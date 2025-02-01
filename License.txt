@@ -1,0 +1,25 @@
+Copyright 2025 Level 9 Computing
+Level 9 Computing is a partnership of Michael Austin and Peter Austin. 
+
+This license applies to the specific implementation of the Level 9 Games, text
+and code. 
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+This license does not apply to the game designs and any future
+implementations of any of those designs, including but not limited to implementations for other media,
+web, mobile app, TV, Film or Book. All rights in the game designs and such future implementations of those designs are reserved by Level 9 Computing. 
+
+
+
+
