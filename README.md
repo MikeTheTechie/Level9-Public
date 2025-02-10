@@ -13,7 +13,9 @@ contains source code for both the game authoring system (squasher, acode compile
 ## "sys sources/docs" 
 contains a manual for the overall system, but unfortunately it's in 1st word format, and needs converting to a more modern word processor format and/or pdf
 # Next steps
-1. There are many floppy disks still to be read
-2. More source disk folders need to be sorted to get consistent sets of system and game source codes
-3. underlying system software like acode compiler, squasher and interpreters need to be compiled and got working on more modern systems.
+1. As noted above, documentation needs converting into modern formats.
+2. There are about 20,000 sheets of paper to be scanned.
+3. There are many floppy disks still to be read
+4. More source disk folders need to be sorted to get consistent sets of system and game source codes
+5. underlying system software like acode compiler, squasher and interpreters need to be compiled and got working on more modern systems.
 
