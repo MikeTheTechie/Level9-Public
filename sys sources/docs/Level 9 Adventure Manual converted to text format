@@ -1,0 +1,428 @@
+Level 9 Adventure Manual
+
+INTRODUCTION
+  
+This manual describes Level 9's Adventure System. It is supplied with one disk containing our standard adventure. You should also have listings of the adventure program. Other adventures are created by modifying the standard game 
+ 
+Warning. All the programs, data and listings that you have been supplied with are copyright (C) 1986 Level 9 Computing. Adventure programs produced using the adventure system are also copyright (C) Level 9 Computing since they contain code written by us. 
+ 
+A lot of effort has been invested in the adventure system, so Level 9 will take action against anyone who supplies or discloses details to any person not authorised by Level 9. Telephone Bracknell ********** to check with us if you're approached by someone who claims to be authorised, before saying anything or handing anything over. 
+ 
+ 
+ 
+                
+ 
+
+ CONTENTS 
+  
+1  Starting 
+ 
+2  TEXT MESSAGES       
+ 
+3  EXITS 
+ 
+4  LISTS 
+ 
+5  RUNNING THE GAME 
+ 
+6  PROGRAM (A-CODE) 
+ 
+7  SPELLING CHECKING 
+ 
+8  PRINTING 
+ 
+9  CODING SIZES & STANDARDS 
+ 
+ 
+ 
+1 Introduction 
+ 
+The adventure system allows you to program an adventure on the  Atari ST, creating and testing everything except music and  pictures (these are added later). Level 9 will transfer the completed game to other micros. 
+ 
+You should have one of the following sets of hardware: 
+ 
+Minimum Configuration: 
+
+520STM, Double sided drive, own monitor or TV. 
+Cost about 400 pounds incl. 
+
+520STM, Double sided drive, winchester, monitor. 
+Cost about 1300 pounds incl. 
+ 
+Development cycle times are given in appendix F. At time of writing (4/11/86), I have not decided which one we'll be distributing. 
+ 
+You will be using GEM (the windowing system on the ST), and a command line program which gives access to TOS, Atari's own operating system. This is very similar in commands to MS-DOS (as found on PC compatibles), which in turn is rather like an improved CPM. A summary of useful commands is given in appendix A. 
+ 
+First, copy the disk to a blank one (see appendix 1 for help), and store the original somewhere safe. 
+ 
+Now put your copy of the disk in drive A. 
+ 
+The components of an adventure are as follows: 
+Text Messages: All the messages output by the adventure for location descriptions, object details, error messages and reports of what happens as the player does things. Keywords to be recognized by the program are also recorded here. 
+
+Exits: How the locations of the adventure are connected. 
+
+Lists: Array data.. Initial positions of objects etc. 
+
+Program: The a-code (short for adventure-code) source. 
+ 
+I strongly advise you to base your game on the standard adventure provided. The standard game already handles most game features, movement, taking/dropping objects, non-player characters etc - you only have to enter the new keywords, exit details, initial positions of objects etc, and the correct text descriptions of 
+things and places. Then add the special cases to the program to handle the puzzles in the game. 
+ 
+ 
+NOTE: Level 9 have manuals for most of the utility programs used in creating adventures. All the relevant features should be described in this Adventure Manual, but if you feel that you need more details then we can probably lend you a specific manual. Please ask. 
+ 
+2 Text Messages  
+ 
+In the new adventure system, messages, exits and acode source are all edited using any standard ST editor. Two editors are supplied on the adventure system disk. Details of these editors are given in Appendix B . 
+ 
+The filename of the text file is MESSAGE.TXT 
+ 
+The messages must be squashed before they can be used by the adventure program. This is a fairly slow process which takes up to about an hour if your game has a lot of text. Save the messages, then type: SQUASH (return) 
+ 
+When squashing is over, the compressed text is automatically saved as SQUASH.DAT for subsequent use by the adventure program. 
+ 
+ 
+ 
+
+3 Exits  
+ 
+Any ST editor is used to edit the exits (how the game locations are connected). 
+ 
+There is one line of data per exit. The exits are described in order: first the exits from room 1, then those from room 2 and so on until the exits from the last room have been described. The format of the data for an exit is as follows: 
+    
+LDIT - Direction - Destination 
+ 
+L is normally 0, but is 1 for the last exit from a location. 
+D is normally 0, but is 1 if the exit is via a door. 
+I is normally 0, but is 1 if the exit is invisible (not reported by LOOK). 
+T is 0 for a one-way exit, or 1 for a two-way exit. 
+ 
+Direction has values as follows: 
+1=north    
+2=northeast  
+3=east    
+4=south  
+5=southeast 
+6=southwest  
+7=west     
+8=northwest 
+9=up   
+10=down 
+11=in     
+12=out     
+13=across 
+ 
+If for some reason you need more directions, they can have values 
+14 and 15. Be sure to add the appropriate verbs. 
+ 
+The destination is simply the location where the exit leads. 
+ 
+Here is an example of some exit data: 
+    ; The data starts with room 1 
+    0101 2 103		; 2-way door, NE from room 1 to room 103 
+    0000 4 12		; 1-way, S from room 1 to room 12 
+    1010 11 12 		; 1-way, IN from room 1 to room 12. Last exit  
+    ; Room 2 
+     1101 3 1		; 2-way door, E from room 2 to room 1.Last exit 
+    ; Room 3 
+    0001 8 34		; 2-way, NW from room 3 to room 34   
+    1100 1 50		; 1-way, N from room 3 to room 50. Last exit. 
+ 
+The last line of the data must consist of: 
+    0000 0 0 
+ 
+You should not define a two-way exit twice; it can be defined at either end but need not be described at both. This saves memory. 
+ 
+Each location must have at least one exit defined from it. If you are not careful, you may find that when the time comes to enter the exits for a new location you have already defined all its exits from their other ends. Then you'd have to redefine an exit 
+and so waste space. Try to avoid this. 
+ 
+The filename of the exit data used by the adventure program is: 
+    EXIT.TXT 
+ 
+5 Lists  
+ 
+The lists are the a-code equivalent of arrays and are used for such things as the initial and current positions of objects in the game, and for NPC attributes. 
+ 
+An ST assembler produced by Hisoft, 'GENST' is used to set up enter the lists used by the adventure program. This is described in detail in Appendix C. 
+ 
+The first bytes of the list data must resemble the following: 
+ 
+START 
+    DC.L LIST1-START 
+    DC.L $8000 ; first workspace 
+    .......... 
+    DC.L LIST8-START 
+    DC.L END-START 
+ 
+; now the main body of the data... 
+list1 
+   dc.b ?? 
+   dc.b ?? 
+etc... 
+ 
+LIST1-9,END and START are  labels. The start of a permanent list is defined by putting its label in the first column of the line at the start of the data (as in normal assembler source). END is defined after the last permanent list. Note that the "-START" is essential for this assembler - if it is omitted, assembly errors will probably occur. 
+ 
+For a workspace list use a suitable address between $8000 and $8FFF ($ means "hexadecimal"). The workspace area starts at $8000, and the number used will give the offset within this. e.g. $8010 would give a temporary list starting 16 (decimal) bytes into the temporary list area. 
+ 
+ 
+An example list might be as follows: 
+LIST1 
+ DC.B 10   ; Object 80 starts in room 10 
+ DC.B 99   ; Object 81 starts in room 99 
+ DC.B 255   ; 255 is the highest value for a list entry 
+ DC.B 30   ; Object 83 start position 
+ 
+ 
+6 Program (A-code)  
+6.1 Trying the game 
+When you've modified any part of the game, it may be tried by typing the letter C or c from the command line program. If any error messages appear, type control-C a few times to stop the compilation, and go back to correct the appropriate file before trying again. 
+ 
+What happens when you type 'c' is that a batch file, 'C.BAT' is run. This has the effect of typing commands to run the following programs: 
+ 
+comp (to compile the acode) 
+finish (to merge squashed text, exits, lists, acode) 
+menu (to run the game) 
+ 
+If all goes well, the game should start running. 
+ 
+The adventure program is written using a compiled language called A-CODE. The a-code source is edited using one of the editors described above. Filenames use the extension '.TXT' and in the Worm in Paradise the main part of the filename starts with 'A' 
+'ASPECIAL.TXT', 'APARSE.TXT', 'AVERB.TXT'. 
+
+6.2 A-Code Compiler 
+The source of a program is split into several parts which may be edited separately. In Knight Orc, these have the following names: 
+
+ACONST.TXT 
+APARSE.TXT 
+AVERB.TXT 
+ASPECIAL.TXT 
+NPC.TXT 
+OOPS.TXT 
+BOOK.TXT 
+ 
+
+The files used are controlled by a file 'COMPILE.BAT' which the compiler will search for and use if present. This has the following format: 
+ 
+1ACONST.TXT 
+1APARSE.TXT 
+1AVERB.TXT 
+1ASPECIAL.TXT 
+1NPC.TXT 
+1OOPS.TXT 
+1BOOK.TXT 
+30
+
+ 
+The numbers are instructions to the compiler. They have the following meaning: 
+ 
+1.. compile this file 
+2.. not implemented 
+3.. save acode (only works if no errors) 
+
+6.. toggle debugging info (also if you put DEBUG in the source) 
+7.. toggle forced long jumps (makes development easier) 
+ 
+6.3 A-Code Source Format 
+  
+Each part of the file may optionally start with sections defining CONSTANTs, VARiables and TABLE (lists). Any or none of these sections may be used in each part. BEGIN  must  be used before any code starts. The format of these sections is obvious from the sample programs supplied. 
+ 
+Note that variables are numbered in the order they are declared, starting with the section of the source and continuing in other sections. It is important for multi-part games that any variables to be shared should have the same number. 
+ 
+Maybe using the same file to declare them for all parts would be a good idea. This can be done - using the same source file. All you need to do is to set up the compile.bat file for each part to refer to the same file. e.g. 1\games.l9\orc.l9\part1.l9\aconst.txt - or something similar if you have a simpler directory structure than my Winchester does! 
+
+You might also care to do the above for the OOPS.TXT file, and possibly APARSE.TXT. This has the merit of ensuring compatability, and bug fixes are automatically incorporated. It has the danger that any changes to these files must be tested separately on each game they are used in. (or else, bugs may be introduced without you realising at the time). 
+ 
+  
+
+
+
+6.3.1 A-Code Statements      
+ 
+Adventures are programmed in a-code, a simplified version of BASIC. It includes several facilities tailored for adventure programming and omits unnecessary features such as complex maths. 
+               
+All symbols used in the program may be of any length, about 20 characters are significant. Be careful if you use more characters, as obscure bugs can sometimes occur (despite the compiler checking for redefined symbols). You are allowed up to 255 different variables in a program. 
+ 
+Numeric values are all decimal & +ve, between 0 and 65535  (minus1=65535, minus2=65534 etc.) 
+ 
+There are 9 lists (numbered 1 to 9) which take the place of arrays. They can hold 1-byte values (0-255). The first entry in a list is number 0. See section 5 and above for more details. 
+ 
+Jumps (GOSUB, GOTO & IF .. THEN) are normally short range; within about 40 lines. For a longer jump, add an "@" in front of the line number. e.g: 
+   
+   10 GOTO 20 
+   20 IF Y2=1 THEN @50000 
+
+Don't add an "@" unless you need to, as this increases the code size. Whilst programming, modify COMPILE.BAT to select option 7 before compiling any files, and leave out the @s in your source code. Option 7 on the compiler menu forces all jumps to be long form. When the program is nearly complete, remove the selection of option 7 from the BEGIN.SUB file, and produce a listing of the errors generated. 
+ 
+The a-code statements are as follows (v1, v2, v3 & v4 indicate variables, n indicates a number, and ln is a line number): 
+ 
+6.3.2 Assignment  
+ 
+v1=v2      v1=n     variable = a variable or a constant 
+v1=list(v2)   v1=list(n)   variable = a list element 
+list(v1)=v2   list(n)=v2   list element = a variable 
+ 
+Note the restrictions: e.g. you cannot assign a constant value to a list. Load it into a variable first. 
+ 
+All list operations are 8 bit only.  All variable-variable operations are 16 bit only. 
+ 
+
+
+6.3.3 Flow of Control  
+ 
+GOSUB ln RETURN       As GOSUB / RETURN in BASIC 
+GOTO ln             As GOTO in BASIC 
+ 
+IF v1=v2 THEN ln  If v1=n THEN ln   If true, GOTO line 
+IF v1<>v2 THEN ln IF v1<>n THEN ln  "  "  "  " 
+IF v1<v2 THEN ln  IF v1<n THEN ln   "  "  "  " 
+IF v1>v2 THEN ln  IF v1>n THEN ln   "  "  "  " 
+ 
+CALL @ln v1     "ON v1 GOTO", ln indicates a line with a DATA statement 
+DATA ln1 ln2 ln3 etc.. A list of line numbers used by the corresponding JUMP. IF v1=0 GOTO ln1, IF v1=1 GOTO ln2 etc.. 
+ 
+6.3.4 Maths  
+ 
+ADD v1,v2     SUB v1,v2      v1=v1+v2; v1=v1-v2 
+ 
+6.3.5 Input  
+ 
+INPUT v1 v2 v3 v4 
+ 
+You should never  use this function. Use the parser facilities instead. Basically, forget about input. Input is automatic. 
+ 
+If, despite the above DIRE WARNINGS, you still insist on using the low-level calls, you are heading for trouble. They are unfriendly and a minefield for the unwary. I have hidden the documentation away somewhere in appendix D. 
+ 
+All you need to know is the following: 
+ 
+Commands are passed to the verb handlers (e.g. TAKE, GIVE, PUT etc.) one at a time, with VERB, NOUN1, NOUN2, PREP set up as appropriate. 
+ 
+Even if several objects are given in the command, the verb is called with one object at a time: with the above variables set up with their (fairly obvious?) meaning. e.g. PUT bottle and keys in rucksack would give: 
+   
+VERB=IPUT, NOUN1=BOTTLE, NOUN2=RUCKSACK, PREP=IPIN 
+ 	and then: 
+  	 VERB=IPUT, NOUN1=KEYS, NOUN2=RUCKSACK, PREP=IPIN 
+
+This mechanism copes with 99.9% of situations in a game. 
+ 
+There will be occasions where you may want to forget about the rest of the things the user typed - e.g. error handling. In 
+this case, jump to CANCELINPUT. 
+ 
+If you want to ask a YES or NO question, print the question and call the routine YESORNO. This returns RESULT=TRUE if yes, RESULT=FALSE if no. 
+ 
+ 
+6.3.6 Output  
+ 
+You should normally use the routines REPORTM1 and REPORTM2 to print messages and REPORTX1 to print numbers. These check if anyone is around who might be interested in what is going on and send the message to them. (This is partly for compatibility with 
+multi-user systems). 
+ 
+e.g. 
+   m1=2707 ; a voice booms out "Hello peasant" 
+   gosub @reportm1 
+ 
+Note that these will (potentially) be printed out to anyone who is in the room, so they must not refer directly to the player (e.g. YOU is a bad idea). They may, for example, be produced by NPCs, so you can envisage situations where a message like: 
+
+   "You can't open the grate, dummy" is printed, when in fact it is an NPC who has tried it! 
+ 
+Now, using m1=2707, gosub @reportm1 takes 7 bytes. Using MESSAGE 2707 would only take 3 bytes. If you are sure that an NPC will NEVER trigger the message, then you may as well use MESSAGE 2707, because it is shorter. e.g. provided you KNOW WHAT YOU ARE DOING: 
+   
+message 2707 ; a voice booms out "Hello Peasant" 
+ 
+
+You will probably want to print out 'so-and-so does something' from time to time. This is simplified by a number of routines: 
+ 
+1) Endings are automatically added onto verbs by the routine PRINTVERB.  This looks at who is the ACTOR, and adds the appropriate ending to VERB. This feature is used by the following routines: 
+ 
+2) There are cases when you want people to do something, or to confirm that something has been done. A flash way of doing this is to use the routine REPORTACTION: 
+ 
+e.g. 
+   VERB=132 ; attack 
+   NOUN1=ORC 
+   ACTOR=GOBLIN 
+   gosub @describeaction 
+
+will print 'the orc attacks the goblin' 
+i.e. ACTOR verb(s) the noun2 
+
+Note that this works for whoever is doing the thing, and wherever they are when doing it. The verb has automatic endings added, so it should make sense. This is a very flexible routine, and is used in a variety of places, including taking/dropping objects, movement, etc. 
+ 
+3) Slightly simpler is a OBJECTVERB which just prints the actor, and what he/she/it/they does/do. 
+
+e.g. 
+   VERB=199 ; stop 
+   gosub objectverb 
+
+will give 'you stop' or 'the orc stops' etc. 
+ 
+This is obviously useful where there are no arguments to the verb (i.e. it is intransitive, or is it transitive. I can never remember). There are other similar uses - you will probably know when you find one. 
+ 
+If the above routines are not suitable, or to save space, the basic acode calls are as follows: 
+ 
+MESSAGE v1     MESSAGE n     	Print the specified message 
+PRINT v1                			Print v1 as a number 
+ 
+
+6.3.8 Random Numbers  
+ 
+These are of vital importance to many games, so I have included a special section on the subject. 
+ 
+A basic random number between 0 and 255 may be generated by: 
+   
+RANDOM V1 ; which gives V1 between 0 and 255 
+ 
+The pseudo-random sequence provided is quite effective. There are ways in which you can drastically reduce its randomness. The most common is to generate a random number on each and every command entered. Do not do it! 
+ 
+To generate a random number between 0 and an arbitrary number (<255) is easy. Use the following code: 
+ 
+   	random x1 
+  	 x2=?? ; maximum number to generate 
+   	gosub @x1modx2 
+; x1 now contains the random number you wanted. 
+ 
+ 
+6.3.7 Misc Adventure Features  
+ 
+You will probably not need to use any of these. They are included for completeness, and so you can understand the existing code more easily. 
+ 
+CLEAR       		Set all variables to 0 
+STACK      	 	Clear the stack (getting rid of unused GOSUB addresses) 
+SCREEN T    		Select text mode (i.e. single screen) 
+SCREEN G     		Select graphics mode (i.e. split screen) 
+CLS G       		Clear graphics screen 
+PICTURE v1    		Display picture 
+EXIT v1 v2 v3 v4 	EXIT from, direction, status ("DIT" sect 4), destination. Set 
+up v1 & v2. V3 and v4 are returned. You will normally never use this. 
+DRIVER      		Call driver function.  Arguments passed in 
+LIST 9. 		First entry in List 9 is function to call,  subsequent entries 
+are the parameter block. 
+SAVE       		Save variables and workspace lists to disk 
+RESTORE      		Opposite of SAVE 
+ 
+  
+
+Creating an Adventure  
+ 
+Some steps towards the perfect adventure (note steps 1-5 may have been done already). 
+ 
+Copy a folder from an existing game onto your disk. 
+
+Enter the folder (by double-clicking on it), and delete all the sub-folders apart from ST.L9. 
+
+Double click on COMMAND.PRG and type ED to start the editor. 
+
+Delete all the game-specific code from AVERB and ASPECIAL, and all the specific messages from MESSAGE.TXT. Substitute a null exits file for EXIT.TXT. 
+
+Set up the exit table for your game. 
+
+Number the objects you will need. PLEASE leave a gap of at least 20 between the end of the NPCs and the start of the mobile objects, and between the mobile objects and the static objects. This costs about 120 bytes of memory, but makes it MUCH easier to add extra objects. 
+
+Set up the initial positions of the objects in LIST.TXT and assemble it to LIST.DAT 
+
+Enter the room descriptions, object descriptions and examine messages. 
+
+Quit the editor, and type C to compile the game. If any errors occur, press and hold control-C for about 1 second (to generate about 3 clicks from the speaker), then correct them. When the game is correct, the game should automatically start. You should now be able to walk around and admire the scenery. Check the exits are correct. 
+
+You are now ready to start coding the puzzles in the game. In no particular order, you will have to code: 
+ 
+SPECIALEXITS to define whether an exit is possible (i.e. where exits may or may not be present, depending on circumstances) This is used for printing the possible exits, as well as at the first stage of every move. 
+
+SPECIALMOVES to define things which may prevent certain moves from happening 
