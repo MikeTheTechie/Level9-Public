@@ -1,0 +1,318 @@
+; Knight Orc Asource (parts 2/3)
+;
+; M.J.Austin 15/4/87
+;
+; Game-specific constant definitions
+;
+;
+; standard labelling convention for constants.
+;
+; Constants preceded by I e.g. ILOOK are relative
+; to their appropriate offset e.g. verboffset
+;
+CONST
+ MAXMOVEABLE=123 ; MAX OBJECT WHICH MAY BE TAKEN, THROWN ETC.
+ MAXMOVEAPLUSONE=124
+
+ xmax=11 ; co-ords go 0..xmax - remember to change room 1 exits.
+ xmaxplusone=12
+ ymax=11
+ minsynthroomminusone=111
+ minsynthroom=112
+ minsynthroomplusone=113
+ maxsynthroom=252
+ minsceneryobj=179
+ minsceneryobjminusone=178
+ maxsceneryobj=191 ;189
+ maxsceneryobjplusone=194 ; 192
+ minsceneryobjtimes2plus1=359
+ maxsceneryobjplus1times2=388 ; 384
+ numsceneryobjplusone=12 ; 10
+;---
+ minweaponminusone=39
+ minweapon=40
+ maxweapon=49
+ maxweaponplusone=50
+;
+ minclothes=90
+ maxclothes=98
+;
+ mintreasure=50
+ mintreasureminusone=49
+ maxtreasure=70
+ maxtreasureplusone=71
+
+ minrope=79
+ maxrope=89
+
+ minfood=75
+ maxfood=78
+ maxfoodplusone=79
+
+ minallobject=40
+ maxallobject=123
+
+ MAXOBJECTVISIBLE=153
+ MAXOBJECT=191 ; goes wrong for maxobject>190 (dunno why!)
+; - inventory gets a funny value for hisearchpos (24)
+ MAXOBJECTPLUSONE=192
+;
+; Preposition values (all relative to prepoffset)
+;
+;; riddenby=6
+ blockedby=6
+ tiedupwith=9 ; special to ko1
+ betweenthemistied=10 ; special to ko1
+ FASTENEDTO=14
+ holdingthelid=15
+
+ through=209
+;
+; VERBS...
+ iburn=115
+ ikiss=129
+ itakegoldtopub=137 ; for npcs only
+ irecruit=146
+ ipast=162
+ ifly=163
+ iwalk=164
+ icatch=165
+;---
+;
+;------------------
+; Now offsets into SCORETABLE
+ scmax=5
+ scmaxplusone=6
+;---
+; Objects
+ user=1
+ dragon=2
+ mouse=3
+ rainbird=4
+ troll=5
+ grok=6
+ oink=7
+ brainz=8
+ druid=9
+ monk=10
+ vampire=11
+ jailor=12
+ humans=13
+ caretaker=14
+ valkyrie=15
+;
+ ants=30
+ frog=31
+ ghost=32
+ eye=33
+ fireball=34
+;---
+; weapons...
+ club=40
+ kitchenknife=41
+ dagger=42
+ sword=43
+
+; clothes...
+ cloak=90
+
+ helmet=95
+ gloves=96
+ shield=97
+ armour=98
+ cape=99
+;
+ ratpie=100
+ tray=101
+ ballandchain=102
+ driftwood=103
+ glitteringcard=104
+ scabbard=105
+ acidbutton=106
+ scrolls=107
+ sack=108
+ wallet=109
+ fingerring=110
+ halfcoin=111
+ crucifix=112
+ bones=113
+ map=114
+ recruiter=115
+ apple=116
+ smallmarrow=117
+ largemarrow=118
+ scale=119
+ amber=120
+ pebble=121
+ note=122
+ rope=123
+ inscription=127
+
+ tomb=129
+ mousehole=130
+ bed=131
+ crack=132
+ crevice=133
+ visor=134
+ batterycompartment=135
+ cupboard=136
+ loot=137
+ perch=138
+ plaque=139
+ panel=140
+ anthill=141
+ gravestone=142
+ gravestonehole=143
+;
+ appletree=145
+ statue=147
+
+ mysteriousbook=149
+;
+; endgame objects...
+ inspectionhatch=125
+ kiosk=146
+ kioskopening=126
+ sensor=136
+;
+ metaldoor=124 ; door in heaven
+ opendrawbridge=128
+ grate=144
+; invisible objects....
+ writing=150
+ sheddoor=151
+ fire=152
+ ropes=153
+ closeddrawbridge=154
+ bolt=155
+ trolldoor=156
+ EYES=157
+;---
+; sccernery objects...
+ mud=181
+ house=183
+ clearing=184
+ castle=188
+ gate=189
+;---
+; some omni-present objects
+ river=241
+ ithing=246
+ iroom=243
+;---
+ minpeople=1 ; = creaturebase
+ maxpeople=34 ; = maxnpc
+ maxpeopleplusone=35
+ creaturebase=1 ; including people, user etc.
+ creaturebaseminusone=0 ; including people, user etc.
+ MINNPC=2 ; all except user
+ MINNPCMINUSONE=1 ; all except user
+ MAXNPC=34
+ MAXNPCPLUSONE=35
+ MAXTALKINGNPCPLUSONE=30
+;---
+; entries in list 6
+; npcs are list 6..
+ npctablesizetozero=1040 ; >>mike 8/8/87 - reduced from 1168 of ST version
+ NPCTABLESIZE=640 ; MAXNPCPLUSONE*16
+ npctablesizeplus16=656 ; npctablesize+npcentrysize
+
+ minspellminusone=157
+ MINSPELL=158
+ MAXSPELL=179
+ maxspellplusone=180
+ coldspell=158
+ deathspell=159
+ lightningspell=160
+ knivesspell=161
+ fireballspell=162
+ swordspell=163
+ slowspell=164
+ flyspell=165
+ jumpspell=166
+ teleportspell=167
+ glowspell=168
+ eyespell=169
+ locatespell=170
+ detectspell=171
+ empathyspell=172
+ curespell=173
+ exorcisespell=174
+ growspell=175
+ charismaspell=176
+ shieldspell=177
+ wizardspell=178
+;-----
+ NPCCURRENTOFFSET=0
+; npc stack is list6
+ npcstackbase=641 ; sptargetmax+1
+ npcstackbaseplus5=646
+ maxnpcentries=75 ; >>mike 8/8/87 - reduced from 100 of ST version
+;; 100 ; - 5 bytes per entry on stack, so table size of 1.25 k
+; vandal table comes after npcstack in list6
+ vandalbase=1029 ;>>mike 8/8/87 - reduced from 1157 of ST version
+;; 1157 ;>>mike 30/7/87 - was 1920 ; maxnpcentries*5+npcstackbase
+ vandalmax=1039 ; >>mike 8/8/87 - reduced from 1167 of ST version
+;; 1167 ;>>mike 30/7/87 - was 1930 ; vandalbase+10
+;---
+ MINOMNI=158 ; all real objects above this are omni-present
+ MINOMNIMINUSONE=159
+ MAXOMNI=260 ; must include ieverything, except, it
+;-----
+; offsets within npccurrent
+ enemyoffset=0
+ followoffset=1 ; person to follow normally
+ masteroffset=2 ; the person or creature who subdued this npc
+ hitpointoffset=3
+ hatredoffset=4 ; the amount which this npc hates its enemy
+ npcptroffset=8
+ boredomoffset=9
+ attentionoffset=10
+; and pointers to npcinitial
+ dodgeoffset=1
+ attackoffset=2
+ greedoffset=4 ; in static data
+ aggressionoffset=5 ; in static data
+ timidityoffset=6 ; in static data
+ obedienceoffset=7
+ goldsingingoffset=8 ; in static data - word (hi byte first)
+ patienceoffset=10
+;
+;---
+; orc hunter state messges...
+ minstunned=30000
+ maxstunnedplusone=30006
+;---
+; internal picture numbers (pictures for static
+; rooms are just the room number)
+ forestpicture=256
+ joustpicture=257
+ orcpicture=258
+ dragonpicture=259
+ plainpicture=260
+;---
+;
+VAR
+; game-specific variables...
+ c6 ; used to add to peoplechasingorc
+ grokstate
+ trollpaid boltsopen trollalarmed trollplacid
+ taughtspell
+ antsleft
+ plaquerubs
+ applefalling
+ vampireawake
+ secretdoordiscovered
+ tombtime
+ mousescared holeblocked crackblocked creviceblocked doorshut
+ dragonplacid mouseplacid
+ ropestate
+ firealarm hatchopen fieldoff
+ cashieralarmed
+ dragonawake
+ woodnotshimmering
+ peopledeathed
+ part1score totalscore
+ crossedredline escaped labseen grokfed
+ picture1displayed
+;---

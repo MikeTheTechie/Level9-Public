@@ -1,0 +1,1657 @@
+; Knight Orc 2 (Hitech) Descriptions
+; 8-bit versions. No protection text
+;
+; By M.J.Austin & P.R.J.Austin
+; Copyright (C) 1987 Level 9 Computing
+;
+[1: ]
+[2::]
+[3:, ]
+[4:.] ; dot with no space
+[5:%]
+[6:and ] ; always starts with lower case a
+[7:.%]
+[8:?%]
+[9:. ]
+[10:exits lead ]
+[11:an exit leads ] 
+[12: through a door]
+[13: through an open door]
+[14: and ] 
+;
+[16:%> ] ; replacement for 'What now?'
+[17:%> ] ; was 'What now?'
+[18:: ];
+[19:"]
+; Messages for printing objects
+;
+[20:a ]
+[21:the ]
+[22:an ]
+[23:some ]
+;
+[24:." ] ; dot quote
+;
+[101:^V north|^V n]
+[102:^V northeast|^V ne]
+[103:^V east|^V e]
+[104:^V south|^V s]
+[105:^V southeast|^V se]
+[106:^V southwest|^V sw]
+[107:^V west|^V w]
+[108:^V northwest|^V nw]
+[109:^V up|^V u]
+[110:^V down|^V d]
+[111:^V in|^V inside]
+[112:^V outside|^V out]
+[113:^V cross|^V across]
+;; [114:with the ^V climb]
+[115:^V jump]
+;
+; Intransitive verbs
+;
+[120:^V i]
+[121:^V again|^V a]
+[122:^V look|^V l]
+[123:^V inventory|^V inv]
+[124:^V quit ^V restart]
+[125:^V restore ^V load]
+[126:^V save]
+[127:^V ramsave ^V ram]
+[128:^V ramload]
+[129:^V score]
+[130:^V verbose]
+[131:^V brief]
+[132:^V wait]
+;
+[134:^V on]
+[135:^V off]
+[136:^V pictures]
+[137:^V words]
+[138:^V hello]
+[139:^V oops ^V undo]
+[140:^V attack|^V hit]
+[142:^V search]
+[145:^V knock]
+[146:^V stand]
+[147:^V lie]
+[148:^V sit]
+[150:^V say]
+[154:^V run]
+[155:^V YES ^V y]
+[156:^V NO ^V n]
+[157:^V board]
+[158:^V go|^V goto ^V find]
+[159:^V stop]
+[162:^V exits]
+[173:^V shout]
+[175:^V to]
+;
+[180:^V have ] ; mainly for output
+[181:^V has ] ; mainly for output
+[182:^V am ] ; mainly for output
+[183:^V are ] ; mainly for output
+[184:^V is ] ; mainly for output
+;
+[193:^V fight|^V kill]
+[194:^V time]
+[195:^V dodge]
+[199:^V buy]
+;
+; Transitive verbs
+;
+[200:^V examine|^V read]
+[201:^V cut]
+[202:^V wake]
+[203:^V cast]
+[204:^V get]
+[205:^V take|^V catch]
+[206:^V wear]
+[207:^V drop]
+[208:^V put|^V hide]
+[209:^V remove|^V free ^V release]
+[210:^V throw]
+[211:^V give|^V offer]
+[212:^V ask]
+[213:^V follow]
+[214:^V open|^V unlock]
+[215:^V light]
+[216:^V extinguish] 
+[217:^V push|^V press]
+[218:^V pull|^V tug]
+[219:^V fasten|^V tie ^V attach]
+[220:^V unfasten|^V untie]
+[221:^V shake]
+;
+[223:^V lick|^V eat]
+[224:^V rub|^V clean ^V polish]
+;; [225:^V bury]
+[226:^V insert]
+[227:^V pick]
+;
+[229:^V kiss]
+[230:^V drink]
+;
+;; [235:^V mount|^V ride]
+;
+[240:^V close|^V shut]
+[241:^V breathe] ; MUST LEAVE IN.
+[242:^V tell]
+[243:^V swim]
+[244:struggle] ; mainly for output
+; 
+[246:^V recruit]
+[247:kill] ; output only
+;
+[260:reach] ; output only
+[261:drag] ; output only
+[262:past] ; output only
+[263:fly] ; output only
+[264:walk] ; output only
+[265:catch] ; output only
+;
+; verbs specific to this game
+; armed combat blows..
+[270:^V touch] ; adds 'es'
+[271:^V poke]
+[272:^V tap]
+[273:^V prod]
+[274:^V rap]
+[275:^V flick]
+[276:^V dab]
+[277:^V clip]
+[278:^V whap]
+[279:^V whomp]
+; unarmed combat blows..
+[280:^V nudge]
+[281:^V jostle]
+[282:^V jog]
+[283:lightly ^V hit] ; must remain as hit!!!! - used for output in THROW
+[284:^V pat]
+[285:^V elbow]
+[286:^V punch] ; adds 'es'
+[287:^V swat]
+[288:^V sock]
+[289:^V punch] ; adds 'es'
+;
+; Objects (300+N)
+;
+[301:you|^N me ^N myself] ; do not mark you
+[302:the robot ^N dragon]
+[303:robot ^N mouse]
+[304:the robot ^N Rainbird]
+[305:the robot ^N troll]
+[306:^N Grok]
+[307:^N Oink]
+[308:^N Brainz]
+[309:the ^N druid robot]
+[310:the ^N monk robot]
+[311:the ^N vampire robot]
+[312:the ^N jailor robot]
+[313:^N humanoid robots on the scaffolding] 
+[314:the robot ^N custodian] 
+[315:the ^N nurse robot]
+; human players..
+[316:a ^A stately ^N transvestite] ; Brunhilde
+[317:a ^N tiny ^N schoolboy] ; Sam the Grey Earl
+[318:a ^A man with a ^N beard] ; Heathcliffe
+[319:a ^A shifty ^N lad] ; Herne the Hunter
+[320:a ^A young ^N whippersnapper] ; Erik Bloodeagle
+[321:a ^A pimply ^N adolescent] ; the Prophet of Greater Manchester
+[322:an ^A old ^N guy] ; the Wily Wizard
+[323:a ^A good ^N chap] ; John Doe
+[324:a ^A smart ^N pensioner] ; the Liquidiser
+[325:a ^A plump ^N youngster] ; Thud the Barbarian
+[326:a ^A puzzled ^N lady] ; Susan
+[327:a ^N girl in ^N jeans] ; Amazon Grace
+[328:a ^A foxy ^N minx] ; the Lady of Shallot
+[329:a ^A young ^N kid] ; Dame Luck
+;
+; npcs who can't talk (30..)
+[330:plastic ^N ants]
+[331:robot ^N frog]
+[332:robot ^N ghost]
+[333:^N vidcam on a string|^N eye]
+[334:^N ball on a string|^N fireball]
+; npcs end at 39..
+;
+; weapons..
+[340:^A comfortable ^N cushion] ; club
+[341:plastic ^N pen] ; knife
+[342:^A rubber ^N dagger] ; dagger
+[343:^A rubber ^N broadsword] ; glowing sword
+;
+; treasure (about 20)..
+[350:silver ^N star]
+[351:silver ^N moon]
+[352:silver ^N spoon]
+[353:silver ^N plate]
+[354:silver ^N salver]
+[355:silver ^N sixpence]
+[356:silver ^N hare]
+[357:silver ^N fox]
+[358:silver ^N fish]
+[359:silver ^N candlestick]
+[360:silver ^N billet]
+[361:silver ^N sliver]
+[362:^N piece of silver] 
+[363:silver ^N top]
+[364:silver ^N nodule]
+[365:silver ^N paper]
+[366:silver ^N dollar] 
+[367:silver ^N bedding]
+[368:silver ^N birch]
+[369:silver ^N teapot]
+[370:silver ^N loaf]
+[371:silver ^N tongue]
+;
+; clothes..
+[390:grey ^N cloak] ; hooded cloak
+[395:^A crash ^N helmet] ; helmet
+[398:^N armoured ^N knitwear|^N armour] ; rusty armour
+;
+; some ordinary objects..
+[400:^N soyaburger|^N burger ^A rat ^N pie] ; rat pie
+[401:^A smooth ^N tray] ; crude tray
+[402:^N ball and ^N chain]
+[403:^N chipboard ^N chunk] ; lump of driftwood
+[404:^N key ^N card] ; glittering card
+[405:^N scabbard] ; scabbard
+[406:^N button] ; button in fog (acid) pool
+[407:^N paper ^N rolls|^N scrolls] ; parchment scrolls
+[408:^A carrier ^N bag|^N sack] ; flour sack
+[409:^N wallet] ; plump wallet
+[410:plastic ^N ring]
+[411:PVC ^N hemidisk|^N disk]
+[412:plastic ^N onion|^N garlic] ; clove of garlic
+[413:plastic ^N bones] ; dry bones
+[414:^N map]
+[415:^N reprogrammer] ; *** 
+[416:^A plastic ^N fruit|^N apple] ; rotten apple
+[417:^A deflated ^N marrow] ; tiny marrow plus writing
+[418:^A massive ^N marrow]
+[419:^N ceramic ^N sheet] ; little dragon scale
+[420:^N yellow ^N filter] ; disk of amber
+[421:^A smooth ^N pebble] ; spat out by frog
+[422:^A spotlit ^N note] ; fastened to shed door
+[423:^A green ^N string|^N rope] ; rope from troll bridge
+;
+; some static objects (124 onwards)..
+[424:^N metal ^N door] ; door in repair shed
+[425:^A inspection ^N hatch] ; *** hitech only
+[426:^N opening] ; in kiosk *** hitech
+[427:^N inscription] ; old inscription
+[428:^A lowered ^N drawbridge] ; open
+[429:^A black ^N monolith] ; mock-gothic tomb
+[430:tiny ^N hole] ; mouse hole
+[431:^A Mothertat ^N bed]
+[432:^A narrow ^N crack]
+[433:tiny ^N crevice]
+[434:^A raised ^N visor] ; in orc
+;
+[436:^A smoke ^N sensor] ; *** hitech fire alarm
+[437:^N growbag] ; growbag
+[438:^A flying ^N trapeze|^N perch] ; comfortable perch
+[439:plastic ^N plaque] ; metal plaque in swamp
+[440:^N lump] ; carved wooden panel in monk's library
+[441:^A massive ^N mound] ; huge anthill
+[442:^N ceramic ^N slab] ; gravestone
+[443:^N socket] ; recess in gravestone
+[444:^N grate]
+[445:^A ceramic ^N tree] ; apple tree
+[446:^A plastic ^N kiosk] ; *** hitech only
+[447:^A polythene ^N statue] ; statue
+[448:^A polythene ^N pedestal]  ; pedestal
+[449:^A primitive ^N database] ; great ^A black ^N book
+[450:^A wriggly ^N writing]
+[451:plastic ^N door] ; termite-riddled door ; shed door
+[452:^N hologram of ^N fire] ; ^A nasty ^N hot ^N fire]
+; some invisible objects (153..)
+[453:^N ropes above|^N rope]
+[454:^N drawbridge] ; closed
+[455:^N bolts|^N bolt]
+[456:^A sturdy ^N door] ; troll's door
+[457:^A red ^N line]
+;
+; Spells (which are also invisible objects)..
+[458:^N cold spell]
+[459:^N death spell]
+[460:^N lightning spell]
+[461:^N knives spell]
+[462:^N fireball spell]
+[463:^N sword spell]
+[464:^N slow spell]
+[465:^N fly spell]
+[466:^N jump spell]
+[467:^N teleport spell]
+[468:^N glow spell]
+[469:^N eye spell]
+[470:^N locate spell]
+[471:^N detect spell]
+[472:^N empathy spell]
+[473:^N cure spell]
+[474:^N exorcise spell]
+[475:^N grow spell]
+[476:^N charisma spell]
+[477:^N shield spell]
+[478:^N magician spell]
+;
+; some location objects..
+; 
+; these are used for seeing from a distance,
+; and for input (for examine and for 'go castle')
+; (note that 'go scenery' also works, so the only unique
+;  functions of these objects is for remote viewing,
+; and for examine)
+;
+; 479+N
+;
+[480:^N archway|^N lair ^N mountain]
+[481:^N woven ^N matting|^N mat ^N mud ^N marsh]
+[482:^A low ^N ramp|^N bridge ^N river]
+[483:^N fence|^N house]
+[484:^A blue ^N circle|^N forest]
+[485:^N crunchy ^N gravel|^N graveyard]
+[486:^N transport ^N container|^N garden ^N shed]
+[488:^N scaffolding ^N mound|^N castle]
+[489:^A ceramic ^N gate] ; ceramic gate
+[490:^N exit]
+;---
+; collective nouns..
+[534:^N everything ^N all ^N every]
+[535:^N treasure] ; collective noun
+[536:^N weapons] ; collective noun
+[537:^N people|^N everyone ^N everybody] ; collective noun
+[538:^N clothes]
+;
+; (more) omni-present objects:
+[539:^N door] ; ?? - ? normal door - never described by printobject,
+; so we can put in the article for the benefit of DESCRIBEACTIONACTOR
+;
+[541:^N water]
+[542:^N be]
+[543:^N room|^N ground] ; used for output as well
+[544:^N wall|^N walls]
+[545:^N roof]
+; and finally, some miscellaneous nouns which are used
+; for various purposes.
+[547:^N except ^N but]
+[548:^N it|^N them ^N him ^N her]
+[549:^N minutes]
+;
+[551:^J then ^J next]
+;; [552:^J therefore ^J so]
+[553:^N you]
+;
+; Pronouns..
+[560:it] ; ita
+[561:it] ; itan
+[562:some]
+[563:he]
+[564:she]
+[565:they]
+[566:you]
+;
+[570:it] ; ita
+[571:it] ; itan
+[572:them]
+[573:him]
+[574:her]
+[575:them]
+[576:you]
+;
+; and some misc output messages
+; plural endings and other odd verb declension..
+[579:~] ; cause previous word to be printed
+[580:s]
+[581:es]
+[582:is] ; used in examine
+;; [583:buries]
+;
+; and directions for output
+; in the form 'The orc enters from the outside'
+; (as opposed to 'The orc goes out' - the normal verb table)
+; Note that these are reversed so the offset into
+; the table is the direction of the moving npc, not the observer
+; 
+[585:from the south]     ; north
+[586:from the southwest] ; northeast
+[587:from the west]      ; east
+[588:from the north]     ; south
+[589:from the northwest] ; southeast
+[590:from the northeast] ; southwest
+[591:from the east]      ; west
+[592:from the southeast] ; northwest
+[593:from below]         ; above
+[594:from above]         ; below
+[595:from outside]       ; inside
+[596:from inside]        ; outside
+[597:from across the way]; across
+[598:from below]         ; climb
+[599:with a jump]        ; jump
+;
+; Examine messages (600+N). NO full stops at end please.
+;
+[601:a primitive robot] ; robot orc (you)
+[602:a shiny metal truck] ; robot dragon
+[603:a grey box] ; robot mouse
+[604:a mechanical animal] ; rainbird robot
+[605:a tall robot] ; robot troll
+[606:a shambling humanoid] ; Grok
+[607:a robot humanoid] ; Oink
+[608:the shambling robot] ; Brainz
+[609:a shambling mechanical humanoid] ; druid robot
+[610:a mechanical monk] ; monk robot
+[611:another robot] ; robot vampire
+[612:grotesque] ; robot jailor
+[613:mechanical cutouts] ; humanoid robots
+[614:a swift metal humanoid] ; robot custodian
+[615:a humanoid ambulance] ; nurse robot
+;
+; most of the human players..
+;
+[616:in a blue gown] ; transvestite (Brunhilde)
+[617:exhaustingly energetic] ; tiny schoolboy (Sam the Grey Earl)
+[618:a smart pinstriped man] ; man with a beard (Heathcliffe)
+[619:a fidgety youth] ; shifty lad (Herne)
+[620:a young thug] ; young whippersnapper (Erik Bloodeagle)
+[621:very dull] ; pimply adolescent (Prophet of Greater Manchester)
+[622:a tourist] ; old guy (the Wily Wizard)
+[623:a horrible human] ; good chap (John Doe)
+[624:a athletic fanatic] ; smart pensioner (the Liquidiser)
+[625:horrible] ; plump youngster (Thud the Barbarian)
+[626:looks baffled] ; bemused lady (Susan)
+[627:an athletic woman] ; girl in jeans (Amazon Grace)
+[628:a cute person] ; foxy minx (Lady of Shallot)
+[629:horrible] ; snot-nosed kid (Dame Luck)
+;
+; NPCs who can't talk (30..)
+[630:toy insects] ; plastic ants
+[631:a mechanical animal] ; robot frog
+[632:a robot on a string] ; robot ghost
+[633:hanging from the roof] ; vidcam on a string
+[634:hanging from the roof] ; ball on a string
+; NPCs end at 39..
+;
+; Weapons..
+[640:very soft] ; comfy cushion (club)
+[641:melted out of shape] ; ball-point pen (knife)
+[642:a Reveline toy] ; theatrical dagger (dagger)
+[643:very soft] ; rubber broadsword (sword)
+;
+; Treasures..
+[650:treasure] ; silver star 
+[651:treasure] ; silver moon
+[652:treasure] ; silver spoon
+[653:treasure] ; silver plate
+[654:treasure] ; silver salver
+[655:treasure] ; silver sixpence
+[656:treasure] ; silver hare
+[657:treasure] ; silver fox
+[658:treasure] ; silver fish
+[659:treasure] ; silver candlestick
+[660:treasure] ; silver billet
+[661:treasure] ; silver sliver
+[662:one of thirty] ; piece of silver
+[663:treasure] ; silver top
+[664:treasure] ; silver coin
+[665:treasure] ; silver paper
+[666:treasure] ; silver dollar
+[667:treasure] ; silver spur
+[668:treasure] ; silver birch
+[669:treasure] ; silver teapot
+[670:treasure] ; silver loaf
+[671:treasure] ; silver tongue
+;
+; clothes..
+[690:not very clean] ; grey cloak
+[695:moulded plastic] ; crash helmet
+[698:rusty] ; armoured knitwear
+;
+; some ordinary objects..
+[700:plastic] ; soyaburger 
+[701:moulded polythene, marked Reveline] ; smooth tray
+[702:heavy plastic] ; ball and chain
+[703:valuable wood stuff] ; chunk of chipboard (driftwood)
+[704:identification] ; key card
+[705:plastic] ; scabbard 
+[706:deep in the fog] ; luminous button
+[707:heavy paper] ; rolled-up paper (scrolls)
+[708:marked Reveline] ; carrier bag (sack)
+[709:tight shut] ; Filofax (wallet)
+[710:a chunk of yellow] ; plastic ring
+[711:D-shaped] ; hemidisk (half coin)
+[712:a garlicky dog-chew] ; squeaky onion (clove of garlic)
+[713:a plastic skeleton] ; articulated skeleton (bones)
+[714:shiny PVC. A blue river runs down the middle, from 
+a bridge to a marsh. Top right is the mountain; below that is a 
+tiny forest; bottom left is a castle and north of that are a 
+strange house and a graveyard] ; map
+[715:important. Capture the mouse or dragon or grab the Troll's 
+wallet and enter eg recruit rainbird] ; reprogrammer
+[716:nothing special in hitech mode] ; wax fruit (apple)
+[717:marked with tiny writing] ; deflated (tiny) marrow
+[718:nothing special in hitech mode] ; puffed-up (huge) marrow
+[719:a chunk of rear fender] ; ceramic sheet (scale)
+[720:a yellow lump] ; yellow filter (amber)
+[721:nothing special] ; pebble
+[722:a plastic bag] ; prominent note on shed door
+[723:thin rope] ; green string (rope)
+;
+; some static objects (125 onwards)..
+[724:just a door] ; metal door
+[725:a tiny metal door] ; inspection hatch
+[726:a little gap into the kiosk] ; opening in kiosk
+[727:"In deep grottos where no one goes,
+%rats nibble toes, ghosts moan their woes
+%and nothing grows: you need what glows"] ; inscription at start
+[728:wide open] ; lowered drawbridge
+[729:shiny metal] ; black monolith
+[730:tiny] ; mouse hole
+[731:not an comfortable couch] ; Mothertat bed
+[732:a narrow gap] ; mouse crack
+[733:a tiny opening] ; mouse crevice
+[734:moulded ceramic] ; raised polythene visor
+;
+[736:a fire detector] ; sensor in the wall
+[737:unimportant] ; growbag
+; The perch examine message is only said by the Rainbird,
+; and results in the player learning the LOCATE spell.
+[738:my perch, inscribed with LOCATE] ; flying trapeze
+[739:not very clean] ; plastic plaque
+[740:inscribed LIGHTNING] ; message on the wall
+[741:for the ants] ; broadcast mound
+[742:ceramic stuff] ; silicon slab
+[743:a D-shaped hole] ; socket
+[744:an special effects fire] ; flame-effect grate
+[745:an upright log] ; ceramic tree-trunk
+[746:a little plastic booth. There is a button inside which opens the 
+door between you and freedom] ; kiosk
+[747:grotesque] ; polythene statue
+[748:a plastic log] ; polythene pedestal
+[749:a hardback] ; primitive database
+;
+; (Normally) invisible objects..
+[750:unreadable in hitech mode] ; glowing writing
+[751:carved with a crescent hole] ; dart-riddled door
+[752:glowing away] ; hologram of flames
+[753:out of reach] ; ropes
+[754:held closed by ropes] ; drawbridge
+[755:a set of three] ; bolts
+[756:held closed by sturdy bolts] ; troll door
+[757:marked "No robots beyond this point"] ; red line
+;
+; Spells (only described by Rainbird)..
+[758:self-explanatory] ; cold spell
+[759:self-explanatory] ; death spell
+[760:a weapon] ; lightning bolt spell
+[761:for flying knives] ; magic knives spell
+[762:a good weapon] ; fireball spell
+[763:for a weapon] ; sword spell
+[764:self-explanatory] ; slow spell
+[765:almost as good as my wings] ; fly spell
+[766:how you walk through walls] ; jump spell
+[767:for fast transport. Eg cast teleport place] ; teleport spell
+[768:how to see in the dark] ; glow spell
+[769:for a flying eye] ; magic eye spell
+[770:self-explanatory] ; locate spell
+[771:not important] ; detect spell
+[772:a good way of bugging people] ; empathy spell
+[773:self-explanatory] ; cure spell
+[774:a spell to end all spells] ; exorcise spell
+[775:self-explanatory] ; grow spell
+[776:something you really need] ; charisma spell
+[777:the ultimate defense] ; shield spell
+[778:the ultimate spell] ; magician spell
+;
+; Examine messages for location objects (779+N), see also (480-490)..
+[780:a wide archway] ; orc lair
+[781:interesting] ; marsh
+[782:an east-west ramp] ; bridge 
+[783:a square fence] ; haunted house
+[784:a cool corner] ; clearing
+[785:interesting] ; graveyard
+[786:an interesting corner] ; formal gardens
+[788:not very impressive] ; castle
+[789:heavy ceramic] ; gate
+[790:where you leave] ; exit from game
+;
+;-------------------------------
+;
+; Short-Form room Descriptions (1000+N). NO full stops at end please.
+;
+; in Knight Orc, these are the brief descriptions when
+; in the same location.
+; e.g 'You are <1010> in an alder forest'
+;
+; room 1 is used as exit modifier for synthesised rooms
+;
+; rooms 2..20 are those with static connections - 
+; i.e. not on the main grid.
+[1002:in a ^N cubicle] ; kitchen
+[1003:in a ^N corridor] ; landing
+[1004:in a ^N dim ^N pathway] ; corridor
+[1005:in an ^N wide ^N place] ; headquarters
+[1006:in a ^N cramped ^N place]
+;
+[1009:in a ceramic ^N foyer]
+[1010:in a ^N corridor]
+[1011:on a wide ^N pathway]
+[1012:beside a ^N locked ^N turnstile]
+[1013:beside a ^N locked ^N turnstile]
+[1014:beside a ^N blue ^N circle|^N forest]
+;
+[1021:in a cramped room]
+[1022:in a ^N scaffolding ^N cubicle] ; in castle
+[1023:in an open ^N square]
+[1024:above a ^N basin of ^N fog]
+[1025:on a ^N corridor]
+[1026:in a ^N repair ^N shed]
+[1027:in a ^N cupboard] ; cupboard, beside shed
+[1028:in a ^N gloomy ^N place]
+[1029:in a ^N tight ^N place]
+[1030:in a ^N narrow ^N corridor]
+[1031:in a ^N long ^N room]
+[1032:in the ^N container]
+[1033:in an ^N enclosed ^N place]
+;
+[1035:underneath the ^N scaffolding]
+[1036:on ^N crunchy ^N gravel]
+[1037:at a ^N junction]
+[1038:at another ^N junction]
+[1039:in a ^N maze]
+[1040:in a maze]
+[1041:in a maze]
+[1042:in a maze]
+[1043:in a ^N passage]
+[1044:in a ^N tight ^N passage]
+[1045:in a white ^N passage]
+[1046:in a grey ^N passage]
+[1047:at a ^N dead ^N end]
+[1048:in a ^N hidden ^N cubicle]
+[1049:in a ^N secret ^N cubicle]
+[1050:in a ^N dead ^N end]
+[1051:on a ^N slope]
+[1052:at another ^N dead ^N end]
+[1053:at an ^N entrance]
+[1054:in a ^N brown ^N room]
+[1055:in a ^N hole] ; can player see this?
+;
+; location objects..
+;
+[1200:at an archway] ; into orcs lair
+[1201:on a damp place]
+[1202:on a low ramp]
+[1203:beside a square fence]
+[1204:beside a blue circle]
+[1205:on a gravel mound]
+[1206:beside a transport container]
+[1208:north of rusty scaffolding]
+[1209:south of a ceramic gate]
+[1210:north of an exit corridor]
+;
+; long additions to location descriptions (1300+n). These are 
+; printed immediately after the short descriptions (1000+n) 
+; without any intervening punctuation (you may start this message
+; with either punctuation or just text)
+;
+[1309:, east of the exit door] ; in a ceramic foyer
+[1310:, east of a thin red line] ; in a corridor
+[1319:, beside a little door] ; on an grotesque bridge
+[1323:. To the south is a huge basin of fog] ; in the castle courtyard
+[1326:. Tinkly music sounds in the background] ; sitting in a cloud
+[1330:, wired for special effects] ; in a scarred corridor
+[1537:, west of a ramp]
+[1539:, east of a ramp]
+;
+; Message pairs for use in describing containment positions
+; also used for preposition table
+;
+; part printed before container
+;
+[1600:can see]       ; 0 - you can see
+[1601:^P on|^P onto]; 1 - on
+[1602:^P underneath] ; 2 - under
+[1603:^P behind]     ; 3 - behind
+[1604:]              ; 4 - carrying
+[1605:]              ; 5 - wearing
+[1606:|^P at]        ; 6 - blocking the hole
+[1607:^P inside |^P into ^P in] ; 7 - in 
+[1608:hanging from]  ; 8
+[1609:]              ; 9 - tied up with
+[1610:^P between]    ;10 - tied between is tied a rope
+;
+[1612:lying on]      ;12
+[1613:sitting on]    ;13
+[1614:fastened to]   ;14
+[1615:tied to]
+;
+[1616:^P with|^P using]
+[1617:^P from]
+;
+; part printed between container and contained.
+;
+[1640:]              ; 0 
+[1641:is]            ; 1 - on
+[1642:is]            ; 2 - under
+[1643:is]            ; 3 - behind
+[1644:is carrying]   ; 4
+[1645:is wearing]    ; 5
+[1646:is blocked by] ; 6 - is blocked by
+[1647:is]            ; 7 - in
+[1648:is]            ; 8
+;
+[1650:is tied]       ;10 -
+[1651:]              ;11 - from
+[1652:]              ;12
+[1653:]              ;13
+[1654:is]            ;14 - fastened to
+;
+; 1700: is base for prepositions to use with 'you'
+;
+; 1700+N is part printed before 'you'
+[1715:tied to]
+;
+; 1740+N is part printed between you and object(s)
+[1741:are on]        ; 1 - on
+; 
+[1744:own]           ; 4 - own
+[1745:are wearing]   ; 5
+;; [1746:are riding]    ; 6
+[1747:are in]        ; 7
+[1752:are lying on]  ; 12
+[1753:are sitting on]; 13
+;; [1754:are fastened to] ;14
+[1755:is]            ; tied to you is 15
+;
+[1800:^P off]
+[1801:^P up]
+[1802:^P down]
+[1803:^P to]
+[1804:^P out]
+[1805:^P from the ]  ; used for npc motion
+[1806:^P for]
+[1807:^P until]
+;
+[1809:^P through]
+[1810:^P about]
+;
+; Parser messages..
+;
+[2000:you don't need ] ; paired with 2001
+[2001: in this part. ]
+;
+[2003:this part doesn't understand ]
+[2004: like that. ]
+;
+[2006:you are ]
+[2007:in a ] ; as in 'You are in an alder forest
+[2008:in an ]
+[2009:exits lead all around]
+;
+; general error message when parsing has broken down.
+[2010:I don't understand. ]
+[2011:you can't see]
+[2012:you don't have]
+[2013:you already have]
+[2014:(Please stop blathering!) ]
+[2015:it's too far away. ] ; examine, take etc. scenery objects
+[2016:I can't find a verb! ]
+[2017:it's not there. ]
+[2018:too many nouns! ]
+[2019:that's too heavy]
+;
+[2020:don't be stupid] ; group..
+;
+; group for things which people may
+; try which might work, but don't
+[2023:nice try] ; group..
+;
+[2030:that's scenery. ] ; group..
+;
+; 'must supply an object' group
+[2033:please say more. ] ; group..
+;
+[2036:I don't understand. ]
+; ^ verb in keyword table but not in CALLVERB routine
+[2037:there doesn't seem to be anything suitable. ]
+;
+[2039:what a mouthful! ]
+;
+[2042:you can't ] ; ** not used in part 1
+;
+[2044:you can't ] 
+[2045:that. ]
+[2046:that]
+[2047:here]
+[2048:I can't find ]
+;
+; again used following a command referring to scenery
+[2050:you can't do that again. ] ; group..
+;
+[2053:I don't know what ]
+[2054: refers to. ] 
+;
+[2055:(a grapple removes] ; E.g '(Removing the bat from the cage first).'
+[2056:from the]  ; to avoid containers inside themselves.
+[2057:first). ]
+;
+; error messages for NPC's
+[2060:you're talking to yourself! ]
+[2061:one person at once! ]
+;
+[2062:looks puzzled] ; group..
+;
+[2065:for] ; as in 'looks for the cask'
+[2066:but can't find]
+;
+; messages when the player tries to take stuff from others..
+[2071:won't let you] ; group..
+;
+; and same for npcs..
+[2074:won't let]
+[2075:take it. ]
+;
+; Standard Adventure output messages
+;
+[2100:%Welcome to A Kind of Magic, the next part of Knight Orc. ]
+[2101:you can't see]
+[2102:you don't have]
+[2103:you already have]
+[2104:you can't see that here. ]
+[2105:in the distance is ] ; for scenery seen from afar
+[2106:you own nothing. ]
+[2108:the light is poor. ]
+;
+[2109:nothing happens] ; Nothing happens group..
+;
+; examining something greater than maxobject: (but not scenery)
+; rare occurrence - mostly for omnipresent objects, numbers, spells
+[2112:it looks as you would expect]
+[2113: nothing. ]
+[2114:you can't go that way. ]
+[2115:through the door]
+[2116:open the door first! ]
+[2117:it's already open. ]
+;
+[2119:you find]
+;
+; the following are printed after the object name..
+; tried to take (move) fixed object
+; only 2120 needs to be suitable for 'you' as well as 'object'
+; before the message is printed
+[2120:won't move] ; group..
+;
+[2123:you can't put ] ; paired with 2124
+[2124:there. ]
+;
+[2125:that's easier said than done! ] ; can't go there
+[2126:drop it first. ]
+;
+[2127:you can't climb that. ]
+[2128:why not to use FIND something or GO TO place? ]
+;
+[2129:whee! ] ; jump to no effect
+;
+; 2130 is used when player refers to scenery which is not nearby
+[2130:I can't find ]
+[2131:you're on it! ]
+[2132:what? ]
+[2133:that doesn't seem to be here. ]
+[2134:you're wearing ]
+[2135:what with? ]
+[2136:which one?]
+[2137:at what?]
+;
+[2139:is full. ]
+[2140: here. ]
+;
+[2142:you can't wear ]
+[2143:you can't reach it from here. ]
+;
+[2144:what a waste of time] ; group..
+;
+[2147:you're already wearing that. ]
+[2148:you don't need to. ]
+;
+; Confirmation messages
+;
+[2152:worn. ]
+[2153:OK. ]
+[2154:it's very nasty. ] ; don't want to eat it
+[2155:time goes by. ]
+[2156:said. ]
+[2157:very nasty! ] ; water / other pleasant liquids
+[2158:please untie it first]
+;
+[2160:YES or NO.%]
+;
+[2176:you polish it until it shines. ]
+;
+[2177:you hear strange noises. ] ; group..
+;
+[2190:(]
+[2191:). ]
+;
+; Death, scoring, game control etc.
+;
+[2200:really restart? ]
+; 
+[2202:really restore? ]
+[2203:%YES or NO]
+[2204:you score ]
+[2205://1000. ] 
+;
+[2207:do you want to continue? ]
+;
+[2209:% %Thy game is over. Enter oops, ram restore, restore or restart. ]
+[2210:you vandal! ] ; attack/fireball room
+[2211:you've already done that. ]
+[2212:not again! ]
+[2213:a vandal has been here! ]
+[2214:% %do you want to continue? ]
+[2215:that's too long to wait. ] ; won't wait
+[2216:try eg WAIT FOR DRAGON, or WAIT FOR 25 MINUTES. ]
+[2217:the time is ]
+[2218:nothing happens. ]
+[2219:you can't. ] 
+;
+[2300:nothing happens. ]
+;; [2301:insert your save disk and press any key. ] ; disk ***
+;; [2302:now insert the Knight Orc disk. ] ; disk ***
+;
+[2308:OOPS can't go back further. ]
+[2309:%(you can use RAM SAVE, RAM RESTORE and OOPS). ]
+[2310:no such position saved. ]
+;
+[2311:% %you're about to move to another part. Do you 
+want to save your position first? ] ; tape ***
+[2312:that position was not saved from Knight Orc. ]
+[2313:now play the tape of "] ; tape ***
+[2314:Loosed Orc". ] ; part 1 ; tape ***
+;
+[2316:Hordes of the Mountain King". ] ; part 3 (magic) ; tape ***
+;
+[2319:you've started in the middle of the game. Either 
+restore a position saved from this part, or start at the 
+beginning by loading part 1, "Loosed Orc". ] ; tape ***
+;
+; table driven responses..
+; all have a dot added automatically
+[2401:you can't] ; attack me
+[2404:yeuch]
+[2405:you find nothing more]
+[2407:hello orc] ; hello. Keep
+[2409:Oh] ; no
+[2410:if you say so] ; yes
+;
+; 'Game play' messages
+;
+[2578:you lie immobilized while a nurse robot carries 
+you through paradise gate and drops you in a repair shed.. ] 
+[2583:two grotesque humans walk in, examine you and throw you out.. ]
+[2586:two humans walk in and examine]
+[2587:. They argue for a while and then take]
+[2588:outside. ]
+;
+[2601:it is very shiny. ] ; used for treasures
+[2602:that's a secret]
+[2603:it dodges away]
+[2604:only a magician can recruit the Rainbird. ]
+;
+; these are used e.g in 'I've stolen something from a ..'
+[2625:an evil orc] ; group..
+;
+[2632:the gate opens and out walks ]
+[2633:. ]
+;
+; special case messages..
+[2649:the dragon robot backs into the room] ; 'from the XX' is added
+; dragon, seen from behind
+[2650:the monk robot shouts angrily! ]
+[2651:the monk picks out a paper. ]
+[2652:light spears from the paper. ]
+[2653:The monk runs away as his paper burns. ]
+;
+; gold-singing for humanoid robots on battlements..
+[2654:walk about. ]
+[2655:wave their arms. ]
+[2656:chuckle at you. ]
+;
+[2657:you don't know all the spells yet. ]
+;
+[2659:the fire door is locked. ]
+[2660:the dragon's smoke starts a fire alarm! The exit door opens! ]
+[2661:the inspection hatch is too high]
+[2662:the troll opens the hatch, "I can see wires out of reach inside". ]
+[2664:"No robots allowed." ]
+[2665:the rainbird can't chew through the wires. ]
+[2666:You hear rustling and the field above the red line disappears. ]
+;
+; random messages while fire alarm is going
+[2667:the alarm rings on] ; group..
+;
+[2670:you need identification]
+[2671:you knock your sensor on the locked door. ]
+;
+[2672:an alarm sounds and the massive exit door slams shut. ]
+[2673:the door won't open]
+[2674:won't fit through the window]
+[2675:the rainbird squeezes through the window and
+runs over to peck the "open" button. The door opens and 
+everyone runs through it! You've won brilliantly! ]
+[2676:the mouse can't push the button hard enough] 
+[2677:the cubicle is armoured plastic]
+[2678:is now yours to command] 
+[2679:you push the button with the rubber sword and
+the door swings open. ]
+[2680:pushed into the fog. ] ; "the object is [2680]"
+[2681:the chief wizard puts a stop to your use of DEATH.. You scored ]
+[2682:you don't have the reprogrammer]
+[2683:you are now a magician! ]
+[2684:brightly spotlit]
+[2685:spotlit by soft light]
+[2686:in the middle of a blue light]
+; after description in room (only when dark)
+[2687:the writing is much clearer! ]
+[2688:"You can only read one new spell", babbles the database, 
+"Do you want to examine my pages yet?" ]
+[2689:the door is closing! Do you want to continue south? ]
+[2690:you escape. ]
+[2691:a second nurse robot appears and carries away the nurse. ]
+[2692:the daemon hand grabs the treasure. ]
+[2693:there are engine noises that way. Do you really 
+want to meet the dragon? ]
+[2694:the mouse was delicious]
+[2695:(except that it is inscribed EYE). ]
+[2696:the dragon's tail, but it is unharmed] ; attack from behind
+[2697:the dragon, but the blow bounces off]
+[2698:the dragon detects]
+[2699:trying to get behind him and reaches out with a fender.. ]
+;
+[2700:% %as you lie on the ground, an army of robot orcs roll up 
+and push you to the ground. After taking everything, they run
+away south and through the archway, leaving you with nothing.
+% 
+%]
+;
+[2701:just as you reach the top of the stairs, something
+hits you on the head, knocking you back. ]
+[2702:as you reach the top of the stairs, an orc hits out
+with a soft cushion! It bounces off the helmet. ]
+[2703:walks up the stairs, but falls back down. ]
+[2704:is hit by a soft cushion, which bounces off the helmet]
+;
+; gold-singing for Grok
+[2706:says, "Why haven't you got me any food?" ]
+[2707:says, "Get me some food, knave." ]
+[2708:says, "I'm hungry!" ]
+;
+[2709:Grok hides the map and shouts, "Where is my rat pie?" ]
+[2710:Grok seems delighted, "Rat pie! And about time too!" 
+He drops the map and grabs the soyaburger. ]
+[2711:Grok bites into the soyaburger. ]
+[2712:Grok eats quickly. ]
+[2713:Grok tears at the burger. ]
+[2714:Grok belches. ]
+[2715:appears from the stairs, is hit over the head by Brainz'
+cushion and falls back down the stairs. ]
+[2716:your path is blocked by a huge troll who shouts, "Oi! One 
+treasure toll for crossing!" ]
+[2717:the troll waves you across. ]
+[2718:of the 3 bolts are open. ]
+[2719:the first bolt is now open. A loud alarm sounds inside. ]
+[2720:the second bolt is now open. ]
+[2721:as the third bolt slides back, the door swings open. ]
+[2722:the troll flicks open all the bolts. ]
+[2723:the troll runs up and is horrified to find you inside. ]
+[2724:she grabs you by the throat and squeezes. ]
+[2725:the troll's voice drips like honey, "Now, my good orc. 
+If you return my wallet, I'll let you keep a treasure beyond 
+price. What do you say?" ]
+;
+[2727:the troll says, "Good. Your life is beyond price - to you!" 
+She slams the door behind you and laughs. ]
+[2728:the troll says, "Very well, without my wallet life has no
+meaning so I'll come quietly." ]
+;
+[2730:the dagger seems to be stuck. ]
+;
+[2732:the string comes up slowly. ]
+[2733:the string jumps into the air. ]
+[2734:a mechanical fish jumps and drags the string
+back down. ]
+[2735:the rope comes completely off the ground. Just in time! ]
+[2736:there are about ]
+[2737: ants here. ]
+;
+[2739:the ants stop you! ]
+[2740:a hundred ants. ]
+[2741:it is hanging from the ramp]
+[2742:more ants climb from the mound. ]
+[2743:there are no ants left! ]
+[2744:a metal hand grabs your leg! ]
+[2745:the metal hand swats you! ]
+[2746:the mat is spotlit in blue]
+[2747:it spits disgustedly. ]
+[2748:the frog croaks quietly. ]
+[2749:the plaque looks almost clean. ]
+[2750:the frog spits something. ]
+[2751:the plaque mists over again. ]
+[2752:the plaque is clean, but unreadable in hitech mode.  ]
+[2753:the floor is spotlit in blue]
+[2754:onto the blue region] ; fly..
+[2755:onto the blue region] ; walk..
+[2756:the chipboard is vibrating and you can't read it. ] 
+[2757:the chipboard stills. ]
+[2758:you hear something opening! ]
+[2759:in the monolith is some unreadable writing. ]
+[2760:the drawbridge is held up by ropes. ]
+[2761:the drawbridge is flat on the ground. ]
+[2762:the drawbridge falls to the ground. ]
+[2763:nothing happens. ]
+[2764:driven back by something. ]
+;
+[2767:not much happens. ]
+[2768:a red light spears down at ]; actor
+[2769:you fall into the fog and can't move]
+[2770:jumps back from the button. ]
+[2771:the keep door swings open. ]
+[2772:the door refuses to open. ] ; both monk's and troll's
+[2773:the door is a very tight fit. ]
+[2774:the door swings open. ]
+;
+[2776:the jailor puts a chain around ]
+[2777:the jailor removes the chain from ]
+[2778:it is fastened to your leg. ]
+[2779:a little robot runs to unfasten the chain. ]
+[2780:larger, then returns to normal. ]
+[2781:the door slams! ]
+[2782:lights flash! ]
+[2783:you are immobilized! ]
+[2784:they reflect from the knitwear ]
+[2785:but you are immobilized. ]
+[2786:and through the chain. You are unharmed. ]
+;
+[2788:the monk did not even blink! ]
+[2789:the druid smiles. ]
+[2790:the druid examines the ground. ]
+[2791:the druid kneels down by the blue circle. ]
+[2792:the database opens, revealing ]
+[2793:. Then it falls closed. ]
+;
+[2798:the ghost waves and an exit opens! ]
+;
+; descriptions for outside rooms ..
+;
+; !!!   ACHTUNG   !!!   DO NOT MARK ANYTHING IN 2800 to 2819   !!!
+;
+[2800:on a green carpet] ; grassy plain
+[2801:on woven matting] ; in a marsh
+[2802:in a region of pillars] ; in a forest
+[2803:above blue PVC flooring] ; on a river
+[2804:above blue PVC flooring, with a fence to the west] ; on a river, 
+[2805:on a carpet, east of a blue PVC floor] ; on a bank at the east side 
+[2806:on a carpet, west of a blue PVC floor] ; on a bank at the west side 
+[2807:on an east-west concrete strip] ; on an east-west road
+[2808:on a north-south concrete strip] ; on a north-south road
+[2809:on a cement path] ; at a junction. 
+[2810:on clean cement] ; at a junction. 
+[2811:on smooth cement] ; at a junction. 
+[2812:on damp concrete] ; at a junction. 
+[2813:west of a bulkhead] ; beside a huge mountain to the east
+[2814:south of a bulkhead] ; beside a huge mountain to the north
+[2815:east of a fence] ; beside a house to the east
+[2816:north of a fence] ; beside a house to the south
+[2817:south of a fence] ; beside a house to the north
+[2818:east of a wall] ; beside a castle to the west
+[2819:north of a wall] ; beside a castle to the south
+;
+; Now other things continue from 2820..
+[2820:the frog jumps about. ] ; frog gold singing
+[2821:the frog looks baffled. ]
+[2822:the frog sticks out its tongue. ]
+;
+[2825:the door won't move. ] ; barrow
+[2826:the door slams! ]
+[2827:the door swings open. ]
+[2828:the vampire jumps up and stretches, ]
+[2829:then bites your neck! ]
+[2830:"Yeuch, garlic!" he says, but then his manner 
+changes, "I can help orcs who help satisfy my needs, if you 
+take my meaning". He opens the door and falls asleep. ]
+[2831:He descends on ]
+[2832:, tells you the KNIVES spell and opens the door. ]
+;
+; 2830-2843 all follow on from 2874
+[2834:is spotlit in the fire. ]
+[2835:the fire is out. ]
+[2836:you hear rustling behind the walls. ]
+[2837:the rustling dies away. ]
+[2838:a mouse runs out from underneath the bed. ]
+[2839:the mouse runs back underneath the bed. ]
+[2840:and escapes through a little crack. ]
+[2841:and dashes into the crevice. ]
+[2842:and escapes through the door. ]
+[2843:and hits the door. It can't escape! ]
+[2844:the mouse runs in circles. ]
+[2845:the mouse is too fast for you. ]
+[2846:the mouse has found some cover! It runs into ]
+[2847:OK. ]
+[2848:the mouse squeaks quickly. ]
+[2849:the mouse squeaks, "You've captured me, so I'll stop 
+hiding and tell you the DEATH spell." ]
+[2850:you can take the card now]
+;; [2851:there may be something in the hole. ]
+;; [2852:can't reach the shining object]
+;
+[2855:the statue is too heavy. ]
+[2856:look underneath it.]
+;
+[2858:underneath it is SHIELD. ]
+[2859:the vampire is asleep. ]
+[2860:the monolith beside you opens. ]
+[2861:the monolith closes. ]
+[2862:is too big to fit the hole. ]
+[2863:the ring falls in the fire. ]
+[2864:it falls from your hand. ]
+[2865:the fire goes out. ]
+[2866:you can't extinguish the fire like that. ]
+[2867:you are not allowed to go that way! ]
+[2868:a mouse enters through a crack. ]
+[2869:a mouse enters through a crevice. ]
+[2870:a mouse enters through the door. ]
+;
+; 2871..2873 are random mouse messages when it is running
+; around in bedroom
+[2871:the mouse sniffs around a little. ]
+[2872:the mouse dashes around the floor. ]
+[2873:the mouse sniffs underneath the bed. ]
+;
+[2874:you hear a thud and the mouse runs out from underneath the bed ]
+[2875:the dragon backs away to the] ; dirn added
+[2876:the dragon enters in a puff of smoke]
+[2877:the dragon belches a wall of fumes! ]
+[2878:the dragon reaches out and swats ] ; an npc
+[2879:the robot dragon rolls on, but it doesn't see the mouse! 
+This plucky peripheral jumps at the dragon, buttons clicking madly 
+as it hits where the monster's armour is missing. "Help!", shouts the 
+dragon, "I surrender!" ]
+[2880:the dragon refuses to go outside with armour missing. ]
+[2881:you can just see where a sheet is missing from 
+the dragon's tail. ]
+[2882:red light shines on ] ; .. the npc
+[2883:the Rainbird clears his throat. "Er, well.. ]
+;
+[2885:peck] ; used for output only - conjugated as a verb
+;
+; gold-singing for rainbird..
+[2886:runs in circles. ]
+[2887:tries to make up his mind. ]
+[2888:is asleep. ]
+;
+[2889:is much too high to reach. ] ; perch/rainbird
+[2890:is still too high. ] ; when flying
+[2891:can't carry anything. ]
+[2892:me! I am a wise old bird who can only be captured by a 
+magician] 
+[2893:you! You can escape after you recruit me, the troll, the mouse
+and the dragon to help]
+;
+[2895:the blow bounces off an shield]
+[2896:nothing happens] ; bounces off troll
+[2897:hanging from a wire] ; as in 'It is flying'
+[2898:you hit the closed drawbridge. ]
+[2899:on the back of the door is a note! ]
+[2900:the writing blends into its background. ]
+;
+[2902:the dull rumbling is really loud now. ]
+;
+; 2903-2905 are when player can hear dragon snoring in the distance
+[2903:you hear a distant engine. ] ; group..
+;
+[2906:the door slams behind her, bolts clicking home. ] ; troll going in
+;
+; the first message is when the dragon is really close.
+; This may only be heard when the dragon is approaching
+; the rest would be better if kept just as distant noises,
+; with no implied direction.
+[2907:the engine noise dies away. ] ; dragon retreating
+[2908:the engine noise grows. ]
+[2909:there is a very loud rumbling in the next room. ]
+[2910:you hear a loud revving noise. ]
+[2911:there is a faint revving noise. ]
+;
+[2912:is locked]
+[2913:the troll slides it home again from inside]
+;; [2914:the dragon shakes you off! ]
+[2915:brightly spotlit]
+[2916:the hanging ball is now]
+[2917:the vidcam is now]
+[2918:light flares! ]
+;
+[2921:has no hands! ]
+;
+[2923:and is carried away south] ; dropping things in.
+[2924:you find that you can't]
+[2925:is carried away south]
+[2926:spotlit in soft light]
+[2927:to the ground] ; as in 'the (object) drops..'
+[2928:as good as new]
+[2929:beyond hope] ; trying to charisma inanimate objects
+;
+[2934:with special effects] ; 'it burns to dust']
+;
+; empathy messages..
+;
+[2940:thinking recursively] ; orc
+[2941:dreaming of treasure] ; dragon
+[2942:dreaming of cheese] ; mouse
+[2943:thinking wise thoughts] ; Rainbird
+[2944:dreaming of treasure] ; troll
+[2945:dreaming of food] ; Grok
+[2946:evil] ; Oink
+[2947:evil] ; Brainz
+[2948:dreaming of the forest] ; druid
+[2949:evil] ; monk
+[2950:very hungry] ; vampire
+[2951:mad] ; jailor
+;
+[2955:thinking cute thoughts] ; nymph
+; now npcs who can't talk (30..)
+[2970:thinking in unison] ; ants
+[2971:dreaming of food] ; frog
+[2972:thinking of nothing] ; ghost
+[2973:not thinking] ; floating eye
+[2974:not thinking] ; 'fireball
+;
+[2980:grabbed and carried by a hoist. ]
+;
+; the object..
+[2981:starts to rise, but] ; the owner
+[2982:grabs]       ; it
+[2983:enclosed by a shimmery light]
+;
+; 2984-2986 is eye gold-singing
+; (these probably will not be printed at present)
+[2984:looks at everything. ]
+[2985:is clicking madly. ]
+[2986:swings lazily. ]
+;
+; 2989-2992 are fireball gold-singing
+[2989:fizzes quietly. ]
+[2990:glows brightly. ]
+[2991:is lit more brilliantly. ]
+;
+[2994:right here]
+[2995:you don't move]
+[2996:too big]
+[2997:the ropes are unaffected by that. ]
+;
+; miscellaneous spell messages
+; first some comments when the player casts a
+; spell at something without a specific message
+; all messages are preceded by 'the target is '
+; and followed by '. '
+[3000:unaffected] ; group..
+;
+; now messages printed when you use a spell, before
+; checking if the spell actually does anything
+; Leave them blank if not wanted for the spell.
+;
+[3020:a blue spotlight tracks away! ]
+[3021:a grey light stabs away! ]
+[3022:white light flares! ]
+[3023:a white spotlight tracks away! ]
+[3029:you are carried away.. ] ; teleport
+[3033:nothing much happens. ] ;detect
+[3036:there is a flash of light. ] ; exorcise
+[3040:triumphal music sounds. ]
+;
+; Hitech messages..
+[3050:everything goes all shimmery and magical.. ]
+;
+[3060:a nozzle descends and disposes of  ]
+[3061:a little bleeping robot makes off with  ]
+[3062:a hole swallows ]
+[3063:a mechanical hoist carries off ]
+[3064:a great manipulator grabs ]
+[3065:a swift hook swings through the air, collecting ]
+[3066:an army of robot termites makes off with ]
+[3067:a hidden hatch opens and swallows ]
+[3068:a metal hand descends to remove ]
+[3069:a rope coils up, lifting ]
+[3070:a hole appears in the floor and out comes ]
+[3071:a robot truck rolls past and drops ]
+[3072:a wire is lowered to drop ]
+[3073:a hook descends from the ceiling and drops ]
+[3074:a grab descends from above and drops ]
+[3075:a hidden hatch opens, revealing ]
+[3076:from a hidden trap door is pushed ]
+[3077:a claw is lowered from the ceiling to drop ]
+[3078:a bleeping robot dashes up to deliver ]
+[3079:a hook descends from the ceiling and drops ]
+;
+; 3100..3200 is block of 'spell fails messages'
+; some are prefixed by 'the object ', others must stand alone.
+; All have dots added on printing.
+[3100:unaffected] ; cold
+[3101:unharmed] ; death
+[3102:unharmed] ; lightning bolt
+[3103:unharmed] ; knives
+[3106:already slow enough] ; slow
+[3107:unaffected] ; fly
+[3108:unmoved] ; jump
+[3109:held in place] ; teleport
+[3112:not of this world] ; locate
+[3113:not very interesting] ; detect
+[3114:too stupid to be thinking] ; empathy
+[3115:unaffected by cure] ; cure
+[3116:not magical] ; exorcise
+[3117:already very big] ; grow
+[3118:as grotesque as ever] ; charisma
+[3119:unaffected] ; shield
+[3120:unaffected] ; magician
+;
+; now some messages generated by the spell fails tables
+; they are referred to by their offset from 3100
+; they are all preceded by 'the object is' and followed by a dot
+;
+[3130:slowed for a moment] ; slow mouse..
+[3131:thinking about feet] ; drawbridge empathy..
+[3132:dreaming of the past] ; house empathy..
+;
+[3508:the immobilized form of] ; as in 'the body of the troll'
+[3509:you great bully!]
+[3516: wears off. ] ; last bit of 'the existing spell wears off' 
+[3517:, but ] ; as in 'but he dodges'
+; 
+[3519:you don't know that spell. ]
+[3520:enter]
+; 
+[3527:you can't do that yet. ]
+; 
+[3529:the existing] ; first bit of 'the existing spell wears off'
+[3530:wears off. ] 
+;
+[3554:nothing happens. ]
+[3555:that's not a spell! ]
+;
+; health reports
+[3560:immobilized]
+[3561:apparently at death's door]
+[3562:apparently a wreck]
+[3563:supposed to be badly injured]
+[3564:supposed to be wounded]
+[3565:reportedly injured]
+[3566:reportedly hurt]
+[3567:almost uninjured]
+[3568:in good shape]
+[3569:unhurt]
+[3570:completely uninjured] ; and probably cheating!
+;
+; groupsay messages for hello responses..
+[3580:says, "Hello there." ] ; group..
+[3585:nods. ] ; group..
+;
+; groupsay messages for people recovering things that they
+; need for racetracks etc.
+[3590:says, "That's mine!" ] ; group..
+[3595:growls angrily. ] ; group..
+;
+[3600:a mechanical voice shouts, "]
+[3601:." ]
+[3602:It's an overflow] ; a stack overflow!
+[3603:Don't panic!] ; a panic
+[3604:I can't help you go there from here. ]
+[3605:You will have to find the way yourself. ]
+;
+; some grouped responses for npcs
+; two groups - those who can talk and those who can't
+; first - npc refuses an order
+[3610:refuses. Recruit people then command them. ] ; group
+[3615:refuses. ] ; group..
+;
+; now, npc accepts an order
+[3620:agrees. ] ; group..
+[3625:nods. ] ; camera group..
+;
+; now response to questions when not obedient..
+[3630:pretends not to hear. ] ; group..
+[3635:makes a rude noise. ] ; group..
+;
+; response to requests to give anything(s) to anyone
+[3640:refuses. ] ; group..
+[3645:looks horrified. ] ; group..
+;
+; now responses when npc wants to obey orders just given,
+; but can't understand any of them!
+[3650:looks baffled. ] ; group..
+[3655:looks baffled. ] ; group..
+;
+; messages when people are attacked by other people (probably player), 
+; and when they attack the thief who has just robbed them.
+[3660:growls angrily. ] ; group..
+[3665:bares its teeth. ] ; group..
+;
+; now messages when people launch unprovoked attacks on the user
+; these are followed by 'and attacks you'
+[3670:realizes who you are. ] ; group..
+[3675:goes mad] ; group..
+; 
+; messages when npc can't find the way to its destination
+[3680:looks puzzled. ] ; group..
+[3685:is baffled. ] ; group..
+;
+; messages when npc refuses order
+[3690:laughs at you. ] ; group..
+[3695:laughs quietly. ] ; group..
+;
+; now group say for people peering at you suspiciously
+[3700:stares at you. ] ; group..
+[3705:stares suspiciously. ] ; group..
+;
+[3710:I'm back! ] ; when people are repaired
+[3712:I've found some treasure! ]
+;
+[3714:I'm in ] ; followed by room description.
+[3715:Kill the orc!] ; group..
+;
+; 16 things which people shout at random..
+[3720:Shut up!]
+[3721:What do I do with the Valkyrie?]
+[3722:Where do I take treasure?]
+[3723:How do I get through the Paradise Gate?]
+[3724:Has anyone got any treasure for me?]
+[3725:Can anyone help with the drawbridge?]
+[3726:Won't anyone tell me how to see in the dark?]
+[3727:Go away!]
+[3728:Can anyone hear me?]
+[3729:Are there any orcs here?]
+[3730:Hello people, I'm back!]
+[3731:Got it! Hehehe!]
+[3732:Where has the custodian got to?]
+[3733:Where is the Rainbird then?]
+[3734:I want to kill me an oik!]
+[3735:Anyone found any orcs?]
+;
+; 'a male voice shouts' type messages
+[3736:a far-off voice shouts, "] ; ita
+[3737:a far-off voice shouts, "] ; itan
+[3738:a distant voice shouts, "]
+[3739:a distant male voice shouts, "] ; he
+[3740:a far-off female voice shouts, "] ; she
+[3741:a voice in the distance shouts, "] ; they
+[3742:a voice shouts, "] ; you
+;
+; message group when people, including orcs, are fighting player..
+[3743:Die, mad orc!] ; group..
+;
+[3746:a voice from the gloomy dark says, "]
+;
+; singing of gold messages..
+[3750:backs into a corner. ]
+[3751:looks around. ]
+[3752:stretches lazily. ]
+;
+; default male gold singing..
+[3753:looks around suspiciously. ]
+[3754:picks his nose. ]
+[3755:whistles tunelessly. ]
+;
+; female default gold singing..
+[3759:smiles brightly. ]
+[3760:wrinkles her nose. ]
+[3761:claps her hands in delight. ]
+;
+; default gold singing for animals
+[3762:looks around suspiciously. ]
+[3763:yawns lazily. ]
+[3764:walks around. ]
+;
+; dragon gold singing
+[3767:puffs out blue exhaust. ]
+[3768:rattles his engine cover. ]
+[3769:licks his silver teeth. ]
+;
+; mouse gold singing
+[3772:rubs its cover with its tail. ]
+[3773:squeaks quietly. ]
+[3774:jumps on the spot. ]
+;
+; troll gold singing
+[3782:sniffs the air for money. ]
+[3783:is dreaming of money. ] 
+[3784:laughs about money. ]
+;
+; people attack you at random - or when they realize you're an orc..
+[3860:shouts, "Kill the orc!" ] ; group..
+;
+; when someone attacks someone else in an unprovoked way..
+[3863:shouts a war cry. ] ; group..
+;
+; messages when people suspect you're an orc..
+[3866:stares suspiciously at you. ] ; group..
+;
+; when you give people presents of treasure..
+; this will probably make them like you a bit.
+[3872:examines it with delight. ] ; group..
+;
+; when someone steals something from an NPC
+[3875:shouts angrily about theft. ] ; group..
+;
+; group shouting messages..
+[3880:I've just stolen some treasure from ] ; group..
+[3885:I've got a valuable ] ; group..
+[3890:I'm back in the game!] ; group..
+;
+; Garbage words
+;
+[4000:^N the ^N some ^N a ^N and ^N of ^N there 
+^N am ^N my ^N your ^N around ^N wires ^N wire 
+^N front ^N immobilized ^N form]
+[4001:^N tiny ^N little ^N great ^N big ^N huge ^N massive
+^N silver ^N metal ^N robot ^N robots ^N wire ^N string 
+^N plastic ^N polythene ^N PVC ^N ceramic ^N white ^N red 
+^N grey]
+;------------------------------------------

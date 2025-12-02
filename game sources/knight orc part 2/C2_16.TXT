@@ -1,0 +1,9 @@
+; C2_16.TXT
+;
+; For 16 bit machines
+;
+; File to hold conditional assembly values which vary between
+; part 1 and part2/3.
+ const
+
+ includeprotection=1

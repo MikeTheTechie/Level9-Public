@@ -1,0 +1,1504 @@
+; Standard Adventure Asource
+;
+; M.J.Austin 12/4/87
+;
+; Parser
+;
+;
+; Late bug-fixes
+;
+; PIEXAMINENOUN changed to prevent IT being used as NOUN2
+; This is because CAST GLOW AT IT and similar, used GLOW as the target!
+;
+const
+ anything=254
+ matchwith=253
+
+VAR
+ CSAVEHISEARCHPOS EVENTUALPREP
+ parseerrors skiponerror
+ tableptr verbend
+ noun1lower noun1upper
+ cvsaveverb cvsavenoun1 cvsavenoun2 cvsaveprep cvsavecurrentobject
+ cvsavehisearchpos cvsavesearchpos
+ gdnoun1pos noun1isgd gdmaxobject
+ gperror
+ lastpossibleverb nextverb
+ gdnouncalled
+
+BEGIN
+ goto @startgame
+;---
+.CANCELINPUT
+; something of great importance has happened - remove
+; rest of input from line
+
+ skiponerror=true
+ GOSUB @ABSCANCELINPUT
+ skiponerror=false
+ GOTO @MAINLOOP
+
+.GETCOMMAND
+ SAYRESPONSE=FALSE
+; before printing What now?, check if any more commands waiting
+ IF NOMOREINPUT=FALSE THEN GC3 ; still something left on line
+ if nextverb<>0 then gc3 ; a prep which might be a verb is pending
+ NOMOREINPUT=FALSE ; disable flag which is set on getting 0 from input
+ IF SOMETHINGPROCESSED=FALSE THEN GC3 ; prevent CR producing 'WHAT NOW'
+
+ add totalmoves,c1
+ if totalmoves<>10 then gc1
+ message 15 ; we won't bother with what now again
+
+.gc1
+ M1=17 ; WHAT NOW ?%
+ if totalmoves<10 then gc2
+ m1=16 ; ">"
+.gc2
+ message m1
+ RANDOM X1 ; kick random number generator
+ SOMETHINGPROCESSED=FALSE
+; actor=USER
+ gosub @setuproom
+.gc3
+ GOSUB @PARSEINPUT
+ IF VERB=0 then GETCOMMAND
+ RETURN
+;---
+.PRESENTMULTIPLE
+; GIVEN VERB,PREP,NOUN2 AND OBJECTTABLE,
+; CQLL VERB ONCE FOB EACH OBJECT SPUCIFIED BY OBJECDTABLE
+; EVERYTXING, IT ETC. ARE HANDLED HERE
+; Work down from top so static orjects, containebs come first
+ moreinfoexpected=false
+ SAYRESPONSE=TRUE
+ MESSAGE CR
+ DIR=0 ;  prevent some SPECIALMOVES being triggered
+ GOSUB @CONVERTVERB
+ GOSUB @SELECTOBJECTPOS
+;
+ if verb=icast then pm1
+; ??? as a kludge - test here to see if NOUN2 is present
+ IF NOUN2=NULLOBJECT THEN PM1
+ OBJECT=NOUN2
+ GOSUB @CHECKIFPRESENT
+ IF RESULT=FALSE THEN @objectnothere
+
+.PM1
+ IF EVERYTHING<>0 THEN @PMEVERYTHING
+; handle individual objects
+ if actor<>user then @callverb ; a queued command
+ if verb=iwaitforperiod then pmcallverb ; noun1,2 already set up
+ if verb=iwaitforperson then pmcallverb ; ditto
+ if verb=iwaituntiltime then pmcallverb ; ditto
+ if verb=isetupgo then pmcallverb
+ if verb=isetuprun then pmcallverb
+ if verb=isetupfind then pmcallverb
+
+ CURRENTOBJECT=otbaseplusone ; pointer into OBJECTTABLE
+.PMSINGLE1
+ OBJECT=OBJECTTABLE(CURRENTOBJECT)
+ IF OBJECT=0 THEN PMSINGLEEND
+
+ GOSUB @CHECKIFACCESSIBLE
+ IF RESULT=TRUE THEN PMSINGLE2
+ if verb=ikill then pmsingle2
+ if verb=ifollow then pmsingle2
+ GOSUB @OBJECTNOTHERE
+ HAVECALLEDVERB=TRUE
+ GOTO PMSINGLENEXT
+.PMSINGLE2
+ if verbstocall<>1 then pmsingle3
+; so "EXAMINE OBJECT" can reply "it is" etc.
+; wheras "examine obj,obj" prints the names
+ lastwordprinted=object
+
+.pmsingle3
+ NOUN1=OBJECT
+ HAVECALLEDVERB=TRUE
+ GOSUB PMCALLVERB
+ MESSAGE CR
+.PMSINGLENEXT
+ ADD CURRENTOBJECT,C1
+ GOTO PMSINGLE1
+
+.PMSINGLEEND
+ IF HAVECALLEDVERB=TRUE THEN PMSINGLERET
+ NOUN1=NULLOBJECT
+ GOSUB PMCALLVERB
+
+.PMSINGLERET
+ RETURN
+;---
+.PMEVERYTHING
+ noun1=everything ; collective noun
+ havecalledverb=false
+ goto @pmsetupgdaccess
+;---
+.pmcallverb
+; only used by USER
+ DestToDescribeExitsIn=0
+ lastverbvalid=true
+ cvsavehisearchpos=hisearchpos
+ cvsavesearchpos=searchpos
+ cvsaveverb=verb
+ cvsavenoun1=noun1
+ cvsavenoun2=noun2
+ cvsaveprep=prep
+ cvsavecurrentobject=currentobject
+
+ gosub @initfifo
+ gosub callverb
+ gosub @linkonfifocommandqueue
+
+ gosub @npcactions
+ gosub @setupuser
+
+ hisearchpos=cvsavehisearchpos
+ searchpos=cvsavesearchpos
+ verb=cvsaveverb
+ noun1=cvsavenoun1
+ noun2=cvsavenoun2
+ prep=cvsaveprep
+ currentobject=cvsavecurrentobject
+ return
+;---
+.CALLVERB
+; GIVEN VERB,PREP,NOUN1,NOUN2,
+; DO THE JUMP-TABLE INDEXING ON THE VERB
+ cif allowcheat
+  if cheatmode<>2 then callverbnodebug ;>>
+  gosub @debugshowcommand
+
+.callverbnodebug
+ cend
+
+ if actor<>user then cvnotuser
+ message cr
+
+.cvnotuser
+ erroroccurred=false ; not yet, anyhow!
+
+.callverb1
+.cv2
+; (OBJECT=NOUN2)
+ GOSUB @OBJECTTRIGGER
+ IF processed=TRUE THEN CVRET
+
+ OBJECT=NOUN1
+ HISEARCHPOS=NONSPECIFIC
+ GOSUB @FUNNIES
+ IF processed=TRUE THEN CVRET
+ GOSUB @OBJECTTRIGGER ; TRIGGERS FOR ANY VERB ON OBJECT
+ IF processed=TRUE THEN CVRET ; FLAG NOT RESET, SO COMMAND PROCESSED
+
+; Do jump-table type indexing
+; Flow will return to PRESENTMULTIPLE when the verb has finished
+
+.abscallverb
+ object=noun1
+ if verb>99 then transverb
+ jump @intranstable verb
+ return ; security!
+;---
+.transverb
+ IF NOUN1<>NULLOBJECT THEN @CVGOTNOUN
+ if actor=14 then cvgotnoun ; caretaker in part 2.
+ M1=2033 ; must supply an object group
+ gosub @getvarym1
+ GOTO @PARSEERROR
+
+.CVGOTNOUN
+ if verb>189 then noverb
+ x1=verb
+ jump @intranstable x1
+; assumes transtable and intranstable
+; are contiguous
+ return
+
+.noverb
+ m1=2036 ; don't understand verb
+ goto @reportm1
+.cvret
+ RETURN
+;---
+.intranstable
+ data @move,@move,@move,@move ; 0-3
+ data @move,@move,@move,@move ; 4-7
+ data @move,@move,@move,@move ; 8-11
+ data @move,@move,@move,@move ; 12-15
+ data @noverb,@noverb,@noverb,@noverb ;16-19
+ data @inventory,@noverb,@describeroom,@inventory ; 20-23
+ data @quit,@restore,@save,@ramsave ; 24-27
+ data @ramload,@score,@verbose,@brief ; 28-31
+ data @noverb,@sleep ; (32=parsewait called elsewhere)
+ data @switchon,@switchoff ; 34-35
+ data @picture,@words,@hello,@oops ; 36-39
+ data @attack,@hear,@search,@help ; 40-43
+ data @smell,@knock,@stand,@lie ; 44-47
+ data @sit,@dig,@say,@teleport ; 48-51
+ data @getme,@think,@setupgdrun,@yes ; 52-55 (55=yes)
+ data @no,@board,@setupgdgo,@commandstop ; 56-59 (56=no)
+ data @weather,@treasure,@exits,@escape ; 60-63
+ data @want,@what,@why,@where ; 64-67
+ data @how,@whether,@rudeword ; 68-70
+ data @intelligence,@life,@shout,@royalties,@tobe ; 71-75
+ data @suggestdeath,@goodbye,@sorry,@scream ; 76-79
+ data @have,@has,@am,@are,@is,@phew ; 80-85
+ data @directory,@noverb,@noverb,@setupwaitforperson ; 86-89
+ data @setupwaitforperiod,@setupwaituntiltime,@shortwait ; 90-92
+ data @kill,@displaytime ; 93-94
+ data @dodge,@setupgdgo,@setupgdrun,@cheat,@buy ; 95-99
+;
+;.transtable
+ data @examine,@cut,@wake,@cast ; 100-103
+ data @get,@take,@wear,@drop ; 104-107
+ data @put,@remove,@throw,@give ; 108-111
+ data @ask,@follow,@open,@light ; 112-115
+ data @extinguish,@push,@pull,@fasten ; 116-119
+ data @unfasten,@ring,@fill,@eat ; 120-123
+ data @rub,@bury,@insert,@pick ; 124-127
+ data @squeeze,@kiss,@drink,@play ; 128-131
+ data @collect,@noverb,@become,@ride ; 132-135
+ data @returnobject,@takegoldtopub ; 136,137
+ data @setupfind,@gdfind ; 138,139
+ data @close,@breathe,@tell,@swim ; 140-143
+ data @noverb,@noverb,@recruit,@noverb ; 144-147
+ data @noverb,@noverb,@noverb,@noverb ; 148-151
+ data @noverb,@noverb,@noverb,@noverb ; 152-155
+ data @noverb,@noverb,@noverb,@noverb ; 156-159
+ data @attack,@attack,@attack,@attack ; 160-163
+ data @attack,@attack,@attack,@attack ; 164-167
+ data @attack,@attack,@attack,@attack ; 168-171
+ data @attack,@attack,@attack,@attack ; 172-175
+ data @attack,@attack,@attack,@attack ; 176-179
+ data @attack,@attack,@attack,@attack ; 180-183
+ data @attack,@attack,@attack,@attack ; 184-187
+ data @attack,@attack ; 188-189
+; ---
+.TOOCOMPLEX
+ M1=2039 ; sentence is too complex
+ goto @reportm1
+;---
+.CHECKIFACCESSIBLE
+; return RESULT=TBUE if OBJECT is0accessible to VERB
+; objects must be present in way HISEARCHPOS
+ result=179 ; dummy value
+ gosub @specialcheckifaccessible
+ if result<>179 then ciaret ; changed by routine, so accept verdict
+
+.CIANCAST
+ IF OBJECT<MINOMNI THEN CIANOTOMNI ; includes spells and everything
+ IF OBJECT>MAXOMNI THEN CIANOTOMNI ; it, except etc.
+ GOTO @RETURNTRUE
+
+.CIANOTOMNI
+ IF OBJECT>MAXOBJECT THEN @CHECKIFSCENERYHERE
+ IF HISEARCHPOS<>NONSPECIFIC THEN CIANOTNS
+ POS=ROOM
+ HIPOS=0
+ GOSUB @CHECKOBJECTPOS
+ IF RESULT=FALSE THEN CIAISITOWNED
+ return
+
+.CIANOTNS
+ IF HISEARCHPOS<>NOUNCARRIED THEN CIANOTCARRIED
+.CIAISITOWNED
+ POS=actor
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS
+ GOTO CIAHAVECHECKED
+
+.CIANOTCARRIED
+ POS=actor
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS ; looking on ground only. if carried, can't be
+; X1=RESULT
+; RESULT=FALSE
+ IF RESULT=TRUE THEN @RETURNFALSE ; CIAHAVECHECKED
+ POS=ROOM
+ HIPOS=0
+ GOSUB @CHECKOBJECTPOS
+
+.CIAHAVECHECKED
+.ciaret
+ RETURN
+;---
+.PARSENOTKNOWN
+; word not recognized at all
+ IF ACTOR<>USER THEN @NPCNOTUNDERSTOOD
+ MESSAGE 2000 ; you don't need to use the word
+ PRINTINPUT
+ message 2001 ; to finish the game
+ GOTO @CANCELINPUT
+;---
+.PARSENOVERB
+ IF PROCESSINGSAY=TRUE THEN @SAYNPCLOOP ; no verb, so continue scanning
+ if actor<>user then @npcnotunderstood
+ m1=2016 ; can't find a verb there!
+ goto parseerror
+
+.SECONDPREP
+.CANTUSEHERE
+ IF ACTOR<>USER THEN @NPCNOTUNDERSTOOD
+ MESSAGE 2003
+ printinput
+ m1=2004
+ GOTO PARSEERROR
+;---
+.toomanynouns
+ if actor<>user then @npcnotunderstood
+ m1=2018 ; too many nouns in that sentance
+ goto parseerror
+;---
+;.NPCLOOKSFORSOMETHING
+;; print "the orc looks for the cask but can't find it. "
+; noun1=object ; save object - the reason we came here
+; object=actor
+; verb=ilook
+; gosub objectverb
+; m1=2065 ; for
+; gosub reportm1
+; object=noun1
+; gosub desctheobject2
+; m1=2066 ; but can't find
+; gosub reportm1
+; object=noun1
+; gosub desctheobject2 ; it or whatever
+; m1=dot
+; goto reportm1
+;;---
+;.NPCCONFUSED;; NPC has been instructed to do something which it can't
+;; but, don't want to stop, so print a message like;
+; 'the frak looks around, as if searching for something'
+;; and then carry on with processing the rest of the command (if any)
+; M1=2065 ; NPC is confused
+; GOTO reportM1
+;---
+;.NOTCLEAR ;**** is this used now?
+;; User has referred to a piece of scenery which is not nearby
+; IF ACTOR<>USER THEN @NPCNOTUNDERSTOOD
+; OBJECT=0
+; HAVECALLEDVERB=TRUE
+; ADD VERBSTOCALL,C1
+; MESSAGE 2130 ; I can't find a reference to "
+; printinput
+; message 2140 ; "here.
+;.NCRET
+;.NPCNURET
+; RETURN
+;---
+.DONTUNDERSTAND
+; general error message when the parsing has borken
+; down for some reason
+ M1=2010
+; drop through to PARSEERROR
+;-
+.PARSEERROR
+ IF ACTOR<>USER THEN @NPCNOTUNDERSTOOD
+ nextverb=0
+ lastpossibleverb=0
+ if skiponerror=true then @cancelinput
+ gosub @reportm1
+ add parseerrors,c1
+ if parseerrors<>5 then parseerror2
+ m1=2014 ; apologies for being so dense
+ gosub @reportm1
+.parseerror2
+ GOTO @CANCELINPUT
+;---
+.OBJECTNOTHERE
+; THE OBJECT IS NOT AVAILBALE TO THE COMMAND
+; THIS ERROR RETURNS AS IT IS USED IN PRESENTMULTIPLE
+ IF OBJECT=0 THEN ONTRET
+ IF ACTOR<>USER THEN ontret ;!!bug !! NPCLOOKSFORSOMETHING
+ lastpossibleverb=0
+ nextverb=0
+ lastwordprinted=nullobject ; force printing of full object name
+; now some fail-safe code.
+; NOUN1 and NOUN2 are sometimes set up wrong,
+; and sometimes they are used for different things (e.g. gd commands)
+; so, unless the verb is one that needs an object, replace it
+; with nullobject, to avoid embarassments like-
+; "you can't see the gold bar" when the use didn't mention it!
+ if verb>99 then ontok ; intransitive (or is it transitive?)
+ object=nullobject
+.ontok
+
+ IF HISEARCHPOS=NOUNONGROUND THEN ONT1
+ IF HISEARCHPOS=NONSPECIFIC THEN CANTSEEIT
+;; .mustcarryobject
+ MESSAGE 2012 ; don't have..
+.ONTERROR
+ GOSUB @DESCTHEOBJECT2 ; print "You can't see HIM" if appropriate
+ MESSAGE DOT
+ goto @cancelinput
+
+.ONT1
+ POS=actor
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS
+ IF RESULT=TRUE THEN ONT2
+.CANTSEEIT
+ IF OBJECT=IEVERYTHING THEN @CANTUSEHERE ; EVERYTHING as NOUN2
+ POS=actor
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS
+ IF RESULT=TRUE THEN ONT2
+;; .GENCANTSEEIT
+ MESSAGE 2101 ; Can't see ..
+ GOSUB ONTERROR
+ goto @cancelinput ; otherwise multiple refs
+; would give multiple error messages
+.ONT2
+ IF VERB=ISTAND THEN ONTDROPFIRST
+ MESSAGE 2103 ; Already have ..
+ GOTO ONTERROR
+
+.ONTDROPFIRST
+ MESSAGE 2126 ; have to drop it first
+.ONTRET
+ RETURN
+;----
+.ITSNOTTHERE
+; user asked for NOUN1 in NOUN2 or similar
+; but NOUN1 is not contained by NOUN2
+ MESSAGE 2017 ; it's not there
+ RETURN
+;---
+.PARSEINPUT
+; CONVERT INPUT TO VERB, PREP, OBJECT FORM FOR
+; EASY UNDERSTANDING BY THE REST OF THE PROGRAM
+ lastpossibleverb=0
+ if actor<>user then pi0notuser
+ HAVECALLEDVERB=FALSE
+.pi0notuser
+ if nextverb<>0 then @verbplus
+
+;; .pinostoredverb
+ GOSUB @GETNEXTWORD
+ VERB=0
+ IF EOL=TRUE THEN @PIEND; NOTHING ENTERED !
+;
+; is actor trying to talk to someone ?
+ SEARCHTYPE=NOUNTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE<minnpc THEN PINOTNPC
+ IF VALUE>MAXNPC THEN PINOTNPC
+; yes, so is the target here ?
+ OBJECT=VALUE
+ GOSUB @CHECKIFPRESENT
+ IF RESULT=TRUE THEN PINPC
+ MESSAGE 2060 ; talking to yourself ?
+ GOTO @ABSCANCELINPUT
+
+.CANTTALKTOSEVERAL
+; can't talk to more dhan one person
+ MESSAGE 2061
+ GOTO @ABSCANCELINPUT
+.PINPC
+; sed up conversation target as actor
+ IF actor=VALUE THEN @PINEXT ; already talking to this one!
+ IF ACTOR<>USER THEN CANTTALKTOSEVERAL
+;; .PINPC1
+ ACTOR=VALUE
+ gosub @getactorattributes
+ GOTO @SAYNPC
+
+.PINOTNPC
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ if value=iteleport then @teleport
+ IF VALUE<>nullvalue THEN PI0
+
+ SEARCHTYPE=NOUNTYPE
+ GOSUB @CHECKTYPE
+ if value>maxgarbage then pinotgarbage
+ IF VALUE>mingarbage THEN PARSEINPUT
+.pinotgarbage
+ if moreinfoexpected=false then @PARSENOVERB ; Wrong type of word found
+ moreinfoexpected=false
+ gosub @goback ; allow this word to get picked up and processed
+ verb=againverb
+ noun1=againnoun1
+ noun2=againnoun2
+ prep=againprep
+ if verb=isetupgo then @parsego
+ if verb=isetuprun then @parserun
+ goto @pitryagain ; try picking up some more info
+  
+.PI0
+ IF VALUE<>IAGAIN THEN PI0A
+ VERB=AGAINVERB
+ NOUN1=AGAINNOUN1
+ NOUN2=AGAINNOUN2
+ PREP=AGAINPREP
+
+ IF LASTVERBVALID=TRUE THEN @PIEND
+ M1=2050 ; last verb not valid
+ gosub @getvarym1
+ GOTO @PARSEERROR
+
+.PI0A
+ VERB=VALUE
+
+.VERBPLUS
+ OBJECTTABLE(otbase)=C0
+ OBJECTTABLE(otbaseplusone)=C0
+ EVERYTHING=0 ; EVERYTHING NOT DETECTED YET
+ EXCEPT=FALSE ; EXCEPT NOT DETECTED YET
+ PREP=0
+ EVENTUALPREP=0
+ NOUN1=NULLOBJECT ; NEEDED ?
+ NOUN2=NULLOBJECT
+ ADJECTIVE1=NULLOBJECT
+ ADJECTIVE2=NULLOBJECT
+ INUMBER=NULLNUMBER
+ VERBSTOCALL=0
+ LASTVERBVALID=FALSE
+ if nextverb=0 then pitryagain
+ verb=nextverb
+ nextverb=0
+ goto @piend
+
+.pitryagain ; got a verb, try to supplement info previously given
+; ( therefore, mustn't clear existing tables etc., but
+;   need to do everything else )
+ IF VERB=ITHINK THEN @THINK
+ IF VERB<ICROSS THEN @PIEND
+ if verb=isetupgo then @parsego
+ if verb=isetuprun then @parserun
+
+; VERB MAY BE FOLLOWED BY SOMETHING ELSE
+ GOSUB @SELECTOBJECTPOS
+
+.PINEXT
+;; .PIANOTHERNOUN
+ if verb=ishout then @shout
+ IF VERB=ISAY THEN @SAY
+ IF VERB=IASK THEN @ASK
+ if verb=itell then @tell
+ if verb=iparsewait then @parsewait
+ GOSUB @GETNEXTWORD
+
+ IF SEPARATOR=TRUE THEN @PINEXT
+ IF EOL=TRUE THEN PIEND
+;;.PINEXT1
+;; IF VERB=IDROP THEN PINOTPREP ; DROP BENCH AND ON
+;; IF VERB=IOPEN THEN PINOTPREP ; OPEN DOOR AND IN
+
+;;.pitryprep
+ SEARCHTYPE=PREPTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE<>nullvalue THEN PIPREP
+
+;;.PINOTPREP
+ GOSUB @CHECKNOUN
+; escape for teleport
+ if verb<>icast then pinotcast
+ if object=teleportspell then @allowteleport ;**SPECIAL TO KO
+ if object=locatespell then @locate ;**SPECIAL TO KO
+
+.pinotcast
+ if processed=true then @pinext
+ IF OBJECT<>0 THEN PIEXAMINENOUN
+
+ SEARCHTYPE=ASCITYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=ICOMMA THEN @PINEXT
+ IF VALUE<>nullvalue THEN @PINEXT
+
+ SEARCHTYPE=NUMBTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=nullvalue THEN PINOTNUMBER
+ INUMBER=VALUE
+ ADD VERBSTOCALL,C1
+ GOTO @PINEXT
+
+.PINOTNUMBER
+; ANYTHING ELSE (CONJ, VERBS ETC.) TERMINATE THIS SENTENCE
+ GOSUB @GOBACK ; STORE (VERB?) FOR FUTURE ANALYSIS
+
+.PIEND
+ IF EVENTUALPREP=0 THEN PIendnoprep
+ PREP=EVENTUALPREP
+.PIendnoprep
+; check for "drop bench and on" type construct
+; if no noun2 was detected after a prep, maybe the prep was
+; really a direction verb. Let's see
+ if noun2<>nullobject then piret
+ if prep=0 then piret
+; ok, we have a prep but no noun2
+; Let's disregard the prep and retrieve any verb
+; which the prep could have been
+ if lastpossibleverb=0 then piret
+ nextverb=lastpossibleverb
+ prep=0
+
+.piret
+ RETURN
+ 
+.PIPREP
+ IF PREP<>0 THEN @SECONDPREP ; GOT A SECOND PREP
+ PREP=VALUE
+ GOSUB @CONVERTVERB
+ GOSUB @SELECTOBJECTPOS
+; and store any verb this could be, just in case
+; it wan't meant as a preposition
+ searchtype=verbtype
+ gosub @checktype
+ if value=0 then @pinext
+ lastpossibleverb=value
+ GOTO @PINEXT
+
+.PIEXAMINENOUN
+ IF OBJECT<>IIT THEN PINOTIT
+ if prep<>0 then cantuseit
+ OBJECT=ITWORD
+ IF OBJECT<NULLOBJECT THEN PINOTIT
+
+.cantuseit
+ IF ACTOR<>USER THEN @NPCNOTUNDERSTOOD
+ MESSAGE 2053 ; it's not clear what
+ printinput
+ message 2054 ; is referring to.
+ GOTO @CANCELINPUT
+
+.PINOTIT
+ IF PREP<>0 THEN @PINOUN2
+ IF OBJECT<mincollective then pinotcollective
+ if object>maxcollective then pinotcollective
+ goto pieverything
+
+.pinotcollective
+ IF OBJECT=IEXCEPT THEN @PIEXCEPT
+; GOT AN ORDINARY NOUN SPECIFIED
+ ITWORD=OBJECT
+ ITNUMBER=INUMBER
+
+;;.PION1
+; There are certain constructs where
+; the first noun can be the destination
+; e.g. "GIVE ME THE MANDRAKE"
+ IF VERB<>IGIVE THEN PION2
+ IF ACTOR=USER THEN PION2
+ IF OBJECT=USER THEN PIGIVE
+; IF OBJECT>NPCMAX THEN PION2
+; IF OBJECT>minnpc THEN PIGIVE
+
+.PION2
+ X1=NOUNFORBIDDEN ; mark noun as forbidden
+ IF EXCEPT=TRUE THEN PIMARK ; DON'T CHECK IT'S HERE (YET)
+; mark ordinary noun
+ X1=NOUNSPECIFIED
+.PIMARK
+ NOUN1=OBJECT
+ GOSUB MARKOBJECT ; MARK NOUN AS SPECIFICALLY REQUESTED
+ GOTO @PINEXT
+;
+.PIEVERYTHING
+ EVERYTHING=object ; everything, ipeople, itreasure etc.
+ GOTO @PINEXT
+
+.PIGIVE
+ IF PREP<>0 THEN @cantusehere ;; DONTUNDERSTAND
+ NOUN2=OBJECT
+ EVENTUALPREP=ITO
+ GOTO @PINEXT
+;---
+.RETURNTRUE
+ RESULT=TRUE
+ RETURN
+.RETURNFALSE
+ RESULT=FALSE
+ RETURN
+;---
+.MARKOBJECT
+; mark object as X1
+ X2=OBJECTTABLE(otbase)
+ IF X2=0 THEN MARKOBJ1 ; no "except" yet
+ IF X1<>X2 THEN @DONTUNDERSTAND ; have had both mark and prevent types
+.MARKOBJ1
+ X2=otbaseplusone
+.MARKOBJ2
+ X3=OBJECTTABLE(X2)
+ IF X3=OBJECT THEN MARKOBJRET ; already marked
+ IF X3=0 THEN MARKOBJ3
+ ADD X2,C1
+ GOTO MARKOBJ2
+
+.MARKOBJ3
+ IF X2>otmax THEN @toocomplex ; OBJECTTABLE OVERFLOW
+ ADD VERBSTOCALL,C1
+ OBJECTTABLE(otbase)=X1
+ OBJECTTABLE(X2)=OBJECT
+ ADD X2,C1
+ OBJECTTABLE(X2)=C0
+.MARKOBJRET
+ RETURN
+;---
+.CHECKIFFORBIDDEN
+ RESULT=FALSE
+ if actor<>user then cifret
+ X1=OBJECTTABLE(otbase)
+ IF X1<>NOUNFORBIDDEN THEN CIFRET
+ X2=otbaseplusone
+.CIF1
+ X1=OBJECTTABLE(X2)
+ ADD X2,C1 ;???C9
+ IF X1=0 THEN CIFRET
+ IF X1<>OBJECT THEN CIF1
+ RESULT=TRUE
+.CIFRET
+ RETURN
+;---
+.SCENERY
+; Have got a noun which is in a room description or similar,
+; so it is just scenery. Print an appropriate message.
+ ITWORD=NULLOBJECT
+ HAVECALLEDVERB=TRUE
+
+ GOSUB @FUNNIES ; Print out any special messages
+ OBJECT=0
+ IF processed=TRUE THEN @cancelinput ;SCENERYEND
+
+ M1=2030 ; just scenery group
+ GOTO @PARSEERROR
+
+;;.SCENERYEND
+;;.SCENERYRET
+;; RETURN
+;---
+
+.PIEXCEPT
+ EXCEPT=TRUE
+ GOTO @PINEXT
+
+.PINOUN2
+; another noun in input, not part of any multiple noun
+ IF NOUN2=NULLOBJECT THEN PINOUN2A
+ IF NOUN2<>OBJECT THEN @toomanynouns
+.PINOUN2A
+ NOUN2=OBJECT
+ GOTO @PINEXT
+;---
+
+.CHECKTYPE
+; SEE IF THERE IS A WORD OF WORDTYPE 'SEARCHTYPE' IN CURRENT WORD
+; IF NOT, RETURN VALUE=0
+; IF THERE IS RETURN ITS WORD NUMBER IN VALUE
+ INDEX=0
+.CHECKTYPEMORE
+ GOSUB @READINPUTLIST
+ IF WORDTYPE<>NUMBTYPE THEN CTNOTNUMBER
+ ADD INDEX,C2 ; numbers are 4 byte values
+
+.CTNOTNUMBER
+ IF VALUE=NULLVALUE THEN CHECKTYPERET
+ ADD INDEX,C2
+ SOMETHINGPROCESSED=TRUE
+ IF WORDTYPE<>SEARCHTYPE THEN CHECKTYPEMORE
+ IF WORDTYPE<>NOUNTYPE THEN CHECKTYPERET
+ IF VALUE<EXAMINEOFFSET THEN CHECKTYPERET
+ IF VALUE>EXAMINEMAXOFFSET THEN CHECKTYPERET
+; an examine message
+ X1=EXAMINEOFFSET
+ SUB VALUE,X1
+
+.CHECKTYPERET
+ RETURN
+;---
+.CHECKNOUN
+; see if there is an object present
+; finding possible alternatives. Return RESULT=TRUE if found
+; and return processed=true if word is to be ignored
+ PROCESSED=false
+ SEARCHTYPE=ADJETYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=nullvalue THEN CNNOTADJE
+ ADJECTIVE1=VALUE
+ GOSUB CHECKTYPEMORE
+ IF VALUE=nullvalue THEN CNADJEND
+ ADJECTIVE2=VALUE
+
+.CNADJEND
+ searchtype=nountype
+ gosub @checktype
+ if value<>nullvalue then checknoun1
+ processed=true ; this is an adjective - so ignore it
+ return
+;
+.CNNOTADJE
+ SEARCHTYPE=NOUNTYPE
+ GOSUB @CHECKTYPE
+;;.cngotadjetrynoun
+ OBJECT=0
+ if value=nullvalue then cnnotclear
+ IF PREP=0 THEN CHECKNOUN0
+ HISEARCHPOS=NONSPECIFIC
+.CHECKNOUN0
+ if value>mingarbage THEN CNGARBAGE
+; have a possible valid object.
+; does it match with any adjective requested ?
+ IF ADJECTIVE1=NULLOBJECT THEN CHECKNOUN1
+ IF VALUE=ADJECTIVE1 THEN CHECKNOUN1
+ if adjective2=nullobject then checknoun1
+ if value>adjective2 then checknoun1 ; could be
+ IF VALUE<>ADJECTIVE2 THEN CNMORE ; no, so try another
+
+.CHECKNOUN1
+; is it here ?
+ OBJECT=VALUE
+ if verb=igetme then checknounend
+ GOSUB @CHECKIFACCESSIBLE
+ IF RESULT=TRUE THEN CHECKNOUNEND ; if present, accept as is
+
+.CNMORE
+; not present, so look for another match
+ GOSUB @CHECKTYPEMORE
+ IF VALUE<>nullvalue THEN CHECKNOUN0
+ if verb=ifollow then checknounend
+ if verb=ikill then checknounend
+
+.CNNOTCLEAR
+; no noun found which is present
+ IF OBJECT=0 THEN CHECKNNORMAL ; not a noun at all
+; so print appropriate message
+ IF OBJECT>MAXOBJECT THEN CNNOTCLEAR1
+ itword=object
+ GOSUB @OBJECTNOTHERE
+ if actor<>user then cngarbage
+ HAVECALLEDVERB=TRUE
+.CNGARBAGE
+ processed=true ; make system skip over garbage words...
+; RESULT=FALSE
+; OBJECT=0
+;; .checknounret
+ RETURN
+
+.CNNOTCLEAR1
+; OBJECT>MAXOBJECT, see if it is valid
+
+.CHECKNOUNEND
+ IF OBJECT<MINOMNI THEN CNNOMNI ; includes everything etc.
+ IF OBJECT>MAXOMNI THEN CNNOMNI
+ GOTO CHECKNNORMAL
+
+.CNNOMNI
+ IF OBJECT>MAXOBJECT THEN @SCENERY
+.CHECKNNORMAL
+ PROCESSED=FALSE
+ RETURN
+;---
+.ABSCANCELINPUT
+; called after any errors - remove rest of input from line
+ processingsay=false
+ if actor<>user then clearinpend
+ LINPUT(C0)=C0 ; in case NOMOREINPUT=TRUE, and LIST9<>0
+ LINPUT(C1)=C0
+ if nomoreinput=true then clearinpend
+ SUPRESSCHECKING=TRUE ; don't check words for validity
+ GOSUB GETNEXTWORD
+ GOTO ABSCANCELINPUT
+.CLEARINPEND
+ SUPRESSCHECKING=FALSE
+ wordnotprocessed=false
+ RETURN
+;---
+.GETNEXTWORD
+; GET NEXT WORD IN LINPUT
+; set EOL=TRUE if get ".", eol, etc.
+; Set SEPARATOR=TRUE if get "." ","
+ IF NOMOREINPUT=TRUE THEN GNWEND
+ IF WORDNOTPROCESSED=TRUE THEN GNWEND ; HAVE USED GOBACK TO RETRIEVE
+ INPUT X1 X1 X1 X1
+ SEARCHTYPE=ASCITYPE
+ GOSUB @CHECKTYPE
+ IF VALUE<33 THEN GNW1
+ IF VALUE<38 THEN @GETNEXTWORD
+.GNW1
+ GOSUB CHECKEOL ; CHECK FOR "." "THEN" etc.
+ IF PROCESSINGSAY=FALSE THEN GNWEND
+ GOSUB @TRIGGERWORDS ; in SAY command, so look for key words
+
+.GNWEND
+ WORDNOTPROCESSED=FALSE
+;; .CIGRET
+ RETURN
+;---
+.CHECKEOL
+ INDEX=0
+ GOSUB READINPUTLIST
+ SEPARATOR=FALSE
+ EOL=FALSE
+ IF VALUE=nullvalue THEN SETNOTHINGMORE
+ SEARCHTYPE=CONJTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=ITHEN THEN SETEOL
+ SEARCHTYPE=ASCITYPE
+ GOSUB @CHECKTYPE
+ IF SUPRESSCHECKING=TRUE THEN CHECKEOL1
+ IF VALUE=128 THEN @PARSENOTKNOWN ; WORD NOT UNDERSTOOD
+.CHECKEOL1
+ IF VALUE=ICOMMA THEN @SETSEPARATOR
+ IF VALUE=IDOT THEN SETEOL
+ RETURN
+.SETSEPARATOR
+ SEPARATOR=TRUE
+ GOTO SETEOL
+
+.SETNOTHINGMORE
+; There is no more input to come on this line
+ NOMOREINPUT=TRUE
+.SETEOL
+ EOL=TRUE
+ RETURN
+;---
+.GOBACK
+; MARK CURRENT WORD AS UNPROCESSED, SO A SUBSEQUENT INPUT ROUTINE
+; CAN GET A CHANCE AT READING IT
+ INDEX=0
+ GOSUB READINPUTLIST
+ IF VALUE=nullvalue THEN GOBACKRET
+ WORDNOTPROCESSED=TRUE
+.GOBACKRET
+ RETURN
+;---
+.READINPUTLIST
+ ; VALUE:=INPUT(INDEX) 16 BIT. X1,X2 corrupted
+ VALUE=LINPUT(INDEX)
+ IF VALUE<>1 THEN RILNOTNUMBER
+ WORDTYPE=NUMBTYPE
+ X1=INDEX
+ ADD X1,C1
+ VALUE=LINPUT(X1) ; returns low order of number
+ RETURN
+
+.RILNOTNUMBER
+ WORDTYPE=VALUE
+; STRIP OFF TOP THREE (WORDTYPE) BITS
+ X1=32
+.RIL1
+ IF VALUE<32 THEN RIL2
+ SUB VALUE,X1
+ GOTO RIL1
+.RIL2
+ GOSUB VALUETIMES256
+ X1=1
+ ADD X1,INDEX
+ X2=LINPUT(X1)
+ ADD VALUE,X2
+; Separate out WORDDYPE = top three0bits
+ X2=WORDTYPE
+ WORDTYPE=ASCITYPE
+ X1=ASCIOFFSET
+ IF X2<32 THEN RILRET
+ WORDTYPE=VERBTYPE
+ X1=VERBOFFSET
+ IF X2<64 THEN RILRET
+ WORDTYPE=CONJTYPE
+ X1=CONJOFFSET
+ IF X2<96 THEN RILRET
+ WORDTYPE=PREPTYPE
+ X1=PREPOFFSET
+ IF X2<128 THEN RILRET
+ WORDTYPE=NOUNTYPE
+ X1=NOUNOFFSET
+ IF X2<160 THEN RILRET
+ WORDTYPE=ADJETYPE
+ X1=ADJEOFFSET
+ IF X2<192 THEN RILRET
+ WORDTYPE=MATCHTYPE
+ X1=MATCHOFFSET
+ IF X2<224 THEN RILRET
+ WORDTYPE=7
+ X1=0
+.RILRET
+ SUB VALUE,X1 ; SUBTRACT OFFSET
+ if value=0 then rilret1
+ IF VALUE>60000 THEN RILRET1
+ RETURN
+.RILRET1
+ VALUE=nullvalue
+ RETURN
+;---
+.VALUETIMES256
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ RETURN
+;---
+.VALUEDIV256
+; divide VALUE by 256
+; must preserve X4
+ X1=0
+ X2=256
+.VD256
+ SUB VALUE,X2
+ IF VALUE>NEGATIVE THEN VDEND
+ ADD X1,C1
+ GOTO VD256
+
+.VDEND
+ VALUE=X1
+ RETURN
+;---
+.CHECKOBJECTPOS
+; return RESULT=TRUE if 'OBJECT' is
+; at 'HIPOS','POS'
+; if POS=0, it is treate as NONSPECIFIC
+; likewise, HIPOS=NONSPECIFIC is handled
+; return X4=lo position of object (or object if on ground)
+ X4=OBJECT
+.COP1
+ IF POS=0 THEN COPHI
+ X1=CURRENTPOS(X4)
+ IF X1<>POS THEN COPNOTYET
+.COPHI
+; lo address is same, now check hi address
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN COPHI1
+ IF HIPOS=NONSPECIFIC THEN COPFOUND ; provided object is contained
+.COPHI1
+ IF X1<>HIPOS THEN COPNOTYET
+.COPFOUND
+ RESULT=TRUE
+ RETURN
+.COPNOTFOUND
+ RESULT=FALSE
+ RETURN
+;
+.COPNOTYET
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN COPNOTFOUND
+ X4=CURRENTPOS(X4)
+ GOTO COP1
+;
+;---
+;.CHECKIFPRESENT
+;; is OBJECT in same room as actor ?
+; SAVEHISEARCHPOS=HISEARCHPOS
+; HISEARCHPOS=NONSPECIFIC
+; GOSUB @CHECKIFACCESSIBLE
+; HISEARCHPOS=SAVEHISEARCHPOS
+; RETURN
+;---
+.THINK
+; just in here to show off.
+; trap I THINK THEREFORE I AM
+; and print a rude message if detected
+ GOSUB @GETNEXTWORD
+ SEARCHTYPE=CONJTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE<>ITHEREFORE THEN @DONTUNDERSTAND
+ MESSAGE 2080 ; do you ?
+ GOTO @CANCELINPUT
+;---
+;.WHY
+; MESSAGE 2081 ; why not ?
+; RETURN
+;;---
+;.WEIGHOBJECT
+;; RETURN WEIGHT OF 'OBJECT' IN 'WEIGHT'
+; OBJECTSAVE=OBJECT
+; SEARCHPOS=OBJECT
+; HISEARCHPOS=NONSPECIFIC
+; GOSUB INITGETOBJ
+; WEIGHT=0
+;.WO1
+; GOSUB GETNEXTOBJECT ; ADDS ON WEIGHT OF THIS OBJECT TO 'WEIGHT'
+; IF OBJECT<>0 THEN WO1
+; OBJECT=OBJECTSAVE
+; RETURN
+;---
+.escape
+.pick ; e.g. lock
+.insert
+.have
+.has
+.am
+.are
+.is
+ goto @noverb
+;-----------------------------------------------
+;.tableresponses
+;; examine input, print message if appropriate, and set processed=true
+;; if the verb has been handled
+; tableptr=0
+;.tr1
+; x1=list8(tableptr)
+; if x1<>verb then nextverb
+;; now find end of this verb handler
+; add tableptr,c1
+; verbend=list8(tableptr)
+; add verbend,tableptr
+; sub verbend,c2
+;.tr2
+;; now get the permament matches for noun1/noun2
+; add tableptr,c1
+; noun1lower=list8(tableptr)
+; add tableptr,c1
+; noun1upper=list8(tableptr)
+; add tableptr,c1
+;; check if this has acceptable noun1/2 values
+; if noun1<noun1lower then badnoun1
+; if noun1>noun1upper then badnoun1
+; goto noun1ok
+;.badnoun1
+; x1=4
+; sub tableptr,x1
+; goto nextverb
+;
+;.noun1ok
+;; ok, now scan for noun2 ranges
+; x1=list8(tableptr)
+; add tableptr,c1
+; if noun2<x1 then matchfail
+;
+; x1=list8(tableptr)
+; if noun2>x1 then matchfail
+;
+;.nomatchnoun2
+;; have matched with both noun ranges requested,
+;; so follow the requests of the data
+; add tableptr,c1
+; x1=list8(tableptr)
+; x2=2400 ; message block for printing under data control
+; add x1,x2
+; message x1 ; print the response
+; message dot
+; add tableptr,c1
+;; any code handler?
+; x1=list8(tableptr) ; (x1=0 if none required)
+; jump @tableresponsetable x1
+;.trret
+; return
+;
+;.nextverb
+; x2=1
+; add x2,tableptr
+; x1=list8(x2)
+; if x1=0 then trret ; reached end of table without a match
+; add tableptr,x1
+; goto tr1
+;
+;.matchfail
+;; try another object
+; x1=4
+; add tableptr,x1
+; if tableptr<verbend then tr2 ; try another noun within verb
+; return
+;
+;.tableresponsetable
+; data @trret,@setprocessed,@cancelinput,@setskiponerror
+;
+;;---
+;.setskiponerror
+; skiponerror=true
+;; drop through to setprocessed...
+;
+;.setprocessed
+; processed=true
+; return
+;---
+.gdnoun1
+; data structure is as follows:
+; current entry is of the form:
+;
+; VERB PREP NOUN1 NOUN2
+;
+; NOUN1 is one of itreasure, iweapons or ipeople
+;
+; the command immediately above this on the stack contains
+; the same verb, prep and noun2, but has NOUN1=current object
+; in gd scan.
+
+; check through what is accessible (using checkifaccessible)
+; and callverb with the first accessible noun1 found
+; If nothing found, do intelligentpop
+ gosub @npcgetcurrent
+ x1=npcstack(x1)
+; x1 is no. of command behind the current one in the command queue
+ gosub @npcgetoffset ; get offset of command in stack
+ x2=3
+ add x1,x2 ; get pos of noun1
+ OBJECT=npcstack(x1) ; now x1=current noun
+ gdnoun1pos=x1 ; save position of current noun in stack
+ 
+ gosub @selectobjectpos
+ searchdepth=1 ; for checkifobvious
+ gdmaxobject=maxtreasure
+ if noun1=itreasure then gdaccessall ; treasure
+ gdmaxobject=maxpeople
+ if noun1=ipeople then gdaccessall ; people
+ gdmaxobject=maxweapon
+ if noun1=iweapons then gdaccessall ; weapons
+ gdmaxobject=maxallobject
+ if noun1=ieverything then gdaccessall
+ gdmaxobject=maxclothes
+ if noun1=iclothes then gdaccessall ; clothes
+.gdaccessend
+ gosub @intelligentpop ; pop off both parts of command
+ noun1=nullobject ; error condition
+ if gdnouncalled=true then gdaeret
+ m1=2037 ; there doesn't seem to be anything suitable
+ goto @nointerestm1
+
+.gdaccessall
+ if object>gdmaxobject then gdaccessend
+ gosub @checkifpresent ; quick check - must be here
+ if result=false then gdaano
+
+ gosub @checkifaccessible
+ if result=false then gdaano
+ gosub @checkifobvious
+ if obvious=false then gdaano
+ gosub @checkifforbidden
+ if result=false then gdaccessobject
+
+.gdaano
+ add object,c1
+ goto gdaccessall
+;
+.gdaccessobject
+ noun1isgd=true
+ if actor<>user then gdaonotuser
+ gdnouncalled=true
+
+.gdaonotuser
+ x1=object
+ add x1,c1
+ npcstack(gdnoun1pos)=x1 ; object to try when we come here next.
+ noun1=object
+.gdaeret
+ return
+;---
+.pmsetupgdaccess
+ gosub @initfifo
+ gosub setupgdaccess
+ goto @linkonfifocommandqueue
+;---
+.setupgdaccess
+; want to set up gd access to noun1,
+; where NOUN1 is one of itreasure, iweapons or ipeople.
+; what is the first object wanted?
+ object=mintreasure
+ if noun1=itreasure then suga1
+ object=minweapon
+ if noun1=iweapons then suga1
+ object=minpeople
+ if noun1=ipeople then suga1
+ object=minallobject
+ if noun1=ieverything then suga1
+ object=minclothes
+ if noun1=iclothes then suga1
+; prs "**system error - setupgdaccess invoked with bad noun1" ;*
+ return
+
+.suga1
+ if actor<>user then suga2
+ gdnouncalled=false
+
+.suga2
+ gosub @npcpushfifo
+
+ noun1=object
+ goto @npcpushfifo ; push on current position
+;---
+
+;-------------------------------------------------
+.setupgdrun
+ descriptionmode=inone
+ goto setupgorun
+
+.setupgdgo
+ descriptionmode=ibrief
+
+.setupgorun
+ verb=igdgo
+ if actor<>user then setupgobug
+ gosub @stopfollowing
+
+;; .setupgr1
+; noun1 is destination
+ numexplicitmoves=100 ; no sarcastic comment now about
+; plodding around with N/S/E etc. now, please
+ gosub @npcpushfifo
+ gosub @linkonfifocommandqueue
+ goto @executeanyorders
+
+.setupgobug ;*
+ return
+; prs "parser error: **attempt to use setupgo by " ;*
+; print actor ;*
+; return ;*
+;---
+;---
+.CONVERTVERB
+; Given VERB,PREP, convert to standard forms of certain commands
+; e.g. LOOK AT => EXAMINE ;     GET ON => STAND ON  ;  GET OFF => LEAVE
+; This is called as soon as the first noun is found - so
+; if it is necessary to separate prepositions before+after nouns,
+; this is a good place to do it
+
+ IF VERB<>ILOOK THEN CVNOTLOOK
+ IF PREP=0 THEN CVNOTLOOKat
+.cvexamine
+ VERB=IEXAMINE
+ PREP=0
+ return
+
+.cvnotlookat
+ if noun1<>nullobject then cvexamine
+
+.CVNOTLOOK
+ IF VERB<>IGET THEN CVNOTSTAND ; get on
+ IF PREP=IPOUT THEN CVSTAND
+ IF PREP=IPOFF THEN CVSTAND
+ IF PREP=IPIN THEN CVSTAND
+ IF PREP<>IPON THEN CVNOTSTAND
+.CVSTAND
+ VERB=ISTAND
+
+.CVNOTSTAND
+ IF VERB<>IVON THEN CVNOTON
+ PREP=IPON
+ VERB=ISTAND
+
+.CVNOTON
+ IF VERB<>IVOFF THEN CVNOTOFF
+ PREP=IPOFF
+ VERB=ISTAND
+.CVNOTOFF
+;; .CVNOTONOFF
+ IF VERB<>IDROP THEN CVNDROP
+ IF PREP=0 THEN CVNDROP
+ IF NOUN2=NULLOBJECT THEN CVNDROP ; ignore PREP if no second noun
+; DROP noun1 PREP noun2
+; probably equivalent to PUT noun PREP noun2
+ VERB=IPUT
+
+.CVNDROP
+ IF VERB<>ITAKE THEN CVNTAKE
+; take off something (REMOVE something)
+ IF PREP<>IPOFF THEN CVNTAKE
+ IF NOUN1<>NULLOBJECT THEN CVNTAKE
+ VERB=IREMOVE
+ PREP=0
+
+.CVNTAKE
+ IF VERB<>IPUT THEN CVNPUT
+; put on something (WEAR something)
+ IF PREP<>IPON THEN CVNPUTON
+ IF NOUN1<>NULLOBJECT THEN CVNPUT
+ VERB=IWEAR
+ PREP=0
+ RETURN
+.CVNPUTON
+ IF PREP<>IPOUT THEN CVNPUT
+; put out => extinguish
+ VERB=IEXTINGUISH ; put candle out
+ IF NOUN1<>NULLOBJECT THEN CVNPUT
+ NOUN1=NOUN2 ; put out candle
+
+.CVNPUT
+ IF VERB<>IGET THEN CVNGET
+ VERB=ITAKE
+
+.CVNGET
+ if verb<>igive then cvngive
+ if prep=0 then cvngive
+ prep=ipto
+
+.cvngive
+ if verb<>iclimb then cvnclimb
+ if prep<>through then cvnclimb
+ verb=ivin
+ prep=0
+
+.cvnclimb
+ RETURN
+;---
+.SELECTOBJECTPOS
+; given VERB,PREP
+; set up HISEARCHPOS to show where the objects which follow on
+; the input line must be - i.e.
+; NOUNONGROUND, NOUNCARRIED or NONSPECIFIC
+ HISEARCHPOS=NOUNONGROUND
+ IF VERB=ITAKE THEN SOPRET
+ IF VERB=ISTAND THEN SOPRET
+ HISEARCHPOS=NOUNCARRIED
+ IF VERB=IDROP THEN SOPRET
+ IF VERB=ICAST THEN SOPRET
+ if verb=igive then sopret
+;** - selects for target as well -- if verb=ithrow then sopret
+ HISEARCHPOS=NONSPECIFIC
+.SOPRET
+ RETURN
+;---
+.SETUPROOM
+; Return 'ROOM'=current position of ACTOR
+; If ACTOR is contained, trace back until find the
+; location in which the container(s) rests.
+ X4=ACTOR
+; IF ESPROOM=0 THEN SETUPROOMX4 ; * SPECIAL TO MAGIK
+; ROOM=ESPROOM
+; RETURN
+
+.SETUPROOMX4
+; Return 'ROOM'=current pos of object X4
+ ROOM=CURRENTPOS(X4)
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN @SETUPROOMEND
+ X4=ROOM
+ GOTO SETUPROOMX4
+.SETUPROOMEND
+ if actor<>user then setuproomend2
+ currentuserroom=room
+
+.setuproomend2
+ if actor<>user then setuproomret
+ gosub @checkiflight
+ lightinroom=result
+.setuproomret
+ RETURN
+;---
+.checkifpresent
+; Return result=true if OBJECT is in ROOM
+ gosub getobjectposx2
+ result=false
+ if x2<>room then cipret
+ result=true
+.cipret
+ goto @specialcheckifpresent
+;---
+.getobjectposx2
+ x4=object
+.gopx4
+; Return 'x2'=current pos of object X4
+ x2=0
+ if x4>32000 then gopfound ; >>mike 30/7/87 - prevent negative index
+ x2=CURRENTPOS(X4)
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN @gopfound
+ X4=x2
+ GOTO gopx4
+.gopfound
+ result=false
+ if x2<>room then gopret
+ result=true
+.gopret
+ RETURN
+;---
+;---
+;--------------------------------------------------
+;-----------------
+.switchon
+.switchoff
+.dodge
+ goto @nothinghappens

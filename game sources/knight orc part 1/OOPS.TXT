@@ -1,0 +1,194 @@
+; Oops code for Knight Orc
+;
+;
+var ; *** PETE 25/6/87
+; save0 save1 save2
+ ramsaveused ; 493=yes. Other values=no ; *** PETE 25/6/87
+begin
+
+.RAMSAVE
+
+
+ cif includeoops
+
+; single position only at present
+ GOSUB @GETNEXTWORD ; see if there is a second word giving load/save
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=IRESTORE THEN RAMLOAD
+
+ RAMSAVEUSED=493 ; Set BEFORE the data is saved *** PETE 25/6/87
+ X2=0 ; first position
+ GOSUB @RAMWRITE
+.RAMSAVEEND
+ IF RESULT<>0 THEN @RAMERROR
+ GOTO @DONE
+;---
+
+
+ cend
+
+
+.RAMLOAD
+
+
+ cif includeoops
+
+
+; single position only at present
+ X2=0 ; first position
+ IF RAMSAVEUSED<>493 THEN @OOPSFATALERROR ; *** PETE 25/6/87
+ GOSUB @RAMREAD
+ IF RESULT<>0 THEN @RAMERROR
+ nomoreinput=true ;>>mike 30/7/87
+
+
+ cend
+
+
+ GOTO @oopsAFTERRESTORE
+;---
+.INITOOPS
+
+
+ cif includeoops
+
+
+; count number of oops positions available
+ X2=0
+ GOSUB @RAMWRITE
+ IF RESULT<>0 THEN INITOOPSRET
+ MESSAGE 2309 ; ram and oops available
+; now go through and write 'certified garbage' to all positions
+ C2=65000 ; show that positions are invalid
+; X2=0
+.INITOOPS1
+ GOSUB @RAMWRITE
+ ADD X2,C1
+ if x2>250 then initoopsend ; stop it wrapping around
+ IF RESULT=0 THEN INITOOPS1
+.initoopsend
+ C2=2 ; restore C2
+.INITOOPSRET
+
+
+
+ cend
+
+ RETURN
+;---
+
+ cif includeoops
+
+
+
+;.INITOOPS1
+; GOSUB RAMWRITE
+; IF RESULT<>0 THEN INITOOPS3
+; ADD X2,C1
+; GOTO INITOOPS1
+;
+;.INITOOPS3
+;; X2 oops positios availble
+; IF X2<>0 THEN INITOOPS4
+; MESSAGE 2308 ; oops and ramsave not available
+; RETURN
+
+;.INITOOPS4
+; PRINT X2 ; number of positions;
+; MESSAGE 2309 ; available for use
+; RETURN
+;---
+.NOPOSITION
+ MESSAGE 2308 ; no oops position found
+ RETURN
+;---
+
+
+ cend
+
+
+.OOPS
+
+
+ cif includeoops
+
+
+; OOPSPOS points to next free position in ram save area
+; go back some positions if they are available
+ IF OOPSPOS<>1 THEN OOPS2
+; have gone to position 0, so need to wrap round to end of ram area
+ IF OOPSPOSEND=0 THEN NOPOSITION ; something wrong here
+ OOPSPOS=OOPSPOSEND ; first invalid position
+
+.OOPS2
+ SUB OOPSPOS,C1
+ X2=OOPSPOS
+ GOSUB RAMREAD
+ nomoreinput=true
+ descriptionmode=iverbose ; in case killed in the middle of RUN
+
+
+ cend
+
+ GOTO @oopsafterrestore
+
+
+ cif includeoops
+
+.RAMERROR
+ MESSAGE 2300 ; ram save/restore not available on this machine
+ RETURN
+;---
+.SAVEOOPS
+; OOPSPOS points to the next free position in ram save area
+; this routine called on EVERY movement
+; try writing to current position
+
+ X2=OOPSPOS
+ GOSUB RAMWRITE
+ IF RESULT=0 THEN SAVEOOPSOK ; fine, inc pointer and finish
+; something went wrong.
+; if we are in the first position, tell the user
+; that it is not available here
+ IF OOPSPOS<2 THEN SAVEOOPSRET ; keep quiet, ignore the error
+; ok, so have some saved positions. Rotate round cyclically
+ OOPSPOSEND=OOPSPOS ; save first invalid position
+ SUB OOPSPOS,C1
+ OOPSPOS=1
+ GOTO SAVEOOPS
+
+.SAVEOOPSOK
+ ADD OOPSPOS,C1
+.SAVEOOPSRET
+ RETURN
+;---
+.RAMREAD
+ X1=23 ; code for ramload
+ GOSUB RAMOPERATION
+ IF C2<>2 THEN OOPSFATALERROR
+ RETURN
+;---
+.RAMWRITE
+ X1=22 ; code for ramsave
+; drop through to RAMOPERATION
+
+.RAMOPERATION
+; write to position X2, return RESULT=0 if OK
+ gosub @savelist9
+ LINPUT(0)=X1
+ LINPUT(1)=X2 ; position number
+ LINPUT(2)=C0
+ DRIVER
+ RESULT=LINPUT(C0)
+ goto @restorelist9
+;
+.OOPSFATALERROR
+ MESSAGE 2310 ; fatal error
+ GOTO @QUITPLAYAGAIN ; ask player to press space, then restart
+;---
+
+ cend
+
+
+

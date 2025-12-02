@@ -1,0 +1,2666 @@
+; Knight Orc Asource
+;
+; M.J.Austin 2/4/87
+;
+; Averb.TXT
+;
+; This section contains code which is mostly game-independent,
+; but where occasional changes will be made for special cases.
+;
+;
+BEGIN
+.STARTGAME
+; thispart=3 ;***
+; parttochain=2 ;*****
+; goto initall ;*****
+ message space
+ message cr
+ if thisgame=knightorc then start2
+ gosub @essentialinit ; set up vars etc.
+ if c0=diskversion then start1
+ message 2312 ; wrong game.
+ parttochain=1
+ thisgame=0 ; cause p1 to restart
+ goto @chainparttochain
+
+.start1
+; cassette start with junk data in memory
+ message 2319 ; you'll have to restore
+ thisgame=0 ; prevent another failed restore restarting with corrupt data
+ goto @dorestore
+
+.start2
+; this was definately chained from some part of KO
+; the part it was chained from is "THISPART"
+ if parttochain<>constantpartnum then notchained
+ if thispart<>constantpartnum then notchained
+; data is a position saved from this part.
+; must have loaded a saved position into another part
+; which caused this part to be chained in.
+ goto @afterrestore ;cancelinput
+
+.notchained
+ if thispart=constantpartnum then initall ; restarting this part
+; we are chaining in from another part...
+ x2=thispart ; set up THISPART.
+ thispart=parttochain
+ gosub @setuppartdependentobjects
+ if x2<>1 then @cancelinput ; (chaining in from alternate
+;			      of P2/P3, so just go straight into game)
+
+; we are chaining in from part 1
+
+.INITALL
+ MESSAGE 2100 ; welcome to game
+
+
+ cif includepictures
+  x1=1 ; part1 title page starts drawing
+  gosub @dp3 ;rawpicturex1 ; start picture drawing (at position 0,0)
+ cend
+
+
+ HOUR=10
+ day=1
+ minute=20
+; now initialisation which must be done anyway
+;
+ gosub @essentialinit
+ ITWORD=NULLOBJECT ; first object seen
+ ITNUMBER=NULLNUMBER
+; CARRYCAPACITY=NORMALCAPACITY
+ GOSUB @INITOBJECTS ; Does NOT change object 0 positions
+ gosub @initnpcs
+;
+; set up hooded cloak/ score as they were
+; when we first entered part 2/3
+ part1score=currentpos(0) ; score
+ x1=hicurrentpos(0) ; cloak position
+ if x1=0 then initnocloak
+ currentpos(cloak)=c1 ; assumes user=1
+ hicurrentpos(cloak)=x1 ; set up hicurrentpos as it was in P1.
+
+.initnocloak
+ gosub setuppartdependentobjects
+ SOMETHINGPROCESSED=TRUE ; force printing of WHAT NEXT ?
+ NORMALDESCRIPTIONMODE=IVERBOSE
+
+
+ cif includeoops
+  OOPSPOS=1
+ cend
+
+ vandalptr=vandalbase
+;
+ gosub @initlocations
+
+; now set up variables as pointers to starts
+; within segmented lists
+ value=list5(0)
+ gosub @valuetimes256
+ x1=list5(1)
+ add value,x1
+ startfloorpointers=value
+
+ value=list5(2)
+ gosub @valuetimes256
+ x1=list5(3)
+ add value,x1
+ startracetracks=value
+
+ value=list5(4)
+ gosub @valuetimes256
+ x1=list5(5)
+ add value,x1
+ startreversaltable=value
+
+; set up initial racetrack commands for npcs
+; which have them
+ actor=1
+.initracetrack1
+; now find pointer to initial racetrack for actor:
+ add actor,c1
+ x1=actor ; number of racetrack to activate
+ gosub @initracetrackx1
+ if actor<maxnpcplusone then initracetrack1
+
+ actor=user
+ gosub @setuproom
+ message 2700 ; start of game message
+; currentpos(0)=c0 ;* this seems to be necessary
+; hicurrentpos(0)=c0 ;* this seems to be necessary
+ totalmoves=20 ; prevent "what now"
+ gosub @describeroom
+ GOTO @CANCELINPUT
+;-----
+.setuppartdependentobjects
+; must not corrupt X2
+; add/remove door in heaven
+ x1=26
+ if thispart=3 then supdo1
+ x1=0
+
+.supdo1
+ currentpos(metaldoor)=x1
+; unwear visor if in hitech mode (for chaining directly to hitech
+; from part1)
+ if thispart=3 then sudonotvisor
+ x1=hicurrentpos(visor)
+ if x1<>worn then sudonotvisor
+ x1=carried
+ hicurrentpos(visor)=x1
+
+.sudonotvisor
+ return
+;---
+.essentialinit
+ list9(0)=thispart
+ CLEAR ; clears all variables
+ thispart=list9(0)
+ thisgame=knightorc
+; initialise some variables which retain their values throughout
+; the game
+ C1=1
+ C2=2
+ C3=3
+; C4=4
+ c6=6
+ c8=8
+ C10=10
+ NOMOREINPUT=TRUE ; have come to end of input line
+ return
+;---
+.unfastennotrope
+; trying to unfasten something other than rope
+; is any rope tied to it?
+ searchpos=noun1
+ hisearchpos=nonspecific
+ searchdepth=2
+ gosub @initgetobj
+.unr1
+ gosub @getnextobject
+ if object=0 then @cantverbnoun1
+ if object<minrope then unr1
+ if object>maxrope then @cantverbnoun1
+ noun1=object
+ goto unfastentake ; unfasten (piece of rope)
+
+.unfasten
+ if noun1<minrope then unfastennotrope
+ if noun1>maxrope then unfastennotrope
+; drop through to take
+.unfastentake
+ verb=itake
+
+.GET
+.TAKE
+; Check for prepositions e.g. GET ON,0GET OFF
+ IF PREP<>0 THEN @TAKEFROM
+.TAKEIT
+ POS=ACTOR
+ HIPOS=CARRIED
+ GOTO @MOVEOBJECT
+;
+.TAKEFROM
+; got a preposition e.g. TAKE noun FROM ; or TAKE noun IN etc.
+ OBJECT=NOUN1
+ POS=NOUN2
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS
+; OBJECT=NOUN1 here
+ IF RESULT=FALSE THEN @ITSNOTTHERE
+ GOTO TAKEIT
+;---
+
+.STAND
+ lastpossibleverb=0 ; prevent prep being parsed as a verb
+ nextverb=0
+ IF PREP=ON THEN STANDON
+ IF PREP=OFF THEN STANDOFF
+ IF PREP=UP THEN STANDUP
+ IF PREP=IPIN THEN STANDIN
+ IF PREP=IPOUT THEN STANDOUT
+ GOTO @DONTUNDERSTAND
+;---
+.STANDOFF
+ if room<>20 then standoffnotdrawbridge
+ verb=4 ; go south instead to get off drawbridge
+ goto @move
+
+.standoffnotdrawbridge
+.STANDOUT ; get out (e.g. of boat)
+.STANDUP
+ X1=HICURRENTPOS(ACTOR)
+ IF X1=0 THEN @SILLY
+ currentpos(actor)=ROOM
+ hicurrentpos(actor)=c0
+ goto @done
+;
+.BOARD ; e.g. boat
+ PREP=ON
+
+.STANDON
+.STANDIN
+; HIDEST=PREP ; ON, IN ETC.
+ GOTO @silly
+;---
+.LIE
+ HIDEST=LIEON
+ if noun2=bed then standok
+ GOTO @silly
+;---
+.SIT
+ HIDEST=SITON
+ if noun2=bed then standok
+ goto @silly
+;---
+.STANDOK
+ gosub @describeactionactor
+ PROCESSED=TRUE
+ HIDEST=PREP
+ DEST=OBJECT
+ GOTO @NEWLOCATION
+;---
+.ATTACK
+ if noun1=iroom then @vandal
+ target=noun1
+ if noun1>maxnpc then atnpc ; assumes nullobject=255
+ if noun2<minweapon then @silly
+ if noun2=nullobject then attackchoose
+ if noun2>maxweapon then @silly
+ weapon=noun2
+ goto @generalblow
+
+.attackchoose
+ GOSUB @CHOOSEBESTWEAPON
+ GOTO @GENERALBLOW
+
+.ATNPC
+ if actor=eye then @gdeyeexplodes
+ if actor<>fireball then atnfireball
+ goto @gdfireballexplodes
+
+.atnfireball
+ if noun1<minsceneryobj then atnsceneryobject
+ if noun1<maxsceneryobjplusone then @vandal
+
+.atnsceneryobject
+ m1=2673 ; door is not breakable
+ if noun1=generaldoor then @reportm1dot
+ m1=2677 ; cubicle is unbreakable
+ if noun1=kiosk then @reportm1dot
+
+.collect
+.become
+.WAKE
+ if noun1<>vampire then wasteoftime
+ if vampireawake<>false then @wakevampire
+
+.WASTEOFTIME
+ IF ACTOR<>USER THEN @NPCNOTUNDERSTOOD
+ M1=2144 ; don't bother group
+ GOTO @VARYMESSAGEDOT
+;---
+.PUT
+ IF NOUN1=NULLOBJECT THEN @CANTSEEWHAT
+ IF NOUN2=NULLOBJECT THEN @CANTSEEWHERE
+; OBJECT=NOUN2
+; GOSUB @CHECKIFACCESSIBLE
+; IF RESULT=FALSE THEN CANTPUTTHERE
+ OBJECT=NOUN1
+
+ IF PREP=ON THEN PUTON
+ IF PREP=UNDER THEN @PUTUNDER
+ IF PREP=IN THEN PUTIN
+ if prep=through then putin
+
+.CANTPUTTHERE
+ if actor<>user then @cptret
+ gosub @cantverbnoun1nodot ; can't put that
+ m1=2124                  ; there
+ goto @reportm1
+;---
+.PUTON
+; CHECK IF DESTINATION CAN HAVE things put on top of it
+ goto cantputthere
+;
+.PUTOK
+ OBJECT=NOUN1
+ POS=NOUN2 ; DESTINATION
+ HIPOS=PREP
+ GOTO @MOVEOBJECT
+
+.PUTIN
+ if noun2<>kioskopening then putnotopening
+.objectwontfit
+ m1=2675 ; rainbird pecks button, you win
+ if object=rainbird then escapefromgame
+ result=false ; prevent special move (when called from sm)
+ m1=2676 ; mouse can't peck button
+ if object=mouse then @reportm1dot
+ gosub @desctheobject
+ result=false ; prevent special move (when called from sm)
+ m1=2674 ; won't fit through the opening
+ goto @reportm1dot
+
+.escapefromgame
+ gosub @reportm1
+ escaped=true
+ goto @win
+
+.putnotopening
+ if noun2=sack then putok
+ if noun2<>scabbard then putinnotscab
+ if noun1=dagger then putok
+;; goto cantputthere
+
+.putinnotscab
+ if noun2<>inspectionhatch then putinnothatch
+ m1=2661 ; the hatch is too high
+ if actor<>troll then @reportm1dot
+ if noun1=mouse then putok
+
+.putinnothatch
+ if noun2=fire then putok
+ if noun2<>gravestonehole then putinnotgravestone
+ if noun1=halfcoin then putok
+ gosub @desctheobject
+ m1=2862 ; is too big
+ goto @reportm1
+
+.putinnotgravestone
+ prep=blockedby
+ if noun2=mousehole then putok
+ if noun2=crack then putok
+ if noun2=crevice then putok
+.PUTUNDER
+ GOTO @CANTPUTTHERE
+
+;---
+
+.ISOBJECTMOVEABLE
+; return RESULT=TRUE if OBJECT can be moved
+ if object=visor then @returntrue
+ if object=mouse then @returntrue
+ RESULT=FALSE
+ if actor<>valkyrie then iomnotvalk
+; valk can pick up any dead body
+ gosub @isobjectalive
+ if result=false then @returntrue ; ok to take
+ m1=2602 ; valk seems annoyed to find that
+ gosub @reportm1
+ gosub @desctheobject
+ m1=2603 ; is still alive
+ gosub @reportm1
+ goto @returnfalse ; prevent take
+
+.iomnotvalk
+ if object>maxmoveable then iomret
+ if object=acidbutton then iomret
+ if actor=troll then @returntrue
+ IF OBJECT>maxnpc then @returntrue
+.IOMRET
+.cptret
+ RETURN
+;---
+.MOVEOBJECT
+; Move 'OBJECT' to 'POS', 'HIPOS'
+; Return RESULT=TRUE if move was successful
+ GOSUB ISOBJECTMOVEABLE
+ IF RESULT=FALSE THEN @IMMOVABLE
+;
+; see if container is big enough to contain it
+; (this is limited by GETNEXTOBJECT)
+; at present, allow maximum of six objects to be carried
+; (though more can be carried inside containers)
+; GOSUB COUNTCONTENTS
+; IF X3>5 THEN CONTAINERFULL
+;
+;
+; is the contents already contained by the container (or V-V) ?
+ GOSUB @CHECKIFCONTAINED
+;
+ IF HIPOS=0 THEN MONOTACTOR
+; ACTOR to gain this object, check if is able to carry it
+; actually this code is now used whenever an object
+; goes to a position not on the ground. This
+; is to catch people trying to avoid SPECIALTAKES
+; GOSUB WEIGHOBJECT
+; ADD WEIGHTCARRIED,WEIGHT
+; IF WEIGHTCARRIED>CARRYCAPACITY THEN HANDSFULL
+ IF HIPOS<>WORN THEN MOVEOBJ1
+; is it wearable ?
+ if object=fingerring then moveobj1
+ if object=visor then moveobj1
+ IF OBJECT<minclothes THEN @cantwear
+ if object>maxclothes then @cantwear
+
+.MOVEOBJ1
+; Now check if the ACTOR is standing on it or some similar problem
+ OBJECTSAVE=OBJECT
+ DEST=POS ; save value
+ HIDEST=HIPOS ; save it
+;
+ POS=OBJECT
+ HIPOS=NONSPECIFIC
+ OBJECT=ACTOR
+ GOSUB @CHECKOBJECTPOS
+;
+ OBJECT=OBJECTSAVE
+ POS=DEST ; restore value
+ HIPOS=HIDEST ; restore value
+ IF RESULT=TRUE THEN @MOVEOBJFAIL
+ GOSUB @SPECIALTAKES ; game-specific take messages
+ IF RESULT=FALSE THEN @MOVEOBJRET
+;
+.MONOTACTOR
+ X1=CURRENTPOS(OBJECT)
+ IF X1<>ACTOR THEN MMNOTLOSE
+ X1=HICURRENTPOS(OBJECT)
+ IF X1=0 THEN MMNOTLOSE
+; ACTOR is to lose object
+ IF X1<>WORN THEN MMLOSENOTWORN
+; ACTOR is wearing object, if it was specified using EVERYTHING,
+; then don't drop it as this could cause embarrasment
+ IF noun1isgd=false THEN MMLOSENOTWORN
+ if verb=iremove then mmlosenotworn
+ RESULT=FALSE
+ if actor<>user then @npcnotunderstood
+ M1=2134 ; you're wearing
+ gosub @reportm1
+ gosub @desctheobject
+ m1=dot
+ goto @reportm1
+
+.MMLOSENOTWORN
+ GOSUB @SPECIALDROPS
+ IF RESULT=FALSE THEN MOVEOBJRET
+
+.MMNOTLOSE
+ IF HIPOS=0 THEN MMNL1
+ IF POS=OBJECT THEN @CANTPUTTHERE
+.MMNL1
+; any other special cases ?
+;
+; is it going to a NPC ?
+ if actor=pos then montonpc ; ok for people to take things
+ IF HIPOS=0 THEN MONTONPC
+ IF POS<minnpc THEN MONTONPC
+ IF POS>MAXNPC THEN MONTONPC
+; code here is to avoid NPCs having things put on them etc.
+; or the statue / bloodworm / bat being given things
+; no special cases for giving to NPC, so make it carry it
+ IF HIPOS=WORN THEN MONTONPC ; unless it is going to wear it
+ HIPOS=CARRIED
+
+.MONTONPC
+
+ FROM=CURRENTPOS(OBJECT)
+ HIFROM=HICURRENTPOS(OBJECT)
+ CURRENTPOS(OBJECT)=POS
+ HICURRENTPOS(OBJECT)=HIPOS
+;
+; now decribe the move
+;
+; show ACTOR doing something
+; verb is set up
+ if verb=ithrow then monodesc
+ objectsave=object
+ if prep<>blockedby then monotblockedby ;>>special to ko
+ prep=ipin
+
+.monotblockedby
+ gosub @describeactionactor
+ object=objectsave
+
+.monodesc
+ gosub @specialaftermoveobj
+ goto @returntrue ; move went just fine!
+;.moveobjret
+; return
+
+.MOVEOBJFAIL
+ M1=2131 ;  you're on it
+ gosub @errorm1
+
+.MOPREVENT
+ RESULT=FALSE
+.moveobjret
+ RETURN
+
+;.HANDSFULL
+; MESSAGE 2107
+; RETURN
+;---
+.SCORE
+ if actor<>user then @npcnotunderstood
+ MESSAGE 2204 ; you are
+
+.ABSSCORE
+ GOSUB CALCSCORE
+ PRINT totalscore
+ MESSAGE 2205 ; out of 1000 and are
+;;
+;; get message 2250-2260 inclusive for score
+;;
+; M1=2250 ; archmage
+; IF totalscore=0 THEN GOTRATING
+;; M1=2250=mage-1
+; SUB totalscore,C1 ; shift score down so 1-10 is first cat, then 11-20 etc.
+;.SCORE1
+; X1=10
+; SUB totalscore,X1
+; ADD M1,C1
+; IF totalscore<NEGATIVE THEN SCORE1
+;
+;.GOTRATING
+ RETURN
+;---
+.CALCSCORE
+ totalscore=0
+; check for spells learnt...
+ object=minspell
+.cs0
+ x1=currentpos(object)
+ if x1<>1 then cs0a ; spell has been learnt because not in room1
+ x1=hicurrentpos(object)
+ if x1=0 then cs1 ; not learnt if still in room 1.
+.cs0a
+ x1=20 ; score increment per spell learnt
+ add totalscore,x1
+.cs1
+ add object,c1
+ if object<maxspellplusone then cs0
+
+ x1=30 ; score for placating each person
+ if trollplacid=false then cs2
+ add totalscore,x1
+
+.cs2
+ if dragonplacid=false then cs3
+ add totalscore,x1
+
+.cs3
+ if mouseplacid=false then cs4
+ add totalscore,x1
+
+.cs4
+ if grokfed=false then cs5
+ add totalscore,x1 ; score 30 points for feeding grok
+
+.cs5
+ object=2
+.cs6
+ gosub @getnpcattributes ; for object
+ x1=masteroffset
+ add x1,x4
+ x1=npccurrent(x1)
+ if x1<>user then cs7 ; not obedient (to user!)
+ x1=30 ; score for recruiting each ally
+ add totalscore,x1
+.cs7
+ add object,c1
+ if object<6 then cs6
+ x1=100
+ if crossedredline=false then cs8
+ add totalscore,x1 ; add 100 for crossing red line.
+
+.cs8
+ if escaped=false then cs9
+ add totalscore,x1 ; add 100 for escaping at end
+
+.cs9
+ if labseen=false then cs10
+ x1=40 ; score for seeing heaven lab (in hitech mode)
+ add totalscore,x1
+
+.cs10
+; ADD X3,C1
+; IF X3<SCMAXPLUSONE THEN CALCSCORE1
+;
+ add totalscore,part1score
+; check the remote possibility of a negative score
+;; IF totalscore>30000 THEN CALCSZERO
+;;.CALCSCORERET
+ RETURN
+
+;;.CALCSZERO
+;; totalscore=0
+;; RETURN
+
+;---
+;---
+.POSITIONSHADOWS
+; Make objects follow the ACTOR around where applicable. e.g. DOORS.
+; and other objects which are in several places at once
+ RETURN
+;---
+.FASTEN
+; NOUN1 TO NOUN2
+; when fastening to rope, the rope becomes contained by
+; the object. If another object is tied to the rope, it
+; must contain the rope.
+; NPCs must remain on the ground, so they always contain the rope.
+; make object=rope (if any)
+; and pos be the thing to tie to it
+ pos=0
+ if noun2<minrope then fastennorope1
+ if noun2>maxrope then fastennorope1
+ object=noun2
+ pos=noun1
+
+.fastennorope1
+ if noun1<minrope then fastennorope2
+ if noun1>maxrope then fastennorope2
+ object=noun1
+ pos=noun2
+; is rope(=object) tied to anything at present?
+ x1=hicurrentpos(object)
+ if x1<>fastenedto then dofasten ; no - so it's easy!
+ goto untiefirst ; rope only has one end at present!
+
+.fastennorope2
+ if pos=0 then fastennorope
+; dropthrough to dofasten
+
+.dofasten
+ hipos=fastenedto
+ if pos>maxpeople then dofasten1
+; tying to npc, so use different hipos
+ hipos=tiedupwith
+.dofasten1
+ if object=nullobject then @cantverbnoun1
+ if pos=nullobject then @cantverbnoun1
+; now special code handlers
+ currentpos(object)=pos
+ hicurrentpos(object)=hipos
+ goto @done
+
+.fastennorope
+ GOTO @cantverbnoun1
+;---
+.untiefirst
+ m1=2158 ; must untie it first
+ goto @reportm1dot
+;---
+.JUMP
+ if noun1=nullobject then jumpnotmagical
+ verb=icast
+ noun2=noun1
+ noun1=jumpspell
+ goto @cast ; treat it as a jump spell.
+
+.jumpnotmagical
+ M1=2129 ; whee - jump on spot
+ goto @errorm1
+;---
+.NEWLOCATION
+; Given FROM=old location, HI,DEST=new location
+; and DIR=direction,
+; print any messages which appear on moving through doors etc.
+; GOSUB @SETUPROOM
+ FROM=ROOM
+ GOSUB @SPECIALMOVES
+ print actor ;****
+ message space ;*****
+ print c2 ;***
+ message comma ;****
+ blockedbysm=true
+ IF RESULT=FALSE THEN @NLRET
+ print c2 ;****
+ message dot ;*****
+ blockedbysm=false
+;
+;;.ABSNEWLOCATION
+; as for newlocation, but don't do any checking for special
+; case code. Use this routine where the move is forced, so
+; don't want to trip any movement traps
+ FROM=ROOM
+; describe door closing (if there is one)
+ IF HIDEST<>0 THEN ANL2 ; skip checks for moving into container
+ GOSUB @CHECKEXIT
+;; IF DOOR=FALSE THEN ANLDOOR
+
+;;.ANLDOOR
+ gosub @describeleaving
+
+.ANL2
+;
+ LASTROOM=ROOM
+ CURRENTPOS(ACTOR)=DEST
+ HICURRENTPOS(ACTOR)=HIDEST
+ gosub @closedoor
+ SAVEROOM=ROOM
+ gosub @setuproom
+ gosub @describearrival
+; no messages printed between describearrival and describeroom please
+;;.NLEND
+ IF ACTOR<>user THEN @AFTERMOVE ; npc doesn't want description
+ timeinroom=0
+ GOSUB @DESCRIBEROOM
+ GOTO @AFTERMOVE
+;---
+.DESCRIBELEAVING
+ if descriptionmode=inone then @dlret
+ if actor<>dragon then dlnotdragon
+ if dragonplacid=true then dlnotdragon
+; dragon advancing/backing down tunnel
+ if dir=3 then dlretreating
+ if dir<>4 then dlnotdragon ; user must be behind it, somehow
+
+.dlretreating
+ m1=2875 ; backs away (when you can see)
+ if currentuserroom=room then dldragonm1
+ gosub @calcdragondistance
+; x1= distance of dragon
+ if x1=4 then @dlret
+ message 2907 ; hear dragon retreating
+ return
+
+.dldragonm1
+ gosub @reportm1
+ goto reportdirectionanddoor
+
+.dlnotdragon
+ verb=istruggle
+ if dir=iclimb then dl1
+ verb=58 ; go
+.dl1
+ gosub @actorverb ; the npc goes
+.reportdirectionanddoor
+ m1=verboffset ; north-1
+ add m1,dir
+ gosub @reportm1 ; direction
+ gosub describedoor
+ if actor<>user then descldot ; print a dot and terminate
+ wanttoprintand=user ; followed immediately by description
+.desclret
+.nlret
+ print c2 ;***
+ message colon ;****
+ return
+
+.descldot
+ m1=dot
+ goto @reportm1
+
+.describedoor
+ IF DOOR=FALSE THEN DESCLret
+ M1=2115 ; through the door
+ goto @reportm1
+;---
+.DESCRIBEARRIVAL
+; first print description of object
+ if descriptionmode=inone then desclret
+ if actor<>dragon then danotdragon
+ if dragonplacid=true then danotdragon
+; dragon advancing/backing down tunnel
+ if dir=1 then daadvancing
+ if dir<>7 then daretreating ; user must be behind it, somehow
+
+.daadvancing
+ m1=2876 ; enters room forwards (when you can see)
+ if currentuserroom=room then daadvancingm1
+ gosub @calcdragondistance
+; x1= distance of dragon
+ if x1=4 then daret
+ message 2908 ; hear dragon advancing
+.daret
+ return
+
+.daretreating
+ m1=2649 ; dragon retreats into your room from the
+
+.daadvancingm1
+ gosub @reportm1
+ goto dadir
+
+.danotdragon
+ IF actor=user then DESCLRET ; for startup
+ verb=3420 ; enter = 3520-verboffset
+ object=actor
+ gosub @anobjectverb ; the npc enters...
+
+.dadir
+ m1=584
+ add m1,dir
+ gosub @reportm1
+ gosub describedoor
+ m1=dot
+ goto @reportm1
+;---
+
+.EAT
+ if object=mouse then eatmouse
+ if object<>ratpie then noeat
+.eatmouse
+ gosub @describeactionactor
+ object=mouse
+ gosub @destroyobject
+ m1=2694 ; the mouse was delicious
+ if noun1=mouse then @reportm1dot
+;;.EATRET
+;;.ANLRET
+.dlret
+ RETURN
+
+.NOEAT
+ M1=2154 ; Yeuch!
+ goto @errorm1
+;---
+.DRINK
+ m1=2576 ; you don't have any
+ goto @reportm1
+;---
+.TICKCLOCK
+; add on time a minute at a time
+;;.TCADDMINUTES
+ GOSUB @TIMEDEPENDENTCODE
+ ADD TIME,C1
+ ADD TIMEINROOM,C1
+ ADD MINUTE,C1
+;; SUB TIMEPASSED,C1
+;; IF TIMEPASSED=0 THEN TCADDMIN1
+;; IF TIMEPASSED<NEGATIVE THEN TCADDMINUTES
+
+.TCADDMIN1
+ IF MINUTE<60 THEN TICKCLOCK2
+.TICKCLOCKMINUTE
+ X1=60
+ SUB MINUTE,X1
+ ADD HOUR,C1
+ IF MINUTE>59 THEN TICKCLOCKMINUTE
+; do all hourly activities here
+ IF HOUR<24 THEN TICKCLOCK2
+.TICKCLOCKHOUR
+ X1=23
+ SUB HOUR,X1
+ ADD DAY,C1
+ IF HOUR>11 THEN TICKCLOCKHOUR
+
+.TICKCLOCK2
+;; TIMEPASSED=1 ; TIME PASSED IN NEXT MOVE (UNLESS OVER-RIDDEN)
+;
+; All time-dependant code comes here
+;
+;;.TCRET
+;;.waitret
+ RETURN
+;---
+.SLEEP
+; voluntarily go to sleep
+ if actor<>user then @npcnotunderstood
+ M1=2595 ; not sleepy
+ goto @reportm1
+;
+;.SLEEP1
+; X1=CURRENTPOS(ACTOR)
+; IF X1<>BED THEN SLEEPNOTONBED
+; X1=HICURRENTPOS(ACTOR)
+; IF X1=0 THEN SLEEPNOTONBED
+; MESSAGE 2600 ; go to sleep in bed
+; GOTO ABSSLEEP
+;.SLEEPNOTONBED
+; MESSAGE 2601 ; go to sleep where ACTOR is
+; GOTO ABSSLEEP
+;---
+;.FORCESLEEP
+; MESSAGE 2594 ; ACTOR drops from exhaustion
+;
+;.ABSSLEEP
+;; M1=2815 ; goodnight
+;; GOSUB DAGGETMESSAGE
+;;
+;.SLEEPNOTARRESTED
+; GOSUB DOSLEEP
+; GOTO @CANCELINPUT
+;---
+;.DOSLEEP
+; GOSUB SLEEPDREAM
+;; X1=CURRENTPOS(ACTOR)
+;; IF X1<>BED THEN SLEEPNOTBED
+;; X1=HICURRENTPOS(ACTOR)
+;; IF X1<>0 THEN SLEEPNOTBED
+; MESSAGE 2604 ; awake refreshed
+;; SCOREINDEX=SCSLEEP
+;; GOSUB ADDSCORE
+; GOTO SLEEPEND
+;.SLEEPNOTBED
+;; MESSAGE 2605 ; awake not refreshed
+;.SLEEPEND
+; MINUTE=1 ; can't use TICKCLOCK due to scenery messages etc.
+; ADD HOUR,C4
+; IF HOUR<10 THEN SLEEPRET
+; SUB HOUR,C10
+;; ADD DAY,C1
+;.SLEEPRET
+; RETURN
+;---
+;.SLEEPDREAM
+; RANDOM X1
+; IF X1>80 THEN SDCLUEDREAM
+; IF SCOREDTODAY=TRUE THEN SDSWEETDREAM
+;; hurry-up dream
+; M1=2613
+; GOTO SDEND
+;.SDSWEETDREAM
+; SCOREDTODAY=FALSE
+; M1=2610
+;.SDEND
+; GOSUB VARYMESSAGE
+; MESSAGE DOT
+; RETURN
+;
+;.SDCLUEDREAM
+; M1=0
+; IF M1=0 THEN SDSWEETDREAM ; no clues to give
+; MESSAGE M1
+; MESSAGE DOT
+; RETURN
+;---
+;---
+.PULL
+ if noun1=rope then @pullrope
+.PUSH
+ if noun1<>acidbutton then @immovable
+ if noun2=nullobject then @acidburnsactor
+ if noun2<>sword then pushnotwithsword
+ dooropen=true
+ m1=2679 ; push button, door opens
+ goto @reportm1
+
+.pushnotwithsword
+ object=noun2
+ verb=iam
+ gosub @objectverb
+ m1=2680 ; dissolved by the acid
+ gosub @reportm1
+ goto @destroyobject
+;---
+;;.VRING
+; IF NOUN1<>BELL THEN @SILLY
+; GOTO RINGBELL
+;---
+.DISPLAYTIME
+ MESSAGE 2217 ; time is_
+ PRINT HOUR
+ MESSAGE COLONNOSPACE
+ if minute>9 then dt1
+ print c0 ; make all minutes double-figures
+.dt1
+ PRINT MINUTE
+ message dot
+ RETURN
+;---
+.OPEN
+ IF OBJECT<>GENERALDOOR THEN @OPENNDOOR
+;;.OPEN1
+ IF DOOROPEN=TRUE THEN @ALREADYOPEN
+.opendoor
+ if room<>11 then opennotfiredoor
+ if firealarm=false then @cantverbnoun1
+
+.opennotfiredoor
+ if room=9 then @cantverbnoun1 ; final door
+ if room<>30 then opennotmonksdoor
+; opening monks door causes some fireworks.
+ m1=2782 ; lightning lashes out and hits you
+ gosub @reportm1
+ object=armour
+ pos=actor
+ hipos=worn
+ gosub @checkobjectpos
+ if result=true then openwitharmour
+ m1=2783 ; they fry you
+ gosub @reportm1
+ goto @actordeath
+
+.openwitharmour
+ m1=2784 ; the ricochet over armour!
+ gosub @reportm1
+ object=ballandchain
+ pos=actor
+ hipos=fastenedto
+ gosub @checkobjectpos
+ if result=true then openwithball
+ m1=2785 ; and earth through you!
+ gosub @reportm1
+ goto @actordeath
+
+.openwithball
+ m1=2786 ; they earth through the ball and chain
+ gosub @reportm1
+ dooropen=true
+ return
+
+.opennotmonksdoor
+ if room=24 then cantopendoor
+ if room<>33 then openbarrow
+; can't open barrow door from inside
+.cantopendoor
+ m1=2825 ; the door won't open
+ goto @reportm1
+
+.openbarrow
+ dooropen=true
+ m1=2827 ; barrow door slowly swings open
+ goto @reportm1
+
+.opennotbarrow
+ DOOROPEN=TRUE
+ doorshut=false
+ gosub @describeactionactor
+;;.OPENDOORRET
+.SAYRET
+;;.OPENRET
+.throwret
+;;.abnret
+ RETURN
+;
+.OPENNDOOR
+ if noun1=sheddoor then @opendoor
+ if noun1<>metaldoor then opennotmetaldoor
+; is key card here?
+ object=glitteringcard
+ gosub @checkifaccessible ;present
+ if result=true then opennotbarrow ; open the door
+ m1=2670 ; need recruiter
+ goto @reportm1dot
+
+.opennotmetaldoor
+ if noun1=trolldoor then openbolt
+ if noun1<>bolt then opennbolt
+.openbolt
+ object=troll
+ gosub @isobjectalive
+ if result=true then openbolt1
+; if troll is dead for some reason,
+; resurrect her near enough to the bridge for
+; her to be able to rush in and stop you opening the door.
+ gosub @destroyobject ; for benefit of hitech mode
+ pos=241 ; east of bridge
+ hipos=0
+ gosub @createobjectpos ; resurrect troll
+ gosub @healobject
+
+.openbolt1
+ gosub @checkifpresent
+ if result=false then openbolt2
+ x1=troll
+ object=bolt
+ goto @x1wontletactorverb ; the troll won't let (you) open the door
+
+.openbolt2
+; is troll inside lair?
+ if trollplacid=true then openbolt3
+ x1=currentpos(troll)
+ if x1<>21 then openbolt3
+ m1=2913 ; troll slides bolt shut again from inside
+ goto @reportm1dot
+
+.openbolt3
+ if boltsopen=3 then dontneedtodothat
+ trollalarmed=true
+ add boltsopen,c1
+ m1=2718 ; base for bolt opening messages
+ add m1,boltsopen
+ goto @reportm1 ; another door opened
+ 
+.opennbolt
+ if object<>wallet then opennotwallet
+ m1=2912 ; wallet is VERY securely locked
+ goto @reportm1dot
+
+.opennotwallet
+ if object<>inspectionhatch then opennothatch
+ if hatchopen=true then dontneedtodothat
+ m1=2661 ; too high
+ if actor<>troll then @reportm1dot
+ hatchopen=true
+ m1=2662 ; troll opens hatch and sees wires
+ goto @reportm1
+
+.opennothatch
+ goto @cantverbnoun1
+;---
+.DONTNEEDTODOTHAT
+ m1=2148 ; you don't need to do that
+ goto @errorm1
+;---
+;.WHICHONE
+; MESSAGE 2136 ; which one ?
+; GOTO @CANCELINPUT
+;---
+.ALREADYOPEN
+ M1=2117 ; already open
+ GOTO @ERRORM1
+;---
+;.DRESS
+;; similar to give, but noun1/noun2 are reversed
+; X1=NOUN2
+; NOUN2=NOUN1
+; NOUN1=X1
+; HIPOS=WORN
+; GOTO GIVE1
+
+.GIVE
+ HIPOS=CARRIED
+;;.GIVE1
+ IF NOUN2=USER THEN GIVENPC
+ IF NOUN2<minnpc THEN NOBODYWANTSIT
+ IF NOUN2<maxnpcplusone THEN GIVENPC
+ IF NOUN2<>NULLOBJECT THEN NOBODYWANTSIT
+ GOSUB @ANYBODYHERE
+ IF OBJECT=NULLOBJECT THEN NOBODYWANTSIT
+ NOUN2=OBJECT
+ GOTO GIVENPC
+
+.NOBODYWANTSIT
+ M1=2172 ; nobody wants it
+ GOTO @ERRORM1
+;---
+.GIVENPC
+; giving NOUN1 to NPC NOUN2
+ IF NOUN2=NULLOBJECT THEN NOBODYWANTSIT
+ POS=NOUN2
+ OBJECT=NOUN1
+
+ GOSUB @MOVEOBJECT
+ if result=false then @giveret
+ goto @specialaftergive
+;---
+.THROW
+ if noun2=nullobject then @drop
+; drop the object...
+ pos=room
+ hipos=0
+ gosub @moveobject
+ if result=false then @throwret ; not possible
+
+ if noun2<minnpc then thrownotnpc
+ if noun2>maxnpc then thrownotnpc
+; throw something at someone - so treat as aggressive
+; object=noun1 here
+ gosub ithits ; report what happens
+ blowstrength=1
+ target=noun2
+; gosub @makeenemies
+ goto @dodamage
+;
+.thrownotnpc
+ hipos=ipin ; lands IN fire.
+ pos=noun2
+ if noun2=fire then @moveobject
+; drop through to ithits
+.ithits
+ verb=ihit
+ object=noun1
+ gosub @objectverb ; prints "the object hits"
+ object=noun2
+ gosub @desctheobject2 ; print out him etc.
+ m1=dot
+ goto @reportm1
+;---
+.RUB
+ if noun1<>plaque then rubnotplaque
+ gosub @describeactionactor
+ add plaquerubs,c1
+ m1=2749 ; looks a little shinier
+ if plaquerubs=1 then @reportm1
+ m1=2752 ; now readable!
+ gosub @reportm1
+ object=fireballspell
+ goto @learnspell
+
+.rubnotplaque
+ M1=2176 ; polish it to a shine
+ goto @nointerestm1
+;---
+.CHECKIFLIGHT
+; Return RESULT=TRUE if room is illuminated
+; (either naturally or by objects etc.)
+ if room=26 then ciltrue ; heaven
+ if room>55 then ciltrue
+ if room=36 then ciltrue
+ if room>20 then cilfalse
+ if room<7 then cilfalse
+.ciltrue
+ goto @returntrue
+;
+.cilfalse
+; is glow spell here?
+ object=glowspell
+ gosub @checkifpresent
+ if result=true then cilret
+ result=false
+
+.giveret
+.cilret
+ return
+;---
+.KNOCK
+ if object<>door then knockndoor
+ IF DOOR<>TRUE THEN KNOCKNDOOR
+ goto @describeactionactor
+
+.KNOCKNDOOR
+ if room=150 then knockdrawbridge
+ if room=23 then knockdrawbridge
+ goto @badobject ; can't knock that
+
+.knockdrawbridge
+ m1=2763 ; knock on drawbridge for a while, but nothing happens
+ goto @reportm1
+;---
+.BRIEF
+.VERBOSE
+ NORMALDESCRIPTIONMODE=VERB
+ GOTO @DONE
+;---
+.LIGHT ; burn etc.
+; check fo specific fire sources
+ if room<>54 then lightnofire
+ if actor=caretaker then lightfire
+ if object=driftwood then itburns
+ if object=scrolls then itburns
+ if object=sack then itburns
+ if object=map then itburns
+;; if object=book then itburns
+ if object=cloak then itburns
+;>>mike 4/8/87 - gloves not in final game!  if object=gloves then itburns
+ if object=fire then lightfire
+
+;;.doesntburn
+ M1=2218 ; doesn't burn
+ goto @errorm1
+
+.lightfire
+ if actor<>caretaker then lightnofire
+ pos=grate
+ hipos=ipin
+ object=fire
+ gosub @createobjectpos
+ noun1=fire
+ goto @describeactionactor
+
+.lightnofire
+ M1=2219 ; no source of fire
+ goto @errorm1
+;---
+.itburns
+ verb=iburn
+ gosub @objectverb
+ m1=2934 ; to dust
+ gosub @reportm1dot
+ goto @destroyobject
+;---
+.EXTINGUISH
+ if noun1<>fire then @cantverbnoun1
+ m1=2866 ; you can't extinguish it
+ goto @errorm1
+;---
+.BURY
+; bury object (maybe creating a hole)
+ m1=2581 ; nothing to dig with
+ goto @errorm1
+; IF NOUN1=NULLOBJECT THEN @CANTSEEWHAT
+; X1=CURRENTPOS(HOLE)
+; IF X1=ROOM THEN BURYEXISTINGHOLE
+; GOSUB DIGHOLE
+; MESSAGE 2575 ; dig hole
+;.BURYEXISTINGHOLE
+;
+; OBJECT=NOUN1
+; POS=HOLE
+; HIPOS=IN
+; GOSUB @MOVEOBJECT
+; IF RESULT=FALSE THEN BURYRET
+;
+; GOSUB @DESCTHEOBJECT
+; MESSAGE 2578 ; in
+;.BURYOBJECT
+;; filling in hole - so see if any objects are destroyed which
+;; will make the ghost happy
+; MESSAGE 2576 ; you fill in the hole
+; CURRENTPOS(HOLE)=C0
+; POS=HOLE
+; DEST=BURIED
+; HIDEST=0
+; GOSUB @POSSLOOP ; kill everything
+; GOSUB @AREBONESBURIED
+; M1=3571 ; why not complete the job ?
+; IF RESULT=FALSE THEN BURYOBJPRINT
+; M1=3572 ; thanks
+;.BURYOBJPRINT
+; GOSUB @GHOSTAPPEARS
+; ACTOR=GHOST
+; GOSUB @NPCSAYS
+; CURRENTPOS(GHOST)=C0
+;.BURYRET
+; RETURN
+;
+;---
+.DIG
+; dig a hole
+ m1=2581 ; nothing to dig with
+ goto @reportm1
+; IF NOUN1=NULLOBJECT THEN @DIG1
+; IF NOUN1<>HOLE THEN @SILLY
+;.DIG1
+; GOSUB DIGHOLE
+; MESSAGE 2575 ; dig a hole
+; RETURN
+;---
+;.DIGHOLE
+;OBJECT=SHOVEL
+; GOSUB @CHECKIFACCESSIBLE
+; IF RESULT=TRUE THEN DIGHOLE1
+; MESSAGE 2581 ; nothing to dig with
+; GOTO @CANCELINPUT
+
+;.DIGHOLE1
+; IF ROOM=71 THEN DIGHOLE2
+; IF ROOM=3 THEN DIGHOLE2
+; MESSAGE 2580 ; ground too hard
+; GOTO @CANCELINPUT
+;
+;.DIGHOLE2
+; X1=CURRENTPOS(HOLE)
+; IF X1=0 THEN DIGHOLEOK
+; MESSAGE 2579 ; fill in your last hole first
+; GOTO @CANCELINPUT
+
+;.DIGHOLEOK
+; CURRENTPOS(HOLE)=ROOM
+; GOTO @DONE
+;---
+.FILL
+; probably hole
+ goto @wasteoftime
+; IF NOUN2=HOLE THEN FILL2
+; IF NOUN1<>HOLE THEN @DONTNEEDTODOTHAT
+;.FILL2
+; GOTO BURYOBJECT
+;;---
+;.FILLINFIRST
+; MESSAGE 2579 ; must fill in last hole first
+; RETURN
+;---
+.PLAY
+ M1=2731 ; toot toot
+ goto @reportm1
+;---
+.HELP
+ M1=2270 ; sorry, can't help
+.HELPPRINT
+ goto @reportm1
+;---
+.cut
+ goto @nothinghappens
+;---
+.squeeze
+.badobject
+.cantwear
+.cantverbnoun1
+ gosub @cantverbnoun1nodot
+ m1=dot
+ goto @reportm1
+;---
+;-----------------------------------------------------------
+;.findunused
+;; find unused terrain/tree combinations in the terrain table
+;; zero table
+; x1=1
+;.fu0
+; linput(x1)=c0
+; add x1,c1
+; if x1<240 then fu0
+;; make which are used..
+; x1=1
+;.fu1
+; x2=terraintable(x1)
+; linput(x2)=c1
+; add x1,c1
+; if x1<240 then fu1
+;; and read out the table
+; x1=1
+;.fu2
+; x2=linput(x1)
+; if x2=c1 then fu3
+; print x1
+; message space
+;.fu3
+; add x1,c1
+; if x1<240 then fu2
+; return
+;;---
+;.checkconflicts
+;; check for occurances in the terrain table where
+;; a scenery/tree combination is used more than once
+; x1=1
+;.cc1
+; x2=1
+; x3=terraintable(x1)
+;.cc2
+; add x2,c1
+; if x2=x1 then cc3
+; x4=terraintable(x2)
+; if x3<>x4 then cc3
+; print x1
+; message space
+; print x2
+; message comma
+;.cc3
+; if x2<240 then cc2
+; add x1,c1
+; if x1<240 then cc1
+; return
+;;
+.initlocations
+; go through and place the special locations in
+; appropriate pseudo-random locations..
+
+; the fairground and viaduct are in fixed places,
+; so their object positions are set up in the normal way.
+.drret
+ return
+;-----------------------------
+; and now section from original acore.txt
+;-----------------------------
+.shortdesc
+; print the short description for ROOM
+ if room<minsynthroom then descstaticroom
+ gosub @convertroom ; is there a special feature here?
+ if x1=0 then drsynthesised
+; x1 is room number in special rooms i.e. 1..24
+; picturetodraw=x1
+ x2=startsynthshortdescs
+ add x2,x1
+ message x2
+; drop through to describe tree/terrain combination at
+; this location
+
+.drsynthesised
+
+ cif includepictures
+  picturetodraw=room
+ cend
+
+
+; X1=ROOM
+; GOSUB DRAWPICTUREX1
+ x1=room
+ x2=minsynthroomplusone
+ sub x1,x2
+ x1=terraintable(x1)
+ x3=2688 ; 2800-minsynthroom(112)
+ add x3,x1
+ message x3
+ return
+;---
+.descstaticroom
+
+
+ cif includepictures
+ picturetodraw=room
+ cend
+
+
+ x1=shortroomdescs
+ add x1,room
+ message x1
+ return
+; goto descroomremainder
+;---
+.DESCRIBEROOM
+
+ cif includepictures
+  picturetodraw=0
+ cend
+
+
+ LASTWORDPRINTED=0 ; prevent printing of 'it'
+ GOSUB @POSITIONSHADOWS
+
+ if room=DestToDescribeExitsIn then dr1
+ if descriptionmode=inone then drret
+
+.dr1
+ if actor<>user then drret ; never any description for npcs
+ GOSUB @CHECKIFLIGHT
+ IF RESULT=TRUE THEN DESCROOM1
+ if wanttoprintand=false then dr2
+ wanttoprintand=false
+ message dot ; not linked to previous message
+
+.dr2
+ MESSAGE 2108 ; It's dark
+
+
+ cif includepictures
+  LASTPICTURE=0
+  CLS G ; clear graphics window
+ cend
+
+;
+ if room<>42 then drnotdarkroom
+; can see writing
+ message 2687
+
+.drnotdarkroom
+ RETURN
+
+.DESCROOM1
+ if room<>26 then descnotheaven
+ currentpos(metaldoor)=room
+ if thispart=2 then descnotheaven
+ currentpos(metaldoor)=c0
+
+.descnotheaven
+ GOSUB @SPECIALactor ; print "You are.."
+ GOSUB @SETUPROOM
+
+.ABSDESCROOM
+ gosub @shortdesc
+
+;;.descroomremainder
+ IF DESCRIPTIONMODE<>IBRIEF THEN DESCROOM3A
+ if room=DestToDescribeExitsIn then descroom3a ; full desc of destinat
+ MESSAGE DOT
+ if normaldescriptionmode<>ibrief then descroom3d ; in middle of GO?
+ GOTO DESCROOM3C
+
+.DESCROOM3A
+ X1=LONGROOMDESCS
+ ADD X1,ROOM
+ MESSAGE X1
+;;.DESCROOM3
+ MESSAGE DOT
+ gosub @specialdescbeforeexits
+ GOSUB @PRINTEXITS
+
+.DESCROOM3C
+
+
+ cif includepictures
+  gosub showpicture ; start selected picture drawing.
+ cend
+
+
+
+.descroom3d
+ SEARCHPOS=ROOM
+ HISEARCHPOS=0
+ GOSUB @PRINTOBJECTS
+
+ GOSUB @DESCactor
+ GOTO @SPECIALDESC
+;---
+
+
+
+ cif includepictures
+
+.showpicture
+ x1=28 ; hitech tunnel picture for endgame scene.
+ if picturetodraw<9 then spnottunnel
+ if picturetodraw<14 then @drawpicturex1
+.spnottunnel
+ if thispart<>2 then showpicturenothitech
+ x1=12 ; robot head and shoulders
+ if picturetodraw=orcpicture then @drawpicturex1
+ if picturetodraw>254 then @dpret ; dragon picture or similar
+; in hitech mode, naturally light rooms
+; have warehouse picture, naturally dark rooms
+; show room divider picture.
+ x1=25 ; warehouse
+ if room=26 then @drawpicturex1 ; heaven
+ if room>55 then @drawpicturex1
+ if room=36 then @drawpicturex1
+ x1=26 ; room dividers
+ if room>20 then @drawpicturex1 ; castle etc.
+ if room<7 then @drawpicturex1
+ x1=25 ; warehouse
+ goto @drawpicturex1
+
+.showpicturenothitech
+ x1=room
+ x2=minsynthroomplusone
+ sub x1,x2
+;>>19/7/87 - code added to fix initial bug in IBM version (wrong picture
+; was displayed in fire room in house in part 2)
+ x4=0
+ if x1>32000 then notongrid
+ x4=terraintable(x1) ; x4=terrain value of here throughout.
+.notongrid
+; displaypicture for room PICTURETODRAW
+; this is either a static room number 2..25
+; or a scenery object number 180..200
+; or 255=forest
+; x1=2 ; deserted jousting field
+; if picturetodraw=14 then @drawpicturex1
+; if picturetodraw=15 then @drawpicturex1
+; if picturetodraw=29 then @drawpicturex1
+; x1=3 ; (wrong) fairground picture
+; if picturetodraw=184 then @drawpicturex1
+; x1=1 ; occupied jousting field
+; x1=2 ; deserted jousting field
+; x1=3 ; fairground picture
+; x1=4 ; mob picture
+ x1=5 ; forest picture
+ if x4=114 then @drawpicturex1
+; x1=6 ; tower
+; if picturetodraw=188 then @drawpicturex1
+ x1=7 ; 0castle
+ if picturetodraw=150 then @drawpicturex1
+ if x4=130 then @drawpicturex1
+ if x4=131 then @drawpicturex1
+; if picturetodraw=181 then @drawpicturex1
+; x1=8 ; viaduct
+; if picturetodraw=189 then @drawpicturex1
+; x1=9 ; hermit's cave
+ x1=10 ; dragon
+ if picturetodraw=dragonpicture then @drawpicturex1
+ x1=11 ; orc picture
+ if picturetodraw=orcpicture then @drawpicturex1
+; if thispart=3 then @drawpicturex1
+; x1=12 ; robot (head and shoulders)
+; goto @drawpicturex1
+
+;;.dpnotorc
+ x1=18 ; bridge
+ if picturetodraw<237 then @dpnotbridge
+ if picturetodraw<240 then @drawpicturex1
+
+.dpnotbridge
+ x1=13 ; river bank
+ if x4=115 then @drawpicturex1 ; on the river!
+ if x4=117 then @drawpicturex1
+ if x4=118 then @drawpicturex1
+ x1=15 ; lost in the marsh
+ if x4=113 then @drawpicturex1
+
+;;.dpnotmarsh
+ x1=16 ; foot of mount olymups
+ if x4=125 then @drawpicturex1
+ if x4=126 then @drawpicturex1
+ x1=17 ; formal garden
+ if picturetodraw=186 then @drawpicturex1
+ x1=19 ; graveyard
+ if picturetodraw=221 then drawpicturex1
+ if picturetodraw=33 then drawpicturex1 ; inside barrow
+ if picturetodraw=36 then drawpicturex1
+ x1=20 ; outside haunted house
+ if picturetodraw=187 then drawpicturex1
+ x1=21 ; inside haunted house
+ if picturetodraw<49 then dpnotinsidehouse
+ if picturetodraw<55 then drawpicturex1
+
+.dpnotinsidehouse
+ x1=22 ; cave
+ if picturetodraw<2 then dpnotcave
+ if picturetodraw<7 then drawpicturex1
+ if picturetodraw<37 then dpnotcave
+ if picturetodraw<49 then drawpicturex1
+
+.dpnotcave
+ x1=23 ; troll's lair
+ if picturetodraw=21 then drawpicturex1
+ x1=27 ; heaven
+ if picturetodraw=26 then drawpicturex1
+ if picturetodraw=27 then drawpicturex1
+ x1=24 ; inside castle
+; MUST check for castle after heaven, because
+; the heaven pictures are in the middle of the castle range.
+ if picturetodraw<22 then dpnotincastle
+ if picturetodraw<32 then drawpicturex1
+ if picturetodraw=35 then drawpicturex1
+.dpnotincastle
+ x1=29 ; road through scrub
+ if x4<119 then dpnotroad
+ if x4<125 then drawpicturex1
+
+.dpnotroad
+; x1=30 ; loading screen
+; if picturetodraw=11 then grassyplain
+; x1=26 ; room dividers
+ if picturetodraw<minsynthroom then dpret ; not known. rawpicturex1
+;;.grassyplain
+ x1=14 ; grassy plain
+ goto drawpicturex1
+
+.dpret
+ return
+
+.drawpicturex1
+; display picture for room X1
+ if x1=lastpicture then @dpret
+ if cheatmode=0 then dpnocheat
+ prs "[Asking for picture " ;*
+ print x1 ;*
+ prs "]. " ;*
+ message cr ;*
+
+.dpnocheat
+; is picture 1 still drawing?
+
+.waitpic
+ x2=34 ; picture being drawn?
+ list9(0)=x2
+ driver
+ x2=list9(2)
+ if x2=1 then @waitpic
+
+ if x1=1 then drawing1
+; when we draw the picture AFTER picture 1, we can be certain
+; that it has finished
+ picture1displayed=true
+.drawing1
+ lastpicture=x1
+.dp3
+
+; set up appropriate coords
+ xcoord=0
+ ycoord=0
+ if x1=1 then dp4
+ xcoord=48
+ ycoord=10
+
+.dp4
+ gosub @savelist9
+ x2=32
+
+ list9(0)=x2
+
+ list9(1)=c0
+ list9(2)=x1 ; picture number to draw
+
+ list9(3)=c0
+ list9(4)=xcoord
+
+ list9(5)=c0
+ list9(6)=ycoord
+ driver
+ goto @restorelist9
+
+
+
+ cend
+
+
+
+;---
+; X2=500
+; ADD X2,X1
+; IF X2=LASTPICTURE THEN DPX1RET
+; CLS G
+; PICTURE X2
+; LASTPICTURE=X2
+;.DPX1RET
+; RETURN
+
+;--------------------
+;---
+.ride
+ if noun1<>dragon then ridenotdragon
+ if dragonplacid=false then ridenotdragon ; still ferocious
+ m1=2914 ; dragon objects!
+ goto @reportm1
+
+.ridenotdragon
+ goto @silly
+;---
+;; ride a horse!
+; if noun1=dragon then ride1
+;.cantride
+; m1=2546 ; can't ride that
+; goto @errorm1
+;
+;.ride1
+; object=noun1
+; gosub @isobjectalive
+; if result=false then cantride
+;
+; x1=hicurrentpos(noun1)
+; if x1<>riddenby then ride2
+; m1=2547 ; already being ridden
+; goto @errorm1
+;
+;.ride2
+; currentpos(noun1)=actor
+; x1=riddenby
+; hicurrentpos(noun1)=x1
+; goto @describeactionactor
+;---
+.CHECKEXIT
+ cesaveroom=room
+ room=from
+ GOSUB ABSCHECKEXIT
+ room=cesaveroom
+ GOTO @SPECIALEXITS ; Exits conditional on game
+;---
+.ABSCHECKEXIT
+; EXIT ( From FROM diection DIR )
+; return DEST, DOOR, EXITVISIBLE
+ door=false
+ dest=0
+ exitvisible=false
+;
+ if room<minsynthroom then fixedexit
+;
+; is there a fixed exit here? if so, it will override
+; any synthesised exits that might otherwise operate
+ gosub @convertroom
+; now x1=1..25 if any scenery object is here
+ if x1=0 then acesynthesised
+ x2=minsceneryobj
+ add x1,x2
+ EXIT x1 DIR STATUS DEST
+ if dest>1 then checkexitstatus ; do rest of fixed exit code
+ ; room 1 gives modifiers for synth rooms.
+;
+.acesynthesised
+; ++++ please note: must have done gosub @getXY BEFORE calling
+;
+ if dir=8 then acenorth
+ if dir>2 then acenotnorth
+.acenorth
+ if y=ymax then acenoexit
+.acenotnorth
+ if dir=2 then aceeast
+ if dir=3 then aceeast
+ if dir<>5 then acenoteast
+.aceeast
+ if x=xmax then acenoexit
+.acenoteast
+ if dir=6 then acesouth
+ if dir=5 then acesouth
+ if dir<>4 then acenotsouth
+.acesouth
+ if y=0 then acenoexit
+.acenotsouth
+ if dir<6 then acenotwest
+ if dir>8 then acenotwest
+ if x=0 then acenoexit
+.acenotwest
+; look at the exit from room 1 to get the destination modifier
+ x1=1
+ exit x1 dir status dest
+ if dest=0 then acenoexit
+ add dest,from
+ x1=dest
+ x2=256
+ gosub @x1modx2
+ dest=x1
+ exitvisible=true
+ return
+
+.acenoexit
+ dest=0
+ return
+
+.fixedexit
+; Seeif there any fixed exits from here.
+ DOOR=FALSE
+ EXITVISIBLE=FALSE
+ EXIT ROOM DIR STATUS DEST
+ if dest=1 then ceret ; room 1 is used to give
+; move modifiers for synthesised rooms.
+ IF DEST=0 THEN CERET
+ if dest<minsceneryobj then checkexitstatus
+; find room which scenery object DEST is in - becomes destination room
+ dest=currentpos(dest)
+.CHECKEXITSTATUS
+ X1=STATUS
+ IF X1<4 THEN CE2
+ DOOR=TRUE
+ X2=4
+ SUB X1,X2 ; subtract 4
+.CE2
+ IF X1>1 THEN CERET
+ EXITVISIBLE=TRUE
+.CERET
+.kissret
+ RETURN
+;---
+.kiss
+ if noun1<>frog then kissnfrog
+ m1=2750 ; you kiss the frog
+.disturbfrog
+ gosub @reportm1
+ x1=currentpos(pebble)
+ if x1<>0 then  kissret
+ object=pebble
+ goto @createobject
+ m1=2747 ; frog spits out pebble
+ goto @reportm1
+
+.kissnfrog
+ gosub @describeactionactor
+ m1=2154 ; Yeuch!
+ goto @reportm1
+;---
+.close
+ if noun1<>generaldoor then closenotdoor
+ gosub @describeactionactor
+.close1
+ doorshut=true ; firmly closed
+ dooropen=false
+ return
+
+.closenotdoor
+ if noun1<>sheddoor then @dontneedtodothat
+ gosub @describeactionactor
+ m1=2899 ; on the door is a note!
+ gosub @reportm1
+ goto close1
+;---
+.closedoor
+ if actor<>user then closedoorret
+ dooropen=false
+
+.closedoorret
+ return
+;-----
+.exits
+.PRINTEXITS
+ if room<>26 then penotheavenexits
+ if thispart=3 then @peret ; no exits whilst in magic mode
+
+.penotheavenexits
+ severalexits=false
+ OWTYPE=OWEXITS
+ if room<minsynthroom then penormal
+ gosub @getxy
+; what is scenery type here?
+ x1=room
+ x2=minsynthroomplusone
+ sub x1,x2
+ x1=terraintable(x1)
+ if x1>114 then peedge ; other types of scenery may be near to things
+
+; are we at the edge of the board?
+ if x=0 then peedge
+ if y=0 then peedge
+ if x=xmax then peedge
+ if y=ymax then peedge
+ word1=2009 ; lead in all directions
+ word2=0
+ word3=0
+ word4=0
+ dir=8 ; last compass direction
+ severalexits=true
+ goto pedesc ; do rest of directions normally
+
+.penormal
+.peedge
+; yes - so print them normally
+ DIR=1 ; current direction
+.PELOOP
+; PRINT AN EXIT ( IF VISIBLE)
+ FROM=ROOM
+ GOSUB @CHECKEXIT
+ IF EXITVISIBLE=FALSE THEN PENEXTDIR
+ WORD1=EXITDESCBASE
+ ADD WORD1,DIR
+ word2=0
+ word3=0
+ word4=0
+ IF DOOR=0 THEN PENODOOR
+ WORD2=12 ; base for door messages
+ ADD WORD2,DOOROPEN
+.PENODOOR
+ if severalexits=true then pe2 ; already printed message
+ IF wordsoutput<>2 THEN PE2
+ MESSAGE 10 ; EXITS ARE
+.PE2
+; IF WORD2<>0 THEN PEDESC ; through a door, so don't describe destination
+; WORD2=93 ; to
+; WORD3=SHORTROOMDESCS
+; ADD WORD3,DEST
+
+.PEDESC
+ GOSUB @OUTWORD1234
+.PENEXTDIR
+ ADD DIR,C1
+ IF DIR<14 THEN PELOOP
+;;.PERET1
+ if severalexits=true then peret2 ; already printed message
+ IF wordsoutput>2 THEN PERET2
+ MESSAGE 11 ; ONLY EXIT IS
+.PERET2
+ GOSUB @OUTWORDnone ; flush bufer
+ if wanttoprintand=false then peret
+ message dot
+ wanttoprintand=false
+.PERET
+ RETURN
+;---
+.parserun
+; verb=isetuprun here
+ againverb=isetuprun
+ goto parsego1
+
+.parsego
+ againverb=isetupgo
+; verb=isetupgo here
+.parsego1
+; return noun1 as room number of destination
+ noun1=nullobject
+ treetype=0
+ terraintype=0
+;;.gad1
+ adjective1=nullobject
+ adjective2=nullobject
+ treatasfind=false
+ gosub getpart
+ if gperror=true then baddestination
+ if treatasfind=true then parsefindvalue
+ if verb=0 then gadnotmove
+ if verb<maxdirectionplusone then gadend ; exit tidily for 'GO EAST'
+.gadnotmove
+ if noun1<>nullobject then gadend ; exit tidily for "go interesting place"
+ goto baddestination
+
+.gadend
+; clean up rest of input - may be useful, intelligent stuff,
+; or it may be complete garbage
+; Loop until we get a verb
+ if nomoreinput=true then gadret
+ gosub @getnextword
+ searchtype=verbtype
+ gosub @checktype
+ if value=nullvalue then gadend
+ gosub @goback ; retrieve verb for later parsing
+.gadret
+ againnoun1=noun1
+ noun2=nullobject
+ return
+;---
+.parsefindvalue
+; user entered "go moveable object"
+; treat as find
+ if verb<>isetuprun then pfv1
+ descriptionmode=inone
+
+.pfv1
+ if value<>mousehole then pfv2
+ if verb=iteleport then pfv2
+ if verb=icast then pfv2
+; user asked to "go hole" or hopefully "go through hole"
+ verb=ivin ; go in!
+ return
+
+.pfv2
+ verb=isetupfind
+ noun1=value
+ noun2=nullobject
+ prep=0
+ return
+;---
+.baddestination ; a parser error
+ gosub @stop
+ noun1=nullobject
+ verb=0
+ goto @cantseewhere
+;---
+.getparterror
+ gperror=true
+ return
+;---
+.getpart
+; return noun1 as destination room,
+; or verb=direction to move in
+; or treetype/terraintype
+ gperror=false
+ gosub @getnextword
+ if eol=true then getparterror
+; just possibly, could be a direction
+ searchtype=verbtype
+ gosub @checktype
+ if value=nullvalue then getpart1
+ if value=ivto then getpart ; go to ...
+ if value>maxdirection then getpart1 ; strange verb
+ verb=value
+ return
+;
+.getpart1
+ searchtype=adjetype
+ gosub @checktype
+ if value=nullvalue then getpart2
+ adjective1=value
+ gosub @checktypemore
+ if value=nullvalue then getpart2
+ adjective2=value
+
+.getpart2
+ index=0
+.goloop
+ searchtype=nountype
+ gosub @checktypemore
+ if value=nullvalue then getpart ; ignore garbage words here.
+ if value>mingarbage then getpart
+
+ if adjective1=nullobject then goloopnoadjective
+
+ if value=adjective1 then goloopnoadjective ; could be right dest
+ if adjective2=nullobject then goloopnoadjective
+ if value>adjective2 then goloopnoadjective
+ if value<>adjective2 then goloop ; can't be right destination
+
+.goloopnoadjective
+ if value>maxsceneryobj then goloopnotlocationobject
+
+;;.golooptreatasfind
+; does object exist in game?
+ x1=currentpos(value)
+ if x1=0 then goloop
+ treatasfind=true
+ return
+
+.goloopnotlocationobject
+; maybe 'go static location'
+; if so, extract room number
+ if value<700 then goloop ; shortroomdescs-nounoffset
+ x1=700 ; shortroomdescs-nounoffset
+ noun1=value
+ if value<1000 then goloopshortdescs ; longroomdescs-nounoffset
+ x1=1000 ; longroomdescs-nounoffset
+.goloopshortdescs
+ sub noun1,x1
+ return
+;---
+;---
+.gdgoxy
+; do we have to cross the river?
+ if noun1<>4 then gdnota1
+; avoid house when going north to west bank
+ if y>5 then gdnota1
+ if x<>4 then gdnota1
+ if noun2>6 then gdgoontoriver ; can't go directly there
+
+.gdnota1
+ gosub @isactorflying
+ if result=true then gdnotriver
+ if x=5 then gdnotriver ; already on river! (or bridge/marsh)
+ if noun1=5 then gdgoontoriver ; going to somewhere on river
+ if x<5 then gdwestofriver
+; starting on east side
+ if noun1>5 then gdnotriver ; going to east side
+; code for crossing from east to west
+; go to locn (6,1), but if there already, go to destination on other side
+ if y<>1 then gdwr1
+ if x=6 then gdnotriver
+
+.gdwr1
+ noun1=6 ; x destination
+ noun2=1 ; y destination
+ goto gdnotriver
+
+.gdgoontoriver
+ if noun2<6 then gdnotriver ; not going to bridge etc.
+ if y=10 then gdnotriver ; already level with bridge
+ noun2=10 ; y destination
+ noun1=2 ; west bank, near to bridge
+ if x<5 then gdnotriver ; GO!
+ noun1=6 ; east bank, next to bridge
+ goto gdnotriver
+
+.gdwestofriver
+ if noun1<5 then gdnotriver
+; code for crossing from west to east
+; go to locn (4,1) unless already there
+ if y<>1 then gdwr2
+ if x=4 then gdnotriver
+
+.gdwr2
+ noun1=4 ; x destination
+ noun2=1 ; y destination
+
+.gdnotriver
+ if y>6 then gdnotnorthhouse
+ if noun1>5 then gdnotavoidhouse ;>>added
+ if noun2<7 then gdnotavoidhouse
+ goto gdavoidhouse ; avoid house when going north past it.
+
+.gdnotnorthhouse
+ if y<6 then gdnotavoidhouse ; avoid house when going south
+; if noun1>5 then gdavoidhouse ;>>added; going to east side of river
+ if noun2>8 then gdnotavoidhouse ;>>added
+
+.gdavoidhouse
+; must avoid house when going south past it.
+ if x=3 then gdavoid1
+ if x<>4 then gdnotavoidhouse
+.gdavoid1
+;>>removed if noun1>5 then gdavoid2 ; going to east side of river
+;>>removed if noun2>8 then gdnotavoidhouse ; going to north of house
+;; .gdavoid2
+; we are going to the south of the house, from
+; the north of it, and from a square directly north of it
+; (i.e. from columns 3 or 4)
+ noun1=2 ; go to a column just west of the house
+ dir=7 ; go west when next to river
+ if x=4 then gdgotdir
+ dir=8 ; northwest round corner
+; if noun1>5 then gdnot1 ; don't go northwest round house
+;; when going to the east side of the river.
+ if y<7 then gdgotdir
+;;.gdnot1
+ dir=6 ; and southwest to go round the corner of the house
+ goto gdgotdir
+
+.gdnotavoidhouse
+ if x<>2 then gdnota2
+; at west side of house?
+; avoid going off too soon to the east -
+; we have to keep going north/south (or west) until clear of the house
+ if noun1<x then gdnota2 ; going to the west ? - ok!
+ if y>8 then gdnota2
+ if y<6 then gdnota2
+;;.gda2a
+ if noun2=7 then gdnota2
+ if noun2=8 then gdnota2
+;;.gda2
+ noun1=x ; force going north/south
+
+.gdnota2
+
+;
+;--
+; if y=2 then gdnothouse ; already on clear path past
+; if noun2=2 then gdhouse1 ;>goontoriver ; going to somewhere on river
+; if y<6 then gdsouthofhouse ;> x<5 then gdwestofriver
+;; starting on south side of house >; east side
+; if noun2>8 then gdnothouse ; going to north. river >; going to east side
+;; code for crossing from north to south. >east to west
+;; go to locn (2,6) >6,1), but if there already, go to destination on other side
+; if y<>6 then gdwr1 ;1
+; if x=2 then gdnothouse ; >gdnotriver ; 6
+;
+;.gdwr1
+; noun1=2 ;>6 ; x destination
+; noun2=6 ;>1 ; y destination
+; goto gdnothouse ;>gdnotriver
+;
+;.gdhouse1 ; gdgoontoriver
+;;?? if noun1<2 then gdnothouse ;>2<6gdnotriver ; not going to bridge etc.
+;; if x=2 then gdnotriver ; already level with bridge >y=10
+;; noun2=10 ; y destination >10
+;; noun1=2 ; west bank, near to bridge >2
+;; if x<5 then gdnotriver ; GO!
+;; noun1=6 ; east bank, next to bridge
+;; goto gdnotriver
+;
+;.gdsouthofhouse ;>westofriver
+; if noun2<6 then gdnotriver ;>1<5
+;; code for crossing from north to south >west to east
+;; go to locn (4,1) unless already there
+; if y<>1 then gdwr2
+; if x=4 then gdnotriver
+;
+;.gdwr2
+; noun1=4 ; x destination
+; noun2=1 ; y destination
+;
+;.gdnotriver
+;--
+;
+;
+ if y<noun2 then gdgonorth
+ if y>noun2 then gdgosouth
+; y=y1 ; so just go east or west
+ if x=noun1 then @followfinished ; have arrived at destination, terminate command
+ dir=3 ; east
+ if x<noun1 then gdgotdir
+ dir=7
+ goto gdgotdir
+
+.gdgosouth
+ dir=4 ; south
+ if x=noun1 then gdgotdir
+ dir=5 ;se
+ if x<noun1 then gdgotdir
+ dir=6 ;sw
+ goto gdgotdir
+
+.gdgonorth
+ dir=1 ; north
+ if x=noun1 then gdgotdir
+ dir=2 ;ne
+ if x<noun1 then gdgotdir
+ dir=8
+; fall through to gdgotdir
+.gdgotdir
+ intendeddirection=dir
+ anglefromintended=0
+ gdroomsave=room
+.gdtrydir
+ from=room
+ dir=intendeddirection
+ gosub adddir
+
+ gosub @checkexit
+ if exitvisible=false then tryanotherdirection
+ if dest<minsynthroom then tryanotherdirection
+ hidest=0
+ verb=dir
+ commandfinished=false
+ gosub @move ;callverb ; move the npc, describing as appropriate
+
+; if a specialmoves trap was activated, we have to abort the
+; find. (Because a message will have been printed, so continuing
+; would just confuse the player. A better tracking algorithm
+; in future games MIGHT be able to get round this)
+ if blockedbysm=true then @followjustfinished ; something badly wrong.
+ if room=gdroomsave then tryanotherdirection ; something went wrong
+ if room=destnoun1 then @followjustfinished
+ return ; all went well.
+;---
+.tryanotherdirection
+; have reached an obstruction in a goaldirected movement
+ if anglefromintended>negative then tad2 ; am wheeling to left
+ if anglefromintended<>0 then tad1 ; am wheeling to right
+ anglefromintended=1 ; wheel to right first
+ goto gdtrydir
+
+.tad1
+; was not going in intended direction when the obstruction
+; was reached
+; try wheeling round to right (clockwise)
+ if anglefromintended=2 then tad2a
+ add anglefromintended,c1 ; try +1, +2
+ goto gdtrydir
+
+.tad2a
+ anglefromintended=0
+.tad2
+; try wheeling round to left
+ if anglefromintended=65534 then cantgothere ; can't cope at present
+ sub anglefromintended,c1 ; try -1,-2
+ goto gdtrydir
+
+.cantgothere
+ m1=3604 ; can't go there from here
+ gosub @reportm1
+ goto @followfinished
+;---
+.adddir
+; do add dir,anglefromintended
+; this is complicated because south,southeast are swapped round
+; Also must wrap round at north, northwest
+;
+; first, swap south,southeast
+ gosub swapdir
+ add dir,anglefromintended
+ gosub makedirwithinbounds
+; fall through to swapdir ; and swap back again
+;
+.swapdir
+; swap round south, southeast
+ if dir<>4 then swapdirnotsouth
+ dir=5
+ return
+
+.swapdirnotsouth
+ if dir<>5 then swapdirret
+ dir=4
+
+.swapdirret
+ return
+;---
+.makedirwithinbounds
+ if dir<9 then mdwb1
+ dir=1
+ return
+
+.mdwb1
+ if dir>0 then mdwb2
+ dir=8
+.mdwb2
+.diwtret
+.mmdret
+.teleportret
+ return
+;-------
+;---
+.teleport
+; we came here straight from the parser, so set up verb...
+ verb=iteleport
+.allowteleport
+; is TELEPORT spell known?
+ noun1=teleportspell
+ gosub @doesactorknowspell
+ if result=false then @cancelinput
+
+;;.teleport1
+ gosub @parsego
+ if noun1=nullobject then teleportret
+ if verb<>isetupfind then teleporttonoun1
+ object=noun1
+ gosub @getobjectposx2
+ noun1=x2
+
+.teleporttonoun1
+ dest=noun1
+ goto @dropallandmovedest
+;---
+.magicmove
+ hidest=0
+
+;;.magicmovedest
+ if dest=0 then mmnomove
+ if dest<2 then @cantseewhere
+ if dest<9 then mm1
+ if dest<14 then mmnomove ; teleport to foyer and rest of hitech stuff
+ if dest<21 then mm1
+ if dest<32 then mmnomove ; to castle/troll's lair/heaven
+.mm1
+ currentpos(actor)=dest
+ hicurrentpos(actor)=hidest
+.mmaftermove
+ gosub @setuproom
+ gosub @getxy
+ if actor<>user then mmdret
+ currentuserroom=room
+ gosub @describeroom
+ GOTO @CANCELINPUT
+
+.mmnomove
+ m1=2995 ; you end up where you were
+ gosub @reportm1dot
+ goto mmaftermove
+;---
+.swim
+ m1=2924 ; water is far too cold
+ goto @reportm1dot
+;---
+.noexit
+ target=iroom ; for explosions!
+ if actor=fireball then @gdfireballexplodes
+ if actor=eye then @gdeyeexplodes
+ if verb=ijump then @jump
+ m1=2114 ; no exit!
+ goto @errorm1
+;---
+.recruit
+ object=recruiter
+ gosub @checkifpresent
+ if result=true then recruit1
+ m1=2682 ; don't have the recruiter
+ goto @reportm1dot
+
+.recruit1
+ if noun1<dragon then @cantverbnoun1
+ if noun1>5 then @cantverbnoun1
+
+ object=noun1
+ gosub @isobjectalive
+ if result=false then @objectisdead
+;
+ m1=2603 ; can't recruit it until placid
+ if noun1<>dragon then rnotdragon
+ if dragonplacid=false then @reportm1dot
+
+.rnotdragon
+ if noun1<>mouse then rnotmouse
+ if mouseplacid=false then @reportm1dot
+
+.rnotmouse
+ if noun1<>troll then rnottroll
+ if trollplacid=false then @reportm1dot
+
+.rnottroll
+ if noun1<>rainbird then recruitm1
+ m1=2604 ; Only a wizard can recruit rainbird
+ x1=hicurrentpos(wizardspell)
+ if x1=0 then @reportm1
+ x1=currentpos(wizardspell)
+ if x1<>actor then @reportm1
+; rainbird hops down from perch
+ currentpos(rainbird)=room
+ hicurrentpos(rainbird)=c0
+
+.recruitm1
+ object=noun1
+ gosub @desctheobject ; the troll
+ m1=2678 ; is now yours to command.
+ gosub @reportm1dot
+ object=noun1
+ goto @makeobjectobedient 
+;---
+.hear
+ gosub @listentodragon
+ m1=2403 ; hear nothing special
+ if result=false then @reportm1dot
+ return
+;---
+.diskinterlock
+ cif includepictures
+  x1=200 ; stop all picture drawing
+  gosub @waitpic ; (will finish picture 1 first, if not yet displayed)
+ cend
+
+
+;
+; this message printing/osrdch should take long enough
+; for there to have been a task swap since the above "kill picture"
+; command.
+
+ cif notmac
+ message 2301 ; please insert save disk and strike a key ;>>>MAC
+ x2=25000 ; good long time to wait ;>>>MAC
+ gosub @timeoutosrdch ;>>>MAC
+ cend
+
+ message cr ; to signal to user that we have acknowledged.
+
+.restoredelay
+
+
+ cif includepictures
+  x2=34 ; is picture still being drawn?
+  list9(0)=x2
+  driver
+  x2=list9(2)
+  if x2<>0 then restoredelay ; loop if ANY picture displayed.
+ cend
+
+
+ return
+;----
+.RESTORE
+ MESSAGE 2202 ; really restore ?
+ GOSUB @YESORNO
+ IF RESULT=FALSE THEN RESTOREEND
+
+.DORESTORE
+ GOSUB @LENSLOK
+ IF RESULT=FALSE THEN AFTERRESTORE
+
+ cif diskversion ;>>mike changed for CBM tape to fix intermittent bug (?)
+  gosub @diskinterlock ; finish all disk activity
+ cend
+
+ RESTORE ; !!! load in the new data !!!
+
+ cif notmac
+ message 2302 ; please reinsert game disk ;>>>MAC
+ cend
+
+ if dead=true then @restartorrestore ; restore failed
+;;.afterrealrestore
+ NOMOREINPUT=FALSE
+ EOL=FALSE
+ GOSUB @GETNEXTWORD
+.AFTERRESTORE
+
+
+ cif includeoops
+  OOPSPOS=1 ; musn't do an oops now to prevent losing old data
+  OOPSPOSEND=0 ; if you type "OOPS"
+ cend
+
+.oopsafterrestore
+
+
+ cif includepictures
+  LASTPICTURE=0 ; allow picture to be drawn
+ cend
+
+.RESTOREEND
+ if thisgame=knightorc then restore1
+;; .wronggame
+ message 2312 ; wrong game
+ goto @restartorrestore
+
+.restore1
+ if thispart=constantpartnum then restore2
+ parttochain=thispart
+
+.chainparttochain
+ if c1=diskversion then diskchain
+ message 2311 ; you are about to chain - do you want to save first?
+ gosub @yesorno
+ if result=false then cassettechain
+ save
+ goto @chainparttochain ; allow multiple copies
+
+.cassettechain
+ m1=2313 ; put in cassette containing part number
+ message m1
+ add m1,parttochain ; 2313+1,2,3 are names of games
+ message m1
+ nomoreinput=true
+
+.diskchain
+
+
+ cif includepictures
+  x1=200
+  gosub @waitpic ; kill current picture
+ cend
+
+
+; chain in "parttochain"
+ thispart=constantpartnum
+ x1=11
+ list9(0)=x1
+ list9(1)=parttochain
+ driver
+ goto @restartorrestore
+
+.restore2
+ GOSUB @DESCRIBEROOM
+ actor=user ; just in case
+ gosub @stop
+ GOTO @getfromuser
+;---
+.immovable
+ m1=2019 ; too heavy
+ goto @reportm1dot
+;---
+.checkifsceneryhere
+ result=false
+ return
+;---

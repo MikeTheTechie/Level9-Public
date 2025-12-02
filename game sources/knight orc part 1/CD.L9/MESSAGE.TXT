@@ -1,0 +1,1864 @@
+; Knight Orc 1 Descriptions
+; Copyright (C) 1987 Level 9 Computing
+;
+; The word type ^C is used when a word
+; is not to be used as part of the normal parsing
+; but is to be available for checking should it be needed
+; This is so references to scenery may be checked for
+; containing particular words.
+; This word type replaces Proper Nouns in this game.
+;
+;
+; Special ST notes:
+;
+; The vertical bar used to end the printable part
+; of a message is found by shifting the backslash
+; (next to the left hand shift key)
+
+; The ^ used for wordtypes is shift-6
+;
+[1: ]
+[2::]
+[3:, ]
+[4:.] ; dot with no space
+[5:%]
+[6:/and ] ; always starts with lower case a
+[7:.%]
+[8:?%]
+[9:. ]
+[10:exits lead ]
+[11:an exit leads ] 
+[12: through a door]
+[13: through an open door]
+[14: and ]
+[15:%We won't bother with "What now" from now on. ]
+[16:%> ] ; replacement for 'What now' 
+[17:%What now? ]
+[18:: ];
+[19:"]
+; Messages for printing objects
+;
+[20:a ]
+[21:the ]
+[22:an ]
+[23:some ]
+;
+[24:." ]
+;
+[101:^V north|^V n]
+[102:^V northeast|^V ne]
+[103:^V east|^V e]
+[104:^V south|^V s]
+[105:^V southeast|^V se]
+[106:^V southwest|^V sw]
+[107:^V west|^V w]
+[108:^V northwest|^V nw]
+[109:^V upwards|^V u ^V up]
+[110:^V downwards|^V d ^V down]
+[111:^V inside|^V in ^V into ^V enter]
+[112:^V outside|^V o ^V out ^V leave]
+[113:^V across|^V cross]
+[114:with the ^V climb]
+; as in 'you go by climbing and are in...' 
+[115:^V jump]
+;; [116:^V plugh ^V xyzzy ^V sesame ^V plover ^V humakaat ^V satarh
+;; ^V ollabin ^V obis]
+;
+; Intransitive verbs
+;
+[120:^V i]
+[121:^V again ^V a]
+[122:^V look|^V l]
+[123:^V inventory ^V inv]
+[124:^V quit ^V restart]
+[125:^V restore ^V load]
+[126:^V save]
+[127:^V ramsave ^V ram]
+[128:^V ramload]
+[129:^V score]
+[130:^V verbose]
+[131:^V brief]
+[132:^V wait|^V wa ^V pause ^V z]
+;; [133:^V sleep ^V rest ^V dream]
+[134:^V on]
+[135:^V off]
+[136:^V pictures ^V graphics]
+[137:^V words ^V text]
+[138:^V hello ^V welcome ^V hi]
+[139:^V oops ^V undo]
+[140:^V attack|^V hit ^V break]
+;; [141:^V listen]
+[142:^V search ^V explore]
+[143:^V help ^V hint]
+[144:^V sniff ^V smell]
+[145:^V knock]
+[146:^V stand]
+[147:^V lie]
+[148:^V sit]
+[149:^V dig]
+[150:^V say] ; used for output
+;; [151:^V teleport]
+;; [152:^V getme]
+[153:^V think]
+[154:^V run]
+[155:^V yes ^V OK]
+[156:^V no ^V n]
+[157:^V board]
+[158:^V go|^V goto ^V find ^V walk]
+[159:^V stop]
+[160:^V weather]
+[161:^V treasure ^V money]
+[162:^V exits]
+[163:^V escape]
+[164:^V want]
+[165:^V what]
+[166:^V why ^V y]
+[167:^V where]
+[168:^V how]
+[169:^V whether]
+;
+; Rude words
+[170:^V shit ^V cunt ^V jesus ^V christ ^V god ^V fucking 
+^V bugger ^V damn] ; leave in lower case to save space
+;
+; Table-driven commands
+[171:^V intelligence]
+[172:^V life]
+[173:^V shout|^V yell]
+[174:^V royalties]
+[175:^V to]
+[176:^V death]
+[177:^V goodbye ^V bye]
+[178:^V sorry]
+[179:^V scream]
+;
+[180:^V have ] ; mainly for output
+[181:^V has ] ; mainly for output
+[182:^V am ] ; mainly for output
+[183:^V are ] ; mainly for output
+[184:^V is ] ; mainly for output
+[185:^V phew] ; what a relief - prints 2411
+[186:^V dir ^V directory ^V catalog ^V cat]
+;[187 is 'GO IN']
+;[188 is 'GO OUT']
+; 189 is 'wait for person'
+; 190 is 'wait until time'
+; 191 is 'wait for (length of time)'
+; 192 is 'wait for single turn'
+[193:^V fight ^V kill]
+[194:^V time]
+[195:^V dodge]
+; 196 and 197 have text for debugging output only - do not mark
+;; [196:gdgo]  ; 196 - gdgo
+;; [197:gdrun] ; 197 - gdrun
+;; [198:^V obscure]
+[199:^V buy]
+;
+; Transitive verbs
+;
+[200:^V examine|^V read]
+[201:^V cut|^V chop]
+;; [202:^V wake ^V rouse]
+;; [203:^V cast]
+[204:^V get]
+[205:^V take|^V carry ^V steal]
+[206:^V wear]
+[207:^V drop]
+[208:^V put|^V hide]
+[209:^V remove]
+[210:^V throw]
+[211:^V give|^V offer]
+[212:^V ask|^V question]
+[213:^V follow|^V chase]
+[214:^V open|^V unlock]
+[215:^V light|^V burn]
+[216:^V extinguish] 
+[217:^V push|^V press ^V touch]
+[218:^V pull]
+[219:^V fasten|^V tie]
+[220:^V unfasten|^V untie]
+;; [221:^V ring]
+;; [222:^V fill]
+[223:^V eat]
+[224:^V rub|^V wave]
+[225:^V bury]
+[226:^V insert]
+[227:^V pick|^V pluck]
+;; [228:^V squeeze|^V squash ^V crush]
+;; [229:^V dress]
+[230:^V drink]
+;; [231:^V play|^V blow]
+;; [232:^V collect] ; goal-directed
+;; [234:^V become]
+[235:^V mount|^V ride]
+
+; 236 - 239 have text for debugging only
+;; 236 is return object to initial position (for npcs)
+;; 237 is take gold to pub
+;; 238 is set up find
+;; 239 is gdfind
+;
+[240:close|^V shut]
+;; [241:^V breathe]
+[242:^V tell]
+;; [243:^V swim]
+[244:struggle] ; output only
+;
+; now verbs specific to this game
+; armed combat blows...
+[270:^V scratch]
+[271:^V pink]
+[272:^V jab]
+[273:^V stab]
+[274:^V hack]
+[275:^V batter]
+[276:^V smite]
+[277:^V cleave]
+[278:^V pulverise]
+[279:^V devastate]
+; unarmed combat blows...
+[280:^V slap]
+[281:^V claw]
+[282:^V bite]
+[283:^V hit] ; must remain as hit, as it is used for output in THROW
+[284:^V thump]
+[285:^V belabour]
+[286:^V crush]
+[287:^V mangle]
+[288:^V pulverise]
+[289:^V demolish]
+;
+; Objects (300+N)
+;
+[301:you|^N player ^N me ^N myself ^N orc] ; do not mark "you"
+[302:the ^N hunter]
+[303:the ^N knight in ^A white ^N satin]
+[304:^N Synonym the ^N wizard] ; adventurer
+[305:^N Kris the ^N ant-warrior] ; adventurer
+[306:^N Odin] ; adventurer
+[307:the ^N prophet] ; adventurer
+[308:the ^N gripper] ; adventurer
+[309:the ^N innkeeper|^N bartender ^N barkeeper] 
+[310:^N Fungus the ^N boggit-man] ; adventurer
+[311:^N Rapunzel]
+[312:the ^N hermit]
+[313:the ^A green ^N knight]
+[314:a ^N knight in ^A shining ^N armour]
+[315:the ^N valkyrie]
+[316:Little ^N John] ; adventurer
+[317:^N Denzyl] ; adventurer
+[318:the ^N Phantom of the ^N Opera] ; adventurer
+[319:the ^N Uruk] ; adventurer
+[320:^A Mighty ^N Flynn] ; adventurer
+[321:^N Genghis] ; adventurer
+[322:^N Attila] ; adventurer
+[323:^N Muscleman] ; adventurer
+[324:the ^N Annihilator] ; adventurer
+[325:^N Pope ^N Joan] ; adventurer
+[326:^N Boadicea] ; adventurer
+[327:^N Jeanie ^N II] ; adventurer 
+[328:^N Mrs ^N Wallop] ; adventurer
+[329:^N Susan] ; adventurer
+;
+; now npcs who can't talk...
+;
+[330:^N goat]
+[331:^A barrow ^N wight]
+[332:^N wolf]
+[333:^A swift ^N horse] ; orc hunter's horse
+[334:^A green ^N horse] ; green knight's horse
+[335:^N horse] ; user's horse at start
+[336:the ^A huge ^N knight]
+; NPCs end at 39
+;
+; weapons...
+;
+[340:^N rapier]
+[341:^N dagger]
+[342:^N poignard]
+[343:^A putty ^N knife]
+[344:^A war ^N axe]
+[345:^N lance]
+[346:^N spear] ; used to throw through ring
+;
+; treasure (about 20)...
+; first those which are scattered at random...
+[350:gold ^N crest]
+[351:gold ^N finch]
+[352:gold ^N finger]
+[353:gold ^N heart]
+[354:gold ^N nugget]
+[355:gold ^N plate]
+[356:gold ^N shoulder]
+[357:golden ^N ball]
+[358:golden ^N fleece]
+[359:golden ^N disk]
+[360:golden ^N rod]
+[361:golden ^N ruler]
+; and the following bits which have definite starting positions...
+[365:gold ^N brick]
+[366:gold ^N comb]
+[367:gold ^N ghost]
+[368:gold ^N leaf]
+[369:gold ^N standard]
+[370:gold ^N sovereign]
+[371:golden ^N apple] ; please leave as an apple!
+;
+; pieces of the rope...
+[378:^N rope] ; ties you on the horse at the start
+[379:^N coil of ^N rope] ; what you assemble from the pieces below..
+[380:^N piece of ^A plaitted ^N hair|^N rope]
+[381:^A hessian ^N hawser|^N rope]
+[382:^N lassoo|^N rope]
+[383:^N belt|^N rope]
+[384:^N reins|^N rope]
+[385:^N noose|^N rope]
+[386:^N halyard|^N rope]
+[387:^N cord|^N rope] ; holds chest lid half-open
+[388:^A washing ^N line|^N rope]
+[389:^N tether|^N rope]
+;
+; clothes...
+[390:^A hooded ^N cloak]
+[391:^A saffron ^N robes] ; what the hermit wears
+;; [392:^A green ^N suit]
+;
+; now some ordinary objects...
+[400:^N cask]
+;
+[402:^N glass of ^N beer|^V pint ^V lager]
+[403:^N empty ^N glass]
+[404:^N bucket]
+[405:^A welcome ^N mat]
+[406:^N note] ; on drawbridge
+[407:^A great ^N chest|^N lid]
+;; [408:^N flag]
+[409:^N key]
+[410:^N head] ; horse's head!
+;
+; some static objects (150 onwards)...
+[450:^N bar] ; in pub
+[451:^N bar] ; in pub
+[452:^N drawbridge]
+[453:^A ominous ^A white ^N doorway]
+[454:^A hardwood ^N roller]
+[455:^N pile of ^N garbage|^A rubbish ^N heap]
+[456:^A trophy ^N cabinet]
+[457:^N flagpole|^N pole]
+[458:^N signposts|^N posts] ; used in "you can see some (458)"
+;
+; some invisible objects...
+[470:^N eyes|^N eye]
+[471:Rapunzel's ^N hair hanging down from above]
+[472:^N ring] ; through the orc's nose
+[473:^N ivy climbing up the castle] ; mark nothing except IVY
+[474:^A thorn ^N hedge|^N thorns]
+[475:^A garbage ^N heap|^N rubbish ^N pile]
+[476:^N head] ; orc's head
+;
+; Location objects...
+; (These are used for seeing from a distance,
+; and for input (for examine and for 'go castle')
+; (note that 'go scenery' also works, so the only unique
+; functions of these objects is for remote viewing,
+; and for examine)
+;
+; 479+N
+[480:^N gibbet]
+[481:^N castle]
+[482:^N clearing]
+[483:^N crossroads]
+[484:^N fairground|^N dismal]
+[485:^A forest ^N lawn]
+[486:^N cave]
+[487:^A royal ^N oak]
+[488:^N tower]
+[489:^N viaduct]
+[490:^N well]
+[491:^N gate]
+;
+; collective nouns...
+[534:^N everything ^N all ^N every]
+[535:^N treasure] ; collective noun
+[536:^N weapons] ; collective noun
+[537:^N people ^N everyone ^N everybody] ; collective noun
+[538:^N clothes]
+;
+; (more) omni-present objects:
+[539:the ^N door] ; normal door - never described by printobject,
+; so we can put in the article for the benefit of DESCRIBEACTIONACTOR
+[540:^N vodka ^N whisky] ; drinks pub doesn't sell
+[541:^N water]
+[542:^N be]
+[543:^N ground|^N floor]
+[544:^N wall|^N walls]
+[545:^N sky|^N sun]
+[546:^N beer]
+; and finally some miscellaneous nouns which are used
+; for various purposes.
+[547:^N except ^N but]
+[548:^N it|^N that ^N them ^N him ^N her]
+[549:^N minute|^N minutes]
+; 
+[551:^J then ^J next]
+[552:^J therefore ^J so]
+[553:^N you ^N yourself]
+;
+; Pronouns...
+[560:it] ; ita
+[561:it] ; itan
+[562:some]
+[563:he]
+[564:she]
+[565:they]
+[566:you]
+;
+[570:it] ; ita
+[571:it] ; itan
+[572:them]
+[573:him]
+[574:her]
+[575:them]
+[576:you]
+;
+; and some misc output messages
+; plural endings and other odd verb declension...
+[579:~] ; cause previous word to be printed
+[580:s]
+[581:es]
+[582:is] ; used in examine
+[583:buries]
+;
+; and directions for output
+; in the form 'The orc enters from the outside'
+; (as opposed to 'The orc goes out' - the normal verb table)
+; Note that these are reversed so the offset into
+; the table is the direction of the moving npc, not the observer
+;
+[585:from the south]     ; north
+[586:from the southwest] ; northeast
+[587:from the west]      ; east 
+[588:from the north]     ; south
+[589:from the northwest] ; southeast
+[590:from the northeast] ; southwest
+[591:from the east]      ; west
+[592:from the southeast] ; northwest
+[593:from below]         ; above
+[594:from above]         ; below
+[595:from outside]       ; inside
+[596:from inside]        ; outside
+[597:from across the way]; across
+[598:by climbing]        ; climb
+[599:with a jump]        ; jump
+;
+; Examine messages (600+N). NO full stops at end please.
+;
+[601:an orc]
+[602:dressed in hunting pink] ; the hunter
+[603:like a frozen elf] ; knight in white
+[604:a splendid figure] ; Synonym the Wizard
+[605:a muscle-bound champion] ; Kris the Ant Warrior
+[606:a one-eyed being of great power] ; Odin
+[607:an unusual human] ; Prophet
+[608:a rat-like youth] ; the Gripper
+[609:dressed in garish clothes] ; the Innkeeper
+[610:twitchy-fingered] ; Fungus, boggit-man
+[611:a young woman with long, silky hair] ; Rapunzel
+[612:sitting in lotus position] ; the Hermit
+[613:a handsome, parfait knight] ; Green Knight
+[614:a canned fool] ; Knight in shining armour
+[615:a winged Amazon] ; Valkyrie
+[616:a trollish oaf] ; Little John
+[617:stupid] ; Denzyl
+[618:a pointy-headed greaseball] ; Phantom of the Opera
+[619:a trollish creature of great pungency] ; Uruk
+[620:an tree-like man] ; Flynn
+[621:a fur-clad warrior] ; Genghis
+[622:a barbarian warrior] ; Attila
+[623:like a Butcher's shop on two legs] ; Muscleman
+[624:a golem-like figure] ; the Annihilator
+[625:an impressive woman] ; Pope Joan
+[626:a killer queen] ; Boadicea
+[627:clad in hareem silks] ; Jeanie II
+[628:the toughest woman ever seen] ; Mrs Wallop
+[629:confused] ; Susan
+;
+[630:an obnoxious brute] ; goat
+[631:very handsome] ; barrow wight
+[632:a shaggy brute with sharp teeth] ; wolf
+[633:an expensive nag] ; orc hunter's horse
+[634:unbearably smug] ; green knight's horse
+[635:like a flatulent barrel.] ; your horse
+[636:encased in steel armour] ; huge knight
+  ;
+[640:a fine weapon] ; rapier
+[641:a long knife] ; dagger
+[642:a funny-looking knife. It's quite sharp] ; poignard
+[643:rusty and blunt] ; knife
+[644:a lethal looking weapon] ; axe
+[645:a sharpened fence-post]; spear
+[646:a dirty great needle] ; spear
+;
+[650:a treasure] ; gold crest
+[651:an ugly statue] ; gold finch
+[652:a bit of vandalized statue] ; gold finger
+[653:a treasure] ; gold heart
+[654:gold dragon dung] ; gold nugget
+[655:what pansy humans use] ; gold plate
+[656:another treasure] ; gold shoulder
+[657:part of some long-destroyed statue] ; golden ball
+[658:metal wool] ; golden fleece
+[659:valuable] ; golden disk 
+[660:a golden pole] ; golden rod
+[661:covered with markings] ; golden ruler
+; and the following bits which have definite starting positions...
+[665:good and heavy] ; gold brick
+[666:not much good]  ; gold comb
+[667:a flimsy little thing] ; gold ghost
+[668:probably for making gold compost] ; gold leaf
+[669:a silly little model flag] ; gold standard
+[670:a thick little coin] ; gold sovereign
+[671:the opposite of delicious] ; golden apple
+;
+; pieces of the rope...
+[678:looped under the horse to hold you on] ; rope - tying you on horse
+[679:tied together from several parts] ; what you assemble from...
+[680:a strong pig-tail] ; hair
+[681:green-slimed hessian] ; hessian rope
+[682:hemp rope] ; lassoo
+[683:strong cloth] ; belt
+[684:decorated leather] ; reins
+[685:a hempen rope] ; noose
+[686:a silken cord] ; halyard for flag
+[687:a tie-string] ; holds chest lid to 120 degrees when open
+[688:smooth hemp] ; washing line
+[689:tattered and chewed] ; tether
+;
+; clothes...
+[690:a deep-shadowed cape] ; hooded cloak
+[691:neat and simple] ; what the hermit wears
+;
+; now some ordinary objects...
+[700:a rusty barrel of "lager beer". Others have a better name 
+for it] ; cask
+;
+[702:the best beer, made from potatoes etc] ; glass of beer
+[703:not as good as a Hobbit-skull mug] ; empty glass
+[704:perished leather] ; bucket
+[705:decorated with: %"Welcome to the Orc's Head Inn. 
+No orcs allowed"] ; welcome mat
+[706:printed with "Knock very carefully" in many languages, including 
+cartoons for Yellow Eye Readers] ; note
+[707:iron-bound] ; great chest
+;
+[709:an old friend] ; key
+[710:messily severed at the neck]
+; 
+; some static objects (150 onwards)...
+[750:horribly clean] ; bar in pub
+[751:reeking of greasy polish] ; bar in pub
+[752:a moving bridge] ; drawbridge
+[753:a draughty archway] ; white door
+[754:a kind of reel] ; well roller
+[755:a delicious pile of fish-heads, brown cabbage and 
+furry bread] ; pile of garbage
+[756:a stupid cupboard] ; trophy cabinet
+[757:an ugly white post] ; flagpole
+[758:two signposts, set at opposite corners of the crossroads.] ; signposts
+;
+; some invisible objects...
+[770:deep, bloodshot and slightly crossed] ; eyes
+[771:smooth, silky and golden. Yeuch] ; Rapunzel's hair
+[772:a great iron hoop, far above, fixed through the orc statue's 
+nose which overhangs the gap in the broken viaduct] ; ring
+[773:growing up the stone wall of the castle] ; ivy
+[774:a sword's-length wide. Its thorns are long, sharp and inedible, 
+so there is no way through] ; thorn hedge
+[775:enough to feed an army of orcs] ; garbage heap
+[776:a huge orc's head carved out of the rock on the far side of 
+the broken viaduct. Its mouth leads to the orc lair, where you want 
+to be] ; head
+;
+[780:a homely construction, used for executions]
+[781:a carbuncular castle designed by mad dwarfs. Ivy now hides the 
+vile stone walls]
+[782:an open area of rabbit-mown grass]
+[783:the junction of hard east-west and north-south roads]
+[784:a trampled field with fair pavilions]
+[785:a horrid field, sometimes used for bowling]
+[786:horribly clean and dry. The air is polluted by the stink of 
+dried flowers and there are no worms to eat]
+[787:a dirty great hollow tree]
+[788:a vertical spire of burnt rock]
+[789:the bridge back to your base in Orc Mountain. Unfortunately, 
+some overzealous idiot has smashed a wide gap in the middle]
+[790:a deep hole]
+[791:a magnificent glowing portal]
+;
+;-------------------------------
+;
+; if you change any of the tree types, must change code
+; in .DRSYNTHESISED which chooses 'a' or 'an'
+[901:^N alder|^N trees]
+[902:^N beech|^N trees]
+[903:^N blackthorn|^N trees]
+[904:^N cedar|^N trees]
+[905:^N elder|^N trees]
+[906:^N elm|^N trees]
+[907:^N hawthorn|^N trees]
+[908:^N hazel|^N trees]
+[909:^N holly|^N trees]
+[910:^N hornbeam|^N trees]
+[911:^N juniper|^N trees]
+[912:^N larch|^N trees]
+[913:^N oak|^N trees]
+[914:^N pine|^N trees]
+[915:^N rowan|^N trees]
+[916:^N whitebeam|^N trees]
+;
+[920:^N clump]
+[921:^N coppice]
+[922:^N deadwood]
+[923:^N edgewood]
+[924:^N forest]
+[925:^N ghostwood]
+[926:^N glade]
+[927:^N grove]
+[928:^N heartwood]
+[929:^N scrubland]
+[930:^N spinney]
+[931:^N tangle]
+[932:^N thicket]
+[933:^N underbrush]
+[934:^N wildwood]
+[935:^N woodland]
+;
+; examine messages for trees..
+[941:Alnus Glutinosa, the common black alder.The wood is used 
+for swamp poles and Elvish Cuckoo Clocks]
+
+[942:Fagus Sylvatica, the common beech. In times past, many 
+trees were grotesquely pollarded for firewood, their mutilated 
+stumps rotting into ghost-shapes, but this skill has been lost]
+
+[943:blackthorn, Prunus Spinosa, a very aggressive little tree, 
+armed with evil black thorns]
+
+[944:Cedrus Libani, the cedar, which lives a long time 
+unless something is done about it]
+
+[945:the elder, an ugly weed which lives wherever there is 
+rubbish]
+
+[946:Ulmus Procera, the elm, a big fuzzy-looking tree used 
+for coffins]
+
+[947:Crataegus Monogyna, the hawthorn. Its red berries 
+attract a lot of edible vermin]
+
+[948:Corylus Avellana, the Common Hazel from the east 
+hemisquare of Middle Earth]
+
+[949:holly, Ilex Aquifolium, a spiky evergreen tree from 
+middle Middle Earth. Its main use is in producing bird lime]
+
+[950:hornbeam, Carpinus Betulus, a birch-like tree from 
+left-of-centre Middle Earth. The dirty white timber burns well 
+and is very hard and tough; well suited for slave-yokes, 
+treadmills and butchers' blocks]
+
+[951:Juniper Communis, the left-wing Juniper]
+
+[952:Larix Laricina, the West Middle Earth larch, which clogs 
+up good marsh land all over the place]
+
+[953:oak, Quercus robur, a big beggar]  
+
+[954:a marvelously attractive tree, almost as nice as the Leylandii 
+Cyprus]
+
+[955:rowan, Sorbus Aucuparia, a silly little tree. The main thing 
+to remember about rowan is to only park a cart below one in Autumn 
+if the owner is smaller than you]
+
+[956:whitebeam, Sorbus Aria, which infests middle Middle Earth]
+;
+[960:a tight cluster of trees] ; clump
+[961:a small wood of young trees] ; coppice
+[962:a fine region of dying trees] ; deadwoods
+[963:an area of small trees] ; edgewoods
+[964:a large tract of trees] ; forest
+[965:a gloomy place] ; ghostwood
+[966:an open space] ; glade
+[967:a small tract of woodland] ; grove
+[968:a dense maze of close-packed trees] ; heartwood
+[969:a mess of brushwood and stunted trees] ; scrubland
+[970:a small wood] ; spinney
+[971:just a confused mass of twisty trees] ; tangle
+[972:a tangle of shrubs and trees] ; thicket
+[973:a region of clinging plants beneath the trees] ; underbrush
+[974:a chaotic remnant of primal forest] ; wildwood
+[975:an ordinary bit of forest] ; woodland
+;
+; Short-Form room Descriptions (1000+N). NO full stops at end please.
+;
+; in Knight Orc, these are the brief descriptions when
+; in the same location.
+; e.g. 'You are <1010> in an alder forest'
+;
+; room 1 is used as exit modifier for synthesised rooms
+;
+; rooms 2..20 are those with static connections - 
+; i.e. not on the synthesised grid of forest locations
+
+[1002:in a ^N cobbled ^N castle ^N courtyard]
+
+[1003:in the single, large ^N entrance ^N hall at the ^N base of 
+the ^N keep]
+
+[1004:on the ^N dangerously ^N rounded ^N steps of a ^N narrow 
+stone ^N staircase]
+
+[1005:on a ^N lead ^N rooftop. From this ^N high ^N lookout, 
+there is a ^N dizzying ^N view across the whole forest|^N ivy]
+
+[1006:in the ^N hermit's ^N horrid little ^N cave]
+
+[1007:inside the ^N rotten ^N trunk of the ^N royal oak]
+
+[1008:in the ^N public ^N bar of the ^N Orc's Head ^N Inn|^N pub ^N head]
+
+[1009:in the "^N Headhunters" ^N saloon ^N bar of the 
+^N Orc's Head ^N Inn|^N head]
+
+[1010:in a ^N damp ^N cellar]
+
+[1011:in the ^N market ^N field]
+
+[1012:on the ^N fairground]
+
+[1013:in a ^N dingy ^N stable]
+
+[1014:on a ^N jousting ^N field]
+
+[1015:on a ^N trampled ^N field]
+
+[1016:in the ^N grandstand: a ^N long ^N tent]
+
+[1018:standing on the ^N viaduct, just north of a ^A huge ^N gap 
+where the ^N southern ^N end of the ^N viaduct has been washed 
+away. To the south, across the ^N chasm, is a ^A huge ^N orc's 
+^N head, carved from the ^N rock. Its ^N nose seems to have been 
+damaged, but enough remains to hold a large metal ring]
+
+[1019:at the ^N bottom of the ^N well]
+
+[1020:standing on the ^N drawbridge]
+
+[1021:at the east ^N end of a forest ^N road]
+
+[1022:at the northern ^N end of a forest ^N road]
+
+[1023:at the west ^N end of a forest ^N road]
+
+[1025:at the ^N base of the ^N tower]
+
+[1026:in a ^N vast ^N hall of ^N bright ^N cloud] ; lab in Paradise
+
+[1029:in a huge pile of garbage] ; invisible object here I think
+;
+; long descriptions of location objects (do not mark)...
+;
+[1200:beside a gibbet]
+[1201:outside an ugly castle]
+[1202:in a clearing]
+[1203:at a crossroads]
+[1204:on a dismal fairground]
+[1205:on a forest lawn]
+[1206:outside a cave]
+[1207:beside the royal oak]
+[1208:a little way south of a tower, separated from it by a thorn
+hedge]
+[1209:just north of a broken viaduct]
+[1210:beside a quaint little well]
+[1211:beside Paradise Gate]
+;
+; Now long additions to location descriptions (1300+n)
+; these are printed immediately after the short description
+; without any intervening punctuation (you may start this message
+; with either punctuation or just text)
+;
+[1302:, surrounded by ^N untidy ^N ranks of ^N wooden ^N sheds which 
+sprawl crookedly against the ^N outer stone ^N walls]
+
+;; [1303:. Its soft ^N mudrock ^N floor has been polished smooth 
+;; by use and the route from the ^N entrance door to the back 
+;; of the ^N hall has ^N worn into a ^N ditch. The ^N rounded ^N treads of 
+;; a ^N spiral ^N staircase emerge from the end of this ^N furrow 
+;; and coil upwards into the wall]
+
+[1304:, within the keep wall]
+
+;; [1305: though you can't quite make out the orc lair beyond the 
+;; viaduct]
+
+;; [1306:, decorated with ^N cartoons and ^N Christmas ^N cracker ^N mottos]
+
+;; [1307:, in a wide ^N chamber lined with ^N leaves and ^N cobwebs. 
+;; Just enough light seeps in from outside for you to be 
+;; able to see the ridged and knotted ^N wood all around]
+
+;; [1308:, squashed between serried ranks of ^N shove-halfpenny 
+;; ^N games and the ^N lacquered ^N bar ^N top with its ^N sticky 
+;; ^N puddles and ^N rows of ^N imitation ^N kegs. Magic 
+;; ^N wall-trumpets whine with Hobbit and Westron music and the 
+;; mood is one of gloom and depression. It all makes you quite homesick]
+
+;; [1309:, wading through the ^N thick ^N carpet. This 
+;; ^N high-class room is furnished with ^N luxurious ^N orc-skin 
+;; ^N armchairs and decorated with ^N paintings of ^N famous 
+;; ^N sportsmen and their ^N trophies]
+
+;; [1310:, reeking pleasantly of stale ale]
+
+;; [1311:. The ground has been churned into a ^N sea of ^N mud, 
+;; upon which the ^N bright ^N wood and ^N canvas ^N market ^N stalls 
+;; float like ^N trapped ^N butterflies]
+
+;; [1312:, a ^N shabby ^N collection of ^N damp ^N tents and 
+;; ^N muddy ^N signboards]
+
+[1313:, a ^N temporary ^N building with ^N canvas ^N walls and 
+^N lots of ^N straw]
+
+[1314:; an ^N acre of ^N firm ^N meadow, ^N divided by a ^N fence which 
+^N guides and ^N separates the ^N contestants. The ^N grass is surrounded 
+by ^N garish ^N pavilions and a ^N tented ^N grandstand, big enough for 
+hundreds of people to watch the fight]
+
+[1315:, pock-marked by the feet of humans and their horses]
+
+[1316: with one side missing, containing raised 
+^N wooden ^N benches for the spectators]
+
+[1318: over the ^N gap in the ^N viaduct]
+
+;; [1319:, standing ankle-deep in ^N mud]
+
+[1320: which leads into the ^N castle]
+
+;; [1321: which winds, narrows and fades away into the trees]
+
+;; [1322:, where it ends abruptly]
+
+;; [1323: to nowhere]
+
+;; [1324: through the ^N claustrophobic ^N undergrowth]
+
+[1325: where Rapunzel lives. It is a ^N peculiarly ^N spiky ^N building
+with no way in]
+
+[1326:, lit from above by ^N painful ^N beams of ^N white ^N light. Sickly 
+^N perfume oozes from some hidden vent and ^N tinkly ^N music jars the 
+nerves] 
+
+;; [1327: of ^N pink ^N mist, billowing about like a ^N salamander trapped 
+;; in a ^N thunderstorm (but without the noise)]
+
+;; [1328:]
+
+[1329:, with the other rubbish thrown away after the tournament]
+;
+; Message pairs for use in describing containment positions
+; also used for preposition table
+;
+; part printed before container
+;
+[1600:can see]        ; 0 - you can see
+[1601:^P on |^P onto] ; 1 - on
+[1602:^P underneath|^P below ^P under] ; 2 - under
+[1603:^P behind]      ; 3 - behind
+[1604:]               ; 4 - carrying
+[1605:]               ; 5 - wearing
+[1606:|^P at]         ; 6 - (person) is riding (horse)
+[1607:^P inside|^P into ^P in] ; 7 - in 
+[1608:hanging from]   ; 8
+[1609:]               ; 9 - tied up with
+[1610:^P between]     ; tied between is tied a rope
+;; [1611:]            ; 11 - for ring of knucklebone
+[1612:lying on]       ; 12
+[1613:sitting on]     ; 13
+[1614:fastened to]    ; 14
+[1615:tied to]        ; 15
+; 15 tied to (the chest) and holding the lid open is (a strap)
+[1616:^P with|^P using]
+[1617:^P from]
+;
+; part printed between container and contained.
+;
+[1640:]              ; 0 
+[1641:is]            ; 1 - on
+[1642:is]            ; 2 - under
+[1643:is]            ; 3 - behind
+[1644:is carrying]   ; 4
+[1645:is wearing]    ; 5
+[1646:is riding]     ; 6 - is riding
+[1647:is]            ; 7 - in
+[1648:is]            ; 8
+[1649:is tied up with] ; 9 - ; tied up with - mainly for goat
+[1650:is tied]       ; 10 -
+[1651:]              ; 11 - from
+[1652:]              ; 12
+[1653:]              ; 13
+[1654:is]            ; 14 - fastened to
+[1655:and holding the lid open is] ; 15 tied to the (chest) is a (strap)
+;
+; 1700: is base for prepositions to use with 'you'
+;
+; 1700+N is part printed before 'you'
+;; [1714:tied up with]
+[1715:tied to]
+;
+; 1740+N is part printed between you and object(s)
+[1741:are on]        ; 1 - on
+; 1742 is 2          ;
+; 1743 is 3          ;
+[1744:own]           ; 4 - own
+[1745:are wearing]   ; 5
+[1746:are riding]    ; 6
+[1747:are in]        ; 7
+[1752:are lying on]  ; 12
+[1753:are sitting on]   ; 13
+[1754:are tied up with] ; 14
+[1755:is]            ; tied to you is 15
+;
+;
+[1800:^P off]
+[1801:^P up]
+[1802:^P down]
+[1803:^P to]
+[1804:^P out]
+[1805:^P from the ] ; used for npc motion
+[1806:^P for]
+[1807:^P until]
+[1808:^P debug]
+[1809:^P through]
+[1810:^P about]
+;
+; Parser messages
+;
+[2000:you don't need to use "] ; paired with 2001
+[2001:" in this part of the game. ]
+;
+[2003:I don't understand "]
+[2004:" when used like that. ]
+;
+[2006:you are ]
+[2007:in a ] ; as in 'You are in an alder forest'
+[2008:in an ]
+[2009:exits lead in all directions]
+;
+; general error message when parsing has broken down.
+[2010:I don't understand. ]
+[2011:you can't see]
+[2012:you don't have]
+[2013:you already have]
+[2014:(please stop blathering and get on with the game). ]
+[2015:it's too far away. ] ; examine, take etc. scenery objects
+[2016:I can't find a verb in that sentence! ]
+[2017:it's not there. ]
+[2018:there were too many nouns in that sentence! ]
+[2019:that's too heavy]
+;
+[2020:don't be silly] ; group..
+;; [2021:strange concept]
+;; [2022:what a peculiar idea]
+;
+; group for things which people may
+; try which might work, but don't
+[2023:nice try] ; group... 
+;; [2024:a valiant attempt]
+;; [2025:nice try]
+;
+[2030:that's scenery. ]  ; that's just scenery group...
+;; [2031:I suggest that you forget it. ]
+;; [2032:that's probably not important. ]
+;
+; now must supply an object group
+[2033:please say more. ] ; group...
+;; [2034:what? I couldn't find an object in that. ]
+;; [2035:could you elaborate? ]
+
+[2036:absolutely nothing happens. ]
+; ^ verb in keyword table but not in CALLVERB routine
+[2037:there doesn't seem to be anything suitable. ]
+;
+[2039:what a mouthful! ]
+;
+[2044:you can't ]
+[2045:that. ]
+[2046:that]
+[2047:here]
+[2048:I can't find ]
+;
+; again used following a command referring to scenery
+[2050:you can't repeat that. ]
+;; [2051:you can't repeat that. ]
+;; [2052:it wouldn't help to try that again. ]
+;
+[2053:it's not clear to what ]
+[2054: is referring. ] 
+;
+[2055:(removing] ; E.g '(Removing the bat from the cage first).'
+[2056:from the]  ; to avoid containers inside themselves.
+[2057:first). ]
+;
+; error messages for NPC's
+[2060:talking to yourself again?]
+[2061:you can't talk to several people at once. ]
+;
+[2062:stops, looking confused] ; group...
+;; [2063:looks puzzled]
+;; [2064:seems uncertain of what to do now]
+;
+;; [2065:looks around, as if searching for something. ]
+;
+[2065:for] ; as in 'looks for the cask'
+[2066:but can't find]
+;
+; messages when the player tries to take stuff from others...
+[2071:won't let you]
+;; [2072:slaps your paw away]
+;; [2073:stops you]
+;
+; and same for npcs...
+[2074:won't let]
+[2075:take it. ]
+;
+; Standard Adventure output messages
+;
+[2100:%Welcome to Knight Orc, copyright (c) 1987 from
+^N Level 9 ^N Computing and Rainbird. ]
+[2101:you can't see]
+[2102:you don't have]
+[2103:you already have]
+[2104:you can't see that here. ]
+[2105:in the distance is ] ; for scenery seen from afar
+[2106:you own nothing at all! ]
+[2108:it is dark. ]
+;
+[2109:nothing happens]    ; Nothing happens group...
+;; [2110:that doesn't work]
+;; [2111:there is no effect]
+;
+; examining something greater than maxobject: (but not scenery)
+; rare occurrence - mostly for omnipresent objects, numbers, spells
+[2112:it looks exactly as you would expect]
+[2113: nothing. ]
+[2114:you can't go that way. ]
+[2115:through the door] 
+;
+[2117:it's already open. ]
+;
+[2119:you find]
+;
+; the following are printed after the object name...
+; tried to take (move) fixed object
+; only 2120 needs to be suitable for 'you' as well as 'object'
+; before the message is printed
+[2120:won't move] ; group...
+;; [2121:doesn't budge]  ; (person) group
+;; [2122:refuses to be moved]
+;
+[2123:you can't put ] ; paired with 2123
+[2124:there. ]
+;
+[2125:you can't go there! ]
+[2126:you'll have to drop it first. ]
+;
+[2127:you can't climb that. ]
+[2128:%(This game provides commands for rapid movement. For 
+example, "GO TO CASTLE" or "FOLLOW THE VALKYRIE". ]
+;; [2128:you can't drop that. ]
+[2129:whee! That was fun. ] ; jump to no effect
+;
+; 2130 is used when player refers to scenery which is not nearby
+[2130:I can't find a reference to "]
+[2131:you're on it! ]
+[2132:what? ]
+[2133:I don't know where that could be! ]
+[2134:you're wearing ]
+[2135:please try again, saying what with? ]
+[2136:which one? ]
+[2137:at what? ]
+;
+[2139:is full. ]
+[2140:" here. ]
+;
+[2142:you can't wear ]
+[2143:you can't reach it from here. ]
+;
+[2144:that's pointless] ; don't bother group...
+;; [2145:that would be a waste of time]
+;; [2146:that's pointless]
+;
+[2147:you're already wearing that. ]
+[2148:you don't need to do that. ]
+;
+; Confirmation messages
+;
+[2152:worn. ]
+[2153:OK. ]
+[2154:yeuch! ] ; don't want to eat it
+[2155:time passes. ]
+[2156:said. ]
+[2157:most refreshing. ] ; water / other pleasant liquids
+[2158:you'll have to untie it first]
+;
+[2160:YES or NO, please.%]
+;
+[2176:nothing happened. ]
+;
+[2190:(]
+[2191:). ]
+;
+; Death, scoring, game control etc.
+;
+[2200:really restart? ]
+; [2201:%press space to play again. ]
+[2202:really restore? ]
+[2203:%YES or NO, please]
+[2204:you score ]
+[2205: out of 1000. ]
+[2207:do you want to continue? ]
+[2209:% %Thy adventure is over. Type RESTART, RESTORE, OOPS or RAM 
+RESTORE. ]
+[2210:you vandalize the place a bit. ]
+[2211:what, again? ]
+[2212:why don't you go and mangle a paper clip instead? ]
+[2213:vandals seem to have been at work here. ]
+[2214:% %do you want to continue? ]
+[2215:that's too long to wait. ] ; won't wait
+[2216:have you considered, eg "WAIT FOR VALKYRIE" or "WAIT FOR 
+25 MINUTES"? ]
+[2217:the time is ]
+[2218:you can't light it. ]
+[2219:you have no source of fire. ] 
+;
+; Help messages
+[2270:please contact Rainbird if you are really stuck. ]
+;
+[2300:oops and ram save/restore don't work in this version. ]
+[2301:remove the Knight Orc disk, insert your formatted save position 
+disk and press a key. ] ; disk ***
+[2302:now pull your save position disk out and stuff the Knight Orc disk 
+back in.% %] ; disk ***
+;
+[2308:I can't use OOPS to go back further than this. ]
+[2309:(this version allows you to use RAM SAVE and RAM RESTORE
+to save a position in memory, and OOPS to take back bad moves). ]
+[2310:I can't find that saved position in memory. ]
+;
+;; [2311:you're about to move to another part of the game. Do you 
+;; want to save your position first, just in case? ] ; tape ***
+[2312:that data was probably not saved from Knight Orc. ]
+;; [2313:play the program cassette containing "] ; tape ***
+;
+;; [2315:A Kind of Magic". ] ; part 2 (hitech) ; tape ***
+;; [2316:Hordes of the Mountain King". ] ; part 3 (magic) ; tape ***
+[2317:are you sure you want to enter "Hitech" mode? ]
+[2318:as the visor lifts away from your eyes, the countryside seems 
+to twist and change. What you had previously seen as the "real" world 
+was only an image! ]
+;; [2319:you've just started in the middle of the game. 
+;; either restore a position saved from this part, or start over 
+;; again at the beginning by loading part 1, "Loosed Orc". ] ; tape ***
+;
+;---------
+;
+; table driven responses..
+; all have a dot added automatically
+[2401:ouch!] ; attack me
+[2402:Mary Whitehouse slaps your legs] ; rude word
+;; [2403:you hear nothing else]
+[2404:you succeed in smelling even worse]
+[2405:you find nothing special]
+[2406:you smell great] ; smell player
+[2407:go stuff yourself, orc scum]
+[2408:why not]
+[2409:Oh, I see] ; no
+[2410:you sound strangely positive] ; yes
+[2411:that was close] ; phew
+[2412:you are very intelligent indeed, considering]
+[2413:life is too good for most people]
+[2414:yes please] ; treasure
+[2415:send your cheques to Level 9] ; royalties
+[2416:to be, or not to be, that is the cliche]
+[2417:very nasty the time of year] ; weather
+[2418:how greedy] ; want
+[2419:how should I know] ; what,why etc.
+[2420:what a nice thought] ; death
+[2421:what, going so soon? Don't forget to SAVE first] ; bye
+[2422:I should think so too] ; sorry
+[2423:aargh..] ; scream
+[2424:oi! Behave yourself] ; 'rude word' npc
+[2425:sorry, can't do that] ; full stop added by acode.
+;
+;-----------
+;
+; 'Game play' messages
+[2503:the drawbridge slowly starts to close. ]
+[2504:the drawbridge clunks shut. ]
+[2505:the drawbridge is closed. ]
+; 
+[2507:the drawbridge is wide open. ]
+[2508:the drawbridge is closing. ]
+[2509:the drawbridge is closing. ]
+[2510:the drawbridge is closing. ]
+[2511:your weight pushes the drawbridge down. ]
+;
+[2513:the chest is locked - you will need a key] ; you have no key
+[2514:the lock opens with a little click]
+[2515:the chest lid swings open and is held by a cord]
+[2516:the heavy lid strikes the ground with a crash]
+;
+[2518:it won't open. ] ; trying to open it
+[2519:the drawbridge is half-shut]
+[2520:you bump into the closed drawbridge. ]
+[2521:WHOOMPH! You are crushed as the drawbridge falls open. ]
+[2522:hits the drawbridge, which falls open. ]
+[2523:the chest opens] ; no strap or other stuff
+;; [2524:it is already open]
+[2525:it is closed] ; examine message when locked
+[2526:it is closed] ; examine message when unlocked but closed
+[2527:it is open] ; examine message when open
+[2528:the pallid knight leaps up in a rage. ]
+[2529:the hunter is too far away. ]
+[2530:the ropes join magically]
+[2531:a horn blatts in the distance. ]
+[2532:a mounted hunter bursts through the trees and spurs his 
+nag towards you. The fool is waving a lassoo and clinging on for 
+dear life. ]
+[2533:the hunter rides over you.  ]
+[2534:the stupid hunter doesn't see your rope! He is caught mid-chest 
+and hurled, stunned, to the ground. ]
+[2535:the hunter strikes out wildly with his whip. ]
+
+[2536:%the green knight puffs himself up and stares down 
+scornfully from the back of his overgrown pony,
+%"If thee be brave, not coward base,
+%Then thee must now my challenge face.
+%With this, my axe, strike blow for blow.
+%I'll let thee strike first. Have a go!" 
+%He indicates his mighty axe. 
+% 
+%]
+
+[2537:%the green knight sneers and, barely moving his lips, 
+spits out another gem of the poet's art,
+%"Spineless weakling, scared of fate, 
+%I know not why you hesitate.
+%If thou wouldst win thyself renown,
+%Take up my axe and strike me down!" 
+% 
+%]
+
+[2538:to your complete amazement, with one mighty swing of the 
+axe, you chop off the giant knight's head! For one glorious 
+moment, his mighty body totters as his head curves through the 
+air.
+%
+%Then, suddenly, a green hand reaches out and catches the falling 
+noggin by its leafy tresses. With practiced ease, the knight 
+replaces his green dome back on his neck and smiles horribly.
+Then he laughs, "Thought you, an orc, a knight to beat? I'll 
+never lose while I can cheat!" He wrests the axe rudely from 
+your grasp and swings it. The last thing you hear is the knight's
+dreadful laughter, "Ho! Ho! Ho!"]
+
+[2539:with a surprisingly dextrous stroke you behead the horse.
+The green knight shouts in surprise but, before he can retaliate,
+the massive steed has fallen on him! He is trapped, but only for 
+the time being. ]
+[2540:the green knight looks dazed. ]
+[2541:the green knight struggles on the ground. ]
+[2542:with a massive effort, the green knight clambers to his 
+feet. ]
+
+[2543:the green knight reattaches the head
+to the horse's body. The horse comes back to life! ]
+;
+[2545:%His verdant war-horse stepping high slow,
+%The green gallant prepares to hew.
+%Heaves up his axe and, shouting thrice "Ho", 
+%Brings down his axe and beheads you. 
+% 
+%]
+
+[2546:you can't ride that! ]
+[2547:it's already being ridden! ]
+
+[2548:the hermit turns his back on you and walks over to his 
+trophy cabinet. His shoulders are shaking with mirth. ]
+[2549:the hermit walks back to you and sits down, cross-legged, 
+in the centre of the cave. He is chuckling more than ever. ]
+[2550:the hermit wakes up, rubs his bald head and scowls. ]
+[2551:the hermit examines it and bursts out laughing. ]
+;
+; trio of messages printed immediately after
+; 'You (npc) attack(s) the hermit but he dodges'
+[2552:the hermit roars with laughter as you miss hopelessly 
+and sprawl on the ground] ; group...
+;; [2553:the hermit sits down again and blows you a kiss]
+;; [2554:the hermit sways about, giggling. He seems to see every 
+;; blow before you make it]
+;
+[2555:while the hermit isn't looking, you clobber the old fool
+on the back of his head and knock him out cold]
+[2556:Rapunzel is looking out of an upper window of the tower, 
+pouting sexily and letting down her incredibly long hair]
+[2557:the thorns drive you back]
+[2558:that won't protect you from the thorns] ; trying to put
+; anything but welcome mat on hedge
+[2559:that wouldn't help you to cross the hedge]
+[2560:you clamber over the hedge]
+[2561:the hair is in reach] ; south of tower base
+[2562:Rapunzel shrieks in angry protest]
+[2563:the hair descends again]
+[2564:you carefully climb up the hair and, just as carefully, 
+Rapunzel knocks you down with a large mallet]
+[2565:you cut off a good length of Rapunzel's hair. She shouts 
+angrily and disappears into the tower. You hear loud 
+cursing and threats of vengeance against orcs]
+;
+[2567:it hangs down into the depths of the well]
+[2568:you climb the rope..]
+[2569:you can't climb down without rope]
+[2570:the innkeeper pulls a fresh pint]
+[2571:the innkeeper looks for the empty glass. ]
+[2572:the innkeeper laughs at you, "Finish your last one first!" ]
+[2573:the innkeeper says, "I'm busy." ]
+[2574:the innkeeper says, "We don't serve orcs." ]
+[2575:the innkeeper isn't here! ]
+[2576:you don't have any] ; beer
+[2577:she is too far away] ; acting on Rapunzel
+[2578:% %You lie still for a while, unable to even twitch
+until the valkyrie swoops down, picks up your body and flies steadily 
+southwards, eventually swinging low through Paradise Gate.
+% 
+%There's a faint click and an awesomely feminine voice breathes huskily 
+at about a hundred decibels, "Good Morning! Welcome to Paradise. Our 
+nymphs are busy right now, but they will attend you in just a few 
+moments; remember that patience is a virtue." She pauses briefly, 
+then chirps, "Putting you on hold" and ends with another click. 
+Somewhere, out of sight, harp music jangles irritatingly into life.
+% 
+%]
+[2579:the innkeeper thanks ]
+[2580:, pours a pint and ]
+[2581:you have nothing to dig with. ]
+[2582:drinks it. ]
+[2583:with a fanfare of trumpets, two nymphs float majestically
+forward, turn up their noses in disgust and throw you out..%]
+[2584:and drinks it down. The innkeeper retrieves 
+the empty glass. ]
+[2585:Rapunzel has gone away and you can't climb up without her 
+hair]
+[2586:two nymphs float in and examine]
+[2587:. They murmur a few words and then take]
+[2588:out. ]
+[2589:% 
+%Grindleguts struggled awake, groaning piteously. The world bucked 
+and swayed, his headache was agony and he ached in every limb. 
+Grindleguts' mouth tasted like a Hobbit's armpit and he seemed to 
+have lost another tooth - he could not quite remember what had 
+happened after they captured the Inn, yesternight, but he was sure 
+it must have been fun! He moaned again and prepared to wallow in 
+his hangover. 
+% 
+%A sharp object stabbed at Grindleguts' ribs again, interrupting 
+his enjoyment of his misery. Grindleguts risked ungluing one 
+bloodshot eye and squinted at the world. A shaft of sunlight 
+stabbed back. It was still light. It was very light! Some idiot 
+had woken him in the middle of the day! 
+% 
+%]
+
+[2590:%you, Grindleguts, leap furiously at the jabbing figure 
+beside you - and discover, to your horror, that your legs are 
+fastened to some huge animal!
+% 
+%One of the robed figures hauls you back upright, jeering "Go on, 
+Sir Orc, you're next" and gives your horse a prod with his spear, 
+laughing as the frightened beast rears and bolts. 
+% 
+%]
+[2591:%you find yourself in a large open arena. All around are 
+crowds of people in mediaeval costume, obviously enjoying themselves. 
+% 
+%A chorus of boos started when you emerged from the tent, in 
+contrast to the cheers at the east end of the arena, where the 
+huge knight is consulting with his seconds. 
+% 
+%]
+[2592:%the knight turns his horse to face you and levels his lance. 
+As he starts to charge, a great yell rises up from the crowd! 
+% 
+%]
+[2593:%the knight takes aim and, WHOOMPH, his lance meets your 
+chest and the crowd roar as you fall, stunned, to the hard ground.
+% 
+%Some time later, you awake. Bruised and battered, but you must 
+still be alive!% 
+%]
+[2594:the horse refuses to move. ]
+[2595:you are tied to the horse. ]
+[2596:the knots are too tight. ]
+[2597:you charge a group of spectators. They scream and flee in
+panic. The horse shies up and stops dead. ]
+[2598:you bravely charge the knight. ]
+[2599:it is ] ; first part of rope length report
+[2600: feet long. ] ; second part of length report.
+[2601:it is very valuable! ] ; after examine message
+[2602:the valkyrie seems annoyed to find that]; followed by name
+[2603:is alive! ]
+[2604:if you did that, the spear would fall into the chasm and be
+lost forever. ] ; throwing spear without rope
+[2605:the rope is too short - the spear is jerked back and
+you catch it. ]
+[2606:the spear sails through the air and neatly slips through the
+ring! You escape, swinging in a graceful arc through the air... 
+% 
+%And crunch into the far wall of the chasm. Not many bones are 
+broken but, patting at your head, you discover with a shock that 
+you are wearing some kind of visor - and presumably have been 
+doing so all along! It seems to have been knocked loose and can 
+be raised at any time from now on.
+% 
+%Do you want to follow my advice and leave the visor alone? ]
+;
+[2607:What about some service here?] ; group...
+;; [2608:Any danger of some service in here?]
+;; [2609:How about a beer, bartender?]
+;
+[2612:Did someone want a beer?] ; group...
+;; [2613:OK, OK, who was dying of thirst here?]
+;; [2614:Who's dying of thirst?]
+;
+[2617:the green knight grabs back the reins shouting, "Not so fast, 
+varlet." ]
+[2618:ouch! That nearly broke a tooth! ] ; bite any treasure
+; (intended for "bite golden apple")
+[2619:it's out of stock.]
+[2620:he is unconscious]
+[2621:a key falls from under the mat]
+[2622:the hermit stops ]; person
+[2623:and says, "Oi! Keep your thieving hands off! ]
+[2624:the Green Knight pushes him roughly to one side. ]
+;
+; messages used for "I've just stolen ... from a vile orc!"
+[2625:a filthy orc] ; group...
+;; [2626:a vile orc]
+;; [2627:a treacherous orc]
+;
+; rapunzel, hello...
+[2630:Rapunzel flutters her eyelashes, "Why, 
+hello little orc. Why dontcha come up and see me..." ]
+; hermit, hello...
+[2631:the hermit laughs at your accent. ]
+[2632:suddenly, the gate opens. Two nymphs emerge, throw
+out ]
+[2633:, and dance back in. ]
+[2634:the rope makes an effective trip-wire]
+[2635:you will need to fix something to the rope and throw that]
+;
+; response for most people to "tell me about you"
+[2636:I am perfect in every way] ; group...
+;; [2637:I am totally perfect]
+;; [2638:I am without flaw]
+;
+[2641:You look orcish to me] ; group...
+;; [2642:You evil monster]
+;; [2643:Something smells around here]
+;
+[2646:nothing special]
+;
+[3508:the body of ] ; this is needed!
+[3509:oi! Let the dead rest in peace]
+[3517:, but ] ; as in 'but he dodges'
+;
+[3520:enter] ; as in 'enters from the north'
+;
+; health reports
+[3560:dead]
+[3561:at death's door]
+[3562:a wreck]
+[3563:badly injured]
+[3564:wounded]
+[3565:injured]
+[3566:hurt]
+[3567:almost uninjured]
+[3568:in good shape]
+[3569:unhurt]
+[3570:uninjured] ; and probably cheating!
+;
+; groupsay messages for hello responses...
+[3580:says, "Hello there." ] ; group...
+;; [3581:says, "Greetings." ]
+;; [3582:says, "Hello to you." ]
+;
+[3585:nods. ] ; group...
+;; [3586:flickers an eyelid. ]
+;; [3587:snorts softly. ]
+;
+; groupsay messages for people recovering things that they
+; need for racetracks etc. 
+[3590:says, "That's mine!" ] ; group...
+;; [3591:says, "Give that to me." ]
+;; [3592:says, "That's mine!" ]
+;
+[3595:snarls angrily. ] ; group...
+;; [3596:snarls. ]
+;; [3597:stops dead. ]
+;
+[3600:a voice in the distance shouts, "]
+[3601:." ]
+[3602:Wow! A stack overflow] ; a stack overflow!
+[3603:Don't panic!] ; a panic
+[3604:I can't go there from here. ]
+[3605:you'll have to find the way yourself. ]
+;
+; some grouped responses for npcs
+; two groups - those who can talk and those who can't
+; first - npc refuses an order
+[3610:refuses. ] ; group...
+;; [3611:says, "Don't try to order ME around!" ]
+;; [3612:says, "No way!" ]
+;
+[3615:curls its upper lip. ] ; group...
+;; [3616:sneers at your request. ]
+;; [3617:laughs hoarsely. ]
+;
+; now, npc accepts an order
+[3620:says, "Sure." ] ; group...
+;; [3621:says, "OK." ]
+;; [3622:says, "Right." ]
+;
+[3625:nods slowly. ] ; group...
+;; [3626:nods in agreement. ]
+;; [3627:agrees. ]
+;
+; now response to questions when not obedient...
+[3630:ignores your question. ] ; group...
+;; [3631:says, "You'll have to find that out for yourself." ]
+;; [3632:says, "You won't get any help from me." ]
+;
+[3635:makes a rude gesture. ] ; group...
+;; [3636:pretends to ignore you. ]
+;; [3637:snarls threateningly. ]
+;
+; response to requests to give anything(s) to anyone
+[3640:says, "You'll have to fight me for that." ] ; group...
+;; [3641:says, "I'd rather die." ]
+;; [3642:says, "I'm not about to give anything away." ]
+;
+[3645:clutches his possessions angrily. ] ; group...
+;; [3646:makes a rude gesture. ]
+;; [3647:waves it at you defiantly. ]
+;
+; now responses when npc wants to obey orders just given,
+; but can't understand any of them!
+[3650:says, "Speak properly, orc." ] ; group...
+;; [3651:says, "It must be your accent; I can't understand what
+;; you're saying." ]
+;; [3652:says, "Pardon?" ]
+;
+[3655:doesn't seem to understand. ] ; group...
+;; [3656:shrugs in non-comprehension. ]
+;; [3657:makes a questioning noise. ]
+;
+; message group when people are attacked by other people (probably player)
+[3660:yells angrily. ] ; group...
+;; [3661:says, "What's your game, buster?" ]
+;; [3662:says, "OK, so that's the way you want it." ]
+;
+[3665:growls in fury. ] ; group...
+;; [3666:growls viciously. ]
+;; [3667:whirls around, ready to fight. ]
+;
+; now messages when people launch unprovoked attacks on the user
+; these are followed by "and attacks you"
+[3670:shouts, "An orc! Let's kill it!" ] ; group...
+;; [3671:shouts, "Kill the orc!" ]
+;; [3672:shouts, "I'm going to kill you, vile orc." ]
+;
+[3675:growls menacingly] ; group...
+;; [3676:stares at you with obvious distaste]
+;; [3677:leaps towards you]
+;
+; messages when npc can't find the way to its destination
+[3680:says, "Where can it be?" ] ; group...
+;; [3681:says, "I can't find it anywhere." ]
+;; [3682:says, "I'm lost." ]
+;
+[3685:seems lost. ] ; group...
+;; [3686:seems to give up. ]
+;; [3687:looks around, then snorts in disgust. ]
+;
+[3690:says, "No way!" ] ; group...
+;; [3691:says, "Nope, I won't do it." ]
+;; [3692:says, "No chance." ]
+;
+[3695:laughs hoarsely. ] ; group...
+;; [3696:sniggers a bit. ]
+;; [3697:sighs heavily. ]
+;
+; now group say for people peering at you suspiciously
+[3700:peers at you suspiciously. ] ; group...
+;; [3701:looks at you curiously. ]
+;; [3702:gives you a long stare. ]
+;
+[3705:peers at you suspiciously. ] ; group...
+;; [3706:looks at you curiously. ]
+;; [3707:gives you a long stare. ]
+;
+; Responses to player shouting...
+[3715:Shut up, you stinking orc!] ; group...
+;; [3716:Come to the crossroads and say that, orc.]
+;; [3717:That sounds like an orc! Who wants to help me kill it?]
+;
+; 16 things which people shout at random...
+[3720:Hey! Give that back!]
+[3721:Stop attacking me!]
+[3722:How do I get a drink from the Innkeeper?]
+[3723:How do I get through the Paradise Gate?]
+[3724:Does anyone have any treasure to spare?]
+[3725:Can someone tell me about the well?]
+[3726:Goodbye folks, I'm leaving.]
+[3727:Help!]
+[3728:Can anyone hear me?]
+[3729:Are there any orcs listening?]
+[3730:Right, you asked for it!]
+[3731:I want some gold.]
+[3732:Where is the gold?]
+[3733:Who's stolen all the treasure?]
+[3734:Anyone seen the orc? I want to kill it.]
+[3735:Someone find me an orc to butcher.]
+; 'a male voice shouts' type messages
+[3736:a voice in the distance shouts, "] ; ita
+[3737:a distant voice shouts, "] ; itan
+[3738:a voice in the distance shouts, "]
+[3739:a male voice in the distance shouts, "] ; he
+[3740:a female voice in the distance shouts, "] ; she
+[3741:a strained voice in the distance shouts, "] ; they
+[3742:a distant voice shouts, "] ; you
+; message group when people are fighting player...
+[3743:I'm fighting a vile orc!] ; group...
+;; [3744:I'm fighting an orc!]
+;; [3745:I'm killing an orc!]
+[3746:a voice in the dark says ]
+;---
+; singing of gold messages...
+[3750:yawns. ]
+[3751:scratches himself. ]
+[3752:looks around. ]
+;
+; default male gold singing...
+[3753:mumbles quietly. ]
+[3754:scratches himself. ]
+[3755:whistles a happy tune. ]
+;
+; gold-singing for hermit
+[3756:looks smugly at his trophy cabinet and laughs at you. ]
+[3757:shakes with laughter at your curious appearance, "Would you 
+happen to have any interesting curios to spare?" he chuckles and 
+bursts out laughing again. ]
+[3758:falls about laughing at you. ]
+;
+; female default gold singing....
+[3759:rearranges her clothing. ]
+[3760:gives you a dirty look. ]
+[3761:hums a little tune. ]
+;
+; default gold singing for animals
+[3762:paws the ground. ]
+[3763:stares at you. ]
+[3764:paces up and down. ]
+;
+; people attack you at random - or when they realize you're an orc..
+[3862:shouts, "Kill the orc!" ] ; group...
+;; [3861:shouts, "An orc - kill it!" ]
+;; [3862:shouts, "Get that wretched orc!" ]
+;
+; when someone attacks someone else in an unprovoked way..
+[3863:screams and turns on you angrily. ] ; group...
+;; [3864:says, "What's your game, buster?" ]
+;; [3865:says, "OK, so that's the way you want it." ]
+;
+; messages when people suspect you're an orc..
+[3866:peers at you suspiciously. ] ; group...
+;; [3867:seems to be eyeing you strangely. ]
+;; [3868:comes up close and looks at you intently. ]
+;
+; when you give people presents of treasure...
+; this will probably make them like you a bit.
+[3872:bites it to test its value. ] ; group...
+;; [3873:says, "Ooo.. thank you. What's wrong with it?" ]
+;; [3874:examines it closely. ]
+;
+; when someone steals something from an NPC
+[3875:is very annoyed. ] ; group...
+;; [3876:shouts in surprise. ]
+;; [3877:snarls menacingly. ]
+;
+; group shouting messages...
+[3880:I've just stolen some treasure from ] ; group...
+;; [3881:I've just ripped off ]
+;; [3882:I've just stolen something from ]
+;
+[3885:I've just found a valuable ] ; group...
+;; [3886:I've just picked up a valuable ]
+;; [3887:I've got a valuable ]
+;
+[3890:I'm back in the game!] ; group...
+;; [3891:I'm now back in the game!]
+;; [3892:I'm back!]
+;
+; now some racetrack messages
+[3900:the innkeeper polishes the bar. ] ; innkeeper
+[3901:the innkeeper hums a little tune. ] ; innkeeper
+;
+; '^C' word types - see comment at start of descriptions
+;
+; Garbage words
+;
+[4000:^N the ^N this ^N these ^N that ^N some ^N a ^N and
+^N good ^N of ^N there]
+[4001:^N therefore ^N am ^N my ^N your ^N try ^N following
+^N gold ^N golden ^N body ^N little ^N stone]
+;-------------------------------------------
+;
+; Book protection code...
+;
+[4200:%A funny little gnome with a book appears on the horizon 
+and sprints towards you, yelling "Stop! To prove that you are 
+allowed to do that, look in this copy of The Sign of the Orc. ]
+[4201:page ]
+[4202:, line ]
+[4203:, word ]
+[4204:?"%]
+[4205:The gnome grins nastily, "Guess again, orc! ]
+[4206:The gnome runs away again.%]
+[4207:What is the word at ]
+[4208:"Wrong!" The gnome flattens you with the book. You scored a mere ]
+;
+[4301:^C a ^C wurden]
+[4302:^C till ^C beide]
+;; [4303:]
+[4304:^C against ^C traute]
+[4305:^C used ^C auf]
+[4306:^C muttered ^C kehrt]
+[4307:^C to ^C konnte]
+[4308:^C ravine ^C in]
+[4309:^C on ^C du]
+;; [4310:]
+;
+[4311:^C in ^C das]
+;; [4312:]
+[4313:^C off ^C hilfe]
+[4314:^C Orc's ^C Orcs ^C waren]
+;; [4315:]
+[4316:^C with ^C rannten]
+;; [4317:]
+;; [4318:]
+[4319:^C have ^C blieb]
+[4320:^C one ^N steal ^C ansonsten]
+;
+[4321:^C Sir ^C wohl]
+[4322:^C to ^C leid]
+;; [4323:]
+[4324:^C had ^C drache]
+;; [4325:]
+;; [4326:]
+;; [4327:]
+;; [4328:]
+[4329:^C terrible ^C ins]
+[4330:^C tower ^C bist ^C du]
+;
+[4331:^C occasionally ^C seine]
+[4332:^C she ^C Grok]
+;; [4333:]
+[4334:^C got ^C mit ^C du]
+;; [4335:]
+[4336:^C do ^C dich]
+;; [4337:]
+[4338:^C Grok ^N Grok-grok ^C Ork]
+[4339:^C butter ^C der]
+[4340:^C something ^C Barney]
+;
+[4341:^C idea ^C rief]
+[4342:^C pachi ^C dort]
+[4343:^C dark ^C dann]
+;; [4344:]
+[4345:^C noticed ^C am]
+[4346:^C anybody ^C sich]
+[4347:^C the ^C damit's ^N damits]
+[4348:^C terrible ^C gute]
+[4349:^C paused ^C gewesen]
+[4350:^C he ^C Oink]
+;
+;; [4351:]
+[4352:^C bowls ^C die]
+[4353:^C weapons ^C da]
+[4354:^C understand ^C oder]
+;; [4355:]
+[4356:^C just ^C lachte]
+[4357:^C had ^C einer]
+;; [4358:]
+[4359:^C plucking ^C im]
+;; [4360:]
+;
+;; [4361:]
+[4362:^C jaws ^C der]
+;; [4363:]
+[4364:^C the ^C krachen]
+[4365:^C frowned ^C gold]
+[4366:^C slid ^C anderen]
+[4367:^C out ^C verstaubten]
+[4368:^C gold ^C Brandon]
+;; [4369:]
+[4370:^C furniture ^C zu]
+;
+[4371:^C it ^C so]
+[4372:^C strewth ^C mit]
+[4373:^C was ^C erst]
+[4374:^C grow ^C gutes]
+;; [4375:]
+[4376:^C it ^C seinem]
+[4377:^C cider ^C nie]
+[4378:^C a ^C dann]
+[4379:^C to ^C schier]
+[4380:^C Grok ^C glaubt]
+;
+[4381:^C else ^C woher]
+;; [4382:]
+;; [4383:]
+[4384:^C tavern ^C gelassen]
+;; [4385:]
+[4386:^C remarkably ^C was]
+[4387:^C own ^C Jack]
+[4388:^C right ^C Oh]
+[4389:^C and ^C am]
+;; [4390:]
+;
+[4391:^C of ^C so]
+[4392:^C toss ^C und]
+;; [4393:]
+[4394:^C about ^C inzwischen]
+[4395:^C sat ^C er]
+;; [4396:]
+[4397:^C Brandon ^C geist]
+[4398:^C rather ^C hielt]
+;; [4399:]
+[4400:^C discovered ^C einmal]
+; -------------------------------------------------------------------

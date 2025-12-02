@@ -1,0 +1,6 @@
+; Part-specific constants, to distinguish between part 2 and 3
+;
+; THIS FILE "HPCONST" for HITECH MODE
+;
+CONST
+ constantpartnum=2 ; 3=magic mode, 2=hitech mode

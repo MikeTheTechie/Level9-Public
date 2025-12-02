@@ -1,0 +1,439 @@
+; Standard adventure
+;
+; M.J.Austin 22/2/87
+;
+; General constants and variables for standard adventure
+; Does not include any game-specific stuff
+;
+; ACONST.TXT
+;
+
+CONST
+
+ ita=0
+ itan=1
+ singularsome=2
+ he=3
+ she=4
+ pluralsome=5
+ you=6
+;
+
+ EAST=3
+ WEST=7
+
+; NOW CONSTANTS FOR COMMON MESSAGES
+ SPACE=1
+ COMMA=3
+ CR=5
+ AND=6
+ SPACEAND=14
+ dotnospace=4
+ DOTCR=7
+ DOT=9
+ THE=21
+ COLON=18
+ COLONNOSPACE=2
+ QUOTE=19
+ dotquote=24
+ STAR=98
+ PLUS=99
+;
+ OWEXITS=1
+ OWOBJECTS=2
+;
+ NONSPECIFIC=31 ; USE IN POSITION SEARCH WHERE TYPE UNKNOWN
+ STACKSPACE=20
+ MAXDIRECTION=14 ; ACROSS
+ MAXDIRECTIONPLUSONE=15
+
+; Bases for text blocks
+ EXITDESCBASE=100
+ OBJECTDESCBASE=300
+ EXAMINEMESSAGES=600
+ EXAMINEOFFSET=300 ; from NOUNOFFSET
+ EXAMINEMAXOFFSET=500
+ startsynthshortdescs=1199 ; shortroomdescs+minsynthroom
+ SHORTROOMDESCS=1000
+ LONGROOMDESCS=1300
+;
+; Preposition values (all relative to prepoffset)
+;
+ IPON=1
+ ON=1
+ UNDER=2 
+ BEHIND=3
+ CARRIED=4
+ WORN=5
+ AT=6 ; FOR INPUT
+ IPIN=7
+ IN=7
+ HANGING=8
+ ipfrom=17
+ LIEON=12
+ SITON=13
+ with=16
+ 
+ IPOFF=200 ;66
+ OFF=200 ;66
+ UP=201 ;67
+ DOWN=202 ;68
+ ipto=203
+ ITO=1803 ;93 - absolute message number
+ IPOUT=204 ;70
+ ifor=206 ;73 ; relative to prepoffset
+ iuntil=207 ;73 ; relative to prepoffset
+ ipdebug=208
+;
+ DISABLEIT=255
+;
+; Now verb definitions
+ INORTH=1
+ ivdown=10
+ IVUP=9
+ ivin=11
+ ICROSS=13
+ ICLIMB=14
+ IJUMP=15
+; imagic=16
+ IAGAIN=21
+ ilook=22
+ IINVENTORY=23
+ IQUIT=24
+ IRESTORE=25
+ iramsave=27
+ iramload=28
+ iverbose=30
+ ibrief=31
+ inone=32 ; description mode
+ ivon=34
+ ivoff=35
+ ihello=38
+ ioops=39
+ iattack=40
+ ilisten=41
+ isearch=42
+ ismell=44
+ isit=48
+ istand=46
+ isay=50
+ istop=59
+ ishout=73
+ ivto=75
+ iam=82
+ idodge=95
+ ibuy=99
+
+ iexamine=100
+ icast=103
+ IGET=104
+ ITAKE=105
+ IWEAR=106
+ IDROP=107
+ iput=108
+ iremove=109
+ ithrow=110
+ igive=111
+ iask=112
+ iopen=114
+ iextinguish=116
+ ipress=117
+ ibury=125
+ ieat=124
+ idress=129
+ iclose=140
+;
+; game specific...
+ iscratch=170
+ ihit=183
+ icrush=186
+ idemolish=189
+;; ireach=180
+;
+; non-game-specific...
+ iteleport=51
+ IGOTO=51
+ IGETME=52
+ ITHINK=53
+ ivno=56
+ ivyes=66
+; goal-directed verbs
+ iwaitforperson=89
+ iwaituntiltime=90
+ iwaitforperiod=91
+ iwait=92 ; short wait
+ iparsewait=32 ; what the user gets when he types "wait"
+ ikill=93
+ istealallfrom=145
+;
+ ifollow=113
+ icollect=132
+ isetupfind=138
+ igdfind=139
+ isetuprun=54
+ isetupgo=58
+ igdgo=96 ; npcs use this
+ igdrun=97
+ igoin=87
+ igoout=88
+ ireturnobject=136 ; for npcs only
+; npcfindobject=138 ; for npcs only
+;
+ istruggle=144
+; now verbs to do with racetracks (can never be typed by player):
+ obeyracetrack=252
+ racetracksay=250
+ racetrackmessage=251
+ racetrackgosub=253
+ racetrackgoto=254
+ racetrackreturn=255
+
+ itell=142
+;
+;------------------
+;
+; collective nouns...
+ mincollective=234
+ maxcollective=238
+ IEVERYTHING=234 ; EVERYTHING-NOUNOFFSET
+ itreasure=235
+ iweapons=236
+ ipeople=237
+ iclothes=238
+;
+; Now nouns
+ IEXCEPT=247
+ IIT=248
+;
+ ibe=242
+ iminutes=249
+;
+; SAYINGS (RELATIVE TO NOUNOFFSET)
+;
+ mingarbage=3699
+ maxgarbage=3799
+;
+ NULLOBJECT=255
+ nullvalue=65535
+ NULLNUMBER=65535
+;
+; WORD TYPE VALUES
+;
+ ASCITYPE=0
+ VERBTYPE=2  ; V
+ CONJTYPE=4  ; J
+ PREPTYPE=6  ; P
+ NOUNTYPE=8  ; N
+ ADJETYPE=10 ; A
+ MATCHTYPE=12 ; C - used for matching with particular words, especially 
+              ; book protection words.
+ NUMBTYPE=14
+ MAXTYPE=14
+ MAXAMBIG=10 ; MAX NUM OF AMBIG FORMS ACCEPTED FROM INPUT
+;
+ ASCIOFFSET=0
+ VERBOFFSET=100
+ CONJOFFSET=0 ; ???
+ PREPOFFSET=1600
+ NOUNOFFSET=300
+ ADJEOFFSET=300 ; = NOUNOFFSET
+ MATCHOFFSET=4300 ; used for matching with particular words
+;
+;
+; ASCII VALUES
+ ICOMMA=44
+ IDOT=46
+;
+; Conjunctions (absolute message numbers)
+;
+ ITHEN=551
+ ITHEREFORE=552
+;
+;---
+ FALSE=0
+ TRUE=1
+ errorcode=2
+;
+;
+; Constants for Objecttable assignments
+;
+ OTBASE=32
+ otbaseplusone=33
+ otmax=47 ; otbase+15
+ NOUNCARRIED=1
+ NOUNONGROUND=2
+ NOUNNOTOBVIOUS=2 ; ADDED TO ABOVE WHEN NOUN IS NOT OBVIOUSLY HERE
+ NOUNSPECIFIED=128
+ NOUNFORBIDDEN=192
+;
+ OK=2153 ; message 'OK'
+;
+ NEGATIVE=50000
+;
+;---
+; some omni-present objects
+ GENERALDOOR=239 ; omni-present nowadays
+ WATER=241
+ iyou=253
+;---
+ HOSTILE=9
+ FRIENDLY=0
+;-----
+ knightorc=0587 ; month/year when chaining checked for game (approx)
+; - gives a unique game number.
+;---
+;
+VAR
+ X1 X2 X3 X4 X5 X6
+ C0 C1 C2 C3 c8 c10 ; C4
+ VERB PREP NOUN1 NOUN2 INUMBER ADJECTIVE1 ADJECTIVE2
+ VALUE
+ INDEX ; TYPEBASE
+ HIFROM FROM TO HIDEST DEST STATUS ROOM DIR NUMEXITS
+ LASTROOM
+ EXITVISIBLE
+ CURRENTOBJECT OBJECT HIPOS POS SEARCHPOS HISEARCHPOS NUMOBJECTFOUND
+ TOTALOBJECTFOUND LASTWORDPRINTED
+ INITIALHISEARCHPOS
+ OUTPUTWORD
+ OWTYPE RESULT
+ WORD1 WORD2 WORD3 WORD4
+ M1 m2
+ SEARCHDEPTH
+ OBVIOUS
+ LASTPICTURE
+
+;
+
+ SEARCHTYPE WORDTYPE EXCEPT
+ WORDNOTPROCESSED EOL SEPARATOR EVERYTHING SAVEHISEARCHPOS NOMOREINPUT
+ PROCESSED SUPRESSCHECKING
+ ITWORD
+ ITNUMBER
+ AGAINVERB againnoun1 againnoun2 againprep
+ VERBSTOCALL HAVECALLEDVERB SOMETHINGPROCESSED LASTVERBVALID
+
+ OBJECTSAVE
+ TRAMPTR TRAMBASE
+ TIMEINROOM
+ CONFIRMMESSAGE
+
+ TIME
+; TIMEINROOM
+ HOUR MINUTE TIMEPASSED DAY
+
+; HOURSAWAKE
+; SCOREDTODAY
+;; SCOREDTHISMOVE
+; DIGIT
+;; SCOREINDEX
+ CURRENTMESSAGE
+ DOOROPEN DOOR
+
+ SPELL
+ actor
+
+ BLOWSTRENGTH
+ PROCESSINGSAY
+;; ANIMATE
+;; ESPROOM
+ SAVERESULT SAVEDEST
+ SAYRESPONSE
+ OOPSPOS OOPSPOSEND
+ ACTORATTRIBUTES
+ moreinfoexpected
+ vandalptr
+ startfloorpointers ; within list5
+ startracetracks ; within list5
+ numexplicitmoves ; number of moves made by N/S/E etc. rather than GO
+ erroroccurred
+ timeoflastinput
+ anythingprintedthisturn
+ wanttoprintand ; set to number of noun to replace with 'and'
+ executeprocessed ; set when gd commands have been acted on
+ terraintype treetype
+ gdgoroomsave
+ descriptionmode
+ startreversaltable ; in list5
+ currentuserroom ; for benefit of npcs
+ commandfinished
+ forceprinting
+ orderwaiting
+ cheatmode
+ treatasfind
+ DestToDescribeExitsIn
+;
+ normaldescriptionmode ; the mode selected by the user
+ wordsoutput
+ X Y
+ target
+ savepos
+ savehipos saveobject
+ fightingsomeone
+ saveroom cesaveroom
+ currentsceneryobject currentheight
+ printingobjects
+ severalexits
+ doobjectsave
+ picturetodraw
+ peoplechasingorc
+ initialscene
+ highwater
+ freespaceptr
+ lastuserroom
+ anglefromintended intendeddirection
+ gdroomsave
+ npcaactorsave
+ NoTreasureInRoom ; set when npc finds no treasure in current room
+; in order to speed things up.
+ lastunlinkedcommand commandstolink
+ synthdest
+ roomtoactivate
+ timefornpcactions
+ npclist9save0 npclist9save1 npclist9save2 npclist9save3 npclist9save4
+ npclist9save5 npclist9save6
+ destnoun1
+ initfifoactor
+ fatalerror
+ lightinroom
+ blockedbysm
+
+ WEAPON
+ WEAPONSTRENGTH
+ GENERALSAVE ADDSCORESAVE
+ OTPOS OTHIPOS
+ hitpoints
+ m1save actorsave
+ hermitnotalert hermitstunned
+ timeinlab
+ verbsave
+ activationsremaining
+ loopactor
+ xcoord ycoord ; position of picture
+ thisgame thispart parttochain
+ totalmoves
+ dead ; set to prevent restore
+ LoopBreaker
+;---
+TABLE
+ OBJECTSTART=1
+ CURRENTPOS=2 ; OBJECT CURRENT POSITION
+ HICURRENTPOS=3
+ terraintable=4
+; TRAMLINES=4 ; paths for mobiles
+ NPCINITIAL=5
+ list5=5 ; also used for floorpointers - from startfloorpointers on.
+ scratchlist=6
+ NPCCURRENT=6
+;; SPELLTIME=6
+ npcstack=6
+ vandaltable=6
+
+ OUTPUTBUFFER=7
+ SCORETABLE=7 ; from entry 16 onwards
+ list8=8
+ OBJECTTABLE=9 ; USED FOR EVERYTHING AND SIMILAR WORDS
+ list9=9
+ LINPUT=9
+
+;---

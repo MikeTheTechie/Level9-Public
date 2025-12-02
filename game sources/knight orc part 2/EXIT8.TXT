@@ -1,0 +1,173 @@
+; Knight Orc (2/3) exits:
+; Copyright (C) 1986 Level 9 Computing.
+;
+; This exit table MUST be only by used for 8 bit versions.
+;
+;
+; format is LDIR dir dest
+;
+;              1
+;           8     2
+;              !
+;         7  --+--   3
+;              !
+;           6     5
+;              4
+;
+; up=9
+; down=10
+; in=11
+; out=12
+; cross=13
+; climb=14
+; jump=15
+;
+; special notes for interface between static and synth rooms..
+;
+; There must be an in/out connection between the static
+; and the object number of the scenery object
+; to which it connects.
+;
+; e.g. If you have a location object "[480:^N castle]"
+;
+;
+; then an exit from room 15:
+;		 1001 12 180
+; will set up an in/out connection to the room where object no. 180
+; is situated. This allows the exit table to be changed easily.
+;
+;
+;Room number 1
+; room modifiers for forest in part1
+0000 1 12 ; 16
+0000 2 13 ; 17
+0000 3 1
+0000 4 244 ; 240
+0000 5 245 ; 241
+0000 6 243 ; 239
+0000 7 255
+1000 8 11 ; 15
+;Room number 2 - kitchen
+0001 7 3 ; west to landing
+1001 10 3 ; down to landing
+;Room number 3 - landing
+1001 7 4
+;Room number 4 - darkly-lit corridor
+1001 4 37 ; to cave maze
+;Room number 5 - headquarter's cave
+1001 3 4 ; to corridor
+;Room number 6 - guardroom
+1001 7 3 ; west to landing
+;Room number 7
+1000 0 0
+;Room number 8 - outside world (can never get there)
+1000 0 0 ; no exits to game!
+;Room number 9 - foyer
+1000 11 9 ; in through opening - can't get anywhere
+;Room number 10 - corridor
+0001 9 15 ; up to inaccessible room
+1001 7 9 ; west to foyer
+;Room number 11 - wide road
+0001 1 190 ; north to exit object
+1101 7 10 ; west to corridor
+;Room number 12 - west of turnstile
+1001 6 10 ; sw to corridor
+;Room number 13 - east of turnstile
+0001 5 11 ; se to wide road
+1001 7 12 ; west to west of turnstile
+;Room number 14 - 
+1001 0 0
+;Room number 15 - 
+1000 0 0
+;Room number 16 - 
+1001 0 0
+;Room number 17 - 
+1001 0 0
+;Room number 18 - 
+1000 0 0
+;Room number 19
+1000 0 0
+;Room number 20 - east of troll bridge
+1001 4 18
+;Room number 21 - troll's lair
+1101 4 182 ; south to bridge object
+;Room number 22 - office
+1001 4 31
+;Room number 23 - drawbridge
+1001 1 188
+;Room number 24 - courtyard
+1001 1 23
+;Room number 25 - steps
+1001 3 35
+;Room number 26 - heaven
+1001 4 189 ; south to gate object
+;Room number 27 - cupboard
+1101 7 26
+;Room number 28 - dungeon
+1001 4 25
+;Room number 29 - armoury
+1001 4 28
+;Room number 30 - corridor
+1001 7 35
+;Room number 31 - library
+1101 4 30
+;Room number 32 - shed
+1101 3 186
+;Room number 33 - barrow
+1101 1 36
+;Room number 34
+1001 0 0
+;Room number 35 - hall
+1101 1 24
+;Room number 36 - south graveyard
+1001 1 185
+;Room number 37 - junction
+1001 4 43
+;Room number 38 - junction
+0001 7 180
+0001 3 37
+1001 4 39
+;Room number 39 - maze
+0001 5 41
+1001 4 40
+;Room number 40 - maze
+1001 3 41
+;Room number 41 - maze
+1001 3 42
+;Room number 42 - dark room
+1000 0 0
+;Room number 43 - corridor
+1001 3 44
+;Room number 44 - corridor
+1001 3 45
+;Room number 45 - corridor
+1000 0 0
+;Room number 46 - dragon's room
+1001 1 45
+;Room number 47 - cupboard south of kitchen
+1001 1 2 ; north to kitchen
+;Room number 48 - dark room
+1000 1 3
+;Room number 49 - secret room in house
+1001 3 50
+;Room number 50 - north bedroom
+0001 4 51
+1001 10 51
+;Room number 51 - stairs
+1101 4 52
+;Room number 52 - south bedroom
+1001 10 51
+;Room number 53 - porch
+0001 7 183 ; west to house locn object
+0001 12 183 ; out to house locn object
+1001 1 54
+;Room number 54 - hall
+0001 9 51
+1001 3 51
+;Room number 55 - inside mouse hole
+1001 12 52 ; out to bedroom
+;Room number 56
+0000 0 0
+
+
+

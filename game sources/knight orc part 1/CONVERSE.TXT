@@ -1,0 +1,348 @@
+; Conversation module
+;
+; Copyright (c) 1986 M.J.Austin.
+;
+; Last change 17/5/87
+;
+;
+; known bugs:
+;  RAINBIRD, EXAMINE ... when not obedient - he refuses,
+;  but ASK RAINBIRD ABOUT ... and he does it!
+;
+var
+ lastnpcpresent
+
+begin
+.ASK
+ MESSAGE 2156 ; said
+ GOSUB @TALKTOSOMEONE
+ GOTO SAYNOUN1
+
+.shout
+ random x1
+ if x1>80 then shoutdone
+; find anyone who isn't here...
+ object=2 ; orc+1
+.shout0
+ gosub @checkifpresent
+ if result=false then shout1
+ add object,c1
+ if object<maxpeople then shout0
+.shoutdone
+ gosub @done
+ goto @realsayend
+
+.shout1
+ actor=object
+ gosub @setuproom
+ m1=3715 ; wait there and I'll come to get you!
+ gosub @getvarym1
+ gosub @actorshouts
+ actor=user
+ add peoplechasingorc,c6 ; people chase you now
+ goto @realsayend
+
+.SAY
+ MESSAGE 2156 ; said
+ PROCESSINGSAY=TRUE
+ GOSUB @TALKTOSOMEONE
+ GOSUB @GETNEXTWORD
+; specifically check for 'SAY TO ... '
+ SEARCHTYPE=PREPTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=0 THEN @SAYNOTNPC
+
+.SAYNOUN1 ; ask NPC about ...
+; just the same as 'SAY TO' NPC
+ GOSUB @GETNEXTWORD
+ PROCESSINGSAY=TRUE
+ SEARCHTYPE=NOUNTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE<minnpc THEN @SAYNOTNPC
+ IF VALUE>maxnpc THEN @SAYNOTNPC
+ ACTOR=VALUE ; talking to a character
+ gosub @getactorattributes
+ GOTO startorders
+
+.SAYNPC
+ GOSUB @GOBACK
+.startorders
+; all conversations with npc come here to start with
+ gosub @initfifo
+.SAYNPCLOOP
+; is target obedient to user?
+ object=actor
+ gosub @isobjectalive
+ if result=true then saynpcnotdead
+ gosub @describedead
+ goto sayend2
+
+.saynpcnotdead
+ gosub @getactorattributes
+ if cheatmode<>false then saynpcloop1
+ x1=masteroffset
+ add x1,actorattributes
+ x1=npccurrent(x1)
+ if x1<>user then @saynpcnotobedient
+
+.saynpcloop1
+ gosub sayparser
+ GOSUB @NPCCALLVERB
+ IF NOMOREINPUT=FALSE THEN SAYNPCLOOP
+; end of thing to say
+ if verb=ihello then sayend2 ;Kludge!!!
+ IF SAYRESPONSE=TRUE THEN SAYEND1 ; was a valid command given?
+; print a random action along the lines of 'the ferryman ignores you'
+ LASTWORDPRINTED=0 ; prevent use of IT
+ m1=3650 ; doesn't understand
+ gosub @groupsaym1
+ goto sayend2
+
+.SAYEND1
+ m1=3620 ; ok boss!
+ gosub @groupsaym1
+
+.sayend2
+ gosub @getnextword
+ gosub @linkonfifocommandqueue
+
+.realsayend
+ verb=isay ; to allow npcs to do something after
+; player has been talking.
+ actor=user
+ gosub @getactorattributes
+ GOSUB @ABSCANCELINPUT ; cancel input, then return (also
+; sets processingsay=false)
+ stack
+ goto @mainloopnpc
+;---
+.sayparser
+; call parser for saying
+ PROCESSINGSAY=TRUE
+ GOSUB @GETNEXTWORD
+; now try calling verb parser
+; first set up this word to be the verb if appropriate
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=nullvalue THEN sayparser2
+ GOSUB @goback
+
+.sayparser2
+ erroroccurred=false
+ GOSUB @PARSEINPUT
+
+
+ cif allowcheat
+  if cheatmode<>2 then sayparsenodebug
+  prs "[pi="
+  print verb
+  message space
+  print prep
+  message space
+  print noun1
+  message space
+  print noun2
+  prs "]"
+.sayparsenodebug
+ cend
+
+
+ if erroroccurred=false then sayparserend
+; got an error - disregard verb
+ verb=0 ; make everything ignore it.
+
+.sayparserend
+ if nomoreinput=true then sayparserret
+ if verb=0 then sayparser2
+.sayparserret
+ return
+;---
+.TALKTOSOMEONE
+; set up ACTOR if there is anyone around to hear
+ GOSUB ANYBODYHERE
+ IF OBJECT=NULLOBJECT THEN TTSORET
+ ACTOR=OBJECT
+.TTSORET
+ RETURN
+;---
+.ANYBODYHERE
+; return OBJECT=a random NPC who is present
+ OBJECT=minnpc
+ lastnpcpresent=nullobject
+.ABH1
+ GOSUB @CHECKIFPRESENT
+ IF RESULT=FALSE THEN ABH2
+; npc is present. Randomly accept it.
+ lastnpcpresent=object
+ random x1
+ if x1>160 then abhret ; accept it
+
+.abh2
+ ADD OBJECT,C1
+ IF OBJECT<maxnpcPLUSONE THEN ABH1
+ if lastnpcpresent=nullobject then abh3
+ object=lastnpcpresent
+ return
+
+.abh3
+ OBJECT=NULLOBJECT
+.ABHRET
+ RETURN
+;---
+.saynpcnotobedient
+; npc that the remark was directed at is not obedient.
+ gosub sayparser ; see if we can make any
+; pertient comments on what the order was supposed to be
+ processed=false
+ gosub @specialconversation
+ if processed=true then snnoprint
+
+ m1=3640 ; won't give anything away
+ if verb=igive then snprint
+ if verb<64 then snnonotquestion
+ m1=3630 ; won't answer that
+ if verb<70 then snprint
+.snnonotquestion
+ m1=3610 ; get lost!
+.snprint
+ gosub @groupsaym1
+.snnoprint
+ goto @sayend2
+;---
+.SAYNOTNPC
+; not talking to NPC, but still need to check for sayings
+ PROCESSINGSAY=TRUE
+ GOSUB @GOBACK
+; is there anyone around to hear ?
+ GOSUB TALKTOSOMEONE
+
+.SAYNOTNPCLOOP
+ PROCESSINGSAY=TRUE
+ GOSUB @GETNEXTWORD
+ IF NOMOREINPUT=FALSE THEN SAYNOTNPCLOOP
+ GOTO @CANCELINPUT
+;---
+;
+; Now miscellaneous code to do with talking to characters
+; this is essentially an Eliza-type program without 
+; the psychoanalysis bit
+;
+;---
+.NPCCALLVERB
+; is target of conversation listening ?
+ processed=false
+ gosub @specialconversation
+ if processed=true then ncvret
+
+;;.NCV2
+ IF VERB=0 THEN @SAYRET
+; push command onto command queue
+; for ACTOR (the person we are talking to)
+; drop through to PUSHORDER
+
+.PUSHORDER
+; GIVEN VERB,PREP,NOUN2 AND OBJECTTABLE,
+; Push them onto command queue!
+; if noun1>maxpeople then ponotfollowpeople
+; if verb=ifollow then pofollow ; follow people is handled specially
+;.ponotfollowpeople
+; Work down from top so static objects, containers come first
+ GOSUB @CONVERTVERB
+ GOSUB @SELECTOBJECTPOS
+ sayresponse=true
+ havecalledverb=false ; indication of whether
+; anything has been pushed for this verb yet
+;
+; prevent "junk" verbs from being stored
+; e.g. "tell rainbird to tell me about me"
+; used to go wrong because "to" was pushed.
+ if verb=itell then posingleret
+ if verb=istop then @stop ; pushorder1 ; needed because istop=57
+ if verb<55 then pushorder1
+ if verb<87 then posingleret
+.pushorder1
+ IF EVERYTHING<>0 THEN pocollective
+ if verb=iwaitforperson then posinglenoun1 ; noun1,2 already set up
+ if verb=iwaitforperiod then posinglenoun1 ; ditto
+ if verb=iwaituntiltime then posinglenoun1 ; ditto
+ if verb=isetupgo then posetupgo ; ditto
+ if verb=isetupfind then posetupfind
+; handle individual objects
+ CURRENTOBJECT=otbaseplusone ; pointer into OBJECTTABLE
+.POSINGLE1
+ OBJECT=OBJECTTABLE(CURRENTOBJECT)
+ IF OBJECT=0 THEN POSINGLEEND
+ noun1=object
+; if verb<>ifollow then ponotfollow
+; if noun1>maxpeople then ponotfollowpeople
+ if verb=ifollow then pofollow ; follow people is handled specially
+; if verb=isetupfind then posetupfind
+
+;.ponotfollowpeople
+; verb=npcfindobject
+
+;;.ponotfollow
+ gosub @npcpushfifo
+ havecalledverb=true
+ ADD CURRENTOBJECT,C1
+ GOTO POSINGLE1
+
+.POSINGLEEND
+ IF HAVECALLEDVERB=TRUE THEN POSINGLERET
+ NOUN1=NULLOBJECT
+.posinglenoun1
+ GOSUB @npcpushfifo
+
+.POSINGLERET
+.ncvret
+ RETURN
+;---
+.posetupfind
+ verb=igdfind
+ goto posinglenoun1
+;---
+.posetupgo
+ verb=igdgo
+ goto posinglenoun1
+;---
+.pofollow
+ gosub @follow
+;?? if executeprocessed=false then pofollowret ; nothing happened
+ sayresponse=true ; understood ok
+
+;;.pofollowret
+;;.gsret
+ return
+.pocollective
+ noun1=everything
+ goto @setupgdaccess ; push multiple order onto stack
+;---
+.groupsaym1
+; print  one of 3 messages at m1 for people who can talk
+; or m1+5 for npcs who can't talk.
+ object=actor
+ gosub @isobjectalive
+ if result=false then @describedead ; "the ... is dead"
+ x1=actor
+ gosub @desctheobjx1
+ if actor<maxtalkingnpcplusone then @varymessage
+ x1=5
+ add m1,x1
+ goto @varymessage
+;---
+.NPCNOTUNDERSTOOD
+; ACTOR, and NPC is trying to do something which would
+; produce an error message if USER tried it.
+; unless actor is under user's control
+ erroroccurred=true
+ executeprocessed=false ; nothing happened
+ return
+
+; if processingsay=false then npcnuret ; do nothing unless
+;; the command which caused the confusion was a direct order
+;; from the user.
+; X1=actor
+; GOSUB @DESCTHEOBJX1
+; M1=2062 ; looks puzzled
+; GOTO @VARYMESSAGEDOT
+;---

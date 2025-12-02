@@ -1,0 +1,4283 @@
+; Knight Orc special code handlers
+;
+; ASPECIAL.TXT
+;
+; M.J.Austin 11/4/87
+;
+;
+; Known bugs:
+;
+; compiler: DATA statements must be followed by comments
+;           else line numbers for errors go wrong
+
+BEGIN
+; now print any messages to be printed after certain movements
+.AFTERMOVE
+ if room<>28 then amnotdungeon
+ object=jailor
+ gosub @checkifpresent
+ if result=false then amnotdungeon
+ x1=currentpos(ballandchain)
+ if x1=actor then amnotdungeon ; already attached to new entrant
+ object=jailor
+ gosub @isobjectalive
+ if result=false then amnotdungeon
+ m1=2775 ; jailor greets you
+ gosub @reportm1
+
+.amnotdungeon
+ if room<>33 then amnotbarrow
+ if actor<>user then amnotbarrow
+ m1=2826 ; you notice that door won't open from inside.
+ gosub @reportm1
+
+.amnotbarrow
+ if actor<>troll then amnottroll
+ if trollplacid=true then amnottroll
+ if room<>21 then amnottroll
+ if currentuserroom<>238 then amnotlockedout
+ message 2906 ; troll shuts door behind her.
+ goto amnottroll
+
+.amnotlockedout
+; troll has just arrived in her lair
+; is player present?
+ object=user
+ gosub @checkifpresent
+ if result=false then amnottroll
+ message 2723 ; troll is horrified to find you inside
+; does user have her wallet?
+ object=wallet
+ pos=user
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=true then amtrollwallet
+ m1=2724 ; kills you
+ gosub @reportm1
+ target=user
+ goto @targetdeath
+
+.amtrollwallet
+ message 2725 ; if you give my wallet back, a valuable treasure is yours!
+ actor=user ; because user must reply to question
+ gosub @yesorno
+ actor=troll ; reset it for rest of troll's turn
+ if result=true then amthrowout
+ message 2728 ; troll surrenders
+ trollplacid=true
+ return
+
+.amthrowout
+; troll throws user out, and off the bridge
+ message 2727 ; out!
+ x1=238 ; onto the bridge
+ currentpos(user)=x1
+ hicurrentpos(user)=c0
+; and takes back wallet to her lair...
+ x1=21
+ currentpos(wallet)=x1
+ hicurrentpos(wallet)=c0
+ return
+
+.amnottroll
+;; if room<>45 then amnotneardragon
+;; if dragonawake=true then amnotneardragon
+;; m1=2902 ; the noise of the dragon is very close by now
+;; gosub @reportm1
+;;.amnotneardragon
+; report what fireball/eye see?
+; describe card appearing...
+ if room<>55 then eyenotburrow
+ x1=currentpos(glitteringcard)
+ if x1<>0 then eyenotburrow
+ pos=55
+ hipos=0
+ object=glitteringcard
+ gosub @createobjectpos ; move card to takeable pos in hole
+ add holeblocked,c1
+ gosub eyesees ; eye/fireball can now see...
+ m1=2850 ; the eye reveals the card
+ gosub @reportm1dot
+; magically move card into a takeable position within the
+; hole object.....
+ x1=mousehole
+ currentpos(glitteringcard)=x1
+ x1=ipin
+ hicurrentpos(glitteringcard)=x1
+ goto eyeafterdesc
+
+.eyenotburrow
+ gosub eyesees ; eye/fireball can now see...
+.eyeafterdesc
+ forceprinting=false
+
+;;.amnoteye
+ if room<>9 then amnotfoyer
+ if cashieralarmed=true then amnotfoyer
+ cashieralarmed=true
+ m1=2672 ; cashier runs!
+ gosub @reportm1dot
+
+.amnotfoyer
+ if actor=dragon then amdragon
+ if room<43 then amdragon
+ if room>46 then amdragon
+.wakedragon
+ if dragonawake<>0 then amdragon ; already awake
+ dragonawake=1
+
+.amdragon
+ if room<>11 then amnotfirealarm
+ if actor=dragon then @soundalarm
+
+.amnotfirealarm
+.amret
+ RETURN
+;---
+.eyesees
+ m1=2916 ; the fireball can now see
+ if actor=fireball then reportdistant
+ if actor<>eye then amret
+ m1=2917 ; the eye can now see
+.reportdistant
+ if room=currentuserroom then amret
+ message m1 ; the (eye) can now see
+ forceprinting=true
+ goto @absdescroom
+;---
+.SPECIALMOVES
+;
+; Given ROOM, HIDEST, DEST, ACTOR is to move that way
+; and exit has been validated as possible (and hence described)
+; in SPECIALEXITS. The purpose of code here is when something
+; happens on moving. If exit is to be blocked, code here should
+; print the appropriate message and set RESULT=FALSE.
+;
+
+
+ cif includeoops
+  if actor<>user then smnotuser
+  GOSUB @SAVEOOPS
+ cend
+
+
+.smnotuser
+;
+ if actor=valkyrie then @smok
+ RESULT=FALSE ; blocked unless get to end
+;
+; any hostile NPCs to block motion?
+; IF DEST=LASTROOM THEN SMNBLOCKED ; going back, so NPC not bothered
+; OBJECT=minnpc
+;.SMCNPC1
+; GOSUB @CHECKIFPRESENT
+; IF RESULT=FALSE THEN SMCNPC2
+;
+; creatures which can be scared by objects
+
+;.SMCNPCNBAT
+; GOSUB @GETNPCATTRIBUTES
+; X1=NPCCURRENT(X4)
+; IF X1<>ACTOR THEN SMCNPC2 ; not hostile to ACTOR
+;; X1=SPELLTIME(IBMSPELLTARGET)
+;; IF X1=OBJECT THEN SMCNPC2 ; NPC is afraid
+;
+; GOSUB @DESCTHEOBJECT
+; MESSAGE 2071 ; won't let you
+; RESULT=FALSE ; ensure movement in blocked
+; RETURN
+;
+;.SMCNPC2
+; ADD OBJECT,C1
+; IF OBJECT<maxnpc THEN SMCNPC1
+
+;;.SMNBLOCKED
+; one-way exit ?
+; X4=FROM
+; X5=DEST
+; X6=DIR
+; FROM=X5
+; TO=X4
+; GOSUB @CALCDIRECTION
+; GOSUB @CHECKEXIT
+; IF DEST<>0 THEN SMNCHUTE
+; MESSAGE 2149 ; slide down a chute
+;
+;.SMNCHUTE
+;; restore
+; FROM=X4
+; DEST=X5
+; DIR=X6
+;
+ if dest<>2 then @smnotkitchen
+ if from<>3 then @smnotkitchen
+; moving up stairs into kitchen - Brainz will knock
+; out anyone not wearing a helmet
+; is brainz in position?
+ x1=currentpos(brainz)
+ if x1<>2 then smnotkitchen
+; does brainz have the club?
+ x1=currentpos(club)
+ if x1<>brainz then smnotkitchen
+ gosub @describeleaving
+ x1=hicurrentpos(helmet)
+ if x1<>worn then smnohelmet
+ x1=currentpos(helmet)
+ if x1=actor then smsurvive
+.smnohelmet
+ if actor=user then smbrainzuser
+ object=actor
+ gosub @desctheobject
+ m1=2703 ; is stunned
+ gosub @reportm1
+; and describe brainz doing his stuff..
+ if currentuserroom=3 then smbelowkitchen
+ if currentuserroom<>2 then @smprevent ; user not in kitchen to see
+.smbelowkitchen
+ forceprinting=true
+ object=actor
+ lastwordprinted=0
+ gosub @desctheobject
+ forceprinting=false
+ if currentuserroom=3 then smnotinkitchen
+ message 2715 ; emerges, and brainz hits them.
+ goto @smprevent
+
+.smnotinkitchen
+ message 2703 ; climb stairs, and get hit by brainz (seen from below)
+ goto @smprevent
+
+.smbrainzuser
+ message dot ; only executed for user
+ m1=2701 ; brainz stuns you
+; gosub @errorm1
+ fatalerror=true ; stop user trying again
+ goto @smpreventm1
+
+.smsurvive
+ if actor<>user then smsurvive1
+ gosub @terminateand
+ m1=2702 ; brainz hits you, helmet protects you
+ goto @smokm1
+
+.smsurvive1
+ object=actor
+ gosub @desctheobject
+ m1=2704 ; is hit by club, but protected by helmet
+ goto @reportm1dot
+
+.smnotkitchen
+ if dest<>238 then smnotbridge
+ if trollplacid=true then smcrossbridge
+ if trollpaid=true then smcrossbridge
+ if actor=troll then smnotbridge ; troll can cross!
+ object=troll
+ gosub @isobjectalive
+ if result=false then @smcrossbridge
+ gosub @checkifpresent
+ if result=true then trollstopsyou
+ x1=currentpos(troll)
+ if x1=21 then createtroll
+ if x1<237 then smcrossbridge ; troll not around!
+ if x1>239 then smcrossbridge
+.createtroll
+ gosub @createobject ; make troll appear
+ m1=2716 ; troll appears and demands a treasure!
+ gosub @reportm1
+ goto trollstop1
+
+.trollstopsyou
+ x1=troll
+ verb=ipast
+ object=nullobject
+ gosub @x1wontletactorverb
+.trollstop1
+; display picture when you run to bridge....
+ if descriptionmode<>inone then trollstop2
+ descriptionmode=iverbose
+.trollstop2
+ gosub @describeroom
+ goto @smprevent
+
+.smcrossbridge
+ trollpaid=false
+.smnotbridge
+ if dest<>21 then smnotlair
+ if actor=troll then smlairtroll
+ if boltsopen=3 then @smok
+ m1=2772 ; the door is locked
+ gosub @nointerestm1
+ goto @smprevent
+
+.smlairtroll
+ if trollplacid=true then smnotlair
+ m1=2722 ; troll goes through, bolts all behind her
+ gosub @reportm1
+ trollalarmed=false
+ boltsopen=0
+
+.smnotlair
+ if dest<>35 then smnothall
+ if from<>24 then smnothall
+ if dooropen=false then smdoorclosed
+
+.smnothall
+ if dest<>31 then smnotlibrary
+ if from<>30 then smnotlibrary
+ if dooropen<>false then smnotlibrary
+.smdoorclosed
+ m1=2116 ; the door is securely closed
+ goto @smpreventm1
+
+.smnotlibrary
+ if dest<>22 then smnotpastmonk
+ object=monk
+ gosub @checkifpresent
+ if result=true then @monkzapsyou
+
+.smnotpastmonk
+ if from<>33 then smnotbarrow
+ if dooropen=true then smnotbarrow
+ m1=2825 ; the door won't open.
+ goto @smpreventm1
+
+.smnotbarrow
+ if dest=238 then smnotriver ; bridge
+ x1=dest
+ x2=minsynthroomplusone
+ sub x1,x2
+ if x1>32000 then smnotriver ; >>mike 29/7/87 - prevent negative index.
+ x1=terraintable(x1)
+ if x1<115 then smnotriver
+ if x1>116 then smnotriver
+
+;;.smriver
+; is actor flying?
+ gosub @isactorflying
+ if result=true then smflyacrossriver
+; is river frozen?
+ object=coldspell
+ pos=river
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=true then smwalkonfrozenriver
+ m1=2867 ; you can't walk on water
+ gosub @nointerestm1
+ goto @smprevent
+
+.smwalkonfrozenriver
+ verb=iwalk
+ gosub @actorverb
+ m1=2755 ; across the frozen river
+ gosub @reportm1dot
+ goto smnotriver
+
+.smflyacrossriver
+ verb=ifly
+ gosub @actorverb
+ m1=2754 ; across the river
+ gosub @reportm1dot
+
+.smnotriver
+ if dragonplacid=true then @smnotblockedbydragon
+ if actor<>dragon then smnotdragon
+ object=mouse
+ gosub @checkifpresent
+ if result=false then smdragon0
+ gosub @isobjectalive
+ if result=false then smdragon0 ; treat as if mouse not here.
+; is mouse visible?
+ x1=hicurrentpos(mouse)
+ if x1=0 then smdragon0 ; yes - so it gets killed
+
+; mouse bites dragon
+ gosub @stop ; dragon stops obeying racetrack
+ dragonplacid=true
+ message 2879 ; the dragon is bitten by the mouse
+ goto @smprevent
+
+.smdragon0
+ if dragonawake=2 then smnotdragon ; dragon is retreating.
+
+ object=maxpeople ; work downwards so user can see what happens
+.smdragon1
+ if object=dragon then smdragon2 ; don't kill dragon!
+ gosub @checkifpresent
+ if result=false then smdragon2
+
+.dragoncrushes
+ m1=2878 ; the dragon crushes...
+ gosub @reportm1
+ gosub @desctheobject2
+ m1=dot
+ gosub @reportm1
+ print c1 ;****
+ message comma ;****
+ target=object
+ dragonawake=2 ; dragon starts to back-off
+ gosub @targetdeath
+ print c1 ;****
+ message dot ;*****
+ goto @smprevent
+
+.smdragon2
+ sub object,c1
+ if object<maxpeople then smdragon1
+
+.smnotdragon
+; is dragon around to stop actor?
+ if actor=dragon then smnotblockedbydragon
+ x1=currentpos(dragon)
+ if x1<>room then @smnotblockedbydragon
+ if dir=4 then smdragonblock1
+ if dir<>3 then @smnotblockedbydragon
+
+.smdragonblock1
+ m1=2698 ; the dragon sees
+ gosub @reportm1
+ object=actor
+ gosub @desctheobject
+ m1=2699 ; and reaches out a scaly limb....
+ gosub @reportm1
+ object=actor
+ goto dragoncrushes
+
+.smnotblockedbydragon
+ if actor<>dragon then smnotdragonmoving
+ if dest<>240 then smnotdragonmoving ; only when leaving mountain
+; is dragon protected by scale?
+ x1=currentpos(scale)
+ if x1=actor then smnotdragonmoving
+ m1=2880 ; the dragon won't leave without its scale
+ goto @smpreventm1
+
+.smnotdragonmoving
+ if from<>150 then smnotdrawbridge
+ if dest<>23 then smnotdrawbridge
+ x1=currentpos(closeddrawbridge) ; closed drawbridge here?
+ if x1<>from then smpouroil
+ m1=2898 ; you bump into the drawbridge
+ goto @nointerestm1
+
+.smpouroil
+ m1=2765 ; the human's on the battlements pour oil!
+ gosub @reportm1
+ verb=iam
+ gosub @actorverb ; "person is(are)..."
+ object=shieldspell
+ pos=actor
+ hipos=nonspecific
+ gosub @checkobjectpos
+ m1=2766 ; protected by shield spell
+ if result=true then @smokm1
+; result=false, which prevents move
+ m1=2764 ; driven back
+ goto @reportm1
+
+.smnotdrawbridge
+ if dest<>24 then smnotacidpool
+ gosub @isactorflying
+ if result=true then flyacrossacid
+.acidburnsactor
+ m1=2768 ; the acid burns
+ gosub @reportm1
+ object=actor
+ gosub @desctheobject2
+ m1=dot
+ goto @smpreventm1
+
+.flyacrossacid
+; verb=ifly
+; gosub @actorverb
+; m1=  ; across the acid
+; gosub @reportm1
+
+.smnotacidpool
+ if dest<>55 then smnotmousehole
+ if actor=eye then smnotmousehole
+ if actor=fireball then smnotmousehole
+ if actor=mouse then smnotmousehole
+ object=actor
+ verb=iam
+ gosub @objectverb
+ m1=2996 ; too big to fit through hole
+ gosub @reportm1dot
+ goto @smprevent
+
+.smnotmousehole
+ if dest<>10 then smnotcorridor
+ if from<>11 then smnotcorridor
+; trying to go through fire door in end-game
+ if firealarm=true then @smok
+ m1=2659 ; fire door is locked
+ goto @smpreventm1
+
+.smnotcorridor
+ if dest<>12 then smnotturnstile
+ if from<>13 then smnotturnstile
+.smturnstile
+; trying to go through turnstile in either direction
+ m1=2664 ; turnstile won't turn
+ if actor=user then @smpreventm1 ;** this is not too efficient
+ if actor=troll then@ smpreventm1
+ if actor=rainbird then @smpreventm1
+ if actor=mouse then @smpreventm1
+ goto smnotturnstile2
+
+.smnotturnstile
+ if dest<>13 then smnotturnstile2
+ if from=12 then smturnstile
+.smnotturnstile2
+ if dest<>9 then smnotredline
+ object=actor
+ if from=9 then @objectwontfit ; trying to enter kiosk
+; walking over red line is hazardous for our heros!
+ if fieldoff=true then smcrossredline ; deactivated
+ if actor>14 then smnotredline ; all robots except valk are deactivated
+;; .redline
+ verb=idrop
+ gosub @actorverb
+ m1=2927 ; dead instantly
+ gosub @reportm1dot
+ gosub @actordeath
+ goto smprevent
+
+.smcrossredline
+ crossedredline=true
+ 
+.smnotredline
+ if from<>10 then smnothatch
+ if dest<>15 then smnothatch ; going through inspection hatch?
+ m1=2665 ; rainbird goes through hatch - can't chew wires
+ if actor=rainbird then smpreventm1
+ object=actor
+ gosub @desctheobject
+ m1=2661 ; inspection hatch is too high
+ goto smpreventm1
+
+.smnothatch
+ if dest<>33 then smnotenterbarrow
+; moving into barrow
+ if actor<>user then smnotenterbarrow
+ message 2689 ; the door may not be opened again - do you want to enter?
+ gosub @yesorno
+ if result=true then @smok
+ message 2690 ; you squeeze out again
+ goto smprevent
+
+.smnotenterbarrow
+; is player about to move into room containing dragon?
+ if dragonplacid=true then smnottodragon
+ x1=currentpos(dragon)
+ if x1<>dest then smnottodragon
+ if actor<>user then smnottodragon
+ message 2693 ; do you really want to be killed by the dragon?
+ gosub @yesorno
+ if result=false then smprevent
+
+.smnottodragon
+ if actor<>mouse then smnotmouse
+; is mouse trapped in sack?
+ x1=hicurrentpos(mouse)
+ if x1<>0 then smprevent
+
+.smnotmouse
+ if dest<>27 then smnotlab
+ if dooropen=true then smnotlab
+ m1=2671 ; door won't open
+ goto smpreventm1
+
+.smnotlab
+.smok
+ RESULT=TRUE
+ RETURN
+;
+.smpreventm1
+ gosub @nointerestm1 ;; reportm1
+.smprevent
+ print c1 ;****
+ message colon ;*****
+ result=false
+ commandfinished=true
+ fatalerror=true
+ return
+
+.smokm1
+ gosub @reportm1
+ goto @smok
+;---
+.specialtakes
+; is POS to be allowed to gain OBJECT?
+; return result=false to prevent action
+ result=false ; just do a return in any of the handlers to prevent
+
+ if actor=valkyrie then @stok
+; is the object carried by an NPC ?
+ x1=hicurrentpos(object)
+ IF x1=0 THEN stncarried
+ x1=currentpos(object)
+ if x1=actor then stncarried ; e.g. wearing stuff
+ if x1>maxpeople then stncarried
+ if actor<>user then stnpcsteals ; people can steal stuff from you ok!
+ goto stncarried ; allow you to steal stuff..
+
+;.stmaybestop
+; objectsave=object
+; object=x1
+; gosub isobjectalert
+; target=object
+; object=objectsave
+; if result=false then stncarried
+;; x1 = current position - i.e. the npc who is carrying the device
+; x1=target
+; verb=itake
+; if actor<>user then X1WontLetActorVerb
+; GOSUB @DESCTHEOBJX1
+; m1=2071 ; won't let you
+; gosub @varymessagedot
+; gosub makeenemies
+; result=false ; prevent it happening
+; return
+
+.x1WontLetActorVerb
+; print "person X1 wont let ACTOR do VERB OBJECT"
+;
+; (if OBJECT=NULLOBJECT), it is ignored
+ gosub @desctheobjx1
+ m1=2074 ; won't let
+ gosub @reportm1
+ objectsave=object
+ object=actor
+ gosub @desctheobject2
+ m1=verboffset
+ add m1,verb
+ gosub @reportm1 ; musn't use printverb! (it gives the wrong ending)
+ object=objectsave
+ if object=nullobject then x1wlacnoobject
+ gosub @desctheobject ; the object!
+
+.x1wlacnoobject
+ m1=dot
+ gosub @reportm1
+ goto @returnfalse ; prevent it happening
+
+.stnpcsteals
+; an actor who is not the user is trying to take something
+; x1 is the person carrying it
+ if actor<>troll then stncarried
+ if trollplacid=true then stncarried
+; when troll steals a treasure, it must
+; continue to steal everything from that person
+ if object<mintreasure then stncarried
+ if object>maxtreasure then stncarried
+ verb=istealallfrom
+ noun1=x1 ; who was carrying the treasure
+ gosub @singlepushfifo
+; and reset values for remainder of take
+ verb=itake
+ noun1=object
+
+.stncarried
+ if object<>apple then stnotapple
+ if verb<>itake then stnotapple
+ verb=icatch ; will report "the ... catches the apple."
+ applefalling=false
+
+.stnotapple
+ if object<>mouse then stnotmouse
+ if mouseplacid=true then stnotmouse
+ gosub @isobjectalive
+ if result=false then stnotmouse
+ m1=2845 ; mouse is too fast to catch
+ x1=hicurrentpos(mouse)
+ if x1=0 then stpreventm1
+ m1=2847 ; the mouse can't escape! you catch it easily!
+ gosub @reportm1
+
+.stnotmouse
+ if object<>statue then stnotstatue
+ gosub @isobjectflying
+ m1=2855 ; statue too heavy
+ if result=false then stpreventm1
+ m1=2856 ; still too heavy
+ goto stpreventm1
+
+.stnotstatue
+; if object<>cape then stnotcape
+;; magic cape can't be stolen, even from an unconcious person
+; x1=hicurrentpos(cape)
+; if x1<>worn then stnotcape
+; x1=currentpos(cape)
+; if x1=actor then stnotcape
+; m1=2901 ; cape welds itself to the wearer
+; gosub @reportm1dot
+;
+;.stnotcape
+ m1=2920 ; has no hands
+ if pos=eye then posm1
+ if pos<>fireball then stnotfireball
+.posm1
+ object=pos
+ gosub @desctheobject
+ result=false ; prevent take
+ goto @reportm1
+
+.stnotfireball
+ m1=2921 ; cannot carry anything
+ if pos=rainbird then posm1
+ if pos=mouse then posm1
+
+ if object<>rope then stnotrope
+.pullrope
+; taking rope away from big fish.
+ if ropestate=2 then stnotrope ; out of water
+ add ropestate,c1
+ m1=2732 ; you reel in some rope
+ if ropestate=1 then stpreventm1
+ m1=2735 ; reel it in completely, fish just misses it.
+ gosub @reportm1 ; allow take to complete.
+ object=fingerring
+ gosub @createobject
+
+.stnotrope
+.stok
+ result=true ; allow actor to take object
+ return
+;---
+.stpreventm1
+ result=false ; prevent taking
+ goto @reportm1
+;--------
+.specialaftermoveobj
+; OBJECT has just been moved from HIFROM, FROM to POS, HIPOS
+; do anything you want, then return
+; no values to return
+;
+; was the object carried by an NPC ?
+; i.e. did the actor steal it?
+ executeprocessed=true
+ IF hifrom=0 THEN samoncarried
+ if actor=from then samoncarried ; actor dropping it itself
+; this code assumes user=1
+ IF from>maxpeople THEN samoNCARRIED
+ if actor=user then samonoshout
+; actor will shout their glee at their new aquisition!
+ if object<mintreasure then samonoshout
+ if object>maxtreasure then samonoshout
+ noun1=object
+ verb=itakegoldtopub
+ gosub @singlepushfifo
+
+ if descriptionmode<>iverbose then samonoshout
+ m1=3880 ; I've stolen some treasure from
+ gosub @getvarym1
+ gosub @actorshoutsnoquote
+ forceprinting=true
+ object=from ; person it was stolen from
+ if object<>user then sastealnotuser
+ m1=2625 ; "a vile orc" group
+ gosub @varymessage
+ goto sasteal1
+
+.sastealnotuser
+ lastwordprinted=0 ; mustn't print article!
+ gosub @desctheobject
+
+.sasteal1
+ message dotquote ; all of the above is reported
+; everywehere, so using MESSAGE is OK
+ forceprinting=false
+
+.samonoshout
+; from = current position - i.e. the npc who is carrying the device
+ if from=user then samoncarried
+ object=from
+ gosub @isobjectalert
+ if result=false then samoncarried
+ if processed=true then samoncarried
+
+ GOSUB @DESCTHEOBJECT
+ m1=3875 ; gets annoyed at theft
+ gosub @varymessage
+
+.samoafterreport
+ target=from
+ goto @makeenemies ; make actor, person it stole from enemies
+ 
+.samoncarried
+ if actor=user then samonottreasure
+ if object<mintreasure then samonottreasure
+ if object>maxtreasure then samonottreasure
+ if pos<>actor then samonottreasure
+ if descriptionmode<>iverbose then samogottnoshout
+ m1=3885         ; "I've just found a valuable
+ gosub @getvarym1
+ gosub @actorshoutsnoquote
+ forceprinting=true
+ x1=object
+ gosub @descobjx1  ; treasure
+ message dotquote ; ."
+ forceprinting=false
+
+.samogottnoshout
+;
+
+.samonottreasure
+ if pos<>gravestonehole then samonothole
+; half-coin is only thing which can fit in gravestone hole.
+; gravestone opens...
+ tombtime=2
+ m1=2758 ; gravestone to the south opens
+ if currentuserroom=221 then samoseegravestone ; in north graveyard
+ m1=2860 ; gravestone nearby opens
+ if currentuserroom=36 then samoseegravestone ; in south graveyard
+; see nothing...
+ return
+
+.samoseegravestone
+ message m1 ; gravestone opens.
+
+.samonothole
+ if pos<>fire then samonotfire
+ if object<>fingerring then @light ; burn/damage many things
+ m1=2863 ; ring lands in fire, learn "EXORCISE"
+ gosub @reportm1
+ object=exorcisespell
+ gosub @learnspell
+
+.samonotfire
+ if pos<>mousehole then samonotmousehole
+ add holeblocked,c1
+
+.samonotmousehole
+ if pos<>crevice then samonotcrevice
+ add creviceblocked,c1
+
+.samonotcrevice
+ if pos<>crack then samonotcrack
+ add crackblocked,c1
+
+.samonotcrack
+ if hifrom=0 then samonotfromcontainer
+ if from<>mousehole then samonotfrommousehole
+ if holeblocked=0 then samonotfrommousehole ; nothing there
+ sub holeblocked,c1
+
+.samonotfrommousehole
+ if from<>crevice then samonotfromcrevice
+ if creviceblocked=0 then samonotfromcrevice ; nothing there
+ sub creviceblocked,c1
+
+.samonotfromcrevice
+ if from<>crack then samonotfromcrack
+ if crackblocked=0 then samonotfromcrack ; nothing there
+ sub crackblocked,c1
+
+.samonotfromcrack
+ if object<>mouse then samonotmouse
+ if actor<>troll then samonotmouse
+ if pos<>inspectionhatch then samonotmouse
+; troll puts mouse in inspection hatch
+ m1=2666 ; mouse chews the wires!
+ gosub @reportm1dot
+ fieldoff=true
+
+.samonotmouse
+.samonotfromcontainer
+ if object<>visor then samonotvisor
+ if pos<>user then samonotwearvisor
+ if hipos<>worn then samonotwearvisor
+ if thispart=3 then samonotvisor
+ message 3050 ; wear visor - go to magic mode
+ parttochain=3
+ goto @chainparttochain
+
+.samonotwearvisor
+ if from<>user then samonotvisor
+ if hifrom<>worn then samonotvisor
+ if thispart=2 then samonotvisor
+ message 3051 ; raise visor - go to hitech mode
+ parttochain=2
+ goto @chainparttochain
+
+.samonotvisor
+ return
+;---
+.specialaftergive
+; NOUN1 has just been given to the npc NOUN2
+ if noun1<mintreasure then sagntreasure
+ if noun1>maxtreasure then sagntreasure
+ if trollplacid=true then sagntreasure
+ if pos=user then sagntreasure
+ if noun2<>troll then givenottroll
+ m1=2717 ; troll says thankyou
+ gosub @reportm1
+ trollpaid=true
+ return
+
+.givenottroll
+ x1=noun2
+ actorsave=actor
+ actor=noun2
+ m1=3872 ; examines it closely, thanks you, etc.
+ gosub @varyactordoes
+ actor=actorsave
+;;; verbsave=verb * should this be in code?
+ if noun2<16 then sagntreasure ; part of game scenery
+ gosub @linkonfifocommandqueue
+;; here, actorsave=actor
+ actor=noun2
+ gosub @getactorattributes
+ verb=itakegoldtopub
+ gosub @singlepushfifo
+ verb=verbsave
+ goto @resetactor
+
+.sagntreasure
+ return
+;---
+.TIMEDEPENDENTCODE
+; called for every minute that goes past
+ actor=user ; just in cast there is any doubt!
+ if room=26 then tdlab
+ if room<>27 then tdnotlab
+.tdlab
+ add timeinlab,c1
+ if timeinlab<8 then tdnotlab
+ timeinlab=0
+ m1=2583 ; thrown out of gate
+ gosub @reportm1
+ object=actor
+ gosub @stop
+ gosub @resethitpoints
+ x1=252
+ currentpos(actor)=x1
+ hicurrentpos(actor)=c0
+ gosub @setuproom
+ goto @describeroom
+
+.tdnotlab
+; at random intervals, liberate an npc from lab...
+ random x1
+ if x1>30 then tdnotnpclab
+ object=1
+ pos=26
+ hipos=0
+.tdlab1
+ add object,c1
+ if object>maxpeople then tdnotnpclab
+ if object=valkyrie then tdlab1
+ gosub @checkobjectpos
+ if result=false then tdlab1
+ goto tdlab2
+
+.tdlab2
+; reset hit points for person
+ gosub @resethitpoints
+; nothing else to do - so try re-starting initial racetrack
+ x6=object ; restart initial racetrack (number=actor number)
+ gosub @newracetrackforobject
+; and move the awakened person outside
+ x1=252
+ currentpos(object)=x1
+ hicurrentpos(object)=c0
+ if currentuserroom<>26 then tdnotinlab ; no report
+ message 2586 ; lab people pick up 
+ forceprinting=true
+ gosub @desctheobject
+ message 2587 ; and take
+ gosub @desctheobject2
+ message 2588 ; out.
+ forceprinting=false
+ goto tdafterthrowout
+
+.tdnotinlab
+ x1=currentpos(gate)
+ if currentuserroom<>x1 then tdnotnpclab ; not outside gate either
+ message 2632 ; the gate opens, the angels throw out...
+ gosub @desctheobject
+ message 2633 ; and close the gate.
+
+.tdafterthrowout
+ actor=object
+ m1=3890 ; I'm back in the game!
+ goto @varyactorshouts
+
+.tdnotnpclab
+; if currentuserroom<>26 then tdnotnpclab ; no report
+; message 2586 ; lab people pick up 
+; forceprinting=true
+; gosub @desctheobject
+; message 2587 ; and take
+; gosub @desctheobject2
+; message 2588 ; out.
+; forceprinting=false
+;
+;.tdnotnpclab
+ if antsleft>10 then tdnotants
+; maybe resurrect ants?
+ add antsleft,c1
+ if antsleft<4 then tdnotants ; not time to resurrect yet
+ antsleft=100
+ if room<>159 then tdants1
+ message 2742 ; about 100 ants come out
+
+.tdants1
+ object=ants
+ room=159
+ gosub @createobject
+ gosub @setuproom
+
+.tdnotants
+ if room<>131 then tdnotmarsh
+ pos=mud
+ hipos=nonspecific
+ object=coldspell
+ gosub @checkobjectpos
+ if result=true then tdnotmarsh ; daemon locked in
+ random x1
+ if x1<128 then tdnotmarsh
+ m1=2744 ; daemon reaches for you
+ if timeinroom<5 then tddaemon1
+ m1=2745 ; daemon kills you
+ gosub @reportm1
+ goto @actordeath
+
+.tddaemon1
+ gosub @reportm1 ; report it, then continue.
+
+.tdnotmarsh
+ if plaquerubs=0 then tdnotplaque
+ plaquerubs=0
+ if room<>131 then tdnotplaque ; not around to see plaque tarnish
+ m1=2751 ; plaque tarnishes again, becoming unreadable
+ gosub @reportm1
+
+.tdnotplaque
+ if room<>31 then tdnotmonk
+ object=monk
+ gosub @checkifpresent
+ if result=false then tdnotmonk
+ m1=2650 ; monk messages
+ add m1,timeinroom
+ if timeinroom<2 then @reportm1
+.monkzapsyou
+ m1=2652 ; monk zaps you (unfortunately this is called from elsewhere)
+ gosub @reportm1
+ actor=user
+ goto @actordeath
+
+.tdnotmonk
+ if applefalling=false then tdnotapple
+ m1=2824 ; the apple hits the ground with a squiwsh
+ gosub @reportm1
+ object=apple
+ gosub @destroyobject
+ applefalling=false
+
+.tdnotapple
+ if tombtime=0 then tdnotclosestone
+ sub tombtime,c1
+ if tombtime>0 then tdnotclosestone
+ message 2861 ; the gravestone closes
+
+.tdnotclosestone
+; are we hanging over the river, but not flying?
+ if room=238 then tdnotriver
+ if room<minsynthroom then tdnotriver ; prevents negative index below.
+ x1=room
+ x2=minsynthroomplusone
+ sub x1,x2
+ x1=terraintable(x1)
+ if x1<115 then tdnotriver
+ if x1>116 then tdnotriver
+ gosub @isactorflying
+ if result=true then tdnotriver
+ message 2922 ; you drop into the water and drown
+ goto @actordeath
+
+.tdnotriver
+ if ropestate<>1 then tdnotrope
+ if currentuserroom<>238 then tdnotrope
+ message 2734 ; fish catches rope, pulls it back down
+ ropestate=0
+
+.tdnotrope
+ if currentuserroom<>24 then tdnotacid
+; flying over acid?
+ actor=user
+ gosub @isactorflying
+ if result=true then tdnotacid
+ m1=2769 ; you fall into the acid
+ gosub @reportm1dot
+ goto @actordeath
+
+.tdnotacid
+ if firealarm=false then tdnotalarm
+ random x1
+ if x1>80 then tdnotalarm
+ m1=2667 ; alarm continues
+ gosub @varymessagedot
+
+.tdnotalarm
+; drop thrugh to listentodragon...
+
+;---
+.listentodragon
+ result=false ; not heard
+ if dragonplacid=true then tdnotdragon
+ gosub @calcdragondistance
+ if x1>3 then tdnotdragon ; too far away
+ m1=2908 ; dragon distance messages-1
+ add m1,x1
+ message m1
+ result=true ; have heard dragon
+
+.tdnotdragon
+ return
+;---
+.resethitpoints
+; reset hit points for OBJECT
+ gosub @getnpcattributes
+ x1=hitpointoffset
+ add x1,x4
+ x2=npcinitial(x1)
+ npccurrent(x1)=x2
+ return
+;---
+.SPELLWEARSOFF
+; SPELL is to be cancelled, so notify ACTOR if can see it happen
+ OBJECT=SPELL
+ GOSUB @CHECKIFPRESENT
+ IF RESULT=FALSE THEN WEARSOFFNODESC
+
+;;.SWODESC
+; SPELL wears off
+;
+; Insert special messages for spells wearing off here.
+; Do GOTO WEARSOFFNODESC if printed
+;
+ MESSAGE 3529 ; the existing
+ X1=NOUNOFFSET
+ ADD X1,OBJECT
+ MESSAGE X1 ; spell
+ MESSAGE 3516 ; wears off
+
+.WEARSOFFNODESC
+ currentpos(object)=c0 ; DO NOT USE destroyobject
+; finally, any special cases for objects returning to ground ?
+;
+.otret
+ RETURN
+;---
+.OBJECTTRIGGER
+; Trigger on OBJECT
+; set PROCESSED=TRUE if the command is completed
+; by this routine (usually by the printing of an
+; error message, or some other general response)
+ processed=false
+ if object=nullobject then @otok
+ gosub @checkifpresent
+ if result=false then otret ; not here, so do nothing
+ if actor=valkyrie then otret
+; (this is to avoid problems with run, go, getme etc.)
+ OTPOS=CURRENTPOS(OBJECT) ; remain set throughout this routine
+ OTHIPOS=HICURRENTPOS(OBJECT)
+ processed=true ; prevent processing unless cleared at end of routine
+ if otpos=nullobject then otret ; don't check
+ if object<minsceneryobj then otnotsceneryobj
+ if object>maxsceneryobj then otnotsceneryobj
+ if room<minsynthroom then @otok ; can examine scenery objects
+; from anywhere in fixed locations (this is much simpler
+; than figuring out which one you are in or whatever
+ if otpos=room then @otok
+ if verb=isetupfind then otnotsceneryobj
+ m1=2015 ; too far away
+ goto @reportm1 ; print it, then prevent further action
+
+.otnotsceneryobj
+ if object<>map then otnotmap
+ if grokstate>0 then otnotmap
+ if actor=grok then otnotmap
+; is grok here?
+ x1=currentpos(grok)
+ if x1<>room then otnotmap
+ m1=2709 ; get your hands off my map!
+ gosub @reportm1
+ goto @otprevent
+
+.otnotmap
+ if object<>amber then otnotamber
+ pos=anthill
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=false then otnotamber
+ object=ants
+ gosub @checkifpresent
+; gosub @isobjectalive
+; if result=false then otnotamber
+ object=amber
+ if result=false then otnotamber
+ if antsleft<10 then otnotamber
+ x1=ants
+ if actor<>user then @x1wontletactorverb
+ m1=2739 ; ants stop you
+ gosub @nointerestm1
+ goto @otprevent
+
+.otnotamber
+ if object<>frog then otnotfrog
+ gosub @isobjectalive
+ if result=false then otnotfrog
+ m1=2748 ; frog croaks loudly
+ if verb=iexamine then @disturbfrog
+ if verb=ieat then @disturbfrog
+
+.otnotfrog
+ if object<>ballandchain then otnotball
+ x1=hicurrentpos(ballandchain)
+ if x1<>fastenedto then otnotball
+ if verb=icast then otnotball
+ m1=2778 ; ball is fastened firmly
+ gosub @reportm1
+ goto @otprevent
+
+.otnotball
+ if room<>31 then otnotmonk
+ if actor=fireball then otnotmonk
+ if verb=icast then otnotmonk ; can use magic against monk
+ x1=currentpos(monk)
+ if x1=room then @monkzapsyou
+
+.otnotmonk
+ if object<>mouse then otnotmouse
+ mousescared=true
+
+.otnotmouse
+ if actor<>user then otnotperch ; for when talking to rainbird
+ if object<>rainbird then otnotrainbird
+; is rainbird on perch?
+ if verb=ihello then otnotrainbird
+ x1=currentpos(rainbird)
+ if x1<>perch then otnotrainbird
+ x1=hicurrentpos(rainbird)
+ if x1=0 then otnotrainbird
+ if verb<>irecruit then otperch
+
+.otnotrainbird
+ if object<>perch then otnotperch
+.otperch
+ gosub @desctheobject
+ gosub @isactorflying
+ m1=2889 ; is too high
+ if result=false then otperch1
+ m1=2890 ; is still too high
+.otperch1
+ gosub @reportm1
+ goto otprevent
+
+.otnotperch
+ if object<>ithing then otnotthing
+ m1=2852 ; can't take it
+ gosub @reportm1
+ goto otprevent
+
+.otnotthing
+
+ if verb=iexamine then otexamine
+
+ if object<>dagger then otndagger
+; is it in scabbard?
+ pos=scabbard
+ hipos=in
+ gosub @checkobjectpos
+ if result=false then otndagger ; no problemt at all
+; is scabbard held by someone other than actor
+ x1=hicurrentpos(scabbard)
+ if x1=0 then otcanttakedagger
+ x1=currentpos(scabbard)
+ if x1<>actor then ottakedagger
+
+.otcanttakedagger
+ m1=2730 ; can't take dagger
+ goto otpreventm1
+
+.ottakedagger
+.otndagger
+;
+.OTEXAMINE ; usually no action
+.OTOK
+ processed=FALSE ; PROCESSING MAY CONTINUE
+ RETURN
+
+.otpreventm1
+ gosub @reportm1
+.otprevent
+ processed=true
+ return
+;---
+.FUNNIES
+; Value of word entered is in 'OBJECT' (relative to NOUNOFFSET)
+; Also have 'VERB' and may have 'PREP' if one has been entered
+; before this noun on the input line
+; Return processed=TRUE if a special message is printed in this routine
+; which should prevent the printing of other messages
+ if object=nullobject then funniesok
+ processed=true ; prevent action unless drop through to end
+ if verb<>iexamine then fnotexamine
+ gosub isroomvandalised
+ if result=false then fnotvandalised
+ message 2213 ; vandals seem to have been at work here
+ if noun1<255 then fnotvandalised ; normal object, so also
+; print normal description
+ return
+
+.fnotvandalised
+ if object<240 then examnotscenery ;** is this constant ok (p1 as well)
+; surely this prevents the "scenery" code working? ***
+ message 2112 ; it looks exactly as you would expect
+ return
+
+.fnotexamine
+ if verb=iattack then vandal
+
+.notvandal
+.examnotscenery
+.funniesok
+ processed=FALSE
+ RETURN
+;---
+.vandal
+; vandalising scenery in ROOM
+; has it already been vandalised?
+ if noun1=iroom then vandal0
+ if noun1<minsceneryobj then notvandal
+
+.vandal0
+ gosub isroomvandalised
+ if result=true then alreadyvandalised
+ if x2=vandalmax then cantaddentry ; off end of table
+; add entry
+.vandalnodesc
+; used by e.g. fireball
+ m1=2210 ; the room is badly damaged
+ gosub @reportm1
+ gosub isroomvandalised ; calculate pointer for fireball etc.
+ if x2=vandalmax then vandalret
+ vandaltable(x2)=room
+ add vandalptr,c1
+.vandalret
+ return
+;
+.cantaddentry
+; can't add any more vandalised locations, so be rude to player..
+ message 2212 ; get knotted!
+ return
+;
+.alreadyvandalised
+ message 2211 ; don't bother.. you made a good job last time
+ return
+;---
+.isroomvandalised
+; has room already been vandalised?
+; return result=true or false accordingly
+ result=false
+ x2=vandalbase ; pointer into table
+.vandal1
+ x1=vandaltable(x2)
+ if x2=vandalptr then irvret ; return false
+ if x1=room then @returntrue
+ add x2,c1
+ if x2<vandalmax then vandal1
+.irvret
+ return
+;---
+.objectism1
+ m1save=m1
+ verb=iam
+ gosub @objectverb
+ m1=m1save
+ goto @reportm1dot
+;---
+.SPECIALEXAMINE
+; print any special examine messages which follow
+; the basic message but are before any contents are printed
+; set processed=true if the contents should not be printed
+ if object<mintreasure then senottreasure
+ if object>maxtreasure then senottreasure
+ message 2601 ; it is very valuable!
+;
+.senottreasure
+; is object flying?
+ gosub @isobjectflying
+ if result=false then senotflying
+ m1=2897 ; is flying
+ gosub objectism1
+
+.senotflying
+; is object glowing?
+ x1=hicurrentpos(glowspell)
+ if x1=0 then senotglowing
+ x1=currentpos(glowspell)
+ if x1<>object then senotglowing
+ m1=2684
+ gosub objectism1
+
+.senotglowing
+ x1=hicurrentpos(charismaspell)
+ if x1=0 then senotcharisma
+ x1=currentpos(charismaspell)
+ if x1<>object then senotcharisma
+ m1=2685
+ gosub objectism1
+
+.senotcharisma
+ x1=hicurrentpos(shieldspell)
+ if x1=0 then senotshielded
+ x1=currentpos(shieldspell)
+ if x1<>object then senotshielded
+ m1=2686
+ gosub objectism1
+
+.senotshielded
+ if noun1<>user then senotuser
+ if initialscene=2 then senotuser ; can't examine yourself at start
+; (because it screws up the border)
+ cif IncludePictures
+  picturetodraw=orcpicture
+  gosub @showpicture
+ cend
+;
+.senotuser
+ if noun1=bolt then setrolldoor
+ if noun1<>trolldoor then senottrolldoor
+.setrolldoor
+ if boltsopen=false then senottrolldoor
+ print boltsopen
+ m1=2718 ; of the bolts are open now
+ goto @reportm1
+;
+.senottrolldoor
+ if object<>ants then senotants
+ gosub @describeants
+ object=ants
+ return
+
+.senotants
+ if object<>vampire then senotvampire
+ if vampireawake=true then senotvampire
+ message 2859 ; vampire is asleep
+ return
+
+.senotvampire
+ if object<>tomb then senottomb
+ if tombtime=0 then senottomb
+ message 2759 ; see inside tomb, learn detect spell
+ object=detectspell
+ goto @learnspell
+
+.senottomb
+ if object<>dragon then senotdragon
+ cif includePictures
+  picturetodraw=dragonpicture
+  gosub @showpicture
+ cend
+
+ x1=currentpos(scale)
+ if x1=dragon then senotdragon
+ message 2881 ; see missing scale on dragon
+
+.senotdragon
+ if object<>statue then senotstatue
+ gosub @isobjectflying
+ if result=false then senotstatue
+ m1=2858 ; underneath statue is "shield"
+ gosub @reportm1
+ object=shieldspell
+ gosub @learnspell
+
+.senotstatue
+ if object<>writing then senotwriting
+ object=coldspell
+ goto @learnspell
+
+.senotwriting
+ if object<>inscription then senotinscription
+ object=glowspell
+ gosub @learnspell
+
+.senotinscription
+ if object<>rope then senotrope
+ if ropestate=2 then senotrope ; out of water
+ m1=2741 ; hanging over the side of the bridge
+ gosub @reportm1dot
+
+.senotrope
+ if object<>largemarrow then senotmarrow
+ object=curespell
+ goto @learnspell
+
+.senotmarrow
+ if object<>mousehole then senothole
+ x1=currentpos(glitteringcard)
+ if x1<>55 then senothole
+ m1=2851 ; you think you can see something inside the hole
+ goto @reportm1
+
+.senothole
+ if object<>note then senotnote
+ object=growspell
+ gosub @learnspell
+
+.senotnote
+ if object<>driftwood then senotwood
+ object=flyspell
+ gosub @learnspell
+
+.senotwood
+ if object<>pebble then senotpebble
+ object=jumpspell
+ gosub @learnspell
+
+.senotpebble
+ if object<>grate then senotgrate
+ x1=currentpos(fire)
+ if x1=grate then senotgrate
+ object=eyespell
+ gosub @learnspell
+ m1=2695 ; the grate is embossed with "EYE"
+ gosub @reportm1
+
+.senotgrate
+ if object<>sheddoor then senotsheddoor
+ if doorshut=true then senotsheddoor
+ processed=true ; prevent seeing the note
+
+.senotsheddoor
+ if object<>apple then senotapple
+ object=empathyspell
+ goto @learnspell
+
+.senotapple
+ if object<>dagger then senotdagger ; must be out if dagger if get here.
+ object=teleportspell
+ goto @learnspell
+
+.senotdagger
+ if object<>panel then senotpanel
+ object=lightningspell
+ goto @learnspell
+
+.senotpanel
+ if object<>amber then senotamber
+ object=wizardspell
+ goto @learnspell
+
+.senotamber
+ RETURN
+;---
+.SPECIALPREEXAMINE
+; before printing examine message / contents, check if
+; anything should prevent this. return TRUE if details should
+; NOT be printed
+ RESULT=FALSE ; proceed normally
+ if object>maxnpc then spenotnpc
+; is npc dead?
+ gosub @isobjectalive
+; gosub @getnpcattributes ; returns x4 as npccurrent(x4) for object
+; x1=hitpointoffset
+; add x1,x4
+; x2=npccurrent(x1)
+; if x2>0 then spenotnpc
+ if result=true then spenotnpc
+;.describedead
+; x1=object
+; gosub @desctheobjx1
+; m1=3506 ; is dead
+; gosub @reportm1dot
+ gosub @describedead
+;
+.spenotnpc
+ if object<>mysteriousbook then spenotbook
+; book teaches you an unknown spell at random
+; - but only one! afterwards it stays shut
+ if taughtspell=true then spebookshut
+ if actor<>user then spenotbook
+ message 2688 ; are you sure?
+ gosub @yesorno
+ if result=false then @returntrue ; prevent examine
+
+ object=minspell
+.spespell1
+ pos=1
+ hipos=0
+ gosub @checkobjectpos
+ if result=true then spelearnspell
+ add object,c1
+ if object=maxspell then spenormalbook
+ goto spespell1
+
+.spelearnspell
+ taughtspell=true
+ m1=2792 ; the book teaches you "
+ gosub @reportm1
+ gosub @desctheobject
+ m1=2793 ; "spell
+ gosub @reportm1
+ gosub @learnspell
+ goto @returntrue ; prevent examine
+
+.spenormalbook
+.spebookshut
+ object=mysteriousbook
+
+;.spebookshut
+; m1=2794 ; book won't open
+; gosub @reportm1
+; goto @returntrue ; prevent examine
+
+.spenotbook
+ if object<>writing then spenotwriting
+; faint writing which may only be seen in the dark
+ gosub @checkiflight
+ object=writing
+ if result=false then speok
+ m1=2900 ; writing is too faint
+; result=true here - will prevent examine
+ goto @reportm1
+
+.spenotwriting
+ if object<minspell then spenotspell
+ result=true ; prevent examine
+ if object<maxspellplusone then @silly
+
+.spenotspell
+ if object<>driftwood then spenotwood
+ if woodnotshimmering=true then spenotwood
+ m1=2756 ; wood is shimmering too much
+ gosub @reportm1
+ goto @returntrue ; prevent examine
+
+.spenotwood
+.speok
+ result=false ; ok to examine
+ RETURN
+;---
+;;.CANTSEETHAT
+;; M1=2104 ; can't see that
+;; GOTO @errorm1
+;---
+.mighthurtyourself
+ m1=2401 ; you might hurt yourself
+ goto @errorm1dot
+;----
+.GENERALBLOW
+; given TARGET,ACTOR (WHO IS ATTACKING)
+; do an ordinary (non-magical) blow
+;
+ IF ACTOR=TARGET THEN mighthurtyourself
+
+;;.absgeneralblow
+ object=target
+ gosub @isobjectalive
+ if result=true then gbalive
+ if target>maxpeople then @silly
+ m1=3509 ; what harm could a dead body do you?
+ goto @errorm1dot
+
+.gbalive
+; special case handlers for special blows....
+ if target<>ants then gbnotants
+.gbants
+ verb=147 ; outputs "KILL" rather than "fight"
+ gosub @actorverb
+ m1=2740 ; about 100 ants
+ gosub @reportm1
+ x1=100
+ sub antsleft,x1
+.describeants
+ if antsleft>0 then reportantsleft
+ gosub @destroyobject
+ m1=2743 ; no ants left!
+ goto @reportm1
+
+.reportantsleft
+ object=user
+ gosub @checkifpresent
+ if result=false then reportantsret
+ message 2736 ; there are
+ print antsleft
+ message 2737 ; ants left now
+
+.reportantsret
+ return
+;
+.gbnotants
+ if target<>rainbird then gbnotrainbird
+.gbrainbird
+ gosub @describeactionactor
+ m1=2884 ; Rainbird's head falls off+he grows a new one.
+ goto @reportm1
+
+.gbnotrainbird
+; is target shielded?
+ object=shieldspell
+ pos=target
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=false then gbnotshielded
+ gosub @describeactionactor
+ m1=2895 ; the blow bounces off an invisible shield
+ goto @reportm1dot
+
+.gbnotshielded
+ if actor=fireball then gdfireball1
+ if target<>fireball then gdnotfireball
+; attacking fireball - so actor gets hurt
+ target=actor
+
+.gdfireball1
+ gosub @describeactionactor
+
+.gdfireballexplodes
+ m1=2918 ; fireball explodes on contact!
+ gosub @reportm1
+
+ noun2=target ; preserve target
+ target=fireball
+ gosub @stoptarget ; kill it, stop any gd commands
+ target=noun2 ; restore target
+
+ object=fireball
+ gosub @destroyobject
+
+ m1=2997 ; ropes are fireproof
+ if target=ropes then @reportm1dot
+
+ if target<>scrolls then fireballnotscrolls
+ object=monk
+ gosub @checkifpresent
+ if result=false then fireballnotscrolls
+ m1=2653 ; scrolls burn, monk does a bunk
+ gosub @reportm1
+ gosub @destroyobject ; remove monk
+ object=scrolls
+ goto @destroyobject ; remove scrolls
+
+.fireballnotscrolls
+ blowstrength=20
+ goto dodamage
+;---
+.gdnotfireball
+ if target=eye then gdeyeexplodes
+ if actor<>eye then gbnoteye
+.gdeyeexplodes
+ m1=2919 ; eye disintegrates
+ gosub @reportm1
+ object=eye
+ goto @destroyobject
+
+.gbnoteye
+; first calculate blow strength
+ X1=ATTACKOFFSET
+ ADD X1,ACTORATTRIBUTES
+ BLOWSTRENGTH=NPCINITIAL(X1)
+ IF WEAPONSTRENGTH<BLOWSTRENGTH THEN GB1
+ BLOWSTRENGTH=WEAPONSTRENGTH
+.GB1
+ GOSUB @RANDOMIZEBLOWSTRENGTH
+; DO A GENERALBLOW
+; now do the blow
+; with strength BLOWSTRENGTH
+; see if target dodges
+ OBJECT=TARGET
+ GOSUB @GETNPCATTRIBUTES
+ X1=DODGEOFFSET
+ ADD X1,X4
+ x6=npcinitial(x1)
+ random x1
+ IF X1>X6 THEN GBNDODGE
+
+.describedodge
+; you bet, so print "you attack the klingon"
+ verb=40 ; attack
+ gosub @describeattackverb
+ m1=3517 ; but
+ gosub @reportm1
+ object=target
+ lastwordprinted=object ; force printing of article
+ verb=idodge
+ gosub @objectverb
+ m1=dot
+ goto @reportm1
+
+.GBNDODGE
+ GOSUB @CHECKARMOUR
+; returns X1=object number of armour worn (0 if none)
+; and x2=additional dodge (out of 255)
+ random x3
+ if x3<x2 then describedodge
+
+ GOSUB @DESCRIBEATTACK ; first part of report
+ m1=dot
+ gosub @reportm1
+
+;;.gbnnodescription
+; IF X1=0 THEN GBH
+;; damage/destroy shield etc.
+; M1=3511 ; blow strikes its
+; IF TARGET<>USER THEN GBSHIELD
+; M1=3510 ; blow strikes your
+;.GBSHIELD
+; gosub @reportm1
+; GOSUB @DESCOBJX1 ; describe armour etc.
+;.gbnodesc
+; IF X1<>SHIELD THEN GBARMOUR
+; SUB SHIELDSTRENGTH,BLOWSTRENGTH
+; IF SHIELDSTRENGTH=0 THEN GBSHATTER
+; IF SHIELDSTRENGTH>NEGATIVE THEN GBSHATTER
+; X2=SHIELDSTRENGTH
+;.GBEND
+; MESSAGE 3525 ; (which has
+; PRINT X2 ; strength of armour remaining
+; MESSAGE 3526 ; hit points left).
+;.GBRET
+; RETURN
+;
+;.GBSHATTER
+; CURRENTPOS(X1)=C0
+; M1=3514 ; shattering it.
+; goto @reportm1
+;
+;;.GBH
+; target not wearing armour or whatever,
+.DODAMAGE
+ if target=ants then @gbants
+ if target=rainbird then @gbrainbird
+ if target=iroom then @vandalnodesc
+ if target>maxnpc then @dodamret
+ OBJECT=TARGET
+ GOSUB @GETNPCATTRIBUTES
+ X1=HITPOINTOFFSET ; find hit points
+ ADD X1,X4
+ hitpoints=NPCCURRENT(X1)
+ if target<>user then gbhnocheat
+ if cheatmode<>false then ddnotdead
+
+.gbhnocheat
+ SUB hitpoints,BLOWSTRENGTH
+ if hitpoints<negative then ddnotdead
+ hitpoints=0
+.ddnotdead
+ npccurrent(x1)=hitpoints
+ 
+; describe hit points remaining on target
+ OBJECT=TARGET
+ verb=82 ; you are/it is
+ x6=x1 ; preserve position in npcxxx()
+ gosub @objectverb
+ if hitpoints=0 then dddead
+ x1=npcinitial(x6) ; initial hit points
+ x2=10
+ gosub @x1divx2
+; x1=number of points for each health report division
+ x2=x1
+ x1=hitpoints
+ gosub @x1divx2
+ if x1>0 then printhealth
+.dddead
+ x1=0 ; dead!
+.printhealth
+ m1=3560 ; health report
+ add m1,x1
+ gosub @reportm1dot
+ if x1<>0 then @makeenemies
+ goto @targetdeath
+;---
+.justkilltarget
+; enemies don't hate it any more...
+ x4=enemyoffset
+.targetdeath1
+ lastwordprinted=0
+ x1=npccurrent(x4)
+ if x1<>target then targetdeath2
+ npccurrent(x4)=c0
+.targetdeath2
+ x1=16 ; npcentrysize
+ add x4,x1 ; npc entry size
+ if x4<npctablesize then targetdeath1
+
+ if target<>valkyrie then deathnotvalkyrie
+ m1=2691 ; valkyrie vanishes
+ gosub @reportm1
+ object=target
+ gosub @destroyobject
+ room=26
+ gosub @createobject ; make valk appear
+ goto @setuproom
+
+.deathnotvalkyrie
+; set target to have 0 hit points
+ OBJECT=TARGET
+ GOSUB @GETNPCATTRIBUTES
+ X1=HITPOINTOFFSET ; find hit points
+ ADD X1,X4
+ npccurrent(x1)=c0
+;
+ HIPOS=CARRIED ; only drop carried things, not worn etc.
+ POS=TARGET
+ DEST=ROOM
+ HIDEST=0
+; want to drop things in marsh, if died on river...
+ x1=room
+ x2=minsynthroomplusone
+ sub x1,x2
+ if x1>32000 then deathnotriver ; >>mike 29/7/87 - prevent negative index
+ x1=terraintable(x1)
+ if x1<115 then deathnotriver
+ if x1>116 then deathnotriver
+ dest=142 ; marsh
+
+.deathnotriver
+ if room<>33 then deathnotbarrow
+ dest=36 ; drop things outside barrow
+
+.deathnotbarrow
+ if room<>24 then deathnotacid
+ dest=23 ; drop things in courtyard, not acid pool
+
+.deathnotacid
+ if room<43 then deathnotdragon
+ if room>46 then deathnotdragon
+ dest=37 ; drop things outside dragon's lair
+
+.deathnotdragon
+ GOSUB @POSSLOOP ; drop everything
+
+.stoptarget
+ actorsave=actor
+ actor=target
+ GOSUB @stop ; don't let it continue with commands !!!
+ actor=actorsave
+ return
+;---
+.actordeath
+ target=actor
+
+.targetdeath
+ object=target
+ if target=ants then @destroyobject
+ gosub @justkilltarget
+
+;;.startvalkyrie
+; valk is to come for TARGET
+ prep=0
+ noun2=nullobject
+ if target=user then gotolab
+ gosub @linkonfifocommandqueue
+ actorsave=actor
+
+; valkyrie is effectively invulnerable
+
+ actor=valkyrie
+ gosub getactorattributes
+; add another command to pick up the fresh body first
+; (alright, so really we ought to do this the other way round,
+; but I can't be bothered)
+ gosub @initfifo
+ verb=ifollow
+ noun1=target
+ gosub @npcpushfifo
+ verb=itake
+ gosub @npcpushfifo
+ gosub @linkonfifocommandqueue
+.resetactor
+ actor=actorsave
+ gosub getactorattributes
+ goto @initfifo
+;---
+;.gotolab
+; m1=2578 ; valk picks you up
+; gosub @reportm1dot
+; x1=26 ; and takes you to lab...
+; currentpos(user)=x1
+; hicurrentpos(user)=c0
+; gosub abscancelinput
+; goto describeroom
+;
+.gotolab
+ gosub @terminateand
+ m1=2578 ; valk picks you up
+ gosub @reportm1
+ x1=26 ; and takes you to lab...
+ currentpos(user)=x1
+ hicurrentpos(user)=c0
+ actorsave=user
+ gosub @resetactor
+ gosub @setuproom
+ currentuserroom=room
+ forceprinting=false
+ gosub @abscancelinput
+ goto @describeroom
+;---
+;---
+.DESCRIBEATTACK
+; first part of damage report for ACTOR vs TARGET
+;
+; now pick out the appropriate verb - from "scratch"
+; through to "pulverise"
+ x1=blowstrength ; (approx 1..40)
+ x2=4 ; ( want 10 divisions, 0..9)
+ gosub @x1divx2
+ if x1<10 then daok
+ x1=9 ; max blow
+.daok
+ verb=170 ; armed blows
+ if weapon<>nullobject then da1
+ verb=180 ; unarmed blows ( relative to verboffset)
+.da1
+ add verb,x1 ; appropriate attack verb
+.describeattackverb
+ noun1=target
+ prep=with
+ noun2=weapon
+ goto @describeactionactornodot
+;---
+.GETACTORATTRIBUTES
+; relise on npcentrysize=16
+ ACTORATTRIBUTES=ACTOR
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+;;.startvalkret
+ RETURN
+;---
+.GETNPCATTRIBUTES
+; return in X4 the pointer to the NPC 'OBJECT'
+; SEE ALSO GETACTORATTRIBUTES
+; must modify .notifynpc if you change this routine
+; relies on npcentrysize=16
+ if object>maxpeople then gnanotalive
+ X4=OBJECT
+ ADD X4,X4
+ ADD X4,X4
+ ADD X4,X4
+ ADD X4,X4
+.dodamret
+ RETURN
+.gnanotalive
+ x4=0
+ return
+;---
+.RANDOMIZEBLOWSTRENGTH
+; return BLOWSTRENGTH=1..BLOWSTRENGTH at random
+ if blowstrength=1 then rbsret
+ random x1
+ x2=blowstrength
+ gosub @x1modx2 ; x1=random number 0..19
+ IF X1=0 THEN RANDOMIZEBLOWSTRENGTH
+ BLOWSTRENGTH=X1
+.rbsret
+ RETURN
+;---
+.CHECKARMOUR
+; return X1=object number of armour worn by TARGET or X1=0 if none
+; and x2=resultant dodge (out of 255)
+
+;>>mike 4/8/87 - shield not in final game! x1=shield
+; x2=255
+; x3=currentpos(x1)
+; if x3=target then caret
+
+ x1=helmet
+ x2=160
+ x3=currentpos(x1)
+ if x3=target then caret
+
+;>>mike 4/8/87 - gloves not in final game! x1=gloves
+; x2=30
+; x3=currentpos(x1)
+; if x3=target then caret
+ 
+;;.CAFAIL
+ X1=0 ; no armour found
+ x2=0 ; no extra dodge conferred
+
+.CARET
+ RETURN
+;---
+.SILLY
+; prs "[actor who is being silly is: "
+; x1=actor
+; gosub @desctheobjx1
+; prs "]"
+; message cr
+ M1=2020
+ GOTO @VARYERRORM1DOT
+;---
+;;.ACTORCHOOSEBESTWEAPON
+;;; did ACTOR specify a weapon ?
+;;; if so, is it a sensible one ? (using a woodpile to
+;;; attack someone is not very helpful, apart from making
+;;; the game look pretty silly)
+;; IF NOUN2=NULLOBJECT THEN CHOOSEBESTWEAPON
+;; WEAPON=NOUN2
+;; IF NOUN2<minweapon THEN @silly
+;; IF NOUN2>maxweapon THEN @silly
+; drop through to CHOOSEBESTWEAPON
+;---
+.CHOOSEBESTWEAPON
+; select dhe best WEAPON that ACTOR is carrying
+ object=noun2
+ if noun2<>nullobject then assessweapon
+
+ OBJECT=minweapon ; (best weapon)
+ POS=ACTOR
+ HIPOS=NONSPECIFIC
+.CBW1
+ GOSUB @CHECKOBJECTPOS
+ IF RESULT=TRUE THEN ASSESSWEAPON
+ add OBJECT,C1
+ IF OBJECT<maxweaponplusone THEN CBW1
+ OBJECT=NULLOBJECT
+
+.ASSESSWEAPON
+ weapon=object
+ WEAPONSTRENGTH=4
+ IF WEAPON=club then cbwret
+ WEAPONSTRENGTH=8
+ IF WEAPON=kitchenknife THEN CBWRET
+ weaponstrength=14
+ if weapon=dagger then cbwret
+ WEAPONSTRENGTH=1
+ WEAPON=NULLOBJECT
+.CBWRET
+ RETURN
+;---
+.MAKEENEMIES
+; make TARGET and ACTOR be enemies
+ OBJECT=TARGET
+ GOSUB @GETNPCATTRIBUTES
+ if target=user then makeen2
+ x1=npccurrent(x4) ; does target already hate attacker?
+ if x1=actor then makeen2
+ object=actor
+ gosub @isobjectalert
+ if result=false then makeen2
+
+ if target=valkyrie then makeen2 ; likewise
+ actorsave=actor
+ actor=target
+ m1=3660 ; what's your game?
+ gosub @groupsaym1
+ actor=actorsave
+ object=target
+ gosub @getnpcattributes ;* shouldn't be necessary (remove when code ok
+
+.makeen2
+; and set attention flag for target:
+ x1=attentionoffset
+ add x1,x4
+ npccurrent(x1)=c1
+; and set up attacker and target to be enemies...
+ NPCCURRENT(X4)=ACTOR
+ NPCCURRENT(ACTORATTRIBUTES)=TARGET
+; and make TARGET's hatred of ACTOR increase
+; drop through to increasehatred
+;
+.increasehatred
+; increase hatred by npc with attributes at x4
+ x1=hatredoffset
+ add x1,x4
+ x2=npccurrent(x1)
+ if x2>200 then increasehatredret ; already hate actor lots
+ add x2,c10
+ npccurrent(x1)=x2
+.increasehatredret
+ return
+;---
+.doesactorknowspell
+; cast spell (at target)
+ IF NOUN1<MINSPELL THEN DONTKNOWSPELL ; can't cast that
+ IF NOUN1>MAXSPELL THEN DONTKNOWSPELL
+ result=false ; no, actor does not know this spell
+ if room>27 then daks1 ; not in heaven
+ if room>25 then @nothinghappens ; in heaven
+ if room>13 then daks1 ; not in hitech area
+ if room>8 then @nothinghappens ; in non-magic area
+
+.daks1
+ SPELL=NOUN1
+ TARGET=NOUN2
+ if cheatmode<>false then castknowspell
+;; does ACTOR know this spell ?
+; spell pseudo-objects start in room 1 - move anywhere elsewhere
+; when they have been used
+ pos=1
+ hipos=0
+ object=noun1
+ gosub @checkobjectpos
+ if result=false then castknowspell
+.DONTKNOWSPELL
+ MESSAGE 3519 ; you don't know that spell
+ result=false
+ RETURN
+
+.CASTKNOWSPELL
+ result=true
+ return
+;---
+.CAST
+; does ACTOR know about magik yet ?
+; valid target ? (if one given)
+ IF PREP=0 THEN CASTNOPREP
+ IF NOUN2<>NULLOBJECT THEN CASTNOPREP
+ MESSAGE 2137 ; at what ?
+.castret
+ RETURN
+
+.CASTNOPREP
+ gosub @doesactorknowspell
+ if result=false then castret
+ GOSUB @SPELLWEARSOFF
+; was there a target specified ?
+; if not - try parsing other possibilities
+; specifically, CAST ESP TO NORTH etc.
+; which currently returns CAST ESP TO 
+; DIR=0
+; IF NOUN2<>NULLOBJECT THEN CAST6 ; not this time
+; IF SPELL<>ESPSPELL THEN CAST6
+; GOSUB @GETNEXTWORD
+; SEARCHTYPE=VERBTYPE
+; GOSUB @CHECKTYPE
+; IF VALUE<>0 THEN CAST4A
+;.CAST4FAIL
+; GOSUB @GOBACK
+; GOTO @SPELLFAILS
+;.CAST4A
+;; have got VALUE as a verb. Is it a valid direction ?
+; IF VALUE>15 THEN CAST4FAIL ; maximum direction
+;; OK - fall through to spell code (eventually)
+; DIR=VALUE
+;
+;.CAST6
+;; is target carrying the black ball ? (which absorbs a spell)
+; GOSUB @DOESBLACKBALLABSORB
+; IF RESULT=TRUE THEN CASTRET
+;;
+;; score for casting spell
+; SCOREINDEX=SCUSESPELLBASE
+; ADD SCOREINDEX,SPELL
+; GOSUB @ADDSCORE
+;;
+;; and get older
+; X1=1
+; GOSUB @GETOLDER
+;;
+; now actually cast it
+;
+; first find M1=default message for this spell
+ M1=2862 ; base for spell effect messages - minspell
+ ADD M1,spell
+ message m1 ; default message (e.g. lightning bolt strikes!)
+;
+; special cases for targets...
+ itword=noun2
+
+ if noun2<>monk then castnotmonk
+ m1=2788 ; bounces off
+ goto @reportm1
+
+.castnotmonk
+;; is target wearing the magic cape?
+; object=cape
+; pos=noun2
+; hipos=nonspecific
+; gosub @checkobjectpos
+; if result=false then castnotwearingcape
+ if noun2<>troll then castnottroll
+ m1=2896 ; the spell vanishes mysteriously
+ goto @reportm1dot
+
+.castnottroll
+ if noun2<>nullobject then castnotnullobject
+ noun2=iroom ; for description of effects
+
+.castnotnullobject
+; what does spell do?
+ x1=minspell
+ x2=spell
+ sub x2,x1
+ if x2>20 then @nothinghappens
+ target=noun2 ; for combat spells
+ object=noun2
+ jump @spelljumptable x2
+ return ; just in case!
+
+.spelljumptable
+ data @coldbeam ;
+ data @castdeath ;
+ data @lightning,@knives ;
+ data @castfireball,@spellsword,@slow,@spellfly ;
+ data @spelljump,@spellteleport,@spellglow,@spelleye ;
+ data @locate,@detect,@empathy,@cure,@exorcise ;
+ data @spellgrowth,@charisma,@spellshield,@wizard ;
+
+.coldbeam
+ if noun2<>fire then castcoldnotfire
+ m1=2835 ; fire now extinguished
+ gosub @reportm1
+ object=fire
+ goto @destroyobject
+
+.castcoldnotfire
+ if noun2<>mud then castcoldnotmud
+ m1=2746 ; mud freezes over
+ gosub @reportm1dot
+ goto @attachspell
+
+.castcoldnotmud
+ if noun2<>river then castcoldnotriver
+ m1=2753 ; the water freezes
+ gosub @reportm1dot
+ goto @attachspell
+
+.castcoldnotriver
+ if noun2>maxpeople then @spellfails
+; drop through to magicblow...
+.lightning
+.magicblow
+ blowstrength=20
+ if noun2>maxpeople then @spellfails
+ target=noun2
+ goto @dodamage ; hurt user if appropriate
+;---
+.castdeath
+ if noun2=humans then @spellfails
+ if noun2=ants then @spellfails
+ if noun2>maxpeople then @spellfails
+; is it dead already?
+ gosub @isobjectalive
+ if result=false then @objectisdead ; prints "the object is dead"
+ verb=idrop
+ gosub @objectverb
+ m1=2927 ; dead instantly
+ gosub @reportm1dot
+ gosub @targetdeath
+ add peopledeathed,c1
+ if peopledeathed<5 then @castdeathret
+ message 2681 ; angel's kill you
+ goto @userdeath
+;--- 
+.knives
+ if noun2<>ropes then magicblow
+ m1=2762 ; drawbridge crashes down
+ gosub @reportm1
+ object=closeddrawbridge
+ gosub @destroyobject
+ object=ropes
+ gosub @destroyobject
+ object=opendrawbridge
+ gosub @createobject
+ object=humans
+ goto @createobject
+;---
+.castfireball
+; generate a fireball in the room
+ target=fireball
+ gosub @justkilltarget ; stop commands, remove enemies etc.
+ object=fireball
+ gosub @healobject
+ gosub @makeobjectobedient
+ goto @createobject
+
+; if noun2<>scrolls then fireballnotscrolls
+; object=monk
+; gosub @checkifpresent
+; if result=false then fireballnotscrolls
+; m1=2796 ; scrolls burn, monk does a bunk
+; gosub @reportm1
+; gosub @destroyobject ; remove monk
+; object=scrolls
+; gosub @destroyobject ; remove scrolls
+;
+;.fireballnotscrolls
+; goto @spellfails
+
+;---
+
+.spellsword
+; summons sword
+ object=sword
+ pos=actor
+ hipos=carried
+ goto @createobjectpos
+;---
+.slow
+ if noun2<>mouse then castslownotmouse
+ if mouseplacid=false then @spellfails
+ m1=2849 ; mouse squeaks out "DEATH"
+ gosub @reportm1
+ gosub @attachspell
+ object=deathspell
+ goto @learnspell
+
+.castslownotmouse
+ goto @spellfails
+;---
+.spellfly
+ if noun2=iroom then @spellfails
+; is target held by someone?
+ x1=hicurrentpos(noun2)
+ if x1=0 then flyobject
+ x1=currentpos(noun2)
+ if x1>maxpeople then flyobject
+ if x1=user then flyobject
+ object=noun2
+ gosub @desctheobject    ; "the object...
+ message 2981                ; starts to rise, but ...
+ x1=currentpos(noun2)
+ gosub @desctheobjx1     ; ... the owner
+ message 2982                ; grabs hold of...
+ lastwordprinted=object ; force using pronoun
+ gosub @desctheobject2	; it/them
+ message dot		; ."
+.castdeathret
+ return
+
+.flyobject
+; is object fixed?
+ if object=ballandchain then @spellfails
+ if object<maxnpcplusone then flyobject2 ; people can be flown, not taken
+ if object=statue then flyobject2
+ gosub @isobjectmoveable
+ if result=false then @spellfails
+
+.flyobject2
+; remove OBJECT from any containers it may be in, and make it fly!
+ gosub @getobjectposx2
+; now x2=room containing OBJECT
+ currentpos(object)=x2
+ hicurrentpos(object)=c0
+ m1=2980
+ gosub @noun2ism1 ; "the object is now flying"
+ goto @attachspell
+;---
+.spelljump
+ GOSUB @GETNEXTWORD
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE<>NULLVALUE THEN CAST4A
+.CAST4FAIL
+ GOSUB @GOBACK
+ GOTO @SPELLFAILS
+.CAST4A
+; have got VALUE as a verb. Is it a valid direction ?
+ IF VALUE>15 THEN CAST4FAIL ; maximum direction
+; OK - fall through to spell code (eventually)
+ DIR=VALUE
+
+;;.CAST6
+; if target is null, treat as actor.
+ if noun2<>iroom then castjumpnotnull
+ noun2=actor
+
+.castjumpnotnull
+; where are we on the grid?
+ x2=room
+ if room>minsynthroomminusone then jumpgotroomx2
+; find corresponding grid locn for this fixed room...
+; to do this, search through terraintable until a match is found
+ x1=0
+.castjump1
+ x2=terraintable(x1)
+ if x2=room then jumpgotroomx1
+ add x1,c1
+ if x1<144 then castjump1
+ goto @spellfails
+
+.jumpgotroomx1
+ x2=minsynthroomplusone
+ add x2,x1
+
+.jumpgotroomx2
+; x2=synth room where player is
+ room=x2
+ gosub @getxy
+ from=room
+ gosub @acesynthesised
+; now check if we should now be in a fixed room overlaying the grid
+ x1=dest
+ x2=minsynthroomplusone
+ sub x1,x2
+ x1=terraintable(x1)
+ if x1>minsynthroomminusone then jumpgotdest
+ dest=x1
+
+.jumpgotdest
+ lastverbvalid=false ; can't repeat this.
+ if noun2<>rope then jumpnotrope
+ if ropestate=2 then jumpnotrope ; out of water
+ message 2733 ; rope jumps, but fish catches it!
+ return
+
+.jumpnotrope
+; now move NOUN2 to DEST
+ object=noun2
+ if noun2<>actor then @moveobject
+
+.dropallandmovedest
+; first user drops everything...
+ savedest=dest
+ gosub @setuproom ; room was set up for grid location.
+ dest=room
+ hidest=0
+ pos=user
+ hipos=carried
+ gosub @possloop
+ dest=savedest
+ goto @magicmove
+;---
+
+.spellteleport
+; coded elsewhere
+ goto @spellfails
+
+.spellglow
+ gosub @attachspell
+ m1=2915 ; now glowing
+ gosub @noun2ism1
+ if lightinroom=false then @describeroom ; room becomes light from dark
+ return
+
+.spelleye
+ target=eye
+ gosub @justkilltarget ; stop commands, remove enemies etc.
+ object=eye
+ gosub @healobject
+ gosub @makeobjectobedient
+ goto @createobject
+
+;---
+
+.locate
+; called directly from parser
+
+.locate1
+ object=nullobject ; for benefit of spellfails
+ if nomoreinput=true then @locatespellfails
+ noun1=locatespell ; for benefit of reporters etc.
+ gosub @getnextword
+ searchtype=nountype
+ gosub @checktype
+ if value=nullvalue then locate1 ; getnextword, etc.
+ if value>minspellminusone then locatespellfails
+ noun2=value
+ object=noun2
+ message 3032 ; "You see that "
+; print short description of room containing object
+ m1=2994 ; right here
+ if noun2=iroom then @noun2ism1
+
+ gosub @getobjectposx2
+; now x2=room containing object
+
+ cif allowcheat
+ if cheatmode=0 then locatenocheat ;*
+ print x2 ;*
+.locatenocheat
+ cend
+
+ if x2=room then @locatenoun2ism1 ; "right here"
+ if x2<2 then locatespellfails ; locs 0/1 are not possible
+ if x2>maxsynthroom then locatespellfails ; fix obscure bug?
+ forceprinting=true
+ room=x2
+ verb=iam
+ gosub @objectverb ; "the object is"
+ gosub @shortdesc
+ message dot
+.locateend
+ forceprinting=false
+ gosub @setuproom
+ goto @cancelinput
+
+.locatenoun2ism1
+ gosub @noun2ism1
+ goto locateend
+
+.locatespellfails
+ target=noun2
+ gosub @spellfails
+ goto @cancelinput
+;---
+
+.detect
+; all magic items in locn glow briefly...
+ goto @spellfails
+;---
+.empathy
+; reports approx feelings of target...
+ if noun2>maxpeople then @spellfails
+ m1=2939 ; empathy for all people messages-1
+ add m1,noun2
+ goto @noun2ism1
+;---
+.cure
+; heals target...
+ verb=iam
+ gosub @objectverb
+ m1=2928 ; completely healed
+ gosub @reportm1dot
+ object=noun2
+.healobject
+ gosub @getnpcattributes
+ x1=hitpointoffset
+ add x1,x4
+ x2=npcinitial(x1)
+ npccurrent(x1)=x2
+ return
+;---
+.exorcise
+; destroys all spells nearby...
+ object=driftwood
+ gosub @checkifpresent
+ if result=false then exorcise0
+ woodnotshimmering=true
+
+.exorcise0
+ object=minspell
+.exorcise1
+ gosub @getobjectposx2
+ if x2<>room then exorcise2
+ spell=object
+ gosub @spellwearsoff
+
+.exorcise2
+ add object,c1
+ if object<maxspellplusone then exorcise1
+ return
+
+.spellgrowth
+ if noun2<>ballandchain then castgrownotball
+ m1=2779 ; grows, comes off ankle
+ gosub @reportm1
+ hicurrentpos(ballandchain)=c0
+ currentpos(ballandchain)=room
+ return
+
+.castgrownotball
+
+
+ if noun2<>smallmarrow then grownotmarrow
+ m1=2797 ; the marrow grows
+ gosub @reportm1
+ object=noun2
+ gosub @destroyobject
+ object=largemarrow
+ itword=object
+ goto @createobject
+
+.grownotmarrow
+ goto @spellfails
+
+.charisma
+; target is charismatic and will not be attacked...
+ m1=2929 ; inanimate
+ if object>maxpeople then @noun2ism1
+ m1=2926 ; now more handsome
+ gosub @noun2ism1
+ goto attachspell
+
+.spellshield
+ if noun2=iroom then @spellfails
+ m1=2983 ; surrounded by a glowing shield
+ gosub @noun2ism1
+ goto attachspell
+
+.wizard
+; do you know all the spells?
+ object=minspell
+.wizard1
+ pos=1
+ hipos=0
+ gosub @checkobjectpos
+ if result=true then notawizard
+ add object,c1
+ if object<maxspell then wizard1
+
+ if target<>user then spellfails
+ m1=2683 ; you are now a wizard
+ gosub @reportm1
+ goto attachspell
+
+.notawizard
+ m1=2657 ; you are not yet a wizard
+ goto @reportm1
+
+; IF SPELL<>MADSPELL THEN CASTNMAD
+; IF TARGET=ACTOR THEN @CASTDESCEFFECT
+; IF TARGET<minnpc THEN @SPELLFAILS
+; IF TARGET>maxnpc THEN @SPELLFAILS
+; X4=1
+; GOTO @CASTANGER
+;;
+;.CASTNMAD
+; SPELLDURATION=0
+; IF SPELL<>DOWSPELL THEN CASTNDOW
+;; first check if pendulum is in a position to swing
+; OBJECT=PENDULUM
+; POS=ACTOR
+; HIPOS=NONSPECIFIC
+; GOSUB @CHECKOBJECTPOS
+; X4=3 ; pendulum wriggles a bit
+; IF RESULT=FALSE THEN DOWPENDULUM
+; OBJECT=TARGET
+; GOSUB @ISOBJECTMAGIC
+; X4=2 ; pendulum swings side to side
+; IF RESULT=FALSE THEN DOWPENDULUM
+; X4=1 ; pendulum swings in a circle
+;.DOWPENDULUM
+; TARGET=PENDULUM ; describe "the pendulum swings ..."
+; GOTO @CASTDESCEFFECT
+;
+;.CASTNDOW
+; IF SPELL<>SEESPELL THEN CASTNSEE
+; FROM=ROOM
+; DIR=1
+; NUMEXITS=0
+;.CASTSEE1
+; GOSUB @ABSCHECKEXIT ; no SPECIALEXITS blocking code
+; IF DEST=0 THEN CASTSEE2
+;; there is an exit here. Is is visible ?
+; GOSUB @SPECIALEXITS
+; IF DEST=0 THEN CASTSEEHIDDEN ; blocked by special code
+; GOSUB @ABSCHECKEXIT
+; IF EXITVISIBLE=TRUE THEN CASTSEE2
+;
+;.CASTSEEHIDDEN
+; MESSAGE 3140 ; you see a hidden exit leading
+; X1=VERBOFFSET
+; ADD X1,DIR
+; MESSAGE X1
+; MESSAGE DOT ; CR
+; ADD NUMEXITS,C1
+;
+;.CASTSEE2
+; ADD DIR,C1
+; IF DIR<14 THEN CASTSEE1
+; IF NUMEXITS=0 THEN @SPELLFAILS
+; RETURN
+
+;;.CASTNSEE
+; IF SPELL<>FIXSPELL THEN CASTNFIX
+; IF TARGET=ACTOR THEN FIXTARGET
+; IF TARGET<minnpc THEN @SPELLFAILS ; can only fix NPCs or ACTOR
+; IF TARGET>maxnpc THEN @SPELLFAILS  ; can only fix NPCs or ACTOR
+; IF TARGET>DARKSPAWN THEN FIXUNDEAD ; ghoul is first undead
+;.FIXTARGET
+; OBJECT=TARGET
+; GOSUB @GETINITHITPOINTS
+; VALUE=X1
+; GOSUB @GETHITPOINTS
+; NPCCURRENT(X4)=VALUE
+; X1=TARGET
+; GOSUB @CONJUGATEX1
+; X4=0 ; look very healthy now
+; IF RESULT=CONJSOME THEN @CASTDESCEFFECT
+; IF TARGET=ACTOR THEN @CASTDESCEFFECT
+; X4=1 ; looks healthy now
+; GOTO @CASTDESCEFFECT
+;
+;.FIXUNDEAD
+;; cause 20 points damage to undead
+; X4=2 ; screams in agony
+; GOSUB @CASTDESCEFFECT
+; BLOWSTRENGTH=20
+; ACTOR=ACTOR
+; GOTO @DODAMAGE
+;
+;.CASTNFIX
+;; berserk
+; IF SPELL<>KILSPELL THEN CASTNKIL
+; SPELLDURATION=10
+; IF TARGET=ACTOR THEN @CASTDESCEFFECT
+; X4=1 ; NPC goes berserk
+; IF TARGET<minnpc THEN @SPELLFAILS
+; IF TARGET>maxnpc THEN @SPELLFAILS
+; GOSUB @CASTDESCEFFECT
+; ACTOR=ACTOR
+; GOTO @MAKEENEMIES
+;
+;.CASTNKIL
+; IF SPELL<>XAMSPELL THEN CASTNXAM
+; IF TARGET=ACTOR THEN @CASTDESCEFFECT
+; goto @SPELLFAILS ; nothing happens
+;
+;.castnxam
+; IF SPELL<>DETSPELL THEN CASTNDET
+; SPELLDURATION=10
+; IF TARGET=ACTOR THEN @CASTDESCEFFECT ; also known as WARD spell
+; GOTO @SPELLFAILS
+;
+;.CASTNDET
+; IF SPELL<>SPYSPELL THEN CASTNSPY
+;; print description of room where object is
+; IF TARGET>MAXOBJECT THEN @SPELLFAILSNULL ; dissipates in mid air
+; MESSAGE 3280 ; you see a vision of
+; X4=TARGET
+; GOSUB @SETUPROOMX4
+; IF ROOM=0 THEN SPYNULL
+; IF ROOM>250 THEN SPYNULL
+; GOSUB @ABSDESCROOM
+; GOTO @SETUPROOM
+;
+;.SPYNULL
+; MESSAGE 3281 ; nothingness
+; GOTO @SETUPROOM
+;
+;.CASTNSPY
+; IF SPELL<>ZENSPELL THEN CASTNZEN
+; DEST=90 ; maze entrance
+; HIDEST=0
+; MESSAGE 3300 ; are transported to another place
+; GOTO @NEWLOCATION
+;
+;.CASTNZEN
+; IF SPELL<>ESPSPELL THEN CASTNESP
+;; have DIR as direction
+;; it is in range 0..15
+; IF DIR=0 THEN @SPELLFAILS
+; IF ESPROOM<>0 THEN @SPELLFAILS ; can't allow ACTOR to chain ESPs together
+; FROM=ROOM
+; GOSUB @CHECKEXIT
+; X4=0 ; you see the inside of a wall
+; IF DEST=0 THEN attachspell
+; X4=1 ; you see another room
+; SPELLDURATION=2
+; TARGET=ACTOR
+; GOSUB attachspell
+; ESPROOM=DEST
+; GOSUB @DESCRIBEROOM
+; GOTO @CANCELINPUT
+;
+;.CASTNESP
+; SPELLDURATION=10
+; IF SPELL<>FLYSPELL THEN CASTNFLY
+; IF TARGET=ACTOR THEN FLYDESCEFFECT
+; IF TARGET<minnpc THEN CASTFLYNNPC
+; IF TARGET>maxnpc THEN CASTFLYNNPC
+; IF TARGET<BLOODWORM THEN CASTFLYCANT ; statues can't fly
+; X4=9 ; NPC flies, is unhappy about it
+;
+;.CASTANGER
+; GOSUB FLYDESCEFFECT
+; ACTOR=ACTOR
+; GOTO @MAKEENEMIES
+;
+;.CASTFLYNNPC
+; OBJECT=TARGET
+; GOSUB @ISOBJECTMOVEABLE
+; X4=5 ; 'floats upwards'
+; IF RESULT=TRUE THEN FLYDESCEFFECT
+; IF TARGET=REDMOON THEN FLYDESCEFFECT
+; X4=8 ; stays where it is
+; IF TARGET=WEIGHT THEN @CASTDESCEFFECT
+;.CASTFLYCANT
+; X1=TARGET
+; GOSUB @DESCTHEOBJX1
+; X4=8 ; stays where it is
+; ADD M1,X4
+; MESSAGE M1
+; MESSAGE DOT
+; RETURN
+;
+;.FLYDESCEFFECT
+;; TARGET is going up in the world. There are one or two
+;; details to attend to as it loosens its earthly bonds
+;; first, if it is contained by something, it won't be now
+; CURRENTPOS(TARGET)=ROOM
+; HICURRENTPOS(TARGET)=C0
+;; now do standard spell stuff
+;
+; GOTO @CASTDESCEFFECT
+; 
+;.CASTNFLY
+; IF SPELL<>ZAPSPELL THEN CASTNZAP
+; SPELLDURATION=0
+; IF TARGET=ACTOR THEN CASTZAP
+; IF TARGET<minnpc THEN @SPELLFAILS
+; IF TARGET>maxnpc THEN @SPELLFAILS
+;.CASTZAP
+; X1=TARGET
+; GOSUB @CONJUGATEM1X1
+; GOSUB @RAND10
+; ADD NUMBER,C1 ; make sure its never 0
+; BLOWSTRENGTH=NUMBER
+; GOSUB @CASTDESCEFFECT
+; X4=0 ; M1=actual message number now (after CONJUGATEM1X1)
+; GOTO @DODAMAGE
+;
+;.CASTNZAP
+; IF SPELL<>DEDSPELL THEN CASTNDED
+;; first dispell spells
+; IF ROOM<>222 THEN CASTDED0
+; X4=1 ; Myglar dies
+; GOSUB attachspell
+; GOTO @WIN
+;
+;.CASTDED0
+; X4=0 ; general magik is dispelled
+; GOSUB attachspell
+; SPELL=1
+;.CASTDED1
+; GOSUB @SPELLWEARSOFF
+; ADD SPELL,C1
+; IF SPELL<19 THEN CASTDED1
+; RETURN
+;
+;.CASTNDED
+; IF SPELL<>SANSPELL THEN CASTNSAN
+; IF TARGET=ACTOR THEN @CASTDESCEFFECT
+; X4=1
+; IF TARGET<>MYGLAR THEN @SPELLFAILS
+;; Myglar draws his sword
+; X1=MYGLAR
+; CURRENTPOS(POIGNARD)=X1
+; GOTO @CASTDESCEFFECT
+;
+;.CASTNSAN
+; IF SPELL<>IBMSPELL THEN CASTNIBM
+;; FEAR spell
+; SPELLDURATION=10
+; IF TARGET=ACTOR THEN @CASTDESCEFFECT
+; X4=2 ; ants cower back
+;;IF TARGET=ANTS THEN CASTDESCEFFECT
+; IF TARGET<minnpc THEN @SPELLFAILS
+; X4=1 ; looks frightened
+; IF TARGET<maxnpcPLUSONE THEN CASTDESCEFFECT
+; GOTO @SPELLFAILS
+;
+;.CASTNIBM
+;; IF SPELL<>HYPSPELL THEN @SPELLFAILS
+; SPELLDURATION=0
+; IF TARGET=ACTOR THEN CASTDESCEFFECT
+; X4=1 ; doesn't seem to understand
+; X4=4 ; looks at you expectantly
+; IF TARGET=MONKEY THEN CASTDESCEFFECT
+; IF TARGET=BAT THEN CASTDESCEFFECT
+; IF TARGET=WEREWOLF THEN CASTDESCEFFECT
+; IF TARGET=DARKSPAWN THEN CASTDESCEFFECT
+;; and finally ... NPCs who must be woken first
+; IF TARGET=IDOL THEN CASTHYPSLEEPING
+; IF TARGET<>STATUE THEN SPELLFAILS
+;.CASTHYPSLEEPING
+; X1=SPELLTIME(BOMSPELLTARGET)
+; IF X1=TARGET THEN CASTDESCEFFECT
+; X1=TARGET
+; GOSUB @DESCTHEOBJX1
+; MESSAGE 3446 ; looks stony
+;.attachspellRET
+; RETURN
+;
+;----
+.noun2ism1
+ m1save=m1
+ object=noun2
+ verb=iam
+ gosub @objectverb
+ m1=m1save
+ goto @reportm1dot
+;---
+.attachspell
+; attach spell pseudo-object to noun2
+ pos=room
+ hipos=c0
+ if noun2=iroom then attachspell2
+ pos=noun2
+ hipos=1 ; arbitrary non-zero
+.attachspell2
+ object=noun1
+ goto @createobjectpos
+;---
+.SPELLFAILS
+; this spell isn't going to work with things as they are.
+ currentpos(noun1)=c0 ; kill spell
+
+ IF TARGET=NULLOBJECT THEN SPELLFAILSNULL
+ verb=iam
+ object=target
+ gosub @objectverb
+
+.spellfailsnull
+; scan SPELLTABLE for appropriate target
+; get offset in list8...
+ value=list8(0)
+ gosub @valuetimes256
+ x1=list8(1)
+ add value,x1
+; now find start of responses for this spell
+ x1=spell ; spell to cast
+ x2=minspell
+ sub x1,x2
+ add x1,x1
+ add value,x1  ; now (value)=pointer to this spell table
+ x2=value
+ value=list8(x2)
+ gosub @valuetimes256
+ add x2,c1
+ x1=list8(x2)
+ add value,x1
+; now value=start of spell table for this spell
+; now scan for target
+.spellfails1
+ x1=list8(value)
+ if x1=0 then spellfailsdefault ; end of table, use default message
+ if x1=noun2 then spellfails2
+ add value,c2
+ goto spellfails1
+
+.spellfails2
+ add value,c1
+ m1=list8(value)
+ goto spellfailsm1
+
+.spellfailsdefault
+ m1=noun1
+ x2=minspell
+ sub m1,x2
+
+.spellfailsm1
+; m1 is offset into "spell fails" messages.
+ x1=3100 ; spell fails messages
+ add m1,x1
+ goto @reportm1dot
+
+;.SPELLFAILSNULL
+; MESSAGE 3554 ; spell expends itself in mid-air
+; RETURN
+;---
+;;.ISOBJECTMAGIC
+;;; return RESULT=TRUE if OBJECT is magical
+;; RESULT=FALSE
+;; RETURN
+;---
+;.CONJUGATEM1X1
+;; the NPC (or ACTOR) X1 is doing M1='TAKE' etc, M1+1='TAKES' etc.
+; gosub @conjugatex1
+; if result>she then conjret
+; ADD M1,C1
+;.CONJRET
+; RETURN
+;---
+;-------------------
+.SPECIALDESC
+; come here after all objects and exits printed
+; no return necessary
+ gosub @isroomvandalised
+ if result=false then sdnotvandalised
+ message 2213 ; vandals have been at work here
+
+.sdnotvandalised
+ if room<>48 then sdnotsaltmine
+ object=swordspell
+ goto @learnspell
+
+;;.sdnotsaltmine
+;;.sdret
+ RETURN
+;---
+.SPECIALEXITS
+; Given 'FROM' 'DIR' 'DEST'
+; Modify if an exit is blocked for some reason
+ if actor=valkyrie then specialexitsok
+ HIDEST=0 ; normally can't move onto a container through an exit
+ X1=HICURRENTPOS(ACTOR)
+ IF X1=0 THEN SEORDINARY
+; ACTOR is on something - so exits may be different
+
+; Standing on something, but can take as being an
+; ordinary exit from the room in which the container is ('ROOM')
+.SEORDINARY
+; now check any other modified exits
+ if dest<minsynthroom then senotsynth
+ x1=dest
+ x2=minsynthroomplusone
+ sub x1,x2
+ x1=terraintable(x1)
+ if x1<minsynthroom then seprevent ; should be going to a fixed room
+
+.senotsynth
+ if dest<>26 then senotholdingtank
+ if from=27 then senotholdingtank
+; moving north into lab - only angel(valkyrie) can do it
+ if actor<>valkyrie then sefalse
+
+.senotholdingtank
+ if from<>26 then senotholdingtank2
+ if dest<>27 then specialexitsnotcupboard
+ if thispart<>2 then sefalse ; lab not visible in magic mode
+ labseen=true ; we have seen lab in hitech mode
+ goto specialexitsok
+
+.specialexitsnotcupboard
+ if actor=user then sefalse
+; trying to move out of holding tank - ok for everyone except user
+ goto specialexitsok
+
+.senotholdingtank2
+; no problems found
+ if dest<>49 then senotsecretroom
+ if actor=ghost then senotsecretroom
+ if secretdoordiscovered=false then sefalse
+
+.senotsecretroom
+.specialexitsok
+.sdnotsaltmine
+ RETURN
+
+.seprevent
+.SEFALSE
+; Exit is not present
+ DEST=0
+ EXITVISIBLE=FALSE
+ RETURN
+;---
+.SPECIALDROPS
+; trying to drop 'OBJECT' to position HIPOS, POS
+; Print appropriate message if desired
+; and return RESULT=FALSE if ACTOR is to be prevented from dropping it
+ if hipos=0 then sdnotputonobject
+ if pos<minsceneryobj then sdndrawbridge
+ if pos>maxsceneryobj then sdndrawbridge
+; can't put things on drawbridge when outside it
+ gosub @cantputthere ; can't put noun1 there
+ result=false ; prevent it
+ return
+
+.sdndrawbridge
+.sdnotputonobject ; not going to a container
+ if actor<>valkyrie then sdnotvalk
+ if room=26 then sdnotvalk
+; prevent her dropping bodies except in lab!
+ result=false ; no!
+ commandfinished=true
+ return
+
+.sdnotvalk
+ if object<>bones then sdnbones
+ m1=2799 ; bones form themselves into "SLOW" spell
+ gosub @reportm1
+ object=slowspell
+ gosub @learnspell
+ pos=room ; (because pos is corrupted)
+ hipos=0
+ object=bones
+ if verb<>iput then @returntrue
+ pos=noun2 ; (allow put bones in hole to work)
+ hipos=prep
+ goto @returntrue ; allow it to be dropped
+
+.sdnbones
+; dropping things on river?
+ x1=room
+ x2=minsynthroomplusone
+ sub x1,x2
+ if x1>32000 then sdnotriver ; >>mike 29/7/87 - prevent negative index
+ x1=terraintable(x1)
+ if x1<3 then sdnotriver
+ if x1>4 then sdnotriver
+; yep - so things either float away, or slide south on the ice(!)
+ verb=idrop
+ gosub @objectverb
+ m1=2923 ; washed away
+ object=coldspell
+ pos=river
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=false then floatsouth
+ m1=2925 ; bounces away to the south on the ice
+.floatsouth
+ gosub @reportm1dot
+; and move the object to the marsh
+ pos=142
+ hipos=0
+; and allow it to be dropped in the marsh...
+
+.sdnotriver
+ RESULT=true ; allow it to be dropped
+ RETURN
+;---
+.SPECIALACTOR
+; describe ACTOR
+ lastwordprinted=actor ; force it to print the article - "you"
+ verb=iam
+ goto @actorverb
+;---
+.specialcheckifaccessible
+; if no special code is needed, LEAVE RESULT UNCHANGED
+; otherwise return RESULT=TRUE if OBJECT is accessible to VERB
+; or RESULT=FALSE if not accessible.
+ if processingsay=true then sciatrue
+ if verb=isetupgo then conditionaltrue ; sciatrue
+ if verb=igdgo then conditionaltrue ; sciatrue
+ if verb=isetupfind then conditionaltrue ; sciatrue
+ if verb=igdfind then conditionaltrue ; sciatrue
+ if verb=iteleport then conditionaltrue ; sciatrue
+ if verb<>icast then scianotcast
+ if noun1=teleportspell then conditionaltrue ; sciatrue
+ if noun1=locatespell then conditionaltrue ; sciatrue
+
+.scianotcast
+ if verb=igetme then sciatrue
+ if verb=iwaitforperson then conditionaltrue ; sciatrue ; wait for ...
+ if verb=iwaitforperiod then conditionaltrue ; sciatrue ; wait for ...
+ if verb=iwaituntiltime then conditionaltrue ; sciatrue ; wait until ...
+ if object<minsceneryobj then scianotscenery
+ if object>maxsceneryobj then scianotscenery
+ if verb<>iexamine then scianotscenery
+ goto @returntrue
+
+.scianotscenery
+ if object<>generaldoor then scianotdoor
+ gosub @setupdoor
+ if door=true then sciatrue
+ goto @returnfalse
+
+.scianotdoor
+ if actor<>dragon then scianotdragon
+ if object=fire then sciatrue
+
+.scianotdragon
+ return
+;
+.conditionaltrue
+; only true if OBJECT exists in the game
+ if object>minspell then sciatrue
+ x1=currentpos(object)
+ if x1=0 then @returnfalse
+.sciatrue
+ result=true
+ return
+;---
+.isobjectalive
+; return result=true if it is
+ result=false
+ if object>maxnpc then ioaret
+ gosub @getnpcattributes ; find npccurrent(x4) for object
+ x1=hitpointoffset
+ add x1,x4
+ x1=npccurrent(x1)
+ if x1=0 then ioaret
+ result=true
+.ioaret
+ return
+;---
+;
+.specialdescbeforeexits
+; printed immediately after short+long room descs.
+; no return needed
+ return
+
+;;.describedistantfeatures
+;;; what is the height of the current location?
+;;; what is the special feature at the current location?
+;;;
+;;; first static rooms with a view...
+;;; currentheight=10
+;;;* x1=3 ; castle
+;;; if room=5 then showsurroundings ; keep roof
+;;; x1=6 ; fairground
+;;; if room=12 then showsurroundings ; fairground
+;;;
+;; currentheight=0
+;; gosub @convertroom
+;;; now x1=2..25 corresponding to room if special feature
+;; if x1=0 then nospecialfeature
+;;;;.showsurroundings
+;; currentsceneryobject=x1 ; object at current position
+;;; picturetodraw=currentsceneryobject
+;;;; x2=minsceneryobj
+;;;; add picturetodraw,x2
+;;
+;;; on a special feature, so print out the others which can be seen
+;;; message 2105 ; in the distance, you can see
+;; currentobject=2 ; first scenery object
+;; owtype=owobjects
+;; wordsoutput=0
+;;.distantobjectloop
+;; if currentobject=currentsceneryobject then dolnoprint ; here!
+;; x4=currentobject
+;; gosub @calcheight ; find x1=height of scenery object x4
+;; add x1,currentheight
+;; if x1<10 then dolnoprint ; combined heights too low to be visible
+;;
+;; if wordsoutput<>0 then dol1
+;; message 2105 ; in the distance, you can see
+;;.dol1
+;; word1=minsceneryobj ; scenery objects are numbered 120.. (not 1...)
+;; add word1,currentobject
+;; word2=0
+;; gosub @outword12
+;;.dolnoprint
+;; add currentobject,c1
+;; if currentobject<numsceneryobjplusone then distantobjectloop
+;; gosub @outwordnone ; output any buffered words
+;; if wanttoprintand=false then nospecialfeature
+;; message dot
+;; wanttoprintand=false
+
+;;.nospecialfeature
+;; return
+;---
+;;.calcheight
+;;; return x1 = height of ROOM with scenery object x4
+;;; x4=1..25 corresponding to room if special feature
+;;; x1=10
+;;; if x4=2 then calcheightret ; castle
+;;; if room=5 then calcheightret ; top of castle keep
+;; x1=0
+;;.calcheightret
+ ;;return
+;---
+;;.CalcTerrainAndTree
+;;; return x1=tree type and x2+x3=terrain type
+;;; for ROOM.
+;; x1=room
+;; sub x1,c1
+;; x1=terraintable(x1)
+;; ; high nibble gives tree type, low nibble gives terrain
+;; x2=16
+;; gosub @x1divx2
+;; add x2,x3 ; x2:=low nibble (x1 mod 16)
+;;; and x1=high nibble (x1 div 16)
+;; return
+;---
+.GetXY
+; return X=x co-ordinate on grid
+; Y=y co-ordinate on grid
+ if room>minsynthroom then getxysynth
+; fixed room
+ x=0
+ y=0
+ return
+
+.getxysynth
+ x1=room
+;;.getxyx1
+ x2=minsynthroom
+ sub x1,x2
+ sub x1,c1
+ x2=xmaxplusone
+ gosub @x1divx2
+ y=x1 ; y:=room div xmax = y co-ordinate
+ add x2,x3
+ x=x2 ; x:=room mod xmax = x co-ordinate
+ return
+;---
+.convertroom
+; return x1 as the room number for the description
+; printed by a room object being here.
+; descriptions are in table with offsets 240..255
+; exits are stored in table from room 10..30
+
+ x1=minsceneryobjtimes2plus1 ; double to give index into initial pos
+.cr1
+ x2=objectstart(x1)
+ if x2=room then crfound
+ add x1,c2
+ if x1<maxsceneryobjplus1times2 then cr1
+ x1=0
+ return
+.crfound
+; objects have numbers minsceneryobj..maxsceneryobj
+; we want offset in objects 1..25
+;; so subtract minsceneryobj
+ x2=2
+ gosub @x1divx2 ; get object number
+ x2=minsceneryobj
+ sub x1,x2
+ return
+;---
+;;.sanprevent
+;; processed=true ; prevents ACTOR from doing anything else
+;; return
+;---
+.specialactivatenpc
+; We are activating npc ACTOR
+; Put special code handlers for them HERE.
+; Set processed=true if they have already done
+; everything they are going to this turn.
+; return verb<>0 to do that action
+ if actor<>dragon then sannotdragon
+ if dragonplacid=true then sanret
+
+ if dragonawake=0 then sannotdragon
+ if dragonawake<>1 then sadragon2
+; going towards junction
+ if room=43 then sadragon2 ; have arrived - start back!
+ verb=igdgo
+ noun1=43 ; go to junction
+.sanret
+ return
+
+.sadragon2
+ if room=46 then sadragon3 ; put dragon back to sleep
+ dragonawake=2 ; going back
+ verb=igdgo
+ noun1=46 ; go to cave for sleep
+ return
+
+.sadragon3
+ processed=true
+ dragonawake=0
+
+.sannotdragon
+ if actor<>grok then sannotgrok
+; is rat pie here?
+ object=ratpie
+ gosub @checkifpresent
+ if result=false then sannotgrok
+ processed=true ; grok will do something from below
+; is grok carrying it?
+ pos=grok
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=true then grokeats
+ grokstate=1 ; start grok going
+ lastwordprinted=grok
+ m1=2710 ; grok takes pie
+ gosub @reportm1
+ grokfed=true
+ currentpos(ratpie)=actor
+ x1=carried
+ hicurrentpos(ratpie)=x1
+; and drops map...
+ currentpos(map)=room
+ hicurrentpos(map)=c0
+ return
+
+.grokeats
+; grok eats it
+ add grokstate,c1
+ m1=2709 ; base for eating messages-2
+ add m1,grokstate
+ gosub @reportm1
+ if grokstate<>5 then sannotgrok
+; kill rat pie
+ grokstate=0
+ object=ratpie
+ goto @destroyobject
+
+.sannotgrok
+ if actor<>ants then sannotants
+; make ants multiply!
+ processed=true ; ants do nothing else
+ if antsleft>1000 then sannotants ; limit growth to
+; avoid taking over the world
+ m1=2742 ; about 100 ants emerge
+ gosub @reportm1
+ x1=100
+ add antsleft,x1
+ if antsleft>100 then sannotants
+ gosub @createobject
+
+.sannotants
+ if actor<>jailor then sannotjailor
+ hisearchpos=nonspecific
+ object=ballandchain
+ gosub @checkifaccessible
+ if result=false then sannotjailor
+; anyone here to attacj it to?
+ object=user
+.sajailor1
+ if object=jailor then sajailor2
+ gosub @checkifpresent
+ if result=true then sanattachball
+
+.sajailor2
+ add object,c1
+ if object<maxpeople then sajailor1
+ return
+
+.sanattachball
+ noun1=object ; preserve object
+ x1=currentpos(ballandchain)
+ if x1=object then sajailor2 ; see if anyone else to attach it to
+ if x1=0 then saball1
+ x1=hicurrentpos(ballandchain)
+ if x1=0 then saball1
+; want to attack the ball to OBJECT
+ m1=2777 ; jailor takes ball from
+ gosub @reportm1
+ object=currentpos(ballandchain)
+ gosub @desctheobject2 ;x1
+ m1=dot
+ gosub @reportm1
+
+.saball1
+ m1=2776 ; jailor attaches ball to
+ gosub @reportm1
+ object=noun1 ; person to attach ball to 
+ gosub @desctheobject2
+ m1=dot
+ gosub @reportm1
+ processed=true
+ currentpos(ballandchain)=object
+ x1=fastenedto
+ hicurrentpos(ballandchain)=x1
+ return
+
+.sannotjailor
+ if actor<>monk then sannotmonk
+ processed=true ; monk does nothing at all...
+ return
+
+.sannotmonk
+ if actor<>vampire then @sanotbarrow
+ processed=true ; vampire doesn't thrash about with random junk
+ if dooropen=true then @sanotbarrow ; only execute for when door
+; is closed - i.e. vampire is thirsty for blood.
+ if timeinroom>3 then savampire
+ if timeinroom<>3 then @sanotbarrow
+ if vampireawake=true then savampire
+.wakevampire
+ m1=2828 ; vampire wakes
+ gosub @reportm1
+ vampireawake=true
+
+.savampire
+; now find someone to suck blood from (starting with npcs)
+ if dooropen=true then sabarrowend ; friendly vampire
+ target=nullobject ; no-one found yet.
+ object=0 ; user-1
+.sacheckbarrow
+ add object,c1
+ if object>maxpeople then sabarrowend
+ if object=vampire then sacheckbarrow
+ gosub @checkifpresent
+ if result=false then sacheckbarrow
+; got an object who is present
+; check if crucifx carried - if so, try finding other people
+ target=object ; preserve person who is here
+ pos=object
+ hipos=nonspecific
+ object=crucifix
+ gosub @checkobjectpos
+ object=target ; person to attack
+ if result=true then sacheckbarrow
+
+ if object=user then savampireuser
+ m1=2831 ; vampire descends gratefully on
+ gosub @reportm1
+ lastwordprinted=0 ; force use of full name
+ gosub @desctheobject
+ m1=2832 ; and tells you about KNIVES
+ gosub @reportm1
+ dooropen=true ; and opens door for you
+ object=knivesspell
+ gosub @learnspell
+ goto @targetdeath
+
+.savampireuser
+ m1=2829 ; vampire kills you
+ gosub @reportm1
+ target=object
+ goto @targetdeath
+
+.sabarrowend
+ vampireawake=false ; put vampire back to sleep if no-one here
+ if target=nullobject then sanotbarrow ; no-one here
+ vampireawake=true
+; someone here, carrying crucifix
+ m1=2830 ; vampire is repelled by crucifix
+ gosub @reportm1
+ if target<>user then sanotbarrow ; is user here+protected?
+ dooropen=true ; he opens the door for you
+
+.sanotbarrow
+ if actor<>troll then sanottroll
+ if trollplacid=true then sanottroll
+ if trollalarmed=false then sanottroll
+ gosub @stop ; stop whatever troll is doing
+ dest=21 ; troll's lair
+ gosub @gdfollowdest ; go nearer to lair!
+ processed=true ; nothing else this turn, thankyou
+
+.sanottroll
+ if actor<>humans then sanothumans
+ processed=true ; nothing at all to do!
+ random x1
+ if x1>120 then @npcgoldsinging
+
+.sanothumans
+ if actor<>mouse then @sanotmouse
+ if mouseplacid=true then samouse2
+; mouse is wild
+ if room=52 then samouse0
+ if room<>55 then @sagotoburrow
+.samouse0
+ processed=true ; mouse only follows programmed actions while wild.
+ if room<>55 then samouse2 ; in burrow?
+; mouse runs out of burrow
+ x1=52
+ currentpos(mouse)=x1
+ hicurrentpos(mouse)=c0
+ room=x1 ; allow messages to be printed if user in bedroom
+ mousescared=false
+ m1=2838 ; a little mouse runs from under bed
+ if holeblocked=false then @reportm1
+ object=crack
+ m1=2868 ; mouse runs into room through crack
+ if crackblocked=false then crackappears
+ object=crevice
+ m1=2869 ; mouse runs into room through crevice
+ if creviceblocked=false then crackappears
+ m1=2870 ; mouse runs into room through door
+ if doorshut=false then @reportm1
+ m1=2836 ; you hear rustling - mouse can't get in!
+ goto @reportm1
+
+.crackappears
+ currentpos(object)=room
+ goto @reportm1
+
+.samouse2
+; wild, but not in burrow
+ if mouseplacid=false then samouse2a
+ random x1
+ if x1>80 then @sanotmouse
+; carried by user...
+ object=slowspell
+ pos=mouse
+ gosub @checkobjectpos
+ m1=2848 ; mouse squeaks rapidly, as if trying to communicate
+ if result=false then @reportm1
+ return
+
+.samouse2a
+ if mousescared=true then samouse3
+; mouse runs around
+ m1=2871 ; random action messages
+ gosub @getvarym1
+ goto @reportm1
+
+.samouse3
+; is mouse in bedroom?
+ if room<>52 then sanotmouse
+; mouse leaves at once
+ m1=2839 ; a little mouse runs under bed...
+ if holeblocked=false then mouseleaves ; .. and escapes
+ gosub @reportm1
+ m1=2874 ; mouse bumps into hole and...
+ gosub @reportm1
+
+ m1=2840 ; ..thud, mouse runs out through a crack
+ object=crack
+ if crackblocked=false then mouseleaves2
+ m1=2841 ; ..thud, mouse runs out through a crevice
+ object=crevice
+ if creviceblocked=false then mouseleaves2
+ m1=2842 ; ..thud, mouse runs out through the door
+ if doorshut=false then mouseleaves
+; mouse can't escape.. 
+; any containers here?
+ object=sack ; only likely container
+ gosub @checkifpresent
+ m1=2843 ; mouse bumps into door, starts running in circles
+ if result=false then @reportm1
+ x1=hicurrentpos(sack)
+ if x1<>0 then @reportm1 ; sack on ground - mouse can't get in
+ m1=2846 ; mouse runs into the
+ gosub @reportm1
+ gosub @desctheobject
+ m1=dot
+ gosub @reportm1
+ currentpos(mouse)=object
+ x1=ipin
+ hicurrentpos(mouse)=x1
+ mouseplacid=true ; becomes placid as soon as it is trapped
+ return
+
+.mouseleaves2
+ currentpos(object)=room ; crack/crevice appear
+.mouseleaves
+ gosub @reportm1
+ x1=55 ; mouse hiding place
+ currentpos(mouse)=x1
+ hicurrentpos(mouse)=c0
+ return
+
+.sagotoburrow
+; mouse wants to go to burrow
+ verb=igdgo
+ noun1=52
+
+.sanotmouse
+ return
+;---
+.isobjectalert
+; return result=true if OBJECT is awake
+ gosub @isobjectalive
+ if result=false then ioalertret
+ if object<>vampire then ioanotvampire
+ if vampireawake=false then @returnfalse
+
+.ioanotvampire
+.ioalertret
+ return
+;---
+.canactormove
+; return result=false if ACTOR is prevented from moving
+ result=false
+ if actor=jailor then camret
+ result=true
+.camret
+ return
+;---
+.canactorrandommove
+; return result=true if actor can make random moves
+ result=false
+ if actor=valkyrie then carmret
+ if actor=grok then carmret
+ if actor=brainz then carmret
+ if actor=troll then carmret
+ if actor=rainbird then carmret
+ if actor=eye then carmret
+ if actor=fireball then carmret
+
+ result=true
+.carmret
+ return
+;---
+.handleinterruption
+; ACTOR has been interrupted in the middle of something
+; Do whatever you see fit, then return
+; No values need be returned
+ return
+;---
+.specialrtmessage
+; actor is just about to print M1 as part of a racetrack
+; instruction. Use this hook to intercept particular things
+; which may happen in the message which cannot be easily
+; coded elsewhere.
+ if m1<>2791 then sprtnotcharisma
+ object=user
+ gosub @checkifpresent
+ if result=false then sprtret
+ object=charismaspell
+ gosub @learnspell
+
+.sprtnotcharisma
+ if m1<>2798 then sprtnotsecretdoor ; footsteps just went .. etc.
+ x1=currentpos(user)
+ if x1<>50 then sprtnotsecretdoor
+ secretdoordiscovered=true
+
+.sprtnotsecretdoor
+.sprtret
+ return
+;---
+.newracetrackforobject
+; start racetrack x6 for actor OBJECT
+ actorsave=actor
+ actor=object ; replace its racetrack with a new one...
+ gosub @getactorattributes
+ gosub @stop ; kill existing racetrack
+ x1=x6 ; race track number to execute
+ gosub @initracetrackx1
+ goto @resetactor ; from actorsave
+;---
+.buy
+; primarily in pub
+ goto @silly
+;---
+.checknullaction
+; ACTOR has no stack actions to do
+; maybe want to start up a new one - used
+; for people such as valkyrie for whom it is VITAL
+; that they should not become 'unhooked'
+; set ORDERWAITING to the first command to
+; execute if you want ACTOR to obey it immediately.
+
+ if actor<>valkyrie then cnnotvalk
+ gosub @initfifo
+ if room=26 then cnholdingtank
+ verb=igdgo
+ noun1=26 ; holding pen for npcs/valk
+ noun2=nullobject
+ prep=0
+ gosub @npcpushfifo
+.cnholdingtank
+; valk has nothing to do in holding tank - tell her to drop people
+ verb=idrop
+ noun1=ipeople
+ gosub @setupgdaccess
+ gosub @linkonfifocommandqueue
+ orderwaiting=igdgo
+ return
+ 
+.cnnotvalk
+ if actor<>troll then cnnottroll
+ if trollplacid=true then cnnottroll
+ gosub @gdfindtreasure
+ if object<>0 then cnnottroll
+; is troll near bridge?
+ if room=21 then cnnottroll
+ if room<237 then cntroll
+ if room<240 then cnnottroll
+.cntroll
+; troll should saunter back to bridge when there is
+; nothing more important to do.
+ verb=igdgo
+ noun1=238 ; bridge
+ gosub @npcpushfifo
+; don't bother setting ORDERWAITING - this is not time-critical.
+
+.cnnottroll
+ return
+;---
+.specialcheckifpresent
+; have just checked if object is present
+; Add special modifiers here.
+; return RESULT=TRUE if object here.
+.initialscenecode
+ return
+;---
+;----
+.doiwantattack
+; for npcs.
+; does actor want to start attacking anyone?
+; if so, return verb and noun1
+ gosub @amiincombat
+ if result=true then @defendmyself
+; start attacking orc if not hidden...
+; is orc wearing the hooded cloak? (which prevents
+; people detecting that it is an orc)
+ if actor<16 then diwaret ; not a human - part of game scenery.
+
+; or is actor charismatic?
+ object=charismaspell 
+ pos=actor
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=true then diwaret ; yep, so never get unprovoked attacks.
+
+ gosub @checkifcloaked
+ if result=false then @diwattackanyonenew ; not hidden
+; now percentage chance if orc has been in same rooms for a while
+ if timeinroom<3 then diwaret
+ random x1
+ if x1<160 then @diwattackanyonenew ; realises you are an orc - may atta
+ m1=3700 ; peers at you suspiciously group
+ goto @groupsaym1
+;---
+.specialinitnpcs
+.diwaret
+ return ; don't start new combar
+;---
+.destroyobject
+; object gets destroyed, and replaced in a location as appropriate
+ if thispart<>2 then destroyobjectnoreport
+ if object>minspellminusone then destroyobjectnoreport
+ m1=3060 ; hook picks up
+ gosub @vary10
+ gosub @desctheobject2
+ m1=dot
+ gosub @reportm1
+
+.destroyobjectnoreport
+ currentpos(object)=c0 ; put object in a null room
+ hicurrentpos(object)=c0
+ if object=fireball then destroypermamently
+ if object=eye then destroypermamently
+ if object=ants then destroyants
+ if object=humans then destroypermamently
+ if object=monk then destroypermamently
+ if object>maxpeople then destroynotpeople
+ x1=26 ; put them in heaven
+ currentpos(object)=x1
+ hicurrentpos(object)=c0
+.doret
+ return
+
+.destroyants
+ antsleft=1
+.destroypermamently
+; destroy things which must not go to location 0
+; (because they would be punted into heaven)
+ currentpos(object)=c1
+ return
+;---
+.destroynotpeople
+ if object=ratpie then destroyratpie
+ if object<Mintreasure then doret
+ if object>maxtreasure then doret
+; treasures are distributed at random
+.randomizetreasure
+ random room
+ if room<70 then randomizetreasure
+ gosub createobject
+ goto @setuproom
+;
+.destroyratpie
+; rat pie must go to kitchen, not the tray where it starts.
+ room=2
+ gosub createobject
+ goto @setuproom
+;---
+.createobject
+; OBJECT gets created in current room
+ gosub createobjectreport
+ currentpos(object)=room
+ hicurrentpos(object)=c0
+ return
+;---
+.createobjectreport
+ if thispart<>2 then createobjectnoreport
+ if object>minspellminusone then createobjectnoreport
+ m1=3070 ; hook lowers
+ gosub @vary10
+ x1=object
+ gosub @descanobjx1
+ m1=dot
+ goto @reportm1
+
+.createobjectnoreport
+ return
+;---
+.createobjectpos
+; create OBJECT at position HIPOS, POS
+ gosub createobjectreport
+ currentpos(object)=pos
+ hicurrentpos(object)=hipos
+.learnspellret
+ return
+;---
+.learnspell
+; learn spell whose pseudo-object is OBJECT
+; spells live in locn 1 until learnt
+ pos=1
+ hipos=0
+ gosub @checkobjectpos
+ if result=false then learnspellret ; already know it
+ goto @destroyobject
+;---
+;;.shake
+.ring
+ if noun1<>appletree then @nothinghappens ;; shakenottree
+ gosub @describeactionactor
+ m1=2823 ; an apple starts to fall
+ gosub @reportm1
+ object=apple
+ gosub @createobject
+ applefalling=true
+ return
+
+;;.shakenottree
+;; goto @nothinghappens
+;---
+.TRIGGERWORDS
+; check current word to see if it is a trigger word
+; ACTOR is the target of conversation
+ SEARCHTYPE=NOUNTYPE
+ GOSUB @CHECKTYPE
+; VALUE is a trigger word ( a saying )
+; see if there is any action to take on it
+ if value=nullvalue then tgret
+ gosub @checknoun
+ if processed=true then tgret
+ if verb=itell then tgret ; process as parsed sentence
+; OBJECT is a word spoken TO actor
+ if object=0 then tgret
+ if actor<>rainbird then twnotrainbird
+ result=false
+ gosub dorainbird
+ if result=true then @realsayend ; clear stack, terminates if processed
+
+.twnotrainbird
+
+.TGRET
+ RETURN
+;---
+.tell
+; tell me about NOUN2
+ if actor=user then @ask
+ if actor<>rainbird then @startorders
+ object=noun2
+ result=false
+ gosub dorainbird
+ if result=false then @startorders
+ return
+;---
+.dorainbird
+; rainbird prints examine messages for item OBJECT
+; set result=true if processed
+ if verb=itell then dorainbird2
+ if verb=iask then dorainbird2
+ if verb=isay then dorainbird2
+ if verb=0 then dorainbird2
+ return ; result=false, so not processed
+
+.dorainbird2
+ if object=nullobject then rainbirdret
+ m1=2883 ; the rainbird clears its throat and says "
+ gosub @reportm1
+ m1=2893 ; ..you, dummy!
+ if object=user then twprint
+ m1=2892 ; me!
+ if object=rainbird then twprint
+ if object=iyou then twprint
+;
+; objects which the rainbird won't describe because
+; their examine messages contain spell names...
+ m1=2602 ; it is very valuable
+ if object=dagger then twprint
+ if object=note then twprint
+ if object=pebble then twprint
+ if object=panel then twprint
+ if object=driftwood then twprint
+ if object=grate then twprint
+ if object=amber then twprint
+
+ m1=2112 ; nothing special
+ if object>maxobject then twprint
+
+ verb=iam
+ gosub @objectverb ; that is..
+ m1=examinemessages ; base of examine messages
+ add m1,object
+.twprint
+ gosub @reportm1 ;dot
+ m1=dotquote
+ gosub @reportm1
+
+ if object<>perch then rainbirdnotperch
+ object=locatespell
+ gosub @learnspell
+
+.rainbirdnotperch
+ result=true ; processed
+.rainbirdret
+ return
+;---
+.breathe
+ if actor<>dragon then @silly
+ m1=2877 ; dragon breathes fire
+ gosub @reportm1
+
+.dragonfire
+ if dragonplacid=false then dragonnottame
+ if room=11 then soundalarm
+; was destination specified?
+ target=noun2
+ if noun2<maxnpcplusone then @targetdeath
+; harmless now unless directed at someone
+ return
+
+.soundalarm
+ if firealarm=true then @sprtret
+ firealarm=true
+ message 2660 ; alarm starts
+ return
+
+.dragonnottame
+; kills one person in dragon's room (usually user)...
+ gosub @reportm1
+ object=1
+.sprtdragon1
+ if object=dragon then sprtdragon2 ; don't kill dragon!
+ gosub @checkifpresent
+ if result=false then sprtdragon2
+
+;;.burnobject
+ if object=dragon then @sprtret
+ m1=2882 ; the fire burns ...
+ gosub @reportm1
+ gosub @desctheobject
+ m1=dot
+ gosub @reportm1
+ target=object
+ goto @targetdeath
+
+.sprtdragon2
+ add object,c1
+ if object<maxpeople then sprtdragon1
+ return
+
+;---
+.isactorflying
+; return RESULT=TRUE if ACTOR is flying
+ object=actor
+
+.isobjectflying
+ result=true
+ if object=rainbird then iafret
+ if object=dragon then iafret
+ result=false
+ x1=currentpos(flyspell)
+ if x1<>object then iafret
+ x1=hicurrentpos(flyspell)
+ if x1=0 then iafret
+ result=true
+
+.iafret
+ return
+;---
+.stealallfrom
+; ACTOR is stealing everything from NOUN1
+ object=noun1
+ gosub @checkifpresent ; are they here?
+ if result=true then saf1 ; steal something!
+ gosub @doiwantfollownoun1
+ if executeprocessed=true then safret
+ if fatalerror=true then safret
+ commandfinished=false
+.safret
+ return
+
+.saf1
+; steal something from NOUN1
+ searchpos=noun1
+ hisearchpos=nonspecific
+ gosub @gdfindtreasuresearchpos
+ if notreasureinroom=true then @setcommandfinished ; command finished
+; take OBJECT
+ noun1=object
+ verb=itake
+ goto @take 
+;---
+;----------------
+;; OBJECT has just been moved from HIFROM, FROM to POS, HIPOS
+;; do anything you want, then return
+;; no values to return
+;;
+;; was the object carried by an NPC ?
+;; i.e. did the actor steal it?
+; IF hifrom=0 THEN samoncarried
+; if actor=from then samoncarried ; actor dropping it itself
+;; this code assumes user=1
+; IF from>maxpeople THEN samoNCARRIED
+; if actor=user then samonoshout
+;; actor will shout their glee at their new aquisition!
+; if object<mintreasure then samonoshout
+; if object>maxtreasure then samonoshout
+; if descriptionmode<>iverbose then samonoshout
+; m1=3711 ; I've stolen some treasure from
+; gosub actorshouts
+; forceprinting=true
+; object=from ; person it was stolen from
+; lastwordprinted=0 ; mustn't print article!
+; gosub @desctheobject
+; message dot ; all of the above is reported everywehere,
+; message quote ; so using MESSAGE is OK
+; forceprinting=false
+;
+;.samonoshout
+;; from = current position - i.e. the npc who is carrying the device
+; if from=user then samoncarried
+; object=from
+; gosub isobjectalert
+; if result=false then samoncarried
+; if processed=true then samoncarried
+;
+; GOSUB @DESCTHEOBJECT
+; m1=3875 ; gets annoyed at theft
+; gosub @varymessage
+;
+;.samoafterreport
+; target=from
+; goto @makeenemies ; make actor, person it stole from enemies
+; 
+;.samoncarried
+; if actor=user then samonottreasure
+; if object<mintreasure then samonottreasure
+; if object>maxtreasure then samonottreasure
+; if pos<>actor then samonottreasure
+; m1=3712 ; I've just found some treasure!
+; gosub actorshouts
+;---------------
+ 
+;---
+.specialconversation
+; USER is saying "verb prep noun1 noun2" to ACTOR
+; make any intercepts you fancy.
+; If the command is not to be stored, set PROCESSED=TRUE
+; and SAYRESPONSE=TRUE
+ if verb=ihello then npchello
+ return
+;---
+.NPCHELLO
+; ACTOR is the person the user is trying to talk to, who is here
+ IF ACTOR=USER THEN NPCHELLOret
+ LASTWORDPRINTED=0 ; prevent use of IT
+ m1=3580 ; hello
+ gosub @groupsaym1
+
+ SAYRESPONSE=TRUE
+ processed=true
+.NPCHELLOret
+ RETURN
+;
+;---
+;---
+.calcdragondistance
+; return x1=distance away that dragon is from USER
+; x1=4 if too far away
+ x1=4 ; too far
+ if currentuserroom<43 then cddgotdistance
+ if currentuserroom>46 then cddgotdistance
+ x1=currentpos(dragon)
+ if x1=currentuserroom then cddgotdistance
+; find abs distance between dragon and user...
+ sub x1,currentuserroom
+ if x1<10 then cddgotdistance
+ x1=currentuserroom
+ x2=currentpos(dragon)
+ sub x1,x2
+.cddgotdistance
+; x1=abs distance between user and dragon
+ return
+;---
+.takegoldtopub
+ executeprocessed=true
+ if actor=troll then @setcommandfinished ; troll doesn't do it!
+; is noun1 carried?
+ object=noun1
+ pos=actor
+ hipos=nonspecific
+ gosub @checkobjectpos
+ if result=true then tgtpfound
+.killtakegold
+ commandfinished=true ; kill the gd command
+ executeprocessed=false
+ return
+
+.tgtpfound
+ if room=131 then tgtpinpub
+ dest=131
+ gosub @gdfollowdest ; move nearer, if possible
+ if executeprocessed=false then killtakegold
+ return
+
+.tgtpinpub
+ verb=idrop
+ noun1=object ; treasure used for payment
+ noun2=nullobject
+ prep=0
+ gosub @describeactionactor
+ m1=2692 ; demon takes the object
+ gosub @reportm1
+ object=noun1
+ commandfinished=true ; the tgtp command is now finished
+ goto @destroyobject
+;---
+.vary10
+; produce one of 10 messages based at M1
+ random x1
+ x2=10
+ gosub @x1modx2
+ add m1,x1
+ goto @reportm1
+;---

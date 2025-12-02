@@ -1,0 +1,6 @@
+; Part-specific constants, to distinguish between part 2 and 3
+;
+; THIS FILE "MPCONST" for MAGIC MODE
+;
+CONST
+ constantpartnum=3 ; 3=magic mode, 2=hitech mode

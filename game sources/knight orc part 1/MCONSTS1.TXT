@@ -1,0 +1,35 @@
+; Machine-specific constants.
+
+; Spectrum 128 versions.
+
+CONST
+ maxactivations=10 ; tailor to each machine. The greater the
+; number, the more that can happen on each turn. Small machines
+; should have this set to as small a value as possible, without
+; losing realism. About 3 might be realistic.
+; 16 bit machines can handle much higher values - perhaps 10-16
+; without losing too much speed.
+
+; kbddelay=30 for 16 bit machines
+; 10 for 8 bit machines
+ kbddelay=10 ; time to wait when attention flag is set
+
+ diskversion=0 ; set to 1 if running/chaining off disk
+
+; Versioning notes.....
+
+ allowcheat=0
+
+; set notmac=1 for 16 bit versions other than mac and 8bit disk versions
+; set notmac=0 for 8 bit cassette versions and mac
+; (notmac=0 disables the insert disk messages)
+ notmac=0
+
+ amigakludge=0
+ includepictures=0
+ includeoops=1 ; include oops/ramsave?
+
+ RemoveGroupsOf3=1
+ IncludeFunnies=0
+ AmstradKludge=0 ; draws picture 1 immediately for amstrad disk versions
+;----

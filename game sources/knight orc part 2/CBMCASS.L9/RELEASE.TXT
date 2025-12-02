@@ -1,0 +1,15 @@
+; Release notes for CBM Cassette version.
+;
+; This version was produced on 11/9/87, but the versions
+; are not timed for some obscure reason.
+;
+; History:
+; The CBM Disk version was released last week, and accepted by
+; Rainbird Today (11/9/87) - by Gary.
+;
+; He asked me where the cbm cass version had got to - claiming
+; that they were waiting on it. I eventually agreed to re-release
+;
+; From disk produced at same time as the CBM disk data - with
+; the appropriate changes
+

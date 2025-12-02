@@ -1,0 +1,264 @@
+; Knight Orc Asource
+;
+; M.J.Austin 20/9/86
+;
+; Game-specific constant definitions
+;
+
+CONST
+ MAXMOVEABLE=149 ; MAX OBJECT WHICH MAY BE TAKEN, THROWN ETC.
+ MAXMOVEAPLUSONE=94
+
+ xmax=15
+ ymax=12 ;3
+ minsynthroomminusone=33
+ minsynthroom=34
+ minsynthroomplusone=35
+ maxsynthroom=240
+ minsceneryobj=179 ;120
+ minsceneryobjminusone=178
+ maxsceneryobj=191 ; 139
+ maxsceneryobjplusone=192 ; 140
+ minsceneryobjtimes2plus1=359 ; 241
+ maxsceneryobjplus1times2=384
+ numsceneryobjplusone=12
+;---
+ minweaponminusone=39
+ minweapon=40
+ maxweapon=49
+ maxweaponplusone=50
+;
+ minclothes=90
+ maxclothes=93
+;
+ mintreasure=50
+ mintreasureminusone=49
+ maxtreasure=71
+ maxtreasureplusone=72
+
+ minrope=78
+ maxrope=89
+ maxropeplusone=90
+
+ minfood=75
+ maxfood=78
+ maxfoodplusone=79
+
+ minallobject=40
+ maxallobject=120
+
+ MAXOBJECTVISIBLE=160 ;70
+ MAXOBJECT=191 ; goes wrong for maxobject>190 (dunno why!)
+; - inventory gets a funny value for hisearchpos (24)
+ MAXOBJECTPLUSONE=192
+;
+; Preposition values (all relative to prepoffset)
+;
+ riddenby=6
+ tiedupwith=9 ; special to ko1
+ betweenthemistied=10 ; special to ko1
+ FASTENEDTO=14
+ holdingthelid=15
+ through=209
+;
+; VERBS...
+ itakegoldtopub=137 ; for npcs only
+ icatch=165
+;
+;------------------
+; Now offsets into SCORETABLE
+ scmax=5
+ scmaxplusone=6
+;---
+; Objects
+ user=1
+ orchunter=2
+ blackknight=3
+ sam=4
+ kris=5
+ thor=6
+ priest=7
+ cleric=8
+ innkeeper=9
+ fergus=10
+ rapunzel=11
+ hermit=12
+ greenknight=13
+ shiningknight=14
+ valkyrie=15
+ denzyl=17
+
+ goat=30
+ wight=31
+ ghost=32
+ horse=33
+ greenknighthorse=34
+ userhorse=35
+ hugeknight=36
+
+ sword=40
+ dagger=41
+ poignard=42
+ bentknife=43
+ greenknightaxe=44
+ lance=45
+ spear=46
+; parts of the rope...
+ initialrope=78 ; ties you onto horse at start
+ rope=79
+ hair=80
+ wellrope=81
+ lassoo=82
+ belt=83
+ reins=84
+ noose=85
+ halyard=86
+ strap=87
+ washingline=88
+ tether=89
+;---
+; clothes...
+ cloak=90
+ hermitsrobes=91
+ greensuit=92
+;
+ cask=100
+;
+ fullglass=102
+ emptyglass=103
+ bucket=104
+ welcomemat=105
+ note=106
+ chest=107
+ flag=108
+ key=109
+ horsehead=110
+;
+ bar=150
+ drawbridge=152
+ ominousdoor=153
+ wellroller=154
+ garbage=155
+ trophycabinet=156
+ flagpole=157
+ posts=158
+;
+; invisible objects...
+ hanginghair=171
+ orcring=172
+ hedge=174
+;
+ EYES=139
+
+
+ glowspell=168
+;---
+; sccernery objects...
+ gibbet=180
+ castle=181
+ clearing=182
+ crossroads=183
+ fairground=184
+ lawn=185
+ cave=186
+ tree=187
+ tower=188
+ viaduct=189
+ well=190
+ olympusgate=191
+;
+ teleportspell=200 ; for compatability with part 2 only
+ locatespell=200 ; for compatability with part 2 only
+;---
+; some omni-present objects
+ beer=246
+;---
+ minpeople=1 ; = creaturebase
+ maxpeople=39 ; = maxnpc
+ maxpeopleplusone=40
+ creaturebase=1 ; including people, user etc.
+ creaturebaseminusone=0 ; including people, user etc.
+ MINNPC=2 ; all except user
+ MINNPCMINUSONE=1 ; all except user
+ MAXNPC=39
+ MAXNPCPLUSONE=40
+ MAXTALKINGNPCPLUSONE=30
+;---
+; entries in list 6
+; npcs are list 6..
+ npctablesizetozero=1039 ;>>mike 27/8/87 -was 168 ; vandalmax - includes npcstack
+ NPCTABLESIZE=640 ; MAXNPCPLUSONE*16
+ npctablesizeplus16=656 ; npctablesize+npcentrysize
+
+; spells are list 6..
+; SPTARGETBASE=640 ; = npctablesize ; after npc current attributes
+; NUMSPELLS=18
+; NUMSPELLSPLUSONE=19
+ NPCCURRENTOFFSET=0
+; npc stack is list6
+ npcstackbase=641 ; sptargetmax+1
+ npcstackbaseplus5=646
+ maxnpcEntries=75 ;>>mike 8/8/87 - reduced from 100 of ST version
+;; maxnpcentries=100 ; 5 bytes per entry on stack, so table size of 0.5 k
+; vandal table comes after npcstack in list6
+;>>mike 30/7/87 vandalbase=1920 ; maxnpcentries*5+npcstackbase
+;>>mike 30/7/87 vandalmax=1930 ; vandalbase+10
+ vandalbase=1029 ; >>Mike 8/8/87 - reduced from ST's vandalbase=1157
+ vandalmax=1039 ; >>mike 8/8/7 - reduced from ST's vandalmax=1167
+;---
+; SPELLBASE=220 ; relative to NOENOFFSET
+; SPELLBASEMINUSONE=219 SPELLMAX=238
+; SPELLMAXPLUSONE=239
+; ABSSPELLBASE=520
+ MINOMNI=193 ;****179 ; all real objects above this are omni-present
+ MINOMNIMINUSONE=192 ;&***178
+ MAXOMNI=260 ; must include ieverything, except, it
+;-----
+; offsets within npccurrent
+ enemyoffset=0
+ followoffset=1 ; person to follow normally
+ masteroffset=2 ; the person or creature who subdued this npc
+ hitpointoffset=3
+ hatredoffset=4 ; the amount which this npc hates its enemy
+ npcptroffset=8
+ boredomoffset=9
+ attentionoffset=10
+; and pointers to npcinitial
+ dodgeoffset=1
+ attackoffset=2
+ greedoffset=4 ; in static data
+ aggressionoffset=5 ; in static data
+ timidityoffset=6 ; in static data
+ obedienceoffset=7
+ goldsingingoffset=8 ; in static data - word (hi byte first)
+ patienceoffset=10
+;
+;---
+; orc hunter state messges...
+ minstunned=30000
+ maxstunnedplusone=30006
+;---
+; internal picture numbers (pictures for static
+; rooms are just the room number)
+ forestpicture=256
+ joustpicture=257
+ orcpicture=258
+ dragonpicture=259
+;---
+constantpartnum=1 ; 1=p1, 2=hitech, 3=magic
+;---
+;
+VAR
+; game-specific variables...
+ drawbridgestate
+ cheststate
+ knightstate
+ orchunterstate
+ greenknightstate
+ c6 ; used to add to peoplechasingorc
+ comingforhorse
+ ropelength
+ gkstruggling
+ servicerequested
+ picture1displayed
+;---

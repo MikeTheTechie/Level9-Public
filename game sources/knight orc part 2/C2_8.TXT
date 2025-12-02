@@ -1,0 +1,9 @@
+; C2_8.TXT
+;
+; For 8 bit machines
+;
+; File to hold conditional assembly values which vary between
+; part 1 and part2/3.
+ const
+
+ includeprotection=0

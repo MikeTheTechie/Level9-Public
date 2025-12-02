@@ -1,0 +1,573 @@
+; Knight Orc exits:
+; Copyright (C) 1986 Level 9 Computing.
+;
+; This exit table MUST be used for 68000 versions due to an INT bug
+;
+;
+; format is LDIR dir dest
+;
+;              1
+;           8     2
+;              !
+;         7  --+--   3
+;              !
+;           6     5
+;              4
+;
+; up=9
+; down=10
+; in=11
+; out=12
+; cross=13
+; climb=14
+; jump=15
+;
+; special notes for interface between static and synth rooms..
+;
+; There must be an in/out connection between the static
+; and the object number of the scenery object
+; to which it connects.
+;
+; e.g. If you have a location object "[480:^N castle]"
+;
+;
+; then an exit from room 15:
+;		 1001 12 180
+; will set up an in/out connection to the room where object no. 180
+; is situated. This allows the exit table to be changed easily.
+;
+;
+;Room number 1
+; room modifiers for forest in part1
+0000 1 12 ; 16
+0000 2 13 ; 17
+0000 3 1
+0000 4 244 ; 240
+0000 5 245 ; 241
+0000 6 243 ; 239
+0000 7 255
+1000 8 11 ; 15
+;Room number 2 - kitchen
+0001 7 3 ; west to landing
+1001 10 3 ; down to landing
+;Room number 3 - landing
+1001 7 4
+;Room number 4 - darkly-lit corridor
+1001 4 37 ; to cave maze
+;Room number 5 - headquarter's cave
+1001 3 4 ; to corridor
+;Room number 6 - guardroom
+1001 7 3 ; west to landing
+;Room number 7
+1000 0 0
+;Room number 8 - outside world (can never get there)
+1000 0 0 ; no exits to game!
+;Room number 9 - foyer
+1000 11 9 ; in through opening - can't get anywhere
+;Room number 10 - corridor
+0001 9 15 ; up to inaccessible room
+1001 7 9 ; west to foyer
+;Room number 11 - wide road
+0001 1 190 ; north to exit object
+1101 7 10 ; west to corridor
+;Room number 12 - west of turnstile
+1001 6 10 ; sw to corridor
+;Room number 13 - east of turnstile
+0001 5 11 ; se to wide road
+1001 7 12 ; west to west of turnstile
+;Room number 14 - 
+1001 0 0
+;Room number 15 - 
+1000 0 0
+;Room number 16 - 
+1001 0 0
+;Room number 17 - 
+1001 0 0
+;Room number 18 - 
+1000 0 0
+;Room number 19
+1000 0 0
+;Room number 20 - east of troll bridge
+1001 4 18
+;Room number 21 - troll's lair
+1101 4 182 ; south to bridge object
+;Room number 22 - office
+1001 4 31
+;Room number 23 - drawbridge
+1001 1 188
+;Room number 24 - courtyard
+1001 1 23
+;Room number 25 - steps
+1001 3 35
+;Room number 26 - heaven
+1001 4 189 ; south to gate object
+;Room number 27 - cupboard
+1101 7 26
+;Room number 28 - dungeon
+1001 4 25
+;Room number 29 - armoury
+1001 4 28
+;Room number 30 - corridor
+1001 7 35
+;Room number 31 - library
+1101 4 30
+;Room number 32 - shed
+1101 3 186
+;Room number 33 - barrow
+1101 1 36
+;Room number 34
+1001 0 0
+;Room number 35 - hall
+1101 1 24
+;Room number 36 - south graveyard
+1001 1 185
+;Room number 37 - junction
+1001 4 43
+;Room number 38 - junction
+0001 7 180
+0001 3 37
+1001 4 39
+;Room number 39 - maze
+0001 5 41
+1001 4 40
+;Room number 40 - maze
+1001 3 41
+;Room number 41 - maze
+1001 3 42
+;Room number 42 - dark room
+1000 0 0
+;Room number 43 - corridor
+1001 3 44
+;Room number 44 - corridor
+1001 3 45
+;Room number 45 - corridor
+1000 0 0
+;Room number 46 - dragon's room
+1001 1 45
+;Room number 47 - cupboard south of kitchen
+1001 1 2 ; north to kitchen
+;Room number 48 - dark room
+1000 1 3
+;Room number 49 - secret room in house
+1001 3 50
+;Room number 50 - north bedroom
+0001 4 51
+1001 10 51
+;Room number 51 - stairs
+1101 4 52
+;Room number 52 - south bedroom
+1001 10 51
+;Room number 53 - porch
+0001 7 183 ; west to house locn object
+0001 12 183 ; out to house locn object
+1001 1 54
+;Room number 54 - hall
+0001 9 51
+1001 3 51
+;Room number 55 - inside mouse hole
+1001 12 52 ; out to bedroom
+;Room number 56
+1000 0 0
+;Room number 57
+1000 0 0
+;Room number 58
+1000 0 0
+;Room number 59
+1000 0 0
+;Room number 60
+0001 1 65
+0001 2 66
+1001 3 61
+;Room number 61
+0001 8 65
+1001 1 66
+;Room number 62
+1000 0 0
+;Room number 63
+1000 0 0
+;Room number 64
+1000 0 0
+;Room number 65
+0001 1 71
+0001 2 72
+1001 3 66
+;Room number 66
+0001 8 71
+1001 1 72
+;Room number 67
+1000 0 0
+;Room number 68
+1000 0 0
+;Room number 69
+1000 0 0
+;Room number 70
+1000 0 0
+;Room number 71
+0001 8 75
+0001 1 76
+0001 2 150
+1001 3 72
+;Room number 72
+0001 8 76
+1001 1 150
+;Room number 73
+1000 0 0
+;Room number 74
+0001 1 81
+1001 2 140
+;Room number 75
+1000 0 0
+;Room number 76
+1000 0 0
+;Room number 77
+1000 0 0
+;Room number 78
+1000 0 0
+;Room number 79
+1000 0 0
+;Room number 80
+1000 0 0
+;Room number 81
+1000 0 0
+;Room number 82
+1000 0 0
+;Room number 83
+1000 0 0
+;Room number 84
+1000 0 0
+;Room number 85
+1000 0 0
+;Room number 86
+1000 0 0
+;Room number 87
+1000 0 0
+;Room number 88
+1000 0 0
+;Room number 89
+1000 0 0
+;Room number 90
+1000 0 0
+;Room number 91
+1000 0 0
+;Room number 92
+1000 0 0
+;Room number 93
+1000 0 0
+;Room number 94
+1000 0 0
+;Room number 95
+1000 0 0
+;Room number 96
+1000 0 0
+;Room number 97
+1000 0 0
+;Room number 98
+1000 0 0
+;Room number 99
+1000 0 0
+;Room number 100
+1000 0 0
+;Room number 101
+1000 0 0
+;Room number 102
+1000 0 0
+;Room number 103
+1000 0 0
+;Room number 104
+1000 0 0
+;Room number 105
+1000 0 0
+;Room number 106
+1000 0 0
+;Room number 107
+1000 0 0
+;Room number 108
+1000 0 0
+;Room number 109
+1000 0 0
+;Room number 110
+1000 0 0
+;Room number 111
+1000 0 0
+;Room number 112
+1000 0 0
+;Room number 113
+1000 0 0
+;Room number 114
+1000 0 0
+;Room number 115
+1000 0 0
+;Room number 116
+1000 0 0
+;Room number 117
+1000 0 0
+;Room number 118
+1000 0 0
+;Room number 119
+1000 0 0
+;Room number 120
+1000 0 0
+;Room number 121
+1000 0 0
+;Room number 122
+1000 0 0
+;Room number 123
+1000 0 0
+;Room number 124
+1000 0 0
+;Room number 125
+1000 0 0
+;Room number 126
+1000 0 0
+;Room number 127
+1000 0 0
+;Room number 128
+1000 0 0
+;Room number 129
+1000 0 0
+;Room number 130
+1000 0 0
+;Room number 131
+1000 0 0
+;Room number 132
+1000 0 0
+;Room number 133
+1000 0 0
+;Room number 134
+1000 0 0
+;Room number 135
+1000 0 0
+;Room number 136
+1000 0 0
+;Room number 137
+1000 0 0
+;Room number 138
+1000 0 0
+;Room number 139
+1000 0 0
+;Room number 140
+1000 0 0
+;Room number 141
+1000 0 0
+;Room number 142
+1000 0 0
+;Room number 143
+1000 0 0
+;Room number 144
+1000 0 0
+;Room number 145
+1000 0 0
+;Room number 146
+1000 0 0
+;Room number 147
+1000 0 0
+;Room number 148
+1000 0 0
+;Room number 149
+1000 0 0
+;Room number 150
+1000 0 0
+;Room number 151
+1000 0 0
+;Room number 152
+1000 0 0
+;Room number 153
+1000 0 0
+;Room number 154
+1000 0 0
+;Room number 155
+1000 0 0
+;Room number 156
+1000 0 0
+;Room number 157
+1000 0 0
+;Room number 158
+1000 0 0
+;Room number 159
+1000 0 0
+;Room number 160
+1000 0 0
+;Room number 161
+1000 0 0
+;Room number 162
+1000 0 0
+;Room number 163
+1000 0 0
+;Room number 164
+1000 0 0
+;Room number 165
+1000 0 0
+;Room number 166
+1000 0 0
+;Room number 167
+1000 0 0
+;Room number 168
+1000 0 0
+;Room number 169
+1000 0 0
+;Room number 170
+1000 0 0
+;Room number 171
+1000 0 0
+;Room number 172
+1000 0 0
+;Room number 173
+1000 0 0
+;Room number 174
+1000 0 0
+;Room number 175
+1000 0 0
+;Room number 176
+1000 0 0
+;Room number 177
+1000 0 0
+;Room number 178
+1000 0 0
+;Room number 179
+1000 0 0
+;Room number 180
+1000 0 0
+;Room number 181
+1000 0 0
+;Room number 182
+1000 0 0
+;Room number 183
+1000 0 0
+;Room number 184
+1000 0 0
+;Room number 185
+1000 0 0
+;Room number 186
+1000 0 0
+;Room number 187
+1000 0 0
+;Room number 188
+1000 0 0
+;Room number 189
+1000 0 0
+;Room number 190
+1000 0 0
+;Room number 191
+1000 0 0
+;Room number 192
+1000 0 0
+;Room number 193
+1000 0 0
+;Room number 194
+1000 0 0
+;Room number 195
+1000 0 0
+;Room number 196
+1000 0 0
+;Room number 197
+1000 0 0
+;Room number 198
+1000 0 0
+;Room number 199
+1000 0 0
+;Room number 200
+1000 0 0
+;Room number 201
+1000 0 0
+;Room number 202
+1000 0 0
+;Room number 203
+1000 0 0
+;Room number 204
+1000 0 0
+;Room number 205
+1000 0 0
+;Room number 206
+1000 0 0
+;Room number 207
+1000 0 0
+;Room number 208
+1000 0 0
+;Room number 209
+1000 0 0
+;Room number 210
+1000 0 0
+;Room number 211
+1000 0 0
+;Room number 212
+1000 0 0
+;Room number 213
+1000 0 0
+;Room number 214
+1000 0 0
+;Room number 215
+1000 0 0
+;Room number 216
+1000 0 0
+;Room number 217
+1000 0 0
+;Room number 218
+1000 0 0
+;Room number 219
+1000 0 0
+;Room number 220
+1000 0 0
+;Room number 221
+1000 0 0
+;Room number 222
+1000 0 0
+;Room number 223
+1000 0 0
+;Room number 224
+1000 0 0
+;Room number 225
+1000 0 0
+;Room number 226
+1000 0 0
+;Room number 227
+1000 0 0
+;Room number 228
+1000 0 0
+;Room number 229
+1000 0 0
+;Room number 230
+1000 0 0
+;Room number 231
+1000 0 0
+;Room number 232
+1000 0 0
+;Room number 233
+1000 0 0
+;Room number 234
+1000 0 0
+;Room number 235
+1000 0 0
+;Room number 236
+1000 0 0
+;Room number 237
+1000 0 0
+;Room number 238
+1000 0 0
+;Room number 239
+1000 0 0
+;Room number 240
+1000 0 0
+;Room number 241
+1000 0 0
+;Room number 242
+1000 0 0
+;Room number 243
+1000 0 0
+;Room number 244
+1000 0 0
+;Room number 245
+1000 0 0
+;Room number 246
+1000 0 0
+;Room number 247
+1000 0 0
+;Room number 248
+1000 0 0
+;Room number 249
+1000 0 0
+;Room number 249
+;Room number 250
+;Room number 251
+;Room number 252
+;Room number 253
+0000 0 0

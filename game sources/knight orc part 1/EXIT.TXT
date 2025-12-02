@@ -1,0 +1,114 @@
+; Knight Orc exits:
+; Copyright (C) 1986 Level 9 Computing.
+;
+; format is LDIR dir dest
+;
+;              1
+;           8     2
+;              !
+;         7  --+--   3
+;              !
+;           6     5
+;              4
+;
+; up=9
+; down=10
+; in=11
+; out=12
+; cross=13
+; climb=14
+; jump=15
+;
+; special notes for interface between static and synth rooms..
+;
+; There must be an in/out connection between the static
+; and the object number of the scenery object
+; to which it connects.
+;
+; e.g. If you have a location object "[480:^N castle]"
+;
+;
+; then an exit from room 15:
+;		 1001 12 180
+; will set up an in/out connection to the room where object no. 180
+; is situated. This allows the exit table to be changed easily.
+;
+;
+;Room number 1
+; room modifiers for forest in part1
+0000 1 16
+0000 2 17
+0000 3 1
+0000 4 240
+0000 5 241
+0000 6 239
+0000 7 255
+1000 8 15
+;Room number 2 (in castle courtyard)
+0001 12 20 ; out to drawbridge
+1001 4 20 ; south to drawbridge
+;Room number 3 (lobby where black knight waits)
+1101 4 2
+;Room number 4 (staircase)
+1001 10 3
+;Room number 5 (keep roof)
+0001 14 181 ; climb to castle object (outside)
+1001 10 4
+;Room number 6 (cave)
+1001 12 186 ; out to cave object
+;Room number 7 (royal oak)
+1001 12 187 ; out to oak scenery object
+;Room number 8
+0001 12 184 ; out to fairground object
+1001 7 184 ; west to fairground object
+;Room number 9
+1001 7 8 ; west from saloon into public
+;Room number 10
+1001 9 9 ; up to saloon bar
+;Room number 11 - market
+1001 3 184
+;Room number 12 
+1000 0 0
+;Room number 13 - stable
+1001 3 14
+;Room number 14 - jousting field
+1001 1 184
+;Room number 15 - trampled field
+0010 11 29 ; in to garbage heap
+0010 9 29 ; up to garbage heap
+1001 7 14
+;Room number 16 - grandstand
+1001 1 14
+;Room number 17 - (tower where rapunzel sits)
+1000 0 0
+;Room number 18 - (on viaduct - just north of broken bit)
+1001 1 189
+;Room number 19 - (well)
+0001 14 190 ; climb to well object
+1001 9 190 ; up to well object
+;Room number 20 - on drawbridge
+0011 4 181 ; south to synthesised room
+1001 12 181 ; out to synthesised room ; must have in/out for link
+;Room number 21 - east of crossroads
+1001 7 183
+;Room number 22 - north of crossroads
+1001 4 183
+;Room number 23 - west of crossroads
+1001 3 183
+;Room number 24 - 
+1000 0 0
+;Room number 25 - base of tower
+0001 9 17
+0001 14 17
+1001 4 188 ; south to tower object
+;Room number 26 - laboratory1
+1001 1 191 ; north to olympus gate
+;Room number 27 - laboratory2
+1000 0 0 ;not present in part 1. 1001 7 26
+;Room number 28 - holding tank
+1000 0 0
+;Room number 29 - garbage heap
+0000 10 15 ; down to trampled field
+1000 12 15
+;Room number 30
+0000 0 0
