@@ -1,0 +1,221 @@
+; Hires code for Time and Magik
+;
+; M.J.Austin 23:07 15/7/87
+;
+; Copyright (c) 1987 Level 9 Computing.
+;---
+var
+ picture1displayed
+ xcoord ycoord
+ npclist9save0
+ npclist9save1
+ npclist9save2
+ npclist9save3
+ npclist9save4
+ npclist9save5
+ npclist9save6
+
+
+begin
+
+;.showpicture
+; displaypicture for room PICTURETODRAW
+; this is either a static room number 2..25
+; or a scenery object number 180..200
+; or 255=forest
+; x1=1 ; joust
+; if picturetodraw=joustpicture then drawpicturex1
+; x1=2 layed=true ; picture 1 is ALWAYS the first pic to be shown.
+; BUT we can only be certain it is finished when we draw the next one.
+
+.drawing1
+ xcoord=0
+ ycoord=0
+ if x1=1 then dp4
+ xcoord=48
+ ycoord=9 ; >> was 10 for knight orc
+
+.dp4
+ gosub @savelist9
+ x2=32
+
+ list9(0)=x2
+
+ list9(1)=c0
+ list9(2)=x1 ; picture number to draw
+
+.picturenotcheat
+ list9(3)=c0
+ list9(4)=xcoord
+
+ list9(5)=c0
+ list9(6)=ycoord
+ driver
+ goto @restorelist9
+
+;---
+.diskinterlock
+ x1=200 ; stop all picture drlayed=true ; picture 1 is ALWAYS the first pic to be shown.
+; BUT we can only be certain it is finished when we draw the next one.
+
+.drawing1
+ xcoord=0
+ ycoord=0
+ if x1=1 then dp4
+ xcoord=48
+ ycoord=9 ; >> was 10 for knight orc
+
+.dp4
+ gosub @savelist9
+ x2=32
+
+ list9(0)=x2
+
+ list9(1)=c0
+ list9(2)=x1 ; picture number to draw
+
+.picturenotcheat
+ list9(3)=c0
+ list9(4)=xcoord
+
+ list9(5)=c0
+ list9(6)=ycoord
+ driver
+ goto @restorelist9
+
+;---
+.diskinterlock
+ x1=200 ; stop all picture drawing
+ gosub @waitpic ; (will finish picture 1 first, if not yet displayed)
+
+;
+; this message printing/osrdch should take long enough
+; for there to have been a task swap since the above "kill picture"
+; command.
+ message 2401 ; please insert save disk and strike a key
+ x2=25000 ; good long time to wait
+ gosub @timeoutosrdch
+ message cr ; to signal to user that we have acknowledged.
+
+.restoredelay
+ x2=34 ; is picture still being drawn?
+ list9(0)=x2
+ driver
+ x2=list9(2)
+ if x2<>0 then restoredelay ; loop if ANY picture displayed.
+
+.dpret
+ return
+;---
+.RESTORE
+ M1=2400 ; really restore ? ;>>mike 19/7/87 - was message
+ GOSUB @YESORNO
+ if y1=0 then restoreend ;>>Mike 15/7/87 IF RESULT=FALSE THEN RESTOREEND
+
+.DORESTORE
+;*********** GOSUB @BOOKPROTECT
+;************ IF RESULT=FALSE THEN AFTERDORESTORE
+ gosub diskinterlock ; finish all picture activity first.
+ RESTORE
+ message 2402 ; please reinsert game disk
+
+.afterdorestore
+ if gameover=true then @restartorrestore ; restore failed.
+;>>mike 19/7/87 NOMOREINPUT=FALSE
+;>>mike 19/7/87 EOL=FALSE
+;>>mike 19/7/87 GOSUB @GETNEXTWORD
+
+.AFTERRESTORE
+ OOPSPOS=1 ; musn't do an oops now - to prevent corruption if
+ OOPSPOSEND=0 ; type OOPS immediately after a restore
+.afteroops ;>>mike 19/7/87
+ LASTPICTURE=0 ; allow picture to be drawn
+.RESTOREEND
+ if thisgame=timeandmagik then restore1
+.wronggame
+ message 2412 ; wrong game
+ goto @restartorrestore
+
+.restore1
+ if thispart=constantpartnum then restore2
+ parttochain=thispart
+
+.chainparttochain
+ if c1=diskversion then diskchain
+ message 2411 ; you are about to chain - do you want to save first?
+ gosub @yesorno
+ if result=false then cassettechain
+ save
+ goto @chainparttochain ; allow multiple copies
+
+.cassettechain
+ m1=2413 ; put in cassette containing part number
+ message m1
+ add m1,parttochain ; 2413+1,2,3 are names of games
+ message m1
+
+.diskchain
+; chain in "PARTTOCHAIN"
+ x1=200
+ gosub @waitpic ; kill any picture which is currently loading
+ x1=11
+ list9(0)=x1
+ list9(1)=parttochain
+
+; pass data to part 2 in first byte of currentpos/hicurrentpos lists...
+; currentpos(0)=ropelength ; score
+; hicurrentpos(0)=c0 ; no cloak unless changed....
+
+ driver
+ goto @restartorrestore
+
+.restore2
+ GOTO @gameafterrestore
+;---
+.timeoutosrdch
+; wait for time x2, return x1=any key entered
+ gosub @osrdch
+ if x1<>0 then tooret
+ sub x2,c1
+ if x2<>0 then @timeoutosrdch
+.tooret
+ return
+;---
+.savelist9
+ npclist9save0=list9(0)
+ npclist9save1=list9(1)
+ npclist9save2=list9(2)
+ npclist9save3=list9(3)
+ npclist9save4=list9(4)
+ npclist9save5=list9(5)
+ npclist9save6=list9(6)
+ return
+;---
+.restorelist9
+ list9(0)=npclist9save0
+ list9(1)=npclist9save1
+ list9(2)=npclist9save2
+ list9(3)=npclist9save3
+ list9(4)=npclist9save4
+ list9(5)=npclist9save5
+ list9(6)=npclist9save6
+ return
+;---
+;---
+.osrdch
+ gosub savelist9
+ x1=3 ; osrdch
+ list9(0)=x1
+ driver
+ x1=list9(1)
+ goto restorelist9
+;---
+;---
+.SAVE
+ gosub @diskinterlock
+ SAVE
+ message 2402 ; please insert game disk
+.SAVERET
+ RETURN
+;---
+

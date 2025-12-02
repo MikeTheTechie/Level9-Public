@@ -1,0 +1,1436 @@
+; Standard adventure source, copyright (C) 1987 Level 9 Computing.
+;
+; ACORE.TXT, core routines for the game, e.g standard printing code.
+; Code in here is basically unchanged from game to game, but if you 
+; do need to make any alterations, be sure to mark them with a comment 
+; of the form below, so we can check them by searching for the ">>":
+; ADD X1,X2 ; >> SPECIAL TO KNIGHT ORC
+;
+BEGIN
+;
+.DESCactor
+; Print any special messages for actor
+; e.g. 'You are standing on the object'
+ X1=HICURRENTPOS(actor)
+ IF X1=0 THEN DESCPLAYRET
+ GOSUB @printTHEactor
+ X1=HICURRENTPOS(actor)
+ X2=1740
+ ADD X1,X2
+ MESSAGE X1 ; are standing on / sitting on / lying on etc.
+ X1=CURRENTPOS(actor)
+ GOSUB @printTHEobjectx1
+ MESSAGE DOT
+.DESCPLAYRET
+ RETURN
+;---
+.CHECKIFOBVIOUS
+; see if 'OBJECT' is immediately obvious
+ if object=actor then ciofail
+ OBVIOUS=TRUE
+ IF SEARCHDEPTH=0 THEN CIORET
+ X1=HICURRENTPOS(OBJECT)
+ IF X1=0 THEN CIORET ; things on ground are always obvious
+ X1=CURRENTPOS(OBJECT)
+ if printingobjects=true then cionotactor
+ if x1=actor then cioret ; actor's possesions are always obvious
+.cionotactor
+ ADD X1,X1
+; look at hi initial position of container
+ X2=OBJECTSTART(X1)
+ IF X2>127 THEN CIORET ; 'obvious' bit set
+.CIOFAIL
+ OBVIOUS=FALSE
+.CIORET
+ RETURN
+;---
+; Print list of exits from current location..
+;
+.exits
+.printEXITS
+ severalexits=FALSE
+ OWTYPE=OWEXITS
+ if room<minsynthroomminus1 then penormal
+ gosub @getxy
+; what is scenery type here?
+ x1=room
+ x2=minsynthroo1 ; current direction
+.PELOOP
+; PRINT AN EXIT ( IF VISIBLE)
+ FROM=ROOM
+ GOSUB @CHECKEXIT
+ IF EXITVISIBLE=FALSE THEN PENEXTDIR
+ WORD1=EXITDESCBASE
+ ADD WORD1,DIR
+ word2=0
+ word3=0
+ word4=0
+ IF DOOR=0 THEN PENODOOR
+ WORD2=12 ; base for door messages
+ ADD WORD2,DOOROPEN
+.PENODOOR
+ if severalexits=TRUE then pe2 ; already printed message
+ IF wordsoutput<>2 THEN PE2
+ MESSAGE 10 ; EXITS ARE
+.PE2
+.PEDESC
+ GOSUB @OUTWORD1234
+.PENEXTDIR
+ ADD DIR,C1
+ IF DIR<14 THEN PELOOP
+.PERET1
+ if severalex1 ; current direction
+.PELOOP
+; PRINT AN EXIT ( IF VISIBLE)
+ FROM=ROOM
+ GOSUB @CHECKEXIT
+ IF EXITVISIBLE=FALSE THEN PENEXTDIR
+ WORD1=EXITDESCBASE
+ ADD WORD1,DIR
+ word2=0
+ word3=0
+ word4=0
+ IF DOOR=0 THEN PENODOOR
+ WORD2=12 ; base for door messages
+ ADD WORD2,DOOROPEN
+.PENODOOR
+ if severalexits=TRUE then pe2 ; already printed message
+ IF wordsoutput<>2 THEN PE2
+ MESSAGE 10 ; EXITS ARE
+.PE2
+.PEDESC
+ GOSUB @OUTWORD1234
+.PENEXTDIR
+ ADD DIR,C1
+ IF DIR<14 THEN PELOOP
+.PERET1
+ if severalexits=TRUE then peret2 ; already printed message
+ IF wordsoutput>2 THEN PERET2
+ MESSAGE 11 ; ONLY VISIBLE EXIT IS
+.PERET2
+ GOSUB @OUTWORDnone ; flush bufer
+; if wanttoprintand=FALSE then peret
+; message dot
+; wanttoprintand=FALSE
+.PERET
+ RETURN
+;---
+; Print list of objects in specified position..
+;
+.printOBJECTS
+; GO THROUGH CURRENT OBJECT POSITION LIST,
+; AND DISPLAY ALL THE OBJECTS AT (HISEARCHPOS,SEARCHPOS)
+ OWTYPE=OWOBJECTS
+ GOSUB INITGETOBJ
+ TOTALOBJECTFOUND=0
+ wordsoutput=1
+ printingobjects=true
+ numobjectfound=0
+.PO1
+ GOSUB GETNEXTOBJECT
+ IF OBJECT=actor THEN PO1
+ IF OBJECT>MAXOBJECTVISIBLE THEN PO1
+ IF OBJECT=0 THEN POEND
+ GOSUB CHECKIFOBVIOUS
+ IF OBVIOUS=FALSE THEN PO3
+.PO1A
+ if hisearchpos<>0 then po1b
+; looking on ground, so must disregard user (assumes user=1)
+ if numobjectfound>2 then po2
+ goto po1c
+.po1b
+ IF numobjectfound>1 THEN PO2 ; have already printed containment type
+.po1c
+ ADD TOTALOBJECTFOUND,C1
+ GOSUB OUTWORDNONE ; output any buffered words
+ GOSUB PRINTCONTAINMENT ; PRINT CONTAINER ON FIRST OBJECT FOUND ONLY
+.PO2
+ WORD1=OBJECT
+ WORD2=0
+ GOSUB OUTWORD12 ; Output object name (delayed effect)
+.PO3
+ goto po1
+.poend
+ printingobjects=false
+ gosub outwordnone ; output any buffered words
+ if wanttoprintand=false then poret
+ goto printDOT
+.poret
+ RETURN
+;---
+.GETNEXTOBJECT
+; RETURN OBJECT=OBJECT FOUND
+;    SEARCHPOS=ROOM OR CONTAINER WHERE FOUND
+;  HISEARCHPOS=TYPE OF CONTAINMENT (=0 FOR ROOMS)
+;
+; BEFORE FIRST CALL, GOSUB INITGETOBJ AND SETUP HI,SEARCHPOS
+; AT END OF SEARCH, ALL ZEROS ARE RETURNED
+; RETURN NUMOBJECTFOUND=NUMBER OF OBJECT FOUND IN THIS PASS
+;
+ X1=MAXOBJECTVISIBLE
+.GETNEXTOBJX1
+ GETNEXT X1 HISEARCHPOS SEARCHPOS OBJECT NUMOBJECTFOUND SEARCHDEPTH
+.GNORET
+ RETURN
+;---      
+.INITGETOBJ
+ SEARCHDEPTH=1
+ X1=0
+ GETNEXT X1 X1 X1 X1 X1 X1
+ RETURN
+;--- 
+.printCONTAINMENT
+ wanttoprintand=false
+ X5=1600 ; BASE FOR CONTAINMENT MESSAGES (You can see)
+ IF HISEARCHPOS=0 THEN PCONGROUND
+ IF SEARCHPOS<>ACTOR THEN PC1
+ X5=1700 ; BASE for 'You are wearing' and 'You are carrying'
+.PC1
+ ADD X5,HISEARCHPOS ; first half of containment message
+ MESSAGE X5
+ IF HISEARCHPOS=0 THEN PCRET ; DON'T PRINT 'THE object' FOR 'YOU CAN SEE'
+ X1=SEARCHPOS ; CONTAINER OBJECT NUMBER
+ GOSUB @printTHEobjectx1
+ X1=40
+ ADD X5,X1 ; second half of containment message
+ MESSAGE X5
+.PCRET
+ RETURN
+;---
+.pconground
+ gosub @printACTOR
+ message 1600 ; 'can see'
+ return
+;---
+; Routines to output a list of words, adding appropriate punctuation. 
+; Output is delayed, presumably because we don't know what punctuation 
+; is needed until after deciding to print an item, e.g consider the 
+; difficulty of printing 'and' before the last entry in a list. They 
+; only seem to be used when listing objects and exits (see code above).
+;
+.OUTWORDNONE ; flush any buffered words
+ WORD1=0
+ WORD2=0
+;
+.OUTWORD12
+ WORD3=0
+ WORD4=0
+;
+.OUTWORD1234
+; BEFORE CALLING, SET OUTPUTWORD=0. AT THE END OF THE LIST, CALL THIS 
+; ROUTINE WITH X1=0 AND THE LIST WILL BE FINISHED OFF WITH A FULL STOP.
+ IF WORD1=0 THEN OWEND
+; FIRST OR SECOND WORD - JUST ADD TO BUFFER
+ add wordsoutput,c1
+ X4=OUTPUTWORD
+ VALUE=WORD1
+ GOSUB WRITEOUTBUFFER
+ VALUE=WORD2
+ GOSUB WRITEOUTBUFFER
+ VALUE=WORD3
+ GOSUB WRITEOUTBUFFER
+ VALUE=WORD4
+ GOSUB WRITEOUTBUFFER
+ OUTPUTWORD=X4
+ IF OUTPUTWORD<>24 THEN OWRET
+;
+.OW1
+; THIRD TO SUBSEQUENT WORDS - print out oldest word
+; in buffer, and shift the other two down
+ X4=0 ; index into OUTPUTBUFFER
+ GOSUB OWPRINT
+ X1=0
+ X2=8
+.OW2
+ X3=OUTPUTBUFFER(X2)
+ OUTPUTBUFFER(X1)=X3
+ ADD X1,C1
+ ADD X2,C1
+ IF X1<16 THEN OW2
+ MESSAGE COMMA
+ OUTPUTWORD=16
+.OWRET
+ RETURN
+
+.OWEND
+; HAVE RECEIVED THE TERMINATOR
+ wordsoutput=1
+ IF OUTPUTWORD=0 THEN OWRET ; NO WORDS OUTPUT AT ALL
+; THERE MUST BE AT LEAST ONE WORD REMAINING IN BUFFER - SO OUTPUT IT
+ X4=0 ; index into OUTPUTBUFFER
+ GOSUB OWPRINT
+ IF OUTPUTWORD=8 THEN OWSTOP ; ONLY ONE WORD OUTPUT - SO THATS IT !
+; MUST HAVE OUTPUTWORD=2, SO 2 OR MORE WORDS OUTPUT.
+; THEREFORE WANT TO F
+; must preserve X3
+ ADD X4,C1 ; write low byte first
+ OUTPUTBUFFER(X4)=VALUE
+ SUB X4,C1
+ GOSUB @VALUEDIV256
+ OUTPUTBUFFER(X4)=VALUE
+ ADD X4,C2 ; skip on to next entry
+ RETURN
+;---
+.READOUTBUFFER
+; read 16 bit word VALUE from OUTPUTBUFFER(X4)
+; do 16 bit autoincrement after the read
+ VALUE=OUTPUTBUFFER(X4)
+ GOSUB @VALUETIMES256
+ ADD X4,C1
+ X1=OUTPUTBUFFER(X4)
+ ADD VALUE,X1
+ ADD X4,C1 ; skip on to next entry
+ RETURN
+;---
+; Door routines, e.g to check if there's a door from this location..
+; must preserve X3
+ ADD X4,C1 ; write low byte first
+ OUTPUTBUFFER(X4)=VALUE
+ SUB X4,C1
+ GOSUB @VALUEDIV256
+ OUTPUTBUFFER(X4)=VALUE
+ ADD X4,C2 ; skip on to next entry
+ RETURN
+;---
+.READOUTBUFFER
+; read 16 bit word VALUE from OUTPUTBUFFER(X4)
+; do 16 bit autoincrement after the read
+ VALUE=OUTPUTBUFFER(X4)
+ GOSUB @VALUETIMES256
+ ADD X4,C1
+ X1=OUTPUTBUFFER(X4)
+ ADD VALUE,X1
+ ADD X4,C1 ; skip on to next entry
+ RETURN
+;---
+; Door routines, e.g to check if there's a door from this location..
+.SETUPDOOR
+ GOSUB CHECKFORDOOR
+ IF DOOR=FALSE THEN sudret
+ currentpos(generaldoor)=room
+ hicurrentpos(generaldoor)=c0
+.sudret
+ RETURN
+; 
+.CHECKFORDOOR
+; from ROOM, return DOOR =true if there is one
+ FROM=ROOM
+ DIR=1
+.CFD1
+ GOSUB @absCHECKEXIT
+ IF DOOR=TRUE THEN CFDRET
+ ADD DIR,C1
+ IF DIR<14 THEN CFD1
+.CFDRET
+ RETURN
+;---
+; Straightforward print routines. These are actually useful, unlike the 
+; peculiar "outword" routines above, which nobody (except possibly Mike) 
+; understands..
+;
+.printACTORactionDOT
+; print action done by actor: verb noun1 prep noun2
+ if lightinroom=false then daaret
+ gosub printACTORaction
+ goto @printdot
+
+.printACTORaction 
+ gosub printACTORverb
+ x1=noun1
+ gosub @printTHEobjectx1
+; now prep/noun2, if specified
+ if noun2=nullobject then daend
+ if prep=0 then pa1
+ gosub printPREP
+.pa1
+ object=noun2
+ gosub @printTHEobject2
+
+.daend
+.daaret
+ return
+;---
+.printPREP
+ m1printsave=m1
+ m1=prepoffset
+ add m1,prep
+ goto @printM1andrestoreM1
+;---
+.printANobjectVERB
+ x1=object ; ( the character doing the action)
+ gosub @printANobjectX1
+ goto printverb
+;---
+.printACTORverb
+ gosub printACTOR
+ goto printverbx1
+;---
+.PrintActorDot
+ gosub printActor
+ goto printDOT
+;---
+.printACTOR
+ x1=actor
+ goto printTHEobjectx1
+;---
+.printOBJECTverb
+ gosub @printTHEobject ; character doing the action
+; drop through to printverb...
+
+.printVERB
+; depending on OBJECT
+ x1=object
+
+.printVERBx1 ; print verb, with appropriate ending for an actor of x1
+ m1printsave=m1
+ m1=verb
+ if verb=iHAVE then pvhave
+ if verb=iAM then pvam
+ gosub @printverbnoending
+; now add appropriate ending, or none for USER
+ if x1=user then @pvreturn
+ m1=579 ; force printing of existing word, without trailing space
+ gosub @printM1
+ m1=581 ; verb ending 'es'
+ if verb=isearch then pves
+ if verb=isetupgo then pves
+ if verb=iextinguish then pves
+ if verb=ipress then pves
+ if verb=idress then pves
+ if verb=iscratch then pves
+ if verb=icrush then pves
+ if verb=idemolish then pves
+ if verb=icatch then pves
+ m1=580 ; verb ending 's'
+.pves
+ goto printM1andrestoreM1
+;---
+.pvhave
+ gosub @conjugatex1
+ if result=you then pvhave1
+ if result=pluralsome then pvhave1
+ m1=iHAS ; has
+.pvhave1
+ goto pvprintM1andrestoreM1
+;---
+.pvam
+ gosub @conjugatex1
+ m1=iARE ; are
+ if result=you then pvare
+ if result=pluralsome then pvare
+ m1=iIS ; is
+.pvare ; drop through to..
+;
+.pvprintM1andrestoreM1
+ x1=verboffset
+ add m1,x1
+ goto @printM1andrestoreM1
+
+.printverbnoending
+ m1=verboffset
+ add m1,verb
+ goto @printM1
+;
+;-------------------
+;
+; Now funny verb-handlers
+;
+;---
+.search
+ if noun1<>nullobject then @examine
+ m1=2404 ; find nothing special
+ goto @printM1dot
+;---
+.smell
+ if noun1<>actor then smellnotactor
+ m1=2406 ; you smell wondeful
+ goto @printM1dot
+.smellnotactor
+ m1=2404 ; smell nothing interesting
+ goto @printM1dot
+;---
+.tobe ; to be or not to be
+ if noun1<>ibe then @dontunderstand
+ m1=2416
+ goto @printM1dot
+;---
+.npcwontdoit
+ m1=3370 ; no way!
+ goto @varysayM1dot
+;---
+.resetcheat
+ cheatmode=0
+.nicetry
+ m1=3110
+ goto @varyerrorm1dot
+;---
+.cheat
+ cif allowcheat
+  if prep=ipdebug then @debugshowstack
+  if noun1<>user then resetcheat
+  if noun2<>user then resetcheat
+  if prep<>with then resetcheat
+ 
+  parttochain=2
+  if inumber=3 then @chainparttochain
+  cheatmode=inumber
+  message cr
+  prs "npc stack high water mark="
+  print highwater
+  message cr
+  goto @done
+ cend
+ goto nicetry
+;---
+.timeoutosrdch
+; wait for time x2, return x1=any key entered
+ gosub osrdch
+ if x1<>0 then tooret
+ sub x2,c1
+ if x2<>0 then timeoutosrdch
+.tooret
+.pvreturn
+ return
+;---
+.hello
+ if noun1>maxnpc then hello1
+ actorsave=actor
+ actor=noun1 ; person we are speaking to
+ gosub @npchello
+ actor=actorsave
+ return
+
+.hello1
+ m1=2407
+ goto @printM1dot
+;---
+.initracetrackx1
+; init racetrack no. x1 for ACTOR
+ add x1,x1
+ add x1,startracetracks
+; now read hi+low bytes of pointer into noun1,2
+ noun1=list5(x1)
+ add x1,c1
+ x1 ; preserve x1
+ add x1,x1
+ x1=objectstart(x1)
+; now extract bits 4:6
+ x2=16
+ gosub @x1divx2
+ x2=8
+ gosub @x1modx2
+ x2=result ; restore object number (saved in result, above)
+ result=x1 ; set up result for return to caller
+ x1=x2 ; restore x1 (i.e. object number)
+; now result contains one of the following values:
+; 0=ita
+; 1=itan
+; 2=singularsome
+; 3=he
+; 4=she
+; 5=pluralsome
+; 6=you
+.conjret
+ RETURN
+;---
+.printANobjectX1 ; for object 'X1', print a object or an object
+ if wanttoprintx1 ; preserve x1
+ add x1,x1
+ x1=objectstart(x1)
+; now extract bits 4:6
+ x2=16
+ gosub @x1divx2
+ x2=8
+ gosub @x1modx2
+ x2=result ; restore object number (saved in result, above)
+ result=x1 ; set up result for return to caller
+ x1=x2 ; restore x1 (i.e. object number)
+; now result contains one of the following values:
+; 0=ita
+; 1=itan
+; 2=singularsome
+; 3=he
+; 4=she
+; 5=pluralsome
+; 6=you
+.conjret
+ RETURN
+;---
+.printANobjectX1 ; for object 'X1', print a object or an object
+ if wanttoprintand=false then daonotand
+ goto @printAND ; link onto a previous message
+
+.daonotand
+;; gosub printbody
+ GOSUB @CONJUGATEX1
+ if result<>itan then descnan
+ m1=22 ; an
+ gosub @printM1
+ goto doobj
+.descnan
+ if result<>ita then doobj
+ M1=20 ; a_
+ gosub @printM1
+.DOOBJ
+ GOTO DESCOBJX1
+;---
+; Print object;  as in 'You can't see SAM' or 'You can't see HIM'
+.printTHEobject2
+ if wanttoprintand=false then dto2notand
+ goto @printAND ; link onto a previous message
+
+.dto2notand
+ if object>254 then @printthat ; fail-safe code - assumes nullobject=255
+ x1=object
+; PRINT OUT 'THE <desc>'
+; Also, print 'it' if possible
+ GOSUB @CONJUGATEX1
+; because e.g. 'some takes the object' looks silly
+ IF LASTWORDPRINTED<>X1 THEN DTOXTHE
+ m2=570
+ add m2,result ; it,some etc.
+ goto @printM2
+;---
+.printTHEactor
+ x1=actor
+ goto printTHEobjectx1
+;
+.printTHEobject
+ x1=object
+;
+.printTHEobjectx1 ; PRINT OUT 'the <desc>', using 'it' if possible
+ if wanttoprintand=false then dtonotand
+ goto @printAND ; link onto a previous message
+
+.dtonotand
+ if x1>254 then @printthat ; fail-safe code - assumes nullobject=255
+ GOSUB @CONJUGATEX1
+ IF RESULT=2 THEN dtoxthe ; prevent some
+; because e.g. 'some takes the object' looks silly
+ IF LASTWORDPRINTED<>X1 THEN DTOXTHE
+
+.dtoprintarticle
+ wanttoprintand=false
+ m2=560
+ add m2,result ; it,some etc.
+ goto @printM2
+;
+.DTOXTHE
+ if result=pluralsome then dtosome
+ if result>2 then descobjx1 ; he,she,some,you have no the
+
+.dtosome
+ M2=THE ; because e.g. 'the you' looks pretty daft
+ gosub @printM2
+ goto do2 ; prevent 'the some'
+;-
+.DESCOBJX1
+ if result=singularsome then @dosome
+ if result<>pluralsome then do2
+
+.dosome
+ gosub @printSOME
+
+.do2
+ LASTWORDPRINTED=X1
+ gosub @conjugatex1
+ x1=lastwordprinted ; restore object no. from just above
+ m2=OBJECTDESCBASE
+ ADD m2,X1
+ goto @printM2
+.DESCOBJRET
+ RETURN
+;---
+.WORDS
+ if actor<>user then @npcnotunderstood
+ if prep=ipoff then @silly
+.abswords
+ SCREEN T ; TURN OFF GRAPHICS SCREEN. THIS COMMENT IS ESSENTIAL
+ GOTO @DONE
+;---
+.PICTURE
+ if actor<>user then @npcnotunderstood
+ if prep=ipoff then abswords
+ SCREEN G C0 ; TURN ON GRAPHICS SCREEN. THIS COMMENT IS ESSENTIAL
+ LASTPICTURE=0
+ GOTO @printROOM
+;---
+.MOVE
+; MOVEMENT.
+ commandfinished=false
+ gosub @setuproom ;**???why is this necessary? (if it is!)
+ DIR=VERB
+.MOVEDIR
+ if actor<>user then movenotuser
+ againverb=dir
+
+.movenotuser
+ FROM=ROOM
+ gosub @getxy ; special for Knight Orc
+ GOSUB @CHECKEXIT
+ IF DEST=0 THEN @NOEXIT
+
+.MOVEOK
+ GOTO @NEWLOCATION
+;
+.WIN
+ GOSUB @ABSCANCELINPUT
+ GOTO RESTARTORRESTORE
+;---
+.USERDEATH
+; user (the player) is dead
+ MESSAGE 2241 ; you are dead. You scored
+ GOSUB @PRINTSCORE
+;
+.RESTARTORRESTORE
+ GOSUB @ABSCANCELINPUT
+.ROR1
+ MESSAGE 2209 ; type restart or restore
+ GOSUB DEADCALLVERB
+; if get back here, option failed
+ GOTO ROR1
+;---
+.DEADCALLVERB
+ SUPRESSCHECKING=TRUE
+ NOMOREINPUT=FALSE
+ GOSUB @GETNEXTWORD
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ dead=true
+ if value=iramsave then @ramsave ; checks for ramload as well.
+ IF VALUE=IRESTORE THEN DORESTORE
+ dead=false
+ IF VALUE=IQUIT THEN @STARTGAME
+ IF VALUE=IOOPS THEN @OOPS
+ if eol=false then deadcallverb
+ RETURN
+;
+;---
+.QUIT
+ MESSAGE 2200 ; really restart ?
+ GOSUB @YESORNO
+ IF RESULT=FALSE THEN SAVERET
+.QUITPLAYAGAIN
+ GOSUB @ABSCANCELINPUT
+ MESSAGE CR
+ GOTO @STARTGAME
+;---
+.SAVE
+ gosub diskinterlock
+ SAVE
+ message 2302 ;***remember to add message ; please reinsert game disk
+.SAVERET
+ RETURN
+;---
+;.RESTORE
+; MESSAGE 2202 ; really restore ?
+; GOSUB @YESORNO
+; IF RESULT=FALSE THEN RESTOREEND
+;
+;.DORESTORE
+;;* GOSUB LENSLOK
+;;* IF RESULT=FALSE THEN AFTERRESTORE
+;
+; RESTORE
+;;* OOPSPOS=1 ; musn't do an oops now * why?
+;;* OOPSPOSEND=0
+;.AFTERRESTORE
+; LASTPICTURE=0 ; allow picture to be drawn
+;.RESTOREEND
+; GOSUB @printROOM
+; NOMOREINPUT=FALSE
+; EOL=FALSE
+; GOSUB @GETNEXTWORD
+; GOTO @CANCELINPUT
+;---
+;---------------------------------------
+;-----
+.diskinterlock
+ x1=200 ; stop all picture redelay ; loop if ANY picture displayed.
+
+ return
+;---
+.RESTORE
+ MESSAGE 2202 ; really restore ?
+ GOSUB @YESORNO
+ IF RESULT=FALSE THEN RESTOREEND
+
+.DORESTORE
+;* GOSUB @LENSLOK
+;* IF RESULT=FALSE THEN AFTERRESTORE
+ gosub diskinterlock ; finish all picture activity first.
+ RESTORE
+ message 2302 ; please reinsert game disk
+ if dead=true then @restartorrestore ; restore failed.
+ NOMOREINPUT=FALSE
+ EOL=FALSE
+ GOSUB @GETNEXTWORD
+.AFTERRESTORE
+ OOPSPOS=1 ; musn't do an oops now - to prevent corredelay ; loop if ANY picture displayed.
+
+ return
+;---
+.RESTORE
+ MESSAGE 2202 ; really restore ?
+ GOSUB @YESORNO
+ IF RESULT=FALSE THEN RESTOREEND
+
+.DORESTORE
+;* GOSUB @LENSLOK
+;* IF RESULT=FALSE THEN AFTERRESTORE
+ gosub diskinterlock ; finish all picture activity first.
+ RESTORE
+ message 2302 ; please reinsert game disk
+ if dead=true then @restartorrestore ; restore failed.
+ NOMOREINPUT=FALSE
+ EOL=FALSE
+ GOSUB @GETNEXTWORD
+.AFTERRESTORE
+ OOPSPOS=1 ; musn't do an oops now - to prevent corruption if
+ OOPSPOSEND=0 ; type OOPS immediately after a restore
+.oopsafterrestore
+ LASTPICTURE=0 ; allow picture to be drawn
+.RESTOREEND
+ if thisgame=standardadventure then restore1
+.wronggame
+ message 2312 ; wrong game
+ goto @restartorrestore
+
+.restore1
+ if thispart=constantpartnum then restore2
+ parttochain=thispart
+
+.chainparttochain
+ if c1=diskversion then diskchain
+ message 2311 ; you are about to chain - do you want to save first?
+ gosub @yesorno
+ if result=false then cassettechain
+ save
+ goto @chainparttochain ; allow multiple copies
+
+.cassettechain
+ m1=2313 ; put in cassette containing part number
+ message m1
+ add m1,parttochain ; 2313+1,2,3 are names of games
+ message m1
+
+.diskchain
+; chain in "PARTTOCHAIN"
+ x1=200
+ gosub waitpic ; kill any picture which is currently loading
+ x1=11
+ list9(0)=x1
+ list9(1)=parttochain
+
+
+; Please leave this code in (commented out)...
+;
+;; pass data to part 2 in first byte of currentpos/hicurrentpos lists...
+; currentpos(0)=ropelength ; score
+; hicurrentpos(0)=c0 ; no cloak unless changed....
+; x1=currentpos(cloak)
+; if x1<>user then diskchain1
+; x1=hicurrentpos(cloak)
+; hicurrentpos(0)=x1
+;
+;
+
+.diskchain1
+ driver
+ goto @restartorrestore
+
+.restore2
+ GOSUB @PRINTROOM
+ actor=user
+ gosub @stop
+ GOTO @getfromuser
+;---
+
+;---
+.EXAMINE
+ noun2=nullobject ; to avoid confusing daa.
+ if actor<>user then @printactoractiondot
+ IF NOUN1<MAXOBJECTPLUS1 THEN EXAMINE1
+ M1=2112 ; can't tell you any more
+ goto @printM1dot
+
+.EXAMINE1
+ GOSUB @SPECIALPREEXAMINE
+ IF RESULT=TRUE THEN EXAMRET ; something prevents main examine message
+ verb=iam ; e.g. 'the knife is..' or 'you are..'
+ gosub @printOBJECTverb
+ M1=EXAMINEMESSAGES
+ ADD M1,OBJECT
+ gosub @printM1dot
+ processed=false
+ GOSUB @SPECIALEXAMINE
+ if processed=true then examret
+.examinecontents
+ SEARCHPOS=OBJECT
+ HISEARCHPOS=NONSPECIFIC
+ GOTO @PRINTOBJECTS
+;---
+.INVENTORY
+ if actor<>user then @npcnotunderstood
+ SEARCHPOS=ACTOR
+ HISEARCHPOS=NONSPECIFIC
+ GOSUB @PRINTOBJECTS
+ IF TOTALOBJECTFOUND<>0 THEN INVENTRET
+; Nothing found, so print appropriate null message
+ MESSAGE 2106 ; nothing carried
+.INVENTRET
+.examret
+ RETURN
+;---
+.CANTSEEOBJECT ; can't see object to VERB PREP. (e.g. STAND ON)
+ gosub printactorcant
+ gosub printverbnoending
+ gosub printM1
+ gosub @printPREP
+ gosub @printthat
+.doneret
+ RETURN
+;---
+.DONE
+ if actor<>user then doneret ; no confirmation
+ M1=2153 ; done
+ goto @printM1dot
+;---
+.WEAR
+ X1=HICURRENTPOS(NOUN1)
+ IF X1<>WORN THEN WEAR1
+ X1=CURRENTPOS(NOUN1)
+ IF X1<>ACTOR THEN WEAR1
+ goto @printthatdot
+.WEAR1
+ IF PREP<>0 THEN CANTSEEWHERE
+ POS=ACTOR
+ HIPOS=WORN
+ GOTO @MOVEOBJECT
+;---
+.REMOVE
+ POS=ACTOR
+ HIPOS=CARRIED
+ GOTO @MOVEOBJECT
+;---
+.DROP
+; DROP prep is filtered off by CONVERTVERB
+ verb=idrop ; needed because this called from THROW as well
+ POS=ROOM
+ HIPOS=0
+ GOTO @MOVEOBJECT
+;---
+.CANTSEEWHAT
+ moreinfoexpected=true
+ M1=2132 ; WHAT?
+ goto @nointerestm1
+;---
+.CANTSEEWHERE
+ moreinfoexpected=true
+ M1=2133 ; WHERE?
+ goto @nointerestm1
+;---
+.CHECKIFCONTAINED
+; trying to put OBJECT in position HIPOS,POS
+; if this is a container, remove any possible loopy
+; connections between the two containers which might crash the game
+ IF HIPOS=0 THEN CICRET
+; is POS contained by OBJECT ?
+ X4=POS
+.CIC1
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN CICRET
+ X3=X4 ; preserve latest contents for use below if necessary
+ X4=CURRENTPOS(X4)
+ IF X4<>OBJECT THEN CIC1
+; yep, so what do we do now ?
+; I think we can be a bit clever - remove the connection
+; and tell the ACTOR what we're doing
+; sever the link between X3 and X4
+; (where X3 is the contents)
+; X3 has to go the the immediate position of X4
+; (we know by now that OBJECT is moveable)
+ X1=CURRENTPOS(OBJECT)
+ CURRENTPOS(X3)=X1
+ X1=HICURRENTPOS(OBJECT)
+ HICURRENTPOS(X3)=X1
+ M1=2055 ; (removing
+ gosub @printM1
+ X1=X3
+ GOSUB @printTHEobjectx1
+ M1=2056 ; from the 
+ gosub @printM1
+ X1=X4
+ GOSUB @printTHEobjectx1
+ M1=2057 ; first)
+ goto @printM1
+;---
+.t ; wait on its own -> short wait
+ searchtype=preptype
+ gosub @checktype
+ if value<>nullvalue then pwprep
+ searchtype=numbtype
+ gosub @checktype
+ if value=0 then @dontunderstand
+ goto pwwaitforperiod
+
+.pwprep
+ prep=value
+
+ gosub @getnextword
+;; if prep=iuntil then pwuntiltime
+; wait for person?
+ searchtype=nountype
+ gosub @checktype
+ if value<minnpc then pwnotperson
+ if value>maxnpc then pwnotperson
+ verb=iwaitforperson
+ noun1=value
+ goto pwend
+
+.pwnotperson
+; wait for period?
+ seart ; wait on its own -> short wait
+ searchtype=preptype
+ gosub @checktype
+ if value<>nullvalue then pwprep
+ searchtype=numbtype
+ gosub @checktype
+ if value=0 then @dontunderstand
+ goto pwwaitforperiod
+
+.pwprep
+ prep=value
+
+ gosub @getnextword
+;; if prep=iuntil then pwuntiltime
+; wait for person?
+ searchtype=nountype
+ gosub @checktype
+ if value<minnpc then pwnotperson
+ if value>maxnpc then pwnotperson
+ verb=iwaitforperson
+ noun1=value
+ goto pwend
+
+.pwnotperson
+; wait for period?
+ searchtype=numbtype
+ gosub @checktype
+ if value=nullvalue then pwnotperiod
+.pwwaitforperiod
+ verb=iwaitforperiod
+ noun1=value
+ sub noun1,c1
+ if value>245 then pwcantwait
+; forget about 'minutes' if the user tagged it on the end
+ gosub @getnextword
+ searchtype=nountype
+ gosub @checktype
+ if value=iminutes then pwend
+ gosub @goback ; leave for later @parsing
+
+.pwend
+; now verb,noun1,noun2 are set up for the wait
+; the routines setupwaitforperiod etc.
+; will push them on.
+; It is done in this slightly toruous way
+; so parseinput always has the same i/o - it
+; helps with giving npcs orders as well (which push things
+; onto the stack in their own, individual way)
+
+ return ; do rest of parsing
+;--- 
+.pwdefaultwait
+; actually convert to 'wait for 10 moves'
+ verb=iwaitforperiod
+ noun1=10
+ return
+;---
+.pwnotperiod
+;.pwuntiltime
+;; wait until time?
+;; read 24 hour clock
+; searchtype=numbtype
+; gosub checktype
+; if value=nullvalue then badtime
+; noun1=value ; hour
+; if noun1>24 then badtime
+;
+; gosub getnextword
+; searchtype=ascitype
+; gosub checktype
+; if value=nullvalue then badtime
+;
+; gosub getnextword
+; searchtype=numbtype
+; gosub checktype
+; if value=nullvalue then badtime
+; noun2=value ; minute
+;
+; if noun2>59 then badtime
+; verb=iwaituntiltime
+; goto pwend
+
+.badtime
+ m1=2216 ; wait formats
+ goto pwerrorm1dot
+
+.pwcantwait
+ m1=2215 ; you could be waiting a long time
+
+.pwerrorm1dot
+ gosub @errorm1dot
+ goto @cancelinput
+;---
+.setupwaituntiltime
+.setupwaitforperiod
+.setupwaitforperson
+ gosub @singlepushfifo
+ executeprocessed=false ; nothing useful done yet
+ return
+;---
+.gdwaitforperson
+; noun1 is person to wait for
+; this command is always executed off the command queue
+ verb=0 ; fool specialcheckifpresent
+ object=noun1
+ gosub @checkifpresent
+ if result=true then gdwaitend ; it's arrived
+ goto gdstillwaiting
+;---
+.gdwaitforperiod
+; noun1 is period to wait for
+; this command is always executed off the command queue
+ if noun1=0 then @intelligentpop ; time up
+; decrement period on stack
+ gosub @npcgetcurrent
+ add x1,c3 ; find noun1 offset
+ x2=npcstack(x1)
+ sub x2,c1
+ if x2>negative then gdwaitend ; time up
+ npcstack(x1)=x2
+.gdstillwaiting
+ x1=attentionoffset
+ add x1,actorattributes
+ x1=npccurrent(x1)
+ if x1<>0 then @handleinterruption
+
+.gdwfpret
+ return
+;---
+;.gdwaituntiltime
+;; this command is always executed from the command queue
+; if noun1>hour then gdstillwaiting ; still waiting
+; if noun2>minute then gdstillwaiting ; still waiting
+; if actor<>user then gdwaitend
+;; gosub displaytime
+;; have reached target time
+.gdwaitend
+ executeprocessed=false ; nothing useful done
+ goto @intelligentpop
+;---
+.SHORTWAIT
+; wait for a single turn
+ executeprocessed=true ; make it take time
+ M1=2155 ; time passes
+ goto @nointerestm1
+;---
+.YESORNO
+ IF ACTOR<>USER THEN YONNO ; NPCs always decline to take risks
+ NOMOREINPUT=FALSE
+;
+ SUPRESSCHECKING=TRUE
+ GOSUB @GETNEXTWORD
+.YON1
+ IF EOL=TRUE THEN @YESORNO
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=ivYES THEN yonYES
+ IF VALUE=iWHY THEN yonYES
+ IF VALUE=ivNO THEN yonNO
+ IF VALUE=iNORTH THEN yonNO
+
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=iOOPS THEN @OOPS
+ IF VALUE=iRAMLOAD THEN @RAMLOAD
+ IF VALUE<>iRAMSAVE THEN YONNRAMSAVE
+ GOSUB @GETNEXTWORD
+ SEARCHTYPE=VERBTYPE
+ GOSUB @CHECKTYPE
+ IF VALUE=iRAMLOAD THEN @RAMLOAD
+ GOTO YON1
+
+.YONNRAMSAVE
+;
+ MESSAGE 2160 ; yes or no please
+ GOSUB @ABSCANCELINPUT
+ GOTO @YESORNO
+.YONYES
+ RESULT=TRUE
+ RETURN
+.YONNO
+ RESULT=FALSE
+ RETURN
+;---
+.INITANOBJECT
+; Note these are the other way round to Worm
+  X4=OBJECT
+ ADD X4,X4
+ X1=OBJECTSTART(X4)
+ x2=16
+ GOSUB @x1modx2 ; remove top four @bits
+ HICURRENTPOS(OBJECT)=X1
+
+ ADD X4,C1
+ X1=OBJECTSTART(X4)
+ CURRENTPOS(OBJECT)=X1
+ RETURN
+;---
+.POSSLOOP
+; move everything contained by POS in way HIPOS to DEST,HIDEST
+; if HIDEST=NONSPECIFC, then leave HICURRENTPOS alone
+ OBJECT=0
+.POSS1
+ X1=CURRENTPOS(OBJECT)
+ IF X1<>POS THEN POSS2
+ X2=HICURRENTPOS(OBJnoun1)=room
+ hicurrentpos(noun1)=c0
+ goto @getfromuser
+;
+.VARYERRORM1DOT
+ gosub @getvarym1
+ goto errorm1dot
+;
+.VARYERRORM1
+ gosub @getvarym1 
+ goto errorm1
+;
+; Many error messages only really make sense when the user's actions 
+; provoke them, e.g because of their wording. Print something in this 
+; case, otherwise just print the npc is in difficulty.. 
+.ERRORM1DOT
+ commandfinished=true
+ if actor=user then printM1dot
+ goto @npcnotunderstood
+;
+.ERRORM1
+ commandfinished=true
+ if actor=usnoun1)=room
+ hicurrentpos(noun1)=c0
+ goto @getfromuser
+;
+.VARYERRORM1DOT
+ gosub @getvarym1
+ goto errorm1dot
+;
+.VARYERRORM1
+ gosub @getvarym1 
+ goto errorm1
+;
+; Many error messages only really make sense when the user's actions 
+; provoke them, e.g because of their wording. Print something in this 
+; case, otherwise just print the npc is in difficulty.. 
+.ERRORM1DOT
+ commandfinished=true
+ if actor=user then printM1dot
+ goto @npcnotunderstood
+;
+.ERRORM1
+ commandfinished=true
+ if actor=user then printM1
+ goto @npcnotunderstood
+;
+; Print something which is of no interest if an NPC does it, 
+; but the user wants to know..
+.NOINTERESTM1DOT
+ if actor=user then printM1dot
+ return
+;
+.NOINTERESTM1
+ if actor=user then printM1
+ return
+;---
+.printACTORcantVERBnoun1DOT
+.actorcantverbnoun1dot
+ gosub actorcantverbnoun1
+ goto printdot
+;
+.printACTORcantVERBnoun1
+.actorcantverbnoun1
+ commandfinished=true ; serious error occurred - abort gd commands etc.
+ executeprocessed=false ; nothing happened, because error occurred
+ gosub printactorcantverb
+ if noun1>255 then @printthat
+ object=noun1
+ goto @printTHEobject2
+;
+.printACTORcantVERB
+ gosub printactorcant
+ goto @printverbnoending
+;
+.printACTORcant
+ gosub printACTOR 
+ m1printsave=m1
+ m1=2044 ; can't
+ goto printM1andrestoreM1
+;
+; Print 'That', using standard routines..
+.printTHATdot
+ gosub printthat
+ goto printdot
+;
+.printTHAT
+ m1printsave=m1
+ m1=2046 ; 'that'
+ goto printM1andrestoreM1
+;
+.printSOME
+ m1printsave=m1
+ m1=some ; 'that'
+ goto printM1andrestoreM1
+;---
+; Double message output routines (a pair of messages with a parameter)..
+;
+.printM1theactorNEXTdot ; e.g 'The wizard takes the ACTOR to heaven.'
+ x1=actor
+ goto printM1theobjectx1NEXTdot
+;
+.printM1theobjectNEXTdot ; e.g 'The impact smashes the OBJECT into pieces.'
+ x1=object
+;
+.printM1theobjectx1NEXTdot ; e.g 'Unfortunately, the X1 is too high up.'
+ gosub printM1
+ gosub printTHEobjectx1
+ add m1,c1
+ goto printM1dot
+;---
+; Standard message output routines...
+;
+.printM1inputNEXTdot ; e.g 'You don't need "WORD" in this game.'
+ gosub printM1
+ add m1,c1
+;
+.PRINTinputM1dot
+ printinput ; entered by user
+;
+.printM1dot
+ gosub printM1
+;
+.printDOT
+ wanttoprintand=false
+ m1printsave=m1
+ m1=dot
+ goto printM1andrestoreM1
+;---
+.printQUOTE
+ m1printsave=m1
+ m1=quote
+ goto printM1andrestoreM1
+;
+.printAND
+ wanttoprintand=false; don't need another 'and'
+ m1printsave=m1
+ m1=and
+ goto printM1andrestoreM1
+;---
+.printM2
+ m1printsave=m1
+ m1=m2
+ goto @printM1andrestoreM1
+;
+.printX1
+ m1printsave=m1
+ m1=X1
+ goto @printM1andrestoreM1
+;---
+.printM1andrestoreM1
+ gosub printM1
+ m1=m1printsave
+ return
+;
+.printM1
+; print message m1 to user(s) if at ROOM
+; must not alter RESULT or PROCESSED!
+ if forceprinting=true then printM1go
+ if currentuserroom<>room then printM1ret
+.printM1go
+ anythingprintedthisturn=true
+; prs "[" ; ***
+; print m1; ***
+; prs "]" ; ***
+ message M1
+.printM1ret
+ return
+;---
+; Output one of 'ALTERNATIVES' messages, starting at 'M1'
+.VARYMESSAGEDOT
+ GOSUB VARYMESSAGE
+ GOTO printDOT
+;
+.VARYMESSAGE
+ M1printSAVE=M1
+ GOSUB GETVARYM1
+ goto @printM1andrestoreM1
+;
+; Add number between 0 and ALTERNATIVES-1 to M1
+.GETVARYM1
+ ADD CURRENTMESSAGE,C1
+ IF CURRENTMESSAGE<ALTERNATIVES THEN VMOK
+ CURRENTMESSAGE=0
+.VMOK
+ ADD M1,CURRENTMESSAGE
+ RETURN
+;
+;
+; RANDOM NUMBER AND MATHS ROUTINES..
+;
+.randomx1modx2 ; return random x1.. 0<=x1<=x2
+ random x1
+;
+.x1modx2 ; return remainder of division
+ if x2=0 then dividebyzero
+.mod1
+ if x1<x2 then x1modx2ret
+ sub x1,x2
+ goto mod1
+;---
+.x1divx2 ; return x1=answer of division without remainder
+; and x2+x3=remainder
+ x3=x2
+ x2=x1
+ if x3=0 then dividebyzero
+ x1=0 ; will be answer
+.x1divx2a
+ sub x2,x3
+ if x2>negative then x1divret
+ add x1,c1
+ goto x1divx2a
+.x1divret
+.dividebyzero
+.x1modx2ret
+.x1timesx2ret
+ return
+;--------------------------------------------------------
+.x1timesx2
+; return x1=x1*x2
+ x3=x1
+.x1tx2a
+ sub x2,c1
+ if x2=0 then x1timesx2ret
+ add x1,x3
+ goto x1tx2a
+;
+;
+;---
+.isobjectcarried
+ pos=actor
+ hipos=nonspecific
+ goto checkobjectpos
+;---
+.isobjectonground
+ pos=room
+ hipos=0
+ goto checkobjectpos
+;---

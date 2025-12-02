@@ -1,0 +1,937 @@
+; Standard adventure source, copyright (C) 1987 Level 9 Computing.
+;
+; MESSAGE.TXT, messages/keywords for the game.   
+;
+; Messages are of the form: [ number : text ] ; comment
+; They must be in numeric order, but gaps are allowed in the number 
+; sequence, of course.
+;
+; | (vertical bar) terminates the printable part of a message. It 
+;   is typed by shifting backslash (to the left of the keyboard).
+; / forces the following character to be printed literally. 
+; % is carriage return. Note that carriage return is ignored if 
+;   the printing is already at the start of a line, to make coding 
+;   simpler. To force a real carriage return, print space first.
+; ^ (shift 6) marks a word for recognition by the parser. It is 
+;   followed by a letter for word type: 
+;   Adjective; Comment; conJunction; Noun; Preposition; Verb. 
+;
+; The word type ^C is used when a word is not to be used as part of 
+; the normal parsing but is to be available for checking should it 
+; be needed. This is so references to scenery may be checked for
+; containing particular words.
+;
+; Capitalisation is done automatically on output and you are 
+; recommended to use lower case for the first letter of messages 
+; as this improves compression and will make no difference on 
+; output, providing all punctuation is correct. 
+;
+; punctuation messages..
+[1: ]
+[2::]
+[3:, ]
+[4:.] ; dot with no space
+[5:%]
+[6:and ] ; note lower case a
+[7:.%]
+[8:?%]
+[9:. ]
+;
+; positions etc..
+[10:exits lead ]
+[11:an exit leads ] 
+[59:^V upwards|^V u ^V up]
+[60:^V downwards|^V d ^V down]
+[61:^V inside|^V in ^V inwards ^V into ^V enter]
+[62:^V outside|^V out ^V leave]
+[63:^V cross|^V across ^V over]
+[64:with the ^V climb|^V scramble ^V ascend ^V mount]
+; is in 'you struggle with the climb and are in'
+;
+; Intransitive verbs..
+[70:^V i]
+[71:^V again|^V a]
+[72:^V look|^V l ^V display ^V redisplay ^V refresh]
+[73:^V inventory|^V inv ^V possessions ^V possess ^V list]
+[74:^V quit ^V restart]
+[75:^V restore ^V load]
+[76:^V 
+[59:^V upwards|^V u ^V up]
+[60:^V downwards|^V d ^V down]
+[61:^V inside|^V in ^V inwards ^V into ^V enter]
+[62:^V outside|^V out ^V leave]
+[63:^V cross|^V across ^V over]
+[64:with the ^V climb|^V scramble ^V ascend ^V mount]
+; is in 'you struggle with the climb and are in'
+;
+; Intransitive verbs..
+[70:^V i]
+[71:^V again|^V a]
+[72:^V look|^V l ^V display ^V redisplay ^V refresh]
+[73:^V inventory|^V inv ^V possessions ^V possess ^V list]
+[74:^V quit ^V restart]
+[75:^V restore ^V load]
+[76:^V save]
+[77:^V ramsave ^V ram]
+[78:^V ramload]
+[79:^V score ^V rating ^V status]
+[80:^V verbose]
+[81:^V brief]
+[82:^V wait|^V wa ^V pause ^V z]
+;
+[84:^V on]
+[85:^V off]
+[86:^V pictures ^V graphics]
+[87:^V words ^V text]
+;
+[89:^V undo ^V oops ^V whoops]
+[90:^V attack|^V hit ^V break ^V kick ^V punch ^V smash]
+;
+[92:^V search|^V explore]
+;
+[94:^V sniff|^V smell]
+;; [95:^V knock]
+[96:^V stand]
+[97:^V lie]
+[98:^V sit]
+;
+[100:^V say|^V whisper ^V call]
+[101:^V teleport]
+[102:^V getme]
+;
+[104:^V run]
+; 
+[108:^V go|^V goto ^V find]
+[109:^V stop|^V abort]
+;
+[112:^V exits ^V exit]
+;
+; verbs for output..
+[130:^V have ] ; mainly for output
+[131:^V has ] ; mainly for output
+[132:^V am ] ; mainly for output
+[133:^V are ] ; mainly for output
+[134:^V is ] ; mainly for output
+;
+;; [137 is 'GO IN']
+;; [138 is 'GO OUT']
+;; 139 is 'wait for person'
+;; 140 is 'wait until time'
+;; 141 is 'wait for (length of time)'
+;; 142 is 'wait for single turn'
+[143:^V fight|^V kill]
+;
+[145:^V dodge]
+; 146 and 147 have text for debugging output only - do not mark
+[146:gdgo]  ; 196 - gdgo
+[147:gdrun] ; 197 - gdrun
+[148:^V cheat]
+;
+; Transitive verbs..
+[150:^V examine|^V read]
+[151:^V cut|^V chop]
+[152:^V wake|^V rouse]
+;
+[154:^V get]
+[155:^V take|^V carry ^V acquire ^V steal ^V hold ^V catch]
+[156:^V wear]
+[157:^V drop|^V discard]
+[158:^V put|^V hide ^V conceal]
+[159:^V remove|^V free ^V release]
+[160:^V throw|^V chuck ^V toss ^V hurl]
+[161:^V give|^V offer ^V offered ^V sell]
+[162:^V ask|^V question]
+[163:^V follow|^V chase]
+[164:^V open|^V unlock]
+;
+[168:^V pull|^V tug]
+[169:^V fasten|^V tie ^V attach]
+[170:^V unfasten|^V untie]
+;
+[176:^V insert]
+[177:^V pick|^V pluck]
+;
+;; [182:^V collect] ; goal-directed
+;
+; 186, 187 and 189 have text for debugging only
+[186:return object] ; 186 is 'return object to initial' (for npcs)
+;; [188:^V find] ; set up find.
+[189:gdfind] ; 239 is gdfind
+;
+[190:^V close|^V shut]
+;; 
+[192:^V tell]
+[194:struggle] ; mainly for output
+; 195 is 'steal all from'
+;
+[197:kill] ; output only
+;
+[210:reach] ; output only
+[211:drag] ; output only
+[212:past] ; output only
+[213:fly] ; output only
+[214:walk] ; output only
+[215:catch] ; output only
+[216:enter] ; output only, e.g 'Fred enters from the east'. Do not mark 
+;
+; Armed combat blows..
+[220:^V scratch]
+[221:^V pink]
+[222:^V jab]
+[223:^V stab]
+[224:^V hack]
+[225:^V batter]
+[226:^V smite]
+[227:^V cleave]
+[228:^V pulverise]
+[229:^V devastate]
+;
+; Unarmed combat blows...
+[230:^V slap]
+[231:^V claw]
+[232:^V bite]
+[233:^V hit] ; must remain as hit!!!! - used for output in THROW
+[234:^V thump]
+[235:^V belabour]
+[236:^V crush]
+[237:^V mangle]
+[238:^V pulverise]
+[239:^V demolish]
+;
+; Echo verbs (250-299) which just print the message containing them..
+[250:you seem very sure|^V no]
+[251:you seem very positive|^V yes]
+[252:whee! That was fun|^V jump|^V leap ^V hop ^V skip ^V dance 
+^V celebrate ]
+[253:you seem to sense mysterious forces gathering, but nothing happens|
+^V plugh ^V xyzzy ^V sesame ^V plover ^V humakaat ^V satarh
+^V ollabin ^V obis] ; magic words for amusing response
+[254:the ^V weather is very average for the time of year]
+[255:^V hello to you too|^V welcome ^V hi ^V greetings ^V day ^V afternoon]
+[256:you hear nothing that you didn't already know about|^V listen ^V hear]
+[257:send the coupon to Level 9 for a ^V hint|^V help]
+[258:the ground is much to hard for digging|^V dig]
+[259:send your ^V cheques to Level 9|^V treasure ^V money]
+[260:the only ^V escape is to finish the game]
+[261:do you really? We can't have everything we ^V want you know]
+[262:you'll have to find that out for yourself^V what]
+[263:Why not|^V y ^V why]
+[264:sorry, I just tidied this place and now I can't find 
+anything|^V where]
+[265:I'm afraid not even the author knows ^V how things work around here]
+[266:sorry, I can't help with such matters|^V whether ^V who]  
+[267:Mary Whitehouse leaps out and slaps your legs|
+^V bloody ^V scott ^V adams ^V frigging ^V wankeNTROL C, but don't forget to save 
+your position first|^V goodbye|^V bye]
+[274:I should think so too|^V sorry]
+[275:eeek!..|^V scream]
+[276:what a relief|^V phew] ; what a relief - prints 2411
+[277:%^V directory of disk A:\% %No files.%Space free = 123456789 
+Megabytes|^V dir ^V catalog ^V cat]
+;
+[279:you're not sleepy|^V sleep]
+[280:the leeches make swimming too dangerous around here|^V swim]
+[281:I ^V think that may be a good idea. Or maybe not]
+;
+[285:bleuch|^V drink]
+[286:I wouldn't ^V shakNTROL C, but don't forget to save 
+your position first|^V goodbye|^V bye]
+[274:I should think so too|^V sorry]
+[275:eeek!..|^V scream]
+[276:what a relief|^V phew] ; what a relief - prints 2411
+[277:%^V directory of disk A:\% %No files.%Space free = 123456789 
+Megabytes|^V dir ^V catalog ^V cat]
+;
+[279:you're not sleepy|^V sleep]
+[280:the leeches make swimming too dangerous around here|^V swim]
+[281:I ^V think that may be a good idea. Or maybe not]
+;
+[285:bleuch|^V drink]
+[286:I wouldn't ^V shake that if I were you] 
+[287:your attempt at musicianship is not very well received|^V ring]
+[288:you are here to use object, not to ^V bury them]
+[289:yeuch|^V eat ^V bite ^V taste ^V nibble ^V lick]
+[290:you polish it to a fine finish|^V rub ^V clean ^V polish]
+[291:you ^V fill a container by, e.g, "PUT THING IN CONTAINER"]
+[292:please ^V empty a container by removing its contents in turn]
+[293:rat-a-tat-tat! That was fun|^V knock]
+[294:you have no source of fire|^V light]
+[295:that's not burning|^V extinguish]
+[296:that's not a musical instrument|^V play ^V blow]
+[297:whatever turns you on|^V kiss]
+[298:what a silly thing to wave|^V wave]
+[299:nothing happens|^V push ^V press ^V select ^V depress ^V poke 
+^V prod ^V touch]
+;
+; Objects (300+N)..
+[301:you|^N player ^N me] ; do not mark you
+[302:^N beetle]
+[303:^N Charles]
+[304:the ^N dancer]
+;
+; weapons (40 onwards)..
+[340:^N axe]
+[341:^N bludgeon]
+[342:^A corroded ^N cudgel]
+[343:^N dagger]
+;
+; clothes...
+[360:^N anorak]
+[361:^N belt]
+;
+; now some ordinary objects (80 onwards)..
+[380:^N apple]
+[381:^N banana]
+[382:^N cushion]
+[383:^N duvet]
+;
+; some static objects (130 onwards)..
+[430:^N armchair|^N chair]
+[431:^N bed]
+[432:^N clue]
+;
+; some invisible objects (150 onwards)..
+[450:^N algae]
+[451:^N branches] 
+;
+; Brief location objects (479+N). See 779+ for examine messages and 
+; 1199+ for their verbose equivalents..
+; 
+; These are used for seeing from a distance and for input, e.g for 
+; 'examine tower' and 'go castle'. (Note that 'go scenery' also works).
+; They also provide a link between the grid of synthesised locations 
+; and the real, static locations used for rooms inside buildings etc.
+[480:a ^N castle ^N keep]
+;---
+; Collective nouns...
+[534:^N everything ^N all ^N every]
+[535:^N treasure] ; collective noun
+[536:^N weapons] ; collective noun
+[537:^N people|^N everyone ^N everybody] ; collective noun
+[538:^N clothes|^N armour]
+;
+; Omni-present objects.. 
+[539:^N door] ; normal door, for the benefit of PRINTACTORACTION. It 
+; is apparantly never described by PRINTOBJECT (so?).
+[541:^N water|^N river]
+[542:^N be]
+[543:^N room|^N ground ^N floor] ; used for output as well
+[544:^N wall|^N walls]
+[545:^N sky|^N sun ^N moon]
+; 
+; and finally, some miscellaneous nouns which are used miscellaneously..
+[547:^N except ^N but]
+[548:^N it|^N that ^N them ^N those ^N none ^N him ^N her]
+[549:^N minute ^N minutes]
+;
+[551:^J then ^J next]
+[552:^J therefore ^J so]
+[553:^N you]
+;
+; Pronouns...
+[560:it] ; ita
+[561:it] ; itan
+[562:some]
+[563:he]
+[564:she]
+[565:they]
+[566:you]
+;
+[570:it] ; ita
+[571:it] ; itan
+[572:them]
+[573:him]
+[574:her]
+[575:them]
+[576:you]
+;
+; and some misc output messages
+; plural endings, and other odd verb declension...
+[579:~] ; print to avoid bug which can print a space after previous word 
+[580:s]
+[581:es]
+[582:is] ; used in examine
+;
+; Entry directions, in the form 'The animal enters from the 
+; outside'. (As opposed to 'The animal goes in' - the normal 
+; verb table.) Note that directions are reversed, so the offset 
+; into the table is the direction of the moving npc.
+;
+[585:from the south]     ; north
+[586:from the southwest] ; northeast
+[587:from the west]      ; east
+[588:from the north]     ; south
+[589:from the northwest] ; southeast
+[590:from the northeast] ; southwest
+[591:from the east]      ; west
+[592:from the southeast] ; northwest
+[593:from below]         ; above
+[594:from above]         ; below
+[595:from outside]       ;inside
+[596:from inside]        ;outside
+[597:from across the way];across
+[598:by climbing]        ;climb
+[599:with a jump]        ;jump
+;
+; Examine messages (600+N). NO full stops at end please.
+;
+[601:as old as your tongue and older than your teeth] ; you
+[602:small, armoured insect]    ; beetle
+[603:a peculiar young man]      ; Charles
+[604:a thin and athletic woman] ; dancer
+; NPCs end at 39...
+;
+; Weapons...
+[640:a fragile, spear-like weapon] ; arrow
+[641:a great lump of wood] ; bludged; too big for, e.g, a Parrot starter home] ; bed
+[732:written in code; it says "42"] ; clue
+;
+; (Normally) invisible objects...
+[750:unpleasantly slimy] ; algae
+[751:twisted into peculiar shapes] ; branches
+;
+; Examine messages for location objects (779+N), see 479+ and 1199+
+[780:a huge mediaeval castle keep]
+;
+; Short-Form room Descriptions (1000+N). No full stops at end please.
+; These are the brief mode descriptions; they are prefixed by "you 
+; are" and, in verbose mode, messages 1300+N aed; too big for, e.g, a Parrot starter home] ; bed
+[732:written in code; it says "42"] ; clue
+;
+; (Normally) invisible objects...
+[750:unpleasantly slimy] ; algae
+[751:twisted into peculiar shapes] ; branches
+;
+; Examine messages for location objects (779+N), see 479+ and 1199+
+[780:a huge mediaeval castle keep]
+;
+; Short-Form room Descriptions (1000+N). No full stops at end please.
+; These are the brief mode descriptions; they are prefixed by "you 
+; are" and, in verbose mode, messages 1300+N are appended.
+;
+; room 1 is used as exit modifier for synthesised rooms.
+; rooms 2..20 are those with static connections; i.e. not on the 
+; synthesised grid.
+;
+[1002:in the ^N living ^N room of a ^N castle ^N keep]
+[1003:on a ^N flight of ^N stairs]
+[1004:on the ^N castle ^N attic|^N loft]
+;
+; verbose messages for location objects..
+;
+; 1199+N (see 779+ for examine messages and 479+ for brief descs)
+[1200:beside a huge castle keep]
+;
+; Now verbose additions to brief location descriptions (1300+n). No 
+; full stops at end please. These are printed immediately after each 
+; short descriptions (1000+N), without any intervening punctuation. 
+; (You may start a message with either punctuation or just text.)
+;
+;
+; Message pairs for use in describing containment positions
+; also used for preposition table
+;
+; part printed before container
+;
+[1600:can see] ; 0 - you can see
+[1601:^P on |^P onto] ; 1 - on
+[1602:^P underneath|^P below ^P under] ; 2 - under
+[1603:^P behind]      ; 3 - behind
+[1604:]               ; 4 - carrying
+[1605:]               ; 5 - wearing
+[1606:in|^P at]       ; 6 - blocking the hole
+[1607:^P in |^P into ^P inside] ; 7 - in 
+[1608:hanging from]   ; 8
+[1609:]               ; 9 - tied up with
+[1610:^P between]     ; tied between is tied a rope
+;; [1611:]            ;11 - for ring of knucklebone
+[1612:lying on]       ;12
+[1613:sitting on]     ;13
+[1614:fastened to]    ;14
+[1615:tied to]
+; 15 tied to (the chest) and holding the lid open is (a strap)
+[1616:^P with|^P using]
+[1617:^P from]
+;
+; part printed between container and contained.
+;
+[1640:]               ; 0 
+[1641:is]             ; 1 - on
+[1642:is]             ; 2 - under
+[1643:is]             ; 3 - behind
+[1644:is carrying]    ; 4
+[1645:is wearing]     ; 5
+[1646:is blocked by]  ; 6 - is blocked by
+[1647:is]             ; 7 - in
+[1648:is]             ; 8
+[1649:is tied up with]; 9 - ; tied up with - mainly for goat
+[1650:is tied]        ;10 -
+[1651:]               ;11 - from
+[1652:]               ;12
+[1653:]               ;13
+[1654:is]             ;14 - fastened to
+[1655:and holding the lid open is] ;15 tied to the (chest) is a (strap)
+;
+; 1700: is base for prepositions to use with 'you'
+;
+; 1700+N is part printed before 'you'
+[1715:tied to]
+;
+; 1740+N is part printed between you and object(s)
+[1741:are on]         ; 1 - on
+; 1742 is 2
+; 1743 is 3
+[1744:own]            ; 4 - own
+[1745:are wearing]    ; 5
+[1746:are riding]     ; 6
+[1747:are in]         ; 7
+[1752:are lying on]   ; 12
+[1753:are sitting on] ; 13
+[1754:are fastened to];14
+[1755:is] ; tied to you is 15
+;
+[1800:^P off]
+[1801:^P up]
+[1802:^P down]
+[1803:^P to]
+[1804:^P out]
+[1805:^P from the ] ; used for npc motion
+[1806:^P for]
+[1807:^P until]
+[1808:^P debug]
+[1809:^P through]
+[1810:^P about]
+;
+; Parser messages..
+[2000:you don't need to use "] 
+[2001:" to finish the game]
+;
+[2003:I don't understand the word "]
+[2004:" when used like that]
+;
+[2006:you are ]
+[2007:in a ] ; as in 'You are in an alder forest
+[2008:in an ]
+[2009:exits lead in all directions]
+;
+; general error message when parsing has broken down.
+[2010:I don't understand what you mean]
+[2011:you can't see]
+[2012:you don't have]
+[2013:you already have]
+[2014:(I would like to take this opportunity to apologise for 
+not knowing what the heck you're blathering about)]
+[2015:it's too far away] ; examine, take etc. scenery objects
+[2016:I can't find a verb in that sentence]
+[2017:it's not there]
+[2018:there were too many nouns in that sentence]
+;
+[2036:sorry, I don't fully understand that verb]
+; ^ verb in keyword table but not in CALLVERB routine
+[2037:there doesn't seem to be anything suitable]
+;
+[2039:what a mouthful! ]
+;
+[2044:can't ] 
+;; [2045:that]
+[2046:that]
+[2047:here]
+[2048:I can't find ]
+;
+[2053:it's not clear to what ]
+[2054: is referring] 
+;
+[2055:(removing] ; E.g '(Removing the bat from the cage first).'
+[2056:from the]  ; to avoid containers inside themselves.
+[2057:first).]
+;
+; error messeen from afar
+[2106:you own nothing at all! ]
+[2108:it is dark, you cannot see]
+;
+; examining something greater than maxobject: (but not scenery)
+; rare occurrence - mostly for omnipresent objects, numbers, spells
+[2112:it looks exactly as you would expect]
+[2113: nothing]
+[2114:you can't go that way]
+[2115:through the door]
+[2116:you try very hard to squeeze under the door, but can't
+manage it. Perhaps you should open it first? ]
+[2117:it's already open]
+;; [2118:it's already closed]
+[2119:yseen from afar
+[2106:you own nothing at all! ]
+[2108:it is dark, you cannot see]
+;
+; examining something greater than maxobject: (but not scenery)
+; rare occurrence - mostly for omnipresent objects, numbers, spells
+[2112:it looks exactly as you would expect]
+[2113: nothing]
+[2114:you can't go that way]
+[2115:through the door]
+[2116:you try very hard to squeeze under the door, but can't
+manage it. Perhaps you should open it first? ]
+[2117:it's already open]
+;; [2118:it's already closed]
+[2119:you find]
+;
+[2123:you can't put ] ; paired with 2124
+[2124:there]
+;
+[2125:you can't go there! ]
+[2126:you'll have to drop it first]
+;
+[2127:you can't climb that]
+[2128:%Did you know that you can say 'GO TO somewhere' to go to
+a far off place? e.g. 'GO TO TOWER' or 'GOTO ALDER FOREST.'%]
+;
+; 2130 is used when player refers to scenery which is not nearby
+[2130:I can't find a reference to "]
+[2131:you're on it! ]
+[2132:what? ]
+[2133:where? ]
+[2134:you're wearing ]
+[2135:Please try again, saying what with? ]
+[2136:which one?]
+[2137:at what?]
+[2139:is full]
+[2140:" here]
+;
+[2142:you can't wear ]
+[2143:you can't reach it from here]
+;
+[2147:you're already wearing that]
+[2148:you don't need to do that]
+;
+; Confirmation messages
+;
+[2152:worn]
+[2153:OK]
+[2155:time passes. ]
+[2156:said]
+[2158:you'll have to untie it first]
+;
+[2160:YES or NO please.%]
+;
+[2177;you hear strange noises]
+[2178:there is a strange noise]
+[2179:some strange noises come from nearby]
+;
+[2190:(]
+[2191:)]
+;
+; Death, scoring, game control etc.
+;
+[2200:really restart? ]
+;; [2201:%press space to play again]
+[2202:really restore? ]
+[2203:%please answer YES or NO]
+;
+[2207:do you want to continue? ]
+;
+[2209:% %thy adventure is over.%Please type RESTORE or RESTART: ]
+[2210:the room is badly damaged] ; attack/fireball room
+[2211:don't bother - you made a pretty good job of smashing the place
+up last time]
+[2212:why don't you go and mangle a paper clip instead? ]
+[2213:vandals seem to have been at work here]
+[2214:% %do you want to continue? ]
+[2215:that's too long to wait] ; won't wait
+[2216:you can wait for someone (e.g. WAIT FOR BEETLE),
+for a certain length of time (e.g. WAIT FOR 25 MINUTES),
+or until a time (e.g. WAIT UNTIL 14:25)]
+[2217:the time is ]
+;
+; Residual combat messages..
+[2230:the body of] ; as in 'the body of a troll'
+[2231:, but]
+;
+; Score messages..
+[2240:you score ]
+[2241:you seem to be have got yourself killed. You scored ]
+[2242: out of 1000 and are a ] 
+;
+; ratings..
+[2250:novice]
+[2251:sorcerer's apprentice]
+[2252:conjuror]
+[2253:soothsayer]
+[2254:shaman]
+[2255:a spellbinder]
+[2256:sorcerer]
+[2257:magician]
+[2258:wizard]
+[2259:mage]
+[2260:supreme archmage]
+; 
+; health reports
+[2270:dead]
+[2271:at death's door]
+[2272:a wreck]
+[2273:badly injured]
+[2274:wounded]
+[2275:injured]
+[2276:hurt]
+[2277:almost uninjured]
+[2278:in good shape]
+[2279:unhurt]
+[2280:completely uninjured] ; and probably cheating!
+;
+[2300:Oops and ram save/restore don't work in this version]
+[2301:%please insert save disk and press a key. %]
+[2302:%please insert game disk and press a key. %]
+[2308:I can't use OOPS to go back further than this]
+[2309:%(This version allows you to use RAM SAVE and RAM RESTORE
+to save a position in memory, and OOPS to take back bad moves). ]
+[2310:can't return to that saved position in memory. Perhaps
+you've turned off the computer, or reloaded the game, since
+it was saved]
+;
+; misc jokey messages (slightly more complex than echo verbs)..
+[2401:you might hurt yourself] ; attack me
+[2404:you smell nothing of interest]
+[2405:you find nothing special]
+[2406:you smell wonderful] ; smell player
+[2407:hello there]
+[2416:to be, or not to be, that is the question]
+;
+[2501:a wizard appears in a puff of smoke to take ]
+[2502: to heaven]
+;
+;
+;
+;
+; add your messages for special cases here....
+
+
+
+
+
+
+
+
+
+
+; descriptions for outside rooms (do not mark anything in 2800 to 2819)..
+; corresponds with entries in TERRAINTABLE
+;
+[2800:on a grassy plain]
+;
+; Message groups (spaced every ten to permit lots of variations)..
+;
+[3100:don't be silly] ; "silly" group
+[3101:strange concept]
+[3102:you must be mad]
+;
+[3110:nice try] ; "nice try" group
+[3111:a valiant attempt]
+[3112:no chance]
+;
+[3120:you might as well leave it alone] ; just scenery group
+[3121:I suggest that you forget about it]
+[3122:that's not important]
+;
+[3130:I can't find any objects in that] ; ommitted object group 
+[3131:sorry, I couldn't find an objecteetings"]
+[3172:says, "Hello to you"]
+;
+[3180:nods in acknowledgement]
+[3181:flickers an eyelid]
+[3182:snorts softly]
+;
+; messages for people recovering things they need
+[3190:says, "I'll take that, thank you"]
+[3191:says, "Give that to me"]
+[3192:says, "That's mine"]
+;
+[3200:growls angrily]
+[3201:snarls]
+[3202:stops dead]
+;
+; responses for npcs - those who can talk and those who can't.
+; first - npc refuses an order
+[3210:says, "Get lost, buster"]
+[3211:says, "Don't try to order me arouneetings"]
+[3172:says, "Hello to you"]
+;
+[3180:nods in acknowledgement]
+[3181:flickers an eyelid]
+[3182:snorts softly]
+;
+; messages for people recovering things they need
+[3190:says, "I'll take that, thank you"]
+[3191:says, "Give that to me"]
+[3192:says, "That's mine"]
+;
+[3200:growls angrily]
+[3201:snarls]
+[3202:stops dead]
+;
+; responses for npcs - those who can talk and those who can't.
+; first - npc refuses an order
+[3210:says, "Get lost, buster"]
+[3211:says, "Don't try to order me around, matey"]
+[3212:says, "No way"]
+;
+[3220:sneers at your request]
+[3221:curls its upper lip disdainfully]
+[3222:laughs hoarsely]
+;
+; now, npc accepts an order
+[3230:says, "Right away, boss"]
+[3231:says, "I'll get onto it at once"]
+[3232:says, "No sooner said than done"]
+;
+[3240:nods slowly]
+[3241:nods in agreement]
+[3242:agrees with a flicker of the eyelids]
+;
+; now response to questions when not obedient...
+[3250:says, "You'll have to find that out for yourself"]
+[3251:says, "You won't get any help from me"]
+[3252:pretends to ignore your question]
+;
+[3260:makes a rude gesture]
+[3261:pretends to ignore you]
+[3262:snarls threateningly]
+;
+; response to requests to give anything(s) to anyone
+[3270:says, "You'll have to fight me for that"]
+[3271:says, "I'd rather die"]
+[3272:says, "I'm not about to give anything away"]
+;
+[3280:clutches his possessions angrily]
+[3281:makes a rude gesture]
+[3282:waves it at you defiantly]
+;
+; npc wants to obey orders just given, but can't understand any of them!
+[3290:says, "Sorry boss, I don't understand"]
+[3291:says, "It must be me, boss, I can't understand what
+you're saying"]
+[3292:says, "Pardon? Could you rephrase that"]
+;
+[3300:shrugs in non-comprehension]
+[3301:doesn't seem to understand]
+[3302:makes a questioning noise]
+;
+; messages when people are attacked by other people (probably player)
+[3310:screams and turns angrily]
+[3311:says, "don't do that"]
+[3312:says, "OK, so that's the way you want it"]
+;
+[3320:screams and turns angrily]
+[3321:growls viciously]
+[3322:whirls around, ready to fight]
+;
+; now messages when people launch unprovoked attacks on the user
+; these are followed by 'and attacks you'
+[3330:shouts, "An orc! Let's kill it"]
+[3331:shouts, "Kill the orc"]
+[3332:shouts, "I'm going to kill you, vile orc"]
+;
+[3340:growls menacingly]
+[3341:stares at you with obvious distaste]
+[3342:leaps towards you]
+;
+; messages when npc can't find the way to its destination
+[3350:says, "I can't find it anywhere"]
+[3351:says, "I'm lost"]
+[3352:says, "Where can it be? I can't find it"]
+;
+[3360:seems to lose purpose]
+[3361:seems to give up]
+[3362:looks around, then snorts in disgust]
+;
+[3370:says, "No way"]
+[3371:says, "Nope, I won't do it"]
+[3372:says, "No chance"]
+;
+[3380:laughs hoarsely]
+[3381:sniggers a bit]
+[3382:sighs heavily]
+;
+; default animal singing of gold messages...
+[3400:paws the ground]
+[3401:stares at you]
+[3402:paces up and down]
+;
+; default male gold singing..
+[3410:looks at what he's carrying and mumbles quietly]
+[3411:scratches himself]
+[3412:hums a little tune]
+;
+; female default gold singing..
+[3420:looks at what she's carrying and mumbles quietly]
+[3421:gives you a dirty look]
+[3422:hums a little tune]
+;
+; beetle gold singing..
+[3430:scuttles about]
+[3431:rubs its mandibles together]
+[3432:looks inscrutible]
+;
+; dancer gold singing..
+[3440:spins around daintily on one leg]
+[3441:leaps high in the air]
+[3442:bounces energetically around you]
+;
+; when someone attacks someone else in an unprovoked way..
+[3460:screams and turns on you angrily. ]
+[3461:says, "What's your game, buster?" ]
+[3462:says, "OK, so that's the way you want it." ]
+;
+; when you give people presents of treasure...
+; this will probably make them like you a bit.
+[3480:says, "Ooo.. thank you"]
+[3481:bites it to test its value]
+[3482:examines it closely]
+;
+; when someone steals something from an NPC
+[3490:seems annoyed]
+[3491:shrieks in surprise]
+[3492:snarls menacingly]
+;
+; group shouting messages..
+[3500:I've just stolen some treasure from ]
+[3501:I've just ripped off ]
+[3502:I've just stolen something from ]
+;
+;; [3510:I've just found a valuable ]
+;; [3511:I've just picked up a valuable ]
+;; [3512:I've got a valuable ]
+;
+;; [3520:I'm back in the game!]
+;; [3521:I'm now back in the game!]
+;; [3522:I'm back!]
+;
+; again used following a command referring to scenery
+[3530:the previous command was not repeatable]
+[3531:you can't repeat that]
+[3532:it wouldn't help to try that a have to find the way yourself from here]
+;
+[3710:I'm back in the game"] ; when people are repaired
+[3711:I've just stolen some treasure from ]
+[3712:I've just found some treasure"]
+;
+[3714:I'm in ] ; followed by room description.
+;
+; Garbage words..
+[4000:^N the ^N this ^N these ^N that ^N some ^N a ^N and ^N also
+^N before ^N wade ^N jog ^N plod ^N rush ^N dash ^N march ^N amble
+^N good ^N of ^N cute ^N there]
+[4001:^N therefore ^N am ^N my ^N your ^N try ^N carefully ^N slowly
+^N warily ^N q have to find the way yourself from here]
+;
+[3710:I'm back in the game"] ; when people are repaired
+[3711:I've just stolen some treasure from ]
+[3712:I've just found some treasure"]
+;
+[3714:I'm in ] ; followed by room description.
+;
+; Garbage words..
+[4000:^N the ^N this ^N these ^N that ^N some ^N a ^N and ^N also
+^N before ^N wade ^N jog ^N plod ^N rush ^N dash ^N march ^N amble
+^N good ^N of ^N cute ^N there]
+[4001:^N therefore ^N am ^N my ^N your ^N try ^N carefully ^N slowly
+^N warily ^N quickly ^N rapidly ^N following ^N around]
+;

@@ -1,0 +1,48 @@
+                    Appendix F - Hardware Performance
+
+The  following timings were performed on a 520STM,  using a Cumana 
+double  sided floppy,  and the Argonaut Winchester.  They refer to 
+the version of Worm in Paradise used in Silicon Dreams.
+
+
+Function                 Accumulated time
+
+                           From floppy         From Winchester
+
+run editor,
+load aspecial,
+save it,
+quit back to CLI.             0:38                0:12             
+
+time at end of compile:       1:19                0:30
+
+time at end of finish:        1:41                0:36
+
+run game, return to CLI       1:58                0:43
+
+The last figure gives the 'development cycle' time.  It is clearly 
+about three times faster from Winchester.
+
+Costs of the various hardware configurations are approx:
+
+                                   Price incl. VAT
+     520STM                             300
+     Double sided drive                 140
+     B/W monitor                        150
+     Colour monitor                     300
+     Winchester drive                   600
+
+     520STM, Double sided drive, own monitor or TV.
+                              Cost about 400 pounds incl.
+
+     520STM, Double sided drive, winchester, monitor.
+                              Cost about 1300 pounds incl.
+
+Over a typical working day, with one compilation every ten minutes 
+on average,  using a Winchester would save about 2 hours. Over the 
+two  months  or so to develop a game,  this is about 80 hours,  or 
+approx  two weeks.  For a salaried programmer earning 12000 pounds 
+pa,  this  is  500  pounds,  or slightly less than the cost  of  a 
+Winchester. Thus a Winchester system is (just) cost-beneficial for 
+developing a single game from start to finish.
+

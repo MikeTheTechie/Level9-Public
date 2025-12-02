@@ -1,0 +1,15 @@
+; documentation on squash.dat file
+;
+; First few bytes are pointers to various sections:
+
+Offset from start			Description
+
+
+	0		Length of squash.dat file
+	2		Offset of message descriptors
+			(messsages - made up of 1 and 2 byte
+			numbers corresponding to words
+			in the dictionary)
+	4		Length of message descriptors
+	6		Offset of word dictionary
+	8		Length of word dictionary
