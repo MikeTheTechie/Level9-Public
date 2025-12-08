@@ -1,0 +1,410 @@
+* GAME.TXT - Main game interface to be used with LIB.TXT 
+* library routines
+* Copyright (C) Graham M Jones 30th August 1990 
+
+*               Signed  Unsigned
+* >=            BGE     BCC
+* >             BGT     BHI
+* =             BEQ     BEQ
+* <>            BNE     BNE
+* <=            BLS     BLS
+* <             BLT     BCS
+
+	opt d+
+
+* ----------------------------------------------------------------------- *
+* main loop								  *
+* ----------------------------------------------------------------------- *
+
+start:
+	bsr calcbufferptrs		; initialise buffer pointers
+;	bra password			; input password
+donepassword:
+	bsr initvars			; set up sys vars
+	bsr initgamevars		; set up game vars
+	bsr initialise			; set up screen etc.
+	bsr showstats			; show program stats
+	bsr loadtitle			; show title page
+	bsr loadmapdata			; load map tiles
+	bsr loadradarmap		; load radar map
+	bsr cls
+
+mapdemoloop:
+	bsr buildanddisplayscreen	; show screen
+	bsr movewindow			; move screen
+	tst.b closedownflag		; quit?
+	bne closedown
+	bra mapdemoloop
+
+* ----------------------------------------------------------------------- *
+* game specific routines
+* ----------------------------------------------------------------------- *
+
+* input password
+password:
+	bsr waitkey
+	move.w d0,-(sp)
+	bsr waitkey
+	move.w d0,-(sp)
+	bsr waitkey
+	move.w (sp)+,d1
+	move.w (sp)+,d2
+	; d2=1st char, d1=2nd char, d0=3rd char
+	cmp.b #'4',d2
+	bne returntogem
+	cmp.b #'5',d1
+	bne returntogem
+	cmp.b #'1',d0
+	bne returntogem
+	bra donepassword
+
+* ----------------------------------------------------------------------- *
+
+* initialise game specific vars
+initgamevars:
+	move.l #startgamevars,a0
+	move.l #(endgamevars-startgamevars)/4,d1
+	clr.l d0
+	bsr fillblock			; clear game specific vars
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* control window scrolling with joystick
+movewindow:
+	bsr keyscan
+	cmp.b #'q',d0			; quit?
+	bne notclosedown
+	move.b #$ff,closedownflag
+	rts
+
+notclosedown:
+	btst.b #upbit,joystickstatus
+	beq notup
+	cmp.w #-16,ychg
+	beq notdown
+	subq.w #2,ychg
+	bra notdown
+notup:
+	btst.b #Downbit,joystickstatus
+	beq notdown
+	cmp.w #16,ychg
+	beq notdown
+	addq.w #2,ychg
+notdown:
+	btst.b #leftbit,joystickstatus
+	beq notleft
+	cmp.w #-32,xchg
+	beq notright
+	subq.w #8,xchg
+	bra notright
+notleft:
+	btst.b #rightbit,joystickstatus
+	beq notright
+	cmp.w #32,xchg
+	beq notright
+	addq.w #8,xchg
+notright:
+
+	; regulate ychg to stop scrolling at map edges
+	cmp.w #16,windowy
+	bgt notregulateup		; not at top edge
+	tst.w ychg
+	bpl notregulateup		; ok - moving down
+	clr.w ychg			; apply brakes!
+notregulateup:
+	cmp.w #(mapdepth-windowdepth-1)*16,windowy
+	ble notregulatedown		; not at bottom edge
+	tst.w ychg
+	bmi notregulatedown		; ok - moving up
+	clr.w ychg			; apply brakes!
+notregulatedown:
+	; regulate ychg to stop scrolling at map edges
+	cmp.w #32,windowx
+	bgt notregulateleft		; not at left edge
+	tst.w xchg
+	bpl notregulateleft		; ok - moving right
+	clr.w xchg			; apply brakes!
+notregulateleft:
+	cmp.w #(mapwidth-windowwidth-2)*16,windowx
+	ble notregulateright		; not at right edge
+	tst.w xchg
+	bmi notregulateright		; ok - moving left
+	clr.w xchg			; apply brakes!
+notregulateright:
+
+	; move window
+	move.w xchg,d0
+	add.w d0,windowx		; move x pos
+	move.w ychg,d0
+	add.w d0,windowy		; move y pos
+
+	; move player
+	move.l #playersprite,a0		; player=sprite 0
+	move.w ychg,d0
+	add.w d0,yposoffset(a0)		; move y pos
+	move.w xchg,d0
+	add.w d0,xposoffset(a0)		; move x pos
+
+	; set player direction
+	tst.w d0			; test x change
+	beq gotplayerdir		; stationary - no dir change
+	clr.b diroffset(a0)
+	tst.w d0			; test x change
+	bpl gotplayerdir		; moving right (dir=0)
+	move.b #1,diroffset(a0)		; moving left (dir=1)
+gotplayerdir:
+
+	; work out intended player position within the window
+	move.w windowx,d0
+	add.w #128,d0
+	sub.w xchg,d0
+	sub.w xchg,d0
+	sub.w xchg,d0
+	sub.w xchg,d0			; d0=intended x pos
+	move.w windowy,d1
+	add.w #64,d1
+	sub.w ychg,d1
+	sub.w ychg,d1
+	sub.w ychg,d1			; d1=intended y pos
+
+	; move the player towards the intended position
+	cmp.w xposoffset(a0),d0
+	beq xposintended		; reached intended x
+	bpl movexright
+	; move left towards intended x
+	sub.w #8,xposoffset(a0)
+	bra xposintended
+	; move right towards intended x
+movexright:
+	add.w #8,xposoffset(a0)
+xposintended:
+	cmp.w yposoffset(a0),d1
+	beq yposintended		; reached intended x
+	bpl moveydown
+	; move up towards intended y
+	sub.w #2,yposoffset(a0)
+	bra yposintended
+	; move down towards intended y
+moveydown:
+	add.w #2,yposoffset(a0)
+yposintended:
+
+	; fire missile?
+	btst.b #firebutton,joystickstatus
+	bne playermissile
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* player fires a missile
+playermissile:
+	move.w #missileaniR,d0		; fire right ani sequence
+	tst.b diroffset(a0)		; dir 0 is right, 1 is left
+	beq startplayermissile
+	move.w #missileaniL,d0		; fire left ani sequence
+startplayermissile:
+	bsr startmissile		; start player missile
+
+	; reposition player missile according to player xchg & ychg values
+	move.w xchg,d0
+	add.w d0,xposoffset(a1)		; adjust missile x
+	move.w ychg,d0
+	add.w d0,yposoffset(a1)		; adjust missile y
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* sprite (a0) fires a missile with ani sequence d0
+startmissile:
+	move.l #missilesprites,a1	; start of missile sprites
+	moveq.w #playermissiles-1,d2	; number of possible missiles
+findblanksprite:
+	move.w pcoffset(a1),d1		; get current animation pc
+	beq gotblankmissile		; found a blank sprite
+	add.l #spriteblocklen,a1
+	dbra d2,findblanksprite		; try next sprite
+	rts				; sorry - no free sprites
+
+* start blank missile (a1) at sprite (a0) pos with ani sequence d0
+gotblankmissile:
+	move.w d0,pcoffset(a1)
+	move.w xposoffset(a0),d0	; sprite x pos
+	move.w d0,xposoffset(a1)	; set missile x pos
+	move.w yposoffset(a0),d0	; sprite y pos
+	move.w d0,yposoffset(a1)	; set missile y pos
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* plot all sprites as pixels on the radar panel
+showradar:
+	; copy radar map to screen
+	move.l currentLscreen,a0	; a0=start of screen
+	add.l #160*radarymargin,a0	; + address offset of radar
+	move.w #(201-radarymargin)*40,d0 ; longwords to copy
+	move.l buffer1,a1		; radar map in buffer 1
+copyradar:
+	move.l (a1)+,(a0)+
+	dbra d0,copyradar
+
+	move.l #spriteparameters,a1	; sprite parameter blocks
+	move.b #1,fatpixels		; set fat pixel mode
+	move.l #maxsprites-1,d0
+plotradarloop:
+	tst.w pcoffset(a1)
+	beq prnext
+	move.l d0,-(sp)
+	move.w xposoffset(a1),d0
+	lsr.w #4,d0			; x pos / 16
+	add.w #radarxmargin,d0		; x offset of radar box
+	move.w yposoffset(a1),d1
+	lsr.w #4,d1			; y pos / 16
+	add.w #radarymargin,d1		; y offset of radar box
+	move.b pixcoloffset(a1),graphiccol ; pixel colour
+	bsr plotpix
+	move.l (sp)+,d0
+prnext:
+	add.l #spriteblocklen,a1	; next sprite
+	dbra d0,plotradarloop
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* load city radar map into buffer1
+loadradarmap:
+	move.l #rfilename,d1
+	move.l buffer1,d2
+	move.l #128,d3				; skip NEO header
+	bsr open
+	bmi loadradarerr
+	bsr read
+	bmi loadradarerr
+	move.l #6400,d3				; 40 pixel lines
+	bsr read
+	bmi loadradarerr
+	bsr close
+loadradarerr:
+	rts
+
+rfilename:
+	dc.b "radar.neo",0
+	even
+
+* ----------------------------------------------------------------------- *
+
+* display program statistics
+showstats:
+	move.b #2,textcol
+	move.l #Tstat0,a0
+	bsr printstring
+	move.b #1,textcol
+	move.l #Tstat1,a0
+	bsr printstring
+	move.l #start,d0
+	bsr printhexbcd
+	move.l #Tstat3,a0
+	bsr printstring
+	move.l #endprog,d0
+	bsr printhexbcd
+	move.l #Tstat3,a0
+	bsr printstring
+	move.l screen1,d0
+	bsr printhexbcd
+	move.l #Tstat4,a0
+	bsr printstring
+	move.l endbuffers,d0
+	bsr printhexbcd
+	move.b #2,textcol
+	move.l #Tstat5,a0
+	bsr printstring
+	bra waitkey
+
+Tstat0:
+	dc.b "BOLLOCK BLASTER V1.32 14th Dec 1989",13,13
+	dc.b "Copyright (C) 1989 Graham M Jones",0
+	even
+Tstat1:
+	dc.b 13,13,"Prog start: $",0
+	even
+Tstat2:
+	dc.b 13,"Prog end  : $",0
+	even
+Tstat3:
+	dc.b 13,"Data start: $",0
+	even
+Tstat4:
+	dc.b 13,"Data end  : $",0
+	even
+Tstat5:
+	dc.b 13,13,"Pilot rating: ASSHOLE",13,13
+	dc.b "May the vibes be with you...",0
+	even
+
+* ----------------------------------------------------------------------- *
+* LIB.TXT interface routines
+* ----------------------------------------------------------------------- *
+
+* about to move sprite with header a0 by x,y adjustments
+* d1,d2. These may be altered according to collisions etc.
+specialmovesprite:
+	; set up temporary vars for collision detection
+	move.w xposoffset(a0),spritex
+	move.w yposoffset(a0),spritey
+	move.w xposoffset(a0),d0
+	add.w d1,d0
+	move.w d0,intendedspritex
+	move.w yposoffset(a0),d0
+	add.w d2,d0
+	move.w d0,intendedspritey
+	rts
+
+* halt the sprite with header a0
+haltsprite:
+	move.w #standani,d0
+	bsr forcenewanimation
+	clr.w d1			; zero move adjustments
+	clr.w d2
+	rts
+
+* force new animation sequence d0 for sprite with header a0
+forcenewanimation:
+	clr.w repeatoffset(a0)		; kill repeat offset
+	move.w d0,pcoffset(a0)		; get new pc offset
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* build the current display to the logical screen and swap 
+* screens to display it
+buildanddisplayscreen:
+	move.w windowx,Wwindowx
+	move.w windowy,Wwindowy
+	move.l #mapwidth,Wmapwidth
+	move.l mapdata,a2
+	clr.b superimpose
+	bsr drawmaptoscreen		; draw main map
+	bsr animatesprites		; animate & move sprites
+	bsr displaysprites		; draw all sprites
+
+	; show foreground "parallax" map
+	asl.w Wwindowx
+	asl.w Wwindowy
+	add.w #32,Wwindowy		; editor window is shallower
+	move.l #fmapwidth,Wmapwidth
+	move.l fmapdata,a2
+	move.b #1,superimpose
+	bsr drawmaptoscreen		; draw foreground map
+
+	bsr showradar			; show radar panel
+	bsr swapscreens
+	bra flyback			; remove when prog loop grows
+
+	include "LIB.TXT"
+	include "GAMEWS.TXT"
+	include "FONT.TXT"
+	include "SPRDATA.TXT"
+	include "GAMECONS.TXT"
+	include "SYSCONST.TXT"		; must be at end of program
+
+* ----------------------------------------------------------------------- *

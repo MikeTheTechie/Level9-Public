@@ -1,0 +1,145 @@
+; Blood Relations LOAD / SAVE code
+;
+; Graham 18/09/90
+;
+const
+ GameVersion=1 ; GAME VERSION NUMBER - CHANGE THIS EVERY VERSION 
+; TO PREVENT LOADING POSITION DATA FROM A PREVIOUS VERSION
+;
+begin
+;
+; Data from four tables are temporarily copied into list 15 
+; (normally, the structure buffer), and saved as one file
+.SAVE
+ gosub @SelectFilename ; Get filename
+;
+ x1=GameVersion ; game version mumber
+ List15(c0)=x1
+ List15(c1)=murder ; murder number
+;
+ Value=5 ; current word pos in file buffer (entries 0-10 contain 
+; a header of game version.b : murder.b : length of list0 data.w : 
+; length of list4 data.w : length of list6 data.w : 
+; length of list12 data.w)
+;
+ v1=0 ; source for copy is list0
+ v5=2000 ; word length of variable table+hi/currentpos lists
+ &list15(c2)=v5 ; header(2) is word length of list0
+ gosub @CopyListToFileBuffer
+ v1=4 ; source for copy is list4
+ &v5=List4(92) ; byte length of list 4
+ asr v5 ; word length of list4 variable data
+ &list15(c4)=v5 ; header(4) is word length of list4
+ gosub @CopyListToFileBuffer
+ v1=6 ; source for copy is list6 - npc tables
+ v5=1750 ; word length of npc tables
+ x1=6
+ &list15(x1)=v5 ; header(6) is word length of list6
+ gosub @CopyListToFileBuffer
+ v1=12 ; source for copy is list12 - hires list
+ v5=SizeHiresList ; length of hires list
+ asr v5 ; word length of hires list
+ &list15(c8)=v5 ; header(8) is word length of list12
+ gosub @CopyListToFileBuffer
+;
+; Save Value words of list 15
+ v1=15 ; save list 15 - temp buffer of lists to be saved
+ v2=0 ; offset within list
+ v6=value ; culminated word length of lists to be saved
+ add v6,v6 ; length in bytes
+ v5=0 ; high word of length
+ gosub @MCSaveFile
+ goto @SetUpMainGame
+;---
+; Load merged tables file into list 15
+.LOAD
+ gosub @SelectFilename ; Get filename
+;
+; Load merged tables into list15...
+ v1=15 ; load list 15 - temp buffer of merged lists
+ v2=0 ; offset within list
+ v3=0
+ gosub @MCLoadFile
+;
+; Header contains...
+; game version.b : murder.b : length of list0 data.w : 
+; length of list4 data.w : length of list6 data.w : 
+; length of list12 data.w
+ x1=List15(c0)
+ if x1<>GameVersion then @FileReadError ; wrong version / file
+;
+; Test current murder number with murder number loaded to see if 
+; we have to load new lists 4 & 5
+ x1=list15(c1)
+ if x1=murder then LoadingCurrentMurder
+ murder=x1
+ gosub @LoadWSTables
+;
+.LoadingCurrentMurder
+ Value=5 ; current word pos in file buffer (entries 0-10 contain 
+ v3=0 ; destination for copy is list0
+ &v5=list15(c2) ; header(2) is word length of list0
+ gosub @CopyFileBufferToList
+ v3=4 ; destination for copy is list4
+ &v5=list15(c4) ; header(4) is word length of list4
+ gosub @CopyFileBufferToList
+ v3=6 ; destination for copy is list6
+ x1=6
+ &v5=list15(x1) ; header(6) is word length of list6
+ gosub @CopyFileBufferToList
+ v3=12 ; destination for copy is list12
+ &v5=list15(c8) ; header(8) is word length of list4
+ gosub @CopyFileBufferToList
+;
+ &WordWS(WordTextBufferOffset)=c0
+code -
+ message 82 ; "Loaded data from game "
+ print murder
+ message dot
+code +
+;
+ goto @SetUpMainGame
+;---
+; A loading error has occured
+.FileReadError
+ &WordWS(WordTextBufferOffset)=c0
+code -
+ message 81 ; "Load error! "
+code +
+ goto @SetUpMainGame
+;---
+; Copy v5 words of list v1 to list15 at position Value, and 
+; then increment Value to the next free space in list15
+.CopyListToFileBuffer
+ v2=0 ; offset within source list
+ v3=15 ; destination list for copy
+ v4=Value ; offset within dest list
+ add v4,v4 ; now in bytes
+ add Value,v5 ; add length to buffer pointer
+ goto @MCCopy
+;---
+; Copy v5 words of list15 at position Value to list v3
+.CopyFileBufferToList
+ v1=15 ; source list for copy
+ v2=Value ; offset within source list
+ add v2,v2 ; now in bytes
+ v4=0 ; offset within dest list
+ add Value,v5 ; add length to buffer pointer
+ goto @MCCopy
+;---
+; Get filename
+.SelectFilename
+ m1=80
+ gosub @DoTextWindow
+ gosub @DisplayEverything
+ TextBoxDisplayed=0
+ &v1=IntroTables(10) ; unextended filename
+ gosub @CopyFilename
+.SelectFilenameLoop
+ gosub @WaitKey
+ if v1<48 then SelectFilenameLoop
+ if v1>57 then SelectFilenameLoop
+ x1=15
+ List17(x1)=v1 ; set last char as extend char 0-9
+ return
+;---

@@ -1,0 +1,20 @@
+; Blood relations LOAD / SAVE overlay interface
+;
+; Graham 18/09/90
+;
+begin
+;
+code -
+.RamSAVE
+.SAVE
+code +
+ SubGame=9 ; code for save
+code -
+ return
+;
+.RamLOAD
+.LOAD
+code +
+ SubGame=10 ; code for load
+code -
+ return

@@ -1,0 +1,173 @@
+; PRINT.TXT for Blood Relations
+;
+; Mike Austin July 1990
+;
+; Copyright (C) 1990 Level 9 Computing Ltd
+;
+;
+const
+ TextBufferNumber=24 ; where characters are put by MESSAGE commands
+ FontListNumber=26
+
+table
+ FontList=26
+
+begin
+
+;------------
+.CopyFilename
+; from IntroTables(v1) to list17(8)
+ v2=8
+.CF2
+ v3=IntroTables(v1)
+ list17(v2)=v3
+ add v1,c1
+ add v2,c1
+ if v3<>0 then CF2
+ return
+;---
+.DoTextWindow
+; text raster is number 1725
+ v1=BigWindowRaster ; =1725 (use 431 to display)
+; flag display system to show this box
+ TextBoxDisplayed=BigWindowDisplayObject
+ TextBoxWidth=216 ; width of main window box
+ TextBoxDepth=100 ; depth of main window box
+
+.BoxMessageM1
+; print message m1 into text raster v1, clearing it to white first
+ gosub @SetupPrintRaster
+ code -
+  gosub @iMessageM1
+ code +
+ return
+;--------------
+ code -
+.iMessageM1
+; print Message M1 at current cursor pos
+ gosub @iStartPrintToBuffer
+ message cr ; flush buffer
+ code +
+  &WordWS(WordTextBufferOffset)=c2 ; throw away any junk flushed
+ code -
+ message m1
+ message cr ; ensure buffer is flushed etc.
+ gosub @iEndPrintToBuffer
+; text has been printed between TextBuffer(2..v7)
+
+.iDisplayBufferedText
+; called from menu etc. where several messages are to be put
+; into one text box
+code +
+ sub v7,c1 ; *** GMJ - ignore trailing garbage - e.g. cr + space etc.
+ if v7>5 then iBoxV1SomeText ; slightly higher than ideal (2)
+; because stray spaces, carriage returns etc. tend to get shoved
+; out from time to time.
+
+; nothing printed - flag display system to not show this box
+ TextBoxDisplayed=0 ; reset flag to indicate no text printed
+
+.iBoxV1SomeText
+ v6=FontHeight ;copy into a variable int mode can access
+ &x6=FontList(2) ; get offset of width table
+ sub x6,FirstAsciiInFont ; so FontList(x6+v3) is width for char v3
+
+ v4=inkcol ; foreground color
+ v5=bakcol ; background color
+code -
+ x1=2 ; position in buffer
+ v2=0 ; y pos
+
+.RasterPrintYLoop
+ v1=0 ; x position
+
+.RasterPrintXLoop
+ v3=TextBuffer(x1) ; ascii code
+ add x1,c1 ; step on to next character in buffer
+ if v3=96 then @NeedCR ;'`' (next to BS)
+ if v3=32 then RPLCheckWordWrap
+ if v3<>13 then RPL1
+.RPLCheckWordWrap
+; check if next word to be printed will fit on this line
+ v3=32 ; convert cr, control codes to spaces
+ x2=x1
+ x4=0 ; cumulative width so far
+.CWW1
+ x3=TextBuffer(x2)
+ if x3<33 then CWW2 ; space,cr,end of message
+ add x3,x6 ; offset of width table
+ x3=FontList(x3)
+ add x4,x3 ; add on width
+ add x2,c1 ; next char
+ goto CWW1
+
+.CWW2
+; x4 is cumulative width in pixels of next word to be printed
+ add x4,v1 ; add on to current x position
+ if x4<TextBoxWidth then RPL1
+.NeedCR
+ if v1<8 then RasterPrintXLoop ; GMJ - ignore useless cr's
+ add v2,v6 ; y position
+ goto RasterPrintYLoop
+
+.RPL1
+; GMJ 7jul90 - don't print characters off the bottom of the window
+ if v2>TextBoxDepth then IgnoreRasterChar
+ code +
+ gosub @MCRasterPrintCharacter
+ code -
+.IgnoreRasterChar
+; v1=x pos v2=y pos, v3=ascii code, v4=foreground colour (0..16)
+; v5=background colour (0..16)
+; returns v1=x,v2=y position after print
+ if x1<v7 then @RasterPrintXLoop
+ code +
+ gosub @InterceptM1 ; GMJ 7jul90 - intercept any evidence messages
+ code -
+ return
+;------------
+.iStartPrintToBuffer
+ v1=0				;1=buffers, 2=Logical, 4=Physical
+ code +
+ gosub @MCEnableTextBuffer	;Select output destination
+ &WordWS(WordTextBufferOffset)=c2
+; all future text printing
+; to this offset within list TextBuffer(), please
+;          /* Parameters:
+;                 V1 = destination raster
+;                 V2 = source raster or clear color
+;                 V5 = 2; /+ copy raster +/ 0=clear to color
+ code -
+ return
+
+.iEndPrintToBuffer
+; stop printing into the text buffer, and return v7 as the offset
+; within it. Any offset >2 indicates that something has been
+; printed.
+ v1=7				;1=buffers, 2=Logical, 4=Physical
+ code +
+ gosub @MCEnableTextBuffer	;Select output destination
+ &v7=WordWS(WordTextBufferOffset)
+ &WordWS(WordTextBufferOffset)=c0
+; all future text printing
+; to this offset within list TextBuffer(), please
+;          /* Parameters:
+;                 V1 = destination raster
+;                 V2 = source raster or clear color
+;                 V5 = 2; /+ copy raster +/ 0=clear to color
+ code -
+ return
+;-------------------
+ code +
+.SetUpPrintRaster
+; prepare to print message m1 into text raster v1, clearing it to white first
+ push v1 ; changed by MCSetPrintRaster?
+  gosub @MCSetPrintRaster
+ pop v1
+; clear raster before printing onto it
+;; v1=destination raster
+ v2=papercol ; clear color. 1=white
+ v5=0 ; clear to color
+ goto @MCRasterHandler
+
+;----------------

@@ -1,0 +1,9 @@
+* GAMECONS.TXT - Game specific constants to be used with LIB.TXT 
+* library routines
+* Copyright (C) Graham M Jones 15th December 1989
+
+radarxmargin equ 60 ; pixel offset of radar screen
+radarymargin equ 152 ; pixel offset of radar screen
+
+xspeed equ 8 ; window x accelleration change
+yspeed equ 2 ; window y accelleration change

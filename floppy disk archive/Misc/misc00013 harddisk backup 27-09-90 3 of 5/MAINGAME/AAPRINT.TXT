@@ -1,0 +1,505 @@
+; Grange Murder print routines.
+;
+ begin
+;
+;---
+; List all objects at (HISEARCHPOS,SEARCHPOS)
+.printOBJECTS
+code -
+ object=1
+ totalobjectsprinted=0
+.po1
+ hipos=hicurrentpos(object)
+ if hisearchpos<>nonspecific then ponns
+ if hipos<>0 then pook
+ goto po2
+.ponns
+ if hipos<>hisearchpos then po2
+.pook
+ pos=currentpos(object)
+ if pos<>searchpos then po2
+; object is at required pos
+ if totalobjectsprinted<>0 then notfirstobject
+; print containment before first object in list
+ if hisearchpos=0 then notfirstobject ; no container
+ gosub @printcontainment
+ goto po3 ; print the object
+.notfirstobject
+; print comma for additional objects
+ message comma
+.po3
+code +
+ gosub @printtheobject
+code -
+ add totalobjectsprinted,c1
+.po2
+ add object,c1
+ if object<MaxObjectVisible then po1
+ if totalobjectsprinted=0 then ponodot
+ m2=dot
+code +
+ gosub @printm2
+code -
+.ponodot
+code +
+ return
+code -
+;---
+.printCONTAINMENT
+ if searchpos=0 then pcret
+ X5=1600 ; BASE FOR CONTAINMENT MESSAGES (You can see)
+ ADD X5,HIPOS ; first half of containment message
+ if descriptionmode=inone then PCNone1
+ MESSAGE X5
+.PCNone1
+ IF HIPOS=0 THEN PCRET ; DON'T PRINT 'THE object' FOR 'YOU CAN SEE'
+ X1=POS ; CONTAINER OBJECT NUMBER
+code +
+ GOSUB @printTHEobjectx1
+code -
+ X1=40
+ ADD X5,X1 ; second half of containment message
+ add x5,pluralOffset
+ if descriptionmode=inone then PCRET
+ MESSAGE X5
+.PCRET
+ RETURN
+;---
+code +
+.printACTORverb
+ gosub @printACTOR
+ goto printverb
+;---
+.printOBJECTverb
+ gosub @printTHEobject ; character doing the action
+; drop through to printverb...
+;
+.printVERB
+code -
+ x1=verb
+ if verb<>iam then printverbNoEnding
+;
+.pvam
+ x1=object
+ gosub @conjugatex1
+ m2=133 ; were
+ if result=pluralsome then @pvm2
+;
+.printverbnoending
+ m2=verboffset
+ add m2,verb
+.pvm2
+code +
+ goto @printm2
+;---
+.printACTORactionDOT
+ gosub @printactoraction
+ goto @printdot
+;---
+.printACTORaction
+code -
+; print action done by actor: verb noun1 prep noun2
+ m2=cr
+code +
+ gosub @printm2 ; cr
+ gosub @printactor ; actor
+code -
+ m2=verboffset
+ add m2,verb
+code +
+ gosub @printm2 ; verb
+ object=noun1
+ gosub @printTHEobject
+code -
+ if noun2=nullobject then daend
+code +
+ if prep=0 then pa1
+ m2=prepoffset
+ add m2,prep
+ gosub @printm2
+.pa1
+ object=noun2
+ gosub @printTHEobject ; noun2
+code -
+.daend
+code +
+ return
+;---
+; Output one of 'ALTERNATIVES' messages, starting at 'M1'
+.VARYMESSAGEDOT
+ GOSUB VARYMESSAGE
+ GOTO @printDOT
+;
+.VARYMESSAGE
+code -
+ m2=m1
+ GOSUB GETVARYM2
+code +
+ goto @printm2
+;
+; Add number between 0 and ALTERNATIVES-1 to M2
+code -
+.GETVARYM2
+ ADD CURRENTMESSAGE,C1
+ IF CURRENTMESSAGE<ALTERNATIVES THEN VMOK
+ CURRENTMESSAGE=0
+.VMOK
+ ADD M2,CURRENTMESSAGE
+ RETURN
+;---
+code +
+.printANobjectX1 ; for object 'X1', print a object or an object
+code -
+ GOSUB @CONJUGATEX1
+ if result<>itan then descnan
+ m2=22 ; an
+code +
+ gosub @printm2
+code -
+ goto doobj
+.descnan
+ if result>she then doobj
+ if result=singularSome then doobj
+ m2=20 ; a_
+code +
+ gosub @printm2
+code -
+.DOOBJ
+ GOSUB @DESCOBJX1
+code +
+ return
+;---
+.printTHEobject
+ x1=object
+;
+.printTHEobjectx1 ; PRINT OUT 'the <desc>', using 'it' if possible
+code -
+ if x1>254 then @printthat ; fail-safe code - assumes nullobject=255
+ GOSUB @CONJUGATEX1
+;
+.DTOXTHE
+ if result=pluralsome then dtosome
+ if result=she then dtosome
+ if result<she then dtosome
+ gosub descobjx1 ; some,you, proper he, prop she have no "the"
+ goto dtoret
+;
+.dtosome
+ m2=THE ; because e.g. 'the you' looks pretty daft
+code +
+ gosub @printm2
+code -
+ gosub do2 ; prevent 'the some'
+.dtoret
+code +
+ return
+;---
+; NB code - entry, code + exit
+code -
+.printthat
+ m2=2046 ; 'that'
+code +
+ goto @printm2
+;---
+code -
+.DESCOBJX1
+ if result=singularsome then dosome
+ if result<>pluralsome then do2
+;
+.dosome
+ m2=some ; 'that'
+code +
+ gosub @printm2
+code -
+;
+.do2
+ gosub @conjugatex1
+ m2=OBJECTDESCBASE
+ ADD m2,X1
+code +
+ gosub @printm2
+code -
+;
+.DESCOBJRET
+ RETURN
+;---
+.CONJUGATEX1
+; depending on the object represented by x1
+; return result=ita,itan,singularsome,he,she,pluralsome, you or the
+; x1 preserved, x2 corrupted
+ result=0
+ if x1>maxobject then conjret
+ result=x1 ; preserve x1
+ add x1,x1
+ x1=objectstart(x1)
+; now extract bits 4:6
+code +
+ asr x1
+ asr x1
+ asr x1
+ asr x1
+ x2=7
+ and x1,x2
+code -
+ x2=result ; restore object number (saved in result, above)
+code +
+ gosub @SpecialConjugate
+code -
+ result=x1 ; set up result for return to caller
+ x1=x2 ; restore x1 (i.e. object number)
+; now result contains one of the following values:
+; 0=ita
+; 1=itan
+; 2=singularsome
+; 3=he
+; 4=she
+; 5=pluralsome
+; 6=you
+.conjret
+ RETURN
+;---
+code +
+.printACTOR
+ x1=actor
+ goto @printTHEobjectx1
+;---
+.ActorM1Dot
+ gosub @PrintActor
+;
+.printM1dot
+ gosub printM1
+;
+.printDOT
+ m2=dot
+;
+.printm2
+ m1printsave=m1
+ m1=m2
+ gosub @printm1
+ m1=m1printsave
+ return
+;---
+.printM1
+; print message m1 to user(s) if at ROOM
+; must not alter RESULT or PROCESSED!
+ if currentuserroom<>room then @printM1ret
+;
+.printM1go
+ if descriptionmode=inone then @printm1ret
+code -
+ message m1
+code +
+;
+; Intercept evidence messages
+.InterceptM1
+push v1
+push x1
+push x2
+push x3
+push x4
+push x5
+ &x1=list4(26) ; evidence message table
+ x2=murder
+ sub x2,c1 ; x2 is murder 0 to 8
+ add x2,x2 ; table pointers are words
+ add x1,x2
+ &x1=list4(x1) ; x1 points to evidence message table for this murder
+.ism1evidence
+ &x2=list4(x1) ; x2 is search message
+ if x2=0 then @evidencemessret ; end of table
+ add x1,c2
+ if x2=m1 then m1isevidence ; found a match
+;
+; match not found, so move on to next entry in the table
+ add x1,c2 ; move pointer to score value
+ &x2=list4(x1) ; x2 is score value
+ add x1,c2
+ v1=255
+ and v1,x2
+ if v1<>255 then ism1evidence ; normal score value - reached end of entry
+; special score value - skip paired message
+ add x1,c2
+ goto ism1evidence
+;
+; we've found a match! m1 is treated as evidence
+.m1isevidence
+ &x3=list4(x1) ; x3 is corresponding note message
+ add x1,c2
+ &x4=list4(x1) ; x4 is score value for this evidence
+ add x1,c2
+ x5=0 ; null paired message
+ v1=255
+ and v1,x4
+ if v1<>255 then nopairedmessage ; normal score value - no paired messages
+;
+; Evidence is only valid if certain paired messages have already 
+; been noted. Although at this stage, we cannot disregard any evidence 
+; if the paired message has not been noted, since it may well be noted 
+; at a later time.
+ &x5=list4(x1) ; get the offset to a list of paired messages
+ add x1,c2
+;
+.nopairedmessage
+ gosub @storeevidence
+.evidencemessret
+;---
+; Intercept contradictory messages, which may also have been 
+; stored as evidence on their own
+ gosub @GetM1variantX1 ; x1=standard message if m1 is a variant
+ if x1<>0 then x1isstandard
+; m1 wasn't a variant of a standard message, so it could be 
+; the standard message itself
+ x1=m1
+.x1isstandard
+; now see if the standard message x1 contradicts anything already 
+; said
+ &x2=List4(70)
+ x3=murder
+ sub x3,c1
+ add x3,x3 ; word based table
+ add x2,x3
+ &x2=List4(x2) ; list of paired contradictions for this murder
+.findcontradiction
+ &x3=List4(x2) ; x3 is the LIE message
+ if x3=0 then @LieMessRet ; end of list
+ add x2,c2
+ &x4=List4(x2) ; x4 is the TRUTH message
+ add x2,c2
+ if x1=x3 then FoundLie ; x1 is the LIE
+ add x2,c2
+ if x1=x4 then FoundTruth ; x1 is the TRUTH
+ add x2,c2 ; skip to next entry
+ goto findcontradiction
+;
+.FoundLie
+ x3=x4
+.FoundTruth
+; x3 is the contradictory message to x1
+; x2 points to the "are you sure?" question
+;
+; shunt LieBuffer up and store message x1
+push x1
+push x2
+push x3
+ &x1=list4(66) ; x1 points to start of lie buffer
+ x2=98 ; buffer is 50 words long
+ add x2,x1 ; x2 points to last entry in buffer
+ x3=96
+ add x3,x1 ; x3 points to penultimate entry in buffer
+.ShuntLie
+ if x3<x1 then ShuntedLieOk ; shunted to start of table
+ &x4=list4(x3) ; get lower entry
+ &list4(x2)=x4 ; move to upper entry
+ sub x2,c2
+ sub x3,c2 ; move down the buffer
+ goto ShuntLie ; shunt the next word
+;
+; Buffer has been shunted up, so insert the new entry
+.ShuntedLieOk
+ x4=x1
+pop x3
+pop x2
+pop x1
+ &list4(x4)=x1
+;
+; if the contradiction if x1 (x3) is already in LieBuffer
+; then force a "Sure?" menu option for conversation
+ x5=49
+.searchliebuffer
+ &v1=list4(x4)
+ if x3=v1 then LieContradiction ; found a contradiction
+ add x4,c2
+ sub x5,c1
+ if x5<32000 then searchliebuffer
+ goto LieMessRet ; reached end of table
+;
+; found a contradiction with this lie, so activate the 'Sure?' 
+; conversation option
+.LieContradiction
+ WantMore=2 ; code for "Sure?"
+ &MoreMessage=List4(x2) ; get "are you sure?" message for 
+; the LIE/TRUTH
+.LieMessRet
+pop x5
+pop x4
+pop x3
+pop x2
+pop x1
+pop v1
+;
+.printm1ret
+ return
+;---
+; Return x1 as the standard lie/truth if m1 is a variant of it
+; x1=0 if m1 is not a variant
+.GetM1variantX1
+ &x2=List4(68)
+ x3=murder
+ sub x3,c1
+ add x3,x3 ; word based table
+ add x2,x3
+ &x2=List4(x2) ; list of variants for this murder
+.readstandard
+ &x1=List4(x2) ; x1 is standard message
+ if x1=0 then GMVXret ; end of list
+ if m1=x1 then GMVXret ; m1 is already the standard message
+ add x2,c2
+.readvariant
+ &x3=List4(x2) ; x3 is a variant of x1
+ add x2,c2
+ if x3=255 then readstandard ; reached end of x1 variants
+ if m1<>x3 then readvariant ; m1 does not match this variant of x1
+; Search complete - m1 is a variant of x1
+.GMVXret
+ return
+;---
+; Store evidence note in buffer.
+; x3 is the note
+; x4 is the score value
+; x5 is the paired message (if score value is specially coded)
+.storeevidence
+ gosub @shuntEbuffer ; make room in buffer for new entry
+push x1
+ &x1=list4(30) ; x1 points to start of evidence buffer
+ &list4(x1)=x3 ; write note
+ add x1,c2
+ &list4(x1)=x4 ; write score value
+ add x1,c2
+ &list4(x1)=x5 ; write paired message
+pop x1
+ return
+;---
+; shunt up all entries in evidence buffer, either to make way 
+; for a new entry or to scrap old entries after a period of 
+; time.
+.ShuntEBuffer
+push x1
+push x2
+push x3
+push x4
+ &x1=list4(30) ; x1 points to start of evidence buffer
+ x2=58 ; buffer is 30 words long
+ add x2,x1 ; x2 points to last entry in buffer
+ x3=52
+ add x3,x1 ; x3 points to penultimate entry in buffer
+.ShuntWord
+ if x3<x1 then ShuntedOk ; shunted to start of table
+ &x4=list4(x3) ; get lower entry
+ &list4(x2)=x4 ; move to upper entry
+ sub x2,c2
+ sub x3,c2 ; move down the buffer
+ goto ShuntWord ; shunt the next word
+;
+; Buffer has been shunted up, so zero the first entry
+.ShuntedOk
+ &list4(x1)=c0
+ add x1,c2
+ &list4(x1)=c0
+ add x1,c2
+ &list4(x1)=c0
+pop x4
+pop x3
+pop x2
+pop x1
+ return
+;---

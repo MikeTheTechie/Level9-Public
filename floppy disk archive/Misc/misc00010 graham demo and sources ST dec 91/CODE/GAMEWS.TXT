@@ -1,0 +1,160 @@
+* GAMEWS.TXT - Game specific workspace to be used with LIB.TXT 
+* library routines
+* Copyright (C) Graham M Jones 15th December 1989
+
+startgamevars equ *
+
+xchg:
+	ds.w 1 ; player x change value in pixels
+ychg:
+	ds.w 1 ; player y change value in pixels
+rbcounter1:
+	ds.w 1 ; radar pixels to unplot (screen 1)
+rbcounter2:
+	ds.w 1 ; radar pixels to unplot (screen 2)
+score:
+	ds.w 1 ; game score
+
+endgamevars equ *
+	ds.l 1 ; padding
+
+* background replace buffer for radar pixels
+*	+ 0  <address of first plane word.l>
+*	+ 4  <plane word 1.w>
+*	+ 6  <plane word 2.w>
+*	+ 8  <plane word 3.w>
+*	+ 10 <plane word 4.w> etc...
+radarbuffer1: ; (screen 1)
+	ds.b 12*20*2 ; bytes per entry * max sprites * fat pix mode
+radarbuffer2: ; (screen 1)
+	ds.b 12*20*2 ; bytes per entry * max sprites * fat pix mode
+citypalette:
+	ds.w 16 ; space for main game palette
+
+	* Game filenames (Must be preceeded by disk number char)
+	dc.w "1" ; disk 1
+citypalettefn:
+	dc.b "palette.neo",0
+	even
+
+	dc.w "1" ; disk 1
+rfilename:
+	dc.b "radar.neo",0
+	even
+
+	dc.w "1" ; disk 1
+bdfilename:
+	dc.b "palette.neo",0
+	even
+
+	* Game text
+Tstat0:
+	dc.b "VENUS 2200 AD",0
+	even
+Tstat1:
+	dc.b "Prog start: $",0
+	even
+Tstat2:
+	dc.b 13,"Prog end  : $",0
+	even
+Tstat3:
+	dc.b 13,"Screen 1  : $",0
+	even
+Tstat4:
+	dc.b 13,"Screen 2  : $",0
+	even
+Tstat5:
+	dc.b 13,"Bgd map   : $",0
+	even
+Tstat6:
+	dc.b 13,"Fgd map   : $",0
+	even
+Tstat7:
+	dc.b 13,"Tiles     : $",0
+	even
+Tstat71:
+	dc.b 13,"Sprites   : $",0
+	even
+Tstat8:
+	dc.b 13,"Buffer 1  : $",0
+	even
+Tstat9:
+	dc.b 13,"Buffer 2  : $",0
+	even
+Tstat10:
+	dc.b 13,"Buffer 3  : $",0
+	even
+Tstat11:
+	dc.b 13,"Data end  : $",0
+	even
+Tscore:
+	dc.b "score           - GIA -           shield",0
+	even
+
+* list of star x,y,col,size for starry backdrop
+* (since these are stored as bytes, the x value is 
+* halved)
+starlist:
+	dc.b 39,71,1,0
+	dc.b 124,132,4,1
+	dc.b 73,84,1,0
+	dc.b 53,53,4,0
+	dc.b 79,16,1,1
+	dc.b 21,89,1,0
+	dc.b 122,118,4,0
+	dc.b 138,147,4,1
+	dc.b 134,31,1,1
+	dc.b 96,42,1,0
+	dc.b 112,29,1,0
+	dc.b 77,47,4,0
+	dc.b 54,18,1,1
+	dc.b 91,36,1,0
+	dc.b 138,54,4,1
+	dc.b 153,71,1,0
+	dc.b 53,82,4,0
+	dc.b 84,103,1,1
+	dc.b 102,149,1,0
+	dc.b 109,19,4,0
+	dc.b 38,78,1,0
+	dc.b 74,137,4,1
+	dc.b 53,86,1,0
+	dc.b 34,54,4,0
+	dc.b 4,12,1,1
+	dc.b 37,83,1,0
+	dc.b 44,41,4,0
+	dc.b 49,42,4,1
+	dc.b 63,39,1,1
+	dc.b 47,48,1,0
+	dc.b 71,27,1,0
+	dc.b 83,46,4,0
+	dc.b 86,14,1,1
+	dc.b 48,33,1,0
+	dc.b 11,52,4,1
+	dc.b 33,71,1,0
+	dc.b 26,86,4,0
+	dc.b 79,74,1,1
+	dc.b 101,55,1,0
+	dc.b 129,16,4,0
+smallstarlist:
+	dc.b 20,70,1,0
+	dc.b 130,130,4,1
+	dc.b 70,80,1,0
+	dc.b 50,50,4,0
+	dc.b 100,10,1,1
+	dc.b 80,80,1,0
+	dc.b 150,110,4,0
+	dc.b 90,140,4,1
+	dc.b 30,30,1,1
+	dc.b 60,40,1,0
+	dc.b 15,25,1,0
+	dc.b 85,45,4,0
+	dc.b 145,15,1,1
+	dc.b 65,35,1,0
+	dc.b 115,55,4,1
+	dc.b 75,75,1,0
+	dc.b 25,85,4,0
+	dc.b 85,125,1,1
+	dc.b 125,145,1,0
+	dc.b 135,115,4,0
+	dc.b 0,0,0,0 ; end of list
+	even

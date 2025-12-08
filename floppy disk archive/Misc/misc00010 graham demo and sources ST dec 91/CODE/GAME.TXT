@@ -1,0 +1,1103 @@
+* GAME.TXT - Main game interface to be used with LIB.TXT library routines
+* Copyright (C) Graham M Jones 15th December 1989
+
+break equ $4afa ; illegal opcode
+
+* ----------------------------------------------------------------------- *
+* program start
+* ----------------------------------------------------------------------- *
+
+start:
+	bsr calcbufferptrs		; initialise buffer pointers
+donepassword:
+	bsr initvars			; set up sys vars
+	bsr initialise			; set up screen etc.
+	bsr initgamevars		; set up game vars
+	bsr chooselocation		; choose planetary location
+	bsr loadmaingame		; load main game data files
+	bsr setupmainscreen		; initialise main game screen
+
+	; main game loop
+mainloop:
+	bsr buildscreen			; show screen
+	bsr swapscreens
+;*	bsr flyback
+	bsr controlplayer		; get controls, move screen
+	move.w score,d0
+	cmp.w #numenemies*50,d0		; killed all enemies (50pts each)
+	bge.s quit
+	tst.b closedownflag		; quit?
+	beq.s mainloop
+
+quit:
+	bsr fadeoutpalette
+	bra closedown
+
+* ----------------------------------------------------------------------- *
+* game specific routines
+* ----------------------------------------------------------------------- *
+
+* load data files for main game
+loadmaingame:
+	bsr loadmapdata			; load map tiles
+	bmi loadmaingame		; disk error!
+doloadcitypalette:
+	bsr loadcitypalette		; load main palette for later
+	bmi doloadcitypalette		; disk error!
+	bsr loadsprites			; load main game sprites
+	bsr fadeoutpalette
+	bra cls
+
+* ----------------------------------------------------------------------- *
+
+* set up main game screen & step on animation a few frames
+setupmainscreen:
+	move.l #1280*3+8,d0			; top left 'window offset
+	move.w #18,d1			; window with in tiles
+	move.w #7,d2			; window depth in tiles
+	bsr setgraphicswindow		; set graphics window
+
+	move.w #100,windowx
+	move.w #336,windowy		; bottom of map
+	move.l #$00200002,xchg		; initial scroll speed
+doloadradar:
+	bsr cls				; clear screen
+	bsr copyradar			; copy radar to first screen
+	bmi doloadradar			; disk error!
+	bsr buildscreen			; show screen
+	bsr showwavetitle
+	bsr showscore			; display score
+	bsr unplotradar			; radar changed - don't copy to
+					; both screens
+	bsr swapscreens
+	bsr flyback
+	bsr equalisescreens		; same image on both screens
+	move.l #citypalette,a1
+	bsr fadeinpalette		; main city palette
+
+	; step on animation a few frames
+	moveq.w #14,d0
+startdelay:
+	move.w d0,-(sp)
+	bsr buildscreen			; show screen
+	bsr showwavetitle
+	bsr swapscreens
+	bsr flyback
+	bsr movewindow			; position player
+	move.w (sp)+,d0
+	dbra d0,startdelay
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* load city palette from neo file
+* on exit, -ve if disk error occurred
+loadcitypalette:
+	move.l #citypalettefn,d1
+	bsr loadpaletted1
+
+	; copy city palette
+	move.l #titlepalette,a0		; workspace palette buffer
+	move.l #citypalette,a1		; city palette buffer
+	move.w #7,d0			; copy 8 longwords
+copycitypalette:
+	move.l (a0)+,(a1)+
+	dbra d0,copycitypalette
+	clr.w citypalette		; force col 0 = black
+	rts				; and don't return -ve
+
+* ----------------------------------------------------------------------- *
+
+* show city title & score headings
+showwavetitle:
+	move.b #1,textcol		; text colour
+	move.w #$0e04,cursorx		; set cursor x,y
+	move.l #Tstat0,a0
+	bra printstring
+
+* ----------------------------------------------------------------------- *
+
+* show score etc. at top of screen
+showscore:
+	move.l currentLscreen,a0
+	move.l #1280/4,d1
+	clr.l d0
+	bsr fillblock			; clear top line
+
+	; print score to logical screen
+	clr.w cursorx			; cursor home
+	move.b #1,textcol		; text colour
+	move.l #Tscore,a0
+	bsr printstring
+	move.w #$0600,cursorx		; set cursor x,y
+	move.b #5,textcol		; text colour
+	moveq.b #1,d5			; flag for leading zeros
+	move.w score,d0
+	bsr printdec
+	move.w #$1c00,cursorx		; set cursor x,y
+	moveq.b #1,d5			; flag for leading zeros
+	moveq.w #5,d0
+	bsr printdec
+
+	; copy top line to physical screen
+	move.l currentLscreen,a0
+	move.l currentPscreen,a1
+	move.l #1280/4,d0
+copyscore:
+	move.l (a0)+,(a1)+
+	dbra d0,copyscore
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* input password
+password:
+	bsr waitkey
+	move.w d0,-(sp)
+	bsr waitkey
+	move.w d0,-(sp)
+	bsr waitkey
+	move.w (sp)+,d1
+	move.w (sp)+,d2
+	; d2=1st char, d1=2nd char, d0=3rd char
+	cmp.b #'4',d2
+	bne returntogem
+	cmp.b #'5',d1
+	bne returntogem
+	cmp.b #'1',d0
+	bne returntogem
+	bra donepassword
+
+* ----------------------------------------------------------------------- *
+
+* initialise game specific vars
+initgamevars:
+	move.l #startgamevars,a0
+	move.l #(endgamevars-startgamevars)/4,d1
+	clr.l d0
+	bsr fillblock			; clear game specific vars
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* control window scrolling with joystick
+controlplayer:
+	bsr keyscan
+	cmp.b #'q',d0			; quit?
+	bne notclosedown
+	move.b #$ff,closedownflag
+	rts
+
+notclosedown:
+	btst.b #upbit,joystickstatus
+	beq.s notup
+	cmp.w #-8,ychg
+	beq.s notdown
+	sub.w #yspeed,ychg
+	bra.s notdown
+notup:
+	btst.b #Downbit,joystickstatus
+	beq.s notdown
+	cmp.w #8,ychg
+	beq.s notdown
+	add.w #yspeed,ychg
+notdown:
+	btst.b #leftbit,joystickstatus
+	beq.s notleft
+	cmp.w #-32,xchg
+	beq.s notright
+	sub.w #xspeed,xchg
+	bra.s notright
+notleft:
+	btst.b #rightbit,joystickstatus
+	beq.s notright
+	cmp.w #32,xchg
+	beq.s notright
+	add.w #xspeed,xchg
+notright:
+
+	bsr movewindow			; scroll window
+
+	; fire missile?
+	btst.b #firebutton,joystickstatus
+	bne.s playermissile
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* player fires a missile
+playermissile:
+	move.w #missileaniR,d0		; fire right ani sequence
+	tst.b diroffset(a0)		; dir 0 is right, 1 is left
+	beq startplayermissile
+	move.w #missileaniL,d0		; fire left ani sequence
+startplayermissile:
+	bsr startmissile		; start player missile
+
+	; reposition player missile according to player xchg & ychg values
+	move.w xchg,d0
+	add.w d0,xposoffset(a1)		; adjust missile x
+	move.w ychg,d0
+	add.w d0,yposoffset(a1)		; adjust missile y
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* move scrolling window and adjust player position 
+* according to xchg,ychg values
+movewindow:
+	; preserve old window pos
+	move.w windowx,Wwindowx
+	move.w windowy,Wwindowy
+
+	; move window and test if we've exceeded the map area
+	move.w windowx,d0
+	add.w xchg,d0			; move x pos
+	move.w #mapwidth,d1
+	sub.w windowwidth,d1		; mapwidth-windowwidth
+	lsl.w #4,d1			; (mapwidth-windowwidth)*16
+	cmp.w d1,d0			; out of map range?
+	bcs.s windowxok
+	clr.w xchg			; apply brakes!
+	tst.w d0
+	bmi haltleft
+	move.w d1,windowx ; halt at right
+	bra.s movedwindowx
+haltleft:
+	clr.w windowx			; halt at left
+	bra.s movedwindowx
+windowxok:
+	move.w d0,windowx		; new window pos
+movedwindowx:
+
+	; when scrolling at a multiple of 16 pixels, make sure 
+	; the window is on a tile boundary to utilise 
+	; mega-fast scrolling (see code in 'BuildScreen' used 
+	; to regulate the scrolling speed)
+	move.w xchg,d0
+	cmp.w #-32,d0
+	beq.s fastwindow1		; 16 pixel scroll
+	cmp.w #32,d0
+	bne.s slowwindow1		; not 16 pixel scroll
+fastwindow1:
+	and.w #$fff0,windowx
+slowwindow1:
+
+	move.w windowy,d0
+	add.w ychg,d0			; move y pos
+	move.w #mapdepth-1,d1
+	sub.w windowdepth,d1		; mapdepth-windowdepth
+	lsl.w #4,d1			; (mapdepth-windowdepth)*16
+	cmp.w d1,d0			; out of map range?
+	bcs.s windowyok
+	clr.w ychg			; apply brakes!
+	tst.w d0
+	bmi haltup
+	move.w d1,windowy		; halt at top
+	bra.s movedwwindowy
+haltup:
+	clr.w windowy			; halt at top
+	bra.s movedwwindowy
+windowyok:
+	move.w d0,windowy		; new window pos
+movedwwindowy:
+
+	; move the player by the amount the window
+	; has actually changed
+	move.l #playersprite,a0		; player=sprite 0
+	move.w windowy,d0		; new pos
+	sub.w Wwindowy,d0		; sub old pos
+	add.w d0,yposoffset(a0)		; move y pos
+	move.w windowx,d0		; new pos
+	sub.w Wwindowx,d0		; sub old pos
+	add.w d0,xposoffset(a0)		; move x pos
+
+	; set player direction
+	tst.w d0			; test x change
+	beq.s gotplayerdir		; stationary - no dir change
+	bmi.s playerleft		; moving left
+	tst.b diroffset(a0)
+	beq gotplayerdir		; already moving left
+	clr.b diroffset(a0)		; moving right (dir=0)
+	move.w #playeraniR,d0
+	bsr forcenewanimation
+	bra.s gotplayerdir
+playerleft:
+	tst.b diroffset(a0)
+	bne.s gotplayerdir		; already moving right
+	move.b #1,diroffset(a0)		; moving left (dir=1)
+	move.w #playeraniL,d0
+	bsr forcenewanimation
+gotplayerdir:
+
+	; work out intended player position within the window
+	move.w windowx,d0
+	add.w #128,d0
+	sub.w xchg,d0
+	sub.w xchg,d0			; d0=intended x pos
+	move.w windowy,d1
+	add.w #56,d1
+	sub.w ychg,d1			; d1=intended y pos
+
+	; move the player towards the intended position
+	cmp.w xposoffset(a0),d0
+	beq.s xposintended		; reached intended x
+	bpl.s movexright
+	; move left towards intended x
+	sub.w #2,xposoffset(a0)
+	cmp.w xposoffset(a0),d0
+	bmi.s xposintended
+	move.w d0,xposoffset(a0)	; crossed over
+	bra.s xposintended
+	; move right towards intended x
+movexright:
+	add.w #2,xposoffset(a0)
+	cmp.w xposoffset(a0),d0
+	bpl.s xposintended
+	move.w d0,xposoffset(a0)	; crossed over
+xposintended:
+	cmp.w yposoffset(a0),d1
+	beq.s yposintended		; reached intended y
+	bpl.s moveydown
+	; move up towards intended y
+	sub.w #2,yposoffset(a0)
+	cmp.w yposoffset(a0),d1
+	bmi.s yposintended
+	move.w d1,yposoffset(a0)	; crossed over
+	bra.s yposintended
+	; move down towards intended y
+moveydown:
+	add.w #2,yposoffset(a0)
+	cmp.w yposoffset(a0),d1
+	bpl.s yposintended
+	move.w d1,yposoffset(a0)	; crossed over
+yposintended:
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* sprite (a0) fires a missile with ani sequence d0
+startmissile:
+	move.l #missilesprites,a1	; start of missile sprites
+	moveq.w #playermissiles-1,d2	; number of possible missiles
+findblanksprite:
+	move.w pcoffset(a1),d1		; get current animation pc
+	beq gotblankmissile		; found a blank sprite
+	add.l #spriteblocklen,a1
+	dbra d2,findblanksprite		; try next sprite
+	rts				; sorry - no free sprites
+
+* start blank missile (a1) at sprite (a0) pos with ani sequence d0
+gotblankmissile:
+	move.w d0,pcoffset(a1)
+	move.w xposoffset(a0),d0	; sprite x pos
+	move.w d0,xposoffset(a1)	; set missile x pos
+	move.w yposoffset(a0),d0	; sprite y pos
+	move.w d0,yposoffset(a1)	; set missile y pos
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* load sprites into sprite buffer
+* on exit, -ve flag set if disk error
+loadsprites:
+	move.l sprdata,d2		; d2=start of sprite buffer
+	addq.l #2,d2			; skip first buffer word
+	; so that IMAGE<>0 when pointing to first image
+
+	move.l #sp1filename,d1		; player sprites
+	move.l #2560,d3			; length
+	bsr loadspriterange		; load range and inc. d2
+
+	move.l #sp2filename,d1		; enemy sprites
+	move.l #10240,d3		; length
+
+	; Fall though...
+
+* load a range of sprite data to address d2
+* on entry, d1 points to the filename, d3=number of bytes
+* on exit, d2=d2+d3 if good load, or -ve set if bad load
+loadspriterange:
+	movem.l d1-d3,-(sp)
+	bsr open
+	bmi loadsperr
+	bsr read
+	bmi loadsperr
+	bsr close
+	bmi loadsperr
+	movem.l (sp)+,d1-d3
+	add.l d3,d2
+	clr.w d0			; don't return -ve
+	rts
+
+loadsperr:
+	bsr cantloadsysfile		; insert disk N
+	movem.l (sp)+,d1-d3
+	bmi loadspriterange		; retry
+	rts				; ignore!
+
+* ----------------------------------------------------------------------- *
+
+* load radar map to logical screen
+copyradar:
+	move.l currentLscreen,d2	; d2=start of screen
+	add.l #160*radarymargin,d2	; + address offset of radar
+	move.l #rfilename,d1
+	move.l #128,d3				; skip NEO header
+	bsr open
+	bmi cantloadsysfile
+	bsr read
+	bmi cantloadsysfile
+	move.l #6400,d3				; 40 pixel lines
+	bsr read
+	bmi cantloadsysfile
+	bsr close
+	bmi cantloadsysfile
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* plot all sprites as pixels on the radar panel
+showradar:
+	bsr unplotradar			; unplot previous radar
+	move.l #spriteparameters,a2	; sprite parameter blocks
+	move.b #1,fatpixels		; set fat pixel mode
+	move.l #maxsprites-1,d0
+
+	tst.b alternator		; screen 1 or 2 ?
+	beq.s srscreen1
+	move.l #radarbuffer2,a1		; background replace buffer
+	clr.w rbcounter2		; number of pixels to unplot
+	bra.s  plotradarloop
+srscreen1:
+	move.l #radarbuffer1,a1		; background replace buffer
+	clr.w rbcounter1		; number of pixels to unplot
+
+plotradarloop:
+	tst.w pcoffset(a2)
+	beq prnext
+	cmp.b #3,typeoffset(a2)		; an explosion?
+	beq prnext
+	move.l d0,-(sp)
+	move.w xposoffset(a2),d1
+	lsr.w #4,d1			; x pos / 16
+	add.w #radarxmargin,d1		; x offset of radar box
+	move.w yposoffset(a2),d0
+	lsr.w #4,d0			; y pos / 16
+	add.w #radarymargin,d0		; y offset of radar box
+	move.b pixcoloffset(a2),graphiccol ; pixel colour
+	beq radarinvisible		; colour zero is invisible
+	bsr plotpix
+	bmi.s radarinvisible		; pixel was off-screen
+
+	; increment background buffer counter
+	tst.b alternator		; screen 1 or 2 ?
+	beq.s addrbcscreen1
+	add.w #2,rbcounter2		; pixel count (fat pixels)
+	bra.s radarinvisible
+addrbcscreen1:
+	add.w #2,rbcounter1		; pixel count (fat pixels)
+
+radarinvisible:
+	move.l (sp)+,d0
+prnext:
+	add.l #spriteblocklen,a2	; next sprite
+	dbra d0,plotradarloop
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* replace the background saved when plotting the radar pixels
+unplotradar:
+	tst.b alternator		; screen 1 or 2 ?
+	beq.s uprscreen1
+	move.w rbcounter2,d1		; pixels to unplot
+	move.l #radarbuffer2,a1		; background replace buffer
+	bra unplotpix			; unplot all pixels
+uprscreen1:
+	move.w rbcounter1,d1		; pixels to unplot
+	move.l #radarbuffer1,a1		; background replace buffer
+	bra unplotpix			; unplot all pixels
+
+* ----------------------------------------------------------------------- *
+
+* show starry backdrop on black parts of the screen only
+showstars:
+	move.l #smallstarlist,a0	; list of star x,y,col,size
+showstarsloop:
+	clr.w d1
+	move.b (a0)+,d1			; get star x
+	beq donestars			; end of list
+	lsl.w d1			; *2
+	clr.w d0
+	move.b (a0)+,d0			; get star y
+	move.b (a0)+,graphiccol		; get star colour
+	move.b (a0)+,fatpixels		; get star size
+
+	; speed-regulate star x
+	move.w windowx,d2
+	cmp.b #1,fatpixels
+	beq.s faststarspeed1
+	lsr.w #2,d2
+	bra.s gotstarspeed1
+faststarspeed1:
+	lsr.w #1,d2
+gotstarspeed1:
+	cmp.b #1,graphiccol
+	beq.s faststarspeed
+	lsr.w #2,d2
+	bra.s gotstarspeed
+faststarspeed:
+	lsr.w #1,d2
+gotstarspeed:
+	sub.w d2,d1
+makestarxok:
+	bpl.s starxok
+	add.w #320,d1
+	bra.s makestarxok
+starxok:
+
+	; speed-regulate star y
+	move.w windowy,d2
+	cmp.b #1,fatpixels
+	beq.s yfaststarspeed1
+	lsr.w #2,d2
+	bra.s ygotstarspeed1
+yfaststarspeed1:
+	lsr.w #1,d2
+ygotstarspeed1:
+	cmp.b #1,graphiccol
+	beq.s yfaststarspeed
+	lsr.w #2,d2
+	bra.s ygotstarspeed
+yfaststarspeed:
+	lsr.w #1,d2
+ygotstarspeed:
+	sub.w d2,d0
+makestaryok:
+	bpl.s staryok
+	add.w #152,d0
+	bra.s makestaryok
+staryok:
+
+	addq.w #8,d0			; don't plot on top char line
+	move.l a0,-(sp)
+	bsr plotbackgroundpix		; plot star
+	move.l (sp)+,a0
+	bra showstarsloop		; next star
+
+donestars:
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* choose planetary location
+chooselocation:
+	bsr setblackpalette		; black palette
+	bsr cls
+	clr.l d0			; top left window offset
+	move.w #20,d1			; window with in tiles
+	move.w #12,d2			; window depth in tiles
+	bsr setgraphicswindow		; set graphics window
+	bsr loadplanetsprites		; load planet sprites
+	bsr loadplanetscreen		; load planet screen
+
+	; set up planets
+	move.b #16,vrotx
+	move.b #24,vrotz		; init viewpoint angles
+	move.w #1000,perspect		; (384 for full screen)
+	move.b #158,xcentre		; set x origin
+	move.b #32,ycentre		; set y origin (top of screen)
+	clr.l windowx
+clloop:
+	bsr rotateplanets
+	bsr flyback
+	bsr copyplanetscreen		; draw backdrop
+	bsr plotshape			; plot all planets
+	move.l #starlist,a0		; list of star x,y,col,size
+	bsr showstarsloop
+	add.w #8,windowy
+	bsr moveplanets
+
+	cmp.b #140,ycentre
+	beq planetsdecended
+	add.b #2,ycentre		; move planets down
+	sub.w #10,perspect		; increase size
+	bra.s planetsdecending
+planetsdecended:
+
+	; "fire to play"
+	move.b #3,textcol
+	move.w #$0e17,cursorx		; set cursor x,y
+	move.l #firetoplay,a0
+	bsr printstring
+	bsr flyback ;*****
+
+planetsdecending:
+	bsr swapscreens
+	btst.b #firebutton,joystickstatus
+	beq.s clloop
+
+	; explode planets
+clloop1:
+	bsr rotateplanets
+	bsr flyback
+	bsr copyplanetscreen		; draw backdrop
+	bsr plotshape			; plot all planets
+	move.l #starlist,a0		; list of star x,y,col,size
+	bsr showstarsloop
+	add.w #8,windowy
+	bsr moveplanets
+	bsr swapscreens
+	sub.b #8,ycentre		; move planets down
+	add.w #40,perspect		; decrease size
+	cmp.b #32,ycentre
+	bhi.s clloop1
+	clr.w windowy
+	rts
+
+* -------------------------------------------------------------------------
+
+firetoplay:
+	dc.b 'FIRE TO PLAY',0
+	even
+
+* -------------------------------------------------------------------------
+
+* rotate each planet
+rotateplanets:
+	lea planetxyz,a0		; planet x,y,z
+	lea planetangles,a1		; planet xrot,yrot,zrot
+	lea sortbuffer,a2		; x,y,z buffer for sorting
+	move.w #numplanets-1,d0		; planets -1
+rploop:
+	lea shape,a3			; buffer used by rotation code
+	move.b (a0)+,(a3)+
+	move.b (a0)+,(a3)+
+	move.b (a0)+,(a3)+		; copy x,y,z to shape buffer
+	move.b #-1,(a3)			; terminator
+	move.b (a1)+,xrot
+	move.b (a1)+,yrot
+	move.b (a1)+,zrot
+	movem.l a0-a2/d0,-(sp)
+	bsr rox
+	bsr roy
+	bsr roz				; rotate shape buffer
+	move.b vrotx,xrot
+	move.b vroty,yrot
+	move.b vrotz,zrot		; copy viewpoint angles
+	bsr rox
+	bsr roy
+	bsr roz				; rotate to viewpoint
+	movem.l (sp)+,a0-a2/d0
+	lea shape,a3			; buffer used by rotation code
+	move.b (a3)+,(a2)+
+	move.b (a3)+,(a2)+
+	move.b (a3)+,(a2)+		; store planet x,y,z in sort buffer
+	dbra d0,rploop			; next planet
+	move.b #-1,(a2)			; terminate sort buffer
+
+; sortbuffer contains the fully rotated x,y,z positions of 
+; each planet.
+; build up a list of pointers of planets to be drawn starting 
+; from the back, and set the planet size depending on the 
+; z position
+
+	lea sortbuffer,a0		; list of x,y,z points
+	lea shapexy,a1			; dest list of x,y pointgs
+	bra ar2				; convert 3d to 2d
+
+* -------------------------------------------------------------------------
+
+* move each planet around its orbit
+moveplanets:
+	lea planetanglesteps,a0		; planet xrot,yrot,zrot steps
+	lea planetangles,a1		; planet xrot,yrot,zrot
+	move.w #(numplanets*3)-1,d0	; number of co-ordinates -1
+mploop:
+	move.b (a0)+,d1			; xrot change value
+	add.b d1,(a1)+
+	dbra d0,mploop			; next planet
+	add.b #1,vrotz			; rotate viewpoint
+	rts
+
+* -------------------------------------------------------------------------
+
+* Plot the shape buffered in shapexy
+
+plotshape:
+	move.b #1,graphiccol		; colour
+	move.b #1,fatpixels		; size
+	lea shapexy,a0			; list of 2d points
+	lea sortbuffer,a1		; list of 3d points
+
+plotshapeloop:
+	clr.w d1
+	move.b (a0)+,d1			; get 2d x
+	beq.s plotshapedone
+	clr.w d0
+	move.b (a0)+,d0			; get 2d y
+	clr.w d2
+	move.b 2(a1),d2			; get 3d z
+	addq.l #3,a1			; next xyz
+	move.b (a2)+,d3			; get size base
+	movem.l a0-a2,-(sp)
+
+	; work out planet size
+	btst #7,d2			; -ve bit set?
+	beq.s pszispositive		; no
+	and.b #127,d2			; mask out -ve bit
+	neg.b d2			; make byte negative
+pszispositive:
+	add.b #128,d2			; +ve range 0 to 255
+	lsr.b #5,d2			; div 32 to get range 0 to 7
+
+	; planet sprites are arranged in blocks of 640 bytes per size
+	lsl.w #7,d2			; * 128
+	move.w d2,d4
+	lsl.w #2,d2			; * 512
+	add.w d4,d2			; * 640
+	add.w #planetspr1,d2		; add address of first sprite
+
+	; set up the sprite parameter block
+	move.l #planetsprite,a0		; planet sprite
+	move.w d2,currentimage(a0)	; set sprite image
+	sub.w #16,d0
+	move.w d0,yposoffset(a0)	; move y pos
+	sub.w #16,d1
+	move.w d1,xposoffset(a0)	; move x pos
+	bsr drawsinglesprite
+
+	movem.l (sp)+,a0-a2
+	bra.s plotshapeloop		; next point
+plotshapedone:
+	rts
+* -------------------------------------------------------------------------
+
+* copy the image in tiledata to the logical screen
+copyplanetscreen:
+	move.l tiledata,a0
+	move.l currentLscreen,a1
+	move.w #(32000/4)-1,d0
+cpsloop:
+	move.l (a0)+,(a1)+
+	dbra d0,cpsloop
+	rts
+
+* -------------------------------------------------------------------------
+
+* set up planet screen
+loadplanetscreen:
+	bsr setblackpalette		; black palette
+	bsr loadtitle			; show title page
+	bmi loadplanetscreen		; disk error!
+
+	; copy screen to buffer
+	bsr equalisescreens
+	move.l currentLscreen,a0
+	move.l tiledata,a1
+	move.w #(32000/4)-1,d0
+copysloop:
+	move.l (a0)+,(a1)+
+	dbra d0,copysloop
+
+	; make sure stars are drawn on logical screen
+	bsr swapscreens
+	move.l #starlist,a0		; list of star x,y,col,size
+	bsr showstarsloop
+	add.w #8,windowx
+	bsr swapscreens
+
+	; fade in screen
+	move.l #titlepalette,a1
+	bra fadeinpalette
+
+* -------------------------------------------------------------------------
+
+* load planet sprites into sprite buffer
+* on exit, -ve flag set if disk error
+loadplanetsprites:
+	move.l sprdata,d2		; d2=start of sprite buffer
+	addq.l #2,d2			; skip first buffer word
+	; so that IMAGE<>0 when pointing to first image
+
+	move.l #planetfn,d1		; planet sprites
+	move.l #20480,d3			; length
+	bra loadspriterange		; load range and inc. d2
+
+* -------------------------------------------------------------------------
+
+* workspace and data for planet code
+vrotx:
+	dc.b 0 ; overall viewpoint x angle
+vroty:
+	dc.b 0 ; overall viewpoint y angle
+vrotz:
+	dc.b 0 ; overall viewpoint z angle
+
+numplanets equ 6			; includes sun
+planetxyz:				; x,y,z positions
+	dc.b 0,0,0			; sun
+	dc.b 40,0,0			; planet 1
+	dc.b 60,0,0			; planet 2
+	dc.b 0,80,0			; planet 3
+	dc.b 100,0,0			; planet 4
+	dc.b 120,0,0			; planet 5
+planetangles:				; xrot,yrot,zrot angles
+	dc.b 0,0,0			; sun
+	dc.b 0,32,0			; planet 1
+	dc.b 0,64,0			; planet 2
+	dc.b 0,96,0			; planet 3
+	dc.b 0,128,0			; planet 4
+	dc.b 0,160,0			; planet 5
+planetanglesteps:			; xrot,yrot,zrot steps
+	dc.b 0,0,0			; sun
+	dc.b 0,6,0			; planet 1
+	dc.b 0,7,0			; planet 2
+	dc.b 11,0,0			; planet 3
+	dc.b 0,4,0			; planet 4
+	dc.b 0,8,0			; planet 5
+
+	; x,y,z buffer for sorting
+sortbuffer:
+	ds.b numplanets*3
+	dc.b -1 ; terminator
+	even
+
+planetspr1 equ 0+2	; offset for 1st sprite (skip 1st word so that 
+			; IMAGE<>0 when pointing to first image)
+
+planetsprite:
+	dc.w planetspr1,1,0 ; image,pc/alive
+	dc.b 0,0
+	dc.w 0,0 ; x,y
+	dc.b 1,1 ; background sprite,non relative
+	dc.w 2,31 ; width,depth-1
+	ds.b 46
+
+	dc.w "1" ; disk 1
+planetfn:
+	dc.b "planets.spr",0
+	even
+
+	dc.w "1" ; disk 1
+planetscfn:
+	dc.b "plansel.neo",0
+	even
+
+* ----------------------------------------------------------------------- *
+
+* display program statistics
+showstats:
+	; prog start
+	move.l #Tstat1,a0
+	bsr printstring
+	move.l #start,d0
+	bsr printhexbcd
+
+	; prog end
+	move.l #Tstat2,a0
+	bsr printstring
+	move.l #endprog,d0
+	bsr printhexbcd
+
+	; screen 1
+	move.l #Tstat3,a0
+	bsr printstring
+	move.l screen1,d0
+	bsr printhexbcd
+
+	; screen 2
+	move.l #Tstat4,a0
+	bsr printstring
+	move.l screen2,d0
+	bsr printhexbcd
+
+	; background map
+	move.l #Tstat5,a0
+	bsr printstring
+	move.l mapdata,d0
+	bsr printhexbcd
+
+	; foreground map
+	move.l #Tstat6,a0
+	bsr printstring
+	move.l fmapdata,d0
+	bsr printhexbcd
+
+	; tiles
+	move.l #Tstat7,a0
+	bsr printstring
+	move.l tiledata,d0
+	bsr printhexbcd
+
+	; sprites
+	move.l #Tstat71,a0
+	bsr printstring
+	move.l sprdata,d0
+	bsr printhexbcd
+
+	; buffer 1
+	move.l #Tstat8,a0
+	bsr printstring
+	move.l buffer1,d0
+	bsr printhexbcd
+
+	; buffer 2
+	move.l #Tstat9,a0
+	bsr printstring
+	move.l buffer2,d0
+	bsr printhexbcd
+
+	; buffer 3
+	move.l #Tstat10,a0
+	bsr printstring
+	move.l buffer3,d0
+	bsr printhexbcd
+
+	; data end
+	move.l #Tstat11,a0
+	bsr printstring
+	move.l endbuffers,d0
+	bsr printhexbcd
+
+	bsr swapscreens
+	bra waitkey
+
+* ----------------------------------------------------------------------- *
+* LIB.TXT interface routines
+* ----------------------------------------------------------------------- *
+
+* about to move sprite with header a0 by x,y adjustments
+* d1,d2. These may be altered according to collisions etc.
+specialmovesprite:
+	; set up temporary vars for collision detection
+	move.w xposoffset(a0),spritex
+	move.w yposoffset(a0),spritey
+	move.w xposoffset(a0),d0
+	add.w d1,d0
+	move.w d0,intendedspritex
+	move.w yposoffset(a0),d0
+	add.w d2,d0
+	move.w d0,intendedspritey
+
+	; player missile?
+	move.b typeoffset(a0),d0
+	cmp.b #1,d0
+	bne smsnotmissile
+	move.w spritex,d1		; missile x
+	move.w spritey,d2		; missile y
+
+	; test d1,d2 against x,y of each enemy
+	move.l #enemysprites,a1		; start of enemy sprites
+	moveq.w #numenemies-1,d3	; number of possible enemies
+cmeloop:
+	tst.w pcoffset(a1)		; get current animation pc
+	beq.s cmenext			; no enemy
+	move.b typeoffset(a1),d4
+	cmp.b #2,d4			; enemy alive?
+	bne.s cmenext
+	move.w xposoffset(a1),d4	; enemy x pos
+	move.w yposoffset(a1),d5	; enemy y pos
+
+	; collision?
+	cmp.w d4,d1			; left of missile > enemy x ?
+	bgt.s cmenext
+	sub.w #100,d4			; width of missile
+	cmp.w d4,d1			; right of missile < enemy x ?
+	blt.s cmenext
+	cmp.w d5,d2			; missile y < top of enemy
+	blt.s cmenext
+	add.w #24,d5			; visual depth of enemy
+	cmp.w d5,d2			; missile y > bottom of enemy
+	bgt.s cmenext
+
+	; missile (a0) kills enemy (a1)
+	clr.w repeatoffset(a1)
+	move.w #enemyexplodes,pcoffset(a1)
+	move.b #3,typeoffset(a1)	; an explosion
+	move.w #63,depthoffset(a1)	; explosion is larger
+	move.w #boom3,currentimage(a1)	; show boom immediately
+	add.w #50,score
+	bra showscore			; display new score
+
+cmenext:
+	add.l #spriteblocklen,a1	; next enemy
+	dbra d3,cmeloop
+
+smsnotmissile:
+	rts
+
+* halt the sprite with header a0
+haltsprite:
+	move.w #standani,d0
+	bsr forcenewanimation
+	clr.w d1			; zero move adjustments
+	clr.w d2
+	rts
+
+* force new animation sequence d0 for sprite with header a0
+forcenewanimation:
+	clr.w repeatoffset(a0)		; kill repeat offset
+	move.w d0,pcoffset(a0)		; get new pc offset
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* build the current display to the logical screen
+buildscreen:
+	bsr animatesprites		; animate & move sprites
+	move.w windowx,Wwindowx
+	move.w windowy,Wwindowy
+
+	; when scrolling at a multiple of 16 pixels, 
+	; use mega-fast scrolling...
+	; (if there is no foreground map, then the "smoothscroll" 
+	; routine can be used)
+	move.w xchg,d0
+	cmp.w #-32,d0
+	beq.s fastwindow2		; 16 pixel scroll
+	cmp.w #32,d0
+	bne.s slowwindow2		; not 16 pixel scroll
+fastwindow2:
+	move.l #fastscroll,scrolljump	; b.g.
+	bra.s gotwindowspeed
+slowwindow2:
+	cmp.w #8,d0
+	bge.s medwindow
+	move.l #smoothscroll,scrolljump
+	bra.s gotwindowspeed
+medwindow:
+	move.l #eightpixscroll,scrolljump ; b.g.
+gotwindowspeed:
+	move.b #1,maskmap
+
+	move.l #mapwidth,Wmapwidth
+	move.l mapdata,a2
+	clr.b superimpose
+	bsr drawmaptoscreen		; draw main map
+	bsr displaysprites		; draw all sprites
+;	bsr showstars			; show starry backdrop
+
+;	bra showradar			; show radar panel
+
+	; show foreground "parallax" map
+	move.b #1,superimpose		; don't show empty cells
+	asl.w Wwindowx
+	asl.w Wwindowy
+	add.w #8*16,Wwindowy
+	move.l #fmapwidth,Wmapwidth
+	move.l fmapdata,a2
+	bsr drawmaptoscreen		; draw foreground map
+
+	bra showradar			; show radar panel
+
+	include "LIB.TXT"
+	include "GAMEWS.TXT"
+	include "FONT.TXT"
+	include "SPRDATA.TXT"
+	include "VECTOR.TXT"
+	include "GAMECONS.TXT"
+	include "SYSCONST.TXT"		; must be at end of program
+
+* ----------------------------------------------------------------------- *

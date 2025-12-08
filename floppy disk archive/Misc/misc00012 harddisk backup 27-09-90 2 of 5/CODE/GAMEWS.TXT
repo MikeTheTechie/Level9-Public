@@ -1,0 +1,13 @@
+* GAMEWS.TXT - Game specific workspace to be used with LIB.TXT 
+* library routines
+* Copyright (C) Graham M Jones 2nd September 1990 
+
+startgamevars equ *
+
+xchg:
+	ds.w 1 ; player x change value in pixels
+ychg:
+	ds.w 1 ; player y change value in pixels
+
+endgamevars equ *
+	ds.l 1 ; padding

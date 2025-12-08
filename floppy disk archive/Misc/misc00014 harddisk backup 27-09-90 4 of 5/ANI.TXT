@@ -1,0 +1,79 @@
+Animation bases, requiring a direction addition...
+--------------------------------------------------
+
+* All NPCs...
+
+ MovingAnimation=2700+dir	* base for moving in given direction
+ RunningAnimation=3050+dir	* base for running in given direction
+ StandingAnimation=2710+dir	* base for standing in given direction
+ NewSitAnimation=3200+dir	* base for sitting in given direction
+ ReadAnimation=2780+dir		* base for reading (sat down) in given 
+				* direction
+ StandUpAnimation=2770+dir	* base for standing up in given direction
+ ReachLeftAnimation=2720+dir	* base for reach with left hand in given 
+				* direction
+ ReachRightAnimation=2730+dir	* base for reach with right hand in given 
+				* direction
+ ReachUpAnimation=2750+dir	* base for reach up in given direction
+ ReachDownAnimation=2760+dir	* base for reach down in given direction
+ 3060+dir			* standing in given direction, with 
+				* moving mouth
+ 3100+dir			* standing in given direction, with 
+				* angry facial expression
+ 3110+dir			* standing in given direction, with 
+				* shocked facial expression
+
+* Specific NPCs only...
+
+ JarvisMovingTrayAni=3230+dir	* J walking with tray in given direction
+				* (no rasteroffset)
+ JarvisStandingTrayAni=3240+dir	* J standing with tray in given direction 
+				* (no rasteroffset)
+
+Absolute animations, requiring no direction addition...
+-------------------------------------------------------
+
+* All NPCs...
+
+ UpStairsAnimation=2800		* climbing stairs
+ DownStairsAnimation=2802	* descending stairs
+ EatingAni=2790			* eating facing south
+ Smoking=3033			* smoking facing south
+ PourAnimation=3029		* pour from bottle, facing south
+ PickUpPhone=2940		* pick up phone facing north
+ DropPhone=2942			* put phone down facing north
+ StandLookLeftAni=3250		* Standing south, look to the left
+ StandLookRightAni=3252		* Standing south, look to the right
+
+* Men / Women only...
+
+ MenPunchLeftAni=3263		* punch to the left (men only)
+ MenPunchRightAni=3262		* punch to the right (men only)
+ MenAdjustTie=3258		* adjust tie (men only)
+ MenCombHair=2826		* Comb hair (men only)
+ WomenUseLipstick=2821		* Use lipstick (women only)
+
+* Sam only...
+
+ SamGunAni=3265			* Sam holding gun
+ SamFiresGunAni=3267		* Sam firing gun
+ SamFallsDownAni=3269		* Sam falls down
+ SamBlowsNoseAni=3272		* Sam blows nose
+ SamUsesPerfumeAni=3273		* Sam dabs on perfume
+ SamWashHandsAni=3275		* Sam washes hands (facing east - 
+				* also need face west to work
+				* with all sinks)
+ SamDryHandsAni=3280		* Sam dries hands (facing east - 
+				* also need face west to work
+				* with all sinks)
+
+* Specific NPCs only...
+
+ AnthonyPolishMonacle=2833	* Anthony polishes monacle
+ KathyLoungingAni=3286		* Kathy lounging (no rasteroffset)
+ AnthonyLoungingAni=3288	* Anthony lounging (no rasteroffset)
+
+* Have no doccumentation for this one! Does it require a direction, 
+  or is it just facing south?...
+
+ ShrugAni=3220			* shrug shoulders

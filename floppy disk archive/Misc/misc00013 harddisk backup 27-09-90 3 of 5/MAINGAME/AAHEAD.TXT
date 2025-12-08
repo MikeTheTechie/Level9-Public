@@ -1,0 +1,337 @@
+; AAHead.txt
+;
+; M.J.Austin Nov 1988
+;
+; Copyright (C) 1988 Level 9 Computing
+;
+;----
+; tables shared between strategy task and AA stuff...
+table
+; CurrentX=12
+; CurrentZ=13
+; CurrentH=25
+ Hires=12
+
+ begin
+ data @Start,@Start ; Dummy - overwritten by "ToMCEnd" vector
+.Start
+ code +
+ data @AcodeFns,@MCFns ; pointers to the major jump blocks
+
+
+.AcodeFns
+; jump table for acode functions called from MC
+ goto @AcodeStart
+ goto @FGSpecials
+ goto @FGSpecialsMovedSprite
+ goto @BGSpecials
+ goto @Dummy ; SpecialCollision
+ goto @DAMSSpecials
+ goto @IRQScheduler
+ goto @VBL
+ goto @HandleCR
+ goto @ExtraTask
+ goto @StrategyTask
+ goto @ErrorHandler
+ goto @OverlayEntryPoint ; OverlayEntryOffset = 12
+; 
+ 
+.MCFns
+; jump table for MC functions called from Acode
+; reserve 6 bytes per jump - absolute, long jumps
+; poked in by MC
+.MCHeroOnceOnlyInit            data @Dummy,@Dummy,@Dummy ;0
+.MCHeroInit                    data @Dummy,@Dummy,@Dummy ;1
+.MCClearScreen                 data @Dummy,@Dummy,@Dummy ;2
+
+.MCMoveScreen                  data @Dummy,@Dummy,@Dummy ;3
+.MCSpecials                    data @Dummy,@Dummy,@Dummy ;4
+.MCBuildBackground             data @Dummy,@Dummy,@Dummy ;5
+.MCDisplayDestroyedWalls       data @Dummy,@Dummy,@Dummy ;6
+.MCMoveAllSprites              data @Dummy,@Dummy,@Dummy ;7
+.MCDisplayAllSprites           data @Dummy,@Dummy,@Dummy ;8
+.MCTrimEdges                   data @Dummy,@Dummy,@Dummy ;9
+.MCDisplayTextLine             data @Dummy,@Dummy,@Dummy ;a
+.MCDisplayUpperTextLine        data @Dummy,@Dummy,@Dummy ;b
+.MCDoAllTimers                 data @Dummy,@Dummy,@Dummy ;c
+.MCCalculateMemoryFree         data @Dummy,@Dummy,@Dummy ;d
+.MCHeroInput                   data @dummy,@Dummy,@Dummy ;e
+.MCOswrchV1                    data @Dummy,@Dummy,@Dummy ;f
+.MCInvertedOswrchV1            data @Dummy,@Dummy,@Dummy ;10
+.MCDestroyTempMoved            data @Dummy,@Dummy,@Dummy ;11
+.MCDestroyTempFixed            data @Dummy,@Dummy,@Dummy ;12
+.MCCloseDown                   data @Dummy,@Dummy,@Dummy ;13
+.MCFindSprite                  data @Dummy,@Dummy,@Dummy ;14
+.MCSetUpNewSprite              data @Dummy,@Dummy,@Dummy ;15
+.MCSprite                      data @Dummy,@Dummy,@Dummy ;16
+.MCHandlePlayerInput           data @Dummy,@Dummy,@Dummy ;17
+.MCReturnFrameTime             data @Dummy,@Dummy,@Dummy ;18
+.MCUpdateFrameTime             data @Dummy,@Dummy,@Dummy ;19
+.MCClearRectangle              data @Dummy,@Dummy,@Dummy ;1d
+.MCMapBuildBackground          data @Dummy,@Dummy,@Dummy ;1a
+.MCPreScrollMap                data @Dummy,@Dummy,@Dummy ;1b
+.MCSpecialCheck                data @Dummy,@Dummy,@Dummy ;1c
+.MCStartBigExplosion           data @Dummy,@Dummy,@Dummy ;1d
+.MCScrollTextLine              data @Dummy,@Dummy,@Dummy ;1e
+.MCReCalcSpriteGraphics        data @Dummy,@Dummy,@Dummy ;1f
+.MCOsrdch                      data @Dummy,@Dummy,@Dummy ;20
+.MCChecksum                    data @Dummy,@Dummy,@Dummy ;21
+.MCEmptyRoom
+.MCInit3D                      data @Dummy,@Dummy,@Dummy ;22
+.MCDrawObjectV1                data @Dummy,@Dummy,@Dummy ;23
+.MCBuildRoom
+.MCBuildViewMap                data @Dummy,@Dummy,@Dummy ;24
+.MCDisplayRoom
+.MCDisplayViewMap              data @Dummy,@Dummy,@Dummy ;25
+.MCInitBootPrg                 data @Dummy,@Dummy,@Dummy ;26
+.MCReturnSpriteAddress         data @Dummy,@Dummy,@Dummy ;27
+.MCNoClipSprite                data @Dummy,@Dummy,@Dummy ;28
+.MCCalcScreenAddress           data @Dummy,@Dummy,@Dummy ;29
+.MCSaveFile                    data @Dummy,@Dummy,@Dummy ;2a
+.MCLoadFile                    data @Dummy,@Dummy,@Dummy ;2b
+.MCCopy                        data @Dummy,@Dummy,@Dummy ;2c
+.MCAbsChangeListPtr            data @Dummy,@Dummy,@Dummy ;2d
+.MCLoadCells                   data @Dummy,@Dummy,@Dummy ;2e
+.MCSetUpPtrs                   data @Dummy,@Dummy,@Dummy ;2f
+.MCParseInputWord              data @Dummy,@Dummy,@Dummy ;30
+.MCInitTask                    data @Dummy,@Dummy,@Dummy ;31
+.MCSnooze                      data @Dummy,@Dummy,@Dummy ;32
+.MCAddToListPtr                data @Dummy,@Dummy,@Dummy ;33
+.MCReserveMemory               data @Dummy,@Dummy,@Dummy ;34
+.MCSetUpVariablePtrs           data @Dummy,@Dummy,@Dummy ;35
+.MCPreLoadCells                data @Dummy,@Dummy,@Dummy ;36
+.MCPlotLogicalScreen           data @Dummy,@Dummy,@Dummy ;37
+.MCPlotPhysicalScreen          data @Dummy,@Dummy,@Dummy ;38
+.MCUpdateScreen                data @Dummy,@Dummy,@Dummy ;39
+.MCUnPlotScreen                data @Dummy,@Dummy,@Dummy ;3a
+; returns v1=actual frame time in ms
+.MCSetPalette                  data @Dummy,@Dummy,@Dummy ;3b
+.MCSetTextWIndow               data @Dummy,@Dummy,@Dummy ;3c
+.MCSetGraphicsWindow           data @Dummy,@Dummy,@Dummy ;3d
+.MCClearChangeMaps             data @Dummy,@Dummy,@Dummy ;3e
+.MCClearTextBuffer             data @Dummy,@Dummy,@Dummy ;3f
+.MCCopyTextBuffer              data @Dummy,@Dummy,@Dummy ;40
+.MCEnableTextBuffer            data @Dummy,@Dummy,@Dummy ;41
+.MCInitSound                   data @Dummy,@Dummy,@Dummy ;42 
+.MCStartSound                  data @Dummy,@Dummy,@Dummy ;43
+.MCFindObj                     data @Dummy,@Dummy,@Dummy ;44
+.MCInitGraphics                  data @Dummy,@Dummy,@Dummy ;45
+.MCCalcMatrix                  data @Dummy,@Dummy,@Dummy ;46
+.MCDrawVector                  data @Dummy,@Dummy,@Dummy ;47
+.MCKeyDown                     data @Dummy,@Dummy,@Dummy ;48
+.MCInitJoystic                  data @Dummy,@Dummy,@Dummy ;49
+.MCReserveChip                  data @Dummy,@Dummy,@Dummy ;4a
+.MCSaveProtect                  data @Dummy,@Dummy,@Dummy ;49
+.MCInitScrolling                  data @Dummy,@Dummy,@Dummy ;47
+.MCScrollDirection                  data @Dummy,@Dummy,@Dummy ;48
+.MCPurgeAllCells                  data @Dummy,@Dummy,@Dummy ;49
+; MCSetTextWindow     = Allocate memory for text buffer
+;       v1=top screen line
+;       v2=number of screen lines
+; MCSetGraphicsWindow = Set graphics clipping
+;       v1=Left   X
+;       v2=Right  X
+;       v3=Top    Y
+;       v4=Bottom Y
+; MCClearChangeMaps   = (Rebuild physical screen from Buffer2)
+; MCClearTextBuffer   = Clear one character row of text buffer
+;       v1=buffer Y to clear
+; MCCopyTextBuffer    = Copy text buffer to physical screen
+;       v1=Buffer Y to top of text window
+; MCEnableTextBuffer  = Select character output 
+;       v1=0, write to TextScreenBase
+;       v1=mask: 1=buffers, 2=Logical, 4=Physical
+
+.MCSetMaxFrameRate
+                data @Dummy,@Dummy,@Dummy ;        80
+; Paramters:
+;             V1 = 84; Time in milliseconds
+
+.MCSetPreloadPalette
+                data @Dummy,@Dummy,@Dummy ;      81
+
+.MCCopyScreenToBuffer
+                data @Dummy,@Dummy,@Dummy ;     82
+; Copies the logical screen back to the buffer screen, thus adding
+; any sprites on a semi-permament basis. Note though, that any
+; insert/remove activity will corrupt these added sprites. Also
+; these added sprites do not obey the 3D rules, so may give
+; peculiar effects
+
+.MCRasterHandler
+                data @Dummy,@Dummy,@Dummy ;          83 */
+;          /* Parameters:
+;                 V1 = destination raster
+;                 V2 = source raster or clear color
+;                 V5 = 2; /+ copy raster +/ 0=clear to color
+
+.MCSetPrintRaster
+                data @Dummy,@Dummy,@Dummy ;         84
+; Parameter: V1=raster to print onto from now on. Must be in memory. 
+
+
+.MCSetPrintFont
+                data @Dummy,@Dummy,@Dummy ;           85
+; v1=list number, v2=offset, v3=CGA palette code (mono machines only)
+
+
+.MCRasterPrintCharacter
+                data @Dummy,@Dummy,@Dummy ;   86 */
+
+.MCPasteCell
+                data @Dummy,@Dummy,@Dummy ;              87
+
+.MCMobilityAbility
+                data @Dummy,@Dummy,@Dummy ;        88
+
+.MCLoadCellDataDirect
+                data @Dummy,@Dummy,@Dummy ;     89
+;          /* V1=list #, v2=offset, v3=cell # */
+
+.MCTransferParkedSprites
+                data @Dummy,@Dummy,@Dummy ;  90
+
+.MCReelTalkHandler
+                data @Dummy,@Dummy,@Dummy ;        91
+;          /* Paramters:
+;                V5=0 Initialise
+;                V5=1 Terminate System
+;                V5=2 FindState Audio  (returns V1=0 or 0FFFF)
+;                V5=3 Wait For Audio
+;                V5=4 Volume Control   (V5=Volume)
+;                V5=5 Translate Sample (V1,V2 = sample, V6 = length,
+;                                       V3=Frequncy, V4=Volume)
+;                V5=6 Play Sample      (V1,V2 = sample, V3=Frequency,
+;                                       V4=loop count, V6=Repeat count)
+;                V5=7 Terminate Sample
+;          */
+
+.MCOnceOnlyMusicInit
+                data @Dummy,@Dummy,@Dummy ;      92
+;          /* Returns V1,V2 = (driver) InfoWord
+;                     V6 = 00000ABC
+;                          A=1 Adlib sound driver
+;                          B=1 Roland sound driver
+;                          C=1 ReelTalk
+;             (Note: Adlib/Soundblaster requires a resident driver to be
+;                    loaded before the game. If the driver is absent an
+;                    error handler call occurs before V6 is returned)
+;             (Note: This is one of the few cases where error handlers
+;                    could occur before SetUpVariablePtrs, so take care
+;                    not to PRINT to the buffer screens) 
+;          */
+
+.MCInitialiseScore
+                data @Dummy,@Dummy,@Dummy ;        93
+;          /* Paramters:
+;                V1 list V2 offset Music Score
+;                V3 list V4 offset Adlib Instrument File
+;                V5 Score number (0-3)
+;          */
+          
+.MCPlayScore
+                data @Dummy,@Dummy,@Dummy ;              94
+;          /* Paramters:
+;                V1 Score number (0-3)
+;                V2 Repeat Flag (255=forever, 0=once, #=number of times)
+;                V3 Operation (0=restart, 1=resume, 2=stop)
+;          */
+          
+.MCMusicCloseDown
+                data @Dummy,@Dummy,@Dummy ;         95
+
+.MCOpenSpriteFile
+                data @Dummy,@Dummy,@Dummy ;         96
+;          /* Paramters:
+;                V1 list V2 offset = first 7 chars of sprites file name
+;          */
+
+.MCstopWithMessage
+                data @Dummy,@Dummy,@Dummy ;        97
+;          /* Parameters:
+;                V1 list V2 offset = 80 character error message
+;                As MCCloseDown but also prints message
+;          */
+
+.MCJumpOverlay
+                data @Dummy,@Dummy,@Dummy ;        98
+; v1 is ascii code: e.g. acode1.acd, gamedat1.dat
+; v2 is offset starting from 0 of routine within overlay
+; ONLY LOADS NEW ACODE FILE
+
+.MCCallOverlay
+                data @Dummy,@Dummy,@Dummy ;        99
+; v1 is ascii code: e.g. acode1.acd, gamedat1.dat
+; v2 is offset starting from 0 of routine within overlay
+; Do a return when you've finished in the overlay to
+; reload the caller
+; ONLY LOADS NEW ACODE FILE
+
+.MCLoadGamedata
+                data @Dummy,@Dummy,@Dummy ;        100
+; v1 is ascii code: e.g. gamedat1.dat
+; Loads in gamedata but does not affect acode file.
+; Remember that list1..9 pointers will be changed,
+; with the exception that any pointers equal to 0 in the new
+; table.txt/dat will not change the existing pointers
+
+
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+                data @Dummy,@Dummy,@Dummy ;50
+
+
+
+.Dummy
+ code -
+ prs " bug!"
+
+ code +
+.AcodeDelay
+; gosub @Delay
+; goto @HeroLoop
+
+.AcodeStart
+ goto @Start3D
+
+.HandleCR
+; MCOSWRCH has requested a cr.
+ gosub @DoCR
+ return
+
+
+code -
+;
+;
+; Args for MCDrawObjectV1:
+;  V1: object number
+;  V2: x coord in pixels
+;  V3: z   "
+;  V4: h   "
+;  V5: flag = -1 for remove object from structure
+;              0 for insert object into structure
+; 	      +ve draw to screen directly (as a sprite)
+
+; Args for MCSetPalette:
+; V1=list number
+; V2=offset within list
+;
+; list:  db x  ) 16 times
+;	 db y  ) 
+; where yyyy   yyyy    xxxx    xxxx
+;       red.   green   blue    RGBI
+;         0..7 (VGA)	       (EGA)
+
+

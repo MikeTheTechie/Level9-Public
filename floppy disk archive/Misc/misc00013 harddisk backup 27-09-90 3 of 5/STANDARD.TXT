@@ -1,0 +1,197 @@
+; STANDARD.TXT
+;
+; Some useful routines for animated games.
+;
+; Mike Austin. 3rd May 1990
+;
+;
+var
+; FireKey
+ FireKeyChange LastFireKey
+
+begin
+.GetControls
+; look at kbd/joystick/mouse and return
+; dir as new movement direction in standard adventure format
+; and FireKey=0 if not pressed, 1 if pressed.
+; and FireKeyChange=1 if pressed/released this turn
+
+; and for directions, returns:
+;	x1
+;   x4       x2
+;       x3
+; Non-zero means trying to move in that direction
+; and x5=x offset (single pixel movement), signed
+;     x6=y offset (single pixel movement), signed
+;     x7=direction number in standard adventure format
+;          i.e.          1
+;                     8     2
+;                    7       3
+;                     6     4
+;                        5
+
+ FireKey=0
+ FireKeyChange=0
+ code -
+  v1=107 ; check for fire (5)
+  gosub @GDKeyDown
+  x1=v1
+  v1=57    ; check for fire (space)
+  gosub @GDKeyDown
+  add x1,v1
+  v1=76    ; check for fire on some PC keyboards
+  gosub @GDKeyDown
+  add x1,v1
+
+
+ code +
+ FireKey=x1
+ if FireKey=LastFireKey then GDNoFireChange
+ FireKeyChange=1
+
+.GDNoFireChange
+ code -
+  gosub @GDDirections
+  x5=0 ; sx
+  x6=0 ; sh
+  x7=0 ; direction
+  if x1=0 then GDNoUp
+  x1=1
+  add x6,c1  ; sh+=1
+  x7=1 ; north(1)
+.GDNoUp
+  if x2=0 then GDNoRight
+  x2=1
+  add x5,c1  ; sx+=1
+  if x7=0 then GDNotNE
+  x7=2 ; NE
+  goto GDNoRight
+
+.GDNotNE
+  x7=3 ; E
+
+.GDNoRight
+  if x3=0 then GDNoDown
+  x3=1	     ; -1
+  sub x6,c1  ; sh-=1
+  if x7=0 then GDNotSE
+  x7=4 ; SE
+  goto GDNoDown
+ 
+.GDNotSE
+  x7=5 ; S=5
+
+.GDNoDown
+  if x4=0 then GDNoLeft
+  x4=65535   ; -1
+  sub x5,c1  ; sx-=1
+  if x7=0 then GDNoSW
+  x7=6 ; SW
+  goto GDNoLeft
+.GDNoSW
+  x7=7 ; W
+
+.GDNoLeft
+  if x6<>1 then GDNoNW ; up?
+  if x5<>65535 then GDNoNW ; left?
+  x7=8 ; NW
+
+.GDNoNW
+
+
+ code +
+; returns:
+;	x1
+;   x4       x2
+;       x3
+; Non-zero means trying to move in that direction
+; and x5=x offset (single pixel movement), signed
+;     x6=y offset (single pixel movement), signed
+ return
+;-----------
+ code -
+.GDKeyDown
+; INT MODE
+ code +
+ gosub @MCKeyDown
+ code -
+ return
+;------
+.GDDirections
+; INT MODE
+; produce x1=up key state, x2=right key state, x3=down key state
+; x4=left key state.
+; 0=not-pressed, non-zero means pressed
+
+; up?
+ v1=104 ; keypad 8
+ gosub GDKeyDown
+ x1=v1 ; if v1<>0, key is pressed
+ v1=72 ; cursor up (PC)
+ gosub GDKeyDown
+ add x1,v1 ; if v1<>0, key is pressed
+
+; right?
+ v1=77 ; cursor right
+ gosub GDKeyDown
+ x2=v1 ; if v1<>0, key is pressed
+ v1=108 ; keypad 6
+ gosub GDKeyDown
+ add x2,v1 ; if v1<>0, key is pressed
+
+; down?
+ v1=110 ; keypad 2
+ gosub GDKeyDown
+ x3=v1 ; if v1<>0, key is pressed
+ v1=80 ; cursor down
+ gosub GDKeyDown
+ add x3,v1 ; if v1<>0, key is pressed
+
+
+; left?
+ v1=106 ; keypad 4
+ gosub GDKeyDown
+ x4=v1 ; if v1<>0, key is pressed
+ v1=75 ; cursor left
+ gosub GDKeyDown
+ add x4,v1 ; if v1<>0, key is pressed
+
+; now tests for diagonal keys
+
+ v1=73 ; keypad 9
+ gosub GDKeyDown
+ add x1,v1 ; up state
+ add x2,v1 ; right state
+ v1=105 ; keypad 9
+ gosub GDKeyDown
+ add x1,v1 ; up state
+ add x2,v1 ; right state
+
+ v1=81 ; keypad 3
+ gosub @GDKeyDown
+ add x2,v1 ; right state
+ add x3,v1 ; down state
+ v1=111 ; keypad 3
+ gosub @GDKeyDown
+ add x2,v1 ; right state
+ add x3,v1 ; down state
+
+ v1=79 ; keypad 1
+ gosub @GDKeyDown
+ add x3,v1 ; down state
+ add x4,v1 ; left state
+ v1=109 ; keypad 1
+ gosub @GDKeyDown
+ add x3,v1 ; down state
+ add x4,v1 ; left state
+
+ v1=71  ; keypad 7
+ gosub @GDKeyDown
+ add x4,v1 ; left state
+ add x1,v1 ; up state
+ v1=103 ; keypad 7
+ gosub @GDKeyDown
+ add x4,v1 ; left state
+ add x1,v1 ; up state
+ return
+;-------

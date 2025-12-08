@@ -1,0 +1,1554 @@
+; Grange Murder character handling code. Graham M Jones 03/06/89. 
+;
+; Loosely based on various bits of the old text adventure stuff. 
+;
+ begin
+;
+.initracetrackx1
+; init racetrack no. x1 for ACTOR
+ add x1,x1
+ add x1,startracetracks
+; now read hi+low bytes of pointer into noun1,2
+ noun1=list5(x1)
+ add x1,c1
+ noun2=list5(x1)
+; now set up npc to obey it, if non-zero
+ if noun1<>0 then initracetrack2
+ if noun2=0 then initracetrack3 ; both zero
+.initracetrack2
+ gosub @setACTORATTRIBUTES
+ verb=obeyracetrack
+ prep=0
+ gosub @singlepushfifo ; push onto normal command queue
+.initracetrack3
+ return
+;---
+.newracetrackforobject
+; start racetrack x6 for actor OBJECT
+push actor
+ actor=object ; replace its racetrack with a new one...
+ gosub @setACTORATTRIBUTES
+ gosub @stop ; kill existing racetrack
+ x1=x6 ; race track number to execute
+ gosub @initracetrackx1
+pop actor
+; fall through...
+;---
+;.resetactor
+ gosub @setACTORATTRIBUTES
+ goto @initfifo
+;---
+.singlepushfifo
+; do a complete fifo push, without the extra facility
+; of being able to give multiple commands which
+; are executed in the order they were given
+ gosub @initfifo
+ gosub npcpushfifo
+ goto @linkonfifocommandqueue
+;---
+.npcpushfifo
+; for npc ACTOR, add a new action to the end of its 'pending
+; action' queue, such that it will be the last to be executed.
+; i.e. FIFO
+;
+; find some free space
+ if lastunlinkedcommand=0 then npffirstcommand
+ x1=lastunlinkedcommand
+ gosub @npcgetoffset
+ npcstack(x1)=freespaceptr ; link on new command
+ if lastunlinkedcommand<highwater then npffirstcommand
+ highwater=lastunlinkedcommand
+
+.npffirstcommand
+ lastunlinkedcommand=freespaceptr
+
+; and push command in...
+; and make freespace ptr crawl along its linked list
+ x1=freespaceptr
+ gosub @npcgetoffset ; find npcstack offset in x1, from x1=number
+; now x1=position in npcstack of free space
+;
+ x3=npcstack(x1) ; move along freespace chain
+ if x3=0 then @npcpusherror ; no free space!
+ freespaceptr=x3
+; x1=offset in npcstack of new current command
+;
+ npcstack(x1)=c0 ; this is last command in chain
+ add x1,c1
+ npcstack(x1)=verb
+ add x1,c1
+ npcstack(x1)=prep
+ add x1,c1
+ npcstack(x1)=noun1
+ add x1,c1
+ npcstack(x1)=noun2
+ return
+;---
+.initfifo
+; initialise a temporary fifo chain
+; this is linked to the command queue for ACTOR when it has been
+; completed
+; This allows new commands to be added as the
+; next thing for the NPC to do, but
+; the block of commands given will be executed in the
+; order given
+ gosub @setACTORATTRIBUTES ; this maybe prevents bugs
+; GMJ 06/07/90 initfifoactor=actor
+ lastunlinkedcommand=0 ; pointer to block of last command given
+ commandstolink=freespaceptr ; pointer to first command given
+ return
+;---
+.npcgetcurrent
+; return x1=block for current action of ACTOR
+ x1=npcptroffset
+ add x1,ACTORATTRIBUTES
+ x1=npccurrent(x1)
+.npcgetoffset
+; given x1=number of stack entry
+; return x1=offset in npcstack 
+; and multiply by npcstackentrysize (5)
+ x2=x1
+ add x1,x1
+ add x1,x1
+ add x1,x2
+ x2=npcstackbase
+ add x1,x2
+;cif DebugCheat
+; return
+;cend
+.npcpusherror ; no free space left!
+;cif DebugCheat ;********************************* WHY HERE?
+;code -
+; prs "PUSH ERR "
+; print actor
+; message cr
+;code +
+;cend
+ return
+;---
+.linkonfifocommandqueue
+; link on the queue which has been built up.
+; The first command to be executed is at COMMANDSTOLINK
+; and the last is at lastunlinkedcommand
+ gosub @setACTORATTRIBUTES
+ if lastunlinkedcommand=0 then @lofcqret
+ x1=npcptroffset
+ add x1,ACTORATTRIBUTES
+ x4=npccurrent(x1)
+; now x4=number of current stack entry
+ npccurrent(x1)=commandstolink
+ x1=lastunlinkedcommand
+ gosub @npcgetoffset ; of number x1, returns in x1
+; now x1=offset in npcstack of last command to link
+ npcstack(x1)=x4 ; link to what used to be current actor command
+ lastunlinkedcommand=0
+.lofcqret
+ return
+;---
+; Routines to return pointer to character 'OBJECT' data. Note that they 
+; rely on npcentrysize=16, so beware if you change this.
+.setACTORATTRIBUTES
+ ACTORATTRIBUTES=ACTOR
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ RETURN
+;---
+;; GMJ 26/09/89 ;;.setX4toOBJECTATTRIBUTES
+;; GMJ 26/09/89 ;;; return pointer in X4. (Modify .notifynpc if you change this routine)
+;; GMJ 26/09/89 ;; X4=0
+;; GMJ 26/09/89 ;; if object>maxNpc then sxtnnotalive
+;; GMJ 26/09/89 ;; X4=OBJECT
+;; GMJ 26/09/89 ;; ADD X4,X4
+;; GMJ 26/09/89 ;; ADD X4,X4
+;; GMJ 26/09/89 ;; ADD X4,X4
+;; GMJ 26/09/89 ;;.sxtnnotalive
+;; GMJ 26/09/89 ;; return
+;---
+.SETUPROOM
+; Return 'ROOM'=current position of ACTOR
+ X4=ACTOR
+ gosub Setuproomx4
+ if actor<>user then setuproomend1
+ currentuserroom=room
+.setuproomend1
+ return
+;
+.SETUPROOMX4
+;
+;****************
+ if room=currentuserroom then SURNotRoomObject
+ if x4<MinRoomObject then SURNotRoomObject
+ if x4>MaxRoomObject then SURNotRoomObject
+ room=currentpos(actor) ; make all room objects omni present if not 
+; in currentuserroom
+ return
+;
+.SURNotRoomObject
+ gosub @gopx4 ; GMJ 10jul90 returns x2=room of object
+ room=x2 ; GMJ 10jul90 ; ROOM=CURRENTPOS(X4)
+.ABScpret
+ RETURN
+;---
+.ControlPeople
+ gosub @setACTORATTRIBUTES
+ gosub @SetupRoom
+ gosub @SetActorACB ; setup ACBHeader for Actor
+push room
+ gosub @DoLeavingAni ; show any npcs leaving the room
+pop x1
+ if x1<>room then @npcanoneedtoactivate ; already moved this turn
+;
+; Decrement any freeze delays (used when npc's detour others etc.)
+ if actor=user then @NPCNotFrozen
+ x1=ACBHaltDelay
+ add x1,ACBHeader
+ x2=ACBList(x1) ; get freeze delay (if any)
+ sub x2,c1
+ if x2>32000 then @NPCNotFrozen
+ if room=currentuserroom then DecFreezeTimer
+ x2=0 ; zero timer if not in user's room
+.DecFreezeTimer
+ ACBList(x1)=x2 ; delay is decremented
+ if x2<>0 then @npcanoneedtoactivate ; still frozen
+ x1=ACBPreviousStatus
+ add x1,ACBHeader
+ dir=ACBList(x1)
+ if dir=0 then npcanoneedtoactivate
+ gosub @GetMovingAniDv1
+ add dv1,dir
+ &Hires(ACBHeader)=dv1
+ if room<>currentuserroom then npcanoneedtoactivate
+ dx4=ACBHeader
+ gosub @AlterACB
+ goto npcanoneedtoactivate
+.NPCNotFrozen
+;
+; don't execute any commands while climbing stairs
+ if actor=climbingstairs then npcanoneedtoactivate
+ gosub activatenpc
+; Face dest & execute next command if just arrived
+ if justarrived=false then npcanoneedtoactivate
+ JustArrived=false
+ if noun1=nullobject then npcanoneedtoactivate
+ if verb=ifollow then NPCFN1
+ if verb<>igdfind then npcanoneedtoactivate
+.NPCFN1
+ gosub @FaceNoun1 ; face the dest
+ goto @ControlPeople
+;
+.npcanoneedtoactivate
+ actor=user
+ gosub @setuproom
+ gosub @setACTORATTRIBUTES
+ goto @initfifo
+;---
+; Activate ACTOR
+.ActivateNpc
+ gosub @initfifo
+ gosub absactivatenpc
+ goto @linkonfifocommandqueue
+;---
+.absactivatenpc
+; prevent npc being shown if not in user's room
+; (doesn't work if coded in .MoveIntoNewRoom when the npc 
+; leaves the user's room)
+ if room=currentuserroom then aancuroom
+ gosub @ClearSearchTimeVEC
+ gosub @KillACBHeaderVEC ; GMJ 15/05/90 - Kill any forks
+; Kill any current conversations when bit 15 of conversation 
+; pointer is set, when npc no longer exists in the room
+ gosub @GetActorConversationV
+ x1=32768
+ and x1,value
+ if x1=0 then aancuroom ; not set
+ value=0
+ gosub @SetActorConversationV
+.aancuroom
+;
+; Set flag if reached a destination other than a door
+ Justarrived=false
+ x1=ACBStatus
+ add x1,ACBHeader
+ x2=ACBList(x1)
+ if x2<>ACBArrived then aanNotJustArrived
+ ACBList(x1)=c0 ; clear arrived status
+ JustArrived=True
+.aanNotJustArrived
+;
+ GOSUB @setACTORATTRIBUTES
+ verb=0
+ noun1=nullobject
+ noun2=nullobject
+ prep=0
+;
+ processed=false
+ gosub @specialactivatenpc
+ if processed=true then @npcret
+ if verb<>0 then @eaoverb ; do it immediately
+;
+ gosub decisioncode
+;; if executeprocessed=true then @npcret
+;
+; at this point, ACTOR is doing absolutely buggerall. if ACTOR should 
+; be doing something, then it should be hard coded here...
+;
+.npcret
+.npcmoveret
+.decisioncoderet
+ RETURN
+;---
+; Decide what ACTOR should do this turn
+.decisioncode
+; execute any commands?
+ gosub @npcgetcurrent ; get stack pointer x1 for actor
+ add x1,c1
+ x2=npcstack(x1)
+ if x2=0 then tryfollowing
+ gosub @ExecuteAnyOrders
+ if executeprocessed=true then decisioncoderet ; done
+;
+; follow someone?
+.tryfollowing
+ x1=followoffset
+ add x1,actorattributes
+ x1=npcCurrent(x1)
+ if x1=0 then decisioncoderet ; nobody to follow
+; else fall through...
+;---
+; Follow npc x1 if appropriate
+; return executeprocessed=true if we have followed
+.doiwantfollowx1
+ if x1=0 then @epfalse
+ commandfinished=false
+ verb=ifollow
+ noun1=x1
+ ProblemObject=noun1
+ Object=noun1
+ gosub @gdfollow
+ return
+;---
+.stop
+; cancel all ACTOR's current command queue
+ gosub @setACTORATTRIBUTES ; just in case!
+.stop1
+ gosub @npcpop
+ if x3<>0 then stop1 ; more to come
+; fall through to stopfollowing...
+;
+; Stop ACTOR following
+.StopFollowing
+ gosub @setACTORATTRIBUTES
+ x1=followoffset
+ add x1,actorattributes
+ npccurrent(x1)=c0 ; stop following
+ goto @ClearActorBusy ; free to do telepathic gosubs
+;---	
+; ACTOR has come across a fatal error
+.ReportProblem
+.gdReportProblem
+;
+;cif debugcheat
+; if noun1=user then NoProblemWithUser ; user may be unconcious (room 0)
+;code -
+; prs "RP "
+; print actor
+; message space
+; print verb
+; message space
+; print noun1
+; message cr
+;code +
+;.NoProblemWithUser
+;cend
+;
+.SetCommandFinished
+; no command waiting - so give up
+ commandfinished=true
+;
+.epfalse
+ executeprocessed=false
+ return
+;---
+.eptrue
+ executeprocessed=true
+ return
+;---
+; ACTOR is about to execute the next stacked command
+.executeanyorders
+ commandfinished=false
+ gosub @abseao
+ if commandfinished=true then @intelligentpop
+ if executeprocessed=false then executeanyorders
+.eaoret
+ return
+;---
+; npc is to stop doing its current action, and climb to next
+; on its chain. The top action (the default one) is never deleted
+.intelligentpop
+ if actor<>user then npcpop
+ if executingcommand=false then npcpop ; user not executing a command
+ if executingracetrack=false then @CancelExecuteVec ; series of commands
+.npcpop
+;
+; return x3=0 if pop error occured
+ gosub @npcgetcurrent
+ x2=npcstack(x1) ; number of command to execute after this one
+; and add this element as the current element in the free space chain
+ x4=npcptroffset
+ add x4,actorattributes
+ x3=npccurrent(x4)
+ if x3=0 then npcpoperror ; no current command on stack
+ npccurrent(x4)=x2 ; make element above it current action for npc
+;
+ npcstack(x1)=freespaceptr
+ freespaceptr=x3
+.npcpoperror
+ return
+;---
+; Get current command off npc stack and allow ACTOR to execute it
+.getcurrentcommand
+ gosub @npcgetcurrent ; set up x1=position in npcstack of current command
+ add x1,c1
+ verb=npcstack(x1)
+ add x1,c1
+ prep=npcstack(x1)
+ add x1,c1
+ noun1=npcstack(x1)
+ add x1,c1
+ noun2=npcstack(x1)
+ goto @eptrue
+;---
+.abseao
+; if there are any orders pending for ACTOR,
+; may as well carry one of them out...
+ gosub @getcurrentcommand
+
+; if actor<>inspector then wwww1
+; if room<>currentuserroom then wwww1
+; gosub @debugshowcommand
+;.wwww1
+
+ ProblemObject=noun1
+ if verb=0 then @setcommandfinished ; nothing pending
+.eaoverb
+ if verb>15 then eaonotdir
+;
+; NB: Directional verbs (i.e. north, south etc.) cannot be used 
+; in racetracks because they are not goal-directed. This means 
+; that the next command will be popped off the stack before 
+; the npc has even reached a door. 
+; To make them goal-directed, the destination room would need to 
+; be incorporated into the command so as to test for arrival in the 
+; room, whereupon the command would be popped off the stack. 
+; Hence, it is essential that 'go,0,room,nullobject' commands 
+; are used rather than 'north,0,nullobject,nullobject'!
+;
+; However, the following code will instantly 'teleport' the npc 
+; to the room in the desired direction should the event ever 
+; crop up...
+;
+ dir=verb
+ gosub @ABScheckexit
+ if dest=0 then eaocantmove ; bug! can't go that way!
+ g2=dir
+ gosub @MoveIntoNewRoom ; instant move!
+.eaocantmove
+ CommandFinished=true
+.eaoret1
+ return
+;
+.eaonotdir
+ if verb=obeyracetrack then @doobeyracetrack
+ if verb=IReportProblem then @GDReportProblem
+;
+ if verb<>rtAnimate then DontRtAnimate ; used here as well as in 
+; doobeyracetrack, so that it can be pushed onto the npc stack 
+; from acode so that it can be treated as a 'normal' verb as well 
+; as a racetrack verb
+ gosub @doRtAnimate
+ goto @SetCommandFinished
+.DontRtAnimate
+;
+ if verb<>iClearActorBusy then DontCAB ; done here instead of 
+; doobeyracetrack, so that it can be pushed onto the npc stack 
+; from acode so that it can be treated as a 'normal' verb as well 
+; as a racetrack verb
+ gosub @ClearActorBusy
+ goto @SetCommandFinished
+.DontCAB
+;
+ if verb=VIntrusionOn then @IntrusionOn
+ if verb=VIntrusionOff then @IntrusionOff
+ object=noun1
+ if verb=ifollow then @gdfollow
+ if verb=igdgo then @gdgo
+ if verb=igdfind then @gdfind
+ if verb=iLocalMove then @LocalMove
+ if verb=iGODOOR then @GoDoor
+ if verb=igoout then @gdgoout
+ if verb=iwaitforpersontoleave then @gdwaitforpersontoleave
+ if verb=iWaitForPersonFree then @gdwaitforpersonfree
+ if verb=iwaitforperson then @gdwaitforperson
+ if verb=iwaitforperiod then @gdwaitforperiod
+ if verb=iwait then @shortwait ; 22/12/89
+;
+; first of all, TAKE noun2 in case we have to GIVE it to noun1
+ if noun2=nullobject then eaononoun2
+; noun2 MUST be carried by actor
+ x1=currentpos(noun2)
+ if x1<>actor then EAOneedNoun2
+ x1=hicurrentpos(noun2)
+ if x1<>0 then EAOnoNoun2 ; carrying noun2
+.EAOneedNoun2
+; take noun2...
+ object=noun2
+ noun1=object
+ noun2=nullobject
+ prep=0
+ verb=itake
+ gosub @SinglePushFifo
+ commandfinished=false
+ executeprocessed=false
+ justarrived=false
+ return
+.eaononoun2
+;
+; GMJ 14/3/90
+; if npc tries to SIT using NULLOBJECT, then find him a 
+; chair...
+ if verb<>isit then @npcnotsit
+;
+; Prevent people sitting twice (?*@œ knows why they do it!)
+ &ObjectNumber=ACBList(ACBHeader)
+ gosub @IsObjectSittingVec
+ if result=false then NpcNotSitting ; not already sitting
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ add v1,actor
+ add v1,actor
+ v2=List4(v1) ; at a room object?
+ if v2=0 then NpcNotSitting
+ if noun1=v2 then DoneNpcSit ; already sitting there
+ if noun1=nullobject then DoneNpcSit ; already sitting when told to 
+; sit anywhere
+.NpcNotSitting
+;
+ if noun1<>nullobject then @npcsit
+ if room=currentuserroom then @npcFindChair
+; if not in user room, sit on a 'special' chair, which is used 
+; until the player enters the room, and a real chair has to be found
+ noun1=SpecialChair
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ v2=actor
+ add v2,v2
+ add v1,v2
+ &List4(v1)=c0 ; clear 'at room object' flags
+ List4(v1)=noun1 ; reset 'at room object' flag ; GMJ 14/3/90
+ goto donenpcsit
+.NpcFindChair
+ gosub @FindChair ; return noun1 as a chair
+ if result=true then npcsit
+; can't find a chair!
+.donenpcsit
+ commandfinished=true ; ignore the command!
+ return
+.npcsit
+ object=noun1
+.npcnotsit
+;
+ if noun1=nullobject then eaononoun1
+; check if noun1 is present
+ gosub @selectobjectpos
+ gosub @checkifaccessible
+ if result=true then eaononoun1
+ gosub @npcneedsobject
+ if executeprocessed=true then @eaoret
+;
+; we've found the object noun1...
+.eaononoun1
+; if accessible on justarrived, then face the object.
+; if accessible because of verb type (i.e. drop object carried)
+; then don't face object
+ if justarrived=false then EAONN1DontFace
+ gosub @FaceNoun1 ; face the dest
+.EAONN1DontFace
+;
+ commandfinished=true ; once-only verb, or not understood.
+; ok, so call the verb!
+ if verb=iwait then @shortwait
+ gosub @callverb ; goto @callverb
+ verb=0 ; prevent normal verbs being repeated!
+ return
+;---
+; Goal Directed code
+; (NB: Use TRACEX1TOSYNTH from old l1.l9 with RootRoom method)
+;---
+.npcneedsobject
+; ACTOR tried to reference OBJECT, but it was not
+; accessible in way HISEARCHPOS
+; (the command which attempted the access is still on the stack)
+;
+; GMJ 10jul90 prevent taking objects already owned!
+ if verb<>iTAKE then nneNotTake
+ gosub @GetObjectPosx2
+ if x4=actor then nneAbort ; already owned
+.nneNotTake
+;
+ noun1=object ; for benefit of take etc.
+ gosub @makelocal
+ if executeprocessed=true then npcneedsobjectret
+.nneABORT
+ commandfinished=true ; abort
+.npcneedsobjectret
+ return
+;---
+.makelocal
+ gosub @setuproom
+ gosub @getobjectposx2
+; now x2=room where OBJECT is
+ executeprocessed=false
+ if x2=room then @AAmakelocal ; here
+ dest=x2
+ gosub @gdfollowdest
+ executeprocessed=true ; but don't want to waste time.
+.roret
+ return
+;---
+; Go to door leading towards room NOUN1
+.GoDoor
+ if justarrived=true then @localmovedone
+ if room<>currentuserroom then @localmovedone
+ dest=noun1
+ ProblemObject=NullObject
+ if room=dest then localmovedone
+ gosub @GDGetTrueDir
+; Fool GraphicsHiresGo into thinking we're currently using 
+; a 'go new room' status, so that a fresh GD is not restarted 
+; every time we call it
+ x1=ACBStatus
+ add x1,ACBHeader
+ x2=ACBList(x1) ; get previous status. only start a fresh GD if we're 
+ if x2<>ACBGoDoor then InitialGoDoor ; not already going towards the door
+ ACBList(x1)=dir
+.InitialGoDoor
+ gosub @HiresGo
+; replace 'go through door' status with a 'go towards door' status
+ x1=ACBStatus
+ add x1,ACBHeader
+ x2=ACBGoDoor
+ ACBList(x1)=x2
+ return
+;---
+; Move actor to cell pos x=noun1, z=noun2
+.LocalMove
+ if justarrived=true then localmovedone
+ executeprocessed=false
+ gosub @MoveLocal
+ if executeprocessed=true then localmoveret
+.localmovedone
+ commandfinished=true ; abort
+ processed=true
+.localmoveret
+ return
+;---
+.gdfollow
+; ACTOR is following noun1
+; fall through...
+;---
+.gdfind
+ x4=noun1 ; character to follow
+ x6=room
+ gosub @setuproomx4 ; return ROOM=position of x4
+ if room=0 then @gdFound ; GMJ 28/04/90 object/person doesn't exist!
+
+; GMJ 22/04/90 go to object only if it's in this room, and stop 
+; trying to find it if it no longer exists here...
+ if prep<>findlocal then notfindlocalonly
+ if x6<>room then @gdfound
+ if justarrived=true then @gdfound
+ goto @AAMakeLocal
+.notfindlocalonly
+
+;=====
+; don't follow people into the loo!
+ if noun1>MaxNpc then notfollowtoilet
+ if room=61 then @gdfindret
+ if room=62 then @gdfindret
+ if room=63 then @gdfindret
+ if room=65 then @gdfindret
+.notfollowtoilet
+;=====
+
+ if x6<>room then @gdfollownothere
+;
+; GMJ 22/04/90 find room containing object only...
+ if prep<>findroomonly then notfindroomonly
+; executeprocessed=false
+ justarrived=true
+; x1=ACBStatus
+; add x1,ACBHeader
+; ACBList(x1)=c0 ; quit the GD
+.notfindroomonly
+;
+ if justarrived=true then gdfound
+ gosub @makelocal
+ if executeprocessed=true then gdfindret
+.gdfound
+
+; Don't POP off follow for player
+ if actor<>user then gdfNotPlayerFollow
+ if verb<>ifollow then gdfNotPlayerFollow
+ executeprocessed=true
+ goto GDFindRet
+.gdfNotPlayerFollow
+;; GMJ 29/11/89
+
+ commandfinished=true ; abort
+ processed=true
+.gdfindret
+ return
+;---
+; Go to a Room num, not an object
+.gdgo
+ if prep<>128 then ABSgdgo ; fast flag not set
+ if room=currentuserroom then ABSgdgo ; needs to use HiresGo/Leavingdirection
+ gosub ABSgdgo
+ if room=currentuserroom then gdgoret ; needs to use LeavingDirection
+ if dest<>currentuserroom then gofast
+; needs to use LeavingDirection
+.gdgoret
+ return
+;
+; repeatedly execute the GDGO until we reach our dest, whereupon 
+; we immediately execute the next RT instruction
+.gofast
+ commandfinished=false
+ executeprocessed=false
+ if room=noun1 then @IntelligentPop ; arrived - do next command
+ return ; not arrived, repeat GDGO command
+;
+.absgdgo
+ dest=noun1
+ ProblemObject=NullObject
+ if room<>dest then @gdfollowdest
+ goto @followfinished
+;---
+.gdfollownothere
+ dest=room ; destination room just calculated by setuproomx4
+ noun1=room
+ room=x6 ; restore saved source room
+; drop through to gdfollowdest
+;
+.gdfollowdest
+;
+; GMJ 19/09/90 must be done here, as room object position flag 
+; is accessed, and it is soon to be erased...
+ gosub @StandUpIfSittingVEC
+;
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ v2=actor
+ add v2,v2
+ add v1,v2
+ &List4(v1)=c0 ; clear 'at room object' flags
+;
+ gosub @GDGetTrueDir
+ if room=CurrentUserRoom then @HiresGo
+;
+; make the move
+.absNPCMakeMove
+ g2=dir
+ gosub @MoveIntoNewRoom
+.ffret
+ return
+;---
+.GdGetTrueDir
+; Any short cuts to cross floorpointer loops?
+;
+; Using EXIT command is REAL slow, believe me!
+; Hence, we use a table bolted onto the end of the floorpointers...
+;
+ x1=SizeFloorPointerTable
+ add x1,startfloorpointers
+.readfpb
+ x2=list5(x1) ; x2 is dest to test
+ if x2=0 then @nobreak ; end of table
+ add x1,c1
+ x3=list5(x1) ; x3 is room to test
+ add x1,c1
+ dir=list5(x1) ; dir is direction to go in
+ add x1,c1
+ if dest<>x2 then readfpb1
+ if room=x3 then crossbreak ; found a short cut
+; how about the opposite direction?
+.readfpb1
+ x4=dir
+ add x4,startreversaltable
+ dir=list5(x4)
+ if room<>x2 then @readfpb
+ if dest<>x3 then @readfpb
+; found a short cut
+.crossbreak
+ return
+.nobreak
+; no short cut, so fall through...
+;---
+.GdGetDir
+ dir=0 ; error return.
+ x1=dest
+ x6=room
+ if room=dest then @followfinished
+; x6 is source room - compare all rooms with source, in case both
+; source and destination are in the same complex
+ gosub @tracex1tosynth
+ if dest=0 then gdgoerror ; can't find
+ if processed=true then @gdfollowgoin
+; now x1=synth room in which the destination is based
+; store it away in synthdest
+ synthdest=x1
+ if x1=room then @gdgoin2 ; am outside the complex containing dest
+; now trace source room through to synth room
+ x1=room
+ x6=dest ; compare all rooms with destination in case both
+; source and destination are in the same complex
+ gosub @tracex1tosynth
+ if dest=0 then gdgoerror
+ if processed=true then @gdgoout
+; now x1=synth room in which the source is based
+;
+ if synthdest=dest then followdifferentcomplex ; go just outside complex
+ if x1<>synthdest then followdifferentcomplex
+ goto @gdgoout ; bug - should
+; have been matched on one tracex1tosynth or the other
+; because they are both in the same complex.
+; The only likely explanation is that there are multiple,
+; non-connecting paths to the exit.
+;
+.followdifferentcomplex
+; source and destination are NOT in the same complex.
+; Therefore, go out.
+; if room<minsynthroomminus1 then @gdgoout
+ goto @gdgoOut
+;---
+.gdgoerror
+ goto @ReportProblem
+;
+.followfinished
+.followjustfinished ; just moved + therefore arrived at dest.
+; no descriptions on, so now have to print room we have arrived at
+ commandfinished=true ; terminate command
+;; if actor<>user then gdreportproblemret
+;; if descriptionmode<>inone then gdreportproblemret
+;; descriptionmode=normaldescriptionmode
+.GdReportProblemRet
+ return
+;---
+.tracex1tosynth
+; trace from room x1 back to the synthesised room number
+; return x1=synth room number
+; if any room=x6 on the way, return with processed=true
+; and dir=direction of last move
+; before we encountered x6
+ processed=false
+ if x1=x6 then txtsfound
+ if x1=RootRoom then txtsret
+ x2=startfloorpointers
+ add x2,x1
+ dir=list5(x2)
+ from=x1
+ gosub @checkexit ; exit x1 x3 x4 x5 ; room dir status dest
+ x1=dest
+ if x1=0 then txtsret ; in for safety only
+ goto @tracex1tosynth
+;---
+.txtsfound
+; have found a match with x6
+; i.e. both source and dest for the move are in
+; the same complex
+ processed=true
+.txtsret
+ return
+;---
+.gdfollowgoin
+; am on a goal-directed go/follow
+; tracing along the OUT pointers from dest has come across
+; the current location. The last move was in direction DIR,
+; from room FROM,
+; reverse direction....
+ x1=dir
+ add x1,startreversaltable
+ dir=list5(x1)
+ return
+;---
+.gdgoin2
+; are being asked to go 'IN' when in a grid location
+ dir=ivin
+ return
+;---
+.gdgoout
+ if room=RootRoom then @FollowJustFInished
+; go outwards in current complex
+ x2=startfloorpointers
+ add x2,room
+ dir=list5(x2)
+ return
+;---
+.racetrackgotonoun12gc
+; note: compiler crashes if 'racetrackgotonoun12getcurrent' is used!
+ gosub @npcgetcurrent ; get x1=current action in npcstack
+; current position of racetrack for ACTOR is (NOUN1,NOUN2)
+; NPCs current stack entry is npcstack(x1)
+; write value back to it
+ gosub @getMessageNumber
+;
+.racetrackgotovalue
+; current position of racetrack for ACTOR is VALUE.
+; NPCs current stack entry is npcstack(x1)
+; write value back to it
+push value
+ index=x1
+ x2=4 ; offset of noun2 in npcstack
+ add x2,index
+ npcstack(x2)=value
+ x2=npcstack(x2) ; low byte
+ sub value,x2
+ gosub @VALUEDIV256
+ x1=value
+ x2=3 ; offset of noun1 in npcstack
+ add x2,index
+ npcstack(x2)=x1
+pop value
+ return
+;---
+; Racetrack code
+;---
+.doobeyracetrack
+; ACTOR is currently on a racetrack, 
+; execute the next instruction
+; return executeprocessed if anything active done
+; NOUN1 gives the high byte of the offset within list5
+; and noun2 has low byte of offset of current instruction
+; within list5
+ gosub @getMessageNumber
+.DOORTNoun1
+; now value is offset of current racetrack instruction
+; within list5
+;
+ verb=list5(value)
+ add value,c1
+ prep=list5(value)
+ add value,c1
+ noun1=list5(value)
+ add value,c1
+ noun2=list5(value)
+ add value,c1
+;
+ if verb=0 then @eptrue
+ gosub @npcgetcurrent ; set up x1=current actor command in npcstack
+ gosub @racetrackgotovalue ; set up new current address
+;
+ executeprocessed=false
+ if verb=VRevealMurder then @MurderRevealed
+ if verb=rtBusy then @doRtBusy
+ if verb=Occupation then @doRtOccupation
+ if verb=rtAnimate then @doRtAnimate
+ if verb=rtTeleGosub then @DoRtTeleGosub
+ if verb=rtTeleGoto then @DoRtTeleGoto
+ if verb=rtConversation then @DoRtConversation
+ if verb=rtAnimateCD then @doRtAnimateCD
+ if verb=rtFaceNoun1 then @FaceNoun1
+ if verb=rtConditional then @doRtConditional
+ if verb=rtRConditional then @doRtRConditional
+ if verb=racetrackgoto then @racetrackobeygoto
+ if verb=racetrackgosub then @racetrackobeygosub
+ if verb=racetrackreturn then @racetrackobeyreturn
+ gosub RacetrackMessages
+ if executeprocessed=false then @SinglePushFifo
+ return
+;---
+; Do a variety of racetrack messages
+.RacetrackMessages
+ executeprocessed=false
+ if verb=rtActorVaryMessage then @doRtActorVaryMessage
+ if verb=RtActorSingleMessage then @DoRtActorSingleMessage
+ if verb=rtActorSaidVaryMessage then @doRtActorSaidVaryMessage
+ if verb=RtActorSaidSingleMessage then @DoRtActorSaidMessage
+ if verb=racetrackmessage then @dortmessage
+ if verb=racetrackvarymessage then racetrackobeyvarymessage
+ return
+;---
+.racetrackobeyvarymessage
+ gosub @GetMessageNumber
+ result=true
+ gosub @specialrtMessage
+ if result=false then NORTMESS1
+push m1
+ m1=cr
+ gosub @printm1
+pop m1
+ gosub @VaryMessageDot
+ gosub @RTMessageAni ; animate expressions
+.NORTMESS1
+ goto @EpTrue ;&*&*& return
+;---
+; Set current npc occupation message, to be printed upon player 
+; entering the npc's room. Zero kills occupation messages
+.DoRtOccupation
+ gosub @GetMessageNumber ; value = 16 bit noun1,noun2 (message no.)
+.SetActorOccupation
+ &x1=List4(84) ; base for occupation pointers
+ add x1,actor
+ add x1,actor ; word based table
+ sub x1,c2 ; starts with npc 1
+ &List4(x1)=value
+ return
+;---
+; Get current occupation message in M1 for Actor
+.GetActorOccupation
+ &x1=List4(84) ; base for occupation pointers
+ add x1,actor
+ add x1,actor ; word based table
+ sub x1,c2 ; starts with npc 1
+ &value=List4(x1)
+ return
+;---
+.DoRtConditional
+; only execute next instruction if NOUN1 is present
+; ValueSave=value
+ if noun1<230 then dortc1
+;
+; noun2 can be used to "target" an npc as the actor upon which 
+; to carry out the conditional
+push actor
+push ACBHeader
+ if noun2<1 then CondNoTargetNpc
+ if noun2>MaxNpc then CondNoTargetNpc
+ actor=noun2
+ gosub @setactorACB
+ gosub @SetActorAttributes
+.CondNoTargetNpc
+ gosub @SpecialRtConditional ; special cases
+pop ACBHeader
+pop actor
+ gosub @SetActorAttributes
+;
+ goto dortc2
+.dortc1
+ object=noun1
+ gosub @CheckIfPresent
+.dortc2
+ if result=true then @doortnoun1
+.rtconditionfailed
+ x1=4
+ add value,x1 ; skip conditional instruction
+ gosub @npcgetcurrent ; get x1=current action in npcstack
+ gosub @racetrackgotovalue
+ goto @doortNoun1
+;---
+.DoRtRConditional
+; only execute next instruction if we're in room NOUN1
+ if room=noun1 then @doortnoun1
+ goto rtconditionfailed
+;---
+; Set flag for npc PREP being busy before sending him on a telegosub 
+; which MUST be finished before doing another telegosub
+.DoRtBusy
+ &x2=List4(74)
+ add x2,noun1
+ sub x2,c2 ; table starts with sue (npc #2)
+ x3=list4(x2)
+ or x3,c2 ; use bit two only
+ list4(x2)=x3
+ goto @EpTrue ;&*&*& return
+;---
+; prepare a conversation in the event that the player talks to 
+; him next
+.DoRtConversation
+ gosub @getmessagenumber ; value=word(noun1,noun2)
+ gosub SetActorConversationV
+ goto @EpTrue ;&*&*& return
+;---
+; Set ACTOR's current conversation pointer to VALUE
+.SetActorConversationV
+ &x1=List4(38) ; base for conversation pointers
+ add x1,actor
+ add x1,actor ; word based table
+ sub x1,c2 ; starts with npc 1
+ &List4(x1)=value
+ return
+;---
+; Get ACTOR's current conversation pointer as VALUE
+.GetActorConversationV
+ &x1=List4(38) ; base for conversation pointers
+ add x1,actor
+ add x1,actor ; word based table
+ sub x1,c2 ; starts with npc 1
+ &value=List4(x1)
+ return
+;---
+; Tell another npc to GOSUB a racetrack, and then return to whatever 
+; he or she was doing beforehand...
+; PREP is the npc to send on a racetrack
+; NOUN1,NOUN2 is the hi,lo address of the racetrack
+.DoRtTeleGosub
+ gosub @getmessagenumber ; value=word(noun1,noun2)
+push actor
+ actor=prep
+ x1=127
+ and actor,x1 ; mask out bit 7
+ if prep<128 then DRTGnoresume
+ gosub @GosubRacetrackValueA ; gosub a racetrack Address
+ goto DoneRTG
+.DRTGnoresume
+ gosub @GOSUBRacetrackValueANoR ; gosub rt & don't resume previous pos
+.DoneRTG
+pop actor
+ gosub @SetActorAttributes
+ goto @EpFalse ; GMJ 03/07/90 ; goto @EpTrue ;&*&*& return
+;---
+; Tell another npc to GOTO a racetrack
+; PREP is the npc to send on a racetrack
+; NOUN1,NOUN2 is the hi,lo address of the racetrack
+.DoRtTeleGoto
+ gosub @getmessagenumber ; value=word(noun1,noun2)
+push actor
+ actor=prep
+ gosub @ClearActorBusy ; not doing a "busy" telegosub
+ gosub @GotoRacetrackValueA
+ gosub @racetrackgotonoun12gc
+pop actor
+ gosub @SetActorAttributes
+ goto @EpFalse ; GMJ 03/07/90 ; goto @EpTrue ;&*&*& return
+;---
+; do animation with current direction...
+.doRtAnimate
+ x1=0
+ goto doRtAnimateGotDir
+.doRtAnimateCD
+ gosub @GetValidDirx1
+.doRtAnimateGotDir
+ gosub @GetMessageNumber
+; m1=ani sequence : x1=direction (if any) : prep=number of frames
+ ObjectNumber=m1
+ sFrames=prep
+ gosub @AAAnimateGotDir
+ goto @EpTrue ;&*&*& return
+;---
+.DoRtActorSaidMessage
+ gosub @GetMessageNumber
+ result=true
+ gosub @specialrtMessage
+ if result=false then @EPTrue
+ gosub ActorSaid
+ gosub @PrintM1
+ goto @QuoteDotEPT
+;---
+.DoRtActorSaidVaryMessage
+ gosub @GetMessageNumber
+ result=true
+ gosub @specialrtMessage
+ if result=false then @EPTrue
+ gosub ActorSaid
+ gosub @VaryMessage
+.QuoteDotEPT
+ gosub @RTMessageAni
+ if room<>currentuserroom then QDEPTret
+code -
+ message quote
+ message dot
+code +
+.QDEPTret
+ goto @EpTrue
+;---
+.ActorSaid
+ if room<>currentuserroom then ActorSaidRet
+push m1
+ m1=cr
+ gosub @printm1
+ gosub @PrintActor
+code -
+ message 2801 ; said, "
+code +
+pop m1
+.ActorSaidRet
+ return
+;---
+.DoRtActorSingleMessage
+ gosub @getmessagenumber
+ result=true
+ gosub @specialrtMessage
+ if result=false then @EPTrue
+push m1
+ m1=cr
+ gosub @printm1
+pop m1
+ gosub @PrintActor
+ gosub @RacetrackObeyMessage
+.MEPtrue
+ goto @EpTrue
+;---
+.DoRtActorVaryMessage
+;
+;=====
+; Message 5010 is used specially as a conditional test to see if 
+; the front door has been opened.
+ gosub @getmessagenumber
+ if m1<>5010 then NotWaitForDoor
+ x1=FrontDoorOpened
+ FrontDoorOpened=false
+ if x1=false then FDNotOpen
+ gosub @racetrackobeyreturn ; yes - do a return
+ goto MEPtrue
+;
+; door not opened, so print message at GameLoopTimer intervals
+.FDNotOpen
+ x1=GameLoopTimer
+ x2=63
+ and x1,x2
+ if x1<>0 then @EpTrue ; don't do the message
+.NotWaitForDoor
+;=====
+;
+ gosub GetMessageNumber
+ result=true
+ gosub @specialrtMessage
+ if result=false then @EPTrue
+push m1
+ m1=cr
+ gosub @printm1
+pop m1
+ gosub @PrintActor
+ gosub @VaryMessageDot
+ gosub @RTMessageAni
+ goto @EPTrue
+;---
+.dortmessage
+ gosub GetMessageNumber
+ result=true
+ gosub @specialrtMessage
+ if result=false then @EPTrue
+push m1
+ m1=cr
+ gosub @printm1
+pop m1
+ gosub racetrackobeymessage
+ goto @EPtrue ;&*&*& return
+;---
+.racetrackobeymessage
+ gosub @PrintM1dot
+ goto @RTMessageAni ; animate expressions
+;---
+.GetMessageNumber
+ value=noun1
+ gosub @valuetimes256
+ add value,noun2
+ m1=value
+ return
+;---
+.racetrackobeygoto
+ gosub @racetrackgotonoun12gc
+ goto @doobeyracetrack
+;---
+.racetrackobeygosub
+ verb=obeyracetrack
+ goto @singlepushfifo
+;---
+.racetrackobeyreturn
+ goto @setcommandfinished ; remove 'obey command' on command queue
+;---
+; Clear flag for actor being busy after doing a telegosub 
+; so that he can be sent on another one (see .DoRtBusy)
+.ClearActorBusy
+ if actor=user then CABRet
+ &x2=List4(74)
+ add x2,actor
+ sub x2,c2 ; table starts with sue (npc #2)
+ x3=list4(x2)
+ x4=253
+ and x3,x4 ; mask out bit two only
+ list4(x2)=x3
+.CABRet
+ goto @EPtrue
+;---
+; When ACTOR executes a RevealMurder, the effect is that everyone 
+; within the room (including ACTOR himself) now knows about the 
+; murder.
+; As a failsafe, the inspector executes a RM when he arrives, which 
+; has the effect of forcing everyone to know about the murder.
+;
+.MurderRevealed
+code -
+ x5=actor ; save original actor
+ actor=1
+.globalreveal
+ if noun2=254 then okIreveal ; reveal to ALL npc's
+ if x5=inspector then okIreveal
+ x1=currentpos(actor)
+ if x1<>room then nextreveal ; npc not in room
+.okIreveal
+ if actor<>user then okreveal
+code +
+ VSamKnowsAboutMurder=true ; set special flag for user
+code -
+ goto nextreveal
+.okreveal
+ gosub individualrevealed
+.nextreveal
+ add actor,c1
+ if actor<maxnpcplus1 then globalreveal
+ actor=x5 ; restore original actor
+ if noun1>maxnpc then notmultiplemurder
+code +
+ &x1=List4(88)
+code -
+ add x1,noun1
+ List4(noun1)=c3 ; set bit 1 for ALL NPCs learned of THIS victim's 
+; murder and bit 0 for victim being dead (should already be set)
+.notmultiplemurder
+code +
+ gosub @EPtrue
+code -
+ return
+;
+.individualrevealed
+code +
+ &x1=list4(58)
+code -
+ add x1,actor
+ sub x1,c2 ; table starts with npc #2
+ x2=List4(x1) ; get revealed flag
+ if x2<>0 then @alreadyrevealed ; already revealed
+ List4(x1)=c1 ; set revealed flag
+; reset meetings with user to begin with new set after the murder
+code +
+ &x1=List4(52) ; start of meetings table (entry 0 is npc #2)
+code -
+ add x1,actor
+ sub x1,c2 ; table starts with npc #2
+ List4(x1)=c0
+;
+; clear 'recent questions' stack, ready for new set of opinions
+code +
+ &x1=list4(24) ; recent questions stack
+code -
+ x2=QStackSize
+ x3=actor
+.GetQStack1
+ add x1,x2
+ sub x3,c1
+ if x3>0 then GetQStack1
+; x1 points to the stack for the Conversant
+ x2=QStackSize
+ sub x2,c2
+.ClearQStack1
+code +
+ &List4(x1)=c0
+code -
+ add x1,c2
+ sub x2,c2
+ if x2<32000 then ClearQStack1
+;
+.alreadyrevealed
+ return
+code +
+;---
+.SetActorACB
+; return ACBHeader for ACTOR
+ v1=Actor
+ gosub @SetV1ACB
+ ACBHeader=v1
+ return
+;---
+.GetActorFromACB
+; return actor for acbheader
+ v1=acbheader
+ gosub @SetV1Actor
+ actor=v1
+ return
+;---
+.SetV1Actor
+; return v1=object/actor for header v1
+ asr v1
+ asr v1
+ asr v1
+ asr v1
+ asr v1
+ asr v1
+ return
+;---
+.SetV1ACB
+; return v1=header for object/actor v1
+ add v1,v1
+ add v1,v1
+ add v1,v1
+ add v1,v1
+ add v1,v1
+ add v1,v1
+ return
+;---
+.HiresGo
+; ACTOR is going to leave current room in direction Dir,
+; from it's current position of ActorX,ActorZ,ActorH
+; So find the destination (i.e. the coords of the exit)
+; ACBList(ACBHeader) is acb for Actor
+; find out what the coordinates of this exit are...
+; *8...
+ graphicsdir=dir
+ goto @GraphicsHiresGo
+;---
+; Face another person or object (noun1) without actually moving.
+; Only works in displayed room...
+.FaceNoun1
+ if room<>currentuserroom then @facenoun1ret
+;
+ x1=ACBStatus
+ add x1,ACBHeader
+ x1=ACBList(x1)
+ if x1=ACBAscending then @FaceNoun1ret
+ if x1=ACBDescending then @FaceNoun1ret
+ if x1=ACBPushedAway then @FaceNoun1ret ; special cases
+ &ObjectNumber=ACBList(ACBHeader)
+ gosub @IsObjectSittingVEC
+ if result=true then @FaceNoun1Ret ; don't face someone if sitting
+;
+ object=noun1
+ gosub @getobjectposx2 ; x4 is returned as the last object in the 
+; containment chain that touches the ground
+ v1=x4 
+;
+ gosub @SetV1ACB
+ v2=14
+ add v2,v1
+ &dir=Hires(v2)
+ if dir=0 then CalcFacingDir
+ if dir<8 then @FaceNoun1Go ; object contains direction to face
+.CalcFacingDir
+ v2=2
+ add v2,v1
+ &DestX=Hires(v2)
+ add v2,c2
+ &DestZ=Hires(v2) ; get hires x,z of object/npc
+ v1=ACBxOffset
+ add v1,ACBHeader
+ &GoalNowX=ACBList(v1)
+ add v1,c2
+ &GoalNowZ=ACBList(v1) ; get our x,z
+;
+ x1=DestX
+ sub x1,GoalNowX ; x1 +ve=distance east, -ve=distance west
+ x2=x1
+ dir=3 ; e
+ if x1<32768 then absxdist
+ x1=0
+ sub x1,x2 ; get abs xdist
+ dir=7 ; w
+.absxdist
+;
+ x3=DestZ
+ sub x3,GoalNowZ ; x3 +ve=distance south, -ve=distance north
+ x2=x3
+ x4=5 ; s
+ if x3<32768 then abszdist
+ x3=0
+ sub x3,x2 ; get abs zdist
+ x4=1 ; n
+.abszdist
+;
+; face NS or EW, depending on which is furthest away...
+ if x1>x3 then FaceNoun1Go ; face EW
+ dir=x4 ; face NS
+.FaceNoun1Go
+;
+ gosub @GetStandingAniDv1
+ add dv1,dir
+ dx4=ACBHeader
+ gosub @AlterACB
+.FaceNoun1Ret
+ goto @EPtrue
+;---
+; Find a chair in this room and return it in Noun1
+; result=false if couldn't find a chair!
+.FindChair ; return noun1 as a chair
+ &v1=List4(60) ; table of sit-able objects
+.fc1
+ v2=list4(v1)
+ if v2=0 then @cantfindchair
+ v3=currentpos(v2)
+ if v3<>room then @trynextchair ; chair not in room
+ gosub @IsChairV2Vacant
+ if result=false then trynextchair ; chair wasn't vacant
+ noun1=v2
+ return ; chair was vacant
+;
+.trynextchair
+ add v1,c1
+ goto @fc1
+;
+; can't find a chair, so use any chair...
+.cantfindchair
+ result=false
+ return
+;---
+; we've found a chair, but we must make sure nobody else 
+; is sat in it!
+.IsChairV2Vacant
+ result=false
+ &x1=List4(44) ; special room object positions used as flags for npcs
+ add x1,c2 ; entry 0 is null
+ x2=user ; start with npc 1
+.testvacantchair
+ if x2=actor then nexttvc ; us!
+ x3=currentpos(x2) ; npc in this room?
+ if x3<>room then nexttvc
+ x3=list4(x1)
+ if x3=v2 then fcNotOK ; someone sat on it
+.nexttvc
+ add x1,c2
+ add x2,c1
+ if x2<maxnpcplus1 then @testvacantchair
+; okay to use this chair...
+.fcOK
+ noun1=v2
+ result=true
+.fcNotOK
+ return
+;---
+.IntrusionOn
+ gosub IntrusionOnNoSF
+ goto iosf
+.IntrusionOnNoSF
+ gosub getintraddr
+ gosub @GetMessageNumber ; m1=noun1.b*256 + noun2.b=rt address
+ &List4(x1)=m1
+ return
+;---
+.IntrusionOff
+ gosub IntrusionOffNoSF
+.iosf
+ goto @SetCommandFinished
+.IntrusionOffNoSF
+ gosub getintraddr
+ &List4(x1)=c0
+ return
+;---
+; Point x1 to intrusion flag.w for Actor
+.GetIntrAddr
+ &x1=List4(62)
+ x2=actor
+ sub x2,c2 ; table starts with sue (npc #2)
+ add x2,x2 ; word based table
+ add x1,x2
+ return
+;---
+;.debugshowcommand
+;code -
+; print verb
+; prs " "
+; print prep
+; prs " "
+; print noun1
+; prs " "
+; print noun2
+; prs " * "
+;code +
+; return
+;---

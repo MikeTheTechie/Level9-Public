@@ -1,0 +1,3494 @@
+;MENU.txt
+;
+;M.J.Austin Mar 1989./N.W.A.Austin Mar 1989
+;
+;Copyright (C) 1989 Level 9 Computing
+;
+;modified from Adept version
+;
+;Runs as part of strategy task.
+
+const
+ MenuMinY=0
+ MenuHcoord=292
+ MenuZCoord=300
+ MenuSeparate=32 ; 6 character squares per menu
+ MenuHeight=5 ;number of text lines the menu can occupy
+ MenuPixelWidth=63
+ MenuPixelHeight=40
+ MenuFirstX=16
+ MenuSecondX=64
+ MenuThirdX=128
+ MenuFourthX=192
+ MenuFifthX=256
+ MenuNotPCbox=1690
+ MenuPCbox=1691
+ MenuPCwide=1693
+ MenuTextBase=0
+ ObjectsTextOffset=80
+ MaxObjectMessage=209
+ MaxPerson=19 ; 0..19 are people; 20+ are objects
+ MenuVerbs=0
+ MenuThings=32 ;things on ground
+ MenuPeopleNearby=33
+ MenuAllPeople=34
+ MenuOpinionObjects=35
+ MenuInventory=48 ; player's possessions
+ MenuMaxVerb=79 ; maximum message which represents a verb. (TABLE.TXT)
+ MenuMinObject=80 ;=MenuMaxVerb+1
+
+begin
+.Menu
+; called from input task - user has just hit space
+; (or whatever summons the menu)
+; save current status (whatever isn't saved by
+; the normal task swapper)
+code -
+ MActor=User
+ LeftMenuLimit=2
+ RightMenuLimit=8
+ BasicCurrentMenu=8 ; start with people menu
+
+code +
+.MenuReleaseFire
+ gosub @MCosrdchVec ; scan keyboard
+ if v1<>0 then MenuReleaseFire ; key being pressed
+ gosub @ReadJoystickMouseVec ; read joystick/mouse status
+ x1=192
+ and x1,joystickstatus
+ if x1<>0 then MenuReleaseFire ; 'fire'
+
+.MenuBCM
+code -
+ CurrentMenu=BasicCurrentMenu
+ noun1=nullobject
+ menubuild=2 ;force menu-bar and border to appear
+ HighlightedLine=1
+ ABSMenuLine=1
+ FirstLine=1
+
+.DoMenuLoop
+code +
+ &v1=WordWS(WordCursorXPos)
+ push v1
+ &v1=WordWS(WordCursorYPos)
+ push v1
+code -
+.DoMenuInnerLoop
+ gosub @IntelligentKeyscan
+ HiKey=v2
+ if v1<>32 then NotHitSpace
+ HiKey=107 ; space is synonimous to '5' or fire
+.NotHitSpace
+ if CurrentMenu=0 then @ExitMenu
+ gosub @DisplayMenuFrame
+
+; Gradually scroll any text that's off-screen
+code +
+ &crx1=WordWs(WordCursorYPos)
+ if crx1<201 then MDontScroll
+code -
+ gosub @MenuBuildAndDisplay1
+code +
+.MDontScroll
+code -
+
+ gosub @MakeMenuSelection
+ if SelectedLine=0 then @DoMenuInnerLoop
+
+ gosub @HaveChangedMenu ;show text again etc.
+code +
+ pop v1
+ &WordWS(WordCursorYPos)=v1
+ pop v1
+ &WordWS(WordCursorXPos)=v1
+code -
+ LeaveMenu=true
+ gosub @HandleSelection
+ if LeaveMenu=false then @DoMenuLoop
+code +
+ return
+code -
+;---
+; Read the keyboard without clogging up the buffer, and 
+; without losing any keystrokes...
+.IntelligentKeyscan
+ x1=0
+ x2=0
+ x3=5 ; scan 5 times
+.IKSloop
+code +
+ gosub @MCOsrdchvec
+code -
+ if v1=0 then IKSnochar ; no keystroke this time - don't overwrite 
+; previous keystroke
+ x1=v1
+ x2=v2 
+.IKSnochar
+ sub x3,c1
+ if x3>0 then IKSloop
+ v1=x1 ; last key that was actually hit
+ v2=x2
+ return
+;---
+.DisplayMenuFrame
+ SuspendScroll=true
+code +
+ &v1=WordWS(WordCursorXPOs) ;>>mike 14/9/89 5:28pm
+ push v1
+ &v1=WordWS(WordCursorYPOs)
+ push v1
+code -
+ gosub @DisplayCurrentMenu ;(On PC this must do the 'UpdateScreen')
+code +
+cif PC
+ v1=7                      ;1=top window, 7=bottom window
+ gosub @MCenabletextBuffer
+cend
+ pop v1
+ &WordWS(WordCursorYPos)=v1
+ pop v1
+ &WordWS(WordCursorXPos)=v1
+ SuspendScroll=false
+
+cif NotPC
+ gosub @DisplayBackdropVec ; copy text buffer to screen
+ gosub @DisplayFrameVec
+ gosub @WaitForFrameVec
+cend
+cif pc
+ gosub @PlayTuneForScene
+ gosub @MCUpdateScreen
+ gosub @MCUnplotScreen
+cend
+code -
+ return
+;---
+.ExitMenu
+code +
+ pop v1
+ &WordWS(WordCursorYPos)=v1
+ pop v1
+ &WordWS(WordCursorXPos)=v1
+code -
+.DCMend
+ return
+;----
+.DisplayCurrentMenu
+;3 bytes per entry
+;; gosub @SetUpLogicalTextPtr
+cif NotPC
+ if menubuild=0 then dcm
+ sub menubuild,c1
+ gosub @MenuBasicRoom
+.dcm
+cend
+
+cif PC
+ gosub @MenuBasicRoom ;re-build the background
+
+ v1=1                      ;To buffer (similar to Logical, but also
+code +
+ gosub @MCenableTextBuffer ;works in single-screen display modes)
+code -
+
+ dv1=MenuPCwide ; 20x1 white line to obliterate the background
+ dv2=0
+ dv3=300 ;* 200
+ dv4=308 ;* 208 ; only show the bottom half of the cells
+ dv5=1 ; sprite
+ dv6=0 ; non-reversed
+code +
+ gosub @MCdrawObjectDv1
+code -
+
+.dcm
+cend
+cif notpc
+code +
+ gosub @SetUpLogicalTextPtrVec
+code -
+cend
+
+ gosub @DisplayMenuBorder ;menu-bar and graphics
+ gosub @DoFirstMenuLine   ;plot colour-0 area for text
+
+;Always display menu title
+ v1=CurrentMenu
+ add v1,MenuData
+code +
+ &MV0=MenuTable(v1) ;start with verbs table
+code -
+ add MV0,c3 ;get message number offset for this entry
+ v1=MenuTable(MV0)
+;print line v1
+
+ MV2=MenuTextBase ;Offset to menu stuff
+ add v1,MV2       ;..so add it on to entry number
+ CurrentHeading=v1
+cif NotPC ;*************
+ if AutoHiKey<>0 then @DisplayMenuEnd ; don't show menu if we're going to 
+cend ;************
+; escape it left or right
+;
+;print line:message v1
+ ByteWS(ByteInvertFlag)=c1
+ if HighLightedLine=1 then ShowTopMenuLine ;; 30/10/89
+ ByteWS(ByteInvertFlag)=c0 ;; 30/10/89
+.ShowTopMenuLine ;; 30/10/89
+ gosub @GPrint
+.DontShowHeading
+ ByteWS(ByteInvertFlag)=c0
+code +
+ gosub @DoCrVec
+code -
+
+ lines=MenuHeight
+ line=FirstLine
+
+;line 1 is menu-bar header; PrintFullMenu does not
+;display menu-bar, but does updates flags.
+ if line<>1 then notcontinue
+ add lines,c1 ;print menu-bar AND expanded menu
+.notcontinue
+
+ v1=CurrentMenu
+ add v1,MenuData
+code +
+ &MV0=MenuTable(v1) ;start with verbs table
+code -
+
+; GMJ 28/8/89 Find out if the the menu contains a list of verbs or 
+; a single special value to indicate a group of objects. 
+; If it's a VERBS menu, we can start at the data line indicated 
+; by firstline, but if it's an OBJECTS menu, we must always use 
+; the special value given in the second data line...
+ add MV0,c4 ; move data pointer to second menu data line
+ v1=MenuTable(MV0)
+ if v1>120 then MenuIsNotObjects
+ if v1<>Menuverbs then DMVerbs ; Menu is OBJECTS type, so don't move 
+; the data poiner MV0 onto the line specified by firstline
+.MenuIsNotObjects
+ sub MV0,c4 ; Menu is VERBS type, so move the data pointer back to 
+; the first menu data line, so that we can add the offset of the 
+; new data line specified by firstline...
+
+ v1=line ;(Firstline)
+ sub v1,c1
+ add v1,v1
+ add v1,v1 ;*4, because 4 bytes per entry in TABLE.TXT
+ add mv0,v1
+
+.DMVerbs
+ V1=MenuTable(MV0)
+;0       top level menu
+;1-127   OtherMenu
+;128-254 sub menu
+;255     terminator
+ if v1=255 then @DisplayMenuEnd
+ if v1>127 then DMsubMenu ;sub-menu when displayed as a single entry
+ if v1<>MenuVerbs then @DisplayOtherMenu
+.DMsubMenu
+
+ v2=v1 ;Verb/128+sub menu number
+ add MV0,c3 ;get message number offset for this entry
+ v1=MenuTable(MV0)
+
+;=====
+; allow 'use' if object is in 'useable' table
+ if v1<>37 then NotDisableUse ; 37 is USE
+code +
+ &x1=List4(34) ; get start of 'use' verbs table
+code -
+.SearchUseVerb
+ x2=list4(x1) ; get object num to test
+ if x2=0 then DisableMenuLine
+ add x1,c2
+ if x2<>noun1 then SearchUseVerb
+.NotDisableUse
+;
+; allow 'frisk' if we've just searched someone who owns objects
+ if v1<>75 then NotDisableFrisk ; 75 is FRISK
+ if EnableFrisk<>noun1 then DisableMenuLine ; disabled
+.NotDisableFrisk
+;
+; exchange 'open' for 'close' if object is already open
+ if v1<>17 then NotMenuOpen ; 17 is OPEN
+ object=noun1
+code +
+ gosub @IsObjectOpen
+code -
+ if result=false then EnableMenuLine
+ v1=71 ; 70 is 'CLOSE'
+.NotMenuOpen
+;
+; disable "fastmode to murder" if murder already complete
+ if v1<>79 then NotDisableFast ; 79 is "murder"
+code +
+ x1=vmurderbeendone
+code -
+ if x1<>false then DisableMenuLine
+.NotDisableFast
+;=====
+
+.EnableMenuLine
+ gosub @PrintFullMenuLine
+
+.DisableMenuLine
+ add MV0,c1 ;on to next entry
+ goto @DMVerbs
+;---
+.DisplayOtherMenu
+;
+; Clear blank objects menu, ready to be built up
+code +
+ &x1=list4(2)
+code -
+ x2=30 ; menu 30
+ add x1,x2
+code +
+ &x1=List4(x1) ; point to start of menu 30
+code -
+ v1=mv0
+ sub v1,c4
+ v2=MenuTable(v1) ; get first byte from original menu
+ List4(x1)=v2
+ add v1,c3
+ add x1,c3
+ v2=MenuTable(v1) ; get heading from original menu
+ List4(x1)=v2
+ add x1,c1
+code +
+push x1
+code -
+ x3=15
+.ClearObjects
+ x4=255
+ List4(x1)=x4 ; end menu marker
+ add x1,c3
+ List4(x1)=c0 ; erase message
+ add x1,c1
+ sub x3,c1
+ if x3<32000 then ClearObjects
+code +
+pop ObjectMenuPtr
+code -
+;
+;handle other types of menus ... objects etc.
+ line=2
+ lines=menuheight
+;
+; Use "MORE" question
+ if WantMore=false then dontwantmore
+ v1=95 ; "SURE?"
+ if wantmore=2 then SetUpMoreNoun
+ v1=80 ; "MORE..."
+.SetUpMoreNoun
+ v2=0 ;Do not store a sub-menu code
+; gosub @PrintFullMenuLine
+ x1=ObjectMenuPtr
+ gosub @InsertMenuLineV1
+ ObjectMenuPtr=x1
+.dontwantmore
+;
+ searchpos=Mactor ; Allow INV of NPCs
+ hisearchpos=nonspecific
+ v1=MenuTable(MV0)
+ if v1=MenuInventory then DMPrintObjects
+ searchpos=currentUserRoom
+ hisearchpos=0
+;
+.DMPrintObjects
+;
+; List IMPORTANT objects - those with altered opinions or notes 
+; specific to this murder
+;
+ object=1 ; skip user
+.DMPO1o
+ add object,c1
+;
+; If we're asking someone's opinion on Object, then give priority
+; if it has an ALTERED opinion
+; (Can't check opinions in PEOPLE menu, as we don't know whose opinions 
+; we're asking about)
+ if CurrentMenu=36 then DMPO1oAskOpinion
+ if CurrentMenu<>38 then DMPO1oNotAskOpinion
+.DMPO1oAskOpinion
+ noun1=object
+ gosub @GetNoun1Opinion
+ if result=false then DMPO1oNoOpinion
+ goto DMPO1oOpinion
+;
+; if we're not asking someone's opinion on Object, then 
+; give priority if it has a special NOTE value
+.DMPO1oNotAskOpinion
+ gosub @IsObjectSignificant
+ if result=false then DMPO1oNoOpinion
+;
+.DMPO1oOpinion
+ gosub DMPO11
+.DMPO1oNoOpinion
+ if Object<MaxObjectVisible then DMPO1o
+;
+; List UNIMPORTANT objects - those without altered opinions or notes 
+; specific to this murder
+ object=1 ; skip user
+.DMPO1oo
+ add object,c1
+;
+; (see above)
+ if CurrentMenu=36 then DMPO1ooAskOpinion
+ if CurrentMenu<>38 then DMPO1ooNotAskOpinion
+.DMPO1ooAskOpinion
+ noun1=object
+ gosub @GetNoun1Opinion
+ if result=true then DMPO1ooNoOpinion
+ goto DMPO1ooOpinion
+;
+.DMPO1ooNotAskOpinion
+ gosub @IsObjectSignificant
+ if result=true then DMPO1ooNoOpinion
+;
+.DMPO1ooOpinion
+ gosub DMPO11
+.DMPO1ooNoOpinion
+ if Object<MaxObjectVisible then DMPO1oo
+;
+; show sam at bottom of menu
+ if currentmenu=60 then dontshowsamonmenu ; but not in FOLLOW menu
+ object=user
+ gosub DMPO11
+.dontshowsamonmenu
+;
+ CurrentMenu=30 ; show menu that's just been built...
+;
+; that's all the people and objects listed!
+.DMPOEnd
+.DisplayMenuEnd
+ NumEntries=Line
+ SUB NumEntries,c1
+ return
+;---
+.DMPO11
+;
+; All people in the game
+ v1=MenuTable(MV0)
+ if v1<>MenuAllPeople then NotAllPeople
+ pos=currentpos(object)
+ if pos=3 then DMPO11ret ; not yet arrived
+ if pos<>0 then @DMPO2 ; person is alive
+.DMPO11ret
+ return
+.NotAllPeople
+
+; All object on ground & carried by user
+ v1=MenuTable(MV0)
+ if v1<>MenuOpinionObjects then NotAllObjects
+ pos=searchpos
+ hipos=hisearchpos
+code +
+ gosub @checkobjectpos
+code -
+ if result=true then OkAllObjects ; ok - on ground
+ x1=hicurrentpos(object)
+ if x1=0 then @dmpo1ret
+ x1=currentpos(object)
+ if x1<>user then @dmpo1ret ; not carried by user
+.OkAllObjects
+ if Object>MaxPerson then @DMPO4
+ return
+.NotAllObjects
+
+ pos=searchpos
+ hipos=hisearchpos
+code +
+ gosub @checkobjectpos
+code -
+ if result=false then @dmpo1ret
+ v1=MenuTable(MV0)
+ if v1=MenuInventory then DMPO4    ;objects carried
+ if v1=MenuThings then DMPO3       ;objects in CurrentUserRoom
+ if v1=MenuPeopleNearby then DMPO2 ;people  in CurrentUserRoom
+.DMPO1ret                          ;no people/objects
+ return
+
+.DMPO2 ;list people in current room
+ if Object>MaxPerson then DMPO1ret
+ goto DMPO4
+
+.DMPO3 ;list objects in current room
+ v1=hicurrentpos(object) ; a contained item must be revealed on
+ if v1<>0 then DMPO1ret ; examining its container (e.g. a person)
+ if Object>MaxPerson then DMPO4
+ return
+
+.DMPO4
+ v1=ObjectsTextOffset
+ add v1,object
+ if v1>MaxObjectMessage then @DMPO4ret ;prevent out-of range messages
+ v2=0 ;Do not store a sub-menu code
+;
+; gosub @PrintFullMenuLine
+ x1=ObjectMenuPtr
+ gosub @InsertMenuLineV1
+ ObjectMenuPtr=x1
+;
+.DMPO4ret
+ return
+;--
+;cif PC
+;.ClearPCtextLine ;(v2=width)
+; if v2=0 then CL1
+; v1=32 ;space
+;code +
+; gosub @MCOSWRCHV1
+;code -
+; sub v2,c1
+; goto @ClearPCtextLine
+;.CL1
+; return
+;cend
+;---
+; emulate keypad with joystickstatus
+.EmulateKeypad
+ HiKey=0
+ if joystickstatus=0 then MNotMovedJoystick
+ if joystickstatus<>1 then MJnotUP
+ HiKey=104
+.MJNotUp
+ if joystickstatus<>2 then MJnotDOWN
+ HiKey=110
+.MJNotDOWN
+ if joystickstatus<>4 then MJnotLEFT
+ HiKey=106
+.MJNotLEFT
+ if joystickstatus<>8 then MJnotRIGHT
+ HiKey=108
+.MJNotRIGHT
+ x1=192
+code +
+ and x1,joystickstatus
+code -
+ if x1=0 then MNotMovedJoystick
+ HiKey=107
+.MNotMovedJoystick
+ return
+;---
+.KBDHandler
+;
+; read joystick/mouse into JoystickStatus and emulate keyboard to 
+; make things compatible with keyboard handler (this saves a lot of 
+; code and makes life easier with things like "AutoHiKey" - see 
+; below)
+cif NotPC
+ minmousePOS=48 ; distance mouse must move to register
+ minmouseNEG=65488
+code +
+ gosub @ReadJoystickMouseVec
+code -
+; On exit, result=1 for joystick, 2 for mouse, 0 neither
+ if result=0 then nomjconvert
+ gosub @EmulateKeypad ; emulate keypad with joystick/mouse
+; release fire...
+.MRF1
+ x1=192
+code +
+ and x1,joystickstatus
+code -
+ if x1=0 then nomjconvert
+code +
+ gosub @ReadJoystickMouseVec
+code -
+ goto MRF1
+.nomjconvert
+;
+ if result<>1 then nojoydelay
+ gosub @Joystickdelay ; delay for joystick
+.nojoydelay
+cend
+;
+;now keyboard type handler...
+; GMJ 07/02/90
+; If hit right on a single menu (left and right boundaries equal), 
+; then treat as clicking the top bar. We must do this to quit 
+; conversation, which is done in a nested GOSUB loop which 
+; calls "Response" and "Ask about" menus separately.
+ if AutohiKey=0 then NoAutoLR
+ HiKey=AutoHiKey
+ AutohiKey=0
+.NoAutoLR
+ x1=RightMenuLimit
+ add x1,c2
+ if x1<>LeftMenuLimit then NotLRescape
+.LRescape1
+ if HiKey=108 then LRescape
+ if HiKey<>106 then NotLRescape
+.LRescape
+ AutohiKey=HiKey ; simulate the L/R keypress next turn
+ HighLightedLine=1
+ SelectedLine=HighlightedLine
+ return
+.NotLRescape
+; GMJ 07/02/90
+
+ if HiKey<>104 then NotUp
+ if HighlightedLine=1 then NotUp
+ sub HighLightedLine,c1
+ return
+
+.NotUp
+ if HiKey<>110 then NotDown
+ if HighlightedLine=NumEntries then NotDown
+ add HighLightedLine,c1
+ return
+
+.NotDown
+ if HiKey<>108 then @NotRight
+ if LeftMargin=MenuFifthX then @NotRight
+ if BasicCurrentMenu>RightMenuLimit then @NotRight
+; if CurrentMenu>RightMenuLimit then @NotRight
+ x1=MenuSeparate ;6 character squares per menu
+ add BasicCurrentMenu,c2
+ CurrentMenu=BasicCurrentMenu
+.HaveChangedMenu
+ HighlightedLine=1
+ FirstLine=1
+;display background to erase menus
+ menubuild=2
+ return
+;-------
+.MenuBasicRoom
+;Display background+Sprites only
+cif PC
+code +
+ gosub @MCPlotLogicalScreen
+code -
+cend
+
+.MenuBasicRoomNoPL
+code +
+ &v1=WordWS(WordCursorXPos) ;Save TEXT cursor
+ push v1
+ &v1=WordWS(WordCursorYPos)
+ push v1
+
+ gosub @MCDisplayRoomvec
+ gosub @SortAndDisplayObjects
+code -
+
+cif pc ;>>mike 13/9/89
+ gosub @MenuBasicRoomPC
+ gosub @CursorTopLeft ;initialise 'LeftMargin'
+ dv1=MenuPCbox ;4x3 cell blank
+ dv2=LeftMargin ; >>mike 14/9/89
+ dv3=MenuZCoord
+ dv4=MenuHCoord
+ dv5=1 ;plot as sprite
+ dv6=0 ;non-reversed
+ sub dv2,c2 ; align the sprite in the right place
+code +
+ gosub @MCDrawObjectDV1
+
+ push lines                ;Sprites cannot set all bitplanes to zero.
+                           ;Text printing only alters one bit plane.
+                           ;Use a sprite to clear three bitplanes then
+                           ;print a space to clear the fourth.
+
+ v1=1                      ;To buffer (similar to Logical, but also
+ gosub @MCenableTextBuffer ;works in single-screen display modes)
+code -
+ lines=6
+.ClearMenuBox
+ if lines=0 then BoxCleared
+ v1=0 ; all-blank, 8 characters wide
+ gosub @PrintLineV1 ;print line:message v1
+ sub lines,c1
+ goto ClearMenuBox
+.BoxCleared
+ code +
+ pop lines
+ code -
+cend ; PC
+
+code +
+ pop v1
+ &WordWS(WordCursorYPos)=v1 ;Restore TEXT cursor
+ pop v1
+ &WordWS(WordCursorXPos)=v1
+code -
+ return
+;----
+;On PC all calls to MenuBasicRoom must be followed by MenuBasicRoomPC
+cif PC
+.MenuBasicRoomPC
+; dv1=499 ; object to set up change maps
+; dv2=0
+; dv3=0
+; dv4=0
+; dv5=1 ;plot as sprite
+; dv6=0 ;non-reversed
+;code +
+; gosub @MCDrawObjectDV1 ;put on border
+;code -
+.MenuBasicRoomPC2
+ return
+cend
+;---
+.NotRight
+ if HiKey<>106 then NotLeft
+ if LeftMargin=MenuFirstX then NotLeft
+ if BasicCurrentMenu=LeftMenuLimit then NotLeft
+; if CurrentMenu=LeftMenuLimit then NotLeft
+ x1=MenuSeparate ;6 character squares per menu
+ sub BasicCurrentMenu,c2
+ CurrentMenu=BasicCurrentMenu
+ goto @HaveChangedMenu
+
+.NotLeft
+ if HiKey<>107 then NotFire
+ SelectedLine=HighlightedLine
+
+.NotFire
+ return
+;---
+.MakeMenuSelection
+ SelectedLine=0
+ gosub @KBDHandler
+ ABSMenuLine=HighLightedLine
+
+; GMJ 31/8/89 - Reset HighlightedMessage to top bar if we're 
+; at the top of the menu.
+; (this used to cause bugs because the first menu entry 
+; was retained in HighlightedMessage after moving back to the top 
+; of the menu)
+ if HighlightedLine<>1 then NotAtTopOfMenu
+ HighlightedMessage=CurrentHeading
+.NotAtTopOfMenu
+
+;check if we need to scroll the window
+ if HighlightedLine<FirstLine then MMSmoveTop
+ goto MMSTopOk
+.MMSmoveTop
+
+ if FirstLine=0 then MMSTopOk ;prevent FirstLine going negative
+ sub FirstLine,c1
+;;not for mouse. goto @MMSEnd ;check again for large movements up or down
+
+.MMSTopOk
+ x1=MenuHeight
+ add x1,FirstLine ;first line NOT displayed
+ if HighlightedLine<x1 then MMSBottomOk
+ if HighlightedLine>32768 then MMSBottomOk ;exclude negative
+ sub x1,c1
+ if x1=NumEntries then MMSBottomOk
+ if x1>NumEntries then MMSBottomOk
+ add FirstLine,c1
+;;not for mouse. goto MMSTopOk
+
+.MMSBottomOk
+ if SelectedLine=0 then @MMSNoSelection
+
+code +
+push highlightedline
+code -
+ highlightedline=255
+ gosub @DisplayMenuFrame ; no highlight
+code +
+pop highlightedline
+code -
+ gosub @DisplayMenuFrame ; highlight
+
+;what do we do with SelectedLine?
+;what type of entry was it?
+;i.e. verb or noun?
+;HighlightedMessage is the message number printed
+;in inverse video - i.e. the current selection.
+
+ if HighlightedVerb<128 then @MMSchangeLevel
+ CurrentMenu=HighlightedVerb
+ v2=128
+ sub CurrentMenu,v2
+ add CurrentMenu,CurrentMenu
+ gosub @HaveChangedMenu * tidy junk etc.
+ SelectedLine=0
+ return
+
+.MMSchangeLevel
+; Highlightedverb=0 if an object was selected
+ if HighlightedMessage>MenuMaxVerb then MenuObject ;get a new menu
+;giving possible verbs.
+ return ;a verb - act on it, exit menu.
+
+.MMSGotSelection
+ HighlightedMessage=BasicCurrentMenu
+ SelectedLine=1
+ return
+
+.MenuObject
+; silly way of working out which menu we're using!
+
+;=====
+; Extra code to allow us to choose the verb (menu's 36 & 38 are ask 
+; about object and person) and THEN the object, rather than 
+; the other way around, as we normally would do...
+ if basiccurrentmenu=60 then extraverbmenu ; 60 is FIND PERSON
+ if BasicCurrentMenu=16 then ExtraVerbMenu ; 16 is containments for PUT IN
+ if BasicCurrentMenu=62 then ExtraVerbMenu ; 62 is analyse menu
+ if BasicCurrentMenu<36 then NotExtraVerbMenu
+ if BasicCurrentMenu>38 then NotExtraVerbMenu
+.ExtraVerbMenu
+ v1=HighlightedMessage
+ v2=MenuMinObject
+ sub v1,v2
+;v1 is object number
+ Noun1=v1
+ goto @MMSGotSelection
+;
+.NotExtraVerbMenu
+ if BasicCurrentMenu>12 then MMSGotSelection ; (PREVIOUS CODE)
+;=====
+
+ v1=HighlightedMessage
+ v2=MenuMinObject
+ sub v1,v2
+;v1 is object number
+ Noun1=v1
+ v2=v1
+ v2=HicurrentPos(v2) ;v2:= method of containment
+ add v1,v1
+ add v1,v1 ;*4 to give offset of object in NounVerbTable
+ add v1,NounVerbTable
+ x1=v1 ; save v1
+;how is it carried?
+ if v2=0 then MO2 ; on ground
+ add v1,c1
+ if v2=Carried then MO2a
+ add v1,c1
+ if v2=Worn then MO2a
+ v1=x1 ; GMJ 31/8/89 use 'on ground' for nonspecific positions 
+; or where an object is contained by another object
+ goto MO2
+;
+; GMJ 31/8/89 - if object is contained by npc, then use 
+; the fourth verb group
+.MO2a
+ x2=currentpos(noun1)
+ if x2=user then MO2 ; contained by user
+; object is contained by an npc...
+ v1=x1
+ add v1,c3
+;
+.MO2
+; list4(v1) is the number of the menu to use to get the verb.
+ CurrentMenu=list4(v1)
+.MO3
+ gosub @HaveChangedMenu * tidy junk etc.
+ SelectedLine=0
+
+.MMSNoSelection
+ return
+;-
+.JoystickDelay
+;stop joystick movements being too rapid
+ Value=IBMFrameLimit
+ add value,c1
+code +
+ gosub @valuetimes256
+code -
+ RepeatCount=0
+.JD1
+ add RepeatCount,c1
+ x1=10
+.JD2
+ sub x1,c1
+ if x1<32000 then JD2
+ if RepeatCount<Value then JD1
+ return
+;---
+;Routine which prints a line of text number v1
+;The co-ordinates are not handled by this routine
+.GPrint
+;Takes V1 as entry number, 
+
+ Add V1,V1 ;double V1 for table use
+ Add V1,MenuText ;Add message Number to MV0
+code +
+ &MV1=MenuTable(V1) ;this should now hold the start of the message
+code -
+
+.GPrint1
+ V1=Menutable(MV1)               ;V1 is char used by OSWRCH
+ If V1=0 then EndGPrint          ;Is it end of line?
+code +
+ gosub @MCOSWRCHV1vec
+code -
+ Add MV1,c1
+ goto GPrint1
+
+.EndGPrint
+ Return
+;------
+.PrintFullMenuLine
+;print line v1
+ MV2=MenuTextBase ;Offset to menu stuff
+ add v1,MV2       ;..so add it on to entry number
+ if line<Firstline then DisplayMenu1 ;; GMJ 24/8/89
+ if lines=0 then DisplayMenu1 ;off bottom of menu - don't show it,
+ sub lines,c1                  ;but still count it to allow scrolling.
+; if AutoHiKey<>0 then DisplayMenu1 ; don't show menu if we're going to 
+;; escape it left or right
+ gosub @PrintLineV1 ;handles highlighted line etc.
+.DisplayMenu1
+ add line,c1
+ return
+;---
+.PrintLineV1
+;print line:message v1
+ ByteWS(ByteInvertFlag)=c0
+ if Line<>HighLightedLine then PMMV1
+ ByteWS(ByteInvertFlag)=c1 ;set up mc to print inverted text
+ HighlightedMessage=v1
+ HighlightedVerb=v2
+
+.PMMV1
+ if line=1 then PMMV2 ;Do not re-display menu-bar
+
+code +
+ &v2=WordWS(WordCursorYPos) ;Printing in column 39 calls 'HandleCR'
+ push v2
+code -
+ gosub @GPrint
+code +
+ pop v2
+ &WordWS(WordCursorYPos)=v2
+
+ gosub @DoCrVec
+code -
+.PMMV2
+ ByteWS(ByteInvertFlag)=c0
+ return
+;---
+.CursorTopLeft
+ gosub CalcLeftMargin
+ TopMargin=MenuMinY
+code +
+ &WordWs(WordCursorXPos)=LeftMargin
+ &WordWs(WordCursorYPos)=TopMargin
+code -
+ return
+;---
+.CalcLeftMargin
+ if BasicCurrentmenu=14 then CLM1 ; notebook menu
+ if BASICcurrentMenu=60 then CLM1
+ if BasicCurrentMenu<>2 then NotGame
+.CLM1
+ LeftMargin=MenuFirstX
+ return
+.NotGame
+ if BasicCurrentMenu=16 then CLM2
+ if BasicCurrentMenu<>4 then NotInv
+.CLM2
+ LeftMargin=MenuSecondX
+ return
+.NotInv
+ if BasicCurrentMenu<>6 then NotThings
+.CLM3
+ LeftMargin=MenuThirdX
+ return
+.NotThings
+ if BasicCurrentMenu=62 then CLM4 ; analyse menu
+ if BasicCurrentMenu<36 then CLM31
+ if BasicCurrentMenu<44 then CLM4
+.CLM31
+ if BasicCurrentMenu<>8 then NotPeople
+.CLM4
+ LeftMargin=MenuFourthX
+ return
+.NotPeople
+ if BasicCurrentMenu<>10 then NotSystem
+ LeftMargin=MenuFifthX
+ return
+.NotSystem
+ return
+;-----
+.DisplayMenuBorder ;menu-bar and graphics
+code +
+ &WordWs(WordCursorXPos)=c0
+ &WordWs(WordCursorYPos)=c0
+ ByteWS(ByteInvertFlag)=c0
+code -
+
+cif NotPC
+;ST: ensure screen is logical colour 0 before printing text.
+ v1=319 ;screen-wide
+ v2=8   ;one-char high
+code +
+ gosub @MCClearRectangleVec ;On ST and Amiga text is a single bit-plane
+code -
+cend
+
+ gosub @CursorTopLeft ;initialise 'LeftMargin'
+
+cif NotPC
+ dv1=MenuNotPCbox ;42x68 border
+ dv2=LeftMargin ;X
+ sub dv2,c2 ;width of border
+ dv3=MenuZCoord
+ dv4=MenuHCoord
+ dv5=1 ;plot as sprite
+ dv6=0 ;non-reversed
+code +
+ gosub @MCDrawObjectDV1
+code -
+cend
+
+code +
+ push LeftMargin
+ v3=BasicCurrentMenu
+ push v3
+code -
+ BasicCurrentMenu=2
+
+.DMB1
+ if BasicCurrentMenu=v3 then @DMB2
+ gosub @CalcLeftMargin
+ v1=BasicCurrentMenu
+ v2=LeftMargin
+
+;v1=index, v2=pixel x
+code +
+ &WordWs(WordCursorXPos)=v2
+ &WordWs(WordCursorYPos)=c0
+
+ add v1,MenuData
+ &MV0=MenuTable(v1) ;start with verbs table
+code -
+ add MV0,c3 ;get message number offset for this entry
+ v1=MenuTable(MV0)
+
+ MV2=MenuTextBase ;Offset to menu stuff
+ add v1,MV2       ;..so add it on to entry number
+ ByteWS(ByteInvertFlag)=c0
+ gosub @GPrint
+
+.DMB2
+ add BasicCurrentMenu,c2
+ if BasicCurrentMenu<12 then @DMB1
+
+code +
+ pop BasicCurrentMenu
+ pop LeftMargin
+ &WordWs(WordCursorXPos)=LeftMargin
+code -
+ return
+;---
+.DoFirstMenuLine ;plot colour-0 area for text
+cif NotPC
+ v1=MenuPixelWidth ;x size
+ v2=MenuPixelHeight ;y size
+code +
+ &WordWs(WordCursorYPos)=c8
+ gosub @MCClearRectanglevec
+code -
+cend
+ gosub @CursorTopLeft ;initialise 'LeftMargin'
+ Line=1 ;Back is first line, 2 is first generated one.
+ return
+;---
+.HandleSelection
+;HighlightedMessage is the message number (in table.txt)
+;which was selected by the user. We know it's a verb -
+;because nouns always generate a new menu to select
+;the corresponding verb.
+;So act on it suitably!
+ wantmore=false ; cancel "more" option
+ v1=HighlightedMessage ; int mode cannot access HighlightedMessage
+ LeftMargin=0 ; any text for reply will now scroll properly.
+;
+; Allow player to leave menu by clicking on heading...
+ if ABSMenuLine>1 then OkDoSelect
+;=====
+; For certain menus (e.g. Response) it is neccessary that 
+; a selection is made, since the verb has already been chosen. 
+; Therefore, we must prevent the player from leaving them by 
+; clicking on the heading...
+ if v1<>36 then OkToLeaveMenu ; not clicked response bar
+ v1=40 ; Bye
+ HighLightedMessage=40
+ goto @OkDoSelect
+;=====
+ gosub @ToBasic
+.OkToLeaveMenu
+ goto @HandleSelectionEnd
+;
+.OkDoSelect
+;
+; Stop hiding if we want to access an object
+ if noun1=NullObject then MenuNotHiding
+ if PlayerHidden=false then MenuNotHiding
+ PlayerHidden=false
+ dv1=2015 ; stand south
+code +
+ &Hires(ACBHeader)=dv1 ; set hires objectnumber
+push v1
+ dx4=ACBHeader
+ gosub @AlterACB
+code -
+ gosub @MenuBuildAndDisplay ; just a buildanddisplayframe to show 
+; us get out
+code +
+pop v1
+code -
+.MenuNotHiding
+;
+ actor=user ; failsafe
+ room=currentuserroom
+ gosub DoJumpTable
+ actor=user ; failsafe
+ goto @AfterAcodeFn ;back to mc, leave menu system
+
+.DoJumpTable
+ sub v1,c1
+ if v1>32000 then DJTRet ;was zero (or maybe large)
+ noun2=Nullobject
+ object=noun1
+ prep=0
+;noun1 was set up if appropriate
+ jump @JumpTable v1 ;dummy comment
+.DJTRet
+ return
+
+.JumpTable
+ data @Null,@Oops,@RamSave,@RamLoad,@Save ; 1-5
+ data @Load,@MenuDebug,@AcodeQuit,@Null,@PutIn ; 6-10
+ data @MenuFast,@MenuSlow,@ToBasic,@ToBasic,@ToBasic ; 11-15
+ data @Null,@MenuOpen,@MenuTake,@MenuDrop,@MenuExamine ; 16-20
+ data @talk,@MenuACCUSE,@MenuSearch,@MenuWaitPerson,@null ; 21-25
+ data @Remove,@ToBasic,@WriteNote,@ReadNote,@NoteObject ; 26-30
+ data @menuScore,@menuRestart,@menugoto,@Null,@Null ; 31-35
+ data @AskAbout,@MenuUse,@AskAbout,@MenuSit ; 36-39
+ data @Response,@Response,@Response,@Response,@Response ; 40-44
+ data @Response,@Response,@Response,@Response,@Response ; 45-49
+ data @Response,@Response,@Response,@Response,@Response ; 50-54
+ data @Response,@Response,@Response,@Response,@Response ; 55-59
+ data @MenuFindWho,@Response,@AnalyseMenu,@Response ; 60-63
+ data @Response,@Response,@Response,@Response,@Response,@Response ; 64-69
+ data @PutOn,@MenuClose,@ShortSkip,@MenuHide,@MenuTx,@MenuFrisk ; 70-75
+ data @MenuFind,@null,@null,@LongSkip,@null,@null,@null ; 76-82
+
+.Remove
+.Oops
+.Null
+ return
+
+.MenuDebug
+code +
+ xor Menudebugmode,c1
+code -
+ return
+
+; do a fastmode for 10 mins game time
+.ShortSkip
+ SamUnconcious=3 ; use "knocked out" mechanism
+ return
+
+; do a fastmode until the murder is complete
+.LongSkip
+ SamUnconcious=2 ; use "knocked out" mechanism
+ return
+
+; wait for a person
+.MenuWaitPerson
+ verb=iwaitforperson
+ gosub MenuFindOrWait ; use menufind, which does a wait if the verb 
+; has been set up correctly
+ return
+
+; this throws up a sub-menu of people in the game
+.MenuFind
+ verb=ifollow
+.MenuFindOrWait
+code +
+push basiccurrentmenu
+code -
+ BasicCurrentMenu=60 ; 'find person' menu
+ gosub @NestedMenu
+code +
+pop basiccurrentmenu
+code -
+ return
+
+; this is called when a person is selected from 
+; the 'find' sub-menu
+.MenuFindWho
+ if noun1<2 then MenuCantFind
+ if noun1>MaxNpc then MenuCantFind
+code +
+ gosub @stopfollowing
+code -
+ if verb=iwaitforperson then MenuCantFind ; treat as a 'wait for person'
+ verb=ifollow ; treat as a 'follow'
+;
+; teleport to person?
+;;cif DebugCheat
+ if menudebugmode=0 then NoTeleport
+ currentuserroom=currentpos(noun1)
+ currentpos(user)=currentuserroom
+ room=currentuserroom
+ actor=user
+code +
+ gosub @DisplayRoomVEC
+code -
+ verb=0
+.NoTeleport
+;;cend
+;
+.MenucantFind
+ return
+
+.MenuSlow
+ if IBMframelimit>4 then ShowSpeed
+ add IBMframelimit,c1
+ GOTO ShowSpeed
+;
+.MenuFast
+ if IBMframelimit<1 then ShowSpeed
+ sub IBMframelimit,c1
+.ShowSpeed
+ x1=5
+ sub x1,IBMFrameLimit
+ message cr
+ message 2861 ; speed
+ print x1
+ message dot
+ return
+
+.MenuTx
+ message cr
+ if normaldescriptionmode=iBRIEF then TextVerbose
+ normaldescriptionmode=iBRIEF
+ message 2862 ; brief
+ goto MTextRet
+;
+.TextVerbose
+ normaldescriptionmode=iVERBOSE
+ message 2863 ; verbose
+.MTextRet
+ descriptionmode=normaldescriptionmode
+ message 2864 ; text
+ return
+
+.MenuSit
+ verb=isit
+ return
+
+.MenuHide
+ verb=ihide
+ return
+
+.MenuOpen
+ verb=iopen
+ return
+
+.MenuClose
+ verb=iclose
+ return
+
+.PutOn
+ gosub @PutIn
+ prep=ipON
+ return
+
+.PutIn
+code +
+push noun1
+code -
+; select noun1 as the containment
+ BasicCurrentMenu=16 ; CARRIED menu
+ LeftMenuLimit=16
+ RightMenuLimit=14
+code +
+ gosub @MenuBCM
+ noun2=noun1 ; noun2 is the containment
+pop noun1 ; noun1 is the container
+code -
+ if noun2=nullobject then PutInNoNoun2
+ verb=iput
+ prep=ipIN
+ gosub PutNoun2PrepNoun1 ; can we put noun2 in/on noun1?
+ if result=true then PutInNoNoun2 ; ok
+ verb=0 ; clear the command
+.PutInNoNoun2
+ return
+
+; Can we put noun2 in/on noun1?
+.PutNoun2PrepNoun1
+;
+;=====
+; Can we put noun2 on a table or bed?
+;
+; should we hang it up?
+ if noun2=pinnafore then NotHangUp  ; don't hang pinnafore up,
+ if noun2<minclothes then NotHangUp ; but hang all other clothes
+ if noun2>maxclothes then NotHangUp ; up.
+.HangUpType
+ m1=2843 ; sam should hang that up
+ if noun1=bed then CantPutM1
+ if noun1=Ntable then CantPutM1
+ if noun1=shelves then CantPutM1
+.NotHangUp
+;
+; is it too big to fit on table correctly
+; get size in cells of noun2
+ if noun2=shotgun then PutOk1 ; GMJ 10jul90 - shotgun OK on table
+ if noun1=shelves then putontable
+ if noun1<>Ntable then PutOk1
+.putontable
+ v1=Noun2
+code +
+ gosub @SetV1ACB
+ &ObjectNumber=Hires(v1)
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=c0
+push v1
+ gosub @FindAndDecode ; get ysize of containment
+pop v1
+code -
+ m1=2866 ; don't clutter the table up with big things
+ if xsize>1 then CantPutM1
+ if ysize>1 then CantPutM1
+;=====
+;
+.PutOk1
+ result=true
+ return
+.CantPutm1
+ message cr
+ message m1 ; can't put that there
+ message dot
+ result=false
+ return
+
+.AcodeQuit
+code +
+ goto @CloseDownVec
+code -
+
+.MenuRestart
+code +
+ SubGame=6
+code -
+ return
+
+.ToBasic
+.CToBasic
+ CurrentMenu=BasicCurrentMenu
+ LeaveMenu=false ;go back to menuing system
+ return
+
+; USE noun1
+.MenuUse
+code +
+ &x1=List4(34) ; get start of 'use' verbs table
+code -
+.SearchUseVerb1
+ x2=list4(x1) ; get object num to test
+ if x2=0 then CantUse
+ add x1,c1
+ x3=list4(x1) ; get verb to use
+ add x1,c1
+ if x2<>noun1 then SearchUseVerb1
+; x3 is the 'use' verb for this object
+ verb=x3
+ return
+.cantuse
+ message 2826 ; Sam couldn't find a use for that
+ return
+
+.MenuSearch
+ if object=user then @MenuExamine ; player posessions listed in 'CARRIED'
+ prep=1 ; code to set "frisk" flag when examine is activated
+; fall through to examine...
+; do a GD find before examining/searching object
+.MenuExamine
+ verb=iexamine
+ return
+
+.MenuFrisk
+; Show objects menu for items owned by other people...
+ verb=0
+ BasicCurrentMenu=4
+ LeftMenuLimit=4
+ RightMenuLimit=2
+ Mactor=noun1 ; show inventory of NPC
+code +
+ gosub @MenuBCM ; choose an object and examine it or note it down etc.
+code -
+ Mactor=user ; restore actor
+ return
+
+.MenuTake
+ verb=itake
+ return
+
+.menugoto
+code +
+ gosub @stopfollowing
+code -
+ verb=igdfind
+ return
+
+.MenuDrop
+ verb=idrop
+ return
+
+.AfterAcodeFn
+.HandleSelectionEnd
+ return
+;---
+.npcsaid
+ message space
+ message cr
+ x1=conversant
+code +
+ gosub @printtheobjectx1 ; npc
+code -
+ message 2801 ; said, "
+ return
+;---
+; Step on animation for person speaking
+.AnimateSpeak
+code +
+
+;;**************
+; &x1=WordWs(WordCursorYPos)
+;code -
+; prs "Y "
+; print x1
+; message cr
+;code +
+;;**************
+
+.SpeakLoop
+ &crx1=WordWs(WordCursorYPos)
+ if crx1<193 then SpeakLoopRet ; scroll all text
+code -
+ gosub MenuBuildAndDisplay1
+code +
+ goto SpeakLoop
+.SpeakLoopRet
+code -
+ gosub @MenuBasicRoom ; GMJ 17jul90 stop flicking between animation 
+; frames, & show room without notepad on one frame
+; [1] must do at least two BuildAndDisplayFrame's, so that killed 
+; rasters (e.g. notepad) are removed from both frames
+ gosub MenuBuildAndDisplay1
+ gosub @MenuBasicRoom ; GMJ 19/09/90
+ goto MenuBuildAndDisplay1
+;---
+; Do a BuildAndDisplayFrame from the menu
+.MenuBuildAndDisplay
+;cif PC
+; message space
+;cend
+.MenuBuildAndDisplay1
+code +
+push room
+push actor
+push object
+push commandfinished
+push executeprocessed
+push noun1
+ gosub @BuildAndDisplayFrameVec
+pop noun1
+pop executeprocessed
+pop commandfinished
+pop object
+pop actor
+pop room
+cif PC
+ v1=7                       ;1=buffers, 2=Logical, 4=Physical
+ gosub @MCenableTextBuffer  ;1=top window, 7=bottom window
+cend
+code -
+ return
+;---
+.DrawPortraitFrame
+ dv2=112 ;128 ; x
+ dv4=190 ; 176 ; h
+.DrawPortraitFrameXH
+ dv1=2410
+ dv3=240 ; z - right at the front
+ dv6=0 ; non-reflected
+ RasterOffset=0
+code +
+ &WordWS(WordRasterOffset)=RasterOffset
+ gosub @MCDrawObjectdv1
+code -
+ return
+;---
+.DrawPortrait
+; for person noun1
+ dv2=128 ; x
+ dv4=176 ; h
+.DrawPortraitXH
+ dv3=240 ; z - right at the front
+ dv6=0 ; non-reflected
+ object=noun1
+code +
+ gosub @CalcRasterOffsetObjectV
+; raster offsets for portraits are spaced at
+; intervals of 10, not 100
+ x1=RasterOffset
+ x2=10
+ gosub @DivX1X2vec
+ RasterOffset=x1 ; return value for caller as well
+ &WordWS(WordRasterOffset)=x1
+ gosub @MCDrawObjectdv1
+code -
+ m1=m1 ; padding needed?
+ return
+;---
+.x2times10
+ add x2,x2 ; 2
+ x3=x2
+ add x2,x2 ; 4
+ add x2,x2 ; 8
+ add x2,x3 ; 10
+ return
+;---
+; has murder been revealed to the conversant?
+.IsMurderRevealedConv
+code +
+ &v1=list4(58)
+code -
+ add v1,conversant
+ sub v1,c2 ; table starts with npc #2
+ result=List4(v1) ; get "murder revealed" flag for this npc
+ return
+;---
+; Print a quote followed by a full stop
+.QuoteDot
+ message quote
+ message dot
+ return
+;---
+; Draw portrait, frame, and start talking animation, returning 
+; dx4 as the ACB of the talking animation
+.DrawTalkAnimation
+cif pc
+code +
+ gosub @MCPlotLogicalScreen
+code -
+cend
+ dv5=dInsertRedraw
+ gosub @DrawPortraitFrame
+ dv1=2300 ; basic portrait
+ dv5=dinsertredraw ; insert
+ gosub @DrawPortrait ; also sets up rasteroffset.
+cif pc
+ gosub @MenuBasicRoomNoPL
+code +
+ push v1
+ &v1=WordWS(WordCursorYPOs)
+ push v1
+code -
+ gosub @DisplayCurrentMenu
+ LeftMargin=0
+code +
+ pop v1
+ &WordWS(WordCursorYPos)=v1
+ pop v1
+ gosub @MCUpdateScreen
+ gosub @MCUnplotScreen
+code -
+cend
+ dv1=2905
+ dv2=128 ; x
+ dv3=240 ; z - right at the front
+ dv4=176 ; h
+code +
+ gosub @SetUpACBDv1
+code -
+ return
+;---
+; Remove portrait, frame, and start talking animation, which is given 
+; (on entry) as an ACB number in dx4
+.RemoveTalkAnimation
+code +
+push ACBHeader
+ ACBHeader=dx4
+ gosub @KillACBHeader
+pop ACBHeader
+code -
+ dv5=dremoveRedraw
+ gosub @DrawPortraitFrame
+ dv1=2300
+ dv5=dremoveRedraw
+ noun1=conversant
+ gosub @DrawPortrait
+ gosub @MenuBuildAndDisplay ; show frame without acb
+ goto @MenuBuildAndDisplay ; show next frame
+;---
+; Done after calling AnimateSpeak, to show expression, have a delay 
+; and then remove the expression
+.ShowExpression
+ if Exp=0 then @SxpRet ; no current expression
+;
+; draw expression
+ dv1=2899 ; base for expressions-1
+ add dv1,Exp ; add expression number
+ dv2=128 ; x
+ dv3=256 ; z - right at the front
+ dv4=192 ; h
+ dv5=dinsertredraw
+ dv6=0 ; non-reflected
+ object=conversant
+code +
+ gosub @CalcRasterOffsetObjectV
+ x1=RasterOffset
+ x2=10
+ gosub @DivX1X2vec
+ RasterOffset=x1 ; return value for caller as well
+ &WordWS(WordRasterOffset)=x1
+ gosub @SetUpACBDv1
+push dx4
+code -
+;
+; show expression for a few frames in case we're just about 
+; to leave the conversation
+ x1=1
+.expressionloop
+code +
+push x1
+code -
+ gosub @MenuBuildAndDisplay1
+code +
+pop x1
+code -
+ add x1,c1
+ if x1<10 then expressionloop ; must be even number of frames
+
+;; show both frames with expression
+; gosub @MenuBuildAndDisplay1
+; gosub @MenuBuildAndDisplay1
+;
+; remove expression
+code +
+pop dx4
+push ACBHeader
+ ACBHeader=dx4
+ gosub @KillACBHeader
+pop ACBHeader
+code -
+.SxpRet
+; expression will be erased when @MenuBuildAndDisplay is called 
+; again, usually when conversant next says something
+ return
+;---
+; Have we talked to npc Conversant?
+.HaveWeTalkedToC
+code +
+ &x2=List4(74)
+code -
+ add x2,Conversant
+ sub x2,c2 ; table starts with sue (npc #2)
+ result=list4(x2)
+code +
+ and result,c1 ; use bit one only
+code -
+ return
+;---
+; Set flag for having talked to Conversant
+.TalkedToConversant ; we've talked to him now
+code +
+ &x2=List4(74)
+code -
+ add x2,Conversant
+ sub x2,c2 ; table starts with sue (npc #2)
+ x3=list4(x2)
+code +
+ or x3,c1 ; set bit one only
+code -
+ list4(x2)=x3
+ return
+;---
+.talk
+; talk to person OBJECT
+ Conversant=Noun1 ; person we're talking to
+;
+; player tries to talk to himself?
+ if noun1<>user then Talk1
+ message 2802
+ goto @ReturnToPeopleMenu
+.talk1
+;
+; player tries to talk to dead body?
+; if noun1<>involvednpc1 then objectnotdead1
+ object=noun1 ;*
+ gosub @IsObjectDeadi ;*
+ if result=false then objectnotdead1 ;*
+ gosub @objectisdead
+ goto @ReturnToPeopleMenu
+.objectnotdead1
+;
+ gosub @DrawTalkAnimation ; draw portrait etc
+code +
+
+ cif AllowMusic
+  NextMusic=10 ; base for people music filename
+  add NextMusic,noun1
+  add NextMusic,noun1
+ cend
+
+push dx4 ; save talk animation ACB number
+code -
+ WantMore=false
+ MoreMessage=false
+;
+; If no specific conversation has been triggered for this npc, then 
+; use the default talk menu options only...
+ actor=conversant
+code +
+ gosub @GetActorConversationV
+ ConversationPtr=32767
+ and ConversationPtr,value ; extract bits 0-14
+ value=0
+ gosub @SetActorConversationV ; clear conversation
+code -
+ actor=user
+ if ConversationPtr<>0 then TalkLoop ; got a conversation
+;
+; use default talk
+code +
+ &ConversationPtr=List4(18)
+code -
+;
+; "talk" main loop
+.TalkLoop
+; Execute the conversation entry at ConversationPtr, and return the 
+; address of the next entry in ConversationPtr, or zero to quit
+code +
+ x1=List4(ConversationPtr) ; get coded byte for entry type
+code -
+ if x1=255 then @DoTalkQuestion ; -1 is code for a question
+ if x1=254 then @DoTalkRacetrack ; -2 is code for a racetrack
+; Not the code for question or racetrack, so read the whole 
+; word value to get a message number...
+code +
+ &x1=List4(ConversationPtr) ; get first word for this entry
+code -
+ if x1<>0 then DoTalkMessage ; code for a message
+ ConversationPtr=0 ; erratic entry code - leave conversation
+.ResumeTalkLoop
+ if ConversationPtr<>0 then TalkLoop
+;
+code +
+pop dx4 ; recover talk animation ACB number
+code -
+ gosub @RemoveTalkAnimation ; remove portrait etc
+ goto @ReturnToPeopleMenu
+;---
+; Execute a "message" type conversation entry
+.DoTalkMessage
+ message cr
+cif PC
+ message blankline ; cr ; GMJ 9jul90
+cend
+ m1=x1
+ gosub @PrintM1MaybeMore ; <message>
+ message dot
+ add ConversationPtr,c2
+code +
+ &ConversationPtr=List4(ConversationPtr) ; get address of next entry
+code -
+ gosub @AnimateSpeak
+ goto ResumeTalkLoop
+;---
+; Execute a "racetrack" type conversation entry
+.DoTalkRacetrack
+ add ConversationPtr,c2
+code +
+ &Value=list4(ConversationPtr) ; get racetrack address
+ actor=Conversant
+ gosub @GOSUBRacetrackValueA
+ actor=user
+ gosub @SetActorAttributes
+ add ConversationPtr,c2
+ &ConversationPtr=List4(ConversationPtr) ; get address of next entry
+code -
+ goto @ResumeTalkLoop
+;---
+; Execute a "question" type conversation entry
+.DoTalkQuestion
+;
+; Erase the response menu, ready for the selections
+code +
+ &x1=list4(2)
+ x2=40 ; menu 40
+ add x1,x2
+ &x1=List4(x1) ; point to start of menu 40
+ add x1,c4 ; skip heading
+push x1
+ x3=7
+code -
+.ClearResponses
+ x4=255
+ List4(x1)=x4 ; end menu marker
+ add x1,c3
+ List4(x1)=c0 ; erase message
+ add x1,c1
+ sub x3,c1
+ if x3<32000 then ClearResponses
+code +
+pop x1
+code -
+;
+; Build up a fresh menu with the new responses
+code +
+push ConversationPtr ; preserve ConversationPtr, because we want to 
+; use it after the selection in order to work out the response
+code -
+ add ConversationPtr,c2 ; skip code header
+ x5=0
+.BuildQuestions
+code +
+;***** &v1=list4(ConversationPtr) ; read menu response option
+ add ConversationPtr,c1 ;*****
+ v1=list4(ConversationPtr) ; read menu response option ;*****
+ sub ConversationPtr,c1 ;*****
+code -
+;***** if v1=65535 then OkBuiltQuestions ; finished questions' list
+ if v1=255 then OkBuiltQuestions ; finished questions' list ;*****
+ add x5,c1 ; number of REAL responses (apart from default ones)
+ v2=6
+ add ConversationPtr,v2 ; 3-word entries
+ v2=40 ; base for messages
+ add v1,v2
+ gosub @InsertMenuLineV1
+ goto BuildQuestions
+;
+; Include default verbs at the end of the menu
+.OkBuiltQuestions
+ if conversant<>inspector then NotSetUpAnalyse
+ if analyseobject<>false then NotSetUpAnalyse ; already doing an analyse
+ v1=53 ; analyse
+ gosub @InsertMenuLineV1
+.NotSetUpAnalyse
+ v1=49 ; ask object
+ gosub @InsertMenuLineV1
+ v1=50 ; ask person
+ gosub @InsertMenuLineV1
+ gosub @IsMurderRevealedConv
+ if result=false then NotSetUpWhere
+ v1=51 ; where?
+ gosub @InsertMenuLineV1
+.NotSetUpWhere
+ v1=40 ; bye
+ gosub @InsertMenuLineV1
+;
+; Allow the player to make a menu selection
+code +
+pop ConversationPtr ; points back to start of questions' list
+code -
+ BasicCurrentMenu=40 ; 'response' menu
+ gosub @NestedMenu
+ goto @ResumeTalkLoop
+;---
+.InsertMenuLineV1
+ List4(x1)=c0 ; clear end menu marker
+ add x1,c3
+ list4(x1)=v1 ; write message into table
+ add x1,c1
+ return
+;---
+; Player has chosen a response to the current conversation fragment
+.Response
+cif PC
+ message cr ; GMJ 9jul90 ; blankline
+code +
+ &WordWS(WordCursorXPos)=c0
+code -
+cend
+ Exp=0 ;********* no current expression
+;
+; Handle special case responses
+ if HighLightedMessage=40 then @RespEndConversation
+ if HighLightedMessage=49 then @AskObject ; ask about object
+ if HighLightedMessage=50 then @AskPerson ; ask about person
+ if HighLightedMessage=51 then @MenuWhere ; where were you?
+ if HighLightedMessage=53 then @RespAnalyse ; analyse
+ if HighLightedMessage<54 then RespNotAnalyseFor
+ if HighLightedMessage<60 then @AnalyseFor ; analyse for prints/poison
+.RespNotAnalyseFor
+;
+; fetch the parameters for this response code from the questions' list
+ x1=ABSMenuLine
+ sub x1,c2 ; skip heading
+;
+; x1 is the line of the questions' list selected
+ x2=ConversationPtr
+ add x2,c1
+ verb=List4(x2) ; get message format (same as racetrack verbs for 
+; message printing)
+ add x1,x1 ; x1*2
+ x2=x1
+ add x1,x1 ; x1*4
+ add x1,x2 ; x1*6 (3-word tables)
+ add ConversationPtr,x1 ; point to questions' list
+
+;***** add ConversationPtr,c4 ; skip code header + menu entry
+ add ConversationPtr,c2 ; skip code header ;*****
+ Exp=List4(ConversationPtr) ; get expression (low byte of menu entry) ;*****
+ add ConversationPtr,c2 ; skip code header ;*****
+
+code +
+ &m1=List4(ConversationPtr) ; get npc reply
+;
+ add ConversationPtr,c2
+ &ConversationPtr=List4(ConversationPtr) ; get next entry
+; display npc's reply to player's response
+;
+; handle special message formats, stored in verb in the same way 
+; as racetrack messages
+code -
+ if verb=0 then NormalQuestionMess
+ prep=0
+ actor=conversant
+ noun2=m1
+ value=m1
+ x1=255
+code +
+ and noun2,x1 ; noun2=lo byte message number
+ gosub @ValueDiv256
+ noun1=value ; noun1=hi byte message number
+ gosub @RaceTrackMessages
+code -
+ actor=user
+ if executeprocessed=true then ResumeConversation ; ok - done a 
+; racetrack-type message
+.NormalQuestionMess
+;
+ message cr
+ gosub @PrintM1MaybeMore ; both sam's & conversant's message
+ message dot
+;
+.ResumeConversation
+ gosub @AnimateSpeak ;*****goto
+ goto @ShowExpression ;*************
+;
+; resume default conversation (after asking about something)
+.RespDefaultTalk
+; use default talk
+code +
+ &ConversationPtr=List4(18)
+code -
+ goto ResumeConversation
+;
+; quit current conversation
+.RespEndConversation
+ ConversationPtr=0
+ goto ResumeConversation
+;---
+; Do a nested menu BasicCurrentMenu, while stepping on the 
+; animation while npc Conversant is speaking...
+; ResponseGiven=true if Conversant responded
+.NestedMenu
+ LeftMenuLimit=BasicCurrentMenu
+ RightMenuLimit=BasicCurrentMenu
+ sub RightMenuLimit,c2
+ ResponseGiven=false
+code +
+ gosub @MenuBCM
+code -
+ return
+;---
+; Routines to handle special case player response verbs during a
+; conversation
+;
+;;; Sam responds with "hello"
+;;.DoNpcHello
+;; gosub @NpcSaid ; conversant said, "
+;; m1=3000
+;; add m1,conversant
+;;code +
+;; gosub @PrintM1 ; hello
+;;code -
+;; gosub @QuoteDot ; ".
+;; goto @ResumeConversation
+;
+;;; More option
+;;.RespMore
+;; x1=conversant
+;;code +
+;; gosub @printtheobjectx1 ; npc
+;;code -
+;; message 4800 ; continued, "
+;; gosub @PrintM1MaybeMore
+;; gosub @QuoteDot
+;; goto @ResumeConversation
+;
+; Analyse for inspector
+.RespAnalyse
+ BasicCurrentMenu=62 ; 'analyse object' menu
+ gosub @NestedMenu
+ BasicCurrentMenu=40 ; 'talk' menu
+ goto @RespEndConversation
+;
+; Ask about object
+.AskObject
+ BasicCurrentMenu=36 ; 'ask object' menu
+ gosub @NestedMenu
+ BasicCurrentMenu=40 ; 'talk' menu
+ if ResponseGiven<>false then AskObject
+ goto @RespDefaultTalk
+;
+; Ask about person
+.AskPerson
+ BasicCurrentMenu=38 ; 'ask person' menu
+ gosub @NestedMenu
+ BasicCurrentMenu=40 ; 'talk' menu
+ if ResponseGiven<>false then AskPerson
+ goto @RespDefaultTalk
+;
+; ask where person OBJECT was at the time of the murder
+.MenuWhere
+ message 4803 ; sam said, "where were you?"
+ gosub @NpcSaid
+;
+; was he involved?
+ if conversant=involvednpc2 then @MakeAliby ; I was err.. um..
+code +
+ &x2=List4(56) ; list of npc positions at time of murder
+code -
+ add x2,conversant
+ sub x2,c2 ; table starts with npc #2
+ x1=list4(x2) ; get npc position
+;
+; store as evidence npc.w score.w room*256.w
+code +
+push x1
+code -
+ x3=conversant ; 1st npc
+ x4=780 ; score opportunity=3*256=768 +bias10 +score2
+ value=x1
+code +
+ if value=255 then MWnotwithsam ; if room is given as 255, then 
+; the npc was with sam at the time of the murder, so don't 
+; multiply by 256 and store as a room. instead, store simply 
+; as 255
+ gosub @valuetimes256
+.MWnotwithsam
+ x5=value ; room
+ gosub @storeevidence
+pop x1
+code -
+;
+ m1=4802
+ if x1=255 then NpcWithSam ; I was with you, sam
+ m1=ShortRoomDescs
+ add m1,x1
+ message 4801 ; I was...
+.NpcWithSam
+ message m1
+ message quote
+ message dot
+;******* gosub @AnimateSpeak
+.WhereRet
+ ResponseGiven=true
+ goto @RespDefaultTalk
+;
+; npc was in murder room at time of murder,
+; so use the "opinion of self", which should give a 
+; false position...
+.MakeAliby
+ noun1=Conversant
+ Object=Conversant
+ SaveOpinionForMore=false
+ gosub @SpecificOpinionC
+ gosub @QuoteDot
+ goto WhereRet
+;---
+.AlreadyAskedThat
+ message 2804
+ goto @DoneOpinion
+;---
+; Only the inspector can analyse things...
+.AnalyseMenu
+;
+; choose type of analyse, e.g. poison, fingerprints
+ analyseobject=object
+ BasicCurrentMenu=42 ; 'analyse for' menu
+; when a selection is made, the verb is handled in .Response, which 
+; will return to .AnalyseFor, below
+ gosub @NestedMenu
+ if responsegiven=true then OkDoAnalyse
+ analyseobject=0 ; player quit "analyse for" menu
+.OkDoAnalyse
+ return
+;
+.AnalyseFor
+ analysetype=highlightedmessage
+ x1=53
+ sub analysetype,x1 ; type 1=f/prints, 2=poison, 3=blood
+ object=analyseobject
+ noun1=analyseobject
+ analyseobject=false
+ if object<MinAllObject then @AskAbout
+ if object>MaxMoveable then @AskAbout ; can object be taken?
+ analyseobject=noun1
+;
+; send inspector on analyse racetrack...
+ value=128 ; inspector analyse racetrack
+ actor=inspector
+code +
+ gosub @GOSUBRacetrackValue
+code -
+;
+; pick up the object to be analysed
+ currentpos(analyseobject)=actor
+ x1=carried
+ hicurrentpos(analyseobject)=x1
+;
+; do inspector message...
+ ResponseGiven=true
+ message 9100 ; I'll have to take it to my car
+ return
+;---
+.AskAbout
+ gosub @iIncrementMinute ; 1 min per question
+ x1=60
+code +
+ add TimeLimit,x1 ; 60 secs = 1 min
+code -
+;
+; handle selection of "sure"
+ if noun1<>15 then notwantsure ; object 15 is "sure?"
+code +
+push conversant
+code -
+ conversant=user
+ gosub @NPCsaid ; Sam said, "
+ m1=moremessage
+ message m1 ; <are you sure, because...>
+ message quote ; finish off with quote if exit conversation
+ message dot
+code +
+pop conversant
+code -
+ gosub @NPCsaid ; Npc said, "
+ add moremessage,c1 ; next message is npc's reply
+ goto @DoneAskPromptQuote
+.notwantsure
+;
+; handle selection of "more"
+ if noun1<>0 then notwantmore1 ; object 0 is "more"
+ message space
+ message cr
+ x1=conversant
+code +
+ gosub @printtheobjectx1 ; npc
+code -
+ message 4800 ; continued, "
+ goto @DoneAskPromptQuote
+.notwantmore1
+;
+code +
+push Conversant
+code -
+ Conversant=user
+ gosub @NPCsaid ; sam said, "
+code +
+pop Conversant
+code -
+ message 2805 ;tell me about
+ if noun1<>Conversant then NotAskSelf
+ message 2806
+ goto DoneAskPrompt
+.NotAskSelf
+ if noun1<>user then NotAskUser
+ message 2807
+ goto DoneAskPrompt
+.NotAskUser
+ x1=noun1
+code +
+ gosub @printtheobjectx1 ; object/person
+code -
+.DoneAskPrompt
+ gosub @QuoteDot
+;
+ gosub @AnimateSpeak
+ gosub @NPCsaid ; npc said, "
+.DoneAskPromptQuote
+;
+; Display "more" message
+ m1=MoreMessage
+ MoreMessage=False ; don't repeat "More..." option next turn
+ if noun1=15 then @PrintOpinion1 ; object 15 is "Sure?"
+ if noun1=0 then @PrintOpinion1 ; object 0 is "more"
+;
+; Have we already asked the same question recently?
+ gosub @GetQStackx1 ; x1 points to the stack for the Conversant
+ x4=x1
+.SearchQStack
+ x3=list4(x4) ; get a stack entry
+ if x3=noun1 then @AlreadyAskedThat
+ add x4,c1 ; move on to next entry
+ sub x2,c1
+ if x2>0 then SearchQStack ; keep searching
+;
+; Give simple 'take a look yourself' if no specific 
+; opinion related to this object
+ if noun1<MaxNpcPlus1 then @SpecificOpinion ; all people have opinions
+ gosub @GetNoun1Opinion ; does object have specific opinion
+ if result=true then @SpecificOpinion
+.BogStandardOpinion
+ message 2819 ; "Why don't you look at it yourself"
+ goto @DoneOpinion
+.SpecificOpinion
+;
+; if opinion person was in same room as conversant, then 
+; begin with "he was with me"
+ SaveOpinionForMore=false
+ gosub @IsMurderRevealedConv
+ if result=false then @notopinionperson
+ if noun1>maxnpc then @notopinionperson
+ if noun1=conversant then @notopinionperson ; self!
+ if noun1=user then @notopinionperson ; sam
+; if noun1=involvednpc1 then @notopinionperson ; victim!!
+ object=noun1 ;*
+ gosub @IsObjectDeadi ;*
+ if result=true then @notopinionperson ;*
+code +
+ &x2=List4(56) ; list of npc positions at time of murder
+code -
+ x3=x2
+ add x2,conversant
+ sub x2,c2 ; table starts with npc #2
+ x1=list4(x2) ; get our position
+ add x3,noun1
+ sub x3,c2 ; table starts with npc #2
+ x2=list4(x3) ; get opinion person's pos
+ if x1<>x2 then notopinionperson
+ x1=noun1
+code +
+ gosub @printtheobjectx1 ; npc
+code -
+ message 2854 ; was with me at the time of the murder
+;
+; stick the note in buffer in case player wants to write it down as 
+; evidence in the format: 1st npc.w score.w 2nd npc.w
+ x3=conversant ; 1st npc
+ x4=780 ; score opportunity=3*256=768 +bias10 +score2
+ x5=noun1 ; 2nd npc
+code +
+ gosub @storeevidence
+code -
+;
+; continue to work out opinion message, but store it as a "more..."
+ SaveOpinionForMore=true
+.notopinionperson
+.SpecificOpinionC
+;
+ gosub @GetNoun1Opinion ; get opinion message
+;
+; Nowadays, objects don't have standard opinions, but their standard 
+; opinion message is worked out so that it can be changed to a 
+; murder-specific opinion
+ if noun1>MaxNpc then PrintOpinionObject
+;
+; Asking an opinion of another person
+ if noun1=conversant then PrintOpinion
+ x1=currentpos(noun1)
+ if x1<>currentuserroom then PrintOpinion
+; Asking about someone who's with us
+ message 2894 ; "It's rude to talk about someone infront of them"
+ goto @DoneOpinion
+;
+.PrintOpinionObject
+ if result=false then @BogStandardOpinion ; if no specific opinion 
+; change for this object, then print a dummy one
+;
+.printopinion
+; if we've just said, "npc was with me at the time of the murder", then 
+; save the real opinion until later...
+ if SaveOpinionForMore=false then printopinion1
+ SaveOpinionForMore=false
+ MoreMessage=m1
+ WantMore=true
+ goto DoneOpinion
+.printopinion1
+;
+; Add a new entry to the stack and increment the stack 
+; pointer...
+ gosub @GetQStackx1 ; x1 points to the stack for the Conversant
+code +
+ &x2=list4(24) ; recent questions stack
+code -
+ x3=Conversant
+ add x2,x3
+ x3=list4(x2) ; get npc stack pointer
+ add x1,x3 ; add pointer to stack
+ list4(x1)=noun1 ; write the new entry
+ add x3,c1
+ if x3<QStackSize then incQstack
+ x3=0 ; stack wrap-around
+.incQstack
+ list4(x2)=x3 ; increment stack pointer
+;
+ gosub @printM1maybeMore
+;
+.DoneOpinion
+ ResponseGiven=true
+ gosub @QuoteDot
+ goto @AnimateSpeak
+;---
+; return x1 as "recent" questions stack for conversant
+.GetQStackx1
+code +
+ &x1=list4(24) ; recent questions stack
+code -
+ x2=QStackSize
+ x3=Conversant
+.GetQStack
+ add x1,x2
+ sub x3,c1
+ if x3>0 then GetQStack
+ return
+;---
+; Get Conversant's opinion for Noun1, and alter it according to 
+; this Murder
+; On exit, result=true if opinion has been altered
+.GetNoun1Opinion
+; work out opinion messages offset
+ m1=19400 ; base-600
+ x1=200 ; arranged in blocks of 200
+ x2=Conversant
+.AskAbout1
+ add m1,x1
+ sub x2,c1
+ if x2<32000 then AskAbout1 ; safe way of preventing underflow!
+ ADD M1,noun1 ; now add the offset of the object or person
+;
+; Are there any changes to this standard opinion before or 
+; after the murder has been committed?
+;
+; Two tables of MESSAGE TO CHANGE, NEW MESSAGE is used, since 
+; this needs only one table rather than one for each NPC, or 
+; an extra search byte for each NPC. It may be slightly slower, 
+; but speed is irrelevant since we are in MENU mode.
+ x1=20 ; pre-murder opinions
+ gosub @IsMurderRevealedConv
+ if result=false then changeopinion
+;
+; for murder 5 only, extra messages are used as various people are 
+; bumped off
+ if murder<>5 then PMopinion
+code +
+ &x1=list4(88)
+code -
+ add x1,noun1
+ x2=list4(x1)
+code +
+ and x2,c2 ; bit 1 is used if npc's murder has been revealed 
+code -
+; to EVERYONE
+ if x2=0 then PMopinion
+ m1=24380 ; base -sue(2)*10
+ x1=actor
+ add x1,x1
+ x2=x1
+ add x1,x1
+ add x1,x1
+ add x1,x2 ; mesages in groups of 10 per npc
+ add m1,noun2 ; get specific message for this person being 
+; killed
+ goto @COtrue
+;
+.PMopinion
+ x1=22 ; post-murder opinions
+; Search through a list messages which need to be altered 
+; after the murder has been committed...
+.changeopinion
+code +
+ &x1=list4(x1) ; pointer to start of table
+code -
+ x2=Murder
+ sub x2,c1 ; start at zero
+ add x2,x2 ; word list
+ add x1,x2
+code +
+ &x1=list4(x1) ; get the table for this murder
+code -
+.changeopinionloop
+code +
+ &x2=list4(x1) ; get message to change
+code -
+ if x2=0 then COfalse ; end of list - no change to message
+ add x1,c2
+code +
+ &x3=list4(x1) ; get new message
+code -
+ add x1,c2
+ if m1<>x2 then changeopinionloop ; not our message
+; found a match - change message
+ m1=x3
+.COtrue
+ result=true
+ return
+.COfalse
+ result=false
+ return
+;---
+; find any continuation messages
+.PrintM1MaybeMore
+ MoreMessage=false
+ WantMore=false
+code +
+ gosub @PrintM1
+code -
+; 'More' may have been set as a 'Sure' contradiction question
+ if wantmore<>false then NoContinuationMess
+code +
+ &x1=List4(54) ; table of MESSAGE,CONTINUATION
+code -
+.FindContinuationMess
+code +
+ &x2=List4(x1)
+code -
+ if x2=0 then NoContinuationMess
+ add x1,c4
+ if x2<>m1 then FindContinuationMess
+;
+; found continuation message
+ sub x1,c2
+code +
+ &MoreMessage=List4(x1)
+code -
+ WantMore=true
+.NoContinuationMess
+ return
+;---
+.MenuACCUSE
+ if noun1<>user then accuse1
+ message cr
+ message 2808 ; accuse self
+ goto @ReturnToPeopleMenuSc
+.accuse1
+;
+ Conversant=Noun1 ; person we're accusing
+ gosub @IsMurderRevealedConv
+ if result=false then accusenomurder
+;
+ gosub @calcevidence
+ if result<>noun1 then accusenoevidence ; not the most likely suspect!
+ if value=0 then accusenoevidence
+;
+; final sub-games: gun grapple & courtroom
+code +
+ if noun1=involvednpc2 then DoGunGrapple ; grapple if guilty npc
+; accuse wrong person: no gun-grapple, but still do courtroom game
+ subgame=8 ; courtroom
+code -
+ leavemenu=true
+ return
+;
+code +
+.DoGunGrapple
+ subgame=2 ; gun grapple
+code -
+ leavemenu=true
+ return
+;
+; no murder been committed yet
+.AccuseNoMurder
+ m1=2809 ; no murder committed!
+ goto endaccuse
+;
+; accused wrong person/correct person but not enough evidence
+.AccuseNoEvidence
+ m1=2811
+;
+.endaccuse
+ gosub @DrawTalkAnimation ; draw portrait etc
+code +
+push dx4 ; save talk animation ACB number
+push m1
+code -
+ gosub @NPCsaid ; npc said, "
+code +
+pop m1
+code -
+ message m1
+ message quote
+ message dot ; ".
+ gosub @AnimateSpeak ; talk
+code +
+pop dx4 ; acb offset of talk animation
+code -
+ gosub @RemoveTalkAnimation
+;
+.ReturnToPeopleMenuSc
+ gosub @AnimateSpeak ; scroll text
+;
+.ReturnToPeopleMenu
+ LeaveMenu=False
+ BasicCurrentMenu=8
+ CurrentMenu=8
+ LeftMenuLimit=2
+ RightMenuLimit=8
+ verb=0 ; verb may have been set up to TALK menu option, so 
+; clear it to stop sam doing silly things!
+ return
+;---
+.menuscore
+ gosub @calcevidence
+code +
+; if score is almost max, then make it max, as it is usually 
+; impossible to get the maximum score, since we can only record 
+; evidence in one place at once.
+ x1=MaxScore
+ if x1<16 then GotMinScoreThreshold ; max score is rather small, so 
+; don't bother subtracting a threshold score
+ sub x1,c16 ; really 160
+.GotMinScoreThreshold
+ if value<x1 then NotMaxScore
+ value=MaxScore ; close enough!
+.NotMaxScore
+code -
+ message 2812 ; sam had scored
+ gosub printvalue
+ message 2813 ; out of
+code +
+ value=MaxScore
+code -
+ gosub printvalue
+ if Vmurderbeendone=false then DontRevealSuspect
+ message 2817 ; , of which means amounted to
+ value=v1
+ gosub printvalue ; means
+ message 2851
+ value=v2
+ gosub printvalue ; motive
+ message 2852
+ value=v3
+ gosub printvalue ; opportunity
+ message dot
+ if result=0 then noguiltynpc ; no likely suspect as yet
+ message 2882 ; The most likely suspect was 
+ x1=result
+code +
+ gosub @PrintTheObjectx1 ; <npc>
+code -
+.DontRevealSuspect
+ message dot ; .
+.noguiltynpc
+ return
+;---
+; print value, adding a minus sign if negative
+.printvalue
+ x2=value
+ gosub @x2times10 ; score * 10
+ print x2
+ return
+;---
+; Return VALUE as the overall evidence score
+; v1,2,3 for means, motive and opportunity
+.CalcEvidence
+code +
+ &x1=List4(32) ; x1 is start of notepad
+code -
+ x5=19 ; length of notebook-1
+ value=0 ; total score
+ v1=0 ; means
+ v2=0 ; motive
+ v3=0 ; opportunity
+; clear "guilt table", ready to use as tally
+code +
+ &x3=List4(90) ; guilt table
+code -
+ x4=0
+.clearguilt
+ List4(x3)=c0
+ add x3,c1
+ add x4,c1
+ if x4<MaxNpcPlus1 then clearguilt
+;
+.ReadEv1
+code +
+push x5
+ &x3=list4(x1) ; get note message
+code -
+ add x1,c2
+ v4=list4(x1) ; get evidence type
+ add x1,c1
+ x4=list4(x1) ; get score value
+ add x1,c1
+code +
+ &x5=list4(x1) ; get offset to paired message list (if any)
+code -
+ add x1,c2
+ if x3=0 then @ReadNextEv ; no entry
+ if x5=0 then nopairedev ; no paired messages
+;
+; We must pair up with any messages in List4(x5) if we are to 
+; score for this piece of evidence
+.findpair
+code +
+
+ x3=x3 ; debug use for monst2 ;***************
+
+ &x4=list4(x5)
+code -
+ if x4=0 then @ReadnextEv ; end of pairs list
+code +
+push x3
+code -
+ x3=x4
+ add x5,c2
+ v4=list4(x5) ; get evidence type
+ add x5,c1
+ x4=list4(x5) ; get score value
+ add x5,c1
+;
+; test to see if we've already noted message x1
+ gosub @TestForNotex3 ; is note x3 already in the notebook
+code +
+pop x3
+code -
+ if result=false then findpair ; no match found yet
+;
+; work out who the evidence points to (- offset of npc*10)
+.nopairedev
+code +
+push x1
+code -
+ x5=10
+ x1=1 ; loop counter, npc 1=evidence pointing to nobody/sam
+.getguiltynpcX1
+ sub x4,x5 ; subtract offset of 10
+ if x4<10 then GotGuiltyNpcX1 ; withing +ve range?
+ if x4>65526 then GotGuiltyNpcX1 ; withing -ve range?
+ add x1,c1
+ goto getguiltynpcX1
+;
+.GotGuiltyNpcX1
+; add evidence value for npc x1
+code +
+ if x1<2 then EvidenceNotAgainstNpc ; not against an npc
+push x2
+
+; don't add guilt if this person has been negated, by 
+; inclusion in sam's "people with me at the time of the 
+; murder" evidence message
+ v1=2 ; starting with npc 2
+ &x2=List4(56) ; table of npc positions
+ add x2,x1
+ x2=list4(x2) ; get room @ murder time or 255 if with sam
+ if x2=255 then NpcNegated
+
+ &x2=List4(90) ; guilt table
+ add x1,x2 ; get byte tally for this npc
+ x2=List4(x1)
+ add x2,x4 ; add score value for this npc
+ List4(x1)=x2
+.NpcNegated
+pop x2
+.EvidenceNotAgainstNpc
+pop x1
+code -
+; add evidence score to our total
+ add value,x4 ; overall score value
+;
+; add individual scores for means, motive & opportunity
+ if v4=1 then scoremeans
+ if v4=2 then scoremotive
+ if v4<>3 then readnextev ; none of these categories!
+; score opportunity
+ add v3,x4
+ goto readnextev
+; score means
+.scoremeans
+ add v1,x4
+ goto readnextev
+; score motive
+.scoremotive
+ add v2,x4
+;
+.ReadNextEv
+code +
+pop x5
+code -
+ sub x5,c1
+ if x5<32000 then @ReadEv1 ; reached end of notebook?
+;
+; return result as most likely suspect
+code +
+push x1
+push x2
+push x3
+push x4
+ &x1=List4(90) ; guilt table
+ x2=2 ; npc counter
+ add x1,x2 ; point table to this npc
+ x3=128 ; highest guilt threshold+128
+ result=0 ; most guilty npc
+.getnpcguilt
+ x4=List4(x1) ; get guilt for npc x2
+ add x4,c32 ; make all values positive
+ add x4,c32
+ add x4,c32
+ add x4,c32
+ if x4<x3 then notmostguilty ; not the most guilty so far
+ if x4=x3 then notmostguilty ; not the most guilty so far
+; npc x2 is the most guilty so far, with a guilt value of x4
+ x3=x4 ; set highest guilt threshold
+ result=x2 ; set most guilty npc so far
+.notmostguilty
+ add x1,c1 ; next guilt table byte
+ add x2,c1 ; next npc
+ if x2<MaxNpcPlus1 then getnpcguilt
+pop x4
+pop x3
+pop x2
+pop x1
+code -
+;
+; force negatives scores to be zero
+ if value<32000 then valpos
+ value=0
+.valpos
+ if v1<32000 then v1pos
+ v1=0
+.v1pos
+ if v2<32000 then v2pos
+ v2=0
+.v2pos
+ if v3<32000 then v3pos
+ v3=0
+.v3pos
+;
+ return
+;---
+; player attempts to converse with a dead person!
+.objectisdead
+ message 2814
+ return
+;---
+code +
+.ClearQStack
+ &x1=list4(24) ; recent questions stack
+code -
+ x2=TotalQStackSize
+.ClearQStack11
+ list4(x1)=c0 ; clear stack entry
+ add x1,c1
+ sub x2,c1
+ if x2<32000 then ClearQStack11
+code +
+ return
+code -
+;---
+; Make a note in the notebook
+.WriteNote
+ if CurrentNotePage<20 then NoteBookNotFull
+; Notebook is full...
+.NoteBookFull
+ message 2815
+ return
+;
+; Get offset of page number in Notepad
+.NoteBookNotFull
+ gosub @Getx1asNoteBookPage
+code +
+ &x2=List4(30) ; x2 is start of evidence buffer
+code -
+;
+; Copy contents of Evidence Buffer to Notepad
+ x5=9 ; length-1 of buffer
+ result=false ; no entries made yet
+.CopyBufferToNotepad
+code +
+ &x3=list4(x2) ; get note from buffer
+code -
+ if x3=0 then @SkipBufferEntry ; this entry is empty
+;
+; We've found an entry in the buffer, so copy it across to the 
+; Notepad...
+ if CurrentNotePage>19 then @NoteBookFull
+ result=true ; an entry has been made
+code +
+ &list4(x2)=c0 ; erase this note from buffer now that we've copied it 
+; to the permanent notebook
+
+; >> GMJ 20/05/90 has message x3 already been noted?
+ if x3<MaxNpcPlus1 then OkMultipleNote ; ok to make multiple notes 
+; for people, such as where they were and who they were with at 
+; the time of the murder
+push result
+code -
+ gosub @TestForNotex3
+ v1=result
+code +
+pop result
+code -
+ if v1=true then @GetNextBufferEntry
+code +
+.OkMultipleNote
+
+ &list4(x1)=x3 ; copy note to notepad
+push x5
+ add x2,c2
+ add x1,c2
+ &x4=list4(x2) ; get score value from buffer
+ &list4(x1)=x4 ; copy to notepad
+ add x2,c2
+ add x1,c2
+ &x5=list4(x2) ; get paired message from buffer
+ &list4(x1)=x5 ; copy to notepad
+code -
+ add x2,c2
+ add x1,c2
+; gosub @PrintNotedx3
+code +
+pop x5
+code -
+ add CurrentNotePage,c1 ; move on to next page in notepad
+ goto GetNextBufferEntry
+;
+.SkipBufferEntry
+ add x2,c3
+ add x2,c3 ; 3 word entries
+.GetNextBufferEntry
+ sub x5,c1
+ if x5<32000 then @CopyBufferToNotepad ; end of buffer reached?
+ if result=true then WriteNoteRet
+;
+; No notes made, so create a null one...
+ x3=29990
+; add x3,VaryNullNote
+
+; >> GMJ 20/05/90 has message x3 already been noted?
+ gosub @TestForNotex3
+ if result=true then WriteNoteRet
+
+; add VaryNullNote,c1
+; if VaryNullNote<5 then WriteNullNote
+; VaryNullNote=0
+;.WriteNullNote
+ add CurrentNotePage,c1 ; move on to next page in notepad
+ v1=10
+code +
+ &list4(x1)=x3 ; copy null message to notepad
+ add x1,c2
+ &list4(x1)=v1 ; zero score value (+10)
+ add x1,c2
+ &list4(x1)=c0 ; zero paired message
+code -
+; gosub @PrintNotedx3
+;
+.WriteNoteRet
+ message cr
+ message 2870 ; sam scribbled in his notebook
+ CurrentReadingPage=19 ; start reading from last entry
+ gosub @AnimateSpeak ; scroll text
+ CurrentMenu=14 ; BasicCurrentMenu=14 ; 'notepad' menu
+ LeaveMenu=false
+ return
+;---
+; Set x1 as a pointed to the current entry in the notebook...
+.Getx1asNoteBookPage
+ x1=CurrentNotePage
+ x2=0
+.GetPageOffset
+ if x1<1 then GotPageOffset
+ add x2,c3
+ add x2,c3 ; 3 word entries
+ sub x1,c1
+ goto GetPageOffset
+;
+.GotPageOffset
+code +
+ &x1=List4(32) ; x1 is start of notepad
+code -
+ add x1,x2 ; add offset for page number
+ return
+;---
+; Read the notebook
+.ReadNote
+ CurrentReadingPage=18
+ value=7 ; current page - three messages per page
+;
+.ReadUpToThreeNotes
+code +
+push value
+ v1=NotePadRaster
+ gosub @SetUpPrintRaster
+code -
+ gosub @iStartPrintToBuffer
+ prs "Page "
+ print value
+ message dot
+ x5=CurrentReadingPage ; current reading position in notebook
+ result=false ; no notes read yet on this current page
+;
+.ReadNote1
+ if x5>19 then @ReadNextNote
+;
+; work out address offset of this notebook entry...
+code +
+ &x1=List4(32) ; x1 is start of notepad
+code -
+ x2=x5 ; get current page
+ add x2,x2 ; *2
+ x3=x2
+ add x2,x2 ; *4
+ add x2,x3 ; *6
+ add x1,x2 ; + start of notepad
+code +
+ &x3=list4(x1) ; get note message
+code -
+ if x3=0 then ReadNextNote
+code +
+push x5
+ add x1,c4
+ &x5=list4(x1) ; get paired mess (may be used as npc number in some cases)
+code -
+;
+; Don't show "nothing happened" notes once a useful note has been made
+ if x3<>29990 then OkShowNote
+ if currentnotepage>1 then DontShowNullNote ; useful notes present
+.OkShowNote
+ result=true ; a note has been read
+ prs "`" ; cr
+ gosub @PrintNotedx3
+.DontShowNullNote
+;
+code +
+pop x5
+code -
+.ReadNextNote
+ add x5,c1 ; move on to next entry
+ x1=CurrentReadingPage
+ add x1,c3
+ if x5<x1 then @ReadNote1 ; read < 3 notes so far
+;
+; we've scanned three notes. result=true if at least one note was 
+; printed
+ message cr ; just in case there's still something in the buffer
+ gosub @iEndPrintToBuffer
+ if result=false then ReadPreviousPage ; this page is empty
+  TextBoxWidth=156 ; set to width of text raster being printed on
+  TextBoxDepth=140 ; set to depth of text raster being printed on
+  gosub @iDisplayBufferedText ; must follow closely after iEndPrintToBuffer
+code +
+  TextBoxDisplayed=NotepadDisplayObject
+  gosub @BuildAndDisplayFrameVec ; show frame with notepad on, wait for key
+  result=true ; used to determine whether there is anything in page 1
+code -
+.ReadPreviousPage
+code +
+pop value
+code -
+ sub value,c1 ; decrement page number
+ sub CurrentReadingPage,c3 ; ready for next page
+ if CurrentReadingPage<>65533 then @ReadUpToThreeNotes ; end of book?
+;
+; scanned to end of notepad...
+ if result<>false then ReadNoteRet1 ; is page 1 empty?
+ message 2816 ; notebook was entirely empty
+.ReadNoteRet1
+ gosub @AnimateSpeak ; scroll text
+ CurrentMenu=14
+ LeaveMenu=false
+ return
+;---
+; Make a null note of a completely useless object
+.NoteUselessObject
+ x3=object ; note the object number
+ x4=10 ; zero score value offset by 10. 0 before the murder, and -1 
+; after the murder for noting useless objects
+ if VMurderBeenDone=false then NoteUseless1
+ x4=9
+.NoteUseless1
+ goto @DoNoteObject ; make a note of the object (return code -)
+;---
+; Sam is about to make a note of Object. If certain conditions are 
+; right, this action may be treated as gaining evidence...
+.NoteObject
+ if CurrentNotePage>19 then @NoteBookFull ; Notebook is full...
+;
+ gosub @IsObjectSignificant ; is the position of this object 
+; significant at this particular time?
+ if result=false then NoteUselessObject
+;
+; Make a note of this object...
+.DoNoteObject
+; Get offset of page number in Notepad
+ gosub @TestForNotex3 ; is note x3 already in the notebook
+ if result=true then @AlreadyMadeNote
+ message cr
+ message 2870 ; sam scribbled in his notebook
+ gosub @Getx1asNoteBookPage
+code +
+ &list4(x1)=x3 ; write message
+ add x1,c2
+ &list4(x1)=x4 ; score value
+ add x1,c2
+ &list4(x1)=x5 ; paired message
+code -
+ add CurrentNotePage,c1
+ LeaveMenu=false
+ goto @AnimateSpeak
+;---
+.PrintNotedx3
+code +
+push x1
+push x2
+push x3
+push x4
+push x5
+push result
+push actor
+code -
+;
+; When an npc number is stored instead of an 
+; evidence message, it is to say that the 
+; npc was with another npc given by the word 
+; normally used to store the address of a paired word
+ if x3>MaxNpc then NotNotePerson
+ actor=x3
+code +
+ gosub @printactor ; 1st npc
+;
+; If the paired word>256 then the npc was simply in the 
+; room/256 at the time of the murder...
+code -
+ if x5<256 then NotePairedPeople
+ value=x5
+code +
+ gosub @VALUEDIV256
+code -
+ x1=value
+ m1=2854
+ m1=ShortRoomDescs
+ add m1,x1
+ message 2859 ; was in 
+ message 21 ; the
+ goto notedm1dot
+;
+; Note two people being together...
+.NotePairedPeople
+ message 6 ; and
+ actor=x5
+ if actor<>255 then PNnotwithsam
+ actor=1
+.PNnotwithsam
+code +
+ gosub @printactor ; 2nd npc
+code -
+ message 2855 ; were together at the time of the murder
+ goto @noteddot
+;
+; When an object number is stored instead of an 
+; evidence message, then we should print an 
+; additional message stating that the object is 
+; useless.
+.NotNotePerson
+ if x3>MaxObject then NotNoteObject
+ x1=x3
+code +
+push x3
+ gosub @printtheobjectx1
+pop x3
+ m1=7
+ and m1,x3 ; get OBJECT MOD 7
+code -
+ v1=30090 ; base for useless object messages
+ add m1,v1
+.notedm1dot
+ message m1
+ goto @NotedDot
+;
+.NotNoteObject
+; When message 29900-9 are noted, then list all people with sam 
+; at the time of the murder
+ if x3<29900 then @NotNoteMurder
+ if x3>29909 then @NotNoteMurder
+ message x3
+ v1=2 ; starting with npc 2
+code +
+ &v2=List4(56) ; table of npc positions
+code -
+ totalobjectsprinted=0
+.NNpcAtMurderTime
+ v3=List4(v2)
+ if v3<>255 then NNAMT1 ; pos 255 means npc was with player
+ if totalobjectsprinted=0 then NNAMTFirstEntry
+ message comma
+.NNAMTFirstEntry
+ add totalobjectsprinted,c1
+ m1=300
+ add m1,v1
+ message m1
+.NNAMT1
+ add v1,c1
+ add v2,c1
+ if v1<MaxNpcPlus1 then NNpcAtMurderTime
+ if totalobjectsprinted<>0 then NotedDot
+ message 2849 ; nobody
+ goto NotedDot
+;
+.NotNoteMurder
+; message x3
+code +
+ push m1
+ m1=x3
+ gosub @PrintM1
+ pop m1
+code -
+.NotedDot
+ message dot
+code +
+pop actor
+pop result
+pop x5
+pop x4
+pop x3
+pop x2
+pop x1
+code -
+ return
+;---
+; Is note x3 in the notebook?
+.TestForNotex3
+code +
+push x1
+push x2
+push m1
+ result=true
+ &x1=List4(32) ; x1 is start of notepad
+code -
+ x2=19 ; number of entries-1
+.TFN1
+code +
+ &m1=list4(x1)
+code -
+ if m1=x3 then TFNRet
+ add x1,c3
+ add x1,c3 ; 3 word entries
+ sub x2,c1
+ if x2<32000 then TFN1
+ result=false ; note does not exist
+.TFNRet
+code +
+pop m1
+pop x2
+pop x1
+code -
+ return
+;---
+.AlreadyMadeNote
+ message 2818
+ return
+;---
+.IOSfalse
+ result=false
+ return
+;---
+.IOStrue
+ result=true
+ return
+;---
+; Sam is about to make a note of Object. If certain conditions are 
+; right, this action may be treated as gaining evidence...
+.IsObjectSignificant
+ x5=0 ; no paired list as yet
+ if murder=9 then @IOSM9
+ if murder=8 then @IOSM8
+ if murder=7 then @IOSM7
+ if murder=6 then @IOSM6
+ if murder=5 then @IOSM5
+ if murder=4 then @IOSM4
+ if murder=3 then @IOSM3
+ if murder=2 then @IOSM2
+;
+; Murder 1
+;
+; pinnafore
+ if object<>pinnafore then IOSNotPinn
+ pos=vera
+ hipos=nonspecific
+code +
+ gosub @checkobjectpos
+code -
+ if result=false then veranotwearpinn
+ x3=30100 ; vera was wearing pinnafore before the murder
+ x4=255 ; this evidence requires a paired message
+code +
+ &x5=list4(28) ; word table of pointers to paired lists
+; Paired list for 'notwearingapron' is entry 0...
+ &x5=list4(x5)
+code -
+ goto @IOSTrue ; make a note
+;
+.veranotwearpinn
+ x3=30101 ; vera not wearing pinnafore
+ x4=10 ; score nothing. this is useless unless paired with 30100
+ goto @IOSTrue ; make a note
+.IOSNotPinn
+;
+ if object<>breadknife then IOSNotKnife
+; vera MUST be carrying knife in murder 1
+ x3=30102 ; vera was carrying the breadknife
+ x4=289 ; means=1*256+against vera(30)+score 3
+ goto @IOSTrue ; make a note
+.IOSNotKnife
+;
+; kathy's bottle in anthony's wardrobe
+ if object<>kathyswhiskybottle then IOSNotWBottle
+ if room<>97 then IOSNotWBottle
+ x3=30103 ; bottle hidden
+ x4=522 ; motive=2*256+score 0 (offset by +10)
+ goto @IOSTrue
+.IOSNotWBottle
+;
+ goto @IOSfalse
+;
+; Murder 2
+.IOSM2
+;
+ if object<>photo then IOSNotPhoto
+ x3=30066 ; blackmail photo in clifford's wallet
+ x4=585 ; motive=2*256+against robert(70)+score 3
+ goto @IOSTrue ; make a note
+.IOSNotPhoto
+;
+ if vmurderbeendone=false then @IOSFalse
+;
+ x4=329 ; means=1*256+against robert(70)+score 3
+;
+ x3=30067 ; cloth from robert's suit
+ if object=cloth then @IOSTrue ; make a note
+;
+ x3=30110 ; wallet found in bushes
+ if object=wallet then @IOSTrue ; make a note
+;
+ x3=30044 ; photo been burnt
+ if object=ashes then @IOSTrue ; make a note
+;
+ x3=30047 ; blood on ring
+ if object=ring then @IOSTrue ; make a note
+;
+ x3=30063 ; glass on body
+ if object=brokenglass then @IOSTrue ; make a note
+;
+ if object<>window then IOSNotWindow
+ if currentuserroom<>94 then IOSNotWindow ; 9jul90 room<>94
+ x3=30062 ; window broken from inside
+ x4=268 ; means=1*256+score 2 (offset by +10)
+ goto @IOSTrue ; make a note
+.IOSNotWindow
+;
+ goto @IOSfalse
+;
+; Murder 3
+.IOSM3
+;
+ if Vmurderbeendone=false then @IOSFalse
+;
+ if object<>cherub then IOSNotCherub
+; cherub is hidden in wardrobe
+ x3=30121
+ x4=339 ; means=1*256+against fiona(80)+score 3
+ goto @IOSTrue
+.IOSNotCherub
+;
+ x4=298 ; means=1*256+against kathy(40)+score 2
+;
+; tongs beside willaim's body
+ x3=30123
+ if object=tongs then @IOSTrue
+.IOSNotTongs
+;
+; perfume bottle beside willaim's body
+ x3=30122
+ if object=perfume then @IOSTrue
+.IOSNotPerfume
+;
+ goto @IOSfalse
+;
+; Murder 4
+.IOSM4
+;
+ x4=791 ; oppo=3*256+against sue(20)+score 3
+;
+; note describes poison
+ x3=30408
+ if object=note then @IOSTrue
+;
+; newspaper reveals sue's case
+ x3=30406
+ if object=newspaper then @IOSTrue
+;
+ x4=535 ; moti=2*256+against sue(20)+score 3
+;
+; letter reveals sue's worries
+ x3=30407
+ if object=suesletter then @IOSTrue
+;
+ if VMurderBeenDone=false then @IOSFalse
+;
+ if object<>pin then IOSNotPin
+; sue carrying pin
+ x1=hicurrentpos(pin)
+ if x1=0 then IOSNotPin
+ x1=currentpos(pin)
+ if x1<>sue then IOSNotPin
+ x3=30130
+ x4=279 ; means=1*256+against sue(20)+score 3
+ goto @IOSTrue
+.IOSNotPin
+;
+ if object<>poisonbottle then IOSNotBottle
+; poison bottle in william's bag
+ x3=30131
+ x4=319 ; means=1*256+against william(60)+score 3
+ goto @IOSTrue
+.IOSNotBottle
+;
+ if object<>fionaschair then IOSNotChair
+; pin in fiona's chair
+ x1=hicurrentpos(pin)
+ if x1=0 then pinnotinchair
+ x1=currentpos(pin)
+ if x1<>fionaschair then pinnotinchair
+ x3=30403
+ x4=525 ; oppo=2*256+score 3
+ x5=0
+ goto @IOSTrue
+; nothing in fiona's chair
+.pinnotinchair
+ x3=30404
+ x4=255 ; this evidence requires a paired message
+code +
+ &x5=list4(28) ; word table of pointers to paired lists
+; Paired list for 'notwearingapron' is entry 1...
+ add x5,c2
+ &x5=list4(x5)
+code -
+ goto @IOSTrue
+.IOSNotChair
+;
+ goto @IOSfalse
+;
+; Murder 5
+.IOSM5
+;
+ if Vmurderbeendone=false then @IOSFalse
+;
+; against nobody...
+ x4=268 ; means=1*256+score 2 (offset by +10=nobody)
+;
+; shotgun recently fired
+ x3=30150
+ if object=shotgun then @IOStrue
+;
+; string beside gun
+ x3=30152
+ if object=string then @IOStrue
+;
+; broken glass from window
+ x3=30157
+ if object=brokenglass then @IOStrue
+;
+ if object<>window then IOSNotWindow5
+ if currentuserroom<>94 then IOSNotWindow5
+ x3=30300 ; window broken from inside
+ goto @IOSTrue ; make a note
+.IOSNotWindow5
+;
+; against anthony
+ x4=309 ; means=1*256+score 3 (offset by +50=anthony)
+;
+; cloth covered in gun oil
+ x3=30151
+ if object=cloth1 then @IOStrue
+;
+ x4=308 ; means=1*256+score 2 (offset by +50=anthony)
+;
+; jarvis' coat in sue's wardrobe
+ x3=30153
+ if object=jarviscoat then @IOStrue
+;
+; long rope hidden in gatehouse
+ x3=30154
+ if object=longrope then @IOStrue
+;
+; penknife - hidden with rope
+ x3=30155
+ if object=penknife then @IOStrue
+;
+; wig like jarvis' head
+ x3=30156
+ if object=wig then @IOStrue
+;
+; bottle beside kathy's body
+ x3=30158
+ if object=robertswhiskybottle then @IOStrue
+;
+; rope hidden in cellar
+ x3=30159
+ if object=rope then @IOStrue
+;
+; against jarvis
+ x4=356 ; means=1*256+score 2 (offset by +100=jarvis)
+;
+; noose - jarvis hanged
+ x3=28022
+ if object=noose then @IOStrue
+;
+ gosub @IsObjectDeadi
+ if result=false then @IOSFalse
+;
+; Dead people...
+;
+; jarvis hanged
+ x3=28022
+ if object=jarvis then @IOStrue
+;
+; robert died from fall
+ x3=28020
+ if object=robert then @IOStrue
+;
+; kathy hit over head
+ x3=28021
+ if object=kathy then @IOStrue
+;
+; fiona shot
+ x3=28016
+ if object=fiona then @IOStrue
+;
+; william crushed
+ x3=28019
+ if object=william then @IOStrue
+;
+ goto @IOSfalse
+;
+; Murder 6
+.IOSM6
+ goto @IOSfalse
+;
+; Murder 7
+.IOSM7
+ goto @IOSfalse
+;
+; Murder 8
+.IOSM8
+ goto @IOSfalse
+;
+; Murder 9
+.IOSM9
+ goto @IOSfalse
+code +
+;---

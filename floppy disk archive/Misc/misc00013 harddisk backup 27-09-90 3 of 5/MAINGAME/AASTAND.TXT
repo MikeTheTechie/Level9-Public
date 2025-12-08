@@ -1,0 +1,549 @@
+; Grange Murder standard adventure routines. 
+;
+ begin
+;
+; Print text info for current ROOM
+.PrintRoom
+ TextBoxDisplayed=0 ; Not displayed with main "TextBox" routine
+ v1=HeadingRaster
+ papercol=0 ; clear raster
+ inkcol=1 ; ink color
+ bakcol=7 ; black background outdoors
+ if room<50 then OkOutdoorHeading
+ if room=78 then OkOutDoorHeading ; black background for larder
+ if room=94 then OkOutDoorHeading ; and master bedroom
+ bakcol=0 ; transparent background indoors
+.OkOutdoorHeading
+ gosub @SetUpPrintRaster
+code -
+ SuspendScroll=true
+ message cr ; flush normal text buffer
+ SuspendScroll=false
+ gosub @iStartPrintToBuffer
+ message space
+ m1=ShortRoomDescs
+ add m1,room
+ x1=hour
+ x2=minute
+ message m1
+ message space
+ print x1
+ prs ":"
+ if x2>9 then minsnozero
+ prs "0"
+.minsnozero
+ print x2
+ message space
+ message dot ; make sure following text starts in UCase
+ message cr
+ gosub @iEndPrintToBuffer
+code +
+ TextBoxWidth=224 ; set to width of text raster being printed on
+ TextBoxDepth=16 ; set to depth of text raster being printed on
+code -
+ gosub @iDisplayBufferedText ; must follow closely after iEndPrintToBuffer
+code +
+ papercol=1 ; default clear raster
+ bakcol=0 ; default text background
+ inkcol=7 ; default ink color
+; x4 is cumulative width in pixels of next word to be printed
+ x1=336 ; screen width+16 pixels
+ sub x1,x4 ; pixels to share either side of heading
+ asr x1 ; get offset from left of screen
+ HeadingXPOS=x1
+ TextBoxDisplayed=0 ; Not displayed with main "TextBox" routine
+ return
+;---
+; Do first time in room message?
+.EnterNewRoom
+push room
+code -
+ x1=currentuserroom
+ m1=1000
+ add m1,x1
+code +
+ if VMurderBeenDone=true then BodyMessage
+ if murder<4 then @FirstTimeInRoomx1
+; no first time in room text after murder 3
+ goto @PRoomRetC
+.BodyMessage
+code -
+; special messages...
+;
+ if murder<>2 then BMessM2
+;
+ x1=1 ; room 1 is used as a flag for "marks of a fall" message
+ m1=1110 ; "sam noticed marks of a fall"
+ if room=39 then @BMess2 ; right side garden
+;
+ x1=2 ; room 2 is used as a flag for "window broken" message
+ m1=1111 ; "sam noticed broken window"
+ if room=94 then @BMess2 ; master bedroom
+;
+.BMessM2
+;
+ if murder<>5 then @BMessM5
+;
+ object=robert
+ gosub @IsObjectDeadi
+ if result=false then NoRobertDeadMess
+ x1=1 ; room 1 is used as a flag for robert's dead body message
+ m1=1107
+ if room=39 then @BMess2 ; "Robert had falled to his death"
+.NoRobertDeadMess
+;
+ object=fiona
+ gosub @IsObjectDeadi
+ if result=false then NoFionaDeadMess
+ x1=2 ; room 2 is used as a flag for fiona's dead body message
+ m1=1108
+ if room=39 then @BMess2 ; "Fiona had been shot"
+.NoFionaDeadMess
+;
+ object=kathy
+ gosub @IsObjectDeadi
+ if result=false then NoKathyDeadMess
+ x1=3 ; room 3 is used as a flag for kathy's dead body message
+ m1=1104
+ if room=86 then @BMess2 ; "Kathy was dead shock horror!"
+.NoKathyDeadMess
+;
+ object=jarvis
+ gosub @IsObjectDeadi
+ if result=false then NoJarvisDeadMess
+ x1=4 ; room 4 is used as a flag for jarvis's dead body message
+ m1=1110
+ if room=50 then BMess2 ; "Jarvis had hanged to death"
+.NoJarvisDeadMess
+;
+ object=william
+ gosub @IsObjectDeadi
+ if result=false then NoWilliamDeadMess
+ x1=6 ; room 6 is used as a flag for william's dead body message
+ m1=1106
+ if room=45 then BMess2 ; "William had been crushed"
+.NoWilliamDeadMess
+;
+ goto @PRoomRet ; no dead bodies met in M5
+;
+.BMessM5
+;
+; is body here?
+ x1=currentpos(InvolvedNpc1)
+ if x1<>currentuserroom then @PRoomRet
+ x1=0 ; room 0 is used as a flag for body message
+code +
+ NextMusic=42 ; offset of corpse music ptr in IntroTables
+code -
+ VSamKnowsAboutMurder=true ; sam seen body
+ m1=1100
+ add m1,murder
+.BMess2
+code +
+push m1
+push x1
+ gosub @interceptm1
+code -
+ gosub @WriteNote ; Auto-note 1st time body message
+code +
+pop x1
+pop m1
+.FirstTimeInRoomx1
+ &x2=List4(64)
+code -
+ add x2,x1
+ x3=List4(x2)
+ if x3<>0 then @PRoomRet ; already been displayed
+ List4(x2)=c1 ; don't repeat message
+;
+; open a text window for the message
+ SuspendScroll=true
+ message cr ; flush normal text buffer
+ SuspendScroll=false
+code +
+ gosub @DoTextWindow
+code -
+;
+.PRoomRet
+code +
+.PRoomRetC
+pop room
+ ACBheader=PlayerACB
+code -
+ currentuserroom=room
+;
+; Are there any occupation messages to be printed for people?
+ actor=2 ; start with npc #2 (sue)
+.PRoomSearchOccupation
+ x1=currentpos(actor)
+ if x1<>room then NextPRSO
+code +
+ gosub @GetActorOccupation
+code -
+ if value<>0 then PRoomGotOccupation
+.NextPRSO
+ add actor,c1
+ if actor<MaxNpcPlus1 then PRoomSearchOccupation
+code +
+ goto PRSOret
+code -
+;
+; Got an occupation message in Value/M1
+.PRoomGotOccupation
+ m1=value
+ message cr
+code +
+ gosub @actorm1dot ; <npc> <occupation message>. 
+ value=0
+ gosub @SetActorOccupation
+.PRSOret
+ actor=user
+ return
+;---
+.printleaving
+code -
+ if descriptionmode<>iverbose then plret
+ if room<>currentuserroom then @plret
+ if actor<>user then PLNotUser
+ gosub @IsLeavingDoorSecret ; secret door?
+ if result=false then plret
+ message cr
+ message 2842 ; sam went through connecting door
+ message dot
+code +
+ return
+code -
+.PLNotUser
+ if vMurderBeenDone=true then plret
+ if executingracetrack<>false then plret
+ message cr
+code +
+ gosub @printactor
+code -
+ message 2824
+.plret
+code +
+ return
+;---
+.printarrival
+code -
+ if descriptionmode<>iverbose then plret
+ if actor=user then plret
+ if room<>currentuserroom then plret
+ if executingracetrack<>false then plret
+;
+; report the room we're going to?
+code +
+ gosub @GetCurrentCommand
+code -
+ m1=300 ; base for people names
+ m2=0 ; null
+ if verb=ifollow then paFindPerson ; following person?
+ if verb<>igdfind then paNotFollow
+ if noun1>maxnpc then paNotGoRoom ; finding person?
+.paFindPerson
+ x1=currentpos(noun1)
+ if x1=room then paNotGoRoom ; dest is current room - we've arrived
+ goto paGoSomewhere
+.paNotFollow
+ if verb<>iGDGO then paNotGoRoom ; going to a room?
+ if noun1=room then paNotGoRoom ; dest is current room - we've arrived!
+ m2=21 ; "the"
+ m1=800 ; base for room names
+;
+; is the current room empty?
+.paGoSomeWhere
+ message cr
+code +
+push m1
+push m2
+ gosub @printactor ; npc
+pop m2
+pop m1
+code -
+ message 2879 ; arrived, on the way to 
+ message m2 ; "the" / null
+ add m1,noun1 ; get message for dest room
+ message m1
+ message dot
+code +
+ return
+code -
+;
+; not going anywhere special, so just say "npc arrived." until 
+; the murder has taken place...
+ if vMurderBeenDone=true then paret
+.paNotGoRoom
+ message cr
+code +
+ gosub @printactor ; <npc>
+code -
+ message 2825 ; arrived.
+.paret
+code +
+ return
+;---
+; Actor is leaving ROOM in (ACBLeavingDirection)
+; result=TRUE if it's a secret (connection) door
+code -
+.IsLeavingDoorSecret ; secret door?
+ result=false
+ x2=ACBLeavingDirection
+ add x2,ACBHeader
+ x2=ACBList(x2) ; get direction in which to leave
+ result=TRUE
+;=====
+ if room<>90 then ILDS90
+ if x2=3 then ILDSRet
+.ILDS90
+ if room<>93 then ILDS93
+ if x2=7 then ILDSRet
+.ILDS93
+ if room<>92 then ILDS92
+ if x2=3 then ILDSRet
+.ILDS92
+ if room<>95 then ILDS95
+ if x2=7 then ILDSRet
+.ILDS95
+ if room<>71 then ILDS71
+ if x2=15 then ILDSRet
+.ILDS71
+ if room<>82 then ILDS82
+ if x2=7 then ILDSRet
+.ILDS82
+ if room<>69 then ILDS69
+ if x2=14 then ILDSRet
+ if x2=3 then ILDSRet
+.ILDS69
+;=====
+ result=FALSE
+.ILDSRet
+ return
+code +
+;---
+.checkifaccessible
+; return RESULT=TRUE if OBJECT is accessible to VERB
+; objects must be present in way HISEARCHPOS
+ result=179 ; dummy value
+ gosub @specialcheckifaccessible
+ if result<>179 then ciaret ; changed by routine, so accept verdict
+;
+.CIANOTOMNI
+ IF HISEARCHPOS<>NONSPECIFIC THEN CIANOTNS
+ POS=ROOM
+ HIPOS=0
+ GOSUB @CHECKOBJECTPOS
+ IF RESULT=FALSE THEN CIAISITOWNED
+; object can be either owned or on the ground. if on the ground, then 
+; approach it...
+ POS=actor
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS ; looking on ground only. if carried, can't be
+ IF RESULT=true then ciaret
+ result=true
+ goto @AACheckIfAccessible
+.CIAHAVECHECKED
+.ciaret
+ return
+;
+.CIANOTNS
+ IF HISEARCHPOS<>NOUNCARRIED THEN CIANOTCARRIED
+.CIAISITOWNED
+ POS=actor
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS
+ GOTO CIAHAVECHECKED
+;
+; check for on the ground
+.CIANOTCARRIED
+;
+; object is accessible if in a room object, even if enclosed
+ gosub @getobjectposx2
+ if x2<>room then @ReturnFalse ; not even in room!
+ if x4<MinRoomObject then CIAnotinroomobject
+ if x4>MaxRoomObject then CIAnotinroomobject
+; contained in a room object
+ result=true
+ goto CIAfindhires
+.CIAnotinroomobject
+;
+ POS=actor
+ HIPOS=NONSPECIFIC
+ GOSUB @CHECKOBJECTPOS ; looking on ground only. if carried, can't be
+ IF RESULT=TRUE THEN @RETURNFALSE ; CIAHAVECHECKED
+ POS=ROOM
+ HIPOS=0
+ gosub @CHECKOBJECTPOS
+;
+.CIAfindhires
+ goto @AACheckIfAccessible ; reached hires position?
+;---
+.SELECTOBJECTPOS
+; given VERB,PREP
+; set up HISEARCHPOS to show where the objects which follow on
+; the input line must be - i.e.
+; NOUNONGROUND, NOUNCARRIED or NONSPECIFIC
+ HISEARCHPOS=NOUNONGROUND
+ IF VERB=ITAKE THEN SOPRET
+ IF VERB=ISTAND THEN SOPRET
+ HISEARCHPOS=NOUNCARRIED
+ IF VERB=IDROP THEN SOPRET
+; IF VERB=IGIVE THEN SOPRET ; nowadays, noun2 is object to be given
+ HISEARCHPOS=NONSPECIFIC
+.SOPRET
+ RETURN
+;---
+.CHECKOBJECTPOS
+; return RESULT=TRUE if 'OBJECT' is
+; at 'HIPOS','POS'
+; if POS=0, it is treate as NONSPECIFIC
+; likewise, HIPOS=NONSPECIFIC is handled
+; return X4=lo position of object (or object if on ground)
+ if object>MaxObject then CopNotFound ; failsafeCode
+ X4=OBJECT
+.COP1
+ IF POS=0 THEN COPHI
+ X1=CURRENTPOS(X4)
+ if x1=0 then copnotfound
+ IF X1<>POS THEN COPNOTYET
+.COPHI
+; lo address is same, now check hi address
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN COPHI1
+ IF HIPOS=NONSPECIFIC THEN COPFOUND ; provided object is contained
+.COPHI1
+ IF X1<>HIPOS THEN COPNOTYET
+.COPFOUND
+ goto @ReturnTrue
+;
+.COPNOTFOUND
+ goto @ReturnFalse
+;
+.COPNOTYET
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN COPNOTFOUND
+ X4=CURRENTPOS(X4)
+ GOTO @COP1
+;---
+.checkifpresent
+; Return result=TRUE if OBJECT is in ROOM
+ gosub getobjectposx2
+ result=FALSE
+ if x2<>room then cipret
+ result=TRUE
+.cipret
+ return
+;---
+.getobjectposx2
+ x2=0
+ if object>MaxObject then @ReturnFalse
+ x4=object
+.gopx4
+; Return 'x2'=room of object X4
+;
+; Set up room as actor's room if object is of the omni-type
+ if x4<MinRoomObject then GOPNotRoomObject
+ if x4>MaxRoomObject then GOPNotRoomObject
+ if room=currentuserroom then NotInRoomObject ; we know which room 
+; objects exist in the user's room!
+;
+; we don't know if this particular room object exists in this room, 
+; so treat all room objects as omni-present
+ x2=room
+ return
+.GOPNotRoomObject
+;
+; GMJ 10jul90 firstly, is the object contained in a room object
+ if x4<MaxNpcPlus1 then NotInRoomObject ; people not treated as 
+; containments
+ &x1=list4(44) ; special objects table
+ add x1,x4
+ add x1,x4 ; special position when contained in raster objects
+ g1=List4(x1) ; get room object
+ if g1=0 then NotInRoomObject
+ add x1,c1
+ x2=list4(x1) ; get room number of room object
+ if x2<>room then gopret ; room object is not in current room, 
+; so return the room number as if the object we're checking 
+; exists plainly in that room. It will, of course, be treated 
+; as being in the room object once we enter it's room.
+;
+; object is in room object x3 within this room
+ x4=g1 ; on exit, x4 contains the last object in the containment 
+; chain, i.e. the room object
+ return
+;
+.NotInRoomObject
+ x2=CURRENTPOS(X4)
+ if x2=0 then gopfound ; not found really
+ X1=HICURRENTPOS(X4)
+ IF X1=0 THEN gopfound
+ X4=x2
+ GOTO @gopx4
+.gopfound
+ result=FALSE
+ if x2<>room then gopret
+ result=TRUE
+.gopret
+ RETURN
+;---
+.ReturnTrue
+ result=true
+ return
+;---
+.ReturnFalse
+ result=false
+ return
+;---
+; RANDOM NUMBER AND MATHS ROUTINES..
+;
+;.randomx1modx2 ; return random x1.. 0<=x1<=x2
+;code -
+; random x1
+;code +
+;
+.x1modx2 ; return remainder of division
+ if x2=0 then dividebyzero
+.mod1
+ if x1<x2 then x1modx2ret
+ sub x1,x2
+ goto mod1
+;---
+;.x1divx2 ; return x1=answer of division without remainder
+;; and x2+x3=remainder
+; x3=x2
+; x2=x1
+; if x3=0 then dividebyzero
+; x1=0 ; will be answer
+;.x1divx2a
+; sub x2,x3
+; if x2>negative then x1divret
+; add x1,c1
+; goto x1divx2a
+.x1divret
+.dividebyzero
+.x1modx2ret
+ return
+;---
+.VALUETIMES256
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ ADD VALUE,VALUE
+ RETURN
+;---
+.VALUEDIV256
+ asr VALUE
+ asr VALUE
+ asr VALUE
+ asr VALUE
+ asr VALUE
+ asr VALUE
+ asr VALUE
+ asr VALUE
+ RETURN
+;---

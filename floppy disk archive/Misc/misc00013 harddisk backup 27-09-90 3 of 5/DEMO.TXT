@@ -1,0 +1,1140 @@
+; Demo.TXT Copyright (C) 1989 Level 9 Computing.
+; for Grange intro sequence
+
+; draw flags are...
+; dRemoveRedraw=65535 ;  -1 Remove and redraw
+; dInsert=0 ;             0 insert
+; dPlot=1 ;               1 plot as sprite
+; dInsertRedraw=2 ;       2 insert and redraw
+; dMarkPreload=3 ;        3 mark to preload
+; dSetProtect=4 ;         4 set protection mark
+; dUnsetProtect=5 ;       5 unset protection mark
+
+const
+ ArcBigWindowDO=50
+ CourtBigWindowDO=93
+ CourtBigWindowRaster=2105
+
+ MazeGame=6
+ GrappleGame=10
+ BeeGame=15
+ RidgeGame=20
+ BagGame=25
+ IntroSequenceGame=32
+
+ NotOverlay=1 ; set to 1 for first program (does memory allocation)
+; set to 0 if called from another overlay
+
+var
+ framelimiting FrameCount
+ CurrentScreen
+ CurrentScreenTableOffset
+ CurrentScreenTimer
+ ScreamStarted
+ SceneLoading
+ LastScore
+ HiWSStart LoWSStart
+
+ NewIntroTextMessage
+ CurrentIntroMessage
+ IntroMessTimer
+ TextWindowXOffset
+ TextWindowHOffset
+
+ GameOver ; set to non-zero when the game has finished
+ Game  ; set to e.g. MazeGame, Bees etc.
+
+ c5 c6 c7 c9
+
+;===========================================================
+;main loop begin
+;===========================================================
+begin
+ code +
+.Start3D
+ Subgame=0 ; entry from startup
+ gosub @AAEssentialInit
+ gosub @MCHeroOnceOnlyInit
+
+
+ &HiWSStart=LongWS(HiLongFreeWorkspace)
+ &LoWSStart=LongWS(LoLongFreeWorkspace)
+
+ gosub @Initialise
+ gosub @IntroInit
+
+ cif NotPC
+  gosub @MCClearScreen
+  gosub @DisplayFrame
+  gosub @WaitForFrame
+  gosub @MCClearScreen
+ cend
+
+ gosub @SetIntroPalettes
+
+ cif AllowMusic
+   gosub @MCOnceOnlyMusicInit
+ cend
+;          /* Returns V1,V2 = (driver) InfoWord
+;                     V6 = 00000ABC
+;                          A=1 Adlib sound driver
+;                          B=1 Roland sound driver
+;                          C=1 ReelTalk
+;             (Note: Adlib/Soundblaster requires a resident driver to be
+;                    loaded before the game. If the driver is absent an
+;                    error handler call occurs before V6 is returned)
+;             (Note: This is one of the few cases where error handlers
+;                    could occur before SetUpVariablePtrs, so take care
+;                    not to PRINT to the buffer screens) 
+ framelimiting = true
+ Murder=2 ; default murder
+ goto @IntroSequence
+;--------------
+.IntroInit
+ CurrentScreenTableOffset=0 ; first screen in IntroTables
+ cif pc
+  v1=100 
+  gosub @MCSetMaxFrameRate
+ cend
+;  v3=0 ; game mode: 0=non-scrolling, 1=scrolling, 2=jumps
+;  v1 = 640
+;  v2 = 384
+;  gosub @MCInitScrolling
+  v1=0    ; X1
+  v2=319  ; X2
+  v3=0    ; Y1
+  v4=191  ; Y2
+  gosub @MCSetGraphicsWindow
+ return
+;--------------
+.IntroSequence
+ Game=IntroSequenceGame
+ gosub @IntroInit
+ gosub @MCPurgeAllCells
+ v1=IntroTablesList
+ &v2=IntroTables(36) ; main game sprites filename
+ gosub @MCOpenSpriteFile
+ gosub @LoadStructures
+; Load intro font
+ &v1=IntroTables(28)
+ gosub @LoadFontV1
+
+.NextScreen
+ TextBoxDisplayed=0
+; this bit initalises each screen
+ gosub @ChooseCurrentScreen ; which screen?
+ &WordWS(WordCursorYPos)=c0
+ gosub @MCEmptyRoom
+ gosub @InitACBs  
+ RasterOffset = 0  
+ SceneLoading=1
+ dv1 = CurrentScreen  
+ gosub @PreLoadAndInsertdv1   
+ v1=0 ; x position in pixels (scrolling)  ; offset start of train demo
+ v2=0  ; y position in pixels (scrolling)
+ gosub @MCBuildRoom
+ SceneLoading=0
+  v1 = 0 ; x step
+  v2 = 0 ; y step
+  gosub @MCScrollDirection
+ cif pc
+  gosub @MCPlotLogicalScreen
+ cend
+ gosub @ClearKBD
+
+.CarryOnLoop
+cif AllowMusic
+ gosub @PlayTuneForScene
+cend
+ gosub @DisplayEverything
+
+ gosub @KeyScan
+ if v1=0 then IntroNoKeypress
+ if v1=49 then @NextScreen ; debug - flick through intro screens
+ if v1=9 then @EndIntro ; tab for "test subgames" menu
+ if CurrentScreenTableOffset<>8 then @SelectGame ; any other key 
+; for "choose game" menu
+ gosub @ClearKBD
+ goto @NextScreen ; start intro
+.IntroNoKeyPress
+
+ gosub @DoIntroTextWindow ; handle any waiting text rasters
+ if IntroMessTimer<>0 then SubIntroMessT
+ TextBoxDisplayed=0
+ goto DoneIntroMessT	
+.SubIntroMessT
+ sub IntroMessTimer,c1
+.DoneIntroMessT	
+
+ sub CurrentScreenTimer,c1
+ if CurrentScreenTimer>0 then @CarryOnLoop
+ goto @NextScreen
+;---
+.SelectGame
+ SubGame=6 ; on hitting space
+.EndIntro
+ TextWindowXOffset=0
+ TextWindowHOffset=0
+ gosub @ClearKBD
+ dv1 = 12 ; arrival at house
+ gosub @ShowScenedv1
+ goto @ArcadeGame ; startup menu
+;---
+; Show scene dv1
+.ShowSceneDv1
+push dv1
+ gosub @MCEmptyRoom
+ gosub @InitACBs  
+pop dv1
+ SceneLoading=1
+ gosub @PreLoadAndInsertdv1   
+ v1=0 ; x position in pixels (scrolling)  ; offset start of train demo
+ v2=0  ; y position in pixels (scrolling)
+ gosub @MCBuildRoom
+ SceneLoading=0
+ cif pc
+  gosub @MCPlotLogicalScreen
+ cend
+ return
+;---
+.KeyScan
+ gosub @MCOsrdch
+ if v1=3 then @Escape ; control-c
+ if v2=16 then @Escape ; Q
+ if v2<>1 then KSNotQuitGame
+ GameOver=true
+
+.KSNotQuitGame
+ return
+
+;====================================================
+; end of main bit!!!!
+;====================================================
+.MoveACBdx4
+; dx4=ACB Header
+ add dx4,c4
+ &ACBList(dx4) = dv2
+ add dx4,c2
+ &ACBList(dx4) = dv3
+ add dx4,c2
+ &ACBlist(dx4) = dv4
+ return
+
+.ReadACBdx4
+; dx4=ACB Header
+ &dv1 = ACBList(dx4)
+ add dx4,c4
+ &dv2 = ACBList(dx4)  ; x coord
+ add dx4,c2
+ &dv3 = ACBList(dx4)  ; z coord
+ add dx4,c2
+ &dv4 = ACBlist(dx4)  ; h coord
+ return
+
+.SpecialACBKilled
+ return
+
+;-----
+
+;.ReadJoystick
+;cif NotPC
+; debug1=ByteWS(ByteJoystickStatus) ;!
+; LastKey=c0
+;.EmptyKeyboard
+; gosub @MCOsrdch
+; if v2=19 then @SafeRestart ;'R'
+; if v2=1 then @Escape
+; if v2=0 then Empty
+; lastKey=v2
+; goto EmptyKeyboard
+;
+;.Empty
+;cend
+;cif PC
+; v1=1
+; gosub @MCkeyDown
+; if v1<>0 then @Escape
+;cend
+; return
+
+;-----
+.Escape
+.CloseDown
+ cif ST
+  v1=IntroTablesList          ; IntroTables
+  &v2=IntroTables(26) ; system palette
+  v3=16
+  v4=0 ; mode
+  gosub @MCSetPalette
+  gosub @DisplayFrame ; make sure palette has been updated
+  gosub @WaitForFrame
+ cend
+
+ v1=0 ; score 0
+ v2=0 ; play
+ v3=2 ; stop
+ cif AllowMusic
+  gosub @MCPlayScore
+  gosub @MCMusicCloseDown
+ cend
+ gosub @MCCloseDown
+;-----
+.ErrorHandler
+; cif pc
+;  return
+; cend
+
+
+
+ gosub @SetUpPhysicalTextPtr
+ &WordWS(WordCursorXpos)=c0
+ &WordWS(WordCursorYpos)=c0
+ push v1
+ push v2
+  v1=320
+  v2=16
+  gosub @MCClearRectangle
+ pop v2
+ pop v1
+ push dv1
+ &dv1=WordWS(66) ;WordErrorNumber
+ code-
+ prs "Error Handler ("
+ print dv1
+ message cr ;'DoCr' ignores newlines; this is 'flush'
+ prs ") "
+ code+
+ pop dv1
+
+.WaitKey
+ gosub @MCosrdch
+ if v2=0 then WaitKey
+ return
+
+;==========
+
+; upper limits...
+; 50 Hz 12.5 fps
+; 60 Hz 16   fps
+.DisplayEverything
+  if framelimiting = false then slowmachine
+  if FrameCount < 4 then DisplayEverything
+
+.SlowMachine
+ FrameCount=0
+
+ cif pc
+  gosub @MCPlotLogicalScreen
+ cend
+ gosub @MCDisplayRoom
+ gosub @DisplayACBS
+ gosub @SortAndDisplayObjects
+ gosub @SpecialSprites
+
+ if TextBoxDisplayed<>ArcBigWindowDO then BANotArcBox
+ dv1=TextBoxDisplayed
+ dv2=0 ; x -16
+ dv3=300 ; z
+ dv4=300 ; h
+ dv5=1 ; plot
+ dv6=0 ; non-reflected
+ gosub @MCDrawObjectDv1
+.BANotArcBox
+
+ if TextBoxDisplayed<>CourtBigWindowDO then BANotCourtBox
+ dv1=TextBoxDisplayed
+ dv2=8 ; x
+ add dv2,TextWindowXOffset
+ dv3=300 ; z
+ dv4=300 ; h
+ add dv4,TextWindowHOffset
+ dv5=1 ; plot
+ dv6=0 ; non-reflected
+ gosub @MCDrawObjectDv1
+.BANotCourtBox
+
+ gosub @MCUpdateScreen
+ gosub @DisplayFrame
+ gosub @WaitForFrame
+ cif pc
+  gosub @MCUnplotScreen
+ cend
+
+ cif Scrolling
+ push v1
+ push v2
+  v1 = ScrollXDir ; 65532 ; x step=-4
+  v2 = ScrollYDir ; 0 ; y step
+  gosub @MCScrollDirection
+ pop v2
+ pop v1
+ cend
+ return
+;-----------------
+.Initialise
+; VBLInitialised=false ; will prevent any task swaps during init.
+ gosub @MCHeroInit
+
+ &x1=LongWS(HiLongPhysicalBase)
+ &LongWS(HiLongGraphicsScreenBase)=x1
+ &x1=LongWS(HiLongLogicalBase)
+ &LongWS(LoLongGraphicsScreenBase)=x1
+
+ gosub @AllocateWorkspaceLists
+; x1=0
+; &LongWS(HiLongRandomSeed)=x1
+; &LongWS(LoLongRandomSeed)=x1
+ &WordWS(WordSuspendTaskSwap)=c1 ; suspended during init
+
+ gosub @AllocateStructures ;LoadStructures
+
+ gosub @AAEssentialInit
+
+ gosub @SetUpTextPtr
+ x1=39
+ ByteWS(ByteWordWrapWidth)=x1
+; ACBsOnly=false
+; AniViewMode=1 ; display animation objects properly.
+; UseMc=true
+ &WordWS(WordUseVM)=c1 ; use vm for 3d plotting code.
+
+
+;;; cif NoIntro
+; initialise 3D.
+ v1=9000 ; 8500	; number of cells used. (will crash if too small)
+ v2=500		; no. of links
+
+cif NotPC
+ v3=500		; no. of composite cells
+cend
+cif PC
+ v3=200		; no. of heap entries = no. of sprites.
+cend
+ v4=500		; no. of masks
+ v5=308		;(For scrolling) number of ground map links
+ gosub @MCSetUpVariablePtrs	;(disable future MCreserveMemory calls)
+ gosub @MCInitBootPrg		;init floppy disk system
+
+ v3=0 ;driver mode (scrolling off)
+ v1 = 320
+ v2 = 192
+ gosub @MCinitScrolling
+cif pc
+ v1=50
+ gosub @MCsetMaxFrameRate
+cend
+;;; cend ; NoIntro
+
+
+
+
+
+
+
+ gosub @MCEmptyRoom
+ &WordWS(WordRasterOffset)=c0
+ gosub @InitACBs
+
+;; VBLInitialised=true
+ &WordWS(WordSuspendTaskSwap)=c0 ; start swapping!
+ &WordWS(WordCursorXPos)=c0
+ x1=128
+ &WordWS(WordCursorYPos)=x1
+ &WordWS(WordVBLDisabled)=c0 ; enable vbl
+ return
+;---
+.VBL
+ add FrameCount,c1
+ return
+;---
+.DoCr
+ &WordWS(WordCursorXPos)=c0
+ push x1
+ &x1=WordWS(WordCursorYPos)
+ add x1,c8
+ &WordWS(WordCursorYPos)=x1
+ pop x1
+ return
+;----------
+
+.StrategyTask
+.BGSpecial
+.TextDisplayAnimation
+.FGSpecials
+.ExtraTask
+.DamsSpecials
+.FGSpecialsMovedSprite
+;.ErrorHandler
+.IRQScheduler
+.BGSpecials
+;.SpecialACBkilled ;ACBList(ACBHeader) or dv1
+.SuspendTaskSwap
+.ResumeTaskSwap
+.DoorAnimation
+.NotDoorAnimation
+ return
+
+;.SAOStep
+;push v1
+;push v2
+;push v3
+; v1=25 ; sound sample buffer
+; v2=1807 ; offset within list
+; v3=84 ; length to play in samples (5KHz)
+; gosub @StartSound
+;pop v3
+;pop v2
+;pop v1
+; return
+;
+;.StartSound
+;; start sound if nothing already playing.
+;; (priorities?)
+; push v1
+; &v1=WordWS(58) ; snd_len - i.e. samples yet to play.
+; if v1>0 then SSEnd
+; pop v1
+; goto @MCStartSound
+;
+;.SSEnd
+; pop v1
+; return
+;---
+
+.ReadObjectAreas
+ MinXZH=1
+ &MinRaster=StructureBuffer(4)
+ add MinRaster,c1
+ &MinAnimation=StructureBuffer(10)
+ add MinAnimation,c1
+ &MinCompressed=StructureBuffer(16)
+ add MinCompressed,c1
+ &MinCell=StructureBUffer(28)
+.ADRRet
+ return
+;---
+.SetUpTextPtr
+ &dx1=list11(72) ; list 18's ptr
+ &LongWS(HiLongTextScreenBase)=dx1
+ &dx1=list11(74)
+ &LongWS(LoLongTextScreenBase)=dx1
+ return
+;-----
+;---
+.SetUpLogicalTextPtr
+ &dx1=LongWS(HiLongLogicalBase)
+ &LongWS(HiLongTextScreenBase)=dx1
+
+ &dx1=LongWS(LoLongLogicalBase)
+ &LongWS(LoLongTextScreenBase)=dx1
+ return
+;---
+.SetUpPhysicalTextPtr
+cif PC
+ v1=7                      
+ gosub @MCEnableTextBuffer 
+cend ;PC
+
+ &x1=LongWS(HiLongPhysicalBase)
+ &LongWS(HiLongTextScreenBase)=x1
+
+ &x1=LongWS(LoLongPhysicalBase)
+ &LongWS(LoLongTextScreenBase)=x1
+ return
+
+;---
+ cif SampledSound
+.LoadSample
+cif st
+ v1=25 ; load list 25
+ List17(8)=x1 ; file letter for sound sample - probably a digit.
+ x1=46 ; '.'
+ list17(9)=x1
+ x1=83 ; 's'
+ list17(10)=x1
+ x1=80 ; 'p'    78 ; 'n'
+ list17(11)=x1
+ x1=76 ; 'l'    68 ; 'd'
+ list17(12)=x1
+ gosub @MCLoadFile
+cend
+
+cif Amiga
+; Amiga expects samples to be -128..127, not
+; the 0..255 used by the ST.
+; on ST/AMiga, mcloadfile returns v1 as the
+; length of file loaded
+ v3=v2
+ add v3,v1
+; v2=start, v3=end of sample
+ x2=128
+.ModifySampleLoop
+ x1=list25(v2)
+ sub x1,x2
+ list25(v2)=x1
+ add v2,c1
+ if v2<v3 then ModifySampleLoop
+cend
+ return
+ cend ; SampledSound
+;-----
+.AllocateStructures
+; set up ACBList (14)
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(56)=x1 ; set up list14
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(58)=x1 ; set up list14
+ v1=6192 ;** probably excessive
+ gosub @MCReserveMemory
+
+; load file saved from structure editor 
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(60)=x1 ; set up list15
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(62)=x1 ; set up list15
+
+ v1=65000
+ gosub @MCReserveMemory
+ goto @AAEssentialInit
+;-----------
+.LoadStructures
+ &v1=IntroTables(38) ; 's1.dat'
+.LoadStructuresV1
+ gosub @CopyFilename
+ v1=15 ; load list 15 (structureBuffer onwards)
+ v2=0 ; offset within list15
+ v3=0
+ gosub @MCLoadFile ; filename is list17(8...)
+ v1=15 ; use list15, please
+ gosub @MCSetUpPtrs ; tell MC about ptrs
+ gosub @ReadObjectAreas ; read mincell, minraster, mincompressed
+ StartStructureBuffer=32
+;
+; drop through to AAEssentialInit...
+;
+.AAEssentialInit
+; things which must be initialised after clear etc.
+ c0=0 ;****!
+ c1=1
+ c2=2
+ c3=3
+ c4=4
+ c5=5
+ c6=6
+ c7=7
+ c8=8
+ c9=9
+ c16=16
+ return
+;-----
+.DisplayFrame
+ gosub @SetUpTextPtr
+ ByteWS(ByteFrameReadyFlag)=c1
+ return
+;------
+; wait for frame to be displayed
+.WaitForFrame
+cif NotPc ; don't wait on pc.
+ dx1=ByteWS(ByteFrameReadyFlag)
+ if dx1<>0 then WaitForFrame
+cend
+ return
+;----
+;----
+;.DivX1X2
+;; x1:=x1/x2
+; x3=minusone ; result = 0 if x2>x1
+;.DivLoop
+; add x3,c1
+; sub x1,x2
+; if x1<50000 then DivLoop
+; x1=x3
+; return
+;---
+;.ModX1X2
+;; x1:=x1 mod x2
+;.ModLoop
+; x3=x1 ; trial result
+; sub x1,x2
+; if x1<50000 then ModLoop
+; x1=x3
+; return
+;---
+
+
+;.AllocateWorkspaceLists
+; gosub @AllocateAndLoadFont
+;
+; cif AllowMusic
+;; and initialisation primarily for intro sequence...
+;; reserve space for list19 - used for music files
+; &x1=longws(HiLongFreeWorkspace)
+; &list11(76)=x1 ; set up list19
+; &x1=longws(LOLongFreeWorkspace)
+; &list11(78)=x1 ; set up list19
+; v1=15000 ; reserve space for list 19 ***Excessive?
+; gosub @MCReserveMemory
+; cend
+;
+;
+;
+;; set up start of List4
+;  &x1=longws(HiLongFreeWorkspace)
+;  &list11(16)=x1 ; set up list4 (general, fixed workspace)
+;  &list11(20)=x1 ; set up list5
+;  &x1=longws(LOLongFreeWorkspace)
+;  &list11(18)=x1 ; set up list4
+; &list11(22)=x1 ; set up list5
+;; reserve space for both tables
+;;MIKE  v1=24000 ; total length list4 + list5 (*may need to change*)
+;  v1=40000 ; total length list4 + list5 (*may need to change*)
+;  gosub @MCReserveMemory
+;;
+;; Grange loads b.dat here.
+;
+;  &x1=longws(HiLongFreeWorkspace)
+;  &list11(64)=x1 ; set up list16 ( for maps )
+;  &x1=longws(LOLongFreeWorkspace)
+;  &list11(66)=x1 ; set up list16
+;  v1=4800 ;********EndCache2 ; space for floor map cache.
+;  gosub @MCReserveMemory
+;
+;
+;  &x1=longws(HiLongFreeWorkspace)
+;  &list11(24)=x1 ; set up list6 ; npctable workspace
+;  &x1=longws(LOLongFreeWorkspace)
+;  &list11(26)=x1 ; set up list6
+;  v1=3500 ; 3000 should be enough, I think **** 
+;  gosub @MCReserveMemory ; space for list6 - npccurrent/npcstack
+;
+;  &x1=longws(HiLongFreeWorkspace)
+;  &list11(68)=x1 ; set up list17
+;  &x1=longws(LOLongFreeWorkspace)
+;  &list11(70)=x1 ; set up list17
+;  v1=128 ; 2048 ; reserve space for list 17
+;  gosub @MCReserveMemory
+;
+;  &x1=longws(HiLongFreeWorkspace)
+;  &list11(48)=x1 ; set up list12 - Hires()
+;  &x1=longws(LOLongFreeWorkspace)
+;  &list11(50)=x1 ; set up list12
+;  v1=SizeHiresList ; reserve space for list 12 - hires x,z,h,acbPtr
+;  gosub @MCReserveMemory
+;
+;; allocate list27 (map)
+; &x1=longws(HiLongFreeWorkspace)
+; &list11(108)=x1 ; set up list27
+; &x1=longws(LOLongFreeWorkspace)
+; &list11(110)=x1 ; set up list27
+; v1=1024 ; 4096 ; reserve space for list 27
+; gosub @MCReserveMemory
+;
+;; and set up list18 to point to the start of free memory -
+;; used for transient stuff during loading
+; &x1=longws(HiLongFreeWorkspace)
+; &list11(72)=x1 ; set up list18
+; &x1=longws(LOLongFreeWorkspace)
+; &list11(74)=x1 ; set up list18
+;
+; cif amiga
+;; subtract  6400 from pointer, so text printed into
+;; buffer will start at the real start of the buffer
+;; (i.e. text printed at text line 20-ish)
+;; -6400 is $FFFFE700
+;  v1=18
+;  v2=65535 ; high word
+;  v3=59136 ; $e700
+;  gosub @MCAddToListPtr
+;  v1=1600 ; 2560 ; size of text buffer on amiga
+;  gosub @MCReserveMemory
+;  return
+; cend ; amiga
+;
+; cif ST
+;; subtract 25600 from pointer, so text printed into
+;; buffer will start at the real start of the buffer
+;; (i.e. text printed at text line 20-ish)
+;; -25600 is $FFFF9c00
+;  v1=18
+;  v2=65535 ; high word
+;  v3=39936 ; $9c00
+;  gosub @MCAddToListPtr
+;  v1=12800 ; size of text buffer on ST
+;  goto @MCReserveMemory ; gosub, return
+; cend
+;
+;
+; cif pc
+; v1=5000 ;************MIKE 10/5/90
+; gosub @MCRESERVEMEMORY ;****EXPERIMENTAL
+; cend
+;  return
+
+cif 0
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(68)=x1 ; set up list17
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(70)=x1 ; set up list17
+ v1=2048 ; reserve space for list 17
+ gosub @MCReserveMemory
+
+
+; reserve space for list18 - used for music files
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(72)=x1 ; set up list18
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(74)=x1 ; set up list18
+ v1=12000 ; reserve space for list 18
+ gosub @MCReserveMemory
+
+
+ cif SampledSound
+cif amiga
+ v1=16000
+ v2=2 ; type of memory
+ v3=25 ; return address in list 25 ptr
+ gosub @MCReserveChip
+ goto InitSamples2
+cend
+
+cif NotPC
+; and set up list25 for sampled sounds
+
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(100)=x1 ; set up list25
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(102)=x1 ; set up list25
+ v1=16000 ; 32768
+ gosub @MCReserveMemory ; reserve space for list25
+
+.InitSamples2
+; and load in samples...
+ x1=49 ; '1'
+ v2=0
+ gosub @LoadSample
+
+ x1=50 ; '2'
+ v2=4000
+ gosub @LoadSample
+
+ x1=51 ; '3'
+ v2=4500
+ gosub @LoadSample
+
+ x1=52 ; '4'
+ v2=7800
+ gosub @LoadSample
+
+ x1=53 ; '5'
+ v2=11000
+ gosub @LoadSample
+cend
+ cend ; SampledSound
+ return
+cend ; 0
+
+;---
+ cif SampledSound
+;.LoadSample
+; v1=25 ; load list 25
+; List17(8)=x1 ; file letter for sound sample - probably a digit.
+; x1=46 ; '.'
+; list17(9)=x1
+; x1=83 ; 's'
+; list17(10)=x1
+; x1=80 ; 'p'    78 ; 'n'
+; list17(11)=x1
+; x1=76 ; 'l'    68 ; 'd'
+; list17(12)=x1
+; goto @MCLoadFile ; gosub, return.
+ cend ; SampledSound
+;---
+;---
+.PreLoadAndInsertdv1
+ dv2=0 ; insert on a non-aligned boundary for testing.
+ dv3=0
+ dv4=0
+.PreLoadAndInsertXZHdv1
+push dv1
+ dv6=0 ; non-reversed
+ dv5=dMarkPreload
+ gosub @DrawObjectdv1
+
+ dx1=80 ; do 80 frames of animation
+; (enough to get most stuff loaded in)
+.PLAI1
+ push dx1
+ push dv1
+  dv5=dMarkPreload
+  gosub @DisplayACBsdv5
+  dv5=dMarkPreload
+  gosub @SortAndDisplaydv5
+ pop dv1
+ pop dx1
+ sub dx1,c1
+ if dx1>0 then PLAI1
+
+ gosub @MCPreLoadCells
+
+ gosub @InitACBs
+ dv5=dInsert ; insert into structure. 7 is non-aligned
+ dv2=0 ; insert on a non-aligned boundary for testing.
+ dv3=0
+ dv4=0
+ dv6=0
+pop dv1
+ gosub @DrawObjectdv1
+ return
+;-----------
+.PreLoadAndPlotdv1
+ dv2=0 ; insert on a non-aligned boundary for testing.
+ dv3=300
+ dv4=300
+;.PreLoadAndInsertXZHdv1
+push dv1
+ dv6=0 ; non-reversed
+ dv5=dMarkPreload
+ gosub @DrawObjectdv1
+ gosub @MCPreLoadCells
+ gosub @InitACBs
+ dv5=dPlot
+pop dv1
+ gosub @DrawObjectdv1
+ return
+;-----
+;.PreLoad100 ; dv1 thru dv1+99
+; dv2=100
+;
+.PreloadDv1Dv2
+ push dv2
+.PLLoop2
+ push dv2 ;count
+ dv2=16 ; x
+ dv3=92 ; z
+ dv4=64 ; h
+ dv5=dMarkPreload
+ dv6=0 ; non-reflected
+ gosub @MCDrawObjectdV1
+ add dv1,c1
+ pop dv2 ;count
+ sub dv2,c1
+ if dv2>0 then PLLoop2
+
+ gosub @MCPreLoadCells
+ pop dv2
+ return
+;-----
+.StartFreeACB ;ObjectNumber, dv2, dv3, dv4; returns dx4
+ dv1=ObjectNumber
+ gosub @FindObjectNumber
+ goto @SetupACB
+;-----
+.SetUpACBdx4
+ push dx4
+  gosub @FindObjectNumber
+  gosub @DecodeHeader
+ pop dx4
+ dv1=ObjectNumber
+ gosub @SUAGotBlankACB
+ return
+;---
+.ChangeACBdx4
+; change acb dx4 to use ani object ObjectNumber
+ ACBHeader=dx4
+ gosub @KillACBHeader
+ push dx4
+  gosub @FindObjectNumber
+  gosub @DecodeHeader
+ pop dx4
+ dv1=ObjectNumber
+ dv6=0 ; set it up, non-reversed
+ gosub @SUAChangeACB
+ return
+;---
+ cif SampledSound
+.StartSound
+; start sound if nothing already playing.
+; (priorities?)
+ push v1
+ &v1=WordWS(58) ; snd_len - i.e. samples yet to play.
+ if v1>0 then SSEnd
+ pop v1
+ goto @MCStartSound
+
+.SSEnd
+ pop v1
+ return
+ cend
+;---
+
+
+;---
+code -
+code +
+.MCDrawObjectV1Vec
+ goto @MCDrawObjectV1
+
+.MCNoClipSpriteVec
+ goto @MCNoClipSprite
+
+.MCFindObjVec
+ goto @MCFindOBj
+
+
+;------
+ cif pc
+.SetPreLoadPalettes
+; set objects x1..x2 to use cga palette x3
+ v1=x3
+ gosub @MCSetPreloadPalette
+
+ v1=x1
+ v5=7 ; dSetPreloadPalette
+.SPLP1
+ gosub @MCDrawObjectV1
+ add v1,c1
+ if v1<x2 then SPLP1
+
+ v1=65535
+ gosub @MCSetPreloadPalette
+
+ return
+ cend
+
+;------------
+.ChooseCurrentScreen
+; which screen?
+ &x1=IntroTables(0)
+ add x1,CurrentScreenTableOffset
+ add CurrentScreenTableOffset,c8 ; next time this routine is
+; called, we'll get the next picture.
+ &CurrentScreen=IntroTables(x1)
+ if CurrentScreen>32767 then @SelectGame ; end of intro
+ add x1,c2
+ &CurrentScreenTimer=IntroTables(x1)
+ add x1,c2
+ &NextMusic=IntroTables(x1) ; offset of filename in IntroTables
+ add x1,c2
+ &MusicRepeatCount=IntroTables(x1)
+ return
+;---------
+.SpecialSetupAniObject
+; raster object dv1 has just been set up
+ return
+;---
+; Draw any waiting text messages from the intro sequence
+.DoIntroTextWindow
+ if NewIntroTextMessage=CurrentIntroMessage then AlreadyHaveIntroMess
+ CurrentIntroMessage=NewIntroTextMessage
+ v1=CourtBigWindowRaster
+ TextBoxDisplayed=CourtBigWindowDO
+ TextBoxWidth=304
+ m1=CurrentIntroMessage
+ gosub @BoxMessageM1
+.AlreadyHaveIntroMess
+ return
+;---
+.SpecialAniObject
+; an animation object is drawing fram num at dv2..dv4
+
+; Show text windows for intro sequence
+ if game<>IntroSequenceGame then @SAOnotintro
+ if dv5=0 then OkValidTextMessage ; dinsert
+ if dv5=1 then OkValidTextMessage ; plot as sprite
+ if dv5<>2 then @SAOnotintro ; dinsertredraw
+.OkValidTextMessage
+ &x1=IntroTables(42)
+; table of raster.w,message number.w,frames.w,x offset.w,h offset.w
+.ScanTextRasters
+ &x2=IntroTables(x1) ; x2=raster.w
+ if x2=0 then @SAOnotIntro ; end of table - raster not found
+ if x2=num then SAOfoundTraster ; found text raster in table
+ add x1,c2
+ add x1,c8 ; point to next entry
+ goto ScanTextRasters ; scan next entry
+;
+; x1 points to requirements for text raster num
+.SAOfoundTraster
+ add x1,c2
+ &NewIntroTextMessage=IntroTables(x1) ; message.w
+ add x1,c2
+ &IntroMessTimer=IntroTables(x1) ; frames.w
+ add x1,c2
+ &TextWindowXOffset=IntroTables(x1) ; x offset.w
+ add x1,c2
+ &TextWindowHOffset=IntroTables(x1) ; h offset.w
+ num=0 ; make sure structure doesn't show trigger raster
+ if NewIntroTextMessage=CurrentIntroMessage then ShowingCorrectMess
+ TextBoxDisplayed=0 ; don't show previous text message at 
+; new message pos while waiting for the new message to be shown
+.ShowingCorrectMess
+ return
+.SAOnotintro
+
+ gosub @ArcadeSpecialAniObject
+ if SceneLoading=1 then @SAORet
+ if num=556 then StartFightMusic
+ if num<>574 then SSAONotFightMusic ; take stick
+.StartFightMusic
+; play fight music
+ &NextMusic=IntroTables(4)
+
+.SSAONotFightMusic
+ if num<>551 then SSAONotFighters ; 551=light cigarette frame
+ if ScreamStarted<>0 then SSAONotFighters
+ ScreamStarted=1
+; play scream
+ &NextMusic=IntroTables(2)
+ MusicRepeatCount=1 ; make sure the scream doesn't kill the music
+; system
+
+.SSAONotFighters
+ if num<>755 then SSAONotHit ; hit on head with stick
+; play thump, birdsong
+ &NextMusic=IntroTables(6)
+ MusicRepeatCount=0
+
+.SSAONotHit
+ if num<>720 then SSAONotSmash ; smash window
+ &NextMusic=IntroTables(8)
+ RepeatCount=3
+
+.SSAONotSmash
+.SAORet
+ return
+;---
+; Set palettes for intro & sub-games
+.SetIntroPalettes
+  v1=IntroTablesList          ; IntroTables
+cif notpc
+  &v2=IntroTables(16) ; palette
+cend
+  v3=16
+cif pc
+  &v2=IntroTables(14) ; palette
+cend
+  gosub @MCSetPalette
+
+ cif pc
+  &v2=IntroTables(20) ; CGA2 palette
+  v3=2 ; 2-color palette
+  v4=0 ; default palette
+  gosub @MCSetPalette
+
+  x1=16
+  add v2,x1 ; skip on to people palette
+  v4=1 ; palette 1 - people
+  gosub @MCSetPalette
+
+  x1=16
+  add v2,x1 ; skip on to train palette
+  v4=2 ; palette 2 - people
+  gosub @MCSetPalette
+ cend
+ return
+;---
+.SpecialSetUpFork ; with ACB dx4, coords dv2..dv4
+ return
+;-----
+.SetIBMReducedPalettes
+ return

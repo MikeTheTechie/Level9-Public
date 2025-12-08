@@ -1,0 +1,25 @@
+swapsc:	move.l (screenp),d1	*read screen pointer
+
+	cmp.l #1,d1	*is it 1
+
+	beq sw2	*if so then branch
+*it isn`t
+	move.l #1,(screenp)
+	move.l (screenb),(screen)
+
+	move.l (screena),d1
+	lsr.l #8,d1
+	move.b d1,($ff8203)
+	lsr.l #8,d1
+	move.b d1,($ff8201)
+	bra waitvideo
+
+sw2:	move.l #2,(screenp)
+	move.l (screena),(screen)
+
+	move.l (screenb),d1
+	lsr.l #8,d1
+	move.b d1,($ff8203)
+	lsr.l #8,d1
+	move.b d1,($ff8201)
+	bra waitvideo

@@ -1,0 +1,166 @@
+Blood Relations: Report
+-----------------------
+
+Recent fixes (for side-effect reference) since 20/9/90
+------------------------------------------------------
+
+OK * Graphics oscillate when finish menu conversation.
+OK * Inspector freezes his racetrack after he's met Sam.
+  - TeleGoto was found to kill all return addresses, such that 
+  an npc given a telegoto while executing a subroutine would 
+  not return to the code which called the subroutine, after 
+  the telegoto routine had ended.
+OK * Intro now works out maximum possible score and rounds it 
+  to the nearest hundred. The main game tweaks the score if 
+  it is close to (or greater than!) the maximum score.
+OK * Move all writeable tables to start of list 4, and save 
+  only those necessary, rather than the whole of list 4.
+OK * Npc's stand up BEHIND chairs when about to leave the room.
+OK * Fiona dead at table not shown.
+   - Dead flag bits not set in murders 1-4!
+OK * Accuse npc, they say, e.g. Kathy said, "Kathy". & mouth animation 
+  is not removed.
+OK * Point evidence to people in M1-4.
+OK * Adjust evidence tables for court in M1-4.
+OK * Can't get menu after climbing stairs from within a "find person" 
+  command.
+OK * Interface maze game with main game - show the correct objects 
+  as sam picks them up, and make sure he's carrying them when 
+  returning to the main game.
+OK * Large font - (!) instead of ( ).
+OK * Sex scene begins in library!
+OK * Get masonry game working properly, & also make masonry 
+  hit William.
+OK * Knocked out if hit by masonry.
+OK * Analyse - all objects treated as insignificant.
+OK * Clear text backdrop & set intro palette when going to 
+  the intro from the main game.
+OK * Restart new game after time-out: Immediately run out of 
+  time again.
+OK * Screen flashes at start & briefly shows intro scene.
+OK * William prevents Sam from opening doctor's bag.
+OK * Don't animate dead body - re-display room.
+OK * William's body pos is too low.
+OK * Whisky bottle hovers above ground M5.
+OK * Electric fire is two cells too high in gatehouse.
+OK * Auto-note 1st time body messages.
+OK * Room heading has black border in ligher-toned indoor rooms.
+OK * Display sub-game intructions over a scene from the 
+  sub-game.
+OK * Raster printing has a black border.
+OK * Load/Save use one of 10 position files.
+OK * Show sub-game instructions over game scene.
+OK * Bees fly more to the left or right when they begin, to 
+  lessen the chance of hitting them by repeatedly swatting the 
+  hive.
+OK * Load now initialises the correct tables if loading a position 
+  saved from a murder other than the current one.
+OK * Intro text on raster printing.
+
+Main game bugs
+--------------
+
+M * Graphics corrupted when loading and even saving.
+M * No quote in big font. Also, the dot character is too far 
+  to the right and not big enough.
+
+* Check all default objects & objects repositioned with 
+  no hipos, to make sure they don't "hover".
+* Text box warnings as time runs out.
+* Can't climb up landing on GD to master bedroom.
+* Can't climb down OR up g/house stairs on a GD.
+* No ridge walk text (window too small? - Shorten text).
+* When player isn't doing well...
+   more frequent, (a) Auto sub-game or hint to do a sub-game
+   less frequent, (b) Game hint to solving the murder (things 
+   to examine, people to ask - Pete: Make this murder specific, 
+   i.e. different hints for each murder?
+* Menus to use raster printing & CopyScreenToBuffer.
+* Main text to use raster printing.
+* When Sam wins the doctor bag game, print each object found 
+  from withing the sub-game overlay, & transfer their position to 
+  him.
+* For the maze, have a maximum of 2 objects in the maze.
+  When the player hits an object, scan to see if any special 
+  objects in the maze (don't have any objects with default maze 
+  positions!). If none, choose a dummy one (which will have 
+  a default pos of room 0). Set vars MazeObject and MazeObject1 
+  to the objects picked up. If Sam wins, give him the objects, 
+  if he loses, clear MazeObject and MazeObject1 (which should 
+  be done whenever the maze game is started, anyway).
+* Make Jarvis carry drinks tray in serving racetrack and at start 
+  of murder 5, and in other murders where he e.g. serves 
+  breakfast.
+
+Murder specific bugs
+--------------------
+
+Murder 1
+--------
+
+Murder 2
+--------
+
+Murder 3
+--------
+
+Murder 4
+--------
+
+Murder 5
+--------
+
+* Clifford repeatedly dials phone / goes on Library RT!
+* William has blank conversation after he sees Kathy dead
+SQUASH * Noose messages mixed up - message.txt says "penknife", table2.txt 
+  says "long rope", BUT when noted, it is correctly referred to 
+  as "a noose"
+
+Sub game bugs
+-------------
+
+* Time-out clock is shown in front of doctor bag graphic.
+* Bees sometimes sting in wrong place. Because big stinging bee 
+  is not within the range 965-985, which is used to set 
+  BeeX and BeeY?
+* Bees usually always fly to the right (random path? Why not just 
+  use one path).
+
+Floormaps
+---------
+
+* Top left corner of library - make small S chair alcove flush 
+  with S sofa.
+* Left side of table in study.
+* Plant pot in downstairs corridor.
+* Landing.
+* Desk in Robert's room.
+* Bee hive.
+* Southeast corner in entrance hall - make chair access easier.
+
+Graphics
+--------
+
+* Please could we have people's legs attached to their eating 
+  animations, and Fiona when she's dead (2191).
+* Jarvis dusting/polishing animation, in all directions.
+* Broken window wrong (too small a hole).
+* The sex scene animation no longer works (the portrait stuff).
+* For some of the smaller rooms, could we have some sort of border? 
+  There is too much contrast between the edge of the room and the 
+  black background. This is emphasised by the main text window, which 
+  remains the full screen width.
+
+Bonus on completion, agreed at œ 5000.00 on Monday 16th September 1990
+----------------------------------------------------------------------
+
+To devalue at a rate of œ 1000.00 per month as follows:
+
+Date ranges inclusive	 Bonus
+---------------------	 -----
+16/09/90 to 15/10/90 œ 5000.00
+16/10/90 to 15/11/90 œ 4000.00
+16/11/90 to 15/12/90 œ 3000.00
+16/12/90 to 15/01/91 œ 2000.00
+16/01/91 to 15/02/91 œ 1000.00
+16/02/91 onwards	  null

@@ -1,0 +1,414 @@
+; COURT.TXT - Blood Relations Courtroom code - GMJ 03/08/90
+;
+const
+ CourtGame=30
+ CourtScene=94
+ SearchMeans=1
+ SearchMotive=2
+ SearchOpportunity=3
+ Continue=7
+;
+begin
+;
+; Sam has lost the game
+.LoseGame
+ gosub @SetUpCourtScene
+ m1=70
+ x1=100 ; wait duration
+ gosub @DoCourtTextWindow
+ goto @EndCourtScene
+;
+; Sam has ACCUSED noun1
+.CourtRoom
+ m1=62
+ gosub @DoTextWindow  ; like BoxMessageM1, but sets up raster num v1 itself
+ x1=75 ; time out for text box
+ gosub @showcourtscene
+ gosub @SetUpCourtScene
+;
+; Prosecutor statement
+ gosub @SetUpWindow ; set up text window
+code -
+ message 144 ; we are here to try
+ m1=120
+ add m1,noun1
+ message m1 ; the accused
+ message 145 ; of murder
+ message cr ; ensure buffer is flushed
+ gosub @iEndPrintToBuffer
+ gosub @iDisplayBufferedText
+code +
+;
+; Prosecutor animation
+ x1=50 ; wait duration
+ gosub @ShowCourtScene
+;
+; List the most important evidence we have noted
+ Value=SearchMeans
+ gosub @PrintEvidenceMessages
+push x7 ; save means score
+ Value=SearchMotive
+ gosub @PrintEvidenceMessages
+push x7 ; save motive score
+ Value=SearchOpportunity
+ gosub @PrintEvidenceMessages
+ v3=x7 ; opportunity score
+pop v2 ; recover motive score
+pop v1 ; recover means score
+;
+; Sam utters nothing if no evidence at all
+ add x7,v1
+ add x7,v2
+ if x7>0 then SamReadEvidence
+ m1=146
+ x1=50 ; wait duration
+ gosub @DoCourtTextWindow
+.SamReadEvidence
+;
+; Prosecutor asks defending lawyer to step forward
+ m1=147
+ x1=50 ; wait duration
+ gosub @DoCourtTextWindow
+;
+; Defending lawyer objects if too little evidence
+ won=true
+ if v1>8 then EnoughMeans
+ won=false
+ m1=111 ; the defending lawyer said, "not enough means"
+ x1=50 ; wait duration
+ gosub @DoCourtTextWindow
+.EnoughMeans
+ if v2>8 then EnoughMotive
+ won=false
+ m1=112 ; the defending lawyer said, "not enough motive"
+ x1=50 ; wait duration
+ gosub @DoCourtTextWindow
+.EnoughMotive
+ if v3>8 then EnoughOpp
+ won=false
+ m1=113 ; the defending lawyer said, "not enough opp"
+ x1=50 ; wait duration
+ gosub @DoCourtTextWindow
+.EnoughOpp
+;
+; Judge asks jury for verdict
+ m1=142
+ x1=50 ; wait duration
+ gosub @DoCourtTextWindow
+;
+; Print the verdict
+ gosub @SetUpWindow ; set up text window
+code -
+ message 143 ; the jury have found, 
+ m1=120
+ add m1,noun1
+ message m1 ; <npc>
+ m1=140
+code +
+ add m1,won
+code -
+ message m1 ; guilty of murder". / innocent".
+ message cr ; ensure buffer is flushed
+ gosub @iEndPrintToBuffer
+ gosub @iDisplayBufferedText
+ x1=50 ; wait duration
+code +
+ gosub @ShowCourtScene
+;
+; Win/lose message
+ dv1=82 ; title screen
+ gosub @ShowScenedv1
+ m1=148
+ add m1,won
+ x1=35 ; wait duration
+ gosub @DoCourtTextWindow
+;
+; Give hints as to evidence missed
+ Value=SearchMeans
+ gosub @PrintEvidenceMissed
+ Value=SearchMotive
+ gosub @PrintEvidenceMissed
+ Value=SearchOpportunity
+ gosub @PrintEvidenceMissed
+;
+.EndCourtScene
+ SubGame=0
+ TextBoxDisplayed=0
+ gosub @MCEmptyRoom
+ gosub @InitACBs
+ v1=0
+ v2=0
+ gosub @MCBuildRoom
+ gosub @ClearKBD
+ goto @introsequence
+;---
+; Plot courtroom
+.SetUpCourtScene
+ Game=CourtGame
+ gosub @MCPurgeAllCells
+ v1=IntroTablesList
+ &v2=IntroTables(36) ; intro sprites filename
+ gosub @MCOpenSpriteFile
+ gosub @LoadStructures
+ gosub @MCEmptyRoom
+ gosub @InitACBs
+ dv1=CourtScene ; court scene
+ gosub @PreloadAndInsertDV1
+ cif pc
+  gosub @MCPlotLogicalScreen
+ cend
+ v1=0 ; x coord
+ v2=0 ; y coord
+ gosub @MCBuildRoom
+ TextBoxDisplayed=0
+ return
+;---
+; Do courtrooom message m1, and step on animation x1+10 times
+.DoCourtTextWindow
+push v1
+push v2
+push v3
+push x1
+ v1=CourtBigWindowRaster
+ TextBoxDisplayed=CourtBigWindowDO
+ TextBoxWidth=304
+ gosub @BoxMessageM1
+pop x1 ; get animation duration
+ gosub ShowCourtScene ; step on animation
+pop v3
+pop v2
+pop v1
+ return
+;---
+; Step on animation x1+1 times
+.ShowCourtScene
+ gosub ShowCS1 ; animate with box
+ gosub @ClearKBD
+ gosub @WaitKey ; wait keypress
+ TextBoxDisplayed=0
+ x1=1 ; and briefly again, without box
+;
+.ShowCS1
+push x1
+ gosub @DisplayEverything
+pop x1
+ sub x1,c1
+ if x1<32000 then ShowCS1
+.DoneCourtScene
+ return
+;---
+; Set up text window
+.SetUpWindow
+ v1=CourtBigWindowRaster
+ TextBoxDisplayed=CourtBigWindowDO
+ TextBoxWidth=304
+ gosub @SetUpPrintRaster
+code -
+ gosub @iStartPrintToBuffer
+code +
+ return
+;---
+; Work out who the evidence with score x4 points to
+; On entry, x4=encoded evidence score value
+; On exit, x4=absolute evidence score value
+;	   v1=guilty npc
+.GetGuiltyNpc
+ v1=1 ; loop counter, npc 1=evidence pointing to nobody/sam
+ v2=10
+.GetGuiltyNpc1
+ sub x4,v2 ; subtract offset of 10
+ if x4<10 then GotGuiltyNpc ; withing +ve range?
+ if x4>65526 then GotGuiltyNpc ; withing -ve range?
+ add v1,c1
+ goto GetGuiltyNpc1
+.GotGuiltyNpc
+ return
+;---
+; Report all the evidence pointing towards the accused in this category 
+; with a score of 3 or more
+;
+; On entry, value=category number, noun1=person we're accusing
+; On exit, x7=total score in this category
+.PrintEvidenceMessages
+ gosub @SetUpWindow ; set up text window
+code -
+ m1=100 ; sam said, "
+ add m1,value ; add category
+ message m1
+code +
+;
+; Report entries that have been noted
+ x7=0 ; clear score
+ x5=19 ; length of notebook-1
+ &x1=List4(32) ; x1 is start of notepad
+.ReportNoted
+push x5
+ &x3=list4(x1) ; get note message
+ add x1,c2
+ v4=list4(x1) ; get evidence type
+ add x1,c1
+ x4=list4(x1) ; get score value
+ add x1,c1
+ &x5=list4(x1) ; get offset to paired message list (if any)
+ add x1,c2
+ if x3=0 then @RNnext ; null entry
+ if x5=0 then NoPairedEv ; no paired messages
+;
+; We must pair up with any messages in List4(x5) if we are to 
+; score for this piece of evidence
+.FindPair
+ &x4=list4(x5)
+ if x4=0 then @RNnext ; end of pairs list
+push x3
+ x3=x4
+ add x5,c2
+ v4=list4(x5) ; get evidence type
+ add x5,c1
+ x4=list4(x5) ; get score value
+ add x5,c1
+;
+; test to see if we've already noted message x1
+ gosub @TestForNotex3 ; is note x3 already in the notebook
+pop x3
+ if result=false then FindPair ; no match found yet
+;
+.NoPairedEv
+ if v4<>value then @RNnext ; wrong evidence category
+ gosub @GetGuiltyNpc ; v1=guilty npc, x4=true score value
+ if v1<2 then EvidenceAgainstNoun1 ; not against an npc - ok
+ if v1<>noun1 then RNnext ; not against the npc we're accusing
+.EvidenceAgainstNoun1
+ if x4<3 then RNnext ; score too low
+ if x4>32000 then RNnext ; score negative
+;
+; Display the noted entry
+ if x7=0 then NoComma ; no comma for first message
+push x1
+push x3
+code -
+ message continue
+ message cr ; ensure buffer is flushed
+ gosub @iEndPrintToBuffer
+ gosub @iDisplayBufferedText
+code +
+ x1=50 ; wait duration
+ gosub @ShowCourtScene
+ gosub @SetUpWindow ; set up text window
+pop x3
+pop x1
+code -
+ message continue
+code +
+.NoComma
+code -
+ message x3
+ add x7,x4 ; add score value
+;
+code +
+.RNnext
+pop x5
+ sub x5,c1
+ if x5<32000 then @ReportNoted ; reached end of notebook?
+;
+; Display all the evidence noted
+code -
+ message quote
+ message dot
+ message cr ; ensure buffer is flushed
+ gosub @iEndPrintToBuffer
+ gosub @iDisplayBufferedText
+code +
+ if x7=0 then NotedNothing ; nothing noted in this category
+ x1=50 ; wait duration
+ gosub @ShowCourtScene
+.NotedNothing
+ TextBoxDisplayed=0
+;
+; force negatives scores to be zero
+ if x7<32000 then x7pos
+ x7=0
+.x7pos
+;
+ return
+;---
+; Print a hint as to any MAIN TABLE evidence missed in this category
+; On entry, value=category number, noun1=person we're accusing
+.PrintEvidenceMissed
+ gosub @SetUpWindow ; set up text window
+ &x1=list4(26)
+ sub x1,c2
+ add x1,murder
+ add x1,murder
+ &x1=list4(x1) ; start of MAIN EVIDENCE table
+.ReportMissed
+ add x1,c2 ; skip intercept message
+ &x3=list4(x1) ; get message number
+ if x3=0 then @NothingMissed ; end of table
+ add x1,c2
+ v4=list4(x1) ; get evidence type
+ add x1,c1
+ x4=list4(x1) ; get score value
+ add x1,c1
+ if x4<>255 then RMnotpaired
+;
+; Ignore paired messages
+ add x1,c2 ; skip pair offset
+ goto ReportMissed
+;
+.RMnotpaired
+ if v4<>value then @ReportMissed ; wrong evidence category
+ gosub @GetGuiltyNpc ; v1=guilty npc, x4=true score value
+ if v1<2 then EvidenceAgainstNoun10 ; not against an npc - ok
+ if v1<>noun1 then @ReportMissed ; not against the npc we're accusing
+.EvidenceAgainstNoun10
+ if x4<3 then @ReportMissed ; score too low
+ if x4>32000 then @ReportMissed ; score negative
+;
+; Is evidence message NOT in the notepad
+ gosub @TestForNotex3
+ if result=true then @ReportMissed ; noted this message
+;
+; Display the noted entry missed
+code -
+ x1=10000
+ sub x3,x1 ; convert evidence message to a hint message
+ message x3
+ message dot
+ message cr ; ensure buffer is flushed
+ gosub @iEndPrintToBuffer
+ gosub @iDisplayBufferedText
+code +
+ x1=50 ; wait duration
+ goto @ShowCourtScene
+;
+; No evidence was missed!
+.NothingMissed
+code -
+ message cr ; ensure buffer is flushed
+ gosub @iEndPrintToBuffer
+code +
+ TextBoxDisplayed=0
+ return
+;---
+; Is note x3 in the notebook?
+.TestForNotex3
+push x1
+push x2
+push m1
+ result=true
+ &x1=List4(32) ; x1 is start of notepad
+ x2=19 ; number of entries-1
+.TFN1
+ &m1=list4(x1)
+ if m1=x3 then TFNRet
+ add x1,c3
+ add x1,c3 ; 3 word entries
+ sub x2,c1
+ if x2<32000 then TFN1
+ result=false ; note does not exist
+.TFNRet
+pop m1
+pop x2
+pop x1
+ return
+;---

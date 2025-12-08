@@ -1,0 +1,1632 @@
+; Grange Murder special game logic. Graham M Jones 03/06/89. 
+;
+ const
+ AllowFade=0
+;
+ begin
+;
+;---
+.StandUpIfSittingVEC
+ goto @StandUpIfSitting
+;---
+.CancelExecuteVec
+ goto @CancelExecute
+;---
+.TalkedToConversantVEC
+code -
+ gosub @TalkedToConversant
+code +
+ return
+;---
+.getobjectposx2VEC
+ goto @getobjectposx2
+;---
+.GDreadSquareVec1
+ goto @GDReadSquare
+;---
+.GDpointOnMapVec1
+ goto @GDPointOnMap
+;---
+.GDQuadMaskVec1
+ goto @GDQuadMask
+;---
+.CalcFastestRouteVec
+ goto @calcFastestRoute
+;---
+.SASCHeckStartMoveVEC
+ goto @SASCHeckStartMove
+;---
+.GDInProgressVec
+ goto @GDInProgress
+;---
+.AdjustPersonHeightVec
+ goto @AdjustPersonHeight
+;---
+.CPC0Vec
+ goto @CPC0
+;---
+.MCOSWRCHV1vec
+ goto @MCOSWRCHV1Vec0
+;---
+.MCClearRectangleVec
+ goto @MCClearRectangleVec0
+;---
+.getdirx1VEC
+ goto @getdirx1
+;---
+.DrawPortraitFrameVecXH
+code -
+ gosub @drawportraitframeXH
+code +
+ return
+;---
+.AAMLGotCoords1Vec
+ goto @AAMLGotCoords1
+;---
+.DrawPortraitVecXH
+code -
+ gosub @drawportraitXH
+code +
+ return
+;---
+.IntelligentKeyScanVec
+code -
+ gosub @IntelligentKeyScan
+code +
+ return
+;---
+.CheckMapVec
+ goto @checkmap
+;---
+.SetUpDotDatVEC
+ goto @SetUpDotDatVEC1
+;---
+.FindChairvec
+ goto @FindChair
+;---
+.InitFloorsVec1
+ goto @InitFloors
+;---
+.CalcRasterOffsetObjectV
+ goto @CalcRasterOffsetObject
+;---
+.DisplayRoomVEC1
+ goto @DisplayRoomVEC
+;---
+.MCLoadFileVEC
+ goto @MCLoadFileVEC1
+;---
+.FCnewRoomDv1Vec1
+ goto @FCnewRoomDv1
+;---
+.FindVacantPositionVEC
+ goto @FindVacantPosition
+;---
+.ClearSearchtimeVEC
+ goto @ClearSearchtime
+;---
+.RepositionDv1234vec
+ goto @RepositionDv1234
+;---
+.GetMovingAniDv1vec
+ goto @GetMovingAniDv1
+;---
+.GetStandingAniDv1vec
+ goto @GetStandingAniDv1
+;---
+.IsObjectSittingVEC
+ goto @IsObjectSitting
+;---
+code -
+.IsObjectDeadi
+code +
+ gosub @IsObjectDead
+code -
+ return
+code +
+;
+; Is npc OBJECT dead?
+.IsObjectDead
+ &x1=List4(88)
+ add x1,object
+ result=list4(x1)
+ and result,c1 ; bit 0=0/1
+ return
+;---
+;
+; Actor has just left FROM in direction DIR to enter ROOM
+.AFTERMOVES
+;
+;=====
+ if actor<>user then AMNotUser
+;---
+ nextmusic=6 ; kitchenmusic
+ if room=80 then GotMusic
+ nextmusic=2 ; house music
+ if room>49 then GotMusic
+ nextmusic=4 ; garden music
+.GotMusic
+;---
+.AMnotuser
+;---
+code -
+; set momentary flag when Actor goes via front door, so as to let in 
+; anybody waiting on arrival
+ if room<>86 then notenterhouse
+ if from=47 then openfrontdoor
+.notenterhouse
+ if room<>47 then notleavehouse
+ if from<>86 then notleavehouse
+.openfrontdoor
+ frontdooropened=true
+.notleavehouse
+code +
+;---
+; handle meetings with player
+ if PlayerHidden<>false then @meetingsret ; sam is hidden
+ if persontalking<>false then @meetingsret ; someone already talking
+ if actor<>user then @usernotmeet
+;
+; the user may have intruded on an npc. are there any special cases 
+; such as throwing the player out, or going on a special racetrack?
+; list of npc.b,room.b
+; * racetrack is worked out from table entry number
+; * npc.b is hashed once this intrusion has been activated
+;
+; simply find the first npc in the room who's waiting to do an 
+; intrusion racetrack
+ x5=2 ; npc count
+ &x1=list4(62) ; intrusion pointers
+.findintrusionnpc
+ &x2=List4(x1) ; get intrusion address for this npc
+push x1
+ if x2=0 then @NoNpcIntrusionx5 ; no intrusion waiting
+; if x5=involvednpc1 then @NoNpcIntrusionx5 ; npc is dead
+push object ;*
+ object=x5 ;*
+ gosub @IsObjectDead ;*
+pop object ;*
+ if result=true then @NoNpcIntrusionx5 ;*
+ x1=currentpos(x5)
+ if x1<>currentuserroom then @NoNpcIntrusionx5 ; npc not here
+;
+; don't do an intrusion rt if we're finding someone or waiting for 
+; them etc., as this messes up crucial timing
+ actor=x5
+ gosub @setACTORATTRIBUTES
+ gosub @getcurrentcommand
+ actor=user
+ gosub @setACTORATTRIBUTES
+ if verb=iwaitforperson then @NoNpcIntrusionx5
+ if verb=ifollow then @NoNpcIntrusionx5
+ if verb<>igdfind then foundintrusion
+ if noun1<maxnpcplus1 then @NoNpcIntrusionx5
+;
+.foundintrusion
+; for some reason, if the player is trying to find the npc we've 
+; intruded, the game hangs up!!
+ gosub @GetCurrentCommand
+ if noun1<>x5 then UserNotFindIntruded
+ gosub @CancelExecute
+.UserNotFindIntruded
+pop x1 ; recover pointer to intrusions list
+ &Value=List4(x1)
+ &list4(x1)=c0 ; don't repeat the intrusion
+ actor=x5
+ conversant=x5
+push x5
+ gosub @GOSUBRacetrackValueA
+ actor=user
+ gosub @SetActorAttributes
+; Set flag for having talked to Conversant
+pop noun1
+push executeprocessed
+ gosub @DoRtBusy ; intrusion npc is 'busy'
+pop executeprocessed
+ goto @TalkedToConversantVEC
+;
+.NoNpcIntrusionx5
+pop x1 ; recover pointer to intrusions list
+ add x1,c2
+ add x5,c1
+ if x5<MaxNpcPlus1 then @findintrusionnpc
+ return
+;
+; npc enters user room, so do a simple "meeting"
+.MeetingWithNpcx5
+ if x2>1 then @meetingsret ; nobody here who hasn't met player
+; enough times already
+ persontalking=x5 ; use portrait for npc we're meeting
+;
+; use a second set of meeting messages after the murder
+ conversant=persontalking
+code -
+ gosub @IsMurderRevealedConv
+code +
+ if result=0 then PreMurderMeetings
+ add x2,c2
+ goto NoJarvisIntro ; no jarvis introductions after murder
+.PreMurderMeetings
+; if murder is complete, but npc has yet to learn of it, then 
+; avoid doing meetings, as this can produce rather embarassing 
+; results
+ if vmurderbeendone=true then @meetingsret
+;
+; If first meeting, and Jarvis is here, then Jarvis introduces 
+; then npc to Sam
+ if murder>1 then nojarvisintro ; only in first murder
+ if x5=Jarvis then nojarvisintro ; jarvis can't introduce himself
+ if x2<>0 then nojarvisintro ; not first meeting
+ x1=currentpos(jarvis)
+ if x1<>currentuserroom then nojarvisintro ; jarvis not here
+code -
+ gosub @HaveWeTalkedToC
+code +
+ if result<>false then nojarvisintro ; we've already been talking to 
+; this npc
+ persontalking=jarvis ; use jarvis portrait
+ x2=4 ; fifth meeting table is jarvis' introductions to each npc
+ goto dontaddmeetings ; don't increment the npc's meeting counter
+.nojarvisintro
+;
+; increment meetings counter
+ &x1=List4(52) ; start of meetings table (entry 0 is npc #2)
+ sub x1,c2
+ add x1,x5
+ x4=List4(x1)
+ add x4,c1
+ List4(x1)=x4
+.dontaddmeetings
+;
+; Set npc x5 into talk mode, having met user for the x2th time
+push actor
+push x2
+ actor=x5
+ add x2,x2
+ add x2,x2 ; meetings*4
+ x1=x2
+ add x2,x2
+ add x2,x2 ; *16
+ add x1,x2 ; *20 (messages in groups of 20)
+ portraitmessage=2600
+ add portraitmessage,x1
+ add portraitmessage,actor
+ portraittimer=40 ; timer for drawing & removing of portrait
+pop x2
+; Trigger special conversations on the first two ordinary 
+; meetings before the murder
+ if x2>1 then @NoMeetingConversation
+
+; GMJ 23 August 1990
+ gosub @GetActorConversationV
+ if value<>0 then NoMeetingConversation ; already have RT conversation
+
+ &x1=List4(82)
+ add x2,x2 ; *2
+ add x2,x2 ; *4
+ add x1,x2
+ add x2,x2 ; *8
+ add x2,x2 ; *16
+ add x1,x2 ; List base + Meeting*10*W
+ x2=actor
+ sub x2,c2
+ add x2,x2 ; *2
+ add x1,x2 ; List base + Meeting*10*W + (npc-2)*W
+ &x1=list4(x1) ; get conversation address
+ value=32768 ; setting bit 15 will scrap the conversation 
+; when the npc leaves the user's room
+ add value,x1
+ gosub @SetActorConversationV
+.NoMeetingConversation
+pop actor
+ return
+;
+; npc enters room - is user here?
+.usernotmeet
+ if room<>currentuserroom then @meetingsret
+;
+; don't do meetings if npc is trying to find player, since 
+; he will probably want to say something to sam anyway...
+ gosub @setACTORATTRIBUTES ; just in case!
+ gosub @getcurrentcommand
+ if verb=ifollow then UNMtestfinduser
+ if verb<>igdfind then UNMnotfinduser
+.UNMtestfinduser
+ if noun1=user then meetingsret
+.UNMnotfinduser
+;
+ &x1=List4(52) ; start of meetings table (entry 0 is npc #2)
+ sub x1,c2
+ add x1,actor
+ x2=List4(x1) ; x2 is number of meetings
+ x5=actor ; x5 is actor we've met
+ goto @MeetingWithNpcx5 ; set talking
+.meetingsret
+;=====
+;
+.amret
+ RETURN
+;---
+; make Actor do a Gosub to racetrack ADDRESS Value, and return to the 
+; previous room and object when the racetrack has finished
+.GOSUBRacetrackValueANoR
+push c1 ; code for RT address
+push c0 ; code for "don't resume previous position etc."
+ goto GRTV1
+.GOSUBRacetrackValueA
+push c1 ; code for RT address
+push c1 ; code for "resume previous position etc."
+ goto GRTV1
+; make Actor do a Gosub to racetrack number Value, and return to the 
+; previous room and object when the racetrack has finished
+.GOSUBRacetrackValue
+push c0 ; code for RT number
+push c1 ; code for "resume previous position etc."
+.GRTV1
+ gosub @setACTORATTRIBUTES
+;
+ verb=iClearActorBusy
+ prep=0
+ noun1=nullobject
+ noun2=nullobject
+ gosub @SinglePushFifo ; clear 'busy' flag when we've finished 
+; telepathic racetrack
+;
+; resume previous pos after the racetrack?
+pop x1
+ if x1=0 then @DontResumeStatus
+;
+; Are we currently stood at a room object?
+; (don't need to check for GOING to any sort of object, as the 
+; current command is always executed before doing the racetrack 
+; gosub)
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ v2=actor
+ add v2,v2
+ add v1,v2
+ noun1=List4(v1) ; is actor at a room object?
+ if noun1=0 then DontReturnRoomObject
+;
+; return to any room objects
+ verb=igdfind
+ &ObjectNumber=ACBList(ACBHeader)
+ gosub @IsObjectSitting
+ if result=false then DontReSitAni
+; or sit on ANY chair if currently sitting
+ verb=iSIT
+ noun1=nullobject ; any chair
+.DontReSitAni
+ prep=0
+ noun2=nullobject
+ gosub @singlepushfifo
+.DontReturnRoomObject
+;
+; return to original room after intrusion GOSUB
+ verb=igdgo
+ prep=0
+ noun1=currentpos(actor)
+ noun2=nullobject
+ gosub @singlepushfifo
+;
+; A racetrack gosub with a "resume" must do something relatively 
+; big, such as being questioned by the inspector. In that case, 
+; kill any occupation messages printed when the player meets them. 
+push value
+ value=0
+ gosub @SetActorOccupation
+ gosub @SetActorConversationV ; GMJ 9jul90 - also kill conversations
+pop value
+;
+.DontResumeStatus
+pop x1
+ if x1=0 then GoRacetrackNumber
+ goto GoRacetrackAddress
+;
+; Entry point used in telepathic goto
+.GotoRacetrackValueA
+push value
+ value=0
+ gosub @SetActorOccupation ; GMJ 9jul90 - kill occupations
+ gosub @SetActorConversationV ; GMJ 9jul90 - also kill conversations
+pop value
+;***** gosub @Stop ; KILLS ALL RETURN ADDRESSES PLUS THE CURRENT 
+; POINTER
+ gosub @SetActorAttributes
+ gosub @npcpop ; KILL CURRENT POINTER ONLY, & KEEP RETURN ADDRESSES 
+; INTACT
+;*****
+;
+; value is a racetrack address, not a racetrack number
+.GoRacetrackAddress
+ noun2=255
+ and noun2,value ; noun2=lo byte
+ gosub @ValueDiv256
+ noun1=value
+ goto GotRtAddr
+.GoRacetrackNumber
+ add value,value ; value is racetrack number (word based table)
+ add value,startracetracks
+; now read hi+low bytes of pointer into noun1,2
+ noun1=list5(value)
+ add value,c1
+ noun2=list5(value)
+.GotRtAddr
+ verb=obeyracetrack
+ prep=0
+ gosub @singlepushfifo ; push onto normal command queue
+ if actor<>user then @IntrusionOffNoSF ; turn intrusions off
+ executingracetrack=true
+ return
+;---
+.SPECIALMOVES
+; Given ROOM, HIDEST, DEST, ACTOR is to move that way
+; and exit has been validated as possible (and hence described)
+; in SPECIALEXITS. The purpose of code here is when something
+; happens on moving. If exit is to be blocked, code here should
+; print the appropriate message and set RESULT=FALSE.
+;
+;=====
+; make sure anyone involved doesn't meet user while the murder 
+; takes place...
+code - ;&
+ if Vreadyformurder<>true then notinvolvednpc
+ if actor=involvednpc1 then testifuserhere
+ if actor<>involvednpc2 then notinvolvednpc
+.testifuserhere
+ if dest<>currentuserroom then notinvolvednpc
+code + ;&
+ gosub @distractuser
+code - ;&
+ goto @ismprevent
+.notinvolvednpc
+;---
+; disable ALL room movement while sex scene is in progress
+ if SamSeduced=true then @iSMprevent
+;---
+; prevent user going though a locked door
+ if actor<>user then @SMnotuser
+ if dir=2 then SMdoornotlocked
+ if dir=4 then SMdoornotlocked ; can't lock stairs!
+code + ;&
+push room
+ room=dest
+ gosub @GetDoorFlags
+pop room
+code - ;&
+ if result=false then SMdoornotlocked
+.SMdoorlocked
+;& code -
+ message cr
+ message 2865
+ goto @iSMprevent
+.SMdoornotlocked
+;---
+; trigger any sub-games BEFORE entering a room
+;
+; cellar maze
+ if dest<>75 then NotGoCellar ; cellar isn't really a room!
+;
+; Pass any objects in the maze to MazeObject
+code + ;&
+ MazeObject=0
+code - ;&
+ x1=MaxNpcPlus1
+.GetMazeObject
+ x2=currentpos(x1)
+ if x2<>75 then ObjectNotInMaze
+ x2=hicurrentpos(x1)
+ if x2<>0 then ObjectNotInMaze
+code + ;&
+ MazeObject=x1
+code - ;&
+ goto GotMazeObject
+.ObjectNotInMaze
+ add x1,c1
+ if x1<MinRoomObject then GetMazeObject
+.GotMazeObject
+;
+code + ;&
+ SubGame=1 ; cellar maze
+code - ;&
+ goto @iSMprevent
+.NotGoCellar
+;
+; bee swat
+ if room<>37 then NoBeeGame
+ if dest<>42 then NoBeeGame
+code + ;&
+ SubGame=3 ; bee swat
+code - ;&
+ goto @iSMok
+.NoBeeGame
+;---
+.SMnotUSER
+;---
+; only allow inspector to return to room 3 (out of the game) when 
+; analysing an object, for instance
+ if room<>45 then NotGoCar
+ if dest<>3 then NotGoCar
+ if actor<>inspector then @iSMprevent
+.NotGoCar
+;---
+; make sure npc's don't arrive in game until jarvis has finished 
+; escorting the last npc to his or her room.
+ if actor=kathy then arriveingame
+ if actor=anthony then arriveingame
+ if actor=clifford then arriveingame
+ if actor<>sue then notarriveingame
+.arriveingame
+ if room<>3 then notarriveingame
+ if dest<>45 then notarriveingame
+ if personarriving<>false then ismprevent
+.notarriveingame
+;=====
+;
+.ismok
+code + ;&
+.smok
+ RESULT=TRUE
+ RETURN
+;
+code - ;&
+.ismprevent
+code + ;&
+.smprevent
+.preventtake
+ result=FALSE
+ return
+;---
+.SpecialTakes
+; RESULT=FALSE if ACTOR can't take OBJECT
+;
+;=====
+; can only take pin if no HIPOS
+ if object<>pin then nottakepin
+ x1=hicurrentpos(pin)
+ if x1<>0 then preventtake
+.nottakepin
+;=====
+;
+ result=true
+ return
+;---
+.SPECIALEXAMINE
+; print any special examine messages which follow
+; the basic message but are before any contents are printed
+; set processed=TRUE if the contents should not be printed
+;
+;=====
+; In menu option 'search' don't list contents until 'more' is 
+; hit!!
+ if ACBStart<>ACBSearchStart then SENotMenuSearch
+ processed=true ; don't list objects
+.SENotMenuSearch
+;
+; don't reveal contents of doctorbag if it's closed
+ if object<>docbag then NotExamDB
+; set processed=true if doctor bag closed, false if open
+ processed=doctorbagopen
+ xor processed,c1
+.NotExamDB
+;=====
+;
+ return
+;---
+.SPECIALPREEXAMINE
+; before printing examine message / contents, check if
+; anything should prevent this. Return TRUE if details should
+; NOT be printed
+;
+;====
+ if vMurderBeenDone=false then @NoExamineChange
+code -
+;---
+; Broken window POST murder 2 & 5
+ if murder=5 then SPEwindow
+ if murder<>2 then SPENotWindow
+.SPEwindow
+ if object<>window then SPENotWindow
+ m1=30300 ; window is smashed
+ if room=94 then @SPETruem1
+.SPENotWindow
+;---
+; Fiona's chair POST murder 4
+ if murder<>4 then notexamchair
+ if object<>fionaschair then notexamchair
+ m1=30404
+ x1=hicurrentpos(pin)
+ if x1=0 then @SPETruem1 ; no pin
+ x1=currentpos(pin)
+ if x1<>fionaschair then @SPETruem1
+ m1=30403
+ goto @SPETruem1
+.notexamchair
+;=====
+;
+code +
+ &x1=List4(86)
+ add x1,murder
+ add x1,murder
+ sub x1,c2
+ &x1=List4(x1) ; list of object.w,message.w for each murder
+.GetExamineChange
+ &x2=List4(x1) ; object
+ if x2=0 then NoExamineChange ; end of list
+ add x1,c2
+ &m1=List4(x1) ; message
+ add x1,c2
+ if x2<>object then GetExamineChange ; object doesn't match
+;
+; got an examine change...
+code -
+.SPETruem1
+code +
+.SPETruem1C
+ gosub @printm1dot
+ result=true ; don't print examine message
+ return
+;
+.NoExamineChange
+ RESULT=FALSE ; proceed normally
+ RETURN
+;---
+; CHECK IF ACCESSIBLE BEFORE CHECKING OBVIOUS THINGS LIKE OBJECT IS
+; OMNI PRESENT, OR OWNED BY SOMEONE ELSE.
+;
+.specialcheckifaccessible
+code - ;&
+; if no special code is needed, LEAVE RESULT UNCHANGED
+; otherwise return RESULT=TRUE if OBJECT is accessible to VERB
+; or RESULT=FALSE if not accessible.
+ if verb=ifollow then conditionaltrue
+ if verb=isetupgo then conditionaltrue
+ if verb=igdgo then conditionaltrue
+ if verb=isetupfind then conditionaltrue
+ if verb=igdfind then conditionaltrue
+ if verb=igetme then sciatrue
+ if verb=iwaitforperson then conditionaltrue ; wait for ...
+ if verb=iwaitforperiod then conditionaltrue ; wait for ...
+ if verb=iwaituntiltime then conditionaltrue ; wait until ...
+;=====
+; Grange: standard chair when not in user's room...
+ if object=SpecialChair then sciatrue
+;=====
+code + ;&
+ return
+;---
+code - ;&
+.conditionaltrue
+; only true if OBJECT exists in the game
+ x1=currentpos(object)
+code + ;&
+ if x1=0 then @returnfalse
+code - ;&
+.sciatrue
+ result=TRUE
+code +
+ return
+;---
+.SpecialConjugate
+; return x1 as type for noun x2 (if different to that in the table)
+code - ;&
+ if x2=vera then scProperFemale
+ if x2=sue then scProperFemale
+ if x2=fiona then scProperFemale
+ if x2=kathy then scProperFemale
+.scNotPF
+code + ;&
+ return
+code - ;&
+.scProperFemale
+ x1=ProperFemale
+code +
+ return
+;---
+; ACTOR is about to be activated. Make any priority decisions here.
+; Set processed=true if next stack command should NOT be executed.
+; Set Verb<>0 to execute that command instead of the next one stacked.
+.specialactivatenpc
+;
+;=====
+;; make user isn't in same room as someone involved with the murder 
+; if actor<>user then sandontdistractuser
+; x1=currentuserroom
+; gosub @distractuserinroomx1
+;.sandontdistractuser
+; make user isn't in same room as someone involved with the murder 
+ if actor=involvednpc1 then sandistractuser
+ if actor<>involvednpc2 then sandontdistractuser
+.sandistractuser
+ x1=currentuserroom
+ gosub @distractuserinroomx1
+.sandontdistractuser
+;=====
+;
+ return
+;---
+; clear keyboard buffer
+.ClearKBD
+; get keys until we have a zero one, then return
+; the last non-zero
+ gosub @MCOsRdChVec
+ if v1<>0 then ClearKBD
+ return
+;---
+; Subroutine to wait 100 frames
+.WaitX1Frames
+ sFrames=0
+.wx1f
+push x1
+code -
+ gosub @MenuBuildAndDisplay
+code +
+pop x1
+ if sFrames<x1 then wx1f
+ return
+;---
+; ACTOR is just about to print M1 as part of a racetrack
+; instruction. Use this hook to intercept particular things
+; which may happen in the message which cannot be easily
+; coded elsewhere.
+;
+; Set RESULT=FALSE if message should NOT be printed
+;
+.specialrtmessage
+; 
+;=====
+; Message 10123 is used just before the sex scene to prevent anyone 
+; entering the room
+ if m1<>10123 then NotStartSeduction
+ SamSeduced=True
+ goto @srtOK
+.NotStartSeduction
+;---
+; William about to be hit by masonry
+ if m1<>15795 then MasonryNotHitWilliam
+ ACBHeader=600 ; william
+ gosub @StartMasonryFallingVEC
+.MasonryNotHitWilliam
+;---
+; Inspector message 8060 triggers countdown timer
+ if m1<>8060 then NotStartCountdown
+ TimeLimit=1 ; start counting
+.NotStartCountDown
+;---
+; Message 10125 (null) is used when sam locks the door before the 
+; sex scene
+ if m1<>10125 then SNotLockDoor
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=c0
+ gosub @MCemptyroomVEC
+ gosub @InitACBs
+ dv1=361 ; door locked
+ dv2=0 ; x
+ dv3=242 ; z
+ dv4=242 ; h
+ dv5=dInsertRedraw
+ gosub @DrawObjectdv1
+ x1=100
+ gosub @Waitx1Frames ; show lock animation
+ gosub @DisplayRoomVEC
+ goto @srtPREVENT
+.SNotLockDoor
+;---
+; Message 10124 (null) is used to trigger the sex scene
+ if m1<>10124 then @NoSexScene
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=c0
+ dv1=3460 ; clothes seq.
+ dv2=48 ; x
+ dv3=96 ; z
+ dv4=64 ; h
+ gosub @SetUpACBDv1 ; start clothes animation
+ x1=200
+ gosub @Waitx1Frames ; show clothes animation
+; gosub @MCemptyroomVEC
+; gosub @InitACBs
+; dv1=364 ; sex scene
+; dv2=0 ; x
+; dv3=242 ; z
+; dv4=242 ; h
+; dv5=dInsertRedraw
+; gosub @DrawObjectdv1
+; x1=200
+; gosub @Waitx1Frames ; show sex animation
+ SamSeduced=False
+ ExecutingRacetrack=false
+ m1=4999 ; fall through and throw sam out of the room...
+.NoSexScene
+;---
+; message 9101 is used when the inspector returns from his analyse 
+; racetrack
+ if m1<>9101 then @SRInspectorNotAnalyse
+code -
+ message 9101 ; the inspector said, "
+code +
+;
+; does the object have a special analyse message for 
+; this murder?
+ &x1=List4(72) ; base of analyse tables
+ x2=murder
+ sub x2,c1
+ add x2,x2
+ add x1,x2
+ &x1=list4(x1) ; get list for current murder
+.findanalyseobject
+ x2=list4(x1)
+ if x2=0 then analysenotimportant ; end of list
+ add x1,analysetype
+ m1=list4(x1) ; get message offset for this type of analyse
+ sub x1,analysetype
+ add x1,c8
+ sub x1,c1 ; 7 bytes per entry
+ if analyseobject<>x2 then findanalyseobject
+;
+; object has a special analyse message
+; using 9149+message offset
+ if m1=0 then analysenotimportant ; analysed for wrong type
+ x1=9149
+ add m1,x1
+ goto printanalysemessage
+;
+; object is not important this murder
+.analysenotimportant
+ x1=analyseobject
+ gosub @Printtheobjectx1 ; the <object>
+ m1=9102 ; looks quite ordinary to me
+;
+.printanalysemessage
+ gosub @printm1
+code -
+ message quote
+ message dot
+code +
+ analyseobject=false
+ goto @srtPREVENT ; don't print standard message
+.SRInspectorNotAnalyse
+;---
+; various messages used to throw sam out of a room...
+ if room<>currentuserroom then @SRTNotThrow
+; message 10130 is used when sam is caught having it off with kathy
+ if m1=10130 then SRTOkThrow
+; message 5680 is used to throw sam out of the toilets
+ if m1=5680 then SRTOkThrow
+; message 9071 is used by the inspector to throw the player out of a room
+ if m1=9071 then SRTOkThrow
+; message 4999 is a blank message used to throw sam out of the room
+ if m1<>4999 then @SRTNotThrow
+.SRTOkThrow
+; (use f/p's because we may want to get out of a dead end)
+ x1=startfloorpointers
+ add x1,room
+ dir=list5(x1) ; get direction to leave this room
+ x1=128
+ add dir,x1 ; dir+128 means no leaving ani
+ x1=ACBLeavingDirection
+ add x1,PlayerACB
+ ACBList(x1)=DIR ; leave via the door
+ WantNewRoom=Dest
+ if m1=4999 then @srtPREVENT
+ gosub @DoTextWindow
+code -
+ message cr
+code +
+ goto @srtPREVENT
+.SRTNotThrow
+;---
+; messages 10000+npc are used when a particular npc has been 
+; taken on a questioning RT by the inspector
+ if m1<10000 then @srtNoIQ
+ if m1>10019 then @srtNoIQ
+ InspectorQV=m1
+ x1=10000
+ sub InspectorQV,x1 ; subtract base to get npc & set flags
+.srtNoIQ
+;---
+; messages 10050+npc are used terminate the above (10000+npc)
+ if m1<10050 then srtNoIQ1
+ if m1>10079 then srtNoIQ1
+ inspectorQV=false ; clear 'being questioned' flag (cancels npc RT 
+; by use of a special conditional)
+.srtNoIQ1
+;---
+; messages 5250-8 are used when jarvis has finished showing somebody 
+; to their room, and is free to answer the door for somebody else
+ if m1<5250 then jarvisnotshowroom
+ if m1>5258 then jarvisnotshowroom
+ personarriving=false
+ goto @srtOK
+.jarvisnotshowroom
+;---
+; message 5259 is used when all the guests have arrived, and Jarvis is 
+; to begin his proper racetrack
+ if m1<>5259 then notjarvisstartrt
+ object=jarvis
+ x6=jarvis
+;
+; add specific block of 12 racetracks per the murder (1-9)
+ x2=murder
+ x3=12
+.rtaddmurderoffset
+ sub x2,c1
+ if x2<1 then gotjarvisrt
+ add x6,x3
+ goto rtaddmurderoffset
+;
+.gotjarvisrt
+ gosub @newracetrackforobject
+ goto @srtOK
+;
+.notjarvisstartrt
+;---
+; Messages 8010-8019 are used to trigger the murder
+ if m1<8010 then notmurderready
+ if m1>8019 then notmurderready
+ gosub @setmurderflags ; set some pre-murder flags
+ Vreadyformurder=true
+;
+; distract player if he's in same room as anyone involved in 
+; the murder...
+ x1=currentuserroom
+ gosub @distractuserinroomx1
+ goto @srtOK
+;
+.notmurderready
+;---
+; Murder 9 only, when more than one person is killed, and messages 
+; 8030-39 (see below) are not used
+; Messages 4980+npc killed
+ if m1<4980 then @NotKillM9
+ if m1>4991 then @NotKillM9
+ x1=4980
+ x3=m1
+ sub x3,x1
+ &x1=List4(88)
+ add x1,x3
+ List4(x1)=c1 ; set flag for victim being killed
+;
+; reposition any special objects relative to the victim's death
+ x2=14 ; offset into ObjectReposition table
+ if x3=jarvis then ReposObjectM5
+ x2=4 ; offset into ObjectReposition table
+ if x3=fiona then ReposObjectM5
+ x2=36 ; offset into ObjectReposition table
+ if x3=kathy then ReposObjectM5
+ x2=0 ; offset (when robert killed) into ObjectReposition table
+ if x3<>robert then @MurderHasBeenDone
+;
+.ReposObjectM5
+ &x1=List4(78)
+ add x1,c8 ; murder (5-1)*2 - word based, starting with murder 1
+ &x1=List4(x1) ; start of reposition table for murder 5
+ add x1,x2 ; add special offset for person killed
+ gosub @SOS1 ; call main loop in "reposition object" loop
+;
+ goto @MurderHasBeenDone
+.NotKillM9
+;---
+; Messages 8030-39 signify that the murder has just taken place, 
+; so begin new 'post-murder' racetracks for all the guests...
+ if m1<8030 then @notmurderdone
+ if m1>8039 then @notmurderdone
+ if samunconcious=false then samnotunconcious
+ x1=40
+ sub m1,x1 ; messages 7090-99
+.samnotunconcious
+;
+; set post murder racetrack commands for npcs
+push actor
+ actor=1
+.PMinitracetrack1
+ gosub @IntrusionOffNoSF ; turn intrusions off
+; now find pointer to initial racetrack for actor:
+ add actor,c1
+ gosub @stop ; cancel current racetrack
+ x1=actor ; number of racetrack to activate
+; add specific block of 12 racetracks per the murder (1-9)
+ x2=murder
+ x3=12
+.PMaddmurderoffset
+ sub x2,c1
+ if x2<1 then PMgotmurderoffset
+ add x1,x3
+ goto PMaddmurderoffset
+.PMgotmurderoffset
+ x2=130 ; offset for Post Murder racetracks
+ add x1,x2
+ gosub @initracetrackx1
+ if actor<maxnpc then PMinitracetrack1
+pop actor
+ gosub @setactorattributes
+ gosub @SpecialPM ; reposition any special objects etc.
+; when setting "readyformurder", which isn't used in M4
+;
+; Also entry for M5 when person killed is m1-4980...
+.MurderHasBeenDone
+ Vmurderbeendone=true
+ gosub @setmurderflags ; just in case we didn't need to do this 
+ &x1=List4(88)
+ add x1,involvednpc1
+ List4(x1)=c1 ; set flag for victim being killed
+;
+ actor=user
+ if samunconcious<>false then NoDispMess1
+ if climbingstairs<>false then NoDispRoom1
+push m1
+ gosub @DisplayRoomVEC ; show new room in case 
+; objects were repositioned in SpecialPM
+pop m1
+.NoDispRoom1
+ gosub @DoTextWindow ; show murder message
+ gosub @BuildAndDisplayFrameVEC ; (read text box)
+ gosub @EnterNewRoom ; show any new text boxes
+.NoDispMess1
+;
+; In murder 5, only record people positions when sir robert is 
+; killed at first
+ if murder<>5 then recordpeoplepos
+ if m1<>4987 then @srtPREVENT ; 4987 is mess for Robert being killed
+;
+; Record the npc positions at the time of the murder...
+.recordpeoplepos
+push actor
+ x1=2 ; starting with npc 2
+ &x2=List4(56) ; table of npc positions
+.NpcAtMurderTime
+ x3=currentpos(x1)
+ if x3<>currentuserroom then NAMT1
+ x3=255 ; pos 255 means npc was with player
+.NAMT1
+ List4(x2)=x3 ; record npc position
+push x1
+ actor=x1
+ value=0
+ gosub @SetActorConversationV
+ gosub @SetActorOccupation
+pop x1
+ add x1,c1
+ add x2,c1
+ if x1<MaxNpcPlus1 then NpcAtMurderTime
+pop actor
+ goto @srtPREVENT
+;
+.notmurderdone
+;---
+; Messages 8070-9 are used when the guilty party has finished the 
+; murder sequence, and it's okay to meet them again without being 
+; distracted
+ if m1<8070 then notfinishedmurder
+ if m1>8079 then notfinishedmurder
+ Vreadyformurder=false
+ goto @srtOK
+.notfinishedmurder
+;---
+; Message 8080 flags PersonArriving, used to delay next arrival
+ if m1<>8080 then NotPersonArrive
+ personarriving=actor ; GMJ 2/1/90 - was done in SpecialMoves
+ goto @srtOK
+.NotPersonArrive
+;---
+; Message 6630 - sue secretly removes the pin
+ if m1<>6630 then suenottakepin
+ x1=carried
+ hicurrentpos(pin)=x1
+ currentpos(pin)=c2 ; sue=2
+ goto @srtOK
+.suenottakepin
+;---
+; Omni messages...
+ if m1<>15842 then NotOmni ; clifford reveals robert's murder (m5)
+ gosub @DoTextWindow
+.NotOmni
+;=====
+;
+; Go ahead with the message...
+.srtOK
+;
+; determine whether or not message should be printed, depending 
+; on the range of prep
+ value=112 ; bits 4,5,6 : 16+32+48
+ and value,prep
+ if value=0 then srtOK1 ; 0..15 print if sam is anywhere in the room
+ if value<>16 then srtmPnot16
+ if PlayerHidden=false then srtOK1 ; 16..31 sam in room, not hidden
+ goto srtPREVENT
+.srtmPnot16
+ if value<>32 then srtmPnot32 ; 32..47 sam in room, hidden
+ result=PlayerHidden
+ return
+.srtmPnot32
+ if value<>48 then srtPREVENT ; 48..63 sam in adjacent room
+ if room=currentuserroom then srtPREVENT
+; trace sam's room to rootroom, and see if it crosses npc's room 
+; in one move only
+;; if currentuserroom=0 then srtPREVENT ; (sam is unconcious?)
+ if SamUnconcious<>false then srtPREVENT ; sam unconcious!
+ x1=currentuserroom
+ x6=room
+ gosub @TraceX1toSynth
+ if from=currentuserroom then srtFORCED ; room is 1 move away - ok!
+;
+; trace npc's room to rootroom, and see if it crosses sam's room 
+; in one move only
+ x1=room
+ x6=currentuserroom
+ gosub @TraceX1toSynth
+ if from<>room then srtPREVENT ; room is more than 1 move away - not ok!
+.srtFORCED
+ currentuserroom=room ; currentuserroomis recovered after rt message output
+;
+.srtOK1
+ result=true
+ return
+;
+.srtPrevent
+; Don't print the message...
+ result=false
+ return
+;---
+; Set InvolvedNpc1,2,3 for this murder...
+.SetMurderFlags
+ &x1=List4(80) ; list of 3 bytes per murder
+code -
+ x2=murder
+.GetFlagsPtr
+ sub x2,c1
+ if x2<1 then GotFlagsPtr
+ add x1,c3
+ goto GetFlagsPtr
+.GotFlagsPtr
+ InvolvedNpc1=List4(x1)
+ add x1,c1
+ InvolvedNpc2=List4(x1)
+; add x1,c1
+; InvolvedNpc3=List4(x1)
+code +
+ return
+;---
+; user is in, or about to enter room x1. distract him if neccessary...
+.distractuserinroomx1
+ if SamUnconcious<>false then irxifalse ; sam unconcious
+ if Vreadyformurder=false then irxifalse
+ gosub @isroomx1involved
+ if result=true then distractuser
+ return
+;
+; RESULT=TRUE if user should be distracted if he's in room x1 while 
+; the murder is taking place?
+.isroomx1involved
+ result=true
+; It's okay to visit the victim just after the murder, provided 
+; we don't meet the guilty party while they clear things up 
+; etc...
+ if murder=5 then CantMeetVictim ; because of multiple murders
+ if Vmurderbeendone=true then oktomeetvictim
+.CantMeetVictim
+ x2=currentpos(involvednpc1)
+ if x2=x1 then irxiret
+.oktomeetvictim
+ x2=currentpos(involvednpc2)
+ if x2=x1 then irxiret
+.irxifalse
+ result=false
+.irxiret
+ return
+;
+; Sam is hit over the head and dragged to the murder room
+.distractuser
+;
+cif AllowFade
+;
+; set up x1 to current palette...
+ &v2=list4(16) ; get palette number to use for room
+ add v2,CurrentUserRoom
+ x1=list4(v2) ; x1=palette number
+ &v2=list4(14) ; start of palette pointers
+ add x1,x1 ; word-based table
+ add v2,x1
+ &x2=list4(v2) ; get offset in list4 of palette info for this room
+;
+; set up v2 to workspace palette...
+ &v2=list4(14) ; start of palette pointers
+ x1=34 ; x1=palette number*2
+ add v2,x1
+ &v2=list4(v2) ; get offset in list4 of palette info for this room
+;
+; copy current palette to workspace palette
+push v2
+ x3=0 ; word count
+.copycurrentpalette
+ &x1=list4(x2) ; word from current palette
+ &list4(v2)=x1
+ add x2,c2
+ add v2,c2
+ add x3,c1
+ if x3<16 then copycurrentpalette
+pop v2
+;
+; repeatedly 'fade' and display the workspace palette
+.fadepalette
+push v2
+ v1=4 ; palette is in list 4
+ v3=16 ; number of colors to set - i.e. this is a 2-color palette
+ v4=0 ; digital data, set vga from it etc.
+
+ gosub @MCSetPaletteVec
+ x2=0 ; sum of palette words
+ x3=0 ; word count
+.fadecurrentpalette
+push x3
+ &x1=list4(v2) ; read RGB value
+ x3=30576 ; $7770
+ and x1,x3
+ add x2,x1
+;
+; fade red
+ x3=28672 ; $7000 red
+ and x3,x1
+ if x3=0 then fcpNored ; no red remaining
+ x4=4096
+ sub x3,x4 ; reduce red by one
+ x4=1904 ; $0770 red mask
+ and x1,x4
+ add x1,x3 ; put new red value back in
+.fcpNored
+;
+; fade green
+ x3=1792 ; $0700 green
+ and x3,x1
+ if x3=0 then fcpNogreen ; no green remaining
+ x4=256
+ sub x3,x4 ; reduce green by one
+ x4=28784 ; $7070 green mask
+ and x1,x4
+ add x1,x3 ; put new green value back in
+.fcpNogreen
+;
+; fade blue
+ x3=112 ; $0070 blue
+ and x3,x1
+ if x3=0 then fcpNoblue ; no blue remaining
+ sub x3,c16 ; reduce blue by one
+ x4=30464 ; $7700 blue mask
+ and x1,x4
+ add x1,x3 ; put new blue value back in
+.fcpNoblue
+;
+ &list4(v2)=x1 ; put new darker colour back
+ add v2,c2
+pop x3
+ add x3,c1
+ if x3<16 then @fadecurrentpalette
+;
+cend
+;
+ cif ST
+  gosub @MCUpdateScreenVEC ; both PC - and ST - should cause
+; the palette to be updated.
+ cend
+;
+cif AllowFade
+;
+; delay...
+ IBMFramesSinceVBL=0 ; variable incremented by VBL (50th second)
+.FD1
+ if IBMFramesSinceVBL<10 then FD1
+;
+pop v2
+ if x2>0 then @fadepalette ; loop until palette is empty
+;
+cif ST
+ v1=4 ; palette is in list 4
+ &v2=list4(14) ; start of palette pointers
+ add v2,c2 ; palette 1
+ &v2=list4(v2) ; get offset in list4 of palette info for this room
+ v3=16
+ gosub @MCSetPaletteVec
+cend
+;
+ gosub @RemovePortrait ; kill any talking portraits
+ gosub @MCEmptyRoomVEC ; emptyroom.
+ gosub @InitACBs
+ gosub @MCBuildRoomVEC ; make the system build an all-black screen
+;
+; If murderer is male, then do a ridge walk & end up in 
+; a landing corridor or front of house, depending on how 
+; successful the sub-game was. If murderer is female then 
+; select a suitable room in which to wake up. 
+push actor
+ actor=involvednpc2 ; the murderer
+ x1=0
+ gosub @SpecialConjugateVEC
+pop actor
+ if x1=properfemale then NoRidgeWalk ; murderer is female
+ gosub @RemovePortrait ; kill any talking portraits
+ gosub @MCEmptyRoomVEC
+ gosub @InitACBs
+ gosub @MCBuildRoomVEC ; make the system build an all-black screen
+ SubGame=4
+ gosub @DoSubGame
+ if won=false then LoseRidge ; escape via skylight
+;
+; escape via skylight
+ currentuserroom=74 ; landing corridor
+ currentpos(user)=currentuserroom
+ hicurrentpos(user)=c0
+ room=currentuserroom
+ gosub @DisplayRoomVEC
+ goto DoneKnockout
+;
+; fall from room
+.LoseRidge
+ currentuserroom=47 ; lost - wake up at front of house
+ currentpos(user)=currentuserroom
+ hicurrentpos(user)=c0
+ goto DoneKnockout
+.NoRidgeWalk
+;
+; we can't go into fastmode here, so set a flag...
+ SamUnconcious=True
+.DoneKnockOut
+ result=true
+.NoRtAni
+ return
+;=====
+;
+;---
+; PREP contains 'expression' to be used when ACTOR is talking
+.RTMessageAni
+ currentuserroom=currentpos(user) ; may have been changed in 
+; specialrtmessage, so as to force a message if sam is overhearing 
+; something in an adjacent room
+ if room<>currentuserroom then NoRtAni
+;
+ x1=207 ; 128+64+15 : bits 7,6,4,3,2,1 used for expressions & portraits
+ and prep,x1
+;
+; draw sam's portrait if expression>64
+ if persontalking<>false then nortmport ; portrait already here!
+ if prep<64 then nortmport ; no portrait at all
+ persontalking=actor
+; draw actor's portrait if expression>128
+ if prep>127 then rtmGotPortrait
+ persontalking=user
+.rtmGotPortrait
+ x1=15 ; bits 4,3,2,1
+ and prep,x1
+ portraitmessage=0 ; no message
+ portraittimer=26 ; display portrait immediately, & don't print message
+.nortmport
+;
+ sFrames=7
+ ObjectNumber=3110
+ if prep=2 then RtMessAni ; shock
+ sFrames=15
+ ObjectNumber=3100
+ if prep=3 then RtMessAni ; anger
+ sFrames=7
+ ObjectNumber=3060
+ if prep=1 then RtMessAni ; emphasis
+.NoRtMessAni
+ return
+.RTMessAni
+ goto @AAAnimateDir
+;---
+; Special conditional traps for high noun1 values (i.e. > 249)
+; RESULT=TRUE if condition is met
+.SpecialRtConditional
+;
+;=====
+; 'intermittent' conditional. TRUE when <GAME TIMER> MOD Noun2=prep
+ if noun1<>intermittent then srtcnotinter
+ x2=prep
+ prep=0 ; aviod any later parser confusion!
+;
+; if x2 (prep) > 250 then use a multiple of Actor (actor*(x2-250))
+ if x2<251 then intermit2
+ x1=0
+.intermit1
+ add x1,actor
+ sub x2,c1
+ if x2>250 then intermit1
+ x2=x1
+;
+.intermit2
+code -
+ random x1
+code +
+ and x1,noun2
+ if x1<>x2 then @ReturnFalse
+ goto @returntrue ; condition met
+.srtcnotinter
+;---
+; is actor alive? (normally used with noun2=target npc)
+ if noun1<>233 then SRTnotIAA
+ gosub @IsActordead
+ xor result,c1 ; opposite of dead
+ return
+.SRTnotIAA
+;---
+; is actor dead? (normally used with noun2=target npc)
+ if noun1<>234 then SRTnotIAD
+.IsActorDead
+; if actor=involvednpc1 then @returntrue
+; goto @returnfalse
+
+;*
+ result=false
+ if vmurderbeendone=false then SRTActorIsAlive
+push object
+ object=actor
+ gosub @IsObjectDead
+pop object
+.SRTActorIsAlive
+ return
+;*
+
+.SRTnotIAD
+;---
+; is actor standing? (normally used with noun2=target npc)
+ if noun1<>235 then SRTnotIAS
+ if room<>currentuserroom then @returntrue
+ &ObjectNumber=ACBList(ACBHeader)
+ gosub @IsObjectSitting ; sets up result
+ xor result,c1
+ return
+.SRTnotIAS
+;---
+; has sam been told about the murder?
+; (used to prevent jarvis phoning the police before sam 
+; knows about the murder)
+ if noun1<>236 then SRTnotSKAM
+ result=VSamKnowsAboutMurder
+ return
+.SRTnotSKAM
+;---
+; is npc sat down (i.e. is he allowed to randomly smoke etc.)?
+ if noun1<>237 then SRTnotSIT
+ if room<>currentuserroom then @returnfalse
+ &ObjectNumber=ACBList(ACBHeader)
+ goto @IsObjectSitting ; sets up result
+.SRTnotSIT
+;---
+; inspector questioning someone?
+ if noun1<>238 then SRTnotIS
+ if inspectorQV=actor then @returntrue
+ goto @returnfalse
+.SRTnotIS
+;---
+; > 2 people in room?
+ if noun1<>239 then SRTnottmp
+ x1=1 ; npc
+ x3=0 ; tally
+.SRTcountNPCs
+ if x1=actor then nextSRTcountNPCs
+ x2=currentpos(x1)
+ if x2<>room then nextSRTcountNPCs
+ add x3,c1
+.nextSRTcountNPCs
+ add x1,c1
+ if x1<maxnpcplus1 then SRTcountNPCs
+ if x3>2 then @returntrue
+ goto @returnfalse
+.SRTnottmp
+;---
+;;; is dinner ready?
+;; if noun1<>dinnerisready then srtcnotdinnerready
+;; result=VDinnerIsReady
+;; return
+;;.srtcnotdinnerready
+;---
+;;; are all guests here (used in dining room before serving dinner)
+;; if noun1<>dinnerisserved then srtcnotdinnerserved
+;; result=VDinnerIsServed
+;; return
+;;.srtcnotdinnerserved
+;---
+; has murder been triggered?
+ if noun1<>readyformurder then srtcnotmurder
+ result=VReadyForMurder
+ return
+.srtcnotmurder
+;---
+;; has jarvis phoned the police?
+; if noun1<>jarvisphonedpolice then srtcnotpolice
+; result=Vjarvisphonedpolice
+; return
+;.srtcnotpolice
+;---
+; murder sequence complete?
+ if noun1<>murderbeendone then srtcnotmurderdone
+ result=Vmurderbeendone
+ return
+.srtcnotmurderdone
+;---
+; return true if room is empty (apart from actor AND user)
+ if noun1<>isroomemptyexceptuser then srtcNotEmpty
+.SIsRoomEmptyExceptUser
+ object=2 ; start after user
+ goto testempty
+.srtcNotEmpty
+;---
+; return true if room is empty (apart from actor)
+ if noun1<>isroomempty then srtcret
+ object=1 ; start at user
+.testempty
+ if object=actor then emptysofar ; skip actor
+ gosub @checkifpresent
+ if result=true then srtc1 ; somebody here!
+.emptysofar
+ add object,c1
+ if object<maxnpcplus1 then testempty
+; result=false...
+;
+.srtc1
+ xor result,c1 ; reverse result
+ return
+;=====
+;
+.srtcret
+ return
+;---
+.WriteHiresCoords
+ x1=ACBHeader
+ &Hires(x1)=ObjectNumber
+ add x1,c2
+ &Hires(x1)=ActorX
+ add x1,c2
+ &Hires(x1)=ActorZ
+ add x1,c2
+ &Hires(x1)=ActorH
+.SOSRet
+ return
+;---
+; reposition any special objects/people etc. after murder
+.SpecialPM
+ &x1=List4(78)
+.MoveObjectsFromList
+ x2=murder
+ sub x2,c1
+ add x2,x2
+ add x1,x2
+ &x1=List4(x1)
+.SOS1
+ object=List4(x1) ; get object
+ if object=0 then SOSRet ; end of table
+ add x1,c1
+ pos=List4(x1) ; get pos
+ add x1,c1
+ hipos=List4(x1) ; get hipos
+ add x1,c1
+; if HIPOS is a room object, then place within that object in 
+; the room specified by POS
+ if hipos<MinRoomObject then SOSnotInRoomObject
+ if hipos>MaxRoomObject then SOSnotInRoomObject
+ &v1=List4(44)
+ v2=object
+ add v2,v2
+ add v1,v2
+ List4(v1)=hipos ; room object
+ add v1,c1
+ List4(v1)=pos ; room number
+ goto SOSnext
+.SOSnotInRoomObject
+push x1
+ gosub @MoveObject
+pop x1
+.SOSnext
+ goto @SOS1
+;---
+.printtheobjectx1Vec
+ goto @printtheobjectx1
+;---
+.KillACBHeaderVEC
+ goto @KillACBHeader
+;---
+.ChangeACBdx4
+ dv1=ObjectNumber
+ goto @AlterACB
+;---
+.DoSubGameVec
+ goto @DoSubGame
+;---

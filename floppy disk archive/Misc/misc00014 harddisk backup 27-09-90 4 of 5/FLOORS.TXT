@@ -1,0 +1,115 @@
+; FloorMap interface code...
+;
+const
+ FloorMapList=16
+ BadRoomOK=1 ;must be 1 for game
+
+table
+ FloorMap=16 ;transient stuff for init
+
+begin
+.InitFloors
+code -
+ MarginZ=0
+ FSizeZ=0
+ MarginX=0
+ FSizeX=0
+ RoomNum=0
+ CursorZ=64
+ CursorX=0
+ CursorH=64
+ CurrentCache=0
+ MapNumber=0
+ v1=220 ; table size
+code +
+ goto @FCinitFloorCache
+;---
+;.ChangeACBdx4
+; goto @AlterACB
+; dv5=1 ; display as a sprite.
+; dv6=1 ; 0=non-reversed, 1=LR reversed
+; push dx4
+;  gosub @FindObjectNumber
+;  gosub @DecodeHeader
+; pop dx4
+; dv1=ObjectNumber
+; gosub @KillACBHeaderVEC
+; object=actor
+; gosub @CalcRasterOffsetObjectV
+; goto @SUAChangeACB
+;---
+code -
+.LoadMap
+ gosub @SetFileName
+code +
+ &FloorMap(CurrentCache)=c0
+code -
+ v1=FloorMapList
+ v2=CurrentCache ;offset
+code +
+ gosub @MCloadFileVec
+code -
+; GMJ 06/07/90 Modified=0
+ return
+;---
+.SetFileName
+ v1=70 ;'f'
+ list17(8)=v1
+ v1=76 ;'l'
+ list17(9)=v1
+ v1=79 ;'o'
+ list17(10)=v1
+ v1=79 ;'o'
+ list17(11)=v1
+ v1=82 ;'r'
+ list17(12)=v1
+ list17(13)=MapNumber
+ v1=46 ;'.'
+ list17(14)=v1
+ v1=68 ;'d'
+ list17(15)=v1
+ v1=65 ;'a'
+ list17(16)=v1
+ v1=84 ;'t'
+ list17(17)=v1
+ list17(18)=c0 ; put a terminator on, for benefit of Amiga etc.
+ return
+;---
+;RoomNum is XZH number of room
+;returns RoomNum=0, CurrentRoom=terminator word if no floor map
+;        CurrentRoom=FloorData
+;
+.FindRoom
+ CurrentRoom=CurrentCache
+.FR1
+code +
+ &v1=FloorMap(CurrentRoom)
+code -
+ if v1=RoomNum then Found
+ if v1=0 then @EOF
+ add CurrentRoom,c2
+code +
+ &v2=FloorMap(CurrentRoom) ;Structure length-2
+code -
+ add CurrentRoom,v2
+ goto FR1
+;
+.Found
+ add CurrentRoom,c4
+code +
+ &MarginX=FloorMap(CurrentRoom)
+ add CurrentRoom,c2
+ &MarginZ=FloorMap(CurrentRoom)
+ add CurrentRoom,c2
+ &FSizeX=FloorMap(CurrentRoom)
+ add CurrentRoom,c2
+ &FSizeZ=FloorMap(CurrentRoom)
+code -
+ add CurrentRoom,c2
+ return
+;
+.EOF
+ RoomNum=0
+ return
+code +
+;---

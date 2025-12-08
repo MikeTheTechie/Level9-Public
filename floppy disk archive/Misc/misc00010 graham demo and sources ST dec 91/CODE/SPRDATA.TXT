@@ -1,0 +1,331 @@
+* SPRDATA.TXT - Sprite data blocks to be used with LIB.TXT 
+* library routines
+* Copyright (C) Graham M Jones 15th December 1989
+
+* sprite parameter blocks
+
+currentimage equ 0
+pcoffset equ 2 ; sprite program counter
+repeatoffset equ 4 ; animation repeat counter
+diroffset equ 6
+pixcoloffset equ 7 ; standard radar pixel colur
+xposoffset equ 8
+yposoffset equ 10
+statusoffset equ 12 ; status byte
+widthoffset equ 14 ; width in words
+depthoffset equ 16 ; depth in lines-1
+typeoffset equ 18 ; type of sprite
+
+* bit positions within status byte
+backgroundbit equ 0 ; 1 = only display sprite over black parts of screen
+relativebit equ 1 ; 1 = don't show sprite relative to map position
+
+*	current image.w,<ani sequence pc.w>,repeat counter.w,
+*	last direction.b (0=right 1=left),<radar pixel col.b>,
+*	<x pos.w>,<y pos.w>,<status.b>,0.b,<width in cells.w>,
+*	<depth in pixels.w>,<type 0=neutral 1=player missile 2=enemy
+*	3=enemy missile>
+
+spriteblocklen equ 64
+spriteparameters:
+
+playersprite:
+	; sprite 1 ; player
+	dc.w 0,playeraniR,0
+	dc.b 0,1
+	dc.w 116,336 ; 16,336
+	dc.b 0,0
+	dc.w 4,31
+	ds.b 46
+
+numenemies equ 10 ; used in collision detection
+
+enemysprites:
+	; sprite 2 ; enemy 1
+	dc.w 0,enemyani1,0
+	dc.b 0,5
+	dc.w 3200,250,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 3 ; enemy 2
+	dc.w 0,enemyani2,0
+	dc.b 0,5
+	dc.w 3200,275,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 4 ; enemy 3
+	dc.w 0,enemyani3,0
+	dc.b 0,5
+	dc.w 3200,300,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 5 ; enemy 4
+	dc.w 0,enemyani4,0
+	dc.b 0,5
+	dc.w 3200,325,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 6 ; enemy 5
+	dc.w 0,enemyani5,0
+	dc.b 0,5
+	dc.w 3200,350,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 7 ; enemy 6
+	dc.w 0,enemyani6,0
+	dc.b 0,5
+	dc.w 3200,375,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 8 ; enemy 7
+	dc.w 0,enemyani7,0
+	dc.b 0,5
+	dc.w 3200,400,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 9 ; enemy 8
+	dc.w 0,enemyani8,0
+	dc.b 0,5
+	dc.w 3200,425,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 10 ; enemy 9
+	dc.w 0,enemyani9,0
+	dc.b 0,5
+	dc.w 3200,450,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+	; sprite 11 ; enemy 10
+	dc.w 0,enemyani10,0
+	dc.b 0,5
+	dc.w 3200,475,0,4,31
+	dc.b 2 ; enemy
+	ds.b 45
+
+playermissiles equ 5 ; number of player missiles
+enemymissiles equ 15 ; number of enemy missiles
+
+missilesprites:
+	rept playermissiles
+	dc.w 0,0,0
+	dc.b 0,1
+	dc.w 0,0,0,8,1
+	dc.b 1 ; player missile
+	ds.b 45
+	endr
+	rept enemymissiles
+	dc.w 0,0,0
+	dc.b 0,5
+	dc.w 0,0,0,8,1
+	dc.b 3 ; enemy missile
+	ds.b 45
+	endr
+
+endsp equ * ; end of sprite parameter blocks
+maxsprites equ (endsp-spriteparameters)/spriteblocklen
+
+* sprite animation sequences
+animations:
+	ds.w 1	; 1 word padding so that PC<>0 when pointing to
+		; first animation
+
+Send equ 0 ; end of animation sequence
+Simage equ 1 ; set new sprite image and process NEXT instruction
+Smove equ 2 ; move to x+x1,y+y1 and display current image
+Snomove equ 3 ; padding after Simage if no move is required
+Sgoto equ 4 ; goto new animation sequence and process NEW instruction
+Srepeat equ 5 ; repeat next instruction N times
+Steleport equ 6 ; teleport to x,y
+
+standani equ *-animations
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Snomove,0
+	dc.w Sgoto,standani
+
+playeraniR equ *-animations
+	dc.w Simage,spr1 ; show right image
+	dc.w Snomove,0
+	dc.w Sgoto,playeraniR
+
+playeraniL equ *-animations
+	dc.w Simage,spr2 ; show left image
+	dc.w Snomove,0
+	dc.w Sgoto,playeraniL
+
+missileaniR equ *-animations
+	dc.w Smove
+	dc.b 48,16 ; set position relative to player
+	dc.w Simage,laser ; show sprite image
+	dc.w Smove
+	dc.b 40,0
+	dc.w Smove
+	dc.b 48,0
+	dc.w Smove
+	dc.b 56,0
+	dc.w Smove
+	dc.b 64,0
+	dc.w Send
+
+missileaniL equ *-animations
+	dc.w Smove
+	dc.b -108,16 ; set position relative to player
+	dc.w Simage,laser ; show sprite image
+	dc.w Smove
+	dc.b -40,0
+	dc.w Smove
+	dc.b -48,0
+	dc.w Smove
+	dc.b -56,0
+	dc.w Smove
+	dc.b -64,0
+	dc.w Send
+
+enemyani1 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,400
+	dc.w Smove
+	dc.b -8,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,400
+	dc.w Smove
+	dc.b 8,0
+	dc.w Sgoto,enemyani1
+
+enemyani2 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,320
+	dc.w Smove
+	dc.b -10,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,320
+	dc.w Smove
+	dc.b 10,0
+	dc.w Sgoto,enemyani2
+
+enemyani3 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,266
+	dc.w Smove
+	dc.b -12,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,266
+	dc.w Smove
+	dc.b 12,0
+	dc.w Sgoto,enemyani3
+
+enemyani4 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,230
+	dc.w Smove
+	dc.b -14,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,230
+	dc.w Smove
+	dc.b 14,0
+	dc.w Sgoto,enemyani4
+
+enemyani5 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,200
+	dc.w Smove
+	dc.b -16,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,200
+	dc.w Smove
+	dc.b 16,0
+	dc.w Sgoto,enemyani5
+
+enemyani6 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,180
+	dc.w Smove
+	dc.b -18,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,180
+	dc.w Smove
+	dc.b 18,0
+	dc.w Sgoto,enemyani6
+
+enemyani7 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,160
+	dc.w Smove
+	dc.b -20,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,160
+	dc.w Smove
+	dc.b 20,0
+	dc.w Sgoto,enemyani7
+
+enemyani8 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,130
+	dc.w Smove
+	dc.b -24,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,130
+	dc.w Smove
+	dc.b 24,0
+	dc.w Sgoto,enemyani8
+
+enemyani9 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,110
+	dc.w Smove
+	dc.b -28,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,110
+	dc.w Smove
+	dc.b 28,0
+	dc.w Sgoto,enemyani9
+
+enemyani10 equ *-animations
+	dc.w Simage,spr2 ; show sprite image
+	dc.w Srepeat,100
+	dc.w Smove
+	dc.b -32,0
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,100
+	dc.w Smove
+	dc.b 32,0
+	dc.w Sgoto,enemyani10
+
+enemyexplodes equ *-animations
+	dc.w Simage,boom3
+	dc.w Smove,0
+	dc.w Simage,boom2
+	dc.w Smove,0
+	dc.w Simage,boom1
+	dc.w Smove,0
+	dc.w Simage,boom2
+	dc.w Smove,0
+	dc.w Simage,boom3
+	dc.w Smove,0
+	dc.w Simage,boom4
+	dc.w Srepeat,100
+	dc.w Smove
+	dc.b 0,-8
+	dc.w Send ; kill sprite
+
+* offsets into sprite buffer
+spr1 equ 0+2	; offset for 1st sprite (skip 1st word so that 
+		; IMAGE<>0 when pointing to first image)
+laser equ spr1+640
+spr2 equ spr1+1280	; offset for 2nd sprite
+boom1 equ spr2+1280
+boom2 equ boom1+2560
+boom3 equ boom2+2560
+boom4 equ boom3+2560
+
+* sprite data filenames (must be preceeded by disk number char)
+
+	dc.w "1" ; disk 1
+sp1filename:
+	dc.b "robby.sp1",0
+	even
+
+	dc.w "1" ; disk 1
+sp2filename:
+	dc.b "boom.spr",0
+	even
+

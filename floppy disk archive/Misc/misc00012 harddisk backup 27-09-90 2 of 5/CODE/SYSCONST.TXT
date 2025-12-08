@@ -1,0 +1,31 @@
+* SYSCONST.TXT - System constants to be used with LIB.TXT 
+* library routines
+* Copyright (C) Graham M Jones 30th August 1990 
+
+windowwidth equ 20 ; window tile width
+windowdepth equ 10 ; window tile depth
+windowtopmargin equ 0 ; address offset from top of screen
+windowbottommargin equ windowtopmargin+2560*windowdepth
+windowleftmargin equ 0 ; address offset from left of screen
+
+mapwidth equ 256 ; dimensions of main map
+mapdepth equ 36
+fmapwidth equ mapwidth*2 ; dimensions of foreground map
+fmapdepth equ mapdepth*2
+sizetiles equ 30720 ; size in bytes of tile data
+
+* Workspace buffer offsets from page following 'workspace'
+* (see counterpart vars in LIB.TXT)
+Oscreen1 equ 0
+Oscreen2 equ Oscreen1+$8000
+Omapdata equ Oscreen2+$8000 ; start of main map
+Ofmapdata equ Omapdata+(mapwidth*mapdepth*2) ; start of foreground map
+Otiledata equ Ofmapdata+(fmapwidth*fmapdepth*2) ; tile graphics data
+Obuffer1 equ Otiledata+sizetiles
+Obuffer2 equ Obuffer1+6400
+Obuffer3 equ Obuffer2+0
+Oendbuffers equ Obuffer3+0 ; end of buffer workspace
+
+endprog equ * ; absolute end of program
+workspace equ * ; start of workspace
+ END

@@ -1,0 +1,330 @@
+; Blood Relations Arcade Game source,
+;
+; copyright (C) 1990 Level 9 Computing.
+;
+; TABLE.TXT, assembler format data for tables, a.k.a lists/arrays. 
+; (Save the assembled data as TABLE.DAT). 
+;
+; You must start all DEFWs on EVEN boundaries, else subsequent code 
+; seems to be padded to make it even (according to the GENST listing, 
+; anyway). The EVEN directive inserts a padding byte if appropriate.
+;
+ ORG 0
+starttables
+ dc.l $ffff ; LIST1-starttables
+ dc.l $ffff ; a temporary table (reserved in Grange)
+ dc.l $ffff ; a temporary table (reserved in Grange)
+ dc.l $ffff ; LIST4-starttables ; misc static data defined herein
+ dc.l $ffff ; list 5 (NPCInitial)
+ dc.l $ffff ; a temporary table (reserved in Grange)
+ dc.l $ffff ; a temporary table (reserved in Grange)
+ dc.l IntroTables-starttables ; 8 - assorted fixed system tables
+ dc.l $ffff ; a temporary table (reserved in Grange)
+ dc.l ENDTABLE-starttables
+;---
+;
+;---
+LIST1
+list8
+NPCINITIAL
+list5
+
+;---------------
+IntroTables
+; new stuff added for AA
+
+; Menu text, etc.
+; First, ptrs for all uses...
+ dc.w ScreenInfo-IntroTables ;MenuText-IntroTables in Grange
+ dc.w Scream-IntroTables ; fight music.  ;MenuData-IntroTables in Grange
+ dc.w Intro3-IntroTables ; fight music.  ;HiresCoords-IntroTables in Grange
+ dc.w Birds-IntroTables ; hit on head, tweety birds.  ;ExitOffsets-IntroTables in Grange
+ dc.w Smash-IntroTables ; smash window. ;ObjectGraphics-IntroTables in Grange
+ dc.w PositionFilename-IntroTables ;IntroText-IntroTables in Grange
+ dc.w GameFont-IntroTables ; 12 ;NounVerbTable-IntroTables in Grange
+ dc.w PCpalette-IntroTables
+ dc.w STpalette-IntroTables
+ dc.w AdlibFile-IntroTables ; offset 18
+ dc.w CGA2Palettes-IntroTables
+ dc.w ArcadeStructuresName-IntroTables ; offset 22
+ dc.w TurnDirections-IntroTables ; offset 24
+ dc.w SystemPalette-IntroTables ; offset 26
+ dc.w FontFilename-IntroTables ; offset 28
+ dc.w LockDigits-IntroTables ; offset 30
+ dc.w ArcaseSpritesFilename-IntroTables ; offset 32
+ dc.w MainGameSpritesFilename-IntroTables ; offset 34
+ dc.w ISpF-IntroTables ; offset 36
+ dc.w IStF-IntroTables ; offset 38
+ dc.w BeeFlightPath-IntroTables ; offset 40
+ dc.w IntroTextRasters-IntroTables ; offset 42
+
+; List of xchg,ychg values for 2 bee flight paths
+BeeFlightPath
+ dc.w -16,1 ; path 1
+ dc.w -16,0
+ dc.w -1,1
+ dc.w -1,0
+ dc.w -1,1
+ dc.w -1,0
+ dc.w -1,1
+ dc.w -1,0
+ dc.w -1,1
+ dc.w -1,0
+ dc.w -1,1
+ dc.w -1,0
+ dc.w -1,1
+ dc.w -1,0
+ dc.w -1,1
+ dc.w -1,0
+ dc.w 16,1 ; path 2
+ dc.w 16,0
+ dc.w 1,1
+ dc.w 1,0
+ dc.w 1,1
+ dc.w 1,0
+ dc.w 1,1
+ dc.w 1,0
+ dc.w 1,1
+ dc.w 1,0
+ dc.w 1,1
+ dc.w 1,0
+ dc.w 1,1
+ dc.w 1,0
+ dc.w 1,1
+ dc.w 1,0
+
+; Save/Load filename without extend
+PositionFilename
+ dc.b 'bloodpos.dat',0 ; Filename must be 8 chars + '.DAT'
+ even
+
+ISpF
+ dc.b 'introsp1.cmp',0
+ even
+
+IStF
+ dc.b 's1.dat',0
+ even
+
+MainGameSpritesFilename
+ dc.b 'maingam1.cmp',0
+ even
+
+LockDigits
+ dc.b 0,0,0,0 * current combination
+ dc.b 4,7,2,8 * combination to open the lock
+
+FontFilename
+ dc.b 'li.fnt',0
+ even
+
+GameFont
+ dc.b 'box.fnt',0
+ even
+
+TurnDirections
+; for each current direction, gives the direction reached
+; by going clockwise
+;     0,1,  3   5   7
+ dc.b 1,3,3,5,5,7,7,1,7,7,7,7,7,7,7,7
+; for each current direction, gives the direction reached
+; by going anti-clockwise
+;     0,1,  3   5   7
+ dc.b 7,7,7,1,1,3,3,5,7,7,7
+
+ even
+AdlibFile
+ dc.b 'intro.adl',0
+ even
+
+ArcadeStructuresName
+ dc.b 'S2.DAT',0
+ even
+
+ArcaseSpritesFilename
+ dc.b 'SPRITES1.DAT',0
+ even
+
+ScreenInfo
+; for Grange intro sequence: contains which picture to display,
+; and for how many frames.
+; title scene goes here
+
+; parameters are:
+; pic num, frames, soundtrack, repeat count for music
+; pointer to text list (zero if no text)
+
+ dc.w 82, 667, intro-IntroTables, 0 ; Do not increase - music is faulty
+ dc.w 2,  250, night-IntroTables, 0 ; grange at night, sam walking
+; scream, int_sc3 started by code
+ dc.w 22, 100, intro3-IntroTables,0 ; window scene
+ dc.w 32, 100, body-IntroTables,  0 ; stoops over body, and gets hit
+ dc.w 0,  4,   0,           0 ; fades to black
+ dc.w 0,  40,  intro5-IntroTables, -1 ; fades to black: repeat forever
+ dc.w 33, 70,  0,            0 ; wakes to find police
+ dc.w 3,  250, 0, 0 ; escorted down drive, police car drives off
+ dc.w 92,220,  body-IntroTables,  -1 ; courtroom
+ dc.w 42, 150, intro8-IntroTables,0 ; released from prison
+ dc.w 52, 66,  0,           0 ; view into car
+ dc.w 62, 150, NoseFlute-IntroTables,0 ; rear view mirror
+ dc.w 72, 300, NoseFlute-IntroTables,0 ; photo album
+ dc.w 12, 300, intro10-IntroTables,0 ; arrival at grange
+ dc.w -1,-1,-1
+;
+; Raster object triggers for text windows during the intro:
+; table of raster.w,message number.w,frames.w,x offset.w,h offset.w
+;
+IntroTextRasters
+ dc.w 638,500,5,124,64 ; 1929
+ dc.w 2103,501,200,0,0 ; courtroom
+ dc.w 685,502,200,0,16 ; car #1
+ dc.w 666,503,200,0,128 ; car #2
+ dc.w 840,504,10,64,-48 ; photo
+ dc.w 841,505,10,48,-48 ; photo
+ dc.w 842,506,10,40,-48 ; photo
+ dc.w 843,507,10,40,-48 ; photo
+ dc.w 844,508,10,32,-48 ; photo
+ dc.w 845,509,10,32,-48 ; photo
+ dc.w 846,510,10,48,-48 ; photo
+ dc.w 847,511,10,80,-48 ; photo
+ dc.w 848,512,10,40,-48 ; photo
+ dc.w 849,513,10,0,-16 ; photo
+ dc.w 0
+
+intro1
+ dc.b 'int_sc1.mmm',0
+ even
+night
+ dc.b 'night.mmm',0
+ even
+scream
+ dc.b 'scream.mmm',0
+ even
+intro3
+ dc.b 'int_sc3.mmm',0
+ even
+body
+ dc.b 'body.mmm',0
+ even
+
+thump
+ dc.b 'thump.mmm',0
+ even
+
+birds
+ dc.b 'thump.mmm',0
+;;; dc.b 'birds.mmm',0,0,0,0
+ even
+
+intro5
+ dc.b 'int_sc5.mmm',0,0,0,0
+ even
+
+NoseFlute
+ dc.b 'int_sc7.mmm',0,0,0,0
+ even
+
+intro8
+ dc.b 'int_sc8.mmm',0
+ even
+
+intro10
+ dc.b 'int_sc10.mmm',0
+ even
+
+AllOff
+ dc.b 'AllOff.mmm',0
+ even
+
+Smash
+ dc.b 'smash.mmm',0
+ even
+
+intro
+ dc.b 'intro.mmm',0
+ even
+
+CGA2Palettes
+ dc.b 0,$f,$e,$7,$f,$0,$7,$0,$8,$0,$f,$f,$f,$a,$8,$f ; town
+ dc.b 0,$f,$f,$f,$0,$0,$a,$0,$8,$a,$8,$0,$0,$9,$0,$f ; people
+ dc.b 0,$f,$0,$f,$0,$0,$7,$0,$a,$8,$f,$0,$e,$f,$7,$7 ; train
+
+
+
+SystemPalette
+
+; palette for returning to system on ST ONLY
+; to the ega colors.
+ dc.w $0000 ; transparent/black
+ dc.w $777f ; white
+ dc.w $3330 ;
+ dc.w $777f ;
+ dc.w $0004 ;
+ dc.w $777a ;
+ dc.w $3333 ;
+ dc.w $7770 ;
+ dc.w $0008 ;
+ dc.w $7772 ;
+ dc.w $333c ;
+ dc.w $7776 ;
+ dc.w $000d ; yellow
+ dc.w $777e ; lgrey
+ dc.w $3331 ; dgrey
+ dc.w $7774 ; green
+
+
+STpalette
+;commonm colours...
+transparent	equ $0000 ; ok
+white		equ $666F ; ok
+flesh		equ $7239;5339 ;light red
+Cyan		equ $0346 ; ok
+Violet		equ $203a ; ok
+Iblue		equ $0263 ;light blue ok
+black		equ $0000 ;ok
+Red		equ $2008 ;dark brown ok
+Blue		equ $0042 ;dark blue ok
+Brown		equ $320C ;light brown ok
+yellow		equ $562D ;ok
+Lgrey		equ $345e;444E 
+Dgrey		equ $2221 ;ok
+Green		equ $0304 ;dark green ok
+Lgreen	 	equ $173e
+pink		equ $526c;orange 520C ;770a
+
+
+;additional colours, for 'variable colours' only...
+
+PaleBlue1	equ $2254
+Vyellow		equ $770a
+;These colours must have IBM equivalents...
+BlueGrey	equ $223d ;(Mgrey?)
+PaleBlue2	equ $3454
+PaleWhite	equ $5671
+
+
+
+PcPalette
+; palette for intro sequence: vga/st colors are slightly different
+; to the ega colors.
+ dc.w $0000 ; transparent/black
+ dc.w $777f ; white
+ dc.w $7239 ; flesh
+ dc.w $0346 ; cyan
+ dc.w $0504 ; green
+ dc.w $203a ; violet
+ dc.w $0263 ; lblue
+ dc.w $0000 ; black
+ dc.w $2008 ; red
+ dc.w $0042 ; blue
+ dc.w $320c ; brown
+ dc.w $0676 ; cyan
+ dc.w $562d ; yellow
+ dc.w $444e ; lgrey
+ dc.w $2221 ; dgrey
+ dc.w $0304 ; green
+
+ENDTABLE
+;---------
+ END
+

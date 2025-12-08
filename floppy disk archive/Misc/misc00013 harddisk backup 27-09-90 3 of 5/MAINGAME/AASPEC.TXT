@@ -1,0 +1,17 @@
+; AASPEC.txt
+;
+; M.J.Austin Nov 1988
+;
+; Copyright (C) 1988 Level 9 Computing
+;
+begin
+.FGSpecials
+.FGSpecialsMovedSprite
+.BGSpecials
+.DAMSSpecials
+ return
+;---
+;.IncrementMinuteVec1
+; goto @IncrementMinute
+;---
+

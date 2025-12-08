@@ -1,0 +1,215 @@
+; MUSIC.TXT
+;
+; Mike Austin May 1990
+;
+; Copyright (C) 1990 Level 9 Computing Ltd
+;
+const
+ MusicDebug=0
+ MainTuneOffset=0 ; 2500 ; offset of main music within list19
+ MusicListNumber=13
+
+table
+ MusicList=13
+
+begin
+;---------
+;.CopyFilename
+;; from IntroTables(v1) to list17(8)
+; v2=8
+;.CF2
+; v3=IntroTables(v1)
+; list17(v2)=v3
+; add v1,c1
+; add v2,c1
+; if v3<>0 then CF2
+; return
+;----
+.AllocateMusic
+ gosub @MCOnceOnlyMusicInit
+;          /* Returns V1,V2 = (driver) InfoWord
+;                     V6 = 00000ABC
+;                          A=1 Adlib sound driver
+;                          B=1 Roland sound driver
+;                          C=1 ReelTalk
+;             (Note: Adlib/Soundblaster requires a resident driver to be
+;                    loaded before the game. If the driver is absent an
+;                    error handler call occurs before V6 is returned)
+;             (Note: This is one of the few cases where error handlers
+;                    could occur before SetUpVariablePtrs, so take care
+;                    not to PRINT to the buffer screens) 
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(52)=x1 ; set up MusicList:13
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(54)=x1 ; set up list13
+ v1=17000 ;12000 ; reserve space for list13 - Music List
+ goto @MCReserveMemory
+;----------
+
+.PlayTuneForScene
+; IntroTables(nextMusic) is the offset within IntroTables
+; of the pointer (word) to the music filename that
+; we want to play next. So all you need do in the 
+; code is to set NextMusic to a word, and this routine
+; will be called automatically from the frame build routine(s)
+ if LastTunePlayed<>NextMusic then PTFST2
+ return ; we've just asked for this tune - don't ask again
+
+.PTFST2
+; cif AllowMusic
+; if HaveDoneStop=1 then PTFSTune2
+;
+; cif MusicDebug
+;  v1=7
+;  gosub @MCEnableTextBuffer
+;  code -
+;  prs " Stop: "
+;  message cr
+;  code +
+;  gosub @WaitKey
+; cend ; MusicDebug
+
+
+
+.PTFSTune2
+ LastTunePlayed=NextMusic ; write it down as having requested this one
+
+ v1=0 ; score 0 for everything at the moment.
+; v2 not needed
+ v3=2 ; stop
+ gosub @MCPlayScore
+
+; load instrument file for adlib board etc.
+ &v1=IntroTables(10) ; 'all.adl'
+ gosub @CopyFilename
+ v1=MusicListNumber ; list to load into
+ v2=0 ;offset zero
+ v3=0
+ gosub @MCLoadFile ; filename is list17(8...)
+
+
+
+ &v1=IntroTables(NextMusic) ; get offset of filename
+ gosub @CopyFilename
+
+ cif MusicDebug
+  push v1
+  push v2
+   v1=7
+   gosub @MCEnableTextBuffer
+   code -
+   prs " Load: "
+   code +
+   v1=list17(8)
+   gosub @MCOswrchV1
+   v1=list17(9)
+   gosub @MCOswrchV1
+   v1=list17(10)
+   gosub @MCOswrchV1
+   v1=list17(11)
+   gosub @MCOswrchV1
+   v1=list17(12)
+   gosub @MCOswrchV1
+   v1=list17(13)
+   gosub @MCOswrchV1
+   v1=list17(14)
+   gosub @MCOswrchV1
+   v1=list17(15)
+   gosub @MCOswrchV1
+   v1=list17(16)
+   gosub @MCOswrchV1
+   v1=list17(17)
+   gosub @MCOswrchV1
+   v1=list17(18)
+  code -
+   prs " "
+   print v1 ; print out ascii code.
+   prs " "
+  code +
+   v1=13
+   gosub @MCOswrchV1
+   gosub @WaitKey
+  pop v2
+  pop v1
+ cend ; MusicDebug 
+
+
+ v1=MusicListNumber ; list to load into
+ v2=MainTuneOffset ;offset zero
+ v3=0
+ gosub @MCLoadFile ; filename is list17(8...)
+
+
+
+ cif MusicDebug
+  &v1=list17(0) ; return code
+  &v2=list17(2) ; return code
+  &v3=list17(4) ; return code
+  &v4=list17(6) ; return code
+  code -
+  print v1
+  prs " "
+  print v2
+  prs " "
+  message cr
+  print v3
+  prs " "
+  print v4
+  prs " "
+  code +
+
+  v1=MusicList(1500)
+  gosub @MCOswrchV1
+  v1=MusicList(1501)
+  gosub @MCOswrchV1
+  v1=MusicList(1502)
+  gosub @MCOswrchV1
+  v1=MusicList(1503)
+  gosub @MCOswrchV1
+
+  v1=7
+  gosub @MCEnableTextBuffer
+  code -
+  prs " Init: "
+  code +
+  gosub @WaitKey
+ cend ; MusicDebug
+
+
+
+
+ v1=MusicListNumber ; list
+ v2=MainTuneOffset ;offset zero
+ v3=MusicListNumber ; adlib instrument file?
+ v4=0
+ v5=0 ; score number
+ gosub @MCInitialiseScore
+;          /* Paramters:
+;                V1 list V2 offset Music Score
+;                V3 list V4 offset Adlib Instrument File
+;                V5 Score number (0-3)
+
+
+ cif MusicDebug
+   v1=7
+   gosub @MCEnableTextBuffer
+   code -
+   prs " Play: "
+   code +
+  gosub @WaitKey
+ cend ; MusicDebug
+
+
+ v1=0 ; score number
+ v2=255 ; MusicRepeatCount ; 0=1 play, 1=twice etc. (0 doesn't work)
+ v3=0 ; restart
+ gosub @MCPlayScore
+
+;          /* Paramters:
+;                V1 Score number (0-3)
+;                V2 Repeat Flag (255=forever, 0=once, #=number of times)
+;                V3 Operation (0=restart, 1=resume, 2=stop)
+;          */
+ cend ; AllowMusic
+ return
+;--------          

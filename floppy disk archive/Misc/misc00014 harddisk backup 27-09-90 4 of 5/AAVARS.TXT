@@ -1,0 +1,301 @@
+; AAVars.txt
+;
+; M.J.Austin Nov 1988
+;
+; Copyright (C) 1988 Level 9 Computing
+;
+ var
+
+;--------------------------------------------------------------------------
+; EARLY VARS (first 256) that can be used in interpreted mode
+;--------------------------------------------------------------------------
+
+ v1 v2 v3 v4 v5 v6 v7 ; must be first vars
+ x1 x2 x3 x4 x5 x6 x7 FireKey
+ c0 c1 c2 c3 c4 c16 c32 ; padding around c16
+ M1 M2 ; General purpose output messages. Lots of routines print M1. 
+ VALUE RESULT ; General purpose results
+ ROOM FROM HIDEST DEST DIR STATUS ; Used by exit code
+ CURRENTUSERROOM ; where player is (for benefit of npcs)
+ OBJECT ; General purpose variable, object acted upon by routines 
+ HIPOS POS ; General purpose position of object
+ SEARCHPOS HISEARCHPOS ; Where parser expects object
+ VERB PREP NOUN1 NOUN2
+; LASTWORDPRINTED ; For printing IT in place of noun. "Last" noun printed.
+; OUTPUTWORD ; Internal to  OUTWORDn (prints exits/object list)
+; WORD1 WORD2 WORD3 WORD4 ; Internal to OUTWORDn
+; OWTYPE ; ditto. Word type, so article can be added/pronoun substituted.
+; SEARCHDEPTH ; Parameter to GETNEXTWORD
+ PROCESSED ; Flag set in parsing. 
+ ACTOR ; current person who is moving/doing things
+ ACTORATTRIBUTES ; used all over the place by NPC handlers
+
+; vars used in the menu must work in interpreted mode
+ MV0
+ MV1
+ MV2
+ LeaveMenu	;non-zero to exit menu/continue with game
+ menubuild	;non-zero to re-display background BEFORE next screen-flip.
+ lines		;Number of text lines displayed this frame
+ BasicCurrentMenu	;Menu to continue FROM on left/right
+ HighlightedMessage	;message number printed in highlight
+ HighlightedVerb	;verb/sub-menu for highlighted line
+ LeftMenuLimit ; furthest to left we can go
+ RightMenuLimit ; furthest to the right we can go
+ ABSMenuLine ; save for HighLightedLine
+ CurrentHeading ; heading message
+ MActor ; set as the actor whose inventory is listed in the CARRIED menu
+ ResponseGiven ; true if npc responds to questioning
+ AutohiKey ; simulates a L/R keypress next turn
+ EnableFrisk ; allows person's objects to be revealed
+ line ; current menu line
+ CurrentReadingPage ; current page being read in notepad
+ ObjectMenuPtr ;&*&*&
+ Exp ; expression of person we're talking to
+;
+ Murder ; game number (1-9)
+ SaveOpinionForMore ; used to force a menu "more"
+ Conversant ; person we're in conversation with
+ ConversationPtr ; current conversation address pointer
+; ConversationNpc ; set to the npc who's triggered a conversation
+ Involvednpc1 ; current victim
+ Involvednpc2 ; murderer
+; Involvednpc3 ; up to 3 npcs involved in murder (inc. victim)
+ CurrentNotePage ; current page in notebook
+; VaryNullNote ; counter for a group of 5 'nothing happened' notes
+ SamUnconcious ; sam knocked out by murderer!
+ WantMore ; enables "more"
+ MoreMessage ; continuation question message
+ JoyStickStatus
+ PlayerHidden ; set when player is hiding
+ AnalyseObject ; Object for Inspector to analyse
+ AnalyseType ; type of analyse (e.g. f/prints, poison)
+ MenuDebugMode ; debug flag
+
+; vars used in the floor cache must work in interpreted mode
+ Cache1     ;map number in first cache
+ Cache2     ;map number in second cache
+ MapNumber    ;ascii suffix of filename (0..9, A..Z)
+ RoomNum      ;room (XZH) number
+ CurrentRoom  ;offset of room data
+ Modified     ;non zero if FloorMap() altered since last save
+ CurrentCache ;address to start load/save
+ FsizeX FsizeZ
+
+;--------------------------------------------------------------------------
+; GAME vars
+;--------------------------------------------------------------------------
+
+ startfloorpointers ; within list5
+ startracetracks ; within list5
+ executeprocessed ; set when gd commands have been acted on
+ descriptionmode ; verbose/brief/none. (None is the case for 'run')
+ startreversaltable ; in list5  
+ commandfinished ; set when a multiple command has finished
+ orderwaiting ; in NPC decision code. Is a queued command waiting?
+ normaldescriptionmode ; the mode selected by the user
+ wordsoutput ; internal to PRINTEXITS etc
+ highwater ; debugging variable, reporting max stack space used.
+ freespaceptr ; internal to NPCPUSH and NPCPOP
+ synthdest ; destination on grid that actor is moving to
+ initfifoactor ; internal initfifo
+ lastunlinkedcommand ; internal to NPCPUSH
+ commandstolink ; ditto
+; fatalerror ; serious error, set to fail current goal-directed command
+ m1printsave actorsave objectsave ceroomsave
+ ValueSave ; used by RTConditional to save position in rt
+ CurrentObjectsPrinted LastHicurrentpos LastCurrentPos TotalObjectsPrinted
+ SaveHisearchpos SaveSearchpos PluralOffset
+ ProblemObject
+ INDEX ; Only used by READINPUTLIST
+ CURRENTMESSAGE ; used for varymessages
+ CursorX CursorZ CursorH ; position of people
+ InputPos ; specific to GetInput routine
+;7JUL90 WaitingForInput ; interlock for continous npc actions
+ c8 ; mainly for benefit of Scheduler
+ g1 g2 g3
+ GraphicsDir
+ ObjectGraphics
+ gActorX gActorZ
+; ForceStartup
+ SFrames ; incremented by VBL. Strategy task can use it for
+; synchronisation with local animation - e.g. take.
+ LoadingSequence
+ SuspendScroll
+ NounVerbTable
+ SpeedLimiting
+ NewPalettePlease ;non-zero if different palette for Logical and Physical
+ WantNewRoom ; when going from one room to another, this is
+; set to the new room.
+ UserDirection ; direction user entered the current room
+; by, to allow his initial coords to be set up correctly.
+ IBMFramesSinceVBL		;IBM frame limiter
+ IBMFrameLimit			;IBM Frame Limit
+ MarginX MarginZ SizeX SizeZ	;Dimensions for CurrentUserRoom
+
+;--------------------------------------------------------------------------
+; SYSTEM vars
+;--------------------------------------------------------------------------
+
+ LeftMargin
+ TopMargin
+ HighlightedLine
+ NumEntries
+ RepeatCount
+ SelectedLine
+ FirstLine
+ CurrentMenu
+ PreviousObjectInfo ObjectInfo
+;7JUL90 PlayerSpriteOffset
+ xsize ; accessed from interpreted mode by MENU.TXT
+ ysize ; accessed from interpreted mode by MENU.TXT
+ ACBHeader ; accessed from interpreted mode by AASTAND.TXT
+ ObjectNumber
+ Header
+ HiKey
+;7JUL90 MouseX MouseY
+;7JUL90 NeoPixelX
+;7JUL90 VBLInitialised
+ NestingDepth
+;7JUL90 AniViewMode ; 0 for script/1 for preview
+;7JUL90 ViewMapBuilt
+ dx1 dx2 dx3 dx4 dx5 dx6 dx7
+;7JUL90 ACBsOnly
+;7JUL90 UseMC
+ dv1 dv2 dv3 dv4 dv5 dv6
+ ExitOffsets
+ PlayerACB
+ RasterOffset
+ RoomCDWidth
+ KeyPadDirection LastRequestedDirection
+ ClimbingStairs ; npc currently climbing stairs
+ StairsZ ; Z pos of stairs
+ StairsX ; X pos of stairs
+ ExecutingCommand ; set when player is executing a menu command
+ ExecutingRacetrack ; set when player executing a racetrack (e.g. 
+; an involuntary distraction)
+ JustArrived ; flag set when npc just arrived at a destination pos
+ MenuText MenuData
+ Running ; used in Goal code when quickly detouring people
+ WantMenu ; set in user interface task, checked by strategy
+ WantToRestart ; set in menu code
+ GameLoopTimer ; incremented every game loop
+ NpcLoopTimer ; incremented every npc activations loop
+ TestHiresCoords ; flag set when hires co-ords should be tested 
+; when doing people collision, as an oppose to using on-screen co-ords
+ collidewithself ; flag when people collision detection should 
+; avoid the person we're testing, so as to make sure FindVacantPos 
+; doesn't return the current pos of the person when e.g. pushed
+ ScanNoTargetNpc ; set when you wish to treat target npcs as obstacles 
+; when using ScanRoute
+ ReturnCode CurrentSquare 
+ PointOnMap
+ persontalking ; npc using talk portrait (not menu)
+ portraittimer ; duration of talking pottrait
+ portraitmessage ; holds talk message until portrait displayed
+ portraitx ; x pos of portrait
+ TalkACB ; holds talk animation ACB number until ready for removing
+ GoalNowX GoalNowZ ;coords right now
+ IntendedDir       ;direction to escape from collision
+ TryDir            ;attempted next direction to travel
+ StartX StartY     ;coords used for testing locns other than NowX,NowZ
+ headingwidth ; width in words of room heading
+ minmousePOS ; distance mouse must move to register
+ minmouseNEG
+ hour
+ minute
+ second
+ shownewtime ; flag set in VBL to redraw time
+ ActorX ActorZ ActorH
+ DestX DestZ DestH
+;7JUL90 frames
+
+;--------------------------------------------------------------------------
+; GAME SPECIFIC vars
+;--------------------------------------------------------------------------
+
+ PersonArriving ; set to Actor currently arriving at manor. remains set 
+; until they are shown by jarvis their room.
+ FrontDoorOpened ; set momentarily when someone passes through the 
+; front door
+; Vars used for special racetrack conditionals
+ Vreadyformurder ; set when murder triggered - cleared when commited
+; Vdinnerisserved
+; Vjarvisphonedpolice
+ Vmurderbeendone
+ VSamKnowsAboutMurder
+ inspectorQV ; inspector questioning someone
+; EggsPricked ; eggs been pricked in murder 2
+ SamSeduced ; set while sex scene is underway
+ JarvisHasTray ; set while jarvis serves drinks
+ TextBoxDisplayed
+ TextBoxWidth ; set to width of text raster being printed on
+ TextBoxDepth ; set to depth of text raster being printed on
+ doctorbagopen
+
+
+
+; SYSTEM variables which don't have to be usable in INT mode
+ ACBStart ; now a variable so that BuildAndDisplayFrame can 
+; be used for room animation only
+ ObjectNumberType
+ MinXZH MinCompressed MinAnimation MinCell
+ MinRaster
+ SchedulerX1
+ SX1
+ ix4
+ dresult
+ MouseX MouseY ; Should use scratch variables instead of these.
+ IBMScrollOffset
+
+ X Y ; used in display.txt
+
+ zsize
+ size
+ bx1 ; used in save/display backdrop ONLY
+;7JUL90 tx1
+;7JUL90 FlashCount
+ crx1
+ AA CC EE ; ACB words
+ opcode num SP z h
+ CurrentStore ; for z-sorting sprites on output
+ ACBLoopBreaker
+;7JUL90 EntryV1 ; really only needed for editor
+;7JUL90 ObjectMaxY
+;7JUL90 ObjectCurrentXSize ObjectCurrentYSize
+ StartStructureBuffer
+ InitialHiresOffset
+ NextMusic
+
+  List4HiLoadAddress
+  List4LoLoadAddress
+
+ SubGame
+ FirstAsciiInFont
+ FontHeight ; character height, in pixels
+ bakcol ; text background col
+ inkcol ; text col
+ papercol ; colour to clear raster to
+ HeadingXPOS ; used for centralising room heading
+ LinkNext LinkNextShift
+ AniViewMode
+ UseMC
+ ACBsOnly
+ EntryV1
+ LastTunePlayed ; set to the value of NextMusic for the
+; last tune we've actually asked the driver for.
+ HaveDoneStop ; set to 1 when we've asked for the current tune
+; to stop - i.e. at the next frame build, the driver should be
+; ready to play the next tune.
+ MusicRepeatCount
+ PrintRasterNum
+
+ Won ; set to true if the current sub-game was won
+ MazeObject ; Set to an object within the maze when calling maze game
+ MazeObjectTaken ; Set to an object Sam picked up during maze game
+ MaxScore ; max score for current murder
+ TimeLimit ; counter until end of game
+
+ FrontDoorACB
+ MasonryACB
+ MasonryHit

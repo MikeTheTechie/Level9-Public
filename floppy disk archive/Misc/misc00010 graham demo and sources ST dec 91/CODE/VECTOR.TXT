@@ -1,0 +1,267 @@
+* VECTOR.TXT - Atari 1040ST 68000 Vector Graphic Routines
+* Copyright (C) Graham M Jones 15th December 1989
+
+* Work out a list of screen x,y points for each x,y,z co-ordinate 
+* from a0 (negative values: $80+value), terminated with -1
+
+		; copy each x,y,z to buffer
+anirot:
+		lea shape,a1
+ar1:
+		move.b	(a0)+,(a1)+
+		move.b	(a0)+,(a1)+
+		move.b	(a0)+,(a1)+		; copy x,y,z
+		cmp.b	#-1,(a0)
+		bne	ar1
+		move.b	#-1,(a1)
+
+		; rotate each x,y,z in the buffer
+		bsr	roz
+		bsr	roy
+		bsr	rox
+
+		; work out the 2d screen x,y positions
+		lea	shape,a0
+		lea	shapexy,a1
+ar2:
+		move.b	(a0)+,d0		; x
+		cmp.b	#-1,d0
+		beq	ar6
+		move.b	(a0)+,d1		; y
+		move.b	(a0),d2			; z
+		and.w	#$7f,d2
+		tst.b	(a0)+
+		bpl	ar3
+		moveq	#0,d3
+		sub.w	d2,d3			; ABS(z)
+		exg	d2,d3
+ar3:		add.w	perspect,d2		; 256 + z
+		asl.w	#8,d0			; x * 256
+		bpl	ar4
+		and.w	#$7fff,d0
+		moveq	#0,d3
+		sub.w	d0,d3			; ABS(x)
+		exg	d0,d3
+ar4:		ext.l	d0
+		divs	d2,d0			; screen x
+
+		asl.w	#8,d1
+		bpl	ar5
+		and.w	#$7fff,d1
+		moveq	#0,d3
+		sub.w	d1,d3			; ABS(y)
+		exg	d1,d3
+ar5:		ext.l	d1
+		divs	d2,d1			; screen y
+
+		add.b	xcentre,d0		; add x origin
+		move.b	d0,(a1)+
+		add.b	ycentre,d1		; add y origin
+		move.b	d1,(a1)+
+		bra	ar2
+
+ar6:		rts
+
+* -------------------------------------------------------------------------
+
+* Rotation routines
+
+rox:	
+		move.b	xrot,rotangle
+		moveq	#1,d0
+		moveq	#2,d1
+		bra	rot
+
+roy:	
+		move.b	yrot,rotangle
+		moveq	#2,d0
+		moveq	#0,d1
+		bra	rot
+
+roz:	
+		move.b	zrot,rotangle
+		moveq	#0,d0
+		moveq	#1,d1
+
+rot:
+		move.w	d0,rotmod1+2
+		move.w	d1,rotmod2+2
+		move.w	d0,rotmod3+2
+		move.w	d1,rotmod4+2
+		move.w	d0,rotmod5+2
+		move.w	d1,rotmod6+2
+		move.w	d0,rotmod7+2
+		move.w	d1,rotmod8+2
+		move.w	d0,rotmod9+2
+		move.w	d1,rotmod10+2
+		move.w	d0,rotmod11+2
+		move.w	d1,rotmod12+2
+		lea	sin256,a0
+		lea	shape,a1
+		move.b	rotangle,d0
+		and.w	#$3f,d0
+		asl.w	#1,d0
+		move.w	#128,d1
+		sub.w	d0,d1
+		move.w	(a0,d0.w),d0		; sin 0-90
+		move.w	(a0,d1.w),d1		; cos 0-90
+		btst	#6,rotangle
+		beq	rot1
+		exg	d0,d1			; angle 90-179 or 270-355
+
+rot1:
+		move.b	(a1),d2
+		cmp.b	#-1,d2
+		beq	rot6
+rotmod1:	move.b	1(a1),d2		; x
+rotmod2:	move.b	1(a1),d3		; y
+		and.w	#$7f,d2
+		and.w	#$7f,d3
+		move.w	d2,d4
+		move.w	d3,d5
+		mulu	d1,d2
+		swap	d2			; x cosa
+		mulu	d0,d3
+		swap	d3			; y sina
+		mulu	d0,d4
+		swap	d4			; x sina
+		mulu	d1,d5
+		swap	d5			; y cosa
+* work out signs
+		cmp.b	#$40,rotangle
+		bhi	rot2
+* 0-90
+rotmod3:	tst.b	1(a1)
+		bpl	rot1a
+		moveq	#0,d7
+		sub.w	d2,d7
+		exg	d2,d7
+		moveq	#0,d7
+		sub.w	d4,d7
+		exg	d4,d7
+rot1a:
+rotmod4:	tst.b	1(a1)
+		bpl	rot5
+		moveq	#0,d7
+		sub.w	d3,d7
+		exg	d3,d7
+		moveq	#0,d7
+		sub.w	d5,d7
+		exg	d5,d7
+		bra	rot5
+
+rot2:
+		cmp.b	#$80,rotangle
+		bhi	rot3
+* 91-180
+rotmod5:	tst.b	1(a1)
+		bmi	rot2a
+		moveq	#0,d7
+		sub.w	d2,d7
+		exg	d2,d7
+		bra	rot2b
+rot2a:		moveq	#0,d7
+		sub.w	d4,d7
+		exg	d4,d7
+rot2b:
+rotmod6:	tst.b	1(a1)
+		bpl	rot2c
+		moveq	#0,d7
+		sub.w	d3,d7
+		exg	d3,d7
+		bra	rot5
+rot2c:		moveq	#0,d7
+		sub.w	d5,d7
+		exg	d5,d7
+		bra	rot5
+
+rot3:
+		cmp.b	#$c0,rotangle
+		bhi	rot4
+* 181-270
+rotmod7:	tst.b	1(a1)
+		bmi	rot3a
+		moveq	#0,d7
+		sub.w	d2,d7
+		exg	d2,d7
+		moveq	#0,d7
+		sub.w	d4,d7
+		exg	d4,d7
+rot3a:
+rotmod8:	tst.b	1(a1)
+		bmi	rot5
+		moveq	#0,d7
+		sub.w	d3,d7
+		exg	d3,d7
+		moveq	#0,d7
+		sub.w	d5,d7
+		exg	d5,d7
+		bra	rot5
+
+rot4:
+* 271-359
+rotmod9:	tst.b	1(a1)
+		bpl	rot4a
+		moveq	#0,d7
+		sub.w	d2,d7
+		exg	d2,d7
+		bra	rot4b
+rot4a:		moveq	#0,d7
+		sub.w	d4,d7
+		exg	d4,d7
+rot4b:
+rotmod10:	tst.b	1(a1)
+		bmi	rot4c
+		moveq	#0,d7
+		sub.w	d3,d7
+		exg	d3,d7
+		bra	rot5
+rot4c:		moveq	#0,d7
+		sub.w	d5,d7
+		exg	d5,d7
+
+rot5:
+ 		sub.w	d3,d2			; new x
+		bpl	rot5a
+		moveq	#0,d3
+		sub.w	d2,d3
+		exg	d2,d3
+		or.b	#$80,d2
+rot5a:
+		add.w	d5,d4			; new y
+		bpl	rot5b
+		moveq	#0,d3
+		sub.w	d4,d3
+		exg	d4,d3
+		or.b	#$80,d4
+rot5b:
+
+rotmod11:	move.b	d2,1(a1)
+rotmod12:	move.b	d4,1(a1)
+		add.l	#3,a1
+		bra	rot1
+
+rot6:		rts
+
+* -------------------------------------------------------------------------
+
+shape:		ds.w	5000
+shapexy:	ds.w	5000
+perspect:	dc.w	440
+xcentre:	dc.b	160
+ycentre:	dc.b	64
+xrot:		ds.b	1
+yrot:		ds.b	1
+zrot:		ds.b	1
+rotangle:	ds.b	1
+		even
+
+sin256:
+		dc.w	0,1608,3216,4821,6424,8022,9616,11204
+		dc.w	12785,14359,15924,17479,19024,20557,22078,23586
+		dc.w	25079,26558,28020,29466,30893,32302,33692,35062
+		dc.w	36410,37736,39040,40320,41576,42806,44011,45190
+		dc.w	46341,47464,48559,49624,50660,51665,52639,53581
+		dc.w	54491,55368,56212,57022,57798,58538,59244,59914
+		dc.w	60547,61145,61705,62228,62714,63162,63572,63944
+		dc.w	64277,64571,64827,65043,65220,65358,65457,65516,-1

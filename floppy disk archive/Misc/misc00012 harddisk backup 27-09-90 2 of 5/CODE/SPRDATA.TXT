@@ -1,0 +1,183 @@
+* SPRDATA.TXT - Sprite data blocks to be used with LIB.TXT 
+* library routines
+* Copyright (C) Graham M Jones 30th August 1990 
+
+maxsprites equ 25
+
+* sprite parameter blocks
+
+currentimage equ 0
+pcoffset equ 2 ; sprite program counter
+repeatoffset equ 4 ; animation repeat counter
+diroffset equ 6
+pixcoloffset equ 7 ; standard radar pixel colur
+xposoffset equ 8
+yposoffset equ 10
+widthoffset equ 14 ; width in words
+depthoffset equ 16 ; depth in lines-1
+
+spriteblocklen equ 64
+
+*	current image.w,<ani sequence pc.w>,repeat counter.w,
+*	last direction.b (0=right 1=left),<radar pixel col.b>,
+*	<x pos.w>,<y pos.w>,0,<width in cells.w>,<depth in pixels.w>
+
+spriteparameters:
+
+playersprite:
+	; sprite 1 ; player
+	dc.w 0,playerani1,0
+	dc.b 0,15
+	dc.w 0,160,0,4,31
+	ds.b 46
+
+enemysprites:
+	; sprite 2 ; enemy 1
+	dc.w 0,enemyani1,0
+	dc.b 0,10
+	dc.w 32,100,0,4,31
+	ds.b 46
+	; sprite 3 ; enemy 2
+	dc.w 0,enemyani2,0
+	dc.b 0,10
+	dc.w 32,100,0,4,31
+	ds.b 46
+	; sprite 4 ; enemy 3
+	dc.w 0,enemyani3,0
+	dc.b 0,10
+	dc.w 32,100,0,4,31
+	ds.b 46
+	; sprite 5
+	dc.w 0,0,0
+	dc.b 0,0
+	dc.w 0,0,0,0,0
+	ds.b 46
+
+playermissiles equ 5 ; number of player missiles
+enemymissiles equ 15 ; number of enemy missiles
+
+missilesprites:
+	; sprites 6 to 6+playermissiles+enemy missiles
+	rept playermissiles
+	dc.w 0,0,0
+	dc.b 0,15
+	dc.w 0,0,0,2,3
+	ds.b 46
+	endr
+	rept enemymissiles
+	dc.w 0,0,0
+	dc.b 0,15
+	dc.w 0,0,0,1,3
+	ds.b 46
+	endr
+
+* sprite animation sequences
+animations:
+	ds.w 1	; 1 word padding so that PC<>0 when pointing to
+		; first animation
+
+Send equ 0 ; end of animation sequence
+Simage equ 1 ; set new sprite image and process NEXT instruction
+Smove equ 2 ; move to x+x1,y+y1 and display current image
+Snomove equ 3 ; padding after Simage if no move is required
+Sgoto equ 4 ; goto new animation sequence and process NEW instruction
+Srepeat equ 5 ; repeat next instruction N times
+
+standani equ *-animations
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Snomove,0
+	dc.w Sgoto,standani
+
+playerani1 equ *-animations
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Snomove,0
+	dc.w Sgoto,playerani1
+
+missileaniR equ *-animations
+	dc.w Smove
+	dc.b 72,16 ; set position relative to player
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Smove
+	dc.b 40,0
+	dc.w Smove
+	dc.b 48,0
+	dc.w Smove
+	dc.b 56,0
+	dc.w Srepeat,3
+	dc.w Smove
+	dc.b 80,0
+	dc.w Send
+
+missileaniL equ *-animations
+	dc.w Smove
+	dc.b -28,16 ; set position relative to player
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Smove
+	dc.b -40,0
+	dc.w Smove
+	dc.b -48,0
+	dc.w Smove
+	dc.b -56,0
+	dc.w Srepeat,3
+	dc.w Smove
+	dc.b -80,0
+	dc.w Send
+
+enemyani1 equ *-animations
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,25
+	dc.w Smove
+	dc.b 16,16
+	dc.w Srepeat,175
+	dc.w Smove
+	dc.b 16,0
+	dc.w Srepeat,25
+	dc.w Smove
+	dc.b 16,-16
+	dc.w Srepeat,225
+	dc.w Smove
+	dc.b -16,0
+	dc.w Sgoto,enemyani1
+
+enemyani2 equ *-animations
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,450
+	dc.w Smove
+	dc.b 8,0
+	dc.w Srepeat,50
+	dc.w Smove
+	dc.b -8,8
+	dc.w Srepeat,350
+	dc.w Smove
+	dc.b -8,0
+	dc.w Srepeat,50
+	dc.w Smove
+	dc.b -8,-8
+	dc.w Sgoto,enemyani3
+
+enemyani3 equ *-animations
+	dc.w Simage,spr1 ; show sprite image
+	dc.w Srepeat,100
+	dc.w Smove
+	dc.b 4,4
+	dc.w Srepeat,700
+	dc.w Smove
+	dc.b 4,0
+	dc.w Srepeat,100
+	dc.w Smove
+	dc.b 4,-4
+	dc.w Srepeat,900
+	dc.w Smove
+	dc.b -4,0
+	dc.w Sgoto,enemyani3
+
+* sprite image data
+sprdata:
+	ds.w 1	; 1 word padding so that IMAGE<>0 when pointing to
+		; first image
+
+spr1 equ *-sprdata	; offset for 1st sprite
+	rept 128
+	dc.w $0000,$0000,$ffff,$0000,$0000
+	dc.w $0000,$0000,$0000,$ffff,$0000
+	endr

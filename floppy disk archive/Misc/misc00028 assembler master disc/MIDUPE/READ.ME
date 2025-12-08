@@ -1,0 +1,62 @@
+        How to make a double-sided bootable TOS disk.
+
+1.  Format a double-sided disk by selecting a disk icon, then the 
+    format option from the desktop menu.
+
+2.  Click on the double-sided selector button.
+
+3.  When  formatting  is finished,  select all the files on  your 
+    original TOS disk and drag them to the newly formatted disk.
+
+4.  Insert  the MichTron Utilites disk in the drive  and  double-
+    click on the MUTIL.PRG file.
+
+For the convenience of those not familiar with disks and TOS,  we 
+have   provided  a  double-sided  boot  sector  on  the  MichTron 
+Utilities disk.   Rather than try to figure out what bits need to 
+be set,  you can just copy the information on track 1 sector 4 of 
+the MichTron Utilities disk onto the boot sectors of your disk.
+
+5.  After the MichTron Utilities opening screen  appears,  choose 
+    track mode, then copy sectors from the Sector menu.
+
+6.  Copy one sector from track 1 sector 4 of the MichTron disk to 
+    track 0 sector 1 of the newly-created double-sided TOS disk.
+
+7.  Reboot using your completed double-sided TOS disk.
+
+
+************************************************************
+
+About volume labels
+
+
+A slight bug in the way volume labels are handled by TOS prevents 
+us  from  renaming  an existing volume label.  The  label  change 
+option will add a new volume label to the disk.   The code in the 
+program  will  handle  a rename when the TOS is  fixed,  so  this 
+problem  will disappear in the future.   You need do  nothing  to 
+modify this program; the code will allow you to directly change a 
+volume  name  just as soon as you install a corrected version  of 
+TOS.  (Not yet released as of November 8, 1985)
+
+In  the meantime you must delete the existing volume label  on  a 
+disk using the View Disk option.  To delete the label:
+
+1.  Select View Disk.
+
+2.  Next,  you must change the first letter of the volume name to 
+    hex E5.   On a single-sided disk,  start at track 1 sector 3.  
+    On a double-sided disk, start at track 0 sector 12.
+
+3.  Move through the disk sectors until you see the volume name in 
+    the ASCII display on the right-hand side.
+
+4.  Change the first letter of the volume name to a hex "E5".  To 
+    do so,  click on the first hex byte of the line,  then type "E5".  
+    Click on Exit and Ok to delete the volume name.
+
+5.  Select Change Label from the opening screen File menu to write 
+    a new voloume name.
+
+

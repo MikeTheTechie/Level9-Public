@@ -1,0 +1,251 @@
+* Memory-efficient variation of the sprite plotting main loop 
+* from LIB.TXT
+* This saves 20% on the sprite data, as it works out its 
+* own bit mask, rather than being supplied with one for every 
+* four plane words
+* Obviously, it runs slightly slower and should only be 
+* used when memory gets tight
+
+* throw the sprite to the screen...
+* a0.l=start of sprite parameter block
+* a1.l=sprite screen address
+* a2.l=sprite image address
+* d3.w=rightmost writeable word offset on this line
+* d5.l=number of lines to skip
+* d6.l=number of lines to draw
+* d7.b=pixel position within word (0-15)
+
+xhasbeenclipped:
+	tst.b d5
+	beq nolinestoskip
+	move.w widthoffset(a0),d0	; get width
+	mulu.w d0,d5			; lines to skip*width*16 pixels
+	lsl.w #3,d5			; lines to skip*width*8 bytes
+	add.l d5,a2			; skip image data	
+nolinestoskip:
+
+depthloop:
+	move.l a1,-(sp)			; save line address
+	clr.l d1
+	move.w xstart,d4		; count used for clipping
+	move.w xstart,d5
+	addq.w #8,d5			; count used for clipping
+	move.w widthoffset(a0),d1	; d1=width counter
+	subq.w #1,d1
+
+	; at this point, we can call a much faster routine if we 
+	; know that the sprite is completely on the screen horizontally
+widthloop:
+	jmp (a3)
+
+	; standard sprite main loop, where x may have to be clipped
+xispartoffscreen:
+
+	btst.b #backgroundbit,statusoffset(a0)
+	beq foregroundsprite
+
+	; only display the sprite on a colour zero background, 
+	; so as to appear "behind" existing graphics.
+	; get the mask from the screen data
+	move.w d6,-(sp)			; save line count
+	clr.l d6
+	cmp.w d3,d4
+	bcc FGdontmaskleft
+	move.w (a1),d6			; get left-most word
+	or.w 2(a1),d6
+	or.w 4(a1),d6
+	or.w 6(a1),d6
+	swap d6
+FGdontmaskleft:
+	tst.b d7
+	beq FGmaskcurrentword
+	cmp.w d3,d5
+	bcc FGmaskcurrentword
+	move.w 8(a1),d6			; get right-most word
+	or.w 10(a1),d6
+	or.w 12(a1),d6
+	or.w 14(a1),d6
+FGmaskcurrentword:
+	not.l d6			; negate the mask
+
+	; copy the 4 plane words, masking each of them
+	moveq.l #3,d0
+FGfourplanewords:
+	clr.l d2
+	move.w (a2)+,d2			; get plane word
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	and.l d6,d2			; mask out unwanted data
+	cmp.w d3,d5
+	bcc FGdontwriteright
+	or.w d2,8(a1)			; write right-most screen word
+FGdontwriteright:
+	cmp.w d3,d4
+	bcc FGdontwriteleft
+	swap d2
+	or.w d2,(a1)			; write current screen word
+FGdontwriteleft:
+	addq.l #2,a1
+	dbra d0,FGfourplanewords
+	move.w (sp)+,d6			; recover line count
+
+	addq.w #8,d4			; increment clip counter
+	addq.w #8,d5			; increment clip counter
+	dbra d1,widthloop
+	move.l (sp)+,a1			; recover line address
+	add.l #160,a1			; move down one line
+	dbra d6,depthloop
+	rts
+
+* ----------------------------------------------------------------------- *
+
+	; get the mask from the sprite data	
+foregroundsprite:
+	clr.l d2
+	move.w (a2),d2
+	or.w 2(a2),d2
+	or.w 4(a2),d2
+	or.w 6(a2),d2
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	not.l d2			; complement it
+
+	; mask out unwanted screen data
+	tst.b d7
+	beq maskcurrentword
+	cmp.w d3,d5
+	bcc maskcurrentword
+	and.w d2,8(a1)			; mask right-most word
+	and.w d2,10(a1)
+	and.w d2,12(a1)
+	and.w d2,14(a1)
+maskcurrentword:
+	cmp.w d3,d4
+	bcc dontmaskleft
+	swap d2
+	and.w d2,(a1)			; mask left-most word
+	and.w d2,2(a1)
+	and.w d2,4(a1)
+	and.w d2,6(a1)
+dontmaskleft:
+
+	; mask in the 4 plane words
+	moveq.l #3,d0
+fourplanewords:
+	clr.l d2
+	move.w (a2)+,d2			; get plane word
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	cmp.w d3,d5
+	bcc dontwriteright
+	or.w d2,8(a1)			; write right-most screen word
+dontwriteright:
+	cmp.w d3,d4
+	bcc dontwriteleft
+	swap d2
+	or.w d2,(a1)			; write current screen word
+dontwriteleft:
+	addq.l #2,a1
+	dbra d0,fourplanewords
+
+	addq.w #8,d4			; increment clip counter
+	addq.w #8,d5			; increment clip counter
+	dbra d1,widthloop
+	move.l (sp)+,a1			; recover line address
+	add.l #160,a1			; move down one line
+	dbra d6,depthloop
+dssret:
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* much faster versions of the sprite main loop, which can only be used 
+* when no x clipping is required
+xisallonscreen:
+
+	btst.b #backgroundbit,statusoffset(a0)
+	beq Fforegroundsprite
+
+	; only display the sprite on a colour zero background, 
+	; so as to appear "behind" existing graphics.
+	; get the mask from the screen data
+	move.w d6,-(sp)			; save line count
+	clr.l d6
+	move.w (a1),d6			; get left-most word
+	or.w 2(a1),d6
+	or.w 4(a1),d6
+	or.w 6(a1),d6
+	swap d6
+	tst.b d7
+	beq FFGmaskcurrentword
+	move.w 8(a1),d6			; get right-most word
+	or.w 10(a1),d6
+	or.w 12(a1),d6
+	or.w 14(a1),d6
+FFGmaskcurrentword:
+	not.l d6			; negate the mask
+
+	; copy the 4 plane words, masking each of them
+	moveq.l #3,d0
+FFGfourplanewords:
+	clr.l d2
+	move.w (a2)+,d2			; get plane word
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	and.l d6,d2			; mask out unwanted data
+	or.w d2,8(a1)			; write right-most screen word
+	swap d2
+	or.w d2,(a1)+			; write current screen word
+	dbra d0,FFGfourplanewords
+	move.w (sp)+,d6			; recover line count
+
+	dbra d1,widthloop
+	move.l (sp)+,a1			; recover line address
+	add.l #160,a1			; move down one line
+	dbra d6,depthloop
+	rts
+
+* ----------------------------------------------------------------------- *
+
+	; get the mask from the sprite data	
+Fforegroundsprite:
+	clr.l d2
+	move.w (a2),d2
+	or.w 2(a2),d2
+	or.w 4(a2),d2
+	or.w 6(a2),d2
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	not.l d2			; complement it
+
+	; mask out unwanted screen data
+	tst.b d7
+	beq Fmaskcurrentword
+	and.w d2,8(a1)			; mask right-most word
+	and.w d2,10(a1)
+	and.w d2,12(a1)
+	and.w d2,14(a1)
+Fmaskcurrentword:
+	swap d2
+	and.w d2,(a1)			; mask left-most word
+	and.w d2,2(a1)
+	and.w d2,4(a1)
+	and.w d2,6(a1)
+
+	; mask in the 4 plane words
+	moveq.l #3,d0
+Ffourplanewords:
+	clr.l d2
+	move.w (a2)+,d2			; get plane word
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	or.w d2,8(a1)			; write right-most screen word
+	swap d2
+	or.w d2,(a1)+			; write current screen word
+	dbra d0,Ffourplanewords
+
+	dbra d1,widthloop
+	move.l (sp)+,a1			; recover line address
+	add.l #160,a1			; move down one line
+	dbra d6,depthloop
+	rts

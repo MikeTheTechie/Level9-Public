@@ -1,0 +1,275 @@
+* ----------------------------------------------------------------------- *
+*     SAMPLE OF 68000 CODE FOR ATARI ST, TAKEN FROM ROUTINES LIBRARY
+* ----------------------------------------------------------------------- *
+* 
+*  COPYRIGHT (C) 1991 GRAHAM JONES, 14 CORNWALL ROAD, RISHTON, BLACKBURN
+*                 LANCASHIRE BB1 4DB. TEL (0254) 888155
+* 
+*   UNAUTHORISED REPRODUCTION, ADAPTATION, DISTRIBUTION, PERFORMANCE OR
+*      DISPLAY OF THIS PROGRAM OR THE ASSOCIATED AUDIOVISUAL WORK IS 
+*               STRICTLY PROHIBITED. ALL RIGHTS RESERVED.
+*
+* ----------------------------------------------------------------------- *
+*
+* Print a positive decimal value from 0 to 65535 to the Logical Screen
+*
+* On Entry: d0.w = value to be printed
+*           d5.b = 1 for leading zeros, 0 for no leading zeros
+*
+* On Exit:  All registers preserved
+
+PrintDec:
+	movem.l a0-a6/d0-d7,-(sp)
+	and.l #$ffff,d0			; make sure d0's a word value
+	move.l #10000,d1		; power count
+printdecloop:
+	divu d1,d0			; divide number by power
+                                        ; (lo.w=result, hi.w=remainder)
+	move.b d0,d4			; d4.w=result of division
+	swap d0
+	and.l #$ffff,d0			; d0.w=remainder
+	add.b #'0',d4			; get ascii digit
+	cmp.b #'0',d4
+	bne Dnotfirstzero		; leading zero?
+	tst.b d5
+	bne Dnotfirstzero
+	move.b #' ',d4			; replace with space
+	bra Dleadingzero
+Dnotfirstzero:
+	moveq.b #1,d5			; no more leading zeros
+Dleadingzero:
+	bsr printchard4			; print digit
+	divu #10,d1			; decrement power count
+	and.l #$ffff,d1
+	cmp.w #1,d1			; last digit?
+	bne Dnotlastdigit
+	moveq.b #1,d5			; no more leading zeros
+Dnotlastdigit:
+	tst.w d1
+	bne printdecloop
+	movem.l (sp)+,a0-a6/d0-d7
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Print an 8 digit BCD or HEX value up to $ffffffff to the Logical Screen
+*
+* On Entry: d0.w = value to be printed
+*           d5.b = 1 for leading zeros, 0 for no leading zeros
+*
+* On Exit:  All registers preserved
+
+PrintHexBcd:
+	movem.l a0-a6/d0-d7,-(sp)
+	move.l #$f0000000,d1		; digit mask
+	moveq.l #28,d2			; digit bit pos
+	clr.b d5			; flag for leading zeros
+	moveq.l #7,d7
+printdigit:
+	move.l d0,d3
+	and.l d1,d3			; get digit
+	lsr.l d2,d3			; scoll to LSByte
+	and.w #15,d3			; mask unwanted data
+	move.l #hexdigits,a0
+	clr.w d4
+	move.b (a0,d3.w),d4		; d4=ascii character
+	cmp.b #'0',d4
+	bne notfirstzero		; leading zero?
+	tst.b d5
+	bne notfirstzero
+	move.b #' ',d4			; replace with space
+	bra leadingzero
+notfirstzero:
+	moveq.b #1,d5			; no more leading zeros
+leadingzero:
+	bsr printchard4
+	lsr.l #4,d1			; shift digit mask
+	subq.l #4,d2			; decrement digit pos
+	bne notlastdigit
+	moveq.b #1,d5			; no more leading zeros
+notlastdigit:
+	dbra d7,printdigit
+	movem.l (sp)+,a0-a6/d0-d7
+	rts
+
+hexdigits:
+	dc.b "0123456789ABCDEF"
+
+* ----------------------------------------------------------------------- *
+
+* Plot a pixel to the Logical Screen, given its X,Y coordinates
+*
+* On Entry: d1.w         = pixel X (0 to 319)
+*           d0.w         = pixel Y (0 to 199)
+*           a1.l         = addr of current entry in backgd replace buffer
+*           GraphicCol.b = colour (0 to 15)
+*           FatPixels.b  = 1 for double height pixels, 0 for single height
+*
+* On Exit:  a1.l is incremented by 12, so as to point to the next entry 
+*                in the background replace buffer
+*
+*           Information for background replace is stored in the 
+*           twelve byte block preceeding a1 ...
+*
+*           Block (a1-12) 0 <screen address of first plane word>
+*	                  4 <original value of first plane word>
+*	                  6 <original value of second plane word>
+*	                  8 <original value of third plane word>
+*	                 10 <original value of fourth plane word>
+*
+*           Negative flag is set if pixel was off-screen
+*
+*           Unchanged registers: a2-a7 ; d3-d7
+ 
+PlotPix:
+	bsr CalcScreenAddress		; get screen address in a0
+	bmi ppfail			; off-screen
+
+	; work out pixel plane & mask
+	move.w #$8000,d0		; pixel to plot
+	move.w #$7fff,d1		; plane mask
+	lsr.w d2,d0			; shift pixel
+	ror.w d2,d1			; shift mask
+
+	; mask pixel in all 4 plane words
+	move.b fatpixels,d2		; pixel depth
+dofatpixels:
+	move.l a0,(a1)+			; save address
+	move.w (a0),(a1)+		; save plane 1
+	and.w d1,(a0)			; mask screen plane 1
+	btst.b #0,graphiccol
+	beq nopix1
+	or.w d0,(a0)			; mask in pixel
+nopix1:
+	addq.l #2,a0
+	move.w (a0),(a1)+		; save plane 2
+	and.w d1,(a0)			; mask screen plane 2
+	btst.b #1,graphiccol
+	beq nopix2
+	or.w d0,(a0)			; mask in pixel
+nopix2:
+	addq.l #2,a0
+	move.w (a0),(a1)+		; save plane 3
+	and.w d1,(a0)			; mask screen plane 3
+	btst.b #2,graphiccol
+	beq nopix3
+	or.w d0,(a0)			; mask in pixel
+nopix3:
+	addq.l #2,a0
+	move.w (a0),(a1)+		; save plane 4
+	and.w d1,(a0)			; mask screen plane 4
+	btst.b #3,graphiccol
+	beq nopix4
+	or.w d0,(a0)			; mask in pixel
+nopix4:
+	add.l #154,a0
+	dbra d2,dofatpixels
+	clr.b d1			; succeeded
+ppfail:
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Work out the Logical Screen address for a pixel, given its X,Y coords
+*
+* On Entry: d1.w = pixel X (0 to 319)
+*           d0.w = pixel Y (0 to 199)
+*
+* On Exit:  a0.l = screen address of the first plane word containing 
+*                  the pixel
+*           d2.b = pixel within plane word (0 to 15)
+*
+*           Negative flag is set if pixel was off-screen
+*
+*           Unchanged registers: a1-a7 ; d3-d7
+
+CalcScreenAddress:
+	and.l #$ffff,d0			; clear upper word
+	cmp.w #199,d0
+	bge CCAfail			; invalid y
+	move.w d1,d2			; save xpos
+
+* X falls into groups of 4 plane words, each representing 16 pixels...
+*
+*      group 0                     group 1
+*    pixels 0-15                 pixels 16-31
+*  ................  word 0    ................  word 4
+*  ................  word 1    ................  word 5
+*  ................  word 2    ................  word 6
+*  ................  word 3    ................  word 7
+*
+* So, X/16      = the group of plane words which the pixel fits into
+*    (X/16) * 8 = the address of the first plane word in this group, 
+*                 since there are 8 bytes in each group
+* Or (X AND $FFF0) / 2, which has the effect of losing bits 0-3 as 
+*                 with dividing by 16, but saves on only having to 
+*                 employ a single shift...
+
+	and.l #$fff0,d1			; x in steps of 16 pixels
+					; (also clears upper word)
+	cmp.w #320,d1
+	bge CCAfail			; invalid x
+	lsr.w d1			; d1=addr of first plane word
+	and.w #15,d2			; d2=pixel within plane word
+	bsr d0times160			; d1=address of y line
+	add.w d0,d1			; d0=offset address from screen
+	move.l currentLscreen,a0	; a0=start of screen
+	add.l d1,a0			; add offset address
+	clr.b d1			; succeeded
+	rts
+
+CCAfail:
+	move.b #-1,d1			; failed
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Peplace the background overwritten by successive calls to PlotPix
+*
+* On Entry: a1.l = address of background replace buffer
+*           d1.w = number of 12 byte entries (see above)
+*
+* On Exit:  Unchanged registers: a2-a7 ; d3-d7
+
+UnplotPix:
+	tst.w d1
+	beq uppret			; no entries!
+	subq.w #1,d1			; penultimate entry
+
+	; point a1 to the penultimate entry, as 
+	; we must unplot in reverse order
+	clr.l d0
+	move.w d1,d0
+	asl.w #2,d0			; * 4
+	move.w d0,d2
+	asl.w #1,d0			; * 8
+	add.w d2,d0			; * 12
+	add.l d0,a1			; penultimate entry
+upploop:
+	move.l (a1)+,a0			; get address of plane 1
+	move.l (a1)+,(a0)+		; replace planes 1 and 2
+	move.l (a1)+,(a0)+		; replace planes 3 and 4
+	sub.w #24,a1			; previous entry
+	dbra d1,upploop
+uppret:
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Unsigned quick multiply of d0 by 160
+*
+* On Entry: d0.l = value to be multiplied
+*
+* On Exit:  d0.l = d0.1 * 160
+*           Unchanged registers: a2-a7 ; d3-d7
+*
+d0times160:
+	move.w d1,-(sp)
+	asl.w #5,d0			; * 32
+	move.w d0,d1
+	asl.w #2,d0			; * 128
+	add.w d1,d0			; * 160
+	move.w (sp)+,d1
+	rts
+
+* ----------------------------------------------------------------------- *

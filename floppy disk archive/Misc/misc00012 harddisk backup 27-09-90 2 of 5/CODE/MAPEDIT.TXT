@@ -1,0 +1,1874 @@
+* Atari 1040ST map editor
+* Copyright (C) Graham M Jones 30th August 1990 
+
+* ----------------------------------------------------------------------- *
+* main loop								  *
+* ----------------------------------------------------------------------- *
+
+start:
+	bsr initvars			; set up vars
+	bsr initialise			; set up screen etc.
+
+	; input password
+	bsr waitkey
+	move.w d0,-(sp)
+	bsr waitkey
+	move.w d0,-(sp)
+	bsr waitkey
+	move.w (sp)+,d1
+	move.w (sp)+,d2
+	; d2=1st char, d1=2nd char, d0=3rd char
+	cmp.b #'4',d2
+	bne closedown
+	cmp.b #'5',d1
+	bne closedown
+	cmp.b #'1',d0
+	bne closedown
+
+	; clear maps
+	clr.l d0
+	move.l #mapdata,a0
+	move.l #(mapwidth*mapdepth)/2,d1	; size of main map
+	bsr fillblock
+	move.l #fmapdata,a0
+	move.l #(fmapwidth*fmapdepth)/2,d1	; size of fgd map
+	bsr fillblock
+
+	move.b #4,textcol
+	move.l #title,a0
+	bsr printstring			; main title
+
+	bsr loadmapdata			; load existing map
+
+	move.b #2,textcol
+	move.l #title0,a0
+	bsr printstring
+
+	; add tiles to buffer
+addtilesloop:
+	move.l #title1,a0
+	bsr printstring
+	move.b #3,textcol
+	bsr inputstring			; filename
+	move.b #2,textcol
+	tst.l sizetiles
+	beq donthavetiles		; tile buffer empty
+	tst.w d1
+	beq editmap			; no more tile screens
+donthavetiles:
+
+	; load neo screen into logical screen area
+	move.l #inputbuffer,d1
+	move.l currentLscreen,d2
+	move.l #128,d3			; skip header
+	bsr open
+	bmi addtileserr
+	bsr read
+	bmi addtileserr
+
+	; copy palette
+	move.l currentLscreen,a0
+	addq.l #4,a0			; offset to palette data
+	move.l #palette,a1		; palette buffer
+	move.w #7,d0			; copy 8 longwords
+copypalette:
+	move.l (a0)+,(a1)+
+	dbra d0,copypalette
+
+	move.l #inputbuffer,d1
+	move.l currentLscreen,d2
+	move.l #32000,d3		; load screen
+	bsr read
+	bmi addtileserr
+	bsr close
+	bmi addtileserr
+
+	; convert the screen to tiles
+	move.l currentLscreen,a0	; a0=screen
+	move.l #tiledata,a1		; a1=tile buffer
+	add.l sizetiles,a1
+	move.w #12,d2			; tiles down
+copydown:
+	move.w #19,d1			; tiles across
+copyacross:
+	move.w #15,d0			; lines per tile
+copyline:
+	move.l (a0)+,(a1)+		; copy 4 planes
+	move.l (a0)+,(a1)+
+	add.l #152,a0			; next screen line
+	dbra d0,copyline
+	sub.l #2552,a0			; next tile across
+	dbra d1,copyacross
+	add.l #2400,a0			; next tile down
+	dbra d2,copydown
+	move.l #title3,a0
+	bsr printstring
+	add.l #30720,sizetiles
+	bra addtilesloop		; add more tiles?
+
+	; edit map
+editmap:
+	bsr cls				; clear screens
+	move.l #title2,a0
+	bsr printstring
+	bsr waitkey
+	bsr cls				; clear screens
+	move.l #palette,a0
+	bsr setpalette			; set palette
+	move.b #1,textcol
+mainloop:
+	bsr buildanddisplayscreen	; show screen
+	bsr movewindow			; move screen & cursor
+	tst.b closedownflag
+	beq mainloop
+	bra closedown
+
+addtileserr:
+	move.l #diskerror,a0
+	bsr printstring
+	bra addtilesloop
+
+* ----------------------------------------------------------------------- *
+* game specific routines
+* ----------------------------------------------------------------------- *
+
+* move map window / cursor
+movewindow:
+	bsr keyscan
+
+* process joystick
+	move.l #spriteparameters+spriteblocklen,a0 ; cursor=sprite 1
+	btst.b #upbit,joystickstatus
+	beq notjup
+	cmp.w #16,yposoffset(a0)
+	bge okjup
+	; top of screen - scroll map window?
+	move.b #'8',d0			; emulate map up key
+	bra notjup
+okjup:
+	sub.w #16,yposoffset(a0)
+
+notjup:
+	btst.b #downbit,joystickstatus
+	beq notjdown
+	cmp.w #168,yposoffset(a0)
+	blt okjdown
+	; bottom of screen - scroll map window?
+	move.b #'2',d0			; emulate map down key
+	bra notjdown
+okjdown:
+	add.w #16,yposoffset(a0)
+
+notjdown:
+	btst.b #leftbit,joystickstatus
+	beq notjleft
+	cmp.w #16,xposoffset(a0)
+	bge okjleft
+	; left of screen - scroll map window?
+	move.b #'4',d0			; emulate map left key
+	bra notjleft
+okjleft:
+	sub.w #16,xposoffset(a0)
+
+notjleft:
+	btst.b #rightbit,joystickstatus
+	beq notjright
+	cmp.w #288,xposoffset(a0)
+	ble okjright
+	; right of screen - scroll map window?
+	move.b #'6',d0			; emulate map right key
+	bra notjright
+okjright:
+	add.w #16,xposoffset(a0)
+
+notjright:
+	btst.b #firebutton,joystickstatus
+	bne hitfire
+
+* process keyboard
+	; d0 is keypress
+	tst.b d0
+	beq mwret			; nothing pressed
+	cmp.b #'q',d0			; quit?
+	bne notclosedown
+	bsr saveall			; save as well
+	move.b #$ff,closedownflag
+	rts
+
+notclosedown:
+	cmp.b #'f',d0			; foreground map?
+	bne notfgdmap
+	move.l #spriteparameters+spriteblocklen,a0 ; cursor=sprite 2
+	move.w #spr3,currentimage(a0)	; change icon
+	move.w #$ffff,editforeground
+	rts
+
+notfgdmap:
+	cmp.b #'b',d0			; background map?
+	bne notbgdmap
+	move.l #spriteparameters+spriteblocklen,a0 ; cursor=sprite 2
+	move.w #spr2,currentimage(a0)	; change icon
+	clr.w editforeground
+	rts
+
+notbgdmap:
+	cmp.b #'s',d0			; save?
+	beq saveall
+	cmp.b #'8',d0			; '8' is up
+	beq keyup
+	cmp.b #'2',d0			; '2' is down
+	beq keydown
+	cmp.b #'4',d0			; '4' is left
+	beq keyleft
+	cmp.b #'6',d0			; '6' is right
+	beq keyright
+	cmp.b #'7',d0			; cursor up
+	beq twup
+	cmp.b #'1',d0			; cursor down
+	beq twdown
+mwret:
+	rts
+
+twup:
+	tst.w tilewindow
+	beq mwret
+	sub.w #20,tilewindow
+	sub.w #20,currenttile
+	rts
+
+twdown:
+	clr.l d0
+	move.w tilewindow,d0
+	add.w #4*20,d0
+	asl.l #7,d0			; *128 bytes per tile
+	cmp.l sizetiles,d0
+	bge mwret
+	add.w #20,tilewindow
+	add.w #20,currenttile
+	rts
+
+keyup:
+	tst.w windowy
+	beq mwret
+	sub.w #16,windowy
+	rts
+
+keydown:
+	cmp.w #(mapdepth-windowdepth)*16,windowy
+	bge mwret
+	add.w #16,windowy
+	rts
+
+keyleft:
+	tst.w windowx
+	beq mwret
+	sub.w #16,windowx
+	rts
+
+keyright:
+	cmp.w #(mapwidth-windowwidth)*16,windowx
+	bge mwret
+	add.w #16,windowx
+	rts
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* joystick fire button has been pressed
+hitfire:
+	cmp.w #128,yposoffset(a0)
+	bge choosetile
+	; insert tile to map
+	tst.w editforeground
+	beq editbackmap
+
+	; insert to foreground map
+	; work out tile from cursor pos
+	clr.w d0
+	move.w yposoffset(a0),d0		; get y
+	add.w windowy,d0			; add window y
+	add.w windowy,d0			; add window y
+	lsr.w #4,d0				; d1=tile down
+	mulu.w #fmapwidth,d0			; d1=tile down*map width
+	clr.w d1
+	move.w xposoffset(a0),d1		; get x
+	add.w windowx,d1			; add window x
+	add.w windowx,d1			; add window x
+	lsr.w #4,d1				; d1=tile across
+	add.l d1,d0				; d0=tile number
+	lsl.l d0				; d0=tile number word
+	move.l #fmapdata,a1
+	add.l d0,a1				; map tile address
+	move.w currenttile,(a1)			; poke in selected tile
+	rts
+
+	; insert to background map
+editbackmap:
+	; work out tile from cursor pos
+	clr.w d0
+	move.w yposoffset(a0),d0		; get y
+	add.w windowy,d0			; add window y
+	lsr.w #4,d0				; d1=tile down
+	mulu.w #mapwidth,d0			; d1=tile down*map width
+	clr.w d1
+	move.w xposoffset(a0),d1		; get x
+	add.w windowx,d1			; add window x
+	lsr.w #4,d1				; d1=tile across
+	add.l d1,d0				; d0=tile number
+	lsl.l d0				; d0=tile number word
+	move.l #mapdata,a1
+	add.l d0,a1				; map tile address
+	move.w currenttile,(a1)			; poke in selected tile
+	rts
+
+choosetile:
+	; choose new current tile
+	move.l #spriteparameters,a1		; box=sprite 0
+	move.w xposoffset(a0),xposoffset(a1)	; copy pos
+	move.w yposoffset(a0),yposoffset(a1)
+	; work out tile from out pos
+	move.w yposoffset(a0),d0		; get y
+	sub.w #128,d0				; -start of tile box
+	move.w d0,d1				; d1=tile down*16
+	lsr.w #2,d0				; d0=tile down*4
+	add.w d1,d0				; d0=tile down*20
+	move.w xposoffset(a0),d1		; get x
+	lsr.w #4,d1				; d1=tile across
+	add.l d1,d0				; d0=tile number
+	add.w tilewindow,d0			; add start of window
+	move.w d0,currenttile
+	rts
+
+* ----------------------------------------------------------------------- *
+* general system subroutines
+* ----------------------------------------------------------------------- *
+
+* initialise variables
+initvars:
+	move.l #startvars,a0
+	move.l #(endvars-startvars)/4,d1
+	clr.l d0
+	bsr fillblock			; clear all vars
+
+	move.b #1,textcol		; default text colour
+	move.l #screen1,currentLscreen	; current logial screen address
+	move.l #screen2,currentPscreen	; current pysical screen address
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* build the current display to the logical screen and swap 
+* screens to display it
+buildanddisplayscreen:
+	move.w windowx,Wwindowx
+	move.w windowy,Wwindowy
+	move.l #mapwidth,Wmapwidth
+	move.l #mapdata,a2
+	clr.b superimpose
+	bsr drawmaptoscreen		; draw main map
+
+	; show selection of map tiles
+	move.l currentLscreen,a0
+	add.l #windowtopmargin+windowdepth*2560,a0
+	move.l #tiledata,a1
+	clr.l d0
+	move.w tilewindow,d0
+	lsl.l #7,d0			; *128 bytes per tile
+	add.l d0,a1
+	move.w #3,d1			; tiles down
+tiledown:
+	move.w #19,d2			; tiles across
+tileacross:
+	move.w #15,d3			; tile pixel lines
+tileline:
+	move.l (a1)+,(a0)+		; copy 4 planes
+	move.l (a1)+,(a0)+
+	add.l #152,a0			; next screen line
+	dbra d3,tileline
+	sub.l #2552,a0			; next tile across
+	dbra d2,tileacross
+	add.l #2400,a0			; next tile down
+	dbra d1,tiledown
+
+	; show foreground "parallax" map
+	tst.w editforeground
+	beq dontshowforeground		; not in fgd edit mode
+	asl.w Wwindowx
+	asl.w Wwindowy
+	move.l #fmapwidth,Wmapwidth
+	move.l #fmapdata,a2
+	move.b #1,superimpose
+	bsr drawmaptoscreen		; draw foreground map
+
+dontshowforeground:
+	clr.w Wwindowx
+	clr.w Wwindowy			; sprites not relative to map
+	move.l #spriteparameters,a0
+	bsr displaysprites		; draw cursor + selection box
+
+	move.l #spriteparameters+spriteblocklen,a0 ; cursor=sprite 1
+	cmp.w #128,yposoffset(a0)
+	bge dontshowmapxy		; off map screen
+
+	; show map stats
+	clr.b cursorx			; zero cursor x,y
+	clr.b cursory
+	move.l #title4,a0
+	bsr printstring
+	clr.l d0
+	move.w windowx,d0
+	move.l #spriteparameters+spriteblocklen,a0 ; cursor=sprite 1
+	add.w xposoffset(a0),d0
+	lsr.w #4,d0			; get cell pos
+	bsr printdec			; print map x+cursorx
+	move.l #title5,a0
+	bsr printstring
+	clr.l d0
+	move.w windowy,d0
+	move.l #spriteparameters+spriteblocklen,a0 ; cursor=sprite 1
+	add.w yposoffset(a0),d0
+	lsr.w #4,d0			; get cell pos
+	bsr printdec			; print map y+cursory
+dontshowmapxy:
+
+	bsr swapscreens
+	bra flyback
+
+* ----------------------------------------------------------------------- *
+
+* draw all sprites to current logical screen
+displaysprites:
+	move.l #spriteparameters,a0	; sprite parameter blocks
+	move.l #maxsprites-1,d0
+drawspriteloop:
+	move.l d0,-(sp)
+	bsr drawsinglesprite
+	add.l #spriteblocklen,a0	; next sprite
+	move.l (sp)+,d0
+	dbra d0,drawspriteloop
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* draw a single sprite whose header is at a0
+drawsinglesprite:
+	tst.w pcoffset(a0)		; get pc offset
+	beq dssret			; sprite is dead
+	clr.l d5			; number of lines to skip
+	clr.l d6			; number of lines to draw
+	clr.l d0
+	move.w currentimage(a0),d0	; get current image offset
+	move.l #sprdata,a2		; start of image data
+	add.l d0,a2			; a2=image address
+
+	; work out screen position of sprite - first the y position
+	move.w yposoffset(a0),d0	; get y pos
+	sub.w Wwindowy,d0		; subtract window y pos
+	; clip the sprite vertically
+	bpl ynotofftop
+	; top of sprite is above screen
+	move.w depthoffset(a0),d6
+	move.w d6,d5
+	add.w d0,d6			; d6=bottom of sprite
+	bmi dssret			; completely off top of screen
+	; d6=number of lines to draw -1
+	sub.w d6,d5
+	; d5=number of lines to skip (those above the screen)
+	clr.w d0			; y is now zero
+	bra yhasbeenclipped
+ynotofftop:
+	cmp.w #200,d0
+	bge dssret			; completely off bottom
+	move.w depthoffset(a0),d5
+	move.w d5,d6
+	add.w d0,d5			; d6=bottom of sprite
+	sub.w #200,d5
+	blt ynotoffbottom		; not off bottom of screen
+	; d5=number of lines off bottom of screen
+	sub.w d5,d6
+	sub.w #1,d6
+	; d6=number of lines to draw -1
+ynotoffbottom:
+	clr.l d5			; (don't skip any lines from top)
+yhasbeenclipped:
+	mulu.w #160,d0			; y*screen lines
+
+	; now the x position
+	clr.l d1
+	move.w xposoffset(a0),d1	; get x pos
+	sub.w Wwindowx,d1		; subtract window x pos
+	bpl xnotoffleft			; xnotoffleft
+	or.l #$ffff0000,d1		; make d1 -ve longword
+xnotoffleft:
+	clr.l d7
+	move.b d1,d7
+	and.b #15,d7			; d7=pixel offset within word
+	and.l #$fffffff0,d1			
+	asr.l d1			; (x mod 16)/2=screen word position
+	add.l d1,d0			; add to start of line
+	move.l currentLscreen,a1
+	add.l #windowtopmargin+windowleftmargin,a1
+	add.l d0,a1			; a1=screen line address
+	move.w d1,xstart		; var used for clipping
+	move.w #windowwidth*8,d3	; rightmost writeable word
+
+	; is sprite completely off the screen horizontally?
+	; also, at this point, we can set up a jump parameter 
+	; to use a much faster main loop if there needn't be 
+	; any horizontal clipping
+	move.l #xisallonscreen,a3
+	cmp.w d3,d1			; leftmost pos of sprite
+	bge dssret			; is off right of screen
+	tst.w d1
+	bpl xisallonscreen1
+	move.l #xispartoffscreen,a3	; sprite overlaps left of screen
+	bra xhasbeenclipped
+xisallonscreen1:
+	move.w widthoffset(a0),d0
+	lsl.w #3,d0
+	add.w d0,d1			; rightmost pos of sprite
+	bmi dssret			; is off left screen
+	add.w xstart,d0
+	cmp.w d3,d0
+	bcs xisallonscreen2
+	move.l #xispartoffscreen,a3	; sprite overlaps right of screen
+xisallonscreen2:
+xhasbeenclipped:
+
+* throw the sprite to the screen...
+* a0.l=start of sprite parameter block
+* a1.l=sprite screen address
+* a2.l=sprite image address
+* d3.w=rightmost writeable word offset on this line
+* d5.l=number of lines to skip
+* d6.l=number of lines to draw
+* d7.b=pixel position within word (0-15)
+
+	tst.b d5
+	beq nolinestoskip
+	move.w widthoffset(a0),d0	; get width
+	mulu.w d0,d5			; lines to skip*width*16 pixels
+	lsl.w d5
+	move.l d5,d0
+	lsl.w #2,d5
+	add.w d0,d5			; lines to skip*width*10 bytes
+	add.l d5,a2			; skip image data	
+nolinestoskip:
+
+depthloop:
+	move.l a1,-(sp)			; save line address
+	clr.l d1
+	move.w xstart,d4		; count used for clipping
+	move.w xstart,d5
+	addq.w #8,d5			; count used for clipping
+	move.w widthoffset(a0),d1	; d1=width counter
+	subq.w #1,d1
+widthloop:
+	; shift the mask
+	clr.l d2
+	move.w (a2)+,d2			; get mask word
+	not.w d2			; complement it
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	not.l d2			; complement it
+
+	; at this point, we can call a much faster routine if we 
+	; know that the sprite is completely on the screen horizontally
+	jmp (a3)
+
+	; standard sprite main loop, where x may have to be clipped
+xispartoffscreen:
+	; mask out unwanted screen data
+	tst.b d7
+	beq maskcurrentword
+	cmp.w d3,d5
+	bcc maskcurrentword
+	and.w d2,8(a1)			; mask right-most word
+	and.w d2,10(a1)
+	and.w d2,12(a1)
+	and.w d2,14(a1)
+maskcurrentword:
+	cmp.w d3,d4
+	bcc dontmaskleft
+	swap d2
+	and.w d2,(a1)			; mask left-most word
+	and.w d2,2(a1)
+	and.w d2,4(a1)
+	and.w d2,6(a1)
+dontmaskleft:
+
+	; mask in the 4 plane words
+	moveq.l #3,d0
+fourplanewords:
+	clr.l d2
+	move.w (a2)+,d2			; get plane word
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	cmp.w d3,d5
+	bcc dontwriteright
+	or.w d2,8(a1)			; write right-most screen word
+dontwriteright:
+	cmp.w d3,d4
+	bcc dontwriteleft
+	swap d2
+	or.w d2,(a1)			; write current screen word
+dontwriteleft:
+	addq.l #2,a1
+	dbra d0,fourplanewords
+
+	addq.w #8,d4			; increment clip counter
+	addq.w #8,d5			; increment clip counter
+	dbra d1,widthloop
+	move.l (sp)+,a1			; recover line address
+	add.l #160,a1			; move down one line
+	dbra d6,depthloop
+dssret:
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* much faster version of the sprite main loop, which can only be used 
+* when no x clipping is required
+xisallonscreen:
+	; mask out unwanted screen data
+	tst.b d7
+	beq Fmaskcurrentword
+	and.w d2,8(a1)			; mask right-most word
+	and.w d2,10(a1)
+	and.w d2,12(a1)
+	and.w d2,14(a1)
+Fmaskcurrentword:
+	swap d2
+	and.w d2,(a1)			; mask left-most word
+	and.w d2,2(a1)
+	and.w d2,4(a1)
+	and.w d2,6(a1)
+
+	; mask in the 4 plane words
+	moveq.l #3,d0
+Ffourplanewords:
+	clr.l d2
+	move.w (a2)+,d2			; get plane word
+	swap d2				; move to upper word of d2
+	lsr.l d7,d2			; shift right to pixel offset
+	or.w d2,8(a1)			; write right-most screen word
+	swap d2
+	or.w d2,(a1)+			; write current screen word
+	dbra d0,Ffourplanewords
+
+	dbra d1,widthloop
+	move.l (sp)+,a1			; recover line address
+	add.l #160,a1			; move down one line
+	dbra d6,depthloop
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* draw the current map to logical screen
+* on entry, Wwindowx.w,Wwindowy.w=top left x,y of map
+* Wmapwidth.l=width of map
+* a2=start of map data
+drawmaptoscreen:
+	clr.l d1
+	clr.l d0
+	move.w Wwindowy,d0		; map y pos is in pixels
+	lsr.w #4,d0			; y/16=row cell
+	mulu.w Wmapwidth+2,d0		; *map width=address of row
+	move.w Wwindowx,d1		; map y pos is in pixels
+	lsr.w #4,d1			; x/16=column cell
+	add.l d1,d0			; add column to row address
+	lsl.l d0			; word based table
+	add.l d0,a2			; add to start of map
+
+	move.l currentLscreen,a0	; start of screen
+	add.l #windowtopmargin,a0	; offset for window top margin
+	add.l #windowleftmargin,a0	; address of first word in window
+
+	clr.l d5
+	move.w Wwindowy,d5
+	and.w #15,d5			; d5=lines to skip for top tile
+	move.b d5,-(sp)
+	move.l d5,d6
+	eor.b #15,d6			; d6=total lines to draw
+	bsr drawmaprow			; draw top tile
+
+	; loop to draw middle tiles
+	clr.b d5
+	move.b #15,d6			; draw full 16 lines
+	moveq.l #windowdepth-2,d4	; tiles deep-2
+dmcloop:
+	bsr drawmaprow			; fetch tile and draw it
+	dbra d4,dmcloop
+
+	; lines skipped on top tile = lines to draw on bottom tile
+	move.b (sp)+,d6
+	sub.l #1,d6
+	bcs nolinesskipped
+	bsr drawmaprow			; draw bottom tile
+nolinesskipped:
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* draw a horizontal row of the map, to screen a0, using map data a2
+* on exit, a2=a2+Wmapwidth.l*2, a0=a0+2560
+drawmaprow:
+	tst.b superimpose
+	bne maskonmaprow		; superimpose map row
+
+	move.l a0,-(sp)
+	move.l a2,-(sp)
+
+	move.l #windowwidth-1,d3	; tiles along screen
+	move.l #draw4planewords,a3
+
+	; if the window x pos is mid-way between tiles, then 
+	; draw the map at an offset of -8 pixels
+	btst.b #3,Wwindowx+1
+	beq windowxiseven
+	; drawing on a -8 pixel boundary, don't display left 8 
+	; pixels of first column
+	move.l #draw4planewordsOR,a3
+	bsr drawmaptile			; draw a tile
+	move.l #draw4planewordsO,a3
+	sub.l #8,a0			; screen word to the left
+	move.l #windowwidth-2,d3	; tiles along screen-1
+windowxiseven:
+
+	; loop to draw middle tiles across
+dmrloop:
+	bsr drawmaptile			; draw a tile
+	dbra d3,dmrloop
+
+	; if we've drawn the map at an offset of -8 pixels, then 
+	; fill vacant gap at the right edge of the window
+	btst.b #3,Wwindowx+1
+	beq windowxiseven1
+	move.l #draw4planewordsOL,a3
+	add.l #1,a0			; screen byte to the right
+	bsr drawmaptile			; draw a tile
+windowxiseven1:
+
+	move.l (sp)+,a2
+	move.l (sp)+,a0
+	move.l d6,d0
+	addq.l #1,d0
+	mulu.w #160,d0
+	add.l d0,a0			; add number of lines printed
+	add.l Wmapwidth,a2
+	add.l Wmapwidth,a2
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Draw map tile in map list a2 to screen address a0
+* with data supplied at address a1
+* On entry, a3 contains either of the routines:
+*  draw4planewords  - draw on normal word boundaries
+*  draw4planewordsO - draw on an 8 pixel offset, overlapping words
+* d5=lines to skip for top tile
+* d6=total lines to draw
+* on exit, a2=a2+2, a0=a0+8
+drawmaptile:
+	move.l a0,-(sp)
+	clr.l d0
+	move.w (a2)+,d0			; get tile number
+	asl.w #7,d0			; mult 128 to get tile data
+	move.l #tiledata,a1		; start of tile data
+	add.l d0,a1			; add offset for current tile
+	move.l d5,d1
+	asl.w #3,d1			; 8 bytes per tile line
+	add.l d1,a1			; skip any tile lines
+	move.l d6,d1			; lines to draw
+dbloop:
+	; draw 4 planes of 16 pixels
+	jsr (a3)
+	add.l #152,a0
+	dbra d1,dbloop			; next screen line
+	move.l (sp)+,a0
+	add.l #8,a0
+	rts
+
+* draw 4 plane words from a1 to screen a0, on an even word bundary
+* on exit, a0=a0+8, a1=a1+4
+draw4planewords:
+	move.w (a1)+,(a0)+
+	move.w (a1)+,(a0)+
+	move.w (a1)+,(a0)+
+	move.w (a1)+,(a0)+
+
+* special code to speed-regulate the main routines to draw 4 plane words
+	move.b (sp),(sp)
+	move.b (sp),(sp)
+	move.b (sp),(sp)
+	move.b (sp),(sp)
+	rts
+
+* draw 4 plane words from a1 to screen a0, offset by -8 pixels
+* on exit, a0=a0+8, a1=a1+8
+draw4planewordsO:
+	move.b (a1)+,1(a0)
+	move.b (a1)+,8(a0)
+	move.b (a1)+,3(a0)
+	move.b (a1)+,10(a0)
+	move.b (a1)+,5(a0)
+	move.b (a1)+,12(a0)
+	move.b (a1)+,7(a0)
+	move.b (a1)+,14(a0)
+	addq.l #8,a0
+	rts
+
+* draw the right hand bytes of 4 plane words from tile data in a1 to the 
+* left hand screen byte a0
+* on exit, a0=a0+8, a1=a1+8
+draw4planewordsOR:
+	move.b 1(a1),(a0)+		; copy byte
+	move.b 3(a1),1(a0)		; copy byte
+	move.b 5(a1),3(a0)		; copy byte
+	move.b 7(a1),5(a0)		; copy byte
+	addq.l #7,a0
+	addq.l #8,a1
+	rts
+
+* draw the left hand bytes of 4 plane words from tile data in a1 to the 
+* right hand screen byte a0
+* on exit, a0=a0+8, a1=a1+8
+draw4planewordsOL:
+	move.b (a1)+,(a0)+		; copy byte
+	move.b 1(a1),1(a0)		; copy byte
+	move.b 3(a1),3(a0)		; copy byte
+	move.b 5(a1),5(a0)		; copy byte
+	addq.l #7,a0
+	addq.l #7,a1
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* superimpose a horizontal row of the map, to screen a0, using map data a2
+* on even word boundaries
+* on exit, a2=a2+Wmapwidth*2, a0=a0+2560
+maskonmaprow:
+	move.l a0,-(sp)
+	move.l a2,-(sp)
+	move.l #windowwidth-1,d3	; tiles along screen
+	; loop to draw middle tiles across
+Mdmrloop:
+	bsr maskmaptile			; mask on a map tile
+	dbra d3,Mdmrloop
+	move.l (sp)+,a2
+	move.l (sp)+,a0
+	move.l d6,d0
+	addq.l #1,d0
+	mulu.w #160,d0
+	add.l d0,a0			; add number of lines printed
+	add.l Wmapwidth,a2
+	add.l Wmapwidth,a2
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Superimpose a map tile in map list a2 to screen address a0
+* with data supplied at address a1 on even word boundaries
+* On entry, d5=lines to skip for top tile
+* d6=total lines to draw
+* on exit, a2=a2+2, a0=a0+8
+maskmaptile:
+	clr.l d0
+	move.w (a2)+,d0			; get tile number
+	beq emptytile			; invisible tile
+	move.l a0,-(sp)
+	mulu.w #128,d0			; mult 160 to get tile data
+	move.l #tiledata,a1		; start of tile data
+	add.l d0,a1			; add offset for current tile
+	move.l d5,d1
+	asl.w d1
+	move.w d1,d7
+	asl.w #2,d1
+	add.w d7,d1			; 10 bytes per tile line
+	add.l d1,a1			; skip any tile lines
+	move.l d6,d1			; lines to draw
+Mdbloop:
+	; work out mask in d7
+	move.w (a1),d7
+	or.w 2(a1),d7
+	or.w 4(a1),d7
+	or.w 6(a1),d7
+	not.w d7			; negate mask
+
+	; draw 4 planes of 16 pixels
+	move.w (a1)+,d0			; fetch plane word
+	and.w d7,(a0)			; mask out screen
+	or.w d0,(a0)+			; mask in plane word
+	move.w (a1)+,d0
+	and.w d7,(a0)
+	or.w d0,(a0)+
+	move.w (a1)+,d0
+	and.w d7,(a0)
+	or.w d0,(a0)+
+	move.w (a1)+,d0
+	and.w d7,(a0)
+	or.w d0,(a0)+
+	add.l #152,a0
+	dbra d1,Mdbloop			; next screen line
+	move.l (sp)+,a0
+emptytile:
+	add.l #8,a0
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* initialise screen etc.
+initialise:
+	clr.l -(sp)
+	move.w #32,-(sp)
+	trap #1				; set supervisor mode
+	addq.l #6,sp
+	move.l d0,savestack
+	; save screen res & addresses
+	move.w #4,-(sp)
+	trap #14
+	addq.l #2,sp
+	move.w d0,oldres		; save res
+	move.w #2,-(sp)
+	trap #14
+	addq.l #2,sp
+	move.l d0,oldpscreen		; save physical screen addr
+	move.w #3,-(sp)
+	trap #14
+	addq.l #2,sp
+	move.l d0,oldlscreen		; save logical screen addr
+	bsr cls
+	clr.w d0			; set lo-res
+	move.l #screen1,a0		; set L screen address
+	move.l #screen2,a1		; set P screen address
+	bsr setscreen
+	move.l #palette,a0
+	bsr setpalette			; set palette
+	bsr initjoystick
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* shut the system down and return to gem
+closedown:
+	bsr disablejoystick
+	move.w oldres,d0			; restore old screen
+	move.l oldpscreen,a0
+	move.l oldlscreen,a1
+	bsr setscreen1
+	move.l savestack,-(sp)
+	move.w #32,-(sp)
+	trap #1				; set user mode
+	addq.l #6,sp
+returntogem:
+	clr.w -(sp)
+	trap #1
+
+* ----------------------------------------------------------------------- *
+
+* swap logical (hidded) & physical (displayed) screens
+swapscreens:
+	move.w #-1,d0
+	move.l currentLscreen,a0
+	move.l currentPscreen,a1
+	; fall through...
+
+* set screen to resulution d0, logical address in a0, physical 
+* address in a1
+setscreen:
+	move.l a0,currentPscreen	; store P screen address
+	move.l a1,currentLscreen	; store L screen address
+setscreen1:
+	move.w d0,-(sp)
+	move.l a0,-(sp)
+	move.l a1,-(sp)
+	move.w #5,-(sp)
+	trap #14
+	add.l #12,sp
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* set palette to palette table at a0
+setpalette:
+	move.l a0,-(sp)
+	move.w #6,-(sp)
+	trap #14
+	addq.l #6,sp
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* wait for next vblank
+* all registers preserved
+flyback:
+	movem.l a0-a6/d0-d7,-(sp)
+	move.w #$25,-(sp)
+	trap #14
+	addq.l #2,sp
+	movem.l (sp)+,a0-a6/d0-d7
+	rts
+
+* ----------------------------------------------------------------------- *
+* keyboard and joystick routines
+* ----------------------------------------------------------------------- *
+
+* scan the keyboard, returning ascii value in d0.b, or zero if 
+* no key pressed
+keyscan:
+	move.w #$b,-(sp)
+	trap #1
+	addq.l #2,sp	
+	tst.l d0
+	bmi keywaiting			; key waiting
+	clr.l d0			; no key waiting
+	rts
+
+keywaiting:
+	move.w #7,-(sp)
+	trap #1
+	addq.l #2,sp
+	rts
+
+* Intercept joystick vector to our routine
+InitJoystick
+	; get address of vector table in d0.l
+	move.w #34,-(sp)
+	trap #14
+	addq.l #2,sp
+
+	; save current joystick table
+	move.l d0,a0
+	move.l #VectorSaveTable,a1
+	move.w #8,d1			; save 8 longs
+SaveTable:
+	move.l (a0)+,(a1)+
+	dbra d1,SaveTable
+
+	; change joystick vector to be intercepted by our routine
+	move.l d0,a1
+	add.l #24,a1
+	move.l #JoystickHandler,a0
+	move.l a0,(a1)
+
+	move.l #KBDstring1,-(sp)	; address of string to send
+	move.w #1,-(sp)			; length of string to send
+	move.w #25,-(sp)		; code for intelligent send
+	trap #14
+	addq.l #8,sp
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Called every time the keyboard updates the joystick
+JoystickHandler:
+	movem.l d0-d7/a0-a6,-(sp)
+	move.b (a0),d0
+	cmp.b #$ff,d0
+	bne.s JHEnd
+	move.b 2(a0),d0			; get joystick status
+	move.b d0,(JoystickStatus)
+JHEnd:
+	movem.l (sp)+,d0-d7/a0-a6
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Close down joystick handler
+DisableJoystick:
+	move.l #KBDString2,-(sp)	; address of string to send
+	move.w #1,-(sp)			; length of string to send
+	move.w #25,-(sp)		; code for intelligent send
+	trap #14
+	 addq.l #8,sp
+
+	; get address of vector table in d0.l
+	move.w #34,-(sp)
+	trap #14
+	addq.l #2,sp
+
+	; restore vectors for operating system
+	move.l d0,a0
+	move.l #VectorSaveTable,a1
+	move.w #8,d1			; save 8 longs
+VectorSaveLoop:
+	move.l (a1)+,(a0)+
+	dbra d1,VectorSaveLoop
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* wait for a keypress, returning ascii value in d0.b
+waitkey:
+	move.w #7,-(sp)
+	trap #1				; wait keypress
+	addq.l #2,sp
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* clear the both screens
+cls:
+	clr.b cursorx			; zero cursor x,y
+	clr.b cursory
+	bsr cls1
+	bsr swapscreens
+	; fall through...
+
+cls1:
+	move.l currentLscreen,a0	; start of screen
+	move.l #screenlongwords-1,d1	; size of screen
+	clr.l d0			; blank plane data
+	; fall through...
+
+* ----------------------------------------------------------------------- *
+
+* fill tile starting between a0 and a0+(d1*4) with d0
+fillblock:
+	move.l d0,(a0)+
+	dbra d1,fillblock
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* save everything
+* On exit, d0 is -ve if errors occured
+saveall:
+	; save tile data
+	move.l #filename1,d1
+	move.l #tiledata,d2
+	move.l sizetiles,d3
+	bsr create
+	bmi saveallerr
+	bsr write
+	bmi saveallerr
+	bsr close
+	bmi saveallerr
+
+	; save main map
+	move.l #filename2,d1
+	move.l #mapdata,d2
+	move.l #mapwidth*mapdepth*2,d3
+	bsr create
+	bmi saveallerr
+	bsr write
+	bmi saveallerr
+	bsr close
+	bmi saveallerr
+
+	; save foreground map
+	move.l #filename3,d1
+	move.l #fmapdata,d2
+	move.l #fmapwidth*fmapdepth*2,d3
+	bsr create
+	bmi saveallerr
+	bsr write
+	bmi saveallerr
+	bsr close
+	bmi saveallerr
+savefail:
+	rts
+
+saveallerr:
+	move.l #redalert,a0
+	bsr setpalette			; 'red alert' palette
+	bsr flyback
+	bsr waitkey
+	move.b d0,-(sp)
+	move.l #palette,a0
+	bsr setpalette			; normal palette
+	move.b (sp)+,d0
+	cmp.b #'r',d0
+	beq saveall			; retry
+	rts				; fail
+
+* ----------------------------------------------------------------------- *
+
+* load map data
+* On exit, d0 is -ve if errors occured
+loadmapdata:
+	; load main map
+	move.l #filename2,d1
+	move.l #mapdata,d2
+	move.l #mapwidth*mapdepth*2,d3
+	bsr open
+	bmi loadmaperr
+	bsr read
+	bmi loadmaperr
+	bsr close
+	bmi loadmaperr
+
+	; load foreground map
+	move.l #filename3,d1
+	move.l #fmapdata,d2
+	move.l #fmapwidth*fmapdepth*2,d3
+	bsr open
+	bmi loadmaperr
+	bsr read
+	bmi loadmaperr
+	bsr close
+loadmaperr:
+	rts
+
+* ----------------------------------------------------------------------- *
+* disk access routines
+* ----------------------------------------------------------------------- *
+
+* On entry, d1=address of filename
+* d2=where to load it
+* d3=filelen
+* On exit, d0 is -ve if errors occured
+
+open:	move.w #2,-(sp)
+	move.l d1,-(sp)
+	move.w #$3d,-(sp)
+	trap #1
+	addq.l #8,sp
+	tst.w d0
+	move d0,handle
+	rts
+
+create:	clr.w -(sp)
+	move.l d1,-(sp)
+	move.w #$3c,-(sp)
+	trap #1
+	addq.l #8,sp
+	tst.w d0
+	move d0,handle
+	rts
+
+read:	move.l d2,-(sp)
+	move.l d3,-(sp)
+	move.w handle,-(sp)
+	move.w #$3f,-(sp)
+	trap #1
+	add.l #12,sp
+	tst.l d0 
+	rts
+
+write:	move.l d2,-(sp)
+	move.l d3,-(sp)
+	move.w handle,-(sp)
+	move.w #$40,-(sp)
+	trap #1
+	add.l #12,sp
+	tst.l d0 
+	rts
+
+close:	move.w handle,-(sp)
+	move.w #$3e,-(sp)
+	trap #1
+	addq.l #4,sp
+	rts
+
+* ----------------------------------------------------------------------- *
+* printing routines
+* ----------------------------------------------------------------------- *
+
+* print decimal value up to 65535 in d0.w
+printdec:
+	movem.l a0-a6/d0-d7,-(sp)
+	and.l #$ffff,d0			; make sure d0's a word value
+	clr.b d5			; flag for leading zeros
+	move.w #10000,d1		; power count
+printdecloop:
+	divu d1,d0			; divide number by power
+	move.b d0,d4			; d4.w=result of division
+	swap d0
+	and.l #$ffff,d0			; d0.w=remainder
+	add.b #'0',d4			; get ascii digit
+	cmp.b #'0',d4
+	bne Dnotfirstzero		; leading zero?
+	tst.b d5
+	bne Dnotfirstzero
+	move.b #' ',d4			; replace with space
+	bra Dleadingzero
+Dnotfirstzero:
+	moveq.b #1,d5			; no more leading zeros
+Dleadingzero:
+	bsr printchard4			; print digit
+	divu #10,d1			; decrement power count
+	cmp.w #1,d1			; last digit?
+	bne Dnotlastdigit
+	moveq.b #1,d5			; no more leading zeros
+Dnotlastdigit:
+	tst.w d1
+	bne printdecloop
+	movem.l (sp)+,a0-a6/d0-d7
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* print 8 digit BCD or HEX value up to $ffffffff in d0.l
+printhexbcd:
+	movem.l a0-a6/d0-d7,-(sp)
+	move.l #$f0000000,d1		; digit mask
+	moveq.l #28,d2			; digit bit pos
+	clr.b d5			; flag for leading zeros
+	moveq.l #7,d7
+printdigit:
+	move.l d0,d3
+	and.l d1,d3			; get digit
+	lsr.l d2,d3			; scoll to LSByte
+	and.w #15,d3			; mask unwanted data
+	move.l #hexdigits,a0
+	clr.w d4
+	move.b (a0,d3.w),d4		; d4=ascii character
+	cmp.b #'0',d4
+	bne notfirstzero		; leading zero?
+	tst.b d5
+	bne notfirstzero
+	move.b #' ',d4			; replace with space
+	bra leadingzero
+notfirstzero:
+	moveq.b #1,d5			; no more leading zeros
+leadingzero:
+	bsr printchard4
+	lsr.l #4,d1			; shift digit mask
+	subq.l #4,d2			; decrement digit pos
+	bne notlastdigit
+	moveq.b #1,d5			; no more leading zeros
+notlastdigit:
+	dbra d7,printdigit
+	movem.l (sp)+,a0-a6/d0-d7
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* Print a string of characters at a0
+printstring:
+	movem.l a0-a6/d0-d7,-(sp)
+printstringchar:
+	move.b (a0)+,d4
+	beq endstring			; end of string?
+	bsr printchard4
+	bra printstringchar
+endstring:
+	movem.l (sp)+,a0-a6/d0-d7
+	rts
+
+* ----------------------------------------------------------------------- *
+
+* print carriage return
+printcr:
+	move.b #13,d4
+	bra printchard4
+
+* print space
+printspace:
+	move.b #' ',d4
+	; fall through...
+
+* print ascii character in d4 at cursorx,cursory using colour textcol
+printchard4:
+	movem.l a0-a6/d0-d7,-(sp)
+
+	; work out font address of char
+	and.l #$ff,d4			; mask out unwanted d4 data
+	cmp.b #32,d4			; font starts with space
+	bcs controlchar			; special control char
+	move.l #font,a1			; start of font
+	sub.b #32,d4			; font starts with space
+	lsl.w #3,d4			; 8 bytes per char
+	add.l d4,a1			; a1=font address
+
+	; work out screen address of char
+	clr.l d0
+	move.b cursory,d0
+	mulu.w #1280,d0			; address of char line
+	clr.l d1
+	move.b cursorx,d1
+	and.b #$fe,d1			; plane no. (every 2 chars)
+	lsl.w #2,d1			; cursor x*4 (plane offset)
+	add.w d1,d0			; address offset from screen
+	move.l currentLscreen,a0
+	move.l currentPscreen,a2
+	add.l d0,a0			; screen word of char
+	add.l d0,a2			; screen word of char
+	move.b cursorx,d1
+	and.b #$01,d1
+	add.l d1,a0			; a0=L screen byte of char
+	add.l d1,a2			; a2=P screen byte of char
+
+	; draw 8 char lines to screen
+	move.w #7,d0			; number of lines-1
+drawcharline:
+	move.b (a1)+,d1			; get char line bits
+	move.b d1,d2
+	eor.b #$ff,d2			; get char line mask
+
+	; draw 4 plane bytes per char line
+	move.w #3,d3			; number of plane bytes-1
+	clr.b d4			; colour bit
+draw4planebytes:
+	btst.b d4,textcol
+	beq noplanecol			; no colour bit on this plane
+	move.b d1,(a0)			; mask in char line
+	move.b d1,(a2)			; mask in char line
+noplanecol:
+	addq.l #2,a0			; next plane byte
+	addq.l #2,a2			; next plane byte
+	addq.b #1,d4			; next colour bit
+	dbra d3,draw4planebytes
+
+	add.l #152,a0			; next screen line
+	add.l #152,a2			; next screen line
+	dbra d0,drawcharline
+
+	add.b #1,cursorx
+	cmp.b #40,cursorx
+	bge docr			; end of line
+
+pcd4ret:
+	movem.l (sp)+,a0-a6/d0-d7
+	rts
+
+	; d4 was a control character
+controlchar:
+	cmp.b #13,d4			; carriage return?
+	beq docr
+	cmp.b #8,d4			; backspace?
+	beq backspace
+	bra pcd4ret
+
+	; handle carriage return
+docr:
+	clr.b cursorx
+	add.b #1,cursory		; next line
+	cmp.b #25,cursory
+	blt pcd4ret			; still on screen
+	clr.b cursory			; off screen - go back to top line
+	bra pcd4ret
+
+	; handle backspace
+backspace:
+	tst.b cursorx
+	beq pcd4ret			; at start of line
+	sub.b #1,cursorx		; back 1 char
+	bra pcd4ret
+
+* ----------------------------------------------------------------------- *
+
+* input a text line from the keyboard to inputbuffer
+* on exit, d1=0 if null string
+inputstring:
+	move.l #inputbuffer,a0
+	moveq.w #39,d0
+clearinput:
+	move.b #32,(a0)+		; clear input buffer
+	dbra d0,clearinput
+	clr.w d1			; cursor pos
+getinputchar:
+	move.w d1,-(sp)
+	bsr waitkey			; wait keypress
+	move.w (sp)+,d1
+	cmp.b #13,d0
+	beq doneinput			; CR to confirm
+	cmp.b #8,d0
+	bne notdel			; DELETE?
+	tst.w d1
+	beq notdel			; start of line
+	subq.w #1,d1			; move cursor back
+	move.b d0,d4
+	bsr printchard4
+	move.b #32,d4			; replace with space
+	bsr printchard4
+	move.b #8,d4
+	bsr printchard4
+	moveq.w #32,d0			; clear buffer byte
+	move.l #inputbuffer,a0
+	move.b d0,(a0,d1.w)
+	bra getinputchar
+notdel:
+	cmp.w #32,d0
+	blt getinputchar		; illegal char
+	cmp.w #39,d1
+	bgt getinputchar		; end of line
+	move.l #inputbuffer,a0
+	move.b d0,(a0,d1.w)		; store char
+	addq.w #1,d1			; move cursor on
+	move.b d0,d4
+	bsr printchard4			; prnt char d4
+	bra getinputchar
+doneinput:
+	move.l #inputbuffer,a0
+	move.b #0,(a0,d1.w)		; terminator=0
+	rts
+
+* ----------------------------------------------------------------------- *
+* general constants
+* ----------------------------------------------------------------------- *
+
+screen1 equ $70000
+screen2 equ $78000
+screenlongwords equ $1f40 ; (32000 bytes/4=8000 longwords)
+mapwidth equ 256 ; dimensions of main map
+mapdepth equ 36
+fmapwidth equ mapwidth*2 ; dimensions of foreground map
+fmapdepth equ mapdepth*2
+mapdata equ $80000 ; start of main map
+fmapdata equ mapdata+(mapwidth*mapdepth*2) ; start of foreground map
+tiledata equ fmapdata+(fmapwidth*fmapdepth*2) ; tile graphics data
+
+windowwidth equ 20 ; window tile width
+windowdepth equ 8 ; window tile depth
+windowtopmargin equ 1280 ; address offset from top of screen
+windowbottommargin equ windowtopmargin+2560*windowdepth
+windowleftmargin equ 0 ; address offset from left of screen
+
+* Joystick status bits
+UpBit equ 0
+DownBit equ 1
+LeftBit equ 2
+RightBit equ 3
+FireButton equ 7
+
+* ----------------------------------------------------------------------- *
+* variables
+* ----------------------------------------------------------------------- *
+
+savestack:
+	ds.l 1 ; save supervisor stack
+oldres:
+	ds.w 1 ; save res
+oldpscreen:
+	ds.l 1 ; save physical screen address
+oldlscreen:
+	ds.l 1 ; save logical screen address
+
+startvars equ * ; start of CLEAR area
+
+handle:
+	ds.w 1 ; disk access handle
+closedownflag:
+	ds.w 1 ; set when closedown requested
+currentLscreen:
+	dc.l screen1 ; current logial screen address
+currentPscreen:
+	dc.l screen2 ; current physical screen address
+windowx:
+	ds.w 1 ; current map window x position in pixels
+windowy:
+	ds.w 1 ; current map window y position in pixels
+xchg:
+	ds.w 1 ; map x change value in pixels
+ychg:
+	ds.w 1 ; map y change value in pixels
+newwindowx:
+	ds.w 1 ; next map x pos
+newwindowy:
+	ds.w 1 ; next map y pos
+Wwindowx:
+	ds.w 1 ; workspace window x
+Wwindowy:
+	ds.w 1 ; workspace window y
+Wmapwidth:
+	ds.l 1 ; workspace window width
+superimpose:
+	ds.w 1 ; set if map is to be superimposed onto screen
+spritex:
+	ds.w 1 ; workspace used in sprite collision code
+spritey:
+	ds.w 1 ; workspace used in sprite collision code
+intendedspritex:
+	ds.w 1 ; workspace used in sprite collision code
+intendedspritey:
+	ds.w 1 ; workspace used in sprite collision code
+xstart:
+	ds.w 1 ; var used for clipping in sprite routine
+sizetiles:
+	dc.l 1 ; current size of tile buffer
+tilewindow:
+	ds.w 1 ; first tile in selection window
+currenttile:
+	ds.w 1 ; current selected tile
+editforeground:
+	ds.w 1 ; set when editing parallax map
+VectorSaveTable:
+	ds.b 40 ; used to save kbd processor jump table
+Joystickstatus:
+	ds.b 1 ; joystick status
+cursorx:
+	ds.b 1 ; text cursor x pos
+cursory:
+	ds.b 1 ; text cursor y pos
+textcol:
+	ds.b 1 ; text colour
+
+endvars equ * ; end of CLEAR area
+
+	ds.l 1 ; padding to allow for uneven longword length of var list
+
+* ----------------------------------------------------------------------- *
+* data
+* ----------------------------------------------------------------------- *
+
+KBDString1:
+	dc.b $14 ; set joystick event reporting
+	even
+
+KBDString2:
+	dc.b $1a ; joystick off
+	dc.b $08 ; relative mode for mouse
+	dc.b 0
+	even
+
+hexdigits:
+	dc.b "0123456789ABCDEF"
+	even
+
+Font:
+ DC.B $0,$0,$0,$0,$0,$0,$0,$0 	;	32
+ DC.B $18,$18,$18,$18,$18,$0,$18,$0 ;	33
+ DC.B $66,$66,$66,$0,$0,$0,$0,$0 ;	34
+ DC.B $0,$6C,$FE,$6C,$6C,$FE,$6C,$0 ;	35
+ DC.B $18,$3E,$60,$3C,$6,$7C,$18,$0 ;	36
+ DC.B $0,$66,$6C,$18,$30,$66,$46,$0 ;	37
+ DC.B $38,$6C,$38,$70,$DE,$CC,$76,$0 ;	38
+ DC.B $18,$18,$18,$0,$0,$0,$0,$0 ;	39
+ DC.B $E,$1C,$18,$18,$18,$1C,$E,$0 ;	40
+ DC.B $70,$38,$18,$18,$18,$38,$70,$0 ;	41
+ DC.B $0,$66,$3C,$FF,$3C,$66,$0,$0 ;	42
+ DC.B $0,$18,$18,$7E,$18,$18,$0,$0 ;	43
+ DC.B $0,$0,$0,$0,$0,$30,$30,$60 ;	44
+ DC.B $0,$0,$0,$7E,$0,$0,$0,$0 ;	45
+ DC.B $0,$0,$0,$0,$0,$18,$18,$0 ;	46
+ DC.B $2,$6,$C,$18,$30,$60,$40,$0 ;	47
+ DC.B $3C,$66,$6E,$76,$66,$66,$3C,$0 ;	48
+ DC.B $18,$38,$18,$18,$18,$18,$7E,$0 ;	49
+ DC.B $3C,$66,$6,$C,$18,$30,$7E,$0 ;	50
+ DC.B $7E,$C,$18,$C,$6,$66,$3C,$0 ;	51
+ DC.B $C,$1C,$3C,$6C,$7E,$C,$C,$0 ;	52
+ DC.B $7E,$60,$7C,$6,$6,$66,$3C,$0 ;	53
+ DC.B $3C,$60,$60,$7C,$66,$66,$3C,$0 ;	54
+ DC.B $7E,$6,$C,$18,$30,$30,$30,$0 ;	55
+ DC.B $3C,$66,$66,$3C,$66,$66,$3C,$0 ;	56
+ DC.B $3C,$66,$66,$3E,$6,$C,$38,$0 ;	57
+ DC.B $0,$18,$18,$0,$18,$18,$0,$0 ;	58
+ DC.B $0,$18,$18,$0,$18,$18,$30,$0 ;	59
+ DC.B $6,$C,$18,$30,$18,$C,$6,$0 ;	60
+ DC.B $0,$0,$7E,$0,$0,$7E,$0,$0 ;	61
+ DC.B $60,$30,$18,$C,$18,$30,$60,$0 ;	62
+ DC.B $3C,$66,$6,$C,$18,$0,$18,$0 ;	63
+ DC.B $3C,$66,$6E,$6A,$6E,$60,$3E,$0 ;	64
+ DC.B $18,$3C,$66,$66,$7E,$66,$66,$0 ;	65
+ DC.B $7C,$66,$66,$7C,$66,$66,$7C,$0 ;	66
+ DC.B $3C,$66,$60,$60,$60,$66,$3C,$0 ;	67
+ DC.B $78,$6C,$66,$66,$66,$6C,$78,$0 ;	68
+ DC.B $7E,$60,$60,$7C,$60,$60,$7E,$0 ;	69
+ DC.B $7E,$60,$60,$7C,$60,$60,$60,$0 ;	70
+ DC.B $3E,$60,$60,$6E,$66,$66,$3E,$0 ;	71
+ DC.B $66,$66,$66,$7E,$66,$66,$66,$0 ;	72
+ DC.B $3C,$18,$18,$18,$18,$18,$3C,$0 ;	73
+ DC.B $6,$6,$6,$6,$6,$66,$3C,$0 ;	74
+ DC.B $66,$6C,$78,$70,$78,$6C,$66,$0 ;	75
+ DC.B $60,$60,$60,$60,$60,$60,$7E,$0 ;	76
+ DC.B $C6,$EE,$FE,$D6,$C6,$C6,$C6,$0 ;	77
+ DC.B $66,$76,$7E,$7E,$6E,$66,$66,$0 ;	78
+ DC.B $3C,$66,$66,$66,$66,$66,$3C,$0 ;	79
+ DC.B $7C,$66,$66,$7C,$60,$60,$60,$0 ;	80
+ DC.B $3C,$66,$66,$66,$76,$6C,$36,$0 ;	81
+ DC.B $7C,$66,$66,$7C,$6C,$66,$66,$0 ;	82
+ DC.B $3C,$66,$60,$3C,$6,$66,$3C,$0 ;	83
+ DC.B $7E,$18,$18,$18,$18,$18,$18,$0 ;	84
+ DC.B $66,$66,$66,$66,$66,$66,$3E,$0 ;	85
+ DC.B $66,$66,$66,$66,$66,$3C,$18,$0 ;	86
+ DC.B $C6,$C6,$C6,$D6,$FE,$EE,$C6,$0 ;	87
+ DC.B $66,$66,$3C,$18,$3C,$66,$66,$0 ;	88
+ DC.B $66,$66,$66,$3C,$18,$18,$18,$0 ;	89
+ DC.B $7E,$6,$C,$18,$30,$60,$7E,$0 ;	90
+ DC.B $1E,$18,$18,$18,$18,$18,$1E,$0 ;	91
+ DC.B $40,$60,$30,$18,$C,$6,$2,$0 ;	92
+ DC.B $78,$18,$18,$18,$18,$18,$78,$0 ;	93
+ DC.B $10,$38,$6C,$C6,$0,$0,$0,$0 ;	94
+ DC.B $0,$0,$0,$0,$0,$0,$FE,$0 ;	95
+ DC.B $0,$C0,$60,$30,$0,$0,$0,$0 ;	96
+ DC.B $0,$0,$3C,$6,$3E,$66,$3E,$0 ;	97
+ DC.B $60,$60,$7C,$66,$66,$66,$7C,$0 ;	98
+ DC.B $0,$0,$3C,$60,$60,$60,$3C,$0 ;	99
+ DC.B $6,$6,$3E,$66,$66,$66,$3E,$0 ;	100
+ DC.B $0,$0,$3C,$66,$7E,$60,$3C,$0 ;	101
+ DC.B $1C,$30,$7C,$30,$30,$30,$30,$0 ;	102
+ DC.B $0,$0,$3E,$66,$66,$3E,$6,$7C ;	103
+ DC.B $60,$60,$7C,$66,$66,$66,$66,$0 ;	104
+ DC.B $18,$0,$38,$18,$18,$18,$3C,$0 ;	105
+ DC.B $18,$0,$18,$18,$18,$18,$18,$70 ;	106
+ DC.B $60,$60,$66,$6C,$78,$6C,$66,$0 ;	107
+ DC.B $38,$18,$18,$18,$18,$18,$3C,$0 ;	108
+ DC.B $0,$0,$EC,$FE,$D6,$C6,$C6,$0 ;	109
+ DC.B $0,$0,$7C,$66,$66,$66,$66,$0 ;	110
+ DC.B $0,$0,$3C,$66,$66,$66,$3C,$0 ;	111
+ DC.B $0,$0,$7C,$66,$66,$66,$7C,$60 ;	112
+ DC.B $0,$0,$3E,$66,$66,$66,$3E,$6 ;	113
+ DC.B $0,$0,$7C,$66,$60,$60,$60,$0 ;	114
+ DC.B $0,$0,$3E,$60,$3C,$6,$7C,$0 ;	115
+ DC.B $0,$18,$7E,$18,$18,$18,$E,$0 ;	116
+ DC.B $0,$0,$66,$66,$66,$66,$3E,$0 ;	117
+ DC.B $0,$0,$66,$66,$66,$3C,$18,$0 ;	118
+ DC.B $0,$0,$C6,$C6,$D6,$7C,$6C,$0 ;	119
+ DC.B $0,$0,$66,$3C,$18,$3C,$66,$0 ;	120
+ DC.B $0,$0,$66,$66,$66,$3E,$6,$7C ;	121
+ DC.B $0,$0,$7E,$C,$18,$30,$7E,$0 ;	122
+ DC.B $E,$18,$18,$30,$18,$18,$E,$0 ;	123
+ DC.B $18,$18,$18,$18,$18,$18,$18,$18 ;	124
+ DC.B $70,$18,$18,$C,$18,$18,$70,$0 ;	125
+ DC.B $0,$60,$F2,$9E,$C,$0,$0,$0 ;	126
+ DC.B $0,$0,$0,$0,$0,$0,$0,$0 ;		127
+	even
+
+	*     0123456789012345678901234567890123456789
+title:
+	dc.b "Map editor V1.03 Copyright G.M.Jones",13,13,0
+
+title0:
+	dc.b "Please enter the filenames of your NEO",13
+	dc.b "screens to be added to the TILE cache.",13
+	dc.b "Press return when all the tiles have",13
+	dc.b "been loaded.",13,13
+	dc.b 0
+
+title1:
+	dc.b "NEO file: ",0
+	even
+
+title2:
+	dc.b "Move map window with keypad 8,6,2,4",13
+	dc.b " OR 'push' joystick at screen edges"
+	dc.b "Move tile window with keypad 7,1",13
+	dc.b "Move cursor with joystick, press fire",13
+	dc.b "within tile window to select tile, and",13
+	dc.b "in the map window to insert the tile",13
+	dc.b "'f' to switch to the foreground map",13
+	dc.b "'b' to return to the background map",13
+	dc.b "'s' saves the map data to disk",13
+	dc.b "(Upon a disk error the screen will turn",13
+	dc.b "red. Press 'r' to retry)",13
+	dc.b "'q' saves map data & quits program",13,13
+	dc.b "Hit any key and go with the flow..."
+	dc.b 0
+	even
+
+title3:
+	dc.b " IMPORTED",10,13,0
+	even
+
+title4:
+	dc.b "Map X:",0
+	even
+
+title5:
+	dc.b " Y:",0
+	even
+
+inputbuffer:
+	ds.b 40					; text line input
+	even
+
+diskerror:
+	dc.b 10,13
+	dc.b "File access error",10,13
+	dc.b 0
+	even
+
+filename1:
+	dc.b "tiledata.dat",0			; tile graphic data
+	even
+
+filename2:
+	dc.b "mapdata.dat",0			; main map
+	even
+
+filename3:
+	dc.b "fmapdata.dat",0			; foreground map
+	even
+
+palette:
+	dc.w $000,$700,$070,$007
+	dc.w $777,$000,$000,$000
+	dc.w $000,$000,$000,$000
+	dc.w $000,$000,$000,$000
+
+redalert:
+	dc.w $700,$111,$222,$333
+	dc.w $444,$555,$666,$777
+	dc.w $700,$711,$722,$733
+	dc.w $744,$755,$766,$777
+
+* sprite parameter blocks
+
+currentimage equ 0
+pcoffset equ 2 ; sprite program counter
+repeatoffset equ 4 ; animation repeat counter
+xposoffset equ 8
+yposoffset equ 10
+widthoffset equ 14 ; width in words
+depthoffset equ 16 ; depth in lines-1
+
+maxsprites equ 3
+spriteblocklen equ 64
+
+spriteparameters:
+	; sprite 0 - select box
+	dc.w spr1,$ffff,0,0
+	dc.w 0,128,0,1,15
+	ds.b 46
+	; sprite 1 - cursor
+	dc.w spr2,$ffff,0,0
+	dc.w 0,0,0,1,15
+	ds.b 46
+	; sprite 2 - fgd map icon
+	dc.w spr3,0,0,0
+	dc.w 0,0,0,1,4
+	ds.b 46
+
+* sprite image data
+sprdata:
+
+spr1 equ *-sprdata	; offset for 1st sprite - select box
+	dc.w $0000,$0000,$0000,$0000,$ffff
+	dc.w $0000,$0000,$0000,$0000,$ffff
+	rept 12
+	dc.w $3ffc,$0000,$0000,$0000,$c003
+	endr
+	dc.w $0000,$0000,$0000,$0000,$ffff
+	dc.w $0000,$0000,$0000,$0000,$ffff
+
+spr2 equ *-sprdata	; offset for 2nd sprite - cursor box
+	dc.w $0000,$0000,$0000,$0000,$ffff
+	dc.w $0000,$0000,$0000,$0000,$ffff
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $0000,$0000,$0000,$0000,$fe7f
+	dc.w $0000,$0000,$0000,$0000,$fe7f
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $3e7c,$0000,$0000,$0000,$c183
+	dc.w $0000,$0000,$0000,$0000,$ffff
+	dc.w $0000,$0000,$0000,$0000,$ffff
+
+spr3 equ *-sprdata	; offset for 2nd sprite - foreground map cursor
+	dc.w $0000,$0000,$0000,$ffff,$0000
+	dc.w $0000,$0000,$0000,$ffff,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $0000,$0000,$0000,$fe7f,$0000
+	dc.w $0000,$0000,$0000,$fe7f,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $3e7c,$0000,$0000,$c183,$0000
+	dc.w $0000,$0000,$0000,$ffff,$0000
+	dc.w $0000,$0000,$0000,$ffff,$0000
+
+* ----------------------------------------------------------------------- *
+ END
+* ----------------------------------------------------------------------- *

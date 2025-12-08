@@ -1,0 +1,987 @@
+; MESSAGE.TXT file for Grange Intro Sequence
+;
+[1:Dummy ]
+;
+; Test menu
+[2:Blood Relations Test Menu:` 0..Quit` 1..Maze` 2..Gun Grapple 
+` 3..Bee Swat` 4..Ridge Walk` 5..Doctor's Bag` 6..Main Game` ]
+;
+; Standard output messages
+[3:, ] 
+[5:%] ; CR
+[6:and ] 
+[7:... ] ; 'continue' prompt
+[8:% %] 
+[9:. ] ; dot
+;
+; Maze Win/Lose messages
+[10:Sam escaped from the maze just in time, taking with him 
+any objects he picked up.%]
+[11:Sam was overcome by the fumes and collapsed on the floor. 
+Much later, he felt himself coming to... ]
+;
+; More standard output messages
+[19:~"] ; tilde means 'print immediately'
+;
+; Sub-game game intro messages
+[21:Sam entered the basement. There was a strong smell
+of gas - the boiler had been sabotaged! `
+Get out before the gas fills the basement, pick up any
+clues the murder dropped in their haste, and watch out for the
+pits!` Keypad//cursor arrows control. `Escape to
+give up. ]
+;
+[22:Suddenly, Sam's opponent drew a gun. Sam knew he would 
+have to fight for his life! `
+Use up//down to increase//decrease the force
+Sam applies. The more force he uses, the quicker he will get
+tired. Sam is on the right. ]
+;
+[23:Suddenly the beehive erupted in a swarm of stinging
+bees. Sam pulled out his notepad and prepared to drive
+off the ferocious insects... `
+Move the hand around to swat the bees.` Keypad to steer`
+Central Keypad 5 to swat. ]
+;
+; Won't fit in text box!
+;[24:After a heavy blow to the head, Sam awoke in a tiny room in 
+;the attic roof. The door was securely locked. The only means 
+;of escape was by the skylight - and that meant a death-defying 
+;walk along the roof ridge! `
+;Sam must walk from left to right along the ridge
+;to escape from the tower on the roof. Use up//down to balance
+;when he wobbles too far. ]
+;
+[24:After a heavy blow to the head, Sam awoke, locked in a tiny 
+room in the attic roof. The only means of escape was by the 
+skylight - and that meant a death-defying walk along the roof ridge! `
+Use up//down to balance Sam when he wobbles too far. ]
+;
+[25:The bag had a combination lock. Sam remembered that
+he had once seen someone open such a lock, just by looking
+at the dials turn... `
+Use left//right to select which dial to change, and up//down to
+change it. There is a way to tell when you have a digit correct! ]
+;
+; Select murder menu
+[26:There are 5 murders to choose from:`
+1..The great cover-up. `
+2..A stab in the dark. `
+3..If there's a Will, there's a way. `
+4..An eggs-ecution. `
+5..The final massacre. `]
+6..Repeat the introduction. `]
+;
+; Win/lose messages for each of the sub-games
+[30:Sam successfully crossed the ridge and slipped through the
+open skylight to freedom. ]
+[31:Sam fell off the roof and landed in some bushes, knocking
+himself out. Much later, he woke with an aching head... ]
+;
+[40:The bag clicked open and Sam sorted through it, taking 
+anything of interest... ]
+[41:The door opened and someone came in. Sam felt something hard 
+against the back of his head and collapsed, unconscious... ]
+;
+[50:Sam was overcome by the bees' poison and lapsed into
+unconsciousness. ]
+[51:Sam managed to edge far enough away from the hive. ]
+;
+[60:Sam fainted as a bullet skimmed his head. ]
+[61:The gun went off, just missing Sam's opponent, who fell to the 
+ground in shock. Soon after, the inspector arrived, taking them 
+both to the station to await trial... ]
+;
+[62:Sam grabbed hold of his suspect and shouted for the inspector, 
+who arrived shortly after. Soon, they were both escorted to the 
+station, to await trial... ]
+;
+; Sam runs out of time
+[70:The Farleighs closed ranks and all gave evidence against Sam, who 
+was quickly found guilty. ] ; Sam runs out of time! 
+;
+; Save / load messages
+[80:Please select filename (0-9) ]
+[81:Unable to find correct file! ]
+[82:Position loaded for game number ]
+;
+; Standard courtroom messages
+[101:Sam skimmed through his notepad and announced, "The evidence 
+showing how the crime was committed is that ] ; sam
+; reads evidence for MEANS
+[102:Sam flicked through his notepad, "As for the motive of such a 
+crime, the evidence shows that ] ; sam
+; reads evidence for MOTIVE
+[103:Sam turned a page in his notepad, "To contest the accused's 
+alibi, evidence shows that ] ; sam
+; reads evidence for OPPORTUNITY
+;
+[111:The defence lawyer shook his head, "As for how my client could have 
+committed such a crime, the evidence given by Mr. Stone is 
+rather weak". ]
+; def. reveals not enough evidence for MEANS
+[112:The defence sighed and continued, "Mr. Stone's evidence regarding 
+my client's motive stands upon extremely weak grounds". ]
+; def. reveals not enough evidence for MOTIVE
+[113:The defence lawyer added, "Referring to Mr. Stone's evidence, 
+I find it unlikely that my client had the opportunity to commit 
+such a crime". ]
+; def. reveals not enough evidence for OPPORTUNITY
+;
+; The accused...
+[122:Miss Sue Lombard]
+[123:Mrs Vera Armstrong]
+[124:Mrs Kathy Farleigh]
+[125:Mr Anthony Farleigh]
+[126:Mr William Farleigh]
+[127:Sir Robert Farleigh]
+[128:Miss Fiona Farleigh]
+[129:Mr Clifford Lodge]
+[130:Mr Jarvis Armstrong]
+;
+; Standard courtroom messages
+[140: innocent". ]
+[141: guilty of murder".`The judge looked grave and declared the 
+sentence to be death by hanging. ]
+[142:"Will the jury please decide the verdict", said the Judge. ]
+[143:The foreman of the Jury stepped forward, "The jury have 
+found ]
+[144:The prosecutor stepped forward, "We are here to try ]
+[145: for the hideous crime of murder. The defendant pleads not 
+guilty. Would the first witness, Mr. Sam Stone, please step forward". ]
+[146:Sam muttered a few weak pieces of evidence and the Judge 
+frowned. ]
+[147:"Thank you Mr. Stone," said the Judge. "Would the 
+defence Lawyer please step forward". ]
+[148:What a shame... You failed to bring the true criminal 
+to justice, and as a result, failed to clear Sam's name. It 
+looks as though you missed out on a few pieces of vital 
+evidence...]
+[149:Congratulations, you have cleared Sam's name and brought 
+the true criminal to sentence! However, there were still one or 
+two pieces of evidence you missed...]
+;
+;--------------------------------------------------------------------------
+; Intro sequence messages
+;--------------------------------------------------------------------------
+;
+[500:1929 ]
+[501:"Normally, I would lock you away and throw away the key, but 
+my good friend, whose wife you are accused of murdering, has 
+paid your bail". ]
+[502:"The real murderer tried again, to kill me this time, while 
+you were in jail". ]
+[503:"You need to clear your name, and I need protection. Come back 
+to the manor and help track down the murderer". ]
+[504:"This is my family". ]
+[505:"William, my doctor son". ]
+[506:"Kathy, his dreadful wife". ]
+[507:"Fiona, my bossy daughter". ]
+[508:"Smarmy Clifford, her fiance". ]
+[509:"My drone of a son, Anthony". ]
+[510:"Old Jarvis, the butler". ]
+[511:"Vera, the cook". ]
+[512:"Sue Lombard, my assistant". ]
+[513:"And myself, Robert Farleigh, from whom they all hope to 
+inherit a fortune". ]
+;
+;--------------------------------------------------------------------------
+; Hints towards evidence missed (EVIDENCE MESSAGES - 10000)
+;--------------------------------------------------------------------------
+;
+;--------------------------------------------------------------------------
+; Evidence gained by watching people's actions & talking to them
+;--------------------------------------------------------------------------
+;
+; Murder 5
+;
+[18000:Is anyone angry enough to commit murder?]
+; Anthony was angry at Jarvis's attitude towards him
+[18001:Has anyone been treated badly enough to be driven to murder?]
+; Jarvis treated Anthony with a studied lack of respect
+[18002:How do people feel about each other?]
+; Many of the family disliked Anthony
+[18003:Who was nearest to the victim at the time of the murder?]
+; Anthony was left alone with Kathy when she was killed
+[18004:'Qui bono?', as they say - who benefits?]
+; Anthony is set to inherit everything
+[18006:Was anyone seen at the scene of the crime?]
+; Jarvis was supposedly seen at the window after Robert
+; was thrown out
+[18007:Was anyone seen at the scene of the crime?]
+; ** SAME AS 18006
+; Jarvis was reported to have been at the window when Fiona
+; was shot
+[18008:Is there anyone who might have borne a grudge against the victim?]
+; Sir Robert had rebuked Jarvis over the way he was treating
+; Anthony
+[18009:Are people always as they appear?]
+; Sue caught a glimpse of Jarvis before she was locked in
+; the wardrobe
+[18010:When someone makes an accusation, can you trust their judgement?]
+; Vera blamed Jarvis of murder
+[18011:Has everyone got a good alibi for the time of the murder?]
+; Anthony was absent when Robert and Fiona's were murdered
+[18012:Did anybody hear anything unusual, apart from the murder itself?]
+; Sue was heard screaming upstairs
+[18013:If someone blames another, is it to steer you away from themselves?]
+; Anthony blames Jarvis for the murders
+[18014:If someone tells you the cause of death, try to check it.]
+; Anthony said that Jarvis had killed himself
+[18015:Look for anyone who might be destroying evidence.]
+; Anthony threw the bald-wig in the fire
+[18016:Do you know the causes of all of the deaths?]
+; Fiona had been shot
+[18017:Is anyone put out of action, but not killed, during the time?]
+; Sue had been locked in Sir Robert's wardrobe
+[18018:Is anyone angry enough to commit murder?]
+; ** SAME AS 18000
+; Jarvis was angry with Anthony for telling tales to Sir
+; Robert
+[18019:Investigate all 'accidents' carefully]
+; William had been crushed by fallen masonry, as if
+; booby trapped
+[18020:Have you checked the cause of all deaths?]
+; Sir Robert had been killed by a fall
+[18021:Have you checked the cause of all deaths?]
+; Kathy had died from a blow to the head
+[18022:Have you checked the cause of all deaths?]
+; Jarvis had hanged to death
+[18023:Did anyone hear the murder takes place?]
+; Sue heard a gunshot from Sir Robert's room
+[18024:Ask the Inspector to check any physical evidence for fingerprints]
+; The shotgun had Jarvis's fingerprints on it
+[18025:Ask the Inspector to check any physical evidence for fingerprints]
+; ** same as 18024
+; Anthony's fingerprints were on the blunt penknife
+[18026:Ask the Inspector to check any physical evidence for blood samples]
+; Kathy's blood was on the bottle
+;
+; Murder 4
+;
+[19000:Is there anyone who might have borne a grudge against the victim?]
+; ** SAME AS 18008
+; Sue was annoyed by Fiona's insults
+[19001:How did Fiona behave towards the others?]
+; Fiona wouldn't accept Sue as part of the family
+[19002:Do people express their true feelings about each other?]
+; Sue said that she always liked Fiona
+[19003:Did Fiona treat anyone badly enough to drive them to murder?]
+; Fiona was known to insult Sue quite often
+[19004:Which came first, the choking or the egg? And where from?]
+; Vera bought the eggs from the farm]
+[19005:How far does the inheritance figure in this murder?]
+; Anthony was glad that Sue was no longer in the will
+[19006:Ask the Inspector to check any physical evidence for poison]
+; The pin was coated in strychnine
+[19007:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; Fiona's blood was on the pin
+[19008:Does anyone behave suspiciously at the scene of the crime?]
+; Sue was fumbling at the back of Fiona's chair
+[19009:Who was there when the victim died?]
+; Sue left the table before the food was served
+[19010:Are you sure that you have the right murder weapon?]
+; Upon examination, Fiona's egg contained no poison
+[19011:Ask the Inspector to check any physical evidence for fingerprints]
+; ** SAME AS 18024
+; Sue's fingerprints were on the poison bottle
+[19012:Ask the Inspector to check any physical evidence for poison]
+; ** SAME AS 18026
+; The poison bottle contained strychnine
+[19013:Who had the opportunity to commit the crime?]
+; Vera said that anyone could have tampered with the
+; eggs, including Sue
+;
+;--------------------------------------------------------------------------
+; Evidence to list people with Sam when the murder occurs
+;--------------------------------------------------------------------------
+;
+; ** NOT REALLY SURE HOW THESE FIT IN
+[19900:Who else was with you when you heard the scream?]
+; Murder 1 - People with me when I heard the scream:
+[19901:Who else was with you when you heard the smash of glass?]
+; Murder 2 - People with me when I heard the smash of glass:
+[19902:Who else was with you when you heard the thump from upstairs?]
+; Murder 3 - People with me when a muffled thump came from upstairs:
+[19903:Who else was with you when Fiona died?]
+; Murder 4 - People with me when Fiona died:
+[19904:Who else was with you when you heard the smash of glass?]
+; ** SAME AS 19901
+; Murder 5 - People with me when I heard the smash of glass:
+;
+;--------------------------------------------------------------------------
+; Evidence gained by watching people's actions & talking to them
+;--------------------------------------------------------------------------
+;
+; Murder 1
+;
+; ** 20001 NUMBER WAS MISSING - PRESUME IN ERROR
+[20001:Try the kitchen. You might pick up some tidbits there.]
+; Vera argues with Sue in kitchen. evidence value 5
+[20002:Did anyone hear anything significant before the murder?]
+; Vera and Sue were heard arguing
+[20003:Did all the characters behave towards Sue as you would expect?]
+; Vera was arrogant towards Sue
+[20004:Did Sue get on well with everybody?]
+; Sue got the clear message that Vera did not like her
+[20005:Did anyone particularly dislike Sue?]
+; Everyone said that Vera hated Sue
+[20006:Did anyone particularly dislike Sue?]
+; Vera admitted that she disliked 'that Lombard woman'
+[20007:Does anyone change their attitude to Sue, after her death?]
+; After Sue's death, Vera said that she used to like Sue
+[20008:Is there anything unusual about anyone's clothing?]
+; After the incident, Vera said that she hadn't worn her
+; apron all day
+[20009:When someone casts aspersions, can you trust their judgement?]
+; Jarvis said that Vera wasn't in the kitchen at the time of
+; Sue's death
+[20010:Is anyone missing at the time of the murder?]
+; Vera wasn't in the kitchen at the time of Sue's death
+[20011:Does anyone have an uncorroborated alibi?]
+; Jarvis couldn't find Vera at the time of Sue's death
+[20012:Are there any disputes about people's whereabouts?]
+; Jarvis argues with Vera, about where she was at the time
+; of the murder
+[20013:Does anyone have an uncorroborated alibi?]
+; ** SAME AS 20011
+; Vera said she must have been in the herb garden when Sue
+; was killed
+[20016:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; The knife blade was smeared with Sue's blood
+[20017:Ask the Inspector to check any physical evidence for fingerprints]
+; ** SAME AS 18024
+; The knife had Vera's fingerprints on it
+[20018:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; The apron had a few traces of blood on it
+[20019:Is anyone keeping secrets from you? Why?]
+; William and Kathy were whispering something suspicious
+[20020:If someone blames another, is it to steer you away from themselves?]
+; ** SAME AS 18013
+; Fiona suspected Sir Robert of murdering Sue
+[20021:Is anyone keeping secrets from you? Why?]
+; ** SAME AS 20019
+; Fiona was talking secretly to William and Kathy
+[20022:Are several players pointing the finger in the same direction?]
+; Clifford blamed Sir Robert for murdering Sue
+[20023:Does alcohol have any part to play in this death?]
+; Vera was known to be unpredictable after a drink
+[20024:Is anyone murderously unstable?]
+; Vera was drinking sherry before Sue was murdered
+[20025:How do the other characters feel about Sue?]
+; Sue wasn't very popular with many of the family
+[20026:How could the murderer have got into Sue's room]
+; The murderer could have used the secret door leading to
+; Sue's room
+[20027:Is money a motive in this murder?]
+; Clifford was pleased that Sue wouldn't inherit any of Sir
+; Robert's will
+[20028:Does the inheritance have anything to do with this death?]
+; Clifford suspects that Sue's death had something to do
+; with Sir Robert's will
+[20029:Does anyone claim to be alone at the time of the murder?]
+; Anthony said he was getting changed when he heard Sue
+; scream
+[20030:Look for anyone who might be destroying evidence.]
+; ** SAME AS 18015
+; Sir Robert took a photograph from Clifford and burnt it
+[20031:Is anyone acting suspiciously after the murder?]
+; William burnt a suspicious letter
+;
+; Murder 2
+;
+[20038:What was the cause of death?]
+; Clifford had suffered multiple fractures
+[20039:Were there any shreds of evidence near the body?]
+; The fibres in the piece of cloth found in the shed matched
+; those of Sir Robert's jacket
+[20040:Have you checked for clues outside the house?]
+; There were marks of a fall below Sir Robert's window
+[20041:When someone makes an accusation, can you trust their judgement?]
+; ** SAME AS 18010
+; Fiona accused Sue of killing Clifford to save the
+; business
+[20042:Look for anyone who might be destroying evidence.]
+; ** SAME AS 18015
+; Kathy burnt some of William's private letters
+[20043:Has anyone any dark secrets to hide?]
+; William hid Kathy's whisky bottle
+[20044:Is anyone playing with fire?]
+; Robert burnt the photo from Clifford's wallet
+[20045:If someone blames another, is it to steer you away from themselves?]
+; ** SAME AS 18013
+; Robert blamed Sam for the murder
+[20046:Examine the body.]
+; Clifford had a gash on his face
+[20047:Have you examined your suspects thoroughly?]
+; There were some traces of blood on Sir Robert's ring
+[20048:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; The gash on Clifford's face matched the blood on Sir
+; Robert's ring
+[20049:Have you examined the victim's clothes?]
+; The broken glass in Clifford's clothes matched the
+; broken window in the master bedroom
+[20050:Who was the last person to see Clifford alive?]
+; Clifford and Sir Robert were arguing in the Master
+; bedroom
+[20051:When was Clifford's absence noted?]
+; Fiona couldn't find Clifford after leaving Sir Robert
+[20052:Is there anyone who might have borne a grudge against the victim?]
+; ** SAME AS 18008
+; Robert was against Clifford's growing authority over the
+; business
+[20053:Was Clifford upsetting anyone in particular?]
+; Clifford was trying to take Sir Robert's place in the
+; business
+[20054:Does anyone change their attitude to Clifford, after his death?]
+; Robert valued Clifford highly as part of the business
+[20055:Did anyone hear anything unusual?]
+; Vera heard a fall in the Kitchen garden
+[20056:When someone makes an accusation, can you trust their judgement?]
+; ** SAME AS 18010
+; Kathy blames the murder on Sue
+[20057:Did money play a part in this murder?]
+; Clifford had financial problems
+[20058:Is anyone suspiciously nice about Clifford, after his death?]
+; Sir Robert stressed his admiration of the way Clifford was
+; running the business
+[20059:Where were the main suspects immediately before the death?]
+; Sir Robert admitted that he was in the master bedroom
+; before the incident
+[20060:Had Clifford fallen out with anyone in particular?]
+; Clifford was arguing with Sir Robert before his
+; disappearance
+[20061:Where did Clifford die?]
+; Clifford's body had been dragged to the shed]
+[20062:Examine the bedrooms carefully.]
+; The window in the master bedroom had been smashed from the
+; inside
+[20063:Examine the body.]
+; ** SAME AS 20046
+; Clifford's clothes were covered in glass
+[20064:What was said of Clifford's last movements?]
+; Sir Robert told Clifford to leave the house
+[20065:Do people make accusations from prejudice?]
+; Jarvis blames gypsies for killing Clifford
+[20066:Examine the body.]
+; ** SAME AS 20046
+; Clifford's wallet contained a photo of Sir Robert. It
+; could have been used for blackmail
+[20067::Were there any shreds of evidence near the body?]
+; ** SAME AS 20039
+; A scrap of cloth, the same color as Sir Robert's suit,
+; found on a nail in the shed
+[20068:Examine all suspects for clues.]
+; Sir Robert's new suit was torn around the pocket
+[20069:If someone blames another, is it to steer you away from themselves?]
+; ** SAME AS 18013
+; Robert blamed the gypsies for killing Clifford
+;
+; Murder 3
+;
+[20070:How did Kathy and Bill get on together?]
+; Kathy and Bill were arguing in their room
+[20071:Did anyone overhear anything interesting?]
+; Fiona was eavesdropping on Kathy and Bill's argument
+[20072:Has anyone been treated badly enough to be driven to murder?]
+; ** SAME AS 18001
+; Kathy disliked the way Bill treated her
+[20073:Was Bill in dispute with anyone over anything?]
+; Bill was against Kathy's flirtatious habits
+[20074:Could money be a motive in this case?]
+; Bill would inherit more than Fiona in Sir Robert's will
+[20075:'Qui bono?' - who benefits?]
+; ** SAME AS 18004 (almost)
+; Bill was the main beneficiary of Sir Robert's will
+[20076:Is there anyone who might have borne a grudge against the victim?]
+; ** SAME AS 18008
+; Fiona had lost out in Sir Robert's new will
+[20077:Do people's accounts of events agree with what others say?]
+; Kathy admits that she argued with Bill earlier
+[20078:Did anyone hear anything significant before the murder?]
+; Kathy and Bill were heard arguing throughout the house
+[20079:Is anyone angry enough to commit murder?]
+; ** SAME AS 18000
+; Fiona was annoyed at Bill for being favoured in Sir Robert's
+; will
+[20080:If someone blames another, is it to steer you away from themselves?]
+; ** SAME AS 18013
+; Fiona blamed Kathy for murdering Bill
+[20081:Ask the Inspector to check any physical evidence for fingerprints]
+; ** SAME AS 18024
+; Fiona's fingerprints were on the cherub's head
+[20082:How far do fingerprints prove anything?]
+; Both Vera and Fiona's fingerprints were on the tongs
+[20083:Ask the Inspector to check any physical evidence for fingerprints]
+; ** SAME AS 18024
+; Kathy's fingerprints were on the perfume bottle, but it
+; wasn't strong enough to have survived a blow against William's head
+[20084:Establish the ownership of all physical evidence.]
+; The perfume bottle belonged to Kathy
+[20085:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; There was some blood on the cherub's head
+[20086:Ask the Inspector to check any physical evidence for blood samples]
+; The perfume bottle was broken and splattered with blood
+[20087:Examine all suspects for clues.]
+; ** SAME AS 20068
+; Fiona had a damp smudge of soot on her shoulder. She also
+; smelt strongly of perfume
+[20088:Is the cause of death as it appears?]
+; Bill's wound was covered with perfume
+[20089:When someone makes an accusation, can you trust their judgement?]
+; ** SAME AS 18010
+; Sue blamed Kathy for killing William
+[20099:How do people feel about each other?]
+; ** SAME AS 18002
+; Fiona and Kathy hated each other
+;
+;--------------------------------------------------------------------------
+; Evidence for noting objects
+;--------------------------------------------------------------------------
+;
+; Murder 1
+;
+[20100:Take a look at what people are wearing.]
+; Vera was wearing an apron
+[20101:Have there been any significant changes in people's clothing?]
+; Vera was not wearing her apron
+[20102:Did you see anyone carrying anything suspicious?]
+; Vera was carrying the breadknife
+[20103:Are dark secrets stashed behind closed doors?]
+; Kathy's whisky bottle had been hidden in Anthony's
+; wardrobe
+;
+; Murder 2
+;
+[20110:Beating about the bushes can sometimes be worthwhile.]
+; Clifford's wallet was in the bushes. There were marks of
+; a heavy fall alongside
+;
+; Murder 3
+;
+[20121:Are dark secrets stashed behind closed doors?]
+; ** SAME AS 20103
+; The cherub's head had been hidden in a wardrobe
+[20122:Examine the murder room thoroughly]
+; A broken perfume bottle was hidden in the murder room
+[20123:Examine the murder room thoroughly]
+; ** SAME AS 20122
+; A pair of tongs were in the same room as William's body
+;
+; Murder 4
+;
+[20130:Examine suspects for even the smallest clues.]
+; Sue was carrying a pin
+[20131:Try examining the luggage]
+; William's bag contained a poison bottle
+;
+; Murder 5
+;
+[20150:Use your nose as well as your eyes and ears.]
+; The shotgun smelt as it it had been recently fired
+[20151:Examine all scraps of evidence for foreign substances.]
+; The cloth was covered in gun oil
+[20152:Look for unusual items in the rooms where things happen ]
+; A piece of string was found by the gun in Robert's room
+[20153:Do cupboards contain what you would expect?]
+; Jarvis's coat had been hidden in Sue's wardrobe
+[20154:Examine rooms for hidden items.]
+; A long piece of rope had been hidden in the gatehouse
+[20155:Examine rooms for hidden items.]
+; ** SAME AS 20154
+; A blunt penknife was found with the long rope
+[20156:Is there anything that could be used as a disguise?]
+; The bald wig looked convincingly like Jarvis's head
+[20157:Where had the broken glass come from?]
+; The broken glass had come from the window in the Master
+; Bedroom
+[20158:Did you find anything near the bodies?]
+; The whisky bottle had been found beside Kathy's body
+[20159:Examine rooms for hidden items.]
+; ** SAME AS 20154
+; A short length of rope had been hidden in the cellar
+;
+;--------------------------------------------------------------------------
+; Evidence for examining objects
+;--------------------------------------------------------------------------
+;
+; Murder 1
+;
+[20200:Does it all come out in the wash?]
+; Vera's apron had been dumped in the washing machine
+[20201:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; The knife was bloodstained
+[20202:What was the cause of death?]
+; Sue had been stabbed to death
+;
+; Murder 2
+;
+[20300:Examine the suspects' bedrooms.]
+; The window had been smashed from the inside
+[20301:Examine Clifford's clothes.]
+; Broken glass covered Clifford's clothes
+[20302:Examine all suspects thoroughly]
+; his smart blue suit seemed to be slightly frayed around
+; a pocket
+[20304:Examine the body carefully.]
+; Clifford couldn't have been dead for long, as the body was
+; still warm. There was a gash on his face, as if he'd been
+; fighting
+[20305:Examine all suspects thoroughly]
+; ** SAME AS 20302
+; Robert's ring had a few traces of blood on it
+;
+; Murder 5
+;
+[20311:If you are at the end of the tether, examine it!]
+; the rope was frayed at the end where it had been cut, probably
+; by a blunt instrument
+[20312:Examine all instruments of death.]
+; the noose was frayed at the end, as if cut by a blunt
+; knife
+[20313:Keep a sharp eye when examining all items.]
+; the penknife was blunt
+[20314:Examine the bodies carefully.]
+; Jarvis' body was stone cold, as if he'd died before killing
+; the others
+;
+; Murder 3
+;
+[20350:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; there were minute traces of blood on the cherub's head
+[20351:Ask the Inspector to check any physical evidence for blood samples]
+; ** SAME AS 18026
+; it was broken and splattered with blood
+[20352:Examine all suspects thoroughly]
+; ** SAME AS 20302
+; she had a damp smudge of soot on her shoulder. She also
+; smelt strongly of perfume
+[20353:Examine the body carefully.]
+; ** SAME AS 20304
+; his wound was doused in perfume
+;
+; Murder 4
+;
+[20400:Why do people keep going on about brown eggs?]
+; All the brown eggs appeared to have pin-pricks in them
+[20401:Did Fiona enjoy her breakfast?]
+; Fiona's egg had a tiny pin-prick in the shell, as if poisoned
+[20402:Check all physical evidence for traces of poison.]
+; The pin appeared to be coated with poison
+[20403:Examine the body and its surroundings carefully.]
+; There was a tiny pin in the back of Fiona's chair
+[20404:Is anything changed in the room after the death?]
+; There was nothing at the back of Fiona's chair
+[20405:What was the cause of death?]
+; Fiona appeared to have been poisoned
+[20406:Try and keep up with the Times.]
+; The newspaper revealed that Sue was defending a famous
+; poisoner in court
+[20407:Could the motive be something other than money?]
+; A letter from Sue to Sir Robert revealed that she
+; was worried that Fiona would reveal the affair between himself
+; and Sue
+[20408:Read everything that you can lay your hands on.]
+; A scrawled note, found in the shed, described the use
+; of poisons
+;
+;--------------------------------------------------------------------------
+; Evidence as it appears in the notepad (HINT MESSAGES + 10000)
+;--------------------------------------------------------------------------
+;
+;--------------------------------------------------------------------------
+; Evidence gained by watching people's actions & talking to them
+;--------------------------------------------------------------------------
+;
+; Murder 5
+;
+[28000:Anthony was angry at Jarvis's attitude towards him]
+[28001:Jarvis treated Anthony with a studied lack of respect]
+[28002:Many of the family disliked Anthony]
+[28003:Anthony was alone with Kathy when she was killed]
+[28004:Anthony is due to inherit everything]
+[28006:Jarvis was seen at the window after Robert was thrown out]
+[28007:Jarvis was reported to have been at the window when Fiona 
+was shot]
+[28008:Sir Robert had rebuked Jarvis over the way he was treating 
+Anthony]
+[28009:Sue caught a glimpse of Jarvis before she was locked in 
+the wardrobe]
+[28010:Vera blamed the murder on Jarvis]
+[28011:Anthony was absent when Robert and Fiona's were murdered]
+[28012:Sue's screams were heard upstairs]
+[28013:Anthony blamed Jarvis for the murders]
+[28014:Anthony said that Jarvis had killed himself]
+[28015:Anthony threw the bald-wig in the fire]
+[28016:Fiona had been shot]
+[28017:Sue had been locked in Sir Robert's wardrobe]
+[28018:Jarvis had been angry with Anthony for telling tales to Sir 
+Robert]
+[28019:William had been crushed by fallen masonry, as if 
+booby trapped]
+[28020:Sir Robert had been killed by a fall]
+[28021:Kathy had died from a blow to the head]
+[28022:Jarvis had hanged to death]
+[28023:Sue heard a gunshot from Sir Robert's room]
+[28024:The shotgun had Jarvis's fingerprints on it]
+[28025:Anthony's fingerprints were on the blunt penknife]
+[28026:Kathy's blood was on the bottle]
+;
+; Murder 4
+; 
+[29000:Sue had been annoyed by Fiona's insults] 
+[29001:Fiona wouldn't accept Sue as part of the family] 
+[29002:Sue said that she liked Fiona] 
+[29003:Fiona was known to insult Sue quite often] 
+[29004:Vera bought the eggs from the farm] 
+[29005:Anthony was glad that Sue was no longer in the will] 
+[29006:The pin was coated in strychnine]
+[29007:Fiona's blood was on the pin]
+[29008:Sue was seen fumbling at the back of Fiona's chair] 
+[29009:Sue left the table before the food was served] 
+[29010:Upon examination, Fiona's egg contained no poison]
+[29011:Sue's fingerprints were on the poison bottle]
+[29012:The poison bottle contained strychnine]
+[29013:Vera said that anyone could have tampered with the 
+eggs, including Sue]
+;
+;--------------------------------------------------------------------------
+; Evidence to list people with Sam when the murder occurs
+;--------------------------------------------------------------------------
+;
+; Evidence to list people with Sam when messages 8030..9 are printed
+[29900:People with me at the time of the scream: ] 
+[29901:People with me when the smash of glass was heard: ] 
+[29902:People with me when a muffled thump came from upstairs: ] 
+[29903:People with me when Fiona died: ] 
+[29904:People with me I heard the smash of glass: ] 
+; 
+;--------------------------------------------------------------------------
+; Evidence gained by watching people's actions & talking to them
+;--------------------------------------------------------------------------
+;
+; Murder 1
+;
+; Vera argues with Sue in kitchen. evidence value 5
+[30002:Vera and Sue were heard arguing]
+[30003:Vera had been arrogant towards Sue]
+[30004:Sue got the clear message that Vera did not like her]
+[30005:Everyone said that Vera hated Sue]
+[30006:Vera admitted that she disliked 'that Lombard woman']
+[30007:After Sue's death, Vera said that she used to like Sue]
+[30008:After the incident, Vera said that she hadn't worn her
+apron all day]
+[30009:Jarvis said that Vera wasn't in the kitchen at the time of
+Sue's death]
+[30010:Vera wasn't in the kitchen at the time of Sue's death]
+[30011:Jarvis couldn't find Vera at the time of Sue's death]
+[30012:Jarvis argued with Vera, about where she had been at the time
+of the murder]
+[30013:Vera said she must have been in the herb garden when Sue
+was killed]
+[30016:The knife blade was smeared with Sue's blood]
+[30017:The knife had Vera's fingerprints on it]
+[30018:The apron had a few traces of blood on it]
+[30019:William and Kathy were whispering something suspicious]
+[30020:Fiona suspected Sir Robert of murdering Sue]
+[30021:Fiona talked secretly to William and Kathy]
+[30022:Clifford blamed Sir Robert for murdering Sue]
+[30023:Vera was known to be unpredictable after a drink]
+[30024:Vera had been drinking sherry before Sue was murdered]
+[30025:Sue wasn't popular with many of the family]
+[30026:The murderer could have used the secret door leading to
+Sue's room]
+[30027:Clifford had been pleased that Sue wouldn't inherit any of Sir
+Robert's will]
+[30028:Clifford suspected that Sue's death had something to do
+with Sir Robert's will]
+[30029:Anthony said he was getting changed when he heard Sue
+scream]
+[30030:Sir Robert took a photograph from Clifford and burnt it]
+[30031:William burnt a suspicious letter]
+;
+; Murder 2
+;
+[30038:Clifford had suffered multiple fractures]
+[30039:The fibres in the piece of cloth found in the shed matched
+those of Sir Robert's jacket]
+[30040:There were marks of a fall below Sir Robert's window]
+[30041:Fiona accused Sue of killing Clifford to save the
+business]
+[30042:Kathy burnt some of William's private letters]
+[30043:William hid Kathy's whisky bottle]
+[30044:Robert burnt the photo from Clifford's wallet]
+[30045:Robert blamed Sam for the murder]
+[30046:Clifford had a gash on his face]
+[30047:There were some traces of blood on Sir Robert's ring]
+[30048:The gash on Clifford's face matched the blood on Sir
+Robert's ring]
+[30049:The broken glass in Clifford's clothes matched the
+broken window in the master bedroom]
+[30050:Clifford and Sir Robert were arguing in the Master
+bedroom]
+[30051:Fiona couldn't find Clifford after leaving Sir Robert]
+[30052:Robert had been against Clifford's growing authority over the
+business]
+[30053:Clifford had been trying to take Sir Robert's place in the
+business]
+[30054:Robert valued Clifford highly as part of the business]
+[30055:Vera heard a fall in the Kitchen garden]
+[30056:Kathy blamed the murder on Sue]
+[30057:Clifford had financial problems]
+[30058:Sir Robert stressed his admiration of the way Clifford had
+running the business]
+[30059:Sir Robert admitted that he was in the master bedroom
+before the incident]
+[30060:Clifford argued with Sir Robert before his
+disappearance]
+[30061:Clifford's body had been dragged to the shed]
+[30062:The window in the master bedroom had been smashed from the
+inside]
+[30063:Clifford's clothes were covered in glass]
+[30064:Sir Robert told Clifford to leave the house]
+[30065:Jarvis blames gypsies for killing Clifford]
+[30066:Clifford's wallet contained a photo of Sir Robert. It
+could have been used for blackmail]
+[30067:A scrap of cloth, the same color as Sir Robert's suit,
+found on a nail in the shed]
+[30068:Sir Robert's new suit was torn around the pocket]
+[30069:Robert blamed the gypsies for killing Clifford]
+;
+; Murder 3
+; 
+[30070:Kathy and Bill were arguing in their room] ; null (before
+murder)
+[30071:Fiona was eavesdropping on Kathy and Bill's argument] ; +ve
+[30072:Kathy disliked the way Bill treated her]
+; null (before murder)
+[30073:Bill had been against Kathy's flirtatious habits]
+; null (before murder)
+[30074:Bill would inherit more than Fiona in Sir Robert's will]
+; +ve
+[30075:Bill was the main beneficiary of Sir Robert's will] ; +ve
+[30076:Fiona had lost out in Sir Robert's new will] ; +ve (+30075)
+[30077:Kathy admits that she argued with Bill earlier] ;-ve
+[30078:Kathy and Bill were heard arguing throughout the house] ;-ve
+[30079:Fiona had been annoyed at Bill for being favoured in Sir Robert's
+will] ; +ve
+[30080:Fiona blamed Kathy for murdering Bill] ;-ve
+[30081:Fiona's fingerprints were on the cherub's head] ; +ve
+[30082:Both Vera and Fiona's fingerprints were on the tongs] ; +ve
+[30083:Kathy's fingerprints were on the perfume bottle, but it
+wasn't strong enough to have survived a blow against William's head]
+;-ve
+[30084:The perfume bottle belonged to Kathy] ;-ve
+[30085:There was some blood on the cherub's head] ; +ve
+(+30120+30121)
+[30086:The perfume bottle was broken and splattered with blood] ;-ve
+[30087:Fiona had a damp smudge of soot on her shoulder. She also
+smelt strongly of perfume] ; +ve
+[30088:Bill's wound was covered with perfume] ;-ve
+[30089:Sue blamed Kathy for killing William] ;-ve
+;
+;--------------------------------------------------------------------------
+; Evidence for noting objects
+;--------------------------------------------------------------------------
+;
+; Murder 1
+; 
+[30100:Vera had been wearing an apron]
+[30101:Vera had not been wearing her apron]
+[30102:Vera had been carrying the breadknife]
+[30103:Kathy's whisky bottle had been hidden in Anthony's
+wardrobe]
+; 
+; Murder 2
+; 
+[30110:Clifford's wallet had been in the bushes. There were marks of
+a heavy fall alongside]
+;
+; Murder 3
+; 
+[30121:The cherub's head had been hidden in a wardrobe]
+[30122:A broken perfume bottle was hidden in the murder room]
+[30123:A pair of tongs were in the same room as William's body]
+;
+; Murder 4
+;
+[30130:Sue had been carrying a pin] 
+[30131:William's bag contained a poison bottle]
+;
+; Murder 5
+;
+[30150:The shotgun smelt as it it had been recently fired] ; shotgun, 
+; also examine
+[30151:The cloth was covered in gun oil] ; cloth, also examine
+[30152:A piece of string had been found by the gun in Robert's room] ; string
+[30153:Jarvis's coat had been hidden in Sue's wardrobe] ; J's coat
+[30154:A long piece of rope had been hidden in the gatehouse] ; long rope
+[30155:A blunt penknife had been found with the long rope] ; penknife
+[30156:The bald wig looked convincingly like Jarvis's head] ; wig, also examine
+[30157:The broken glass had come from the window in the Master 
+Bedroom] ; broken glass
+[30158:The whisky bottle had been found beside Kathy's body] ; bottle
+[30159:A short length of rope had been hidden in the cellar] ; short rope
+;
+;--------------------------------------------------------------------------
+; Evidence for examining objects
+;--------------------------------------------------------------------------
+;
+; Murder 1
+;
+[30200:Vera's apron had been dumped in the washing machine] 
+[30201:The knife was bloodstained] 
+[30202:Sue had been stabbed to death] 
+;
+; Murder 2
+;
+[30300:The window had been smashed from the inside] ; <E>
+[30301:Broken glass covered Clifford's clothes]
+; <E> (paired with 30300)
+[30302:his smart blue suit seemed to be slightly frayed around
+a pocket] ; <E> (paired with 623)
+[30304:Clifford couldn't have been dead for long, as the body had 
+still been warm. There was a gash on his face, as if he'd been
+fighting] ; <E> (paired with 30305)
+[30305:Robert's ring had a few traces of blood on it] ; <E>
+;
+; Murder 5
+;
+[30311:the rope was frayed at the end where it had been cut, probably 
+by a blunt instrument] ; long & short rope, also E mess
+[30312:the noose was frayed at the end, as if cut by a blunt 
+knife] ; noose, also E mess
+[30313:the penknife was blunt] ; penknife, also E mess
+[30314:Jarvis' body was stone cold, as if he'd died before killing 
+the others] ; jarvis, also E mess
+;
+; Murder 3
+;
+[30350:there were minute traces of blood on the cherub's head]
+[30351:it was broken and splattered with blood]
+[30352:she had a damp smudge of soot on her shoulder. She also
+smelt strongly of perfume]
+[30353:his wound was doused in perfume]
+;
+; Murder 4
+;
+[30400:All the brown eggs appeared to have pin-pricks in them] ; eggs <NE>
+[30401:Fiona's egg had a tiny pin-prick in the shell, as if poisoned] ; Fiona's egg
+[30402:The pin appeared to be coated with poison] ; pin <E>
+[30403:There was a tiny pin in the back of Fiona's chair] ; chair
+[30404:There was nothing at the back of Fiona's chair] ; chair (later)
+[30405:Fiona appeared to have been poisoned]  ; fiona
+[30406:The newspaper revealed that Sue had just been defending a 
+famous poisoner in court] ; newspaper
+[30407:A letter from Sue to Sir Robert revealed that she had been 
+worried that Fiona would reveal the affair between himself and 
+Sue] ;  sue's letter
+[30408:A scrawled note, found in the shed, described the use 
+of poisons] ; scribbled note

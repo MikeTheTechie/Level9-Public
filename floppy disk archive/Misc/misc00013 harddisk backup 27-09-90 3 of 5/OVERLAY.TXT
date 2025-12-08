@@ -1,0 +1,825 @@
+; Blood Relations stuff moved out into intro overlay...
+;
+const 
+ NotFromOverlay=1 ; set to 1 to run stand-alone
+ NoIntro=1 ; set to 1 to run stand-alone
+;
+ begin
+.HardInit
+ PlayerACB=64
+ x1=0
+ &LongWS(HiLongRandomSeed)=x1
+ &LongWS(LoLongRandomSeed)=x1
+
+ LeftMargin=0
+ gosub @SetUpTextPtr
+ x1=39
+ ByteWS(ByteWordWrapWidth)=x1
+ CursorX=32
+ CursorZ=100
+ CursorH=PeopleHeight
+ SuspendScroll=0 ; allow scrolling (only suspended in menu)
+ &WordWS(WordUseVM)=c1 ; use vm for 3d plotting code.
+ SpeedLimiting=true
+
+ IBMScrollOffset=c0
+ v1=0			;X1
+ v2=319			;X2
+ v3=0			;Y1
+ v4=IBMclipPosition	;Y2
+ gosub @MCSetGraphicsWindow	;For clipping sprites
+ v1=IBMTopOfText
+ v2=IBMTextHeight
+ gosub @MCSetTextWindow		;Allocate text bufer
+ v1=7				;1=buffers, 2=Logical, 4=Physical
+ gosub @MCEnableTextBuffer	;Select output destination
+
+ gosub @MCInit3D
+ &WordWS(WordRasterOffset)=c0
+ gosub @InitACBs
+
+ &WordWS(WordCursorXPos)=c0
+ x1=160
+ &WordWS(WordCursorYPos)=x1
+
+ gosub @PreLoadAll
+ &WordWS(WordVBLDisabled)=c0 ; enable vbl
+ return
+;---
+.RestartGameInit
+ WantToRestart=0
+ GameLoopTimer=0
+ NpcLoopTimer=0
+ ClimbingStairs=0
+ ExecutingCommand=0
+ ExecutingRacetrack=0
+ SubGame=0
+cif pc
+ IBMFrameLimit=0
+cend
+cif st
+ IBMFrameLimit=0
+cend
+;
+; Clear game-specific variables...
+ code -
+ PersonArriving=0
+ FrontDoorOpened=0
+ Vreadyformurder=0
+ Vmurderbeendone=0
+ inspectorQV=0
+ Involvednpc1=0
+ Involvednpc2=0
+ CurrentNotePage=0
+ normaldescriptionmode=iVERBOSE
+ persontalking=false
+ VSamKnowsAboutMurder=false
+ wantmore=false
+ analyseobject=false
+ SamSeduced=false
+ JarvisHasTray=false
+ doctorbagopen=false
+; set up time
+ hour=11
+ minute=0
+ second=0
+ code +
+ TimeLimit=0
+;
+ gosub @LoadWSTables ; re-load workspace lists after restart
+;
+; initialise offsets within list4...
+ &MenuText=list4(0)
+ &MenuData=list4(2)
+ &InitialHiresOffset=list4(4)
+ &ExitOffsets=list4(6)
+ &ObjectGraphics=list4(8)
+ &NounVerbTable=list4(12)
+;
+; and offsets within list5...
+ &StartFloorPointers=list5(0)
+ &startracetracks=list5(2)
+ &startreversaltable=list5(4)
+; &startdistractions=list5(6)
+;
+ gosub @InitNpcTablesVEC
+ gosub @InitHiresCoords
+ gosub @SpecialObjectStartVec
+code -
+ actor=user
+ room=83
+ currentuserroom=room
+ currentpos(user)=currentuserroom
+code +
+ return
+;---
+; Load tables 4 & 5 etc...
+.LoadWSTables
+  &list11(16)=List4HiLoadAddress
+  &list11(18)=List4LoLoadAddress ; set up list4 load addr
+  &list11(20)=List4HiLoadAddress
+  &list11(22)=List4LoLoadAddress ; set up list5 load addr
+;
+; load b.dat / c.dat
+  v1=4
+  x1=66 ; 'b.dat' ; for murders 1-3
+  if murder<4 then LoadWST
+  x1=67 ; 'c.dat' ; for murders 4-9
+.LoadWST
+  v2=0 ; offset within list4
+  v3=0
+  gosub @LoadFile
+  &x3=List4(28) ; get offset for list5
+;
+; get list 4 address (header+list5 pointer)
+  v1=4 ; add to list 4
+  v2=0 ; high word 0
+  v3=30
+  gosub @MCAddToListPtr
+;
+; get the list5 address (header+list5 offset)
+  v1=28
+  add x3,v1
+  v1=5 ; add to list 5
+  v2=0 ; high word 0
+  v3=x3 ; low word
+  goto @MCAddToListPtr
+;---
+.AllocateWorkspaceLists
+; this must be the first allocate done...
+  v1=2500
+  gosub @MCReserveMemory ; extra space for temporary tables,
+; (as set up in table.txt).
+; This reserve is immediately after the variable space
+
+  &x1=longws(HiLongFreeWorkspace)
+  &list11(68)=x1 ; set up list17
+  &x1=longws(LOLongFreeWorkspace)
+  &list11(70)=x1 ; set up list17
+  v1=128 ; 2048 ; reserve space for list 17
+  gosub @MCReserveMemory
+
+ gosub @AllocateAndLoadFont
+ cif PC
+ gosub @AllocateMusic
+ cend
+
+ cif AllowMusic
+; and initialisation primarily for intro sequence...
+; reserve space for list19 - used for music files
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(76)=x1 ; set up list19
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(78)=x1 ; set up list19
+ v1=15000 ; reserve space for list 19 ***Excessive?
+ gosub @MCReserveMemory
+ cend
+
+; get address to load lists 4 & 5 after each restart
+  &List4HiLoadAddress=LongWS(HiLongFreeWorkSpace)
+  &List4LoLoadAddress=LongWS(LoLongFreeWorkSpace)
+; reserve space for both tables
+  v1=32000 ; total length list4 + list5 (*may need to change*)
+  gosub @MCReserveMemory
+
+  &x1=longws(HiLongFreeWorkspace)
+  &list11(64)=x1 ; set up list16 ( for maps )
+  &x1=longws(LOLongFreeWorkspace)
+  &list11(66)=x1 ; set up list16
+  v1=EndCache2 ; space for floor map cache.
+  gosub @MCReserveMemory
+
+  &x1=longws(HiLongFreeWorkspace)
+  &list11(24)=x1 ; set up list6 ; npctable workspace
+  &x1=longws(LOLongFreeWorkspace)
+  &list11(26)=x1 ; set up list6
+  v1=3500 ; 3000 should be enough, I think **** 
+  gosub @MCReserveMemory ; space for list6 - npccurrent/npcstack
+
+  &x1=longws(HiLongFreeWorkspace)
+  &list11(48)=x1 ; set up list12 - Hires()
+  &x1=longws(LOLongFreeWorkspace)
+  &list11(50)=x1 ; set up list12
+  v1=SizeHiresList ; reserve space for list 12 - hires x,z,h,acbPtr
+  gosub @MCReserveMemory
+
+; allocate list27 (map)
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(108)=x1 ; set up list27
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(110)=x1 ; set up list27
+ v1=1024 ; 4096 ; reserve space for list 27
+ gosub @MCReserveMemory
+
+; and set up list18 to point to the start of free memory -
+; used for transient stuff during loading
+ &x1=longws(HiLongFreeWorkspace)
+ &list11(72)=x1 ; set up list18
+ &x1=longws(LOLongFreeWorkspace)
+ &list11(74)=x1 ; set up list18
+
+ cif amiga
+;; subtract  5440 from pointer, so text printed into
+;; buffer will start at the real start of the buffer
+;; (i.e. text printed at text line 20-ish)
+;; -5440 is $FFFFEAC0
+; v1=18
+; v2=65535 ; high word
+; v3=60096 ; $eac0
+; gosub @MCAddToListPtr
+
+; subtract  6400 from pointer, so text printed into
+; buffer will start at the real start of the buffer
+; (i.e. text printed at text line 20-ish)
+; -6400 is $FFFFE700
+ v1=18
+ v2=65535 ; high word
+ v3=59136 ; $e700
+ gosub @MCAddToListPtr
+ v1=1600 ; 2560 ; size of text buffer on amiga
+ gosub @MCReserveMemory
+ return
+ cend ; amiga
+
+ cif ST
+; subtract 25600 from pointer, so text printed into
+; buffer will start at the real start of the buffer
+; (i.e. text printed at text line 20-ish)
+; -25600 is $FFFF9c00
+ v1=18
+ v2=65535 ; high word
+ v3=39936 ; $9c00
+ gosub @MCAddToListPtr
+
+; GRAHAM 16/1/90 - reserve screen mem + extra 4 lines for buffer
+; and another line for room description buffer
+;; v1=6400 ; size of text buffer on ST (visible area only)
+;; gosub @MCReserveMemory
+ v1=11520 ;12800 ; size of text buffer on ST
+ gosub @MCReserveMemory ; gosub, return
+
+ cend
+
+;cif NotPc
+; v1=32768 ; space for off-screen text buffer (need only
+;; be about 8K, enough for 6-8 text lines, but you'll
+;; have to change the text-writing ptrs etc.).
+; gosub @MCReserveMemory
+;cend
+
+ cif pc
+ v1=7000 ;************MIKE 10/5/90
+ gosub @MCRESERVEMEMORY ;****EXPERIMENTAL
+ cend
+
+ return
+;---
+.LoadGameStructures
+ v1=15 ; load list 15 (structureBuffer onwards)
+ x1=83 ; 's.dat'
+ v2=0 ; offset within list15
+ gosub @LoadFile ; gosub, return
+
+ v1=15 ; use list15, please
+ gosub @MCSetUpPtrs ; tell MC about ptrs
+ gosub @ReadObjectAreas ; read mincell, minraster, mincompressed
+ StartStructureBuffer=32
+ goto @AAEssentialInit ; gosub, return
+;-------
+.PreLoadALL
+ rasteroffset=640
+ gosub PreLoadPerson ; preload jarvis
+ rasteroffset=0
+ gosub PreLoadPerson ; preload player (sets up v2-v5)
+ v1=MenuBorderObject
+ gosub @MCDrawObjectV1 ; preload menu stuff
+ v1=MenuCGAblank
+ gosub @MCDrawObjectV1
+ v1=2410
+ gosub @MCDrawObjectV1 ; preload portrait border
+ gosub @MCPreLoadCells
+ v5=4 ; dSetProtect
+ goto PreLoadPersonV5
+;---
+; preload all walking frames for person with RasterOffet
+.PreLoadPerson
+ v2=0
+ v3=0
+ v4=0
+ v6=0 ; non-reversed
+ v5=dMarkPreload
+.PreLoadPersonV5
+ v1=1
+ &WordWS(WordRasterOffset)=RasterOffset
+.PersonPreLoadLoop
+ gosub @MCDrawObjectv1
+ add v1,c1
+ x1=50
+ if v1=9 then PreLoadNewRange
+ x1=100
+ if v1=59 then PreLoadNewRange
+ x1=150
+ if v1=109 then PreLoadNewRange
+ if v1=159 then PreloadPersonDone
+ goto PersonPreLoadLoop ; continue loading this person
+;
+.PreLoadNewRange
+ v1=x1
+ goto PersonPreLoadLoop ; continue loading this person
+;
+.PreloadPersonDone
+; raster offsets for portraits are spaced at
+; intervals of 10, not 100
+ x1=RasterOffset
+ x2=10
+ gosub @DivX1X2
+push RasterOffset
+ RasterOffset=x1 ; return value for caller as well
+ &WordWS(WordRasterOffset)=RasterOffset
+ v1=2300 ; basic portrait
+ gosub @MCDrawObjectV1 ; preload portrait
+pop RasterOffset
+ return
+;---
+; Initialise npc tables...
+.InitNPCTablesVec
+.InitNpcTables
+; clear entire table area...
+ x1=0
+ c1=1
+.clearall
+ npccurrent(x1)=c0
+ add x1,c1
+ if x1<npctablesizetozero then clearall
+;
+ gosub @initnpcs
+;
+; set up initial racetrack commands for npcs
+; which have them
+ actor=1
+.initracetrack1
+; now find pointer to initial racetrack for actor:
+ add actor,c1
+ x1=actor ; number of racetrack to activate
+;=====
+; add specific block of 12 racetracks per the murder (1-9)
+ x2=murder
+ x3=12
+.addmurderoffset
+ sub x2,c1
+ if x2<1 then gotmurderoffset
+ add x1,x3
+ goto addmurderoffset
+.gotmurderoffset
+;=====
+ gosub @initracetrackx1
+ if actor<maxnpc then initracetrack1
+;=====
+ object=jarvis
+ x6=110
+ gosub @newracetrackforobject ; special rt for jarvis while guests arrive
+;
+ gosub @ClearQStack
+;
+;=====
+return
+;---
+.initnpcs
+ x4=8 ; start of entry for user
+.initnpc2
+ x1=npcinitial(x4)
+ npccurrent(x4)=x1
+ add x4,c3 ; move on to hit point entry
+ x1=npcinitial(x4)
+ npccurrent(x4)=x1
+ x1=5 ; NpcEntrySize-HitPointOffset
+ add x4,x1
+ if x4<npctablesize then initnpc2
+; set up all entries to be on the free space chain
+ x1=npcstackbase ; (starting with dummy entry 0)
+ x2=npcstackentrysize
+ x3=1 ; entry number of NEXT entry
+.initnpcstack1
+ npcstack(x1)=x3 ; point to next entry in table
+ add x1,x2
+ add x3,c1
+ if x3<maxnpcentries then initnpcstack1
+ x1=npcstackbase
+ npcstack(x1)=c0 ; unlink demo pointer from chain 
+ freespaceptr=2 ; number of current stack entry
+; and set up pointers for npccurrent of the default
+; actions for each npc
+ ACTOR=1
+.ins1
+ gosub @setACTORATTRIBUTES
+ x1=npcptroffset
+ add x1,actorattributes
+ npccurrent(x1)=c0 ; default to no action
+ add ACTOR,c1
+ if ACTOR<maxnpcplus1 then ins1
+ return
+;---
+.initracetrackx1
+; init racetrack no. x1 for ACTOR
+ add x1,x1
+ add x1,startracetracks
+; now read hi+low bytes of pointer into noun1,2
+ noun1=list5(x1)
+ add x1,c1
+ noun2=list5(x1)
+; now set up npc to obey it, if non-zero
+ if noun1<>0 then initracetrack2
+ if noun2=0 then initracetrack3 ; both zero
+.initracetrack2
+ gosub @setACTORATTRIBUTES
+ verb=obeyracetrack
+ prep=0
+ gosub @singlepushfifo ; push onto normal command queue
+.initracetrack3
+ return
+;---
+.InitHiresCoords
+; initialise CurrentX,CurrentZ, CurrentH
+; for each object (a word per object)
+ object=0
+ x3=InitialHiresOffset ; within list4
+.IHCLoop
+ x4=object
+ add x4,x4 * 2
+
+ x1=ObjectStart(x4) ; hi pos
+ x2=15
+ and x1,x2 ; extract bits 0:3
+ hicurrentpos(object)=x1
+ push x4
+  add x4,c1
+  x1=ObjectStart(x4) ; lo pos
+  CurrentPos(object)=x1
+ pop x4
+
+ add x4,x4
+ add x4,x4
+ add x4,x4
+ add x4,x4
+ add x4,x4 ; *64
+
+ &x1=list4(x3) ; default graphical object
+ &Hires(x4)=x1
+ add x3,c2
+ add x4,c2
+
+ code -
+ x1=list4(x3) ; x coord
+ gosub @iMultX116 ; convert from cells to pixels
+;7JUL90 &Hires(x4)=x1 ; x,z,h of object
+;7JUL90 add x3,c1
+;7JUL90 add x4,c2
+ gosub @iWriteHiresWord
+
+ x1=list4(x3) ; z coord
+ gosub @iMultX116 ; convert from cells to pixels
+ code + ; 7JUL90
+ asr x1 ; GMJ 3/1/89 - now uses finer z accuracy
+ code - ; 7JUL90
+;7JUL90 &Hires(x4)=x1 ; x,z,h of object
+;7JUL90 add x3,c1
+;7JUL90 add x4,c2
+ gosub @iWriteHiresWord
+
+ x1=list4(x3) ; h coord
+ gosub @iMultX116 ; convert from cells to pixels
+;7JUL90 &Hires(x4)=x1 ; x,z,h of object
+;7JUL90 add x3,c1
+;7JUL90 add x4,c2
+ gosub @iWriteHiresWord
+
+ x1=list4(x3) ; x coord
+ gosub @iMultX116 ; convert from cells to pixels
+;7JUL90 &Hires(x4)=x1 ; x,z,h at which to stand
+;7JUL90 add x3,c1
+;7JUL90 add x4,c2
+ gosub @iWriteHiresWord
+
+ x1=list4(x3) ; z coord
+ gosub @iMultX116 ; convert from cells to pixels
+;7JUL90 &Hires(x4)=x1 ; x,z,h at which to stand
+;7JUL90 add x3,c1
+;7JUL90 add x4,c2
+ gosub @iWriteHiresWord
+
+ x1=list4(x3) ; h coord
+ gosub @iMultX116 ; convert from cells to pixels
+;7JUL90 &Hires(x4)=x1 ; x,z,h at which to stand
+;7JUL90 add x3,c1
+;7JUL90 add x4,c2
+ gosub @iWriteHiresWord
+
+ x1=list4(x3) ; facing direction
+ code +
+ &Hires(x4)=x1
+ add x3,c8 ; skip over redundant info.
+
+ add object,c1
+ if Object<MinRoomObject then @IHCLoop
+ return
+;---------
+ code -
+.iWriteHiresWord
+ code +
+ &Hires(x4)=x1 ; x,z,h at which to stand
+ code -
+ add x3,c1
+ add x4,c2
+ return
+
+.iMultX116
+; convert from cells to pixels
+ add x1,x1
+ add x1,x1
+ add x1,x1
+ add x1,x1
+ return
+
+ code +
+;---
+; Routines to return pointer to character 'OBJECT' data. Note that they 
+; rely on npcentrysize=16, so beware if you change this.
+.setACTORATTRIBUTES
+ ACTORATTRIBUTES=ACTOR
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+ ADD ACTORATTRIBUTES,ACTORATTRIBUTES
+.SOSret
+ RETURN
+;---
+.SpecialObjectStartVec
+.SpecialObjectStart
+ &x1=List4(76)
+.MoveObjectsFromList
+ x2=murder
+ sub x2,c1
+ add x2,x2
+ add x1,x2
+ &x1=List4(x1)
+.SOS1
+ object=List4(x1) ; get object
+ if object=0 then SOSRet ; end of table
+ add x1,c1
+ pos=List4(x1) ; get pos
+ add x1,c1
+ hipos=List4(x1) ; get hipos
+ add x1,c1
+
+; if HIPOS is a room object, then place within that object in 
+; the room specified by POS
+ if hipos<MinRoomObject then SOSnotInRoomObject
+ if hipos>MaxRoomObject then SOSnotInRoomObject
+ &v1=List4(44)
+ v2=object
+ add v2,v2
+ add v1,v2
+ List4(v1)=hipos ; room object
+ add v1,c1
+ List4(v1)=pos ; room number
+ goto SOSnext
+.SOSnotInRoomObject
+
+push x1
+ gosub @MoveObject
+pop x1
+
+.SOSnext
+ goto @SOS1
+;-------------------
+.singlepushfifo
+; do a complete fifo push, without the extra facility
+; of being able to give multiple commands which
+; are executed in the order they were given
+ gosub @initfifo
+ gosub npcpushfifo
+ goto @linkonfifocommandqueue
+;---
+.npcpushfifo
+; for npc ACTOR, add a new action to the end of its 'pending
+; action' queue, such that it will be the last to be executed.
+; i.e. FIFO
+;
+; find some free space
+ if lastunlinkedcommand=0 then npffirstcommand
+ x1=lastunlinkedcommand
+ gosub @npcgetoffset
+ npcstack(x1)=freespaceptr ; link on new command
+ if lastunlinkedcommand<highwater then npffirstcommand
+ highwater=lastunlinkedcommand
+
+.npffirstcommand
+ lastunlinkedcommand=freespaceptr
+
+; and push command in...
+; and make freespace ptr crawl along its linked list
+ x1=freespaceptr
+ gosub @npcgetoffset ; find npcstack offset in x1, from x1=number
+; now x1=position in npcstack of free space
+;
+ x3=npcstack(x1) ; move along freespace chain
+ if x3=0 then @npcpusherror ; no free space!
+ freespaceptr=x3
+; x1=offset in npcstack of new current command
+;
+ npcstack(x1)=c0 ; this is last command in chain
+ add x1,c1
+ npcstack(x1)=verb
+ add x1,c1
+ npcstack(x1)=prep
+ add x1,c1
+ npcstack(x1)=noun1
+ add x1,c1
+ npcstack(x1)=noun2
+ return
+;---
+.initfifo
+; initialise a temporary fifo chain
+; this is linked to the command queue for ACTOR when it has been
+; completed
+; This allows new commands to be added as the
+; next thing for the NPC to do, but
+; the block of commands given will be executed in the
+; order given
+ gosub @setACTORATTRIBUTES ; this maybe prevents bugs
+; GMJ 06/07/90 initfifoactor=actor
+ lastunlinkedcommand=0 ; pointer to block of last command given
+ commandstolink=freespaceptr ; pointer to first command given
+ return
+;---
+.npcgetcurrent
+; return x1=block for current action of ACTOR
+ x1=npcptroffset
+ add x1,ACTORATTRIBUTES
+ x1=npccurrent(x1)
+.npcgetoffset
+; given x1=number of stack entry
+; return x1=offset in npcstack 
+; and multiply by npcstackentrysize (5)
+ x2=x1
+ add x1,x1
+ add x1,x1
+ add x1,x2
+ x2=npcstackbase
+ add x1,x2
+;cif DebugCheat
+; return
+;cend
+.npcpusherror ; no free space left!
+;cif DebugCheat ;********************************* WHY HERE?
+;code -
+; prs "PUSH ERR "
+; print actor
+; message cr
+;code +
+;cend
+ return
+;---
+.linkonfifocommandqueue
+; link on the queue which has been built up.
+; The first command to be executed is at COMMANDSTOLINK
+; and the last is at lastunlinkedcommand
+ gosub @setACTORATTRIBUTES
+ if lastunlinkedcommand=0 then @lofcqret
+ x1=npcptroffset
+ add x1,ACTORATTRIBUTES
+ x4=npccurrent(x1)
+; now x4=number of current stack entry
+ npccurrent(x1)=commandstolink
+ x1=lastunlinkedcommand
+ gosub @npcgetoffset ; of number x1, returns in x1
+; now x1=offset in npcstack of last command to link
+ npcstack(x1)=x4 ; link to what used to be current actor command
+ lastunlinkedcommand=0
+.lofcqret
+ return
+;---
+.newracetrackforobject
+; start racetrack x6 for actor OBJECT
+push actor
+ actor=object ; replace its racetrack with a new one...
+ gosub @setACTORATTRIBUTES
+ gosub @stop ; kill existing racetrack
+ x1=x6 ; race track number to execute
+ gosub @initracetrackx1
+pop actor
+; fall through...
+;---
+;.resetactor
+ gosub @setACTORATTRIBUTES
+ goto @initfifo
+;---
+.ClearQStack
+ &x1=list4(24) ; recent questions stack
+code -
+ x2=TotalQStackSize
+.ClearQStack11
+ list4(x1)=c0 ; clear stack entry
+ add x1,c1
+ sub x2,c1
+ if x2<32000 then ClearQStack11
+code +
+ return
+;----
+.DivX1X2
+; x1:=x1/x2
+ x3=65535 ; result = 0 if x2>x1
+.DivLoop
+ add x3,c1
+ sub x1,x2
+ if x1<50000 then DivLoop
+ x1=x3
+ return
+;---
+.stop
+; cancel all ACTOR's current command queue
+ gosub @setACTORATTRIBUTES ; just in case!
+.stop1
+ gosub @npcpop
+ if x3<>0 then stop1 ; more to come
+; fall through to stopfollowing...
+;
+; Stop ACTOR following
+.StopFollowing
+ gosub @setACTORATTRIBUTES
+ x1=followoffset
+ add x1,actorattributes
+ npccurrent(x1)=c0 ; stop following
+ goto @ClearActorBusy ; free to do telepathic gosubs
+;---	
+.npcpop
+;
+; return x3=0 if pop error occured
+ gosub @npcgetcurrent
+ x2=npcstack(x1) ; number of command to execute after this one
+; and add this element as the current element in the free space chain
+ x4=npcptroffset
+ add x4,actorattributes
+ x3=npccurrent(x4)
+ if x3=0 then npcpoperror ; no current command on stack
+ npccurrent(x4)=x2 ; make element above it current action for npc
+;
+ npcstack(x1)=freespaceptr
+ freespaceptr=x3
+.npcpoperror
+ return
+;---
+.eptrue
+ executeprocessed=true
+ return
+;---
+.MoveObject
+ currentpos(Object)=pos
+ hicurrentpos(Object)=hipos
+ if object>MaxRoomObject then ClearROflag
+ x2=0
+ if object>79 then MORet
+.ClearROflag
+ &x1=list4(44) ; special objects table
+ add x1,object
+ add x1,object ; special position when contained in raster objects
+ x2=List4(x1) ; return x2 as previous room object
+ &List4(x1)=c0 ; clear the position
+.MORet
+ return
+;---
+; Clear flag for actor being busy after doing a telegosub 
+; so that he can be sent on another one (see .DoRtBusy)
+.ClearActorBusy
+ if actor=user then CABRet
+ &x2=List4(74)
+ add x2,actor
+ sub x2,c2 ; table starts with sue (npc #2)
+ x3=list4(x2)
+ x4=253
+ and x3,x4 ; mask out bit two only
+ list4(x2)=x3
+.CABRet
+ goto @EPtrue
+;---
+.LoadFile
+; load file with single char filename 'x1'.dat
+; at v2 bytes into listv1()
+; Set up filename...
+ gosub SetUpDotDat
+ goto @MCLoadFile ; and load it...
+;---
+.SetUpDotDat
+; filename 'x1'.dat
+ List17(8)=x1
+ x1=46 ; '.'
+ list17(9)=x1
+ x1=68 ; 'd'
+ list17(10)=x1
+ x1=65 ; 'a'
+ list17(11)=x1
+ x1=84 ; 't'
+ list17(12)=x1
+ list17(13)=c0 ; term
+ return
+;---
+

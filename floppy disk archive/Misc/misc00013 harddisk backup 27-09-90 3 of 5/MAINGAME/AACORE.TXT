@@ -1,0 +1,5235 @@
+; AAcore.txt
+;
+; M.J.Austin Nov/Dec 1988 Jan/Feb 1989.
+;
+; Copyright (C) 1988/1989 Level 9 Computing
+;
+;MCSetPalette call:
+; each colour has a word entry of the form:
+;  R G B EGA  (1 nybble per group) (high nybble first)
+; where EGA=RGBI (1 bit per letter)
+; Colours are ordered as given by Neochrome file header.
+;
+const
+ FullPC=0 ; set to 1 for cga support etc.
+ xRoomOffset=32 ; amount room is offset for display purposes
+ zRoomOffset=32
+ UserOffset=0 ; player uses a later person.
+;
+ MovingAnimation=2700 ; base for moving in given direction
+ MaxMovingAnimation=2709 ; max moving animations
+ RunningAnimation=3050
+ MaxRunningAnimation=3059
+ StandingAnimation=2710 ; stopped series.
+ MaxStandingAnimation=2719
+ WalkingSouth=2705 ; animated person, walking south.
+ StandingSouthAnimation=2715 ; animated person standing still, facing south
+;
+ SitNoCrouchAnimation=3200
+ MaxSitNoCrouchAniP1=3210
+ NewSitAnimation=3390 ; 3200
+ NewMaxSitAnimationP1=3400 ; 3210
+ ReadAnimation=2780
+ MaxReadAnimationP1=2790
+ SitSouthAnimation=3205
+ UpStairsAnimation=2800 ; man climbing stairs
+ DownStairsAnimation=2802 ; man descending stairs
+ ReachLeftAnimation=2720 ; reach with left hand
+ ReachRightAnimation=2730 ; reach with right hand
+ ReachUpAnimation=2750 ; reach up
+ ReachDownAnimation=2760 ; reach down
+ MaxReachUDanimation=2769
+ StandUpAnimation=2770 ; stand up
+ maxStandUpAnimation=2779 ; stand up
+ EatingAni=2790
+ PickUpPhone=2940
+ DropPhone=2942
+ HideAnimation=0
+ ShrugAni=3220
+ JarvisMovingTrayAni=3230 ; no rasteroffset
+ MaxJarvisMovingTrayAni=3239
+ JarvisStandingTrayAni=3240 ; no rasteroffset
+ MaxJarvisStandingTrayAni=3249
+ JarvisWalkSouthTray=3235
+ JarvisStandSouthTray=3245
+ MenPunchLeftAni=3263
+ MenPunchRightAni=3262
+ MenAdjustTie=3258
+ SamGunAni=3265
+ SamFiresGunAni=3267
+ SamFallsDownAni=3269
+ SamBlowsNoseAni=3272
+ SamUsesPerfumeAni=3273
+ SamWashHandsAni=3275 ; east only?
+ SamDryHandsAni=3280 ; east only?
+ KathyLoungingAni=3286 ; no rasteroffset
+ AnthonyLoungingAni=3288 ; no rasteroffset
+ StandLookLeftAni=3250
+ StandLookRightAni=3252
+ WomenUseLipstick=2821 ; sitting
+ MenCombHair=2826
+ AnthonyPolishMonacle=2833
+ SitSpeak=3130
+ SitReachUp=3140
+ SitReach=3150
+ MaxSitReach=3159
+ ReadNewspaper=3370
+ SitDrink=3380
+ MaxSitDrink=3390
+
+ MaxAnimations=710 ; Last ani sequence (3400) - 2690
+
+ FallingBlock=3485
+ FallingPudding=3486
+
+begin
+code +
+.Start3D
+.OverlayEntryPoint
+
+; *** BUG ON PC CAUSES OVERLAYENTRYPOINT TO BE EXECUTED 
+; *** DURING THE GAME
+code -
+ STACK ; RESET STACK
+code +
+ if NPCloopTimer<>0 then GameLoop ; SKIP INITIALISATION
+
+ papercol=1 ; clear rasters to white
+ inkcol=7 ; text colour
+ gosub @AAEssentialInit
+ gosub @initfloorsVec
+ gosub @DisplayRoom
+ gosub @EnterNewRoom ; do first time in room message (at present, ST only)
+ NextMusic=30 ; default - kitchen music (pointer in IntroTables)
+
+.GameLoopNewRoom
+ room=currentuserroom
+ ACBHeader=PlayerACB
+ gosub @DoLeavingAni ; do leaving animation
+ WantNewRoom=false
+ gosub @ClearKBDVec ; clear keyboard buffer
+
+.GameLoop
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=c0
+ descriptionmode=normaldescriptionmode
+ gosub @GetInput
+ gosub @ControlPlayer
+ gosub @HandleMasonry
+ gosub @BuildAndDisplayFrame
+
+ if WantNewRoom=0 then GameLoopNotNewRoom
+ actor=user
+ gosub @SetUpRoomVec
+ goto @GameLoopNewRoom
+.GameLoopNotNewRoom
+ x1=15
+ and x1,GameLoopTimer
+ if x1=0 then @DoneFullCycle
+ if x1>MaxNpc then @Game1
+ actor=x1
+ gosub @ControlPeopleVec
+ goto Game1
+;
+.DoneFullCycle
+ add NpcLoopTimer,c1 ; npc actions timer
+.Game1
+;
+ gosub @incrementtime
+ gosub @timepressure
+ x1=15
+ and x1,GameLoopTimer
+ if x1<>15 then Game2 ; GMJ 9jul90 ; x1<>0
+; shunt up all entries in evidence buffer,  to scrap old entries after 
+; a period of time. 
+ gosub @ShuntEBuffer
+ gosub @TriggerMasonry ; trigger falling masonry
+;
+.Game2
+ gosub @DoSubGame ; any sub-games waiting?
+;
+ add GameLoopTimer,c1 ; overall game timer
+ if WantMenu=True then @RequestMenu
+ if Samunconcious<>false then @SamIsUnconcious
+ if shownewtime<>true then @GameLoop
+ gosub @printroom
+ shownewtime=false
+ goto @GameLoop
+;---
+; Handle falling masonry
+.HandleMasonry
+ if MasonryHit=0 then @HMret ; anything hit sam?
+ if currentuserroom<>47 then @HMret ; not at front of house
+ ACBHeader=PlayerACB
+ ObjectNumber=3270 ; sam falls down
+ x1=ACBxOffset
+ add x1,ACBHeader
+ &dv2=ACBList(x1) ; player x
+ add dv2,c16
+ add dv2,c16 ; make sure the masonry it hit's him in the face
+ add x1,c2
+ &dv3=ACBList(x1) ; player x
+ add x1,c2
+ &dv4=ACBList(x1) ; player x
+ dv5=dInsertRedraw
+ dv6=0
+ gosub @ShowNewPerson
+ m1=2899 ; sam hit by masonry
+ gosub @DoTextWindow
+ sFrames=16
+ gosub @BADFsFrames ; allow masonry to fall & explode
+ MasonryHit=0
+ goto @LoseSubGame ; pass time & set-knock out
+.HMret
+ return
+;---
+; Trigger any falling masonry?
+.TriggerMasonry
+ if SamUnconcious<>false then HMRet
+ if vMurderBeenDone=false then HMRet
+ if currentuserroom<>47 then HMret
+;
+code -
+ random x1
+code +
+ if x1>63 then HMret
+;
+; is room empty, except for player?
+ gosub @SIsRoomEmptyExceptUserV
+ if result=false then HMret
+ ACBHeader=PlayerACB ; fall on Sam
+;
+; Start masonry falling on ACBHeader
+.StartMasonryFalling
+ x1=ACBxOffset
+ add x1,ACBHeader
+ &dv2=ACBList(x1) ; player x
+ add x1,c2
+ &dv3=ACBList(x1) ; player z
+ dv4=32 ; just above screen
+ x1=0
+ if ACBHeader<>PlayerACB then NotAimPlayer
+ x1=GraphicsDir
+.NotAimPlayer
+;
+; Add, subtract X pos in the line of the player's movement
+ x2=80 ; to the right
+ if x1=3 then AdjustMasonryXpos
+ x2=65456 ; -32 to the left
+ if x1=7 then AdjustMasonryXpos
+ x2=0 ; above player
+.AdjustMasonryXpos
+ add x2,dv2 ; x2 is new z pos of block
+ if x2<32000 then MasonryNotOffLeft
+ x2=0 ; masonry was off left of screen
+ goto SetMasonryFalling
+.MasonryNotOffLeft
+ if x2<300 then SetMasonryFalling
+ x2=300 ; masonry was off right of screen
+;
+.SetMasonryFalling
+ x1=NpcLoopTimer ; general loop timer
+ and x1,c1 ; 0 or 1
+ dv1=FallingBlock
+ add dv1,x1 ; Falling block, or Christmas pudding
+ dv2=x2 ; set adjusted x
+ dv5=dInsertRedraw
+ MasonryHit=0 ; flag for Masonry hiting sam
+ goto @SetUpACBDv1
+;---
+; Sam is 'knocked out' by the murderer, so do a 'fast forward' 
+; until the murder is complete, leaving sam to wake up beside 
+; the dead body!
+.SamIsUnconcious
+ climbingstairs=false
+ gosub @CancelExecute ; kill any user GDs
+ m1=2890
+ add m1,SamUnconcious
+ gosub @DoTextWindow ; show 'knocked out' message
+ gosub @BuildAndDisplayFrame
+ TextBoxDisplayed=0
+push currentuserroom
+;
+ x1=0 ; counter for "skip" mode
+.SamIsUnconcious1
+push x1
+ currentuserroom=1
+ currentpos(user)=c1 ; involvednpc3 may be in room 0, hence use room 1
+ gosub @IncrementTime
+ add GameLoopTimer,c1 ; increment game loop timer
+ x1=15
+ and x1,GameLoopTimer
+ if x1=0 then DDoneFullCycle
+ if x1>MaxNpc then DGame1
+ actor=x1
+ gosub @ControlPeopleVec
+ goto DGame1
+.DDoneFullCycle
+ add NpcLoopTimer,c1 ; npc actions timer
+.DGame1
+pop x1
+ if SamUnconcious=3 then SIUSkip ; used in "skip" mode
+ if VmurderBeenDone=false then SamIsUnconcious1
+ if SamUnconcious=2 then WakeUpInOldRoom
+ goto WakeUpInMurderRoom
+;
+; Handle the option to "skip" a few minutes
+.SIUSkip
+ add x1,c1 ; increment "skip" timer
+; 10 mins = 10 * 30 iterations per min
+ if x1<300 then @SamIsUnconcious1
+;
+; we've voluntarily skipped to after the murder, so resume the 
+; existing room
+.WakeUpInOldRoom
+pop x1
+push x1
+ gosub @isroomx1involvedVEC
+ if result=true then @SamIsUnconcious1 ; not safe to wake up yet!
+pop x1
+ currentuserroom=x1
+ currentpos(user)=currentuserroom
+ room=currentuserroom
+ goto @SamIsAwake
+;
+; sam wakes up in the murder room after being knocked out
+; initialise new room
+.WakeUpInMurderRoom
+;
+; in murder 2, where clifford is thrown out of the window, don't 
+; wake sam up until clifford's body has been dragged to the shed
+ if murder<>2 then NotWakeUpM2
+ if vReadyForMurder<>false then @SamIsUnconcious1
+.NotWakeUpM2
+;
+ x1=currentpos(involvednpc1) ; room of victim
+ gosub @isroomx1involvedVEC
+ if result=true then @SamIsUnconcious1 ; not safe to wake up yet!
+pop x5
+;
+; in murder 5, if no ridge walk, always wake up in green bedroom, 
+; as so many people are killed
+ if murder=5 then WakeBlueRoom
+;
+; is anyone else in murder room?
+ room=x1
+ actor=involvednpc1 ; fool SIsRoomEm.. into not checking for the body
+push x5
+ gosub @SIsRoomEmptyExceptUserV
+pop x5
+ actor=user
+ if result=true then OkWokenUp ; wake up in murder room
+ room=x5
+ gosub @SIsRoomEmptyExceptUserV ; wake up in room we were knocked out
+ if result=true then OkWokenUp
+.WakeBlueRoom
+ room=90 ; wake up in blue bedroom (usually empty)
+;
+.OkWokenUp
+ currentuserroom=room
+ currentpos(user)=currentuserroom
+ VSamKnowsAboutMurder=true
+ x1=3270
+ &Hires(PlayerACB)=x1
+;
+.SamIsAwake
+ actor=user
+ gosub @DisplayRoom ; show room with normal palette
+ gosub @EnterNewRoom ; do first time in room message (at present, ST only)
+ SamUnconcious=false
+ goto @GameLoop
+;---
+; Request menu
+.RequestMenu
+ if climbingstairs=user then @GameLoop ; prevent bug
+ gosub @RemovePortrait ; kill any talking portraits
+ gosub @BuildAndDisplayFrame
+;;&& gosub @MCCopyScreenToBuffer ; save room image to speed things up
+;;&& gosub @InitACBs ; kill animations
+;;&& gosub @MCDisplayRoom
+;
+ actor=user
+ gosub @SetActorAttributesVec
+ WantMenu=false
+ verb=0
+ noun1=NullObject
+ ACBStart=ACBSearchStart ; NumNPC*ACBSize Don't animate people
+ CurrentReadingPage=19 ; start at end of notepad if we start reading it
+ gosub @MenuVec
+ ACBStart=0 ; BuildAndDisplay screen as normal
+ if verb=0 then @NpcNotMenu ; no menu command been set up
+ actor=user ; just in case we've changed it!
+ gosub @stopVec1 ; player can only execute one command at a time
+ gosub @singlepushfifoVEC ; command been set up, so bung it on the stack
+; verb=0 ; clear command now that it's on the stack
+;
+ x1=ACBStatus
+ add x1,PlayerACB
+ ACBList(x1)=c0 ; make sure player hasn't "justarrived"
+;
+ executingcommand=true ; set flag while command being executed
+ keypaddirection=0
+ LastRequestedDirection=0
+ GameLoopTimer=0 ; user has next turn!
+;
+.npcNotMenu
+;;&& gosub @DisplayRoom ; re-init acbs we killed on entry to menu
+ goto @GameLoop
+;---
+.DisplayRoom
+ gosub @RemovePortrait ; kill any talking portraits
+;7JUL90 ViewMapBuilt=false
+ gosub @ClearExits
+ gosub @MCEmptyRoom ; emptyroom.
+ gosub @InitACBs
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=c0
+
+cif PC
+ &v1=List4(48)		;2 and 4 colour palettes
+ add v1,CurrentUserRoom
+ v1=List4(V1)		;Select palette number, 1=inside, 2=outside 
+ gosub @MCsetPreloadPalette
+cend
+
+ dv1=400
+ add dv1,CurrentUserRoom
+ gosub @FCnewRoomDv1VEC
+ dv2=0
+ dv3=0
+ dv4=0
+ dv6=0
+ dv5=dMarkPreload
+ gosub @DrawObjectdv1
+
+cif PC
+ push dv2
+ v1=3			;Preload 'wall paintings' palette #3
+ gosub @MCsetPreloadPalette
+ v1=1780		;'paintings' rasters
+ dv2=1785
+ gosub @SetCGApalette
+ pop dv2
+cend
+
+ push dv1 ; room number
+  v7=dMarkPreload
+  object=MaxNpcPlus1
+  gosub @DisplayAllObjects
+  gosub @MCPreLoadCells
+ 
+  gosub @InitACBs
+ pop dv1 ; room object number
+ dv2=0
+ dv3=0
+ dv4=0
+ dv6=0
+ dv5=dInsert	;insert into structure.
+ gosub @DrawObjectdv1
+
+cif PC
+ v1=65535	;turn off 2/4-colour palette setting
+ gosub @MCsetPreloadPalette
+cend
+
+ v7=dInsert
+ object=1
+ gosub @DisplayAllObjects
+
+ gosub @MCBuildRoomVec
+ gosub @PositionPlayer
+ NewPalettePlease=true
+ goto @PrintRoom
+;---
+.PositionPlayer
+ dir=UserDirection
+ actor=user
+ object=actor
+ room=currentuserroom
+ ACBHeader=PlayerACB
+ return
+;---
+;.DisplayTitleScreen
+;cif PC
+;;On the PC clearing the screen has limited effect because
+;;on the presence of BufferScreen2 and the TextBuffer
+; gosub @ClearTextWindow
+;; v1=0
+;;.ClearTextBuffer
+;; gosub @MCClearTextBuffer ;Clear top text line (buffer 2)
+;; add v1,c8
+;; if v1<IBMTextLimit then ClearTextBuffer
+;cend
+;
+; gosub @MCClearScreen ; maybe the PC wants this to eliminate garbage????******
+;; dv1=9 ; farleigh picture
+;; gosub @PreLoadAndInsertdv1
+;
+; dv1=MinCell
+; gosub @PreLoadAndInsertdv1 ; the other option to fix the pc ****...
+;
+; gosub @MCBuildViewMap
+; dx1=200
+; gosub @StepOnAnimationdx1
+; ViewMapBuilt=true
+; LoadingSequence=true
+; return
+;;---
+;.StepOnAnimationdx1
+; push dx1
+;  gosub @DisplayACBs
+;  dv5=dMarkPreload
+;  gosub @SortAndDisplaydv5
+; pop dx1
+; sub dx1,c1
+; if dx1>0 then StepOnAnimationdx1
+; gosub @MCPreloadCells
+; return
+;---
+.WaitKey
+; gosub @AcodeScheduler
+ gosub @MCOsrdch
+ if v2=16 then @CloseDown ; 'Q'
+ if v1=0 then WaitKey
+.ExtraTask
+ return
+;---
+.SetNewPalette ;*nick 4/9/89... 
+; if NewPalettePlease=0 then dontsetpalette
+ v1=4 ; palette is in list 4
+ &v2=list4(16) ; get palette number to use for room
+ add v2,CurrentUserRoom
+ x1=list4(v2) ; x1=palette number
+ &v2=list4(14) ; start of palette pointers
+ add x1,x1 ; word-based table
+ add v2,x1
+ &v2=list4(v2) ; get offset in list4 of palette info for this room
+ v3=16
+ gosub @MCSetPalette
+ NewPalettePlease=0
+;.dontsetpalette
+ return
+;---
+
+;Set up PC two and four colour palettes.
+
+;At runtime EGA and VGA drivers ignore MCsetPalette without V3=16
+;CGA 2 colour defaults until called with V3=2
+;CGA 4 colour defaults until called with V3=4
+
+cif PC
+.SetIBMreducedPalettes
+cif FullPC
+ v1=4		;palette is in list 4
+ v3=2		;number of colours
+ &v2=list4(48)	;2 and 4 colour palette
+ v4=100
+ add v2,v4
+ v4=0		;palette number: 0=default
+ gosub @MCSetPalette
+ v4=16
+ add v2,v4
+ v4=1		;palette number: 1=inside rooms
+ gosub @MCSetPalette
+ v4=16
+ add v2,v4
+ v4=2		;palette number: 2=outside
+ gosub @MCSetPalette
+ v4=16
+ add v2,v4
+ v4=3		;palette number: 3=people/portaits
+ gosub @MCSetPalette
+
+ v3=4		;...and do 4-colour palettes
+ v4=16
+ add v2,v4
+ v4=0		;palette number: 0=default
+ gosub @MCSetPalette
+ v4=16
+ add v2,v4
+ v4=1		;palette number: 1=inside rooms
+ gosub @MCSetPalette
+ v4=16
+ add v2,v4
+ v4=2		;palette number: 2=outside
+ gosub @MCSetPalette
+ v4=16
+ add v2,v4
+ v4=3		;palette number: 3=people/portaits
+ gosub @MCSetPalette
+
+ v1=3			;Preload people and portraits as palette #3
+ gosub @MCsetPreloadPalette
+
+ v1=500			;people rasters
+ dv2=1599
+ gosub @SetCGApalette
+ v1=2300		;portrait rasters
+ dv2=2440
+ gosub @SetCGApalette
+
+ v1=65535		;Turn off palette setting
+ gosub @MCsetPreLoadPalette
+ return
+ cend ; FUllPC
+
+.SetCGApalette		;v1=first raster. dv2=last raster
+ cif FullPC
+ if v1>dv2 then SCP2
+ v5=dSetpalette
+ gosub @MCdrawobjectV1
+ add v1,c1
+ goto SetCGApalette
+.SCP2
+ cend ; FullPC
+ return
+
+cend
+
+;---
+.DisplayBackdrop
+ v3=19 ; normally write to non-displayed buffer
+
+.DisplayBackdropV3
+cif NotPC
+; gosub @SuspendTaskSwap
+ push v1
+ push v2
+ push v4
+ push v5
+
+ &bx1=WordWS(WordCursorXPos)
+ push bx1
+ &bx1=WordWS(WordCursorYPos)
+ push bx1
+
+ &WordWS(WordCursorXPos)=c0
+ &WordWS(WordCursorYPos)=c0
+
+cif Amiga
+ v1=19 ; logical base in list 19
+ v2=20 ; physical base in list 20
+ gosub @MCCalcScreenAddress ; get List19 as start of screen
+ v1=18 ; source for copy is list18
+ v2=6400 ; 5440 ; 21760 ; offset within list18.
+ v3=19 ; destination list
+ v4=6400 ; 5440 ; 21760 ; offset within dest list. 0 for full screen
+ v5=800 ; 1280 ; 5120 ; no. of words to copy. 16000 for full screen
+ gosub @MCCopy
+ goto DBCommon
+cend
+
+cif ST
+ v1=19 ; logical base in list 19
+ v2=20 ; physical base in list 20
+ gosub @MCCalcScreenAddress ; get List19 as start of screen
+ code -
+  v1=18 ; source for copy is list18
+  v2=25600 ; offset within list18.
+  v3=19 ; destination list
+  v4=25600 ; offset within dest list. 0 for full screen
+  v5=3200 ; no. of words to copy. 16000 for full screen
+ code +
+ gosub @MCCopy
+cend
+
+.DBCommon
+ pop bx1
+ &WordWS(WordCursorYPos)=bx1
+ pop bx1
+ &WordWS(WordCursorXPos)=bx1
+
+ pop v5
+ pop v4
+ pop v2
+ pop v1
+; gosub @ResumeTaskSwap
+.DontClearScreen
+
+cend
+.DRTRet
+ return
+;---
+.LoadFile
+; load file with single char filename 'x1'.dat
+; at v2 bytes into listv1()
+; Set up filename...
+ gosub SetUpDotDat
+ goto @MCLoadFile ; and load it...
+;---
+.SetUpDotDat
+; filename 'x1'.dat
+ List17(8)=x1
+ x1=46 ; '.'
+ list17(9)=x1
+ x1=68 ; 'd'
+ list17(10)=x1
+ x1=65 ; 'a'
+ list17(11)=x1
+ x1=84 ; 't'
+ list17(12)=x1
+ list17(13)=c0 ; term
+ return
+;---
+.VBL
+ add IBMFramesSinceVBL,c1 ; frame limiter
+ return
+;-----
+.DisplayFrame
+ gosub @SetUpTextPtr
+ ByteWS(ByteFrameReadyFlag)=c1
+ return
+;------
+; wait for frame to be displayed
+.WaitForFrame
+
+;cif PC ;8086 processors dont need limiting, but 80286,80386 do...
+;VBL is 50hz non-scrolling, VBL is frame rate (60/70 hz) scrolling...
+; 3 ( IBMFramesSinceVBL<2 ) gives 16   fps (50hz) or 23   fps (70hz)
+; 4 ( IBMFramesSinceVBL<3 ) gives 12.5 fps (50hz) or 17.5 fps (70hz)
+ bx1=IBMFrameLimit
+ add bx1,bx1 ; ST=twice as slow GMJ 7jul90
+cif PC
+ add bx1,bx1 ; PC=four times as slow GMJ 7jul90
+cend
+ if IBMFramesSinceVBL<bx1 then WaitForFrame
+ IBMFramesSinceVBL=c0
+
+cif NotPc ; don't wait on pc.
+ bx1=ByteWS(ByteFrameReadyFlag)
+ if bx1<>0 then WaitForFrame
+cend
+ return
+;----
+;.CalcPixelMask
+;; calculate vblX3 as mask for pixel x horizontally along in cell
+; X1=x
+; X2=16
+; gosub @ModX1X2
+; cif st
+;.CalcPiXelMaskvblX1
+; vblX3=32768
+; if vblX1=0 then @WP1
+; vblX3=16384
+; if vblX1=1 then @WP1
+; vblX3=8192
+; if vblX1=2 then @WP1
+; vblX3=4096
+; if vblX1=3 then @WP1
+; vblX3=2048
+; if vblX1=4 then @WP1
+; vblX3=1024
+; if vblX1=5 then @WP1
+; vblX3=512
+; if vblX1=6 then @WP1
+; vblX3=256
+; if vblX1=7 then @WP1
+; vblX3=128
+; if vblX1=8 then @WP1
+; vblX3=64
+; if vblX1=9 then @WP1
+; vblX3=32
+; if vblX1=10 then @WP1
+; vblX3=16
+; if vblX1=11 then @WP1
+; vblX3=8
+; if vblX1=12 then @WP1
+; vblX3=4
+; if vblX1=13 then WP1
+; vblX3=2
+; if vblX1=14 then WP1
+; vblX3=1
+;;; if x=15 then WP1
+;.WP1
+;.EBRet
+; return 
+; cend
+;----
+.DivX1X2
+; x1:=x1/x2
+ x3=65535 ; result = 0 if x2>x1
+.DivLoop
+ add x3,c1
+ sub x1,x2
+ if x1<50000 then DivLoop
+ x1=x3
+ return
+;---
+.AAEssentialInit
+; things which must be initialised after clear etc.
+ c1=1
+ c2=2
+ c3=3
+ c4=4
+ c8=8
+ c16=16
+ c32=32
+ ACBStart=0 ; Start in ACB list
+ return
+;---
+; read joystick status, and if no joystick movement, then emulate 
+; joystick bits with any mouse movements...
+; On exit, result=1 for joystick, 2 for mouse, 0 neither
+.ReadJoystickMouse
+; read joystick first
+ x3=ByteJoystickStatus
+ JoyStickStatus=ByteWS(x3) ; JoyStickStatus=bytews(bytejoystickstatus)
+ if joystickstatus=0 then joysticknotmoved1 ; joystick moved?
+ result=1
+ return ; yes!
+;
+; emulate joystick status with mouse movements if joystick 
+; hasn't been moved
+.joysticknotmoved1
+ &MouseX=wordws(wordmousexdistance)
+ &MouseY=wordws(wordmouseydistance)
+;
+; work out which is greastest distance, mousex or mousey...
+ v1=mousex
+ if v1<32000 then absmousex
+ v1=0
+ sub v1,mousex ; get abs distance
+.absmousex
+ v2=mousey
+ if v2<32000 then absmousey
+ v2=0
+ sub v2,mousey ; get abs distance
+.absmousey
+ if v2>v1 then notmouselr ; u/d is greatest distance moved
+;
+ if mousex<32000 then mouseright
+ joystickstatus=4
+ if mousex<MinMouseNEG then @joystickmoved ; moved at least 4 left?
+ goto notmouselr
+.mouseright
+ joystickstatus=8
+ if mousex>MinMousePOS then @joystickmoved ; moved at least 4 right?
+.notmouselr
+ if mousey<32000 then mousedown
+ joystickstatus=1
+ if mousey<MinMouseNEG then joystickmoved ; moved at least 4 up?
+ goto joysticknotmoved
+.mousedown
+ joystickstatus=2
+ if mousey>MinMousePOS then joystickmoved ; moved at least 4 down?
+;
+; neither joystick nor mouse has been moved
+.joysticknotmoved
+ joystickstatus=0
+ result=0
+ return
+;
+.joystickmoved
+; reset mouse distance counters if we've made a move
+ &wordws(wordmousexdistance)=c0
+ &wordws(wordmouseydistance)=c0
+ result=2
+ return
+;---
+.GetInput
+; KeyPadDirection contains the last keypad key pressed, so as 
+; to continue movement without keeping the key pressed.
+; if, however, the player is stationary, then we must clear 
+; the KeyPadDirection (done here because it saves having to 
+; do it in the numerous parts of the code which stop the player)
+
+ if executingcommand<>false then @keymoved
+ if executingracetrack<>false then @keymoved
+
+ &x1=ACBList(PlayerACB)
+ if x1<MovingAnimation then GIPlayerStill
+ if x1<MaxMovingAnimation then GIPlayerNotStill ; walking
+; can't be running under manual control
+; if x1<RunningAnimation then GIPlayerStill
+; if x1<MaxRunningAnimation then GIPlayerNotStill ; running
+.GIPlayerStill
+ keypaddirection=0
+.GIPlayerNotStill
+;
+; read any mouse or joystick movements into JoyStickStatus
+ minmousePOS=4 ; distance mouse must move to register
+ minmouseNEG=65532
+ gosub @ReadJoystickMouse
+; now, we treat mouse as keypad, so that we don't have to move the 
+; mouse again until we wish to change direction. This saves on desk 
+; space!
+ code -
+ if result<>2 then notmovedmouse
+ code +
+ gosub @EmulatekeypadVec
+ code -
+; if mouse is moved in reverse direction to the direction 
+; we're currently moving, then stop player...
+ if hikey<>104 then nomouseup1 ; want to move up
+ if keypaddirection=110 then stopmouse ; currently moving down
+.nomouseup1
+ if hikey<>110 then nomousedown1 ; want to move down
+ if keypaddirection=104 then stopmouse ; currently moving up
+.nomousedown1
+ if hikey<>106 then nomouseleft1 ; want to move left
+ if keypaddirection=108 then stopmouse ; currently moving right
+.nomouseleft1
+ if hikey<>108 then nomouseright1 ; want to move right
+ if keypaddirection=106 then stopmouse ; currently moving left
+.nomouseright1
+ KeyPadDirection=Hikey
+ joystickstatus=0
+
+.notmovedmouse
+ if joystickstatus<>0 then GIJoyStickMoved
+;
+; mouse/joystick not moved
+ if keypaddirection<>0 then @ikeymoved
+; stop moving on the condition that the joystick is steady AND 
+; we didn't move using the keyboard last time (player keeps 
+; moving when keys are released, but not with joystick)
+.stopmouse
+ x1=ACBStatus
+ add x1,PlayerACB
+ x1=ACBList(x1)
+ if x1<>0 then ikeymoved
+ keypaddirection=107
+ goto ikeymoved ; we may switch to keypad
+;
+.GIjoystickmoved
+; if player is aligning himself to climb stairs, then ignore the 
+; joystick, which would normally cancel any GD movements...
+
+ x1=ACBStatus
+ add x1,PlayerACB
+ x1=ACBList(x1)
+ if x1<>2 then jsNotStairs
+ joystickstatus=0
+ goto ikeymoved
+.jsNotStairs
+ keypaddirection=0 ; last move used joystick, not keyboard
+ v3=192
+code +
+ and v3,joystickstatus
+ if v3<>0 then BADFToMenu ; joystick/mouse fire
+ return
+
+code -
+.ikeymoved
+; read keyboard status
+ code +
+.keymoved
+ gosub @IntelligentKeyScanVec ;***** MCOsrdch
+
+.BADFGotKey
+ if v2<>107 then NotRepeatStop
+ ACBHeader=PlayerACB
+ gosub @getdirx1
+ if x1>8 then BADFToMenu ; pressed '5' when already stopped
+.NotRepeatStop
+ if v1=1 then BADFToMenu
+ if v1<>32 then BADFNotMenu
+.BADFToMenu
+ if executingracetrack=true then @GFNNext ; GMJ 15/05/90 sam seduced
+ WantMenu=true ; indicate to ContinousNpcActions to do a menu.
+ goto @GFNNext
+
+.BADFNotMenu
+; was:  if v2<100 then BADFNotKeyPad ; v2=hikey
+ if v2=0 then BADFNotKeyPad
+ if v2<71 then BADFNotKeyPad ; v2=hikey
+ KeyPadDirection=v2 ; pass across to ControlPlayer in graphics task.
+ goto @GFNNext
+
+.BADFNotKeyPad
+ if v2=16 then CloseDown ;'Q'
+ goto @GFNNext
+
+.CloseDown
+; gosub @SuspendTaskSwap
+;7JUL90 vblInitialised=false
+ goto @MCCloseDown
+
+.GFNNext
+ return
+
+;; input line disabled at the present...
+; if v1<>8 then NoBackSpace
+; if InputPos<9 then NoBackSpace
+; sub InputPos,c1
+; &InputX1=WordWS(WordCursorXPos)
+; InputX2=8
+; sub InputX1,InputX2
+; &WordWS(WordCursorXPos)=InputX1
+; goto @gfnNext
+;
+;.NoBackSpace
+; if v1=13 then @GFNCr
+; if v1<32 then @gfnNext ; unrecognized control code
+; list17(InputPos)=v1
+;
+; gosub @MCoswrchV1
+; add InputPos,c1
+; goto @gfnNext
+;
+;.GFNCr
+; pop v2
+; pop v1
+; &WordWS(WordSuspendTaskSwap)=c0 ; resume task swapping ** naughty!
+; gosub @AcodeScheduler ; force a task swap
+;
+; list17(InputPos)=c0
+;code -
+; message cr ; do cr, tell acode+scroll screen.
+;code +
+; &InputX4=WordWS(WordCursorXPos)
+; if InputX4<>0 then DoCr ; acode didn't know to do a cr
+; return
+
+;------------------------Handle CR routine------------------------
+
+; scroll until bottom line is clear
+.FullScroll
+ gosub @DoScroll
+ &crx1=WordWs(WordCursorYPos)
+ if crx1>192 then FullScroll
+ return
+
+.DoCr
+ &WordWS(WordCursorXPos)=LeftMargin
+ &crx1=WordWs(WordCursorYPos)
+ add crx1,c8
+ &WordWS(WordCursorYPos)=crx1
+; fall through to scroll routine...
+
+.DoScroll
+ &crx1=WordWs(WordCursorYPos) ; (because called from elsewhere)
+ if crx1<193 then @DoCROk ; no need for scroll
+ if SuspendScroll=true then @DoCrOk
+
+ cif NotPC
+;
+; if extra-screen buffer is full, then 
+; scroll until bottom line of buffer is clear
+.ClearScrollBuffer
+ if crx1<224 then ScrollPixLine ; else scroll screen one pixel
+ gosub ScrollPixLine
+ goto ClearScrollBuffer
+
+.ScrollPixLine
+ cend ; NotPC
+
+; gosub @SuspendTaskSwap
+ push v1
+ push v2
+ push v3
+ push v4
+ push v5
+
+ cif NotPC
+ sub crx1,c1 ; st & amiga scroll 1 pixel line
+ cend
+
+ cif PC
+ sub crx1,c8 ; pc scrolls 8 pixel lines
+ cend
+
+ &WordWS(WordCursorYPos)=crx1
+
+cif ST
+ v1=18
+ v2=25760 ; source offset. 1280 for full screen
+ v3=18
+ v4=25600 ; dest offset. 0 for full screen
+; scroll 5 text lines on screen and 4 in the buffer
+ v5=5760 ; words to copy. 16000 for full screen
+ gosub @MCCopy 
+
+; clear bottom pixel line
+ crx1=36960
+.Clear1
+ &list18(crx1)=c0
+ add crx1,c2
+ if crx1<37120 then Clear1
+ &crx1=WordWs(WordCursorYPos)
+cend ; ST
+
+cif Amiga
+ v1=18
+ v2=6720 ; 5760 ; 23040 ; source offset. 1280 for full screen
+ v3=18
+ v4=6400 ; 5440 ; 21760 ; dest offset. 0 for full screen
+ v5=800 ; 1280 ; 5120 ; words to copy. 16000 for full screen
+ gosub @MCCopy 
+
+; clear bottom line
+ crx1=7720 ; 30880 ; 30720 ; 192*160
+.AmigaClear1
+ &list18(crx1)=c0
+ add crx1,c2
+ if crx1<8040 then AmigaClear1 ; 32160
+ &crx1=WordWs(WordCursorYPos)
+ goto ScrollCommon
+cend
+
+.ScrollCommon
+
+cif PC
+ v1=IBMScrollOffset
+ gosub @MCClearTextBuffer ;Clear top text line (buffer 2)
+ add IBMScrollOffset,c8   ;Rotate text buffer
+ if IBMScrollOffset<IBMTextLimit then ResetVerticalWrap
+ IBMScrollOffset=c0       ;Re-align buffer
+.ResetVerticalWrap
+ v1=IBMScrollOffset
+ gosub @MCCopyTextBuffer  ;Re-copy (buffer 2 to physical)
+cend
+
+ pop v5
+ pop v4
+ pop v3
+ pop v2
+ pop v1
+; gosub @ResumeTaskSwap
+; gosub @AcodeScheduler
+.DoCROk
+ return
+
+;---
+.IRQScheduler
+; called from MC when it thinks a task swap should be done
+; &Schedulerx1=LongWs(LoLongCurrentTaskMTCB)
+; if SchedulerX1<>4 then @ToTask4 ; only swap to graphics task. AcodeScheduler
+; return ; don't interrupt "input line" task.
+
+;&*&*&.AcodeScheduler
+;; called from acode when a task wishes to surrender
+;; the remainder of its time slice.
+; &WordWS(WordVBLDisabled)=c1 ; disable vbl
+; if VBLInitialised=false then @SchedulerNoSwap ; in Init, or similar
+; &Schedulerx1=wordWs(WordSuspendTaskSwap)
+; if Schedulerx1<>0 then @SchedulerNoSwap
+;
+; &Schedulerx1=LongWs(LoLongCurrentTaskMTCB)
+; if Schedulerx1=0 then ToTask4
+; if Schedulerx1=4 then @ToTask8
+; if Schedulerx1=8 then @ToTask0
+;.ToTask4
+;; SchedulerX1=3857 ;f11
+;; &List20(28832)=SchedulerX1
+; &LongWS(LoLongNextTaskMTCB)=c4
+; &WordWS(WordVBLDisabled)=c0 ; re-enable vbl
+;.ToSnooze 
+; push dv1
+; push dv2
+; push dv3
+; push dv4
+; push dv5
+; push dv6
+; push dx1
+; push dx2
+; push dx3
+; push dx4
+; push dx5
+; push dx6
+; push dx7
+; push ObjectNumber
+; push header
+; push v1
+; push v2
+; push v3
+; push v4
+; push v5
+; push v6
+; push v7
+; push RasterOffset
+; push AA
+; push cc
+; push ee
+; push sp
+; push ACBHeader
+;   gosub @MCSnooze
+; pop ACBHeader
+; pop sp
+; pop ee
+; pop cc
+; pop aa
+; pop RasterOffset
+; pop v7
+; pop v6
+; pop v5
+; pop v4
+; pop v3
+; pop v2
+; pop v1
+; pop header
+; pop ObjectNumber
+; pop dx7
+; pop dx6
+; pop dx5
+; pop dx4
+; pop dx3
+; pop dx2
+; pop dx1
+; pop dv6
+; pop dv5
+; pop dv4
+; pop dv3
+; pop dv2
+; pop dv1
+; return
+;
+;.ToTask0
+;; SchedulerX1=497 ; 1f1
+;; &List20(28832)=SchedulerX1
+; &LongWS(LoLongNextTaskMTCB)=c0
+; &WordWS(WordVBLDisabled)=c0 ; re-enable vbl
+; goto @ToSnooze
+;
+;.ToTask8
+;; SchedulerX1=287 ; 11f
+;; &List20(28832)=SchedulerX1
+; &LongWS(LoLongNextTaskMTCB)=c8
+; &WordWS(WordVBLDisabled)=c0 ; re-enable vbl
+; goto @ToSnooze
+;
+;.SchedulerNoSwap
+; &WordWS(WordVBLDisabled)=c0 ; re-enable vbl
+ return
+;---
+.SuspendTaskSwap
+.ResumeTaskSwap
+ return
+;---
+.SetUpTextPtr
+; &tx1=LongWS(HiLongLogicalBase)
+; &LongWS(HiLongTextScreenBase)=tx1
+
+; &tx1=LongWS(LoLongLogicalBase)
+; &LongWS(LoLongTextScreenBase)=tx1
+
+;7JUL90 &tx1=list11(72) ; list 18's ptr
+;7JUL90  &LongWS(HiLongTextScreenBase)=tx1
+;7JUL90  &tx1=list11(74)
+;7JUL90  &LongWS(LoLongTextScreenBase)=tx1
+ &x1=list11(72) ; list 18's ptr
+ &LongWS(HiLongTextScreenBase)=x1
+ &x1=list11(74)
+ &LongWS(LoLongTextScreenBase)=x1
+ return
+;---
+.SetUpLogicalTextPtr
+;7JUL90 &tx1=LongWS(HiLongLogicalBase)
+;7JUL90 &LongWS(HiLongTextScreenBase)=tx1
+;7JUL90 &tx1=LongWS(LoLongLogicalBase)
+;7JUL90 &LongWS(LoLongTextScreenBase)=tx1
+ &x1=LongWS(HiLongLogicalBase)
+ &LongWS(HiLongTextScreenBase)=x1
+
+ &x1=LongWS(LoLongLogicalBase)
+ &LongWS(LoLongTextScreenBase)=x1
+ return
+;---
+.SetUpPhysicalTextPtr
+ &x1=LongWS(HiLongPhysicalBase)
+ &LongWS(HiLongTextScreenBase)=x1
+
+ &x1=LongWS(LoLongPhysicalBase)
+ &LongWS(LoLongTextScreenBase)=x1
+.TextDisplayAnimation
+ return
+;---
+;&.ReadObjectAreas
+;& MinXZH=1
+;& &MinRaster=StructureBuffer(4)
+;& add MinRaster,c1
+;& &MinAnimation=StructureBuffer(10)
+;& add MinAnimation,c1
+;& &MinCompressed=StructureBuffer(16)
+;& add MinCompressed,c1
+;& &MinCell=StructureBUffer(28)
+;&.ADRRet
+;& return
+;---
+; Actor is not in user room, so set hires co-ords to centre of room in 
+; case user decides to enter.
+; also, write access co-ords, since SpecialAniShift usually does this, 
+; but won't be called in this case.
+.AAOADifferentRoom
+ gosub @GetStandingAniDv1Vec
+ add dv1,dir
+ &Hires(ACBHeader)=dv1
+ dx1=2
+ add dx1,ACBHeader
+ dx3=8
+ add dx3,ACBHeader
+ &Hires(dx1)=destx ; write x into hires()
+ &Hires(dx3)=destx ; write access x into hires()
+ add dx1,c2
+ add dx3,c2
+ &Hires(dx1)=destz ; write z into hires()
+ &Hires(dx3)=destz ; write access z into hires()
+ add dx1,c2
+ add dx3,c2
+ &Hires(dx1)=desth ; write h into hires()
+ &Hires(dx3)=desth ; write access h into hires()
+ dx1=ACBStatus
+ add dx1,ACBHeader
+ ACBList(dx1)=c0 ; ACBList(ACBStatus)=ACBIdle
+ return
+;---
+; destx,z contain centre-pos of room for actor to go to.
+; changes to this should be made here...
+.specialroompos
+ if room<>83 then notenterhall
+ destz=StairsZ
+ x1=36
+ add destz,x1
+.notenterhall
+;
+ if room<>84 then notenterlanding
+ destz=92
+.notenterlanding
+;
+ if room<>94 then notentermasterb
+ destz=160
+.notentermasterb
+;
+ if room<>77 then notenterdining
+ destz=160
+ destx=216
+.notenterdining
+.AAOARet
+ return
+;---
+.AAObjectArrives
+; person ACTOR leaves ROOM in direction DIR
+ object=actor
+ gosub @AbsCheckExit
+ if dest=0 then AAOARet
+ Currentpos(actor)=dest
+ hicurrentpos(actor)=c0
+ from=room
+ gosub @SetUpRoomVec
+  Gosub @SetActorAttributesVEC
+  x1=hatredoffset
+  add x1,actorattributes
+  npcCurrent(x1)=c0 ; clear hatred offset in new room
+ if actor<>user then DoAAOA
+push dir
+ gosub @DisplayRoom ; show new room
+pop dir
+.DoAAOA
+ gosub @ABSObjectArrives
+ goto @AfterMoves
+;
+.ABSObjectArrives
+ if dir=4 then @AAObjectDescends ; descend stairs
+;
+ if actor<>user then aaoaNotUser
+ if room=83 then aaoaNotUser
+ ClimbingStairs=false ; clear flag for stairs animation if user 
+; is not in hall
+.aaoaNotUser
+ x1=dir
+ add x1,startreversaltable
+ x1=list5(x1)
+;
+; Convert any true exits to their physical on-screen direction 
+; in the event that the room is viewed from a different angle.
+; E.g. if the room is viewed from the east, and we want to go west, 
+; then we must physically go via the south exit!
+; Dx2 is the direction we wish to go in. Change this if the exit 
+; is facing any other direction...
+ dx2=x1
+ gosub @RealToPhysicalExits
+ x1=dx2
+; DIR will also need altering so that we face the new direction
+ dir=x1
+ add dir,startreversaltable
+ dir=list5(dir)
+;
+ gosub @GetExitCoords
+; work out offset for arriving through this door...
+ x1=EnterFromOffset
+ add x1,ExitOffsets
+ x2=dir
+ add x2,x2
+ add x2,x2 ; 4 bytes per direction
+ add x1,x2
+ &x2=list4(x1)
+ add dv2,x2
+ add x1,c2
+ &x2=list4(x1)
+ add dv3,x2
+ dv4=peopleheight
+ dv5=1 ; display as a sprite.
+ dv6=0
+
+; Change any non-compass directions to compass directions so 
+; that the ACTOR can face in a valid direction...
+ gosub @RealToPhysicalDir
+
+ destx=145
+ destz=120
+ desth=peopleheight
+ gosub @specialroompos
+
+ if room<>CurrentUserRoom then @AAOADifferentRoom
+; make sure we don't put one person on top of another
+ dx1=ACBStatus
+ add dx1,ACBHeader
+ ACBList(dx1)=c0 ; ACBList(ACBStatus)=ACBIdle
+ gosub @FindVacantPosition
+; Adjust person's height to that of the terrain...
+ gosub @AdjustPersonHeight
+ dv4=x2
+
+; set new hires() coords
+ dx1=2
+ add dx1,ACBHeader
+ &Hires(dx1)=dv2 ; write x into hires()
+ add dx1,c2
+ &Hires(dx1)=dv3 ; write z into hires()
+ add dx1,c2
+ &Hires(dx1)=dv4 ; write h into hires()
+;
+ gosub @GetMovingAniDv1Vec
+ add dv1,dir
+ ObjectNumber=dv1
+ gosub @FindObjectNumber
+ object=actor
+ gosub @CalcRasterOffsetObject
+ dx4=ACBHeader
+ gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+ gosub @SUAGotBlankACB ; much faster than using SetUpACB, due to scanning
+ gosub @PreLoadPerson ; GMJ 16jul90
+ gosub @MCPreLoadCells
+ RasterOffset=0
+ 
+ if actor<>user then dontsetlastdir
+ graphicsdir=dir
+
+; reset keypaddirection to direction in case we're going in a 
+; different physical direction to the real direction
+ if keypaddirection=0 then gotkpd ; not using keypad!
+ keypaddirection=108
+ if dir=3 then gotkpd
+ keypaddirection=106
+ if dir=7 then gotkpd
+ keypaddirection=104
+ if dir=1 then gotkpd
+ keypaddirection=110
+ if dir=5 then gotkpd
+ keypaddirection=0
+.gotkpd
+
+.dontsetlastdir
+ return
+;---
+; Change any non-compass directions to compass directions so 
+; that the ACTOR can face in a valid direction...
+.RealToPhysicalDir
+ x1=1
+ if dir=2 then aaoanewdirx1 ; up becomes north
+ x1=3
+ if dir=8 then aaoanewdirx1 ; east #2 becomes east
+ x1=7
+ if dir=6 then aaoanewdirx1 ; west #2 becomes west
+ x1=1
+ if dir=14 then aaoanewdirx1 ; north #2 becomes north
+ x1=5
+ if dir=15 then aaoanewdirx1 ; south #2 becomes south
+ return
+;
+.AAOANewDirX1
+ dir=x1
+ return
+;---
+; Do a Hiresfindvacantposition without people collision
+.HiresFindVacantNoCPC
+ TestHiresCoords=true
+.FindVacantNoCPC
+ x1=ACBStatus
+ add x1,ACBHeader
+ x2=ACBList(x1)
+push x1
+push x2
+ x2=ACBAscending
+ ACBList(x1)=x2 ; fool FindVacantPosition
+ gosub @FindVacantPosition
+pop x2
+pop x1
+ ACBList(x1)=x2 ; reset previous status
+ return
+;---
+; Find nearest vacant square to dv2,dv3.
+; On exit dv2,dv3 contain the nearest vacant position, or 
+; Result=False if no vacant square could be found.
+;
+; Using hires positions...
+.HiresFindVacantPosition
+ TestHiresCoords=true
+;
+.FindVacantPosition
+push dx2
+push dx3
+ cursorx=dv2 ; preserve original pos in case we fail to find
+ cursorz=dv3 ; a vacant one
+ v1=0 ; min range for search
+ v2=0 ; max range for search
+.NextSearch
+ dx3=v1 ; z search
+.NextYOffset
+ dx2=v1 ; x search
+.NextXOffset
+ push v1
+ push v2
+;
+; make sure we don't search off the edge of the screen...
+ x1=dv2
+ add x1,dx2 ; add x offset
+ x2=MarginX
+ add x2,c16 ;c4
+ if x1<x2 then @PositionNotVacant
+ add x2,FSizeX
+ sub x2,c32 ;c8
+ if x1>x2 then @PositionNotVacant
+;
+ x1=dv3
+ add x1,dx3 ; add z offset
+ x2=MarginZ
+ add x2,c4
+ if x1<x2 then @PositionNotVacant
+ add x2,FSizeZ
+ sub x2,c8
+ if x1>x2 then @PositionNotVacant
+;
+; Check for collisions with people at (dv2+dx3,dv3+dx3)
+ x1=32
+ x2=4
+ gosub @cpc0x1x2
+ if dx1<>0 then @PositionNotVacant
+;
+; Check with map square (dv2+dx2,dv3+dx3)
+ gosub @CheckMap
+ if v1<>0 then @PositionNotVacant
+ if PointOnMap=false then @PositionNotVacant
+;
+; Found a vacant position...
+ add dv2,dx2
+ add dv3,dx3 ; add the search adjustments
+ pop v2
+ pop v1 ; clear the shit off the stack
+pop dx3
+pop dx2
+ Result=true
+ TestHiresCoords=false ; use on-screen co-ords (just in case!)
+ return
+;
+; This position is not vacant, so try another...
+.PositionNotVacant
+ pop v2
+ pop v1
+ if v2<8 then testallcolumns ; test all squares at first...
+ if dx3=v1 then testallcolumns
+ if dx3=v2 then testallcolumns
+ if dx2=v2 then nextrow
+ dx2=v2 ; ...then just test border squares
+ goto @NextXOffset
+;
+.TestAllColumns
+ if dx2=v2 then nextrow ; end of x search, step down z
+ add dx2,c4
+ goto @NextXOffset
+;
+.NextRow
+ if dx3=v2 then nextrange ; end of y search, enlarge range
+ add dx3,c4
+ goto @NextYOffset
+;
+.NextRange
+ sub v1,c4 ; enlarge -ve range
+ add v2,c4 ; enlarge +ve range
+ if v2<257 then @NextSearch ; search from -256 to +256 (step 4)
+;
+; Can't find a vacant position anywhere!!
+ Result=false
+pop dx3
+pop dx2
+ dv2=cursorx ; resume original pos
+ TestHiresCoords=false ; use on-screen co-ords (just in case!)
+ return
+;---
+; Check map square at dv2+dx2,dv3+dx3
+; V1=0 if square is vacant...
+.CheckMap
+ push CursorX
+ push CursorZ
+ CursorX=dv2
+ CursorZ=dv3
+ add CursorX,dx2
+ add CursorZ,dx3
+ gosub @GDpointOnMapVec
+ CurrentSquare=48
+ PointOnMap=false
+ if ReturnCode=0 then FVPMap
+ PointOnMap=true
+ gosub @GDreadSquareVec ;current square=collision byte
+ gosub @GDquadMaskVec ;v1=mask
+.FVPMap
+ pop CursorZ
+ pop CursorX
+ and v1,CurrentSquare
+ return
+;---
+.AAObjectAscends
+; person at ACBHeader ascends staircase
+ gosub @GetActorFromACBVec1 ; return actor for acbheader
+ ClimbingStairs=actor
+ GraphicsDir=2 ; dir 2 is up
+ ObjectNumber=UpStairsAnimation
+ dv2=stairsX
+ add dv2,c8 ;*
+ dv3=StairsZ
+ x1=1 ;*6
+ add dv3,x1
+ gosub @ShowNewPerson ; using animation sequence ObjectNumber
+ g1=ACBStatus
+ add g1,ACBHeader
+ v1=ACBAscending ; ascending status
+ ACBList(g1)=v1
+ dx4=0 ; don't suddenly jump ten feet into the air!
+ return
+;---
+.AAObjectDescends
+; person ACTOR descends staircase
+ dir=5
+ if room<>CurrentUserRoom then @AAOADifferentRoom
+;
+ dv2=stairsX
+ sub dv2,c8 ;*
+ dv3=StairsZ
+ x1=1 ;*6
+ add dv3,x1
+ dv4=128 ; start at top of stairs
+;
+; set new hires() coords
+ dx1=2
+ add dx1,ACBHeader
+ &Hires(dx1)=dv2 ; write x into hires()
+ add dx1,c2
+ &Hires(dx1)=dv3 ; write z into hires()
+ dv5=1 ; display as a sprite.
+ dv6=0 ;; GMJ 03/11/89 ;; 1 ; 0=non-reversed, -1=LR reversed
+;
+ dv1=DownStairsAnimation
+ ObjectNumber=dv1
+ gosub @FindObjectNumber
+ dx4=ACBHeader
+;
+ object=actor
+ gosub @CalcRasterOffsetObject
+ gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+ gosub @SUAGotBlankACB ; much faster than using SetUpACB, due to scanning
+ gosub @PreLoadPerson ; GMJ 16jul90
+ gosub @MCPreLoadCells
+ RasterOffset=0
+;
+ dx1=ACBStatus
+ add dx1,dx4
+ v1=ACBDescending
+ ACBList(dx1)=v1
+ return
+;---
+.BuildAndDisplayFrame
+ cif pc
+ gosub @MCPlotLogicalScreen
+ cend
+ gosub @DisplayTopWindow
+
+ if TextBoxDisplayed=0 then BANoBox
+ dv1=TextBoxDisplayed
+ dv2=0
+ dv3=0 ; z
+ dv4=0 ; h
+ dv5=1 ; plot
+ dv6=0 ; non-reflected
+ gosub @MCDrawObjectDv1
+.BANoBox
+
+; show room heading raster at all times
+ if ACBStart=ACBSearchStart then NoRoomHeading ; except in menu mode
+ if SamUnconcious<>false then NoRoomHeading ; or when unconcious
+ gosub @ShowRoomHeading
+.NoRoomHeading
+
+ gosub @MakeScreenVisible
+
+.BADF1
+gosub @DoScroll
+gosub @HandleTalkPortrait
+
+ if SamUnconcious<>false then BANoBox2 ; or when unconcious
+ if TextBoxDisplayed=0 then BANoBox2
+ TextBoxDisplayed=0
+; delay...
+ IBMFramesSinceVBL=0 ; variable incremented by VBL (50th second)
+.BAWaitKey
+ if IBMFramesSinceVBL<50 then BAWaitKey
+; wait for carriage return, space or fire key
+ gosub @WaitKey
+ if v1=13 then BANoBox2
+ if v1=32 then BANoBox2
+ if v2<>107 then BAWaitKey ; fire key
+
+.BANoBox2
+ return
+;---
+.ShowRoomHeading
+ dv1=HeadingRaster
+ dv2=HeadingXPOS
+ dv3=300
+ dv4=300
+ dv5=1 ; plot
+ dv6=0 ; non-reflected
+ goto @MCDrawObjectDv1
+;---
+.MakeScreenVisible
+; a screen has been built etc, so make it visible to the user
+ cif pc
+  gosub @MCUpdateScreen
+ cend
+
+ gosub @DisplayBackDrop
+ gosub @DisplayFrame ; save+display the current frame
+ if NewPalettePlease=0 then dontsetpalette
+ gosub @SetNewPalette
+.dontsetpalette
+
+ gosub @WaitForFrame
+ cif pc
+ gosub @MCUnplotScreen
+ cend
+ cif AllowMusic
+  gosub @PlayTuneForScene
+ cend
+ return
+;---
+.DisplayTopWindow
+ if ACBStart=ACBSearchStart then DTWMenuMode ; used in menu mode
+ gosub @MCDisplayRoom
+ add sFrames,c1
+ dv5=1 ; use MC routine for cell plotting.
+ gosub @DisplayACBsdV5
+ gosub @SortAndDisplayObjects
+.DTW1
+ return
+;---
+.DTWMenuMode
+ gosub @MCDisplayRoom
+ add sFrames,c1
+ dv5=1 ; use MC routine for cell plotting.
+; displaying people frozen
+ gosub @DisplayACBS2
+ gosub @SortAndDisplayObjects
+ goto @OverlayMenu ; gosub,return
+;---
+; Display the current menu over the animated window
+.OverlayMenu
+ &v1=WordWS(WordCursorXPos)
+push v1
+ &v1=WordWS(WordCursorYPos)
+push v1
+ SuspendScroll=true
+ &x1=LongWs(HiLongLogicalBase)
+ &LongWS(HiLongGraphicsScreenBase)=x1
+ &x1=LongWs(LoLongLogicalBase)
+ &LongWS(LoLongGraphicsScreenBase)=x1
+ gosub @DisplayCurrentMenuVec ;(On PC this must do the 'UpdateScreen')
+pop v1
+ &WordWS(WordCursorYPos)=v1
+pop v1
+ &WordWS(WordCursorXPos)=v1
+ gosub @SetUpTextPtr ;write to buffer screen normally
+ LeftMargin=0
+ SuspendScroll=false ;allow scrolling of response
+ return
+;---
+.DecodeKeyPress
+code -
+ GraphicsDir=3
+ if joystickstatus=8 then @DKP1
+ if KeyPadDirection=108 then @DKP1
+ if KeyPadDirection=77 then @DKP1 ;Cursor right
+ GraphicsDir=7
+ if joystickstatus=4 then @DKP1
+ if KeyPadDirection=106 then @DKP1
+ if KeyPadDirection=75 then @DKP1 ;Cursor left
+ GraphicsDir=1
+ if joystickstatus=1 then @DKP1
+ if KeyPadDirection=104 then @DKP1
+ if KeyPadDirection=72 then @DKP1 ;Cursor up
+ GraphicsDir=5
+ if joystickstatus=2 then @DKP1
+ if KeyPadDirection=110 then @DKP1
+ if KeyPadDirection=80 then @DKP1 ;Cursor down
+ GraphicsDir=0
+ KeyPadDirection=0
+ goto DKPRet
+
+.DKP1
+ LastRequestedDirection=GraphicsDir ; to decide whether we're
+; going to move into another room when we're near the edge.
+.DKPRet
+code +
+ return
+;---
+.ControlPlayer
+ if executingracetrack<>false then @CPret ; GMJ 15/05/90 seduction Rt
+ actor=user
+ ACBHeader=PlayerACb
+ GraphicsDir=LastRequestedDirection
+;
+; Numeric key '5' halts the player...
+ if KeyPadDirection<>107 then CPnotHalt
+ gosub @getdirx1
+ if x1>8 then CPNotHalt ; not already moving
+ dv1=StandingAnimation
+ add dv1,x1
+ dx4=PlayerACB
+ gosub @AlterACB
+ g1=ACBStatus
+ add g1,PlayerACB
+ ACBList(g1)=c0
+ Playerhidden=false
+ KeyPadDirection=0 ; don't repeat keypress
+ goto @cancelexecute ; cancel any commands
+.CPnotHalt
+;
+ gosub @DecodeKeyPress
+;
+ g1=ACBStatus
+ add g1,PlayerACB
+ g1=ACBList(g1)
+ if g1=ACBDescending then @CPRet
+ if g1=ACBAscending then @CPRet
+ if lastrequesteddirection=0 then @CPRet
+;
+ gosub @StandUpIfSitting ; GMJ 10jul90
+; &ObjectNumber=ACBList(PlayerACB)
+; gosub @IsObjectSitting
+; if result=false then CPNotSitting ; not sitting
+; Gosub @RepositionBeforeStand ; reposition sam
+;.CPNotSitting
+;
+ if executingcommand=false then CPMoveFree
+ gosub CancelExecute
+ goto CPMoveFree
+;
+; Goal directed command has been interrupted by player attempting 
+; to change direction, so cancel the command.
+.cancelexecute
+ if climbingstairs<>user then ceSamNotOnStairs
+ climbingstairs=false
+.ceSamNotOnStairs
+ x1=ACBHaltDelay
+ add x1,PlayerACB
+ ACBList(x1)=c0 ; zero freeze delay (if any)
+ executingcommand=false
+ actor=user
+ gosub @Stopvec1
+ goto @ClearSearchTime ; zero the 'stuck' timer for local GD moves
+;
+.CPMoveFree
+ if graphicsdir=0 then @CPRet
+ Playerhidden=false
+ gosub @getdirx1
+ if x1<>GraphicsDir then CPChangeDir ; change dir
+;
+; code here used to ignore a 'shownewperson' if the desired direction 
+; was the same as the previous one. however, this caused a freeze if the 
+; person was not already using the 'moving' animation (e.g. standing still).
+ &x1=ACBList(PlayerACB)
+ if x1<MovingAnimation then CPChangeDir
+ sub x1,c8
+ if x1>MovingAnimation then CPChangeDir ; not moving
+;
+; already moving...
+.CPRet
+ return
+;
+.CPChangeDir
+; kill piano music when we move away
+ if nextmusic<>36 then dontkillpiano ; piano music
+ nextmusic=2
+.dontkillpiano
+;
+; set up player...
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ add v1,c2
+ &List4(v1)=c0 ; clear 'at room object' flags
+ dv1=MovingAnimation ; walking in direction
+ add dv1,GraphicsDir
+ g1=ACBXOffset
+ add g1,PlayerACB
+ &dv2=ACBList(g1)
+ add g1,c2
+ &dv3=ACBList(g1)
+; reset height...
+ dx2=0
+ dx3=0
+ gosub @CheckMap ; used to get height value
+ gosub @AdjustPersonHeight
+ dv4=x2
+ dv5=1 ; display as a sprite.
+ dv6=0 ;; GMJ 03/11/89 ;; 1 ; 0=non-reversed, -1=LR reversed
+ ObjectNumber=dv1
+ gosub @FindObjectNumber
+ dx4=PlayerACB ; pass address of existing ACB for updating
+; with new animation sequence.
+ RasterOffset=UserOffset
+ gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+ gosub @SUAGotBlankACB ; much faster than using SetUpACB, due to scanning
+ RasterOffset=0
+ g1=ACBStatus
+ add g1,PlayerACB
+ ACBList(g1)=c0 ; idle
+.ContinueInDirection
+.StrategyTask
+ return
+;---
+;.BuildSprites
+; if ViewMapBuilt<>CurrentUserRoom then @BS1
+; if ViewMapBuilt=0 then @BS1
+; dv1=100
+; dv2=PlayerPixelX
+; dv3=PlayerPixelZ
+; dv4=PlayerPixelH ; 16
+; dv5=1 ; draw as sprite
+; dv6=0 ; non-reversed
+; gosub @MCDrawObjectdV1
+;
+; add PlayerPixelX,PlayerPixelXSpeed
+; if PlayerPixelXSpeed<64 then NoMin
+; if PlayerPixelX>16 then NoMin
+; PlayerPixelXSpeed=4
+;
+;.NoMin
+; if PlayerPixelXSpeed>64 then NoMax
+; if PlayerPixelX<212 then NoMax
+; PlayerPixelXSpeed=65532
+;
+;.NoMax
+;
+;.BS1
+; return
+;---
+;.CalcScreenAddress
+;; calc list19/20 as screen address, preserving
+;; cursor pos's.
+;&CSx1=WordWS(WordCursorXPos)
+;push CSx1
+;&CSx1=WordWS(WordCursorYPos)
+;push CSx1
+; &WordWS(WordCursorXPos)=c0
+; &WordWS(WordCursorYPos)=c0
+; v1=19 ; logical base in list 19
+; v2=20 ; physical base in list 20
+; gosub @MCCalcScreenAddress ; get List19 as start of screen
+;pop CSx1
+;&WordWS(WordCursorYPos)=CSx1
+;pop CSx1
+;&WordWS(WordCursorXPos)=CSx1
+;return
+;---
+;.StrategyTask
+;; task giving npc's strategies, movement, etc.
+;; This would be the bulk of a text adventure, excluding parser.
+;; Most text output comes from this task.
+; gosub @AcodeScheduler
+; goto @StrategyTask
+;---
+;--
+.DisplayAllObjects
+; display all objects in CurrentUserRoom, from
+; coordinates in InitHiresCoords. This routine
+; is used when the player goes into a room, called
+; from DisplayRoom
+; Use Draw Flag v7 (preserved throughout this routine)
+
+; object=1
+.dao1
+ x1=currentpos(object)
+ if x1=CurrentUserRoom then OkDisplayObject
+; Make sure we kill any people not in this room
+; (THIS IS IMPORTANT WHEN WE DO A LOAD & DISPLAY THE ROOM, SO 
+; THAT PREVIOUS ACBS ARE ERASED - FOR SOME REASON, THEY REMAINED 
+; FOR A FEW SECONDS, EVEN AFTER AN INIT3D!!)
+ if object>MaxNpc then @dao2
+ v1=object
+ gosub @Setv1ACBvec
+push ACBHeader
+ ACBHeader=v1
+ gosub @KillACBHeader
+pop ACBHeader
+ goto @dao2
+;
+.OkDisplayObject
+ if Object<MinRoomObject then @dao4 ; room objects are already 
+ if Object>MaxRoomObject then @dao4 ; in the structure
+ verb=0 ; don't do animations
+ room=currentuserroom
+ gosub @ShowOpenStatus ; open the object & show containments
+; if neccessary
+ goto @dao2
+;
+; Don't display objects contained within raster objects (e.g. 
+; wardrobes), since they are displayed when the raster object
+; is displayed (see above)
+.dao4
+ &x1=list4(44) ; special objects table
+ add x1,object
+ add x1,object ; special position when contained in raster objects
+ x2=List4(x1) ; is object contained in wardrobe etc?
+ if x2<MinRoomObject then @dao5 ; no
+ if x2>MaxRoomObject then @dao5 ; no
+;
+; Reposition any npcs that have moved to room objects when not 
+; in user room
+ if object>MaxNpc then @dao2 ; not an npc
+;
+; GMJ 14/3/90
+; if npc is sat on a Special chair (i.e. ANY vacant chair), then 
+; find a vacant chair and sit him on it
+ if x2<>specialchair then @DAONotFindChair
+push x1 ; save list4(44) pointer
+ v1=object
+ gosub @Setv1ACBvec
+ v2=v1 ; v2 is hires offset for npc
+push v2
+ gosub @FindChairVEC
+pop v2
+pop x1
+ if result=false then RoomObjectNotHere ; can't find a chair!
+; set 'sat in chair' byte..
+ &List4(x1)=c0 ; clear 'at room object' flags
+ List4(x1)=noun1 ; reset 'at room object' flag ; GMJ 14/3/90
+ x2=noun1 ; chair to sit on
+ x1=SitSouthAnimation
+ &Hires(v2)=x1 ; failsafe - make sure we ARE sitting!
+.DAONotFindChair
+;
+ x1=currentpos(x2)
+ if x1=room then DisplayNpcAtRoomObject
+; the room object which the npc is supposed to be at doesn't 
+; exist in this room!
+.RoomObjectNotHere
+; make the npc stand still
+ v1=object
+ gosub @Setv1ACBvec ; v1 is hires offset for npc
+push dv1
+ gosub @GetStandingAniDv1Vec
+ x1=5
+ add x1,dv1
+pop dv1
+ &Hires(v1)=x1
+ goto @dao5
+;
+.DisplayNpcAtRoomObject
+ v1=object
+ gosub @Setv1ACBvec
+ v2=v1 ; v2 is hires offset for npc
+ v1=x2
+ gosub @Setv1ACBvec ; v1 is hires offset for room object
+;
+; If actor is sitting, then put him at the containment x,z,h pos
+; of the chair
+;
+ gosub @Isx2achair ; provided it IS a chair!
+ if result=false then @standatroomobject
+;
+ &dv1=Hires(v2)
+ ObjectNumber=dv1
+ gosub @IsObjectSitting
+ if result=false then @standatroomobject
+;
+; face the right direction
+ x2=14
+ add v1,x2
+ &x1=Hires(v1) ; get direction to face
+ x2=startreversaltable
+ add x2,x1
+ x1=list5(x2) ; sit in reverse dir!
+ dv1=NewSitAnimation
+ add dv1,x1
+ &Hires(v2)=dv1 ; set sitting animation
+;
+ x1=6 ; 20
+ add v1,x1 ; containment h co-ord for room object
+ x1=6
+ add v2,x1 ; npc h coord
+ &dv4=Hires(v1) ; get containment h
+ &Hires(v2)=dv4
+ sub v1,c4 ; containment x co-ord for room object
+ sub v2,c4 ; npc x coord
+ goto movetoobjectcoords
+;
+.standatroomobject
+ add v2,c2 ; hires coords for npc
+ add v1,c8 ; access co-ords for room object
+.movetoobjectcoords
+ &dv2=Hires(v1) ; get access x
+ &Hires(v2)=dv2
+ add v1,c2
+ add v2,c2
+ &dv3=Hires(v1) ; get access z
+ &Hires(v2)=dv3
+; only set the facing direction if we are standing south 
+; (default direction when not in user room) so that we 
+; dont override any special ani sequences such as sitting 
+ sub v2,c4 ; objectnumber for npc
+ &dv1=Hires(v2)
+ if dv1<>StandingSouthAnimation then dao3
+ add v1,c4
+ &x1=Hires(v1)
+ gosub @GetStandingAniDv1Vec
+ add dv1,x1
+ &Hires(v2)=dv1 ; set facing dir
+ goto dao3
+;
+.dao5
+ if object<MaxNpcPlus1 then dao3
+ x5=v7 ; draw flag
+ gosub @DisplayObjectx5 ; static object with Draw Flag x5
+ goto dao2
+.dao3
+ gosub @DisplayPerson ; npc
+.dao2
+ add object,c1
+ if Object<MaxRoomObjectPlus1 then @dao1
+;
+; Little fudge to make sure people having sitting down animation 
+; sequences are shown with the last (3rd) frame when room is first show
+ dv5=dMarkPreload ; preload first bits of animation, sprites
+ gosub @DisplayACBs
+ gosub @DisplayACBs
+ goto @DisplayACBs ; gosub, return
+;---
+.DisplayObject
+ x5=0
+.DisplayObjectX5
+; insert object
+;
+ v1=object
+ gosub @SetV1ACBvec ; return v1=header for object
+ x4=v1
+; Hires(x4) gives coords etc.
+ push x4
+  &dv1=Hires(x4)
+  add x4,c2
+  &dv2=Hires(x4)
+  add x4,c2
+  &dv3=Hires(x4)
+  add x4,c2
+  &dv4=Hires(x4)
+pop x4
+push x4
+ dv5=x5
+ RasterOffset=0 ;*
+ &WordWS(WordRasterOffset)=c0 ;*
+ gosub @MCDrawObjectdv1
+; Make sure the object access co-ords aren't blocked
+pop x4
+ add x4,c8 ; point to hires access co-ords
+push x4
+ &dv2=Hires(x4) ; x
+ add x4,c2
+ &dv3=Hires(x4) ; z
+push ACBHeader
+ ACBHeader=PlayerACB ; simply used for testing status
+ gosub @FindVacantNoCPC
+pop ACBHeader
+pop x4
+ &Hires(x4)=dv2 ; x
+ add x4,c2
+ &Hires(x4)=dv3 ; z
+ return
+;---
+.DisplayPerson
+ x5=0
+.DisplayPersonx5
+; set up person OBJECT in their acb
+ gosub @CalcRasterOffsetObject
+ v1=object
+ gosub @SetV1ACBvec ; return v1=header for object
+ x4=v1
+; Hires(x4) gives coords etc.
+; ACBList(x4) for people.
+ push x4
+  &dv1=Hires(x4)
+  add x4,c2
+  &dv2=Hires(x4)
+  add x4,c2
+  &dv3=Hires(x4)
+  add x4,c2
+  &dv4=Hires(x4)
+;
+; Don't show people descending/ascending stairs, 
+; show them at the bottom...
+ if dv1<UpStairsAnimation then DPnotstairs
+ if dv1>DownStairsAnimation then DPnotstairs
+ dv1=StandingSouthAnimation
+ dv4=PeopleHeight
+.DPnotstairs
+;
+; Make sure this position isn't occupied...
+ pop ACBHeader
+ push ACBHeader
+;
+; Don't reposition people who are sitting...
+ ObjectNumber=dv1
+ gosub @IsObjectSitting
+ if result=false then @oktoreposition
+ dx2=0
+ dx3=0
+ goto @DPUpdateHires
+;
+.oktoreposition
+ gosub @HiresFindVacantPosition
+;
+; Adjust person's height to that of the terrain...
+.DPUpdateHeight
+ gosub @AdjustPersonHeight
+ dv4=x2
+;
+; Update Hires co-ords in case we've been repositioned
+.DPUpdateHires
+;
+;=====
+ if VMurderBeenDone=false then @DisplayNotBody
+; if object<>InvolvedNPC1 then @DisplayNotBody
+ gosub @IsObjectDead ;*
+ if result=false then @DisplayNotBody ;*
+ RasterOffset=0
+pop x4
+push x4
+ dx1=ACBRasterOffset
+ add dx1,x4
+ &ACBList(dx1)=RasterOffset
+;
+ code -
+ if object<>sue then DisplayNotSue
+ dv1=2187 ; sue's body
+ dv2=48 ; x
+ dv3=144 ; z
+ dv4=48 ; h
+.displaynotsue
+;
+ if object<>kathy then DisplayNotKathy
+ dv1=2190 ; kathy's body
+ dv2=112
+ dv3=128
+ dv4=80
+.displaynotkathy
+;
+ if object<>william then DisplayNotWilliam
+ dv1=2182 ; william's body
+ dv2=232 ; x
+ dv3=128 ; z
+ dv4=32 ; h
+ if room=45 then DisplayNotWilliam
+ dv2=48 ; x
+ dv4=48 ; h ; william has different x,h in his bedroom
+.DisplayNotWilliam
+;
+ if object<>robert then DisplayNotRobert
+ dv1=2097 ; robert's body
+ dv2=148 ; x
+ dv3=88 ; z
+ dv4=16 ; h
+.DisplayNotRobert
+;
+ if object<>fiona then DisplayNotFiona
+ dv1=2191 ; fiona's body (no change in x,z pos)
+ dv4=48
+ if room=77 then DisplayNotFiona ; fiona poisoned
+ dv1=2098 ; fiona's body (no change in x,z pos)
+ dv2=148 ; x
+ dv3=88 ; z
+ dv4=16 ; h=16 in front right garden
+.DisplayNotFiona
+;
+ if object<>clifford then DisplayNotCliff
+ dv1=2188 ; clifford's body
+ dv2=148 ; x
+ dv3=88 ; z
+ dv4=32 ; h
+ if room=37 then DisplayNotCliff ; h=32 in shed
+ dv4=16 ; h=16 in front right garden
+.DisplayNotCliff
+;
+ if object<>jarvis then DisplayNotJarvis
+ dv1=2189 ; jarvis's body
+ dv2=148 ; x
+ dv3=88 ; z
+ dv4=88 ; h
+.DisplayNotJarvis
+;
+.iDisplayNotBody
+ code +
+.DisplayNotBody
+;=====
+;
+ ObjectNumber=dv1
+ actorx=dv2
+ actorz=dv3
+ actorh=dv4
+ gosub @WriteHiresCoordsVEC
+;
+ pop x4
+ x1=ACBLeavingDirection
+ add x1,x4
+ ACBList(x1)=c0 ; don't suddenly leave when not near a door!
+ dv5=x5
+ gosub @SetupACBx4
+ gosub @PreLoadPerson ; GMJ 16jul90
+ goto @MCPreLoadCells
+;---
+; Make ACBHeader stand up if sitting
+.StandUpIfSitting
+ &ObjectNumber=ACBList(ACBHeader)
+ gosub @IsObjectSitting
+ if result=false then @idsaret ; not sitting
+;
+ ObjectNumber=StandUpAnimation
+ sFrames=3
+push dv2
+push dv3
+push dx2
+push dx3
+ gosub @AAAnimateDir ; animate getting up
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ add v1,actor
+ add v1,actor
+ v1=List4(v1) ; get 'at room object' flag
+; only reposition if we're at a true chair, i.e. not doing 
+; a sit ani at a table for instance
+ x2=v1
+ gosub Isx2achair
+ if result=false then StandUpNoReposition
+;
+; reposition npc to chair access pos
+ &dv1=ACBList(ACBHeader)
+ gosub @Setv1ACBvec
+ add v1,c8 ; v1=points to access x,z,h pos
+ &dv2=Hires(v1) ; x
+ add v1,c2
+ &dv3=Hires(v1) ; z
+ &dv4=Peopleheight
+ gosub @RepositionDv1234
+.StandUpNoReposition
+pop dx3
+pop dx2
+pop dv3
+pop dv2
+ return
+;---
+.isx2achair
+code -
+ result=true
+ if x2=84 then x2isachair
+ if x2=80 then x2isachair
+ if x2=85 then x2isachair
+ if x2=93 then x2isachair
+ if x2=98 then x2isachair
+ if x2=81 then x2isachair
+ if x2=92 then x2isachair
+ if x2=94 then x2isachair
+ result=false
+.x2isachair
+code +
+ return
+;---
+; Reposition & redraw ACBHeader at coords given in hires(v1)
+.RepositionHiresV1
+push c0 ; code for "don't find vacant pos"
+.RHV11
+ &dv2=Hires(v1) ; x
+ add v1,c2
+ &dv3=Hires(v1) ; z
+ add v1,c2
+ &dv4=Hires(v1) ; h
+ goto RHV12
+.RepositionDv1234
+push c1 ; code for "find vacant pos"
+.RHV12
+ ObjectNumber=dv1
+ dv5=1 ; display as a sprite.
+ dv6=0 ; 0=non-reversed, -1=LR reversed
+pop x1 ; find vacant pos?
+ if x1=0 then RHVdontfindvacant
+ gosub @FindVacantPosition ; GMJ 02/05/90
+.RHVdontfindvacant
+  gosub @FindObjectNumber
+  dx4=ACBHeader ; dx4:=address of existing ACB
+  object=actor
+  gosub @CalcRasterOffsetObject
+ gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+ gosub @SUAGotBlankACB ; much faster than using SetUpACB, due to scanning
+ RasterOffset=0
+.SUISnoReposition
+ return
+;---
+; is objectnumber of the seated animation variety?
+.IsObjectSitting
+ result=true
+ if objectnumber<2187 then IOSnotdead1
+ if objectnumber<2195 then idsaret ; dead
+.IOSnotdead1
+ if objectnumber<2097 then IOSnotdead
+ if objectnumber<2100 then idsaret ; dead
+.IOSnotdead
+;
+ if ObjectNumber=WomenUseLipstick then idsaret ; sitting
+ if ObjectNumber<NEWSitAnimation then notNEWsitani ; not sitting
+ if ObjectNumber<NEWmaxSitAnimationP1 idsaret ; sitting
+.notNEWsitani
+;
+; GMJ 05/09/90
+ if ObjectNumber<SitNoCrouchAnimation then notSNC ; not sitting
+ if ObjectNumber<MaxSitNoCrouchAniP1 idsaret ; sitting
+.notSNC
+;
+; sit speak, sit reach up, sit reach
+ if ObjectNumber<SitSpeak then notsitani
+ if ObjectNumber<MaxSitReach then idsaret
+.notsitani
+;
+ if ObjectNumber<ReadAnimation then notreadani ; not reading
+ if ObjectNumber<MaxReadAnimationP1 then idsaret ; reading
+.notreadani
+;
+; 9jul90 read newspaper, sit drink
+ if ObjectNumber<ReadNewspaper then notreadNani ; not reading
+ if ObjectNumber<MaxSitDrink then idsaret ; reading
+.notreadNani
+;
+ if objectnumber=eatingani then idsaret ; eating
+ result=false
+.idsaret
+ return
+;---
+; Set Hires coords of object to just ahead of the person 
+; ACBheader (e.g. for dropping objects), using the height 
+; supplied in dv4.
+.SetObjectToPersonPos
+ x1=0 ; 0 x adjustment
+ x2=0 ; 0 z adjustment
+ dir=0 ; facing dir is unclear if not in user's room
+ if room<>currentuserroom then gotobjectdisplacement
+;
+ gosub @getvalidDirx1
+ dir=x1
+;
+.gotobjectdisplacement
+ v1=object
+ gosub @SetV1ACBvec
+ x4=v1
+ add x4,c2
+; Hires(x4) gives object coords
+ x5=x4
+ add x5,c3
+ add x5,c3
+; Hires(x5) gives object access coords
+ x3=2
+ add x3,ACBHeader
+; Hires(x3) gives person coords
+  &dv1=Hires(x3)
+;  add dv1,x1 ; add x displacement
+;  add dv1,c4
+;  add dv1,c8 ; add half people width
+  &Hires(x5)=dv1
+  add dv1,c4 ;;
+  add dv1,c8 ;; add half people width
+  &Hires(x4)=dv1
+  add x3,c2
+  add x4,c2
+  add x5,c2
+  &dv1=Hires(x3)
+;  add dv1,x2 ; add z displacement
+  &Hires(x4)=dv1
+  &Hires(x5)=dv1
+  add x5,c2
+  add x4,c2
+  &Hires(x4)=dv4 ; special height
+;  if dv4=0 then SOTPPdir
+;; don't set access dir if dropped on ground
+;  dir=0
+;.SOTPPdir
+  add x5,c2 ; Hires(x5) gives access dir
+  &Hires(x5)=dir
+ return
+;---
+ code -
+.iMultX116
+; convert from cells to pixels
+ add x1,x1
+ add x1,x1
+ add x1,x1
+ add x1,x1
+ return
+ code +
+;---
+.ClearExits
+; clear out exits.
+ code - ;7JUL90
+ x3=StartDoorPositions
+ x1=36 ; 9*8/2
+.IH1
+;7JUL90 &Hires(x3)=c0
+;7JUL90 add x3,c2
+ Hires(x3)=c0 ;7JUL90
+ add x3,c1 ;7JUL90
+ Hires(x3)=c0 ;7JUL90
+ add x3,c1 ;7JUL90
+ sub x1,c1
+ if x1>0 then IH1
+ code + ;7JUL90
+ return
+;---
+;.ClearTextWindow
+;cif amiga
+; return
+;cend
+;
+;cif NotPc
+; v2=21760 ; offset within list18.
+;.CTW1
+; &list18(v2)=c0
+; add v2,c2
+; if v2<32160 then CTW1 ; 32100 then CTW1
+;cend
+;cif pc
+; push x1
+;  x1=128
+;  &WordWS(WordCursorYPos)=x1
+;  x1=7
+;.CTW1
+;  v2=40
+;  gosub @ClearPCTextLine
+;  gosub @DoCr
+;  sub x1,c1
+;  if x1>0 then CTW1
+;  x1=128
+;  &WordWS(WordCursorYPos)=x1
+; pop x1
+;cend
+; return
+;---
+; Coarse variation of CPC0, where the distance detection is 
+; provided in x1,x2 so as to reduce collision in emergencies 
+; (see .HitNpc in GOAL.TXT)...
+.CPC0x1x2
+ push cursorx
+ push cursorz
+ cursorx=x1 ; xdist
+ cursorz=x2 ; zdist
+ goto CPC0gotdistance
+;---
+.CPC0
+; return dx1=acb we'll hit if we move to (dv2+dx2,dv3+dx3)
+; or dx1=0 if no collision
+ push cursorx
+ push cursorz
+ cursorx=12 ; xdist
+ cursorz=3 ; zdist
+.CPC0gotdistance
+;
+; No collisions while actor is on stairs...
+ x1=ACBStatus
+ add x1,ACBHeader
+ x1=ACBList(x1)
+ dx1=0
+ if x1=ACBAscending then @CPCRet1
+ if x1=ACBDescending then @CPCRet1
+;
+ push room
+ v1=acbheader
+ gosub @SetV1ActorVec ; return v1=object/actor for header v1
+ room=currentpos(v1)
+;
+ push dv2
+ push dv3
+ push dx2
+ push dx3
+  add dv2,dx2
+  add dv3,dx3
+  dx1=ACBSize ; start of acb 1
+.CPC1
+  if collidewithself=true then CPCcollideself
+  if ACBHeader=dx1 then @CPC2 ; don't collide with itself
+.cpccollideself
+;
+; don't collide with anything that isn't in the room!
+ v1=dx1
+ gosub @SetV1ActorVec ; return v1=object/actor for header v1
+ x1=currentpos(v1)
+ if x1<>room then @CPC2
+;
+; Don't collide with npc's on the stairs
+; (e.g. npc's on stairs)
+  x1=ACBStatus
+  add x1,dx1
+  x1=ACBList(x1) ; x1 is status
+  if x1=ACBAscending then @CPC2
+  if x1=ACBDescending then @CPC2
+;
+  if TestHiresCoords=true then gethiresx
+  dx2=ACBXOffset
+  add dx2,dx1
+  &dx3=ACBList(dx2) ; x pos of acb we're checking
+  goto gotcpc0x
+.gethiresx
+  dx2=2
+  add dx2,dx1
+  &dx3=Hires(dx2) ; hires x pos of acb we're checking
+.gotcpc0x
+;
+  sub dx3,cursorx ; width of moved acb.
+  if dv2<dx3 then @CPC2 ; moved is too far to left.
+  add dx3,cursorx
+  add dx3,cursorx ; width of moved acb+collision acb
+  if dv2>dx3 then @CPC2 ; moved is too far to right.
+  add dx2,c2
+;
+  if TestHiresCoords=true then gethiresz
+  &dx3=ACBList(dx2) ; z pos of acb we're checking
+  goto gotcpc0z
+.gethiresz
+  &dx3=Hires(dx2) ; hires z pos of acb we're checking
+.gotcpc0z
+;
+  sub dx3,cursorz ; depth of moved acb.
+  if dv3<dx3 then CPC2 ; moved is too far back.
+  add dx3,cursorz
+  add dx3,cursorz ; depth of moved acb+collision acb
+  if dv3>dx3 then CPC2 ; moved is too far forewards.
+; collision!
+  goto CPC3
+;
+.CPC2
+ dx2=ACBSize
+ add dx1,dx2
+ if dx1<ACBSearchStart then @CPC1
+ dx1=0 ; no collision
+; 
+.CPC3
+ pop dx3
+ pop dx2
+ pop dv3
+ pop dv2
+ pop room
+.CPCRet1
+ pop cursorz
+ pop cursorx
+ return
+;---
+.SpecialAniShift
+; moving object dv1 from dv2,dv3,dv4 by dx2,dx3,dx4
+; would person collide with anything if they continued
+; in this direction?
+ if ACBHeader<ACBSearchStart then SASPeople
+; do nothing unusual for background animation stuff...
+.SASRet1
+ return
+;
+.SASPeople
+ if ACBStart<>ACBSearchStart then NotMenuMode
+; Menu is being used
+ dx2=0
+ dx3=0 ; Make sure people don't move just in case this code 
+ dx4=0 ; happens to be called
+ return
+.NotMenuMode
+;
+ gosub @GetActorFromACBvec1
+ object=actor
+ room=currentpos(actor)
+;
+; update Hires table so that gdfind works for moving objects (people)
+ x1=ACBHeader
+ &Hires(x1)=dv1 ; objectnumber
+ add x1,c2
+ &Hires(x1)=dv2 ; x
+ add x1,c2
+ &Hires(x1)=dv3 ; z
+ add x1,c2
+ &Hires(x1)=dv4 ; h
+ add x1,c2
+ &Hires(x1)=dv2 ; access x
+ add x1,c2
+ &Hires(x1)=dv3 ; access z
+ add x1,c2
+ &Hires(x1)=dv4 ; access h
+.DontSaveH
+;
+; If actor is not on a GD path, then we must check for 
+; collisions here, since the GOAL code will not be executed...
+ x1=ACBLeavingDirection
+ add x1,ACBHeader
+ x1=ACBList(x1)
+ if x1<>0 then @SASRet1 ; we're doing a "leaving room" sequence
+;
+; NPCs don't wander idlely through doors
+ gosub @SASCheckIdleDoor
+ if g2<>false then @SASCollision
+;
+ x1=ACBStatus
+ add x1,ACBHeader
+ x1=ACBList(x1)
+ if x1<>ACBIdle then @SASMoveOk
+;
+; Don't execute collision code if person is simply sitting down 
+; or standing still etc., since we are not moving
+ if dv1<MovingAnimation then @SASRet1
+ if dv1>MaxMovingAnimation then @SASRet1
+.SASMovingAni
+;
+; Push people out of player's way before he actually 
+; reaches them...
+ if actor<>user then @SASCollision11
+ x1=16
+ x2=8
+ gosub @CPC0x1x2
+ if dx1=0 then @SASCollision11
+; user is allowed to shove people out of the way under
+; manual control
+;
+; don't push npc if doing any animation apart from walking 
+; or standing (n.b. most animations finish with standing)
+ &ObjectNumber=ACBList(dx1)
+ if ObjectNumber>MaxStandingAnimation then @SASCollision11
+;
+; don't push dead bodies
+ v1=dx1
+ gosub @SetV1ActorVec
+ if VMurderBeenDone=false then NotPushDead
+; if v1=InvolvedNPC1 then @SASCollision11 ; npc is dead!
+ object=v1 ;*
+ gosub @IsObjectDead ;*
+ object=actor ;*
+ if result=true then @SASCollision11 ;*
+.NotPushDead
+;
+; try pushing npc using the goal code
+ GameLoopTimer=v1
+ sub gamelooptimer,c1 ; make npc move next turn
+ x1=ACBHaltDelay
+ add x1,dx1
+ &ACBList(x1)=c0 ; npc no longer halted
+ gosub @CPCPushNpc
+ ACBList(x1)=c0 ; make sure player isn't halted!
+;
+.SASCollision11
+ gosub @CPC0
+ if dx1<>0 then @SASCollision
+.SASNoPeopleColl
+;
+; With map squares...
+;
+; failsafe code to allow us to move if we're stuck on 
+; a map square
+push dx2
+push dx3
+ dx2=0
+ dx3=0
+ gosub @checkmap
+pop dx3
+pop dx2
+ if v1<>0 then @SASMoveOk
+;
+; check the square we're moving to
+ gosub @checkmap
+ if v1=0 then @SASMoveOk
+;
+.SASCollision
+ dx2=0 ; stop player moving
+ dx3=0
+ dx4=0
+.SASCollision1
+  gosub @StopPerson
+  push dx4
+   gosub @ShowNewPerson
+  pop dx4
+ g1=ACBStatus
+ add g1,ACBHeader
+ ACBList(g1)=c0 ; put npc into ACBIdle
+; to stop e.g. trying to find doorway.
+ if actor<>user then StopAtLockedDoor
+ KeypadDirection=0 ; must stop player keydir
+.StopAtLockedDoor
+ return
+;---
+; push npc dx1 in the direction we wish to go
+.CPCPushNpc
+ gosub @GetDirx1
+ add x1,startreversaltable
+ trydir=list5(x1) ; try to get to other side of player
+push dx4
+push ACBHeader
+ dx4=dx1
+ ACBHeader=dx1
+ v1=ACBXOffset
+ add v1,ACBHeader
+ &GoalNowX=ACBList(v1) ; npc x pos
+ add v1,c2
+ &GoalNowZ=ACBList(v1) ; npc z pos
+ goto @PushNpcAwayVEC ; pops off dx4 & ACBHeader
+;---
+; Adjust person's height to that of the terrain...
+; on entry: CurrentSquare=value of walkable square
+; on exit: x1=height adjustment x2=peopleheight+x1
+.AdjustPersonHeight
+ x2=15
+ and x2,currentsquare
+ x1=0
+ if x2<>0 then DefaultPersonH ; not walkable!
+ x1=240
+ and x1,CurrentSquare ; x1=height*16
+ asr x1
+ asr x1
+ asr x1		;/16 then *2 (for words)
+ &x2=List4(36)	;HeightTable
+ add x1,x2
+ &x1=List4(x1)
+
+;Meaning of height codes in floor maps changes for Gatehouse landing...
+ if CurrentUserRoom<>51 then DefaultPersonH
+ if x1=0 then DefaultPersonH
+ x2=96
+ sub x1,x2
+
+.DefaultPersonH
+ x2=peopleheight
+ add x2,x1
+ return
+;---
+; if an npc is Idle, then treat doors as collisions so that 
+; the npc doesn't cross over GD
+; g2=false if clear of exits
+.SASCheckIdleDoor
+ if dv4>100 then SASCIDfalse ; don't stop climbing stairs
+ if ACBHeader=PlayerACB then SASCIDfalse
+ g1=ACBStatus
+ add g1,ACBHeader
+ g2=ACBList(g1)
+ if g2=ACBIdle then SASCID1
+ if g2=ACBArrived then SASCID1
+.SASCIDfalse
+ g2=false
+ return
+;
+.SASCID1
+ gosub @getvaliddirx1
+ g2=x1 ; check direction we're moving in
+ gActorX=dv2
+ add gActorX,dx2
+ gActorZ=dv3
+ add gActorZ,dx3 ; test the pos we're moving to
+push dv2
+push dv3
+push dv4
+push dx2
+push dx3
+push dx4
+ gosub @CheckForExitCollision
+pop dx4
+pop dx3
+pop dx2
+pop dv4
+pop dv3
+pop dv2
+ return
+;---
+.SASMoveOk
+ g1=ACBStatus
+ add g1,ACBHeader
+ g2=ACBList(g1)
+ if ACBHeader<>PlayerACB then SASNotPlayer
+ if executingcommand=true then SASNotPlayer
+ if executingracetrack<>false then SASNotPlayer
+ push g2
+ push dv2
+ push dv3
+ push dv4
+; push dx2
+; push dx3
+ push dx4
+ gosub @SASCHeckStartMove
+ pop dx4
+; pop dx3
+; pop dx2
+ pop dv4
+ pop dv3
+ pop dv2
+ pop g2
+
+.SASNotPlayer
+ if g2=ACBArrived then NoLocalDecision
+ if g2=ACBIdle then NoLocalDecision
+; Are we allowed to move?
+ gosub @IsPersonHalted
+ if result=true then NoLocalDecision
+;
+ gosub @NPCLocalDecision
+;
+; Adjust person height to that of the terrain
+.NoLocalDecision
+ gosub @checkmap ; check square we're moving to
+ x1=15
+ and x1,currentsquare
+ if x1<>0 then @NotHCsquare ; not a height-coded currentsquare
+ gosub @AdjustPersonHeight
+ v1=x2
+ sub v1,dv4
+ if v1=0 then @NotHCsquare ; already at correct height
+ dx4=v1 ; adjustment to height
+.NotHCsquare
+ return
+;
+; set 'previousdistance' to max value, so that the next time we 
+; do a GD move, we are treated as getting closer to our target for 
+; the first iteration of the goal-code...
+.ClearSearchtime
+ x1=65535
+ x2=ACBPreviousDistance
+ add x2,ACBHeader
+ &ACBList(x2)=x1
+ x2=ACBSearchTime
+ add x2,ACBHeader
+ &ACBList(x2)=c0 ; also, zero the 'stuck' timer
+.nolocaldec1
+ return
+;---
+.SpecialXZHObject
+; xzh object dv1 is being plotted
+
+; Door exit positions are determined by the position of XZH objects
+; withing the room structure.
+;   N   door  200..207
+;   E   door  224..231
+;   S   door  240..246
+;   W#2 door  248..255
+;   W   door  256..263
+;   E#2 door  264..271
+;   N#2 door  312..319
+;   S#2 door  320..327
+
+ if dv1<208 then @SXONotDoor
+ if dv1>327 then @SXONotDoor
+ if dv1<272 THEN SXOdoorOK
+ if dv1<312 then @SXONotDoor
+
+.SXOdoorOK
+
+;;&*&*&*&*
+;; dv4 is height, should be 80
+;code -
+; prs "D "
+; print dv1
+; prs " H "
+; print dv4
+; message cr
+;code +
+;;&*&*&*&*
+
+ dx1=dv1
+ dx2=200
+ sub dx1,dx2
+.SetExitCoords
+; now use offset from start of doors to give the table entry for
+; the direction in which the door leads...
+ dx2=dx1
+ dx3=65528 ; fff8 - mask off bottom 3 bits.
+ and dx1,dx3 ; dx1:=direction in which door leads *8
+ sub dx2,dx1 ; dx2:=type of door (within direction)
+ dx3=StartDoorPositions
+ add dx3,dx1
+ &Hires(dx3)=dv2 ; x coord
+ add dx3,c2
+ &Hires(dx3)=dv3 ; z coord
+ add dx3,c2
+ &Hires(dx3)=dv4 ; h coord
+ add dx3,c2
+ &Hires(dx3)=dx2 ; type of door.
+ return
+
+.SXONotDoor
+ goto @GetRoomObject ; room object?
+;---
+.SpecialRasterObject
+; raster object dv1 is being plotted...
+;
+ if dv1<>1656 then sronotstairs ; upwards staircase
+ dx1=16 ; 16=8 * dir 2 (up)
+ push dv2
+ push dv3
+ x1=65533
+ and dv2,x1 ; make a multiple of 4 pixels
+ StairsX=dv2
+ x1=65533
+ and dv3,x1 ; make a multiple of 4 pixels
+ add dv3,c8 ;; GMJ 07/11/89 ;; c4
+ StairsZ=dv3
+ gosub @SetExitCoords
+ pop dv3
+ pop dv2
+ return
+.sronotstairs
+;
+ if dv1<>1654 then sronotlanding ; downwards staircase
+ dx1=32 ; 32=8 * dir 4 (down)
+ push dv2
+ push dv3
+ add dv2,c32
+ add dv2,c32
+ sub dv3,c8
+ gosub @SetExitCoords
+ pop dv3
+ pop dv2
+ return
+.sronotlanding
+;
+ gosub @GetRoomObject ; room object?
+ return
+;---
+; store dv1 as a room object?
+.GetRoomObject
+ &x1=list4(40) ; list of room object rasters
+.isdv1roomobject
+ &x2=List4(x1) ; get raster number
+ add x1,c2
+ if x2=0 then @dv1isnotroomobject ; end of list
+ if dv1=x2 then foundroomobject
+ add x1,c8 ; skip to next table entry
+ goto isdv1roomobject
+;
+; found a matching raster
+.foundroomobject
+ v1=list4(x1) ; get object number
+ add x1,c1
+ currentpos(v1)=room
+ hicurrentpos(v1)=c0 ; set up position
+ gosub @Setv1ACBvec
+ x2=v1 ; x2 is now Hires offset
+ &Hires(x2)=dv1 ; set objectnumber
+ add x2,c2
+ &Hires(x2)=dv2 ; set x pos
+ add x2,c2
+ &Hires(x2)=dv3 ; set z pos
+ add x2,c2
+ &Hires(x2)=dv4 ; set h pos
+;
+; now work out the centre of the object
+; (z size is negligible, so we only need to find centre x)
+push dv2
+push dv3
+push dv4
+ ObjectNumber=Dv1
+ gosub @findanddecode
+ x3=xsize ; get half width
+ add x3,x3
+ add x3,x3
+ add x3,x3 ; x3=(xsize*16pixels)/2
+ add dv2,x3
+ sub dv2,c16 ; GMJ 2/1/90 sub half people width to get centre to stand at
+push dv2 ; save centre x
+.SRADoneAdjust
+;
+cif DebugObjects
+ if menudebugmode<>1 then SRANoDebug
+ add x1,c2
+ goto @SRADebugOn
+.SRANoDebug
+cend
+;
+; add/subtract x adjustment to find edge of object
+  v1=65280
+  x3=list4(x1) ; get x offset
+  add x1,c1
+  if x3<128 then relativesignedx
+  add x3,v1 ; make 16 bit negative (65280+255=65535)
+.relativesignedx
+ if dv6=0 then SRANonReversed1
+; raster is reversed, so subtract x adjustment
+  sub dv2,x3
+  goto SRADoneAdjust1
+.SRANonReversed1
+; raster is non-reversed, so add x adjustment
+  add dv2,x3
+.SRADoneAdjust1
+;
+  x3=list4(x1) ; get z offset
+  add x1,c1
+  if x3<128 then relativesignedz
+  add x3,v1 ; make 16 bit negative (65280+255=65535)
+.relativesignedz
+  add dv3,x3
+;
+; if the height is different from the normal value for 
+; this object, then we must compensate for it by adjusting 
+; the z coord by the height difference...
+ add x1,c4
+ x3=list4(x1) ; get default height
+ sub x1,c4
+ if dv4=x3 then heightisdefault
+ sub x3,dv4
+ add dv3,x3
+.heightisdefault
+;
+; make sure the position is vacant. this speeds things up 
+; because we don't need to do a findvacantposition every time 
+; we do a GD move to the object.
+push x1
+push x2
+push ACBHeader
+ ACBHeader=PlayerACB ; simply used for testing status
+ gosub @HiresFindVacantNoCPC
+pop ACBHeader
+pop x2
+pop x1
+;
+.SRADebugOn
+ add x2,c2
+ &Hires(x2)=dv2 ; set access x
+ add x2,c2
+ &Hires(x2)=dv3 ; set access z
+ add x2,c2
+ x3=Peopleheight
+ &Hires(x2)=x3 ; set access h
+;
+ x3=list4(x1) ; get direction in which to face
+ add x1,c1
+ if dv6=0 then SRANonReversed2
+ if x3=1 then SRANonReversed2 ; don't reflect n/s
+ if x3=5 then SRANonReversed2
+ if x3=0 then SRANonReversed2
+; raster is reversed, so reverse facing dir
+ add x3,startreversaltable
+ x3=list5(x3)
+.SRANonReversed2
+ add x2,c2
+ &Hires(x2)=x3 ; set access direction
+ add x2,c2
+;
+pop dv2 ; resume centre x
+pop dv4
+pop dv3 ; get displayed co-ords back temporarily
+push dv3
+push dv4
+;
+; set position at which containments should be placed
+; add/subtract x adjustment
+  v1=65280
+  x3=list4(x1) ; get x offset
+  add x1,c1
+  if x3<128 then relativesignedx3
+  add x3,v1 ; make 16 bit negative (65280+255=65535)
+.relativesignedx3
+ if dv6=0 then SRANonReversed3
+; raster is reversed, so subtract x adjustment
+  sub dv2,x3
+  goto SRADoneAdjust3
+.SRANonReversed3
+; raster is non-reversed, so add x adjustment
+  add dv2,x3
+.SRADoneAdjust3
+ &Hires(x2)=dv2 ; set containment x pos
+ add x2,c2
+;
+; add/subtract z adjustment
+  x3=list4(x1) ; get z offset
+  add x1,c1
+  if x3<128 then relativesignedz1
+  add x3,v1 ; make 16 bit negative (65280+255=65535)
+.relativesignedz1
+  add dv3,x3
+  &Hires(x2)=dv3 ; set containment z pos
+ add x2,c2
+;
+; add/subtract h adjustment
+  x3=list4(x1) ; get h offset
+  if x3<128 then relativesignedh
+  add x3,v1 ; make 16 bit negative (65280+255=65535)
+.relativesignedh
+  add dv4,x3
+  &Hires(x2)=dv4 ; set containment h pos
+;
+ add x2,c2
+ &Hires(x2)=dv6 ; store reversal flag
+;
+pop dv4
+pop dv3
+pop dv2
+.dv1isnotroomobject
+ return
+;---
+.NPCLocalDecision
+; we need to make a hires decision for NPC ACBList(ACBHeader)
+; which is currently at coords dv2,dv3,dv4
+; - set up new animation offset for new direction,
+; and return g1 as distance to walk in this direction
+; before making a new decision.
+;
+; Ascended/Descended stairs...
+ g1=ACBStatus
+ add g1,ACBHeader
+ g2=ACBList(g1) ; g1 is status
+ if g2<>ACBDescending then @nldnotDescended
+;
+; Decended to bottom of stairs...
+ g1=ACBHOffset
+ add g1,ACBHeader
+ &g1=ACBList(g1) ; g1 is height
+ if g1>68 then @NLDNaughtyRet ; not reached ground yet
+ ClimbingStairs=false
+ gosub @GetStandingAniDv1Vec
+ ObjectNumber=5
+ add ObjectNumber,dv1
+ x1=ACBStatus
+ add x1,ACBHeader
+ ACBList(x1)=c0 ; yes - test for people collision
+ add dv3,c8 ; reposition ahead of stairs
+ add dv3,c4 ;; 30/10/89
+ gosub @FindVacantPosition ; or to nearest vacant square
+ gosub @ShowNewPerson
+ goto @nldnotarrived
+.nldnotDescended
+;
+; Ascended to top of stairs?
+ if g2<>ACBAscending then nldnotAscended
+ g1=ACBHOffset
+ add g1,ACBHeader
+ &g1=ACBList(g1) ; g1 is height
+ if g1<144 then @NLDnaughtyRet
+ ClimbingStairs=false
+ g2=2 ; force move up
+ goto @MoveIntoNewRoom
+.nldnotAscended
+;
+; move towards our target
+ dx4=ACBHeader
+push dv2
+push dv3
+push dv4
+push g2
+ gosub @GDInProgressVec ; handle goal movement
+pop g2
+pop dv4
+pop dv3
+pop dv2
+;
+ g1=ACBStatus
+ add g1,ACBHeader
+ g3=ACBList(g1) ; g3 is new status
+ if g3<>ACBArrived then @NLDNotArrived
+;
+; we've arrived!
+ if g2>15 then @nldnotdoor ; not a door
+;
+; climb up stairs before entering landing?
+ if g2<>2 then nldArrived
+; npc's wait at bottom of stairs until the way is clear...
+ if ClimbingStairs=false then @AAObjectAscends
+ dv1=2701 ; moving north
+ dx4=ACBHeader
+ gosub @AlterACB
+ dx2=0
+ dx3=0 ; hold it right there!
+ g1=ACBStatus
+ add g1,ACBHeader
+ ACBList(g1)=c2 ; reset 'climb stairs' status
+ goto @nldnotarrived
+.nldArrived
+;
+ if acbheader<>playeracb then doautomove
+ if executingcommand=true then doautomove
+ if executingracetrack=false then @NLDNotArrived ; handled in checkforexit
+.doautomove
+ gosub @MoveIntoNewRoom
+ goto nldnotarrived
+;
+; arrived at a destination other than a door
+.nldnotdoor
+ x2=ACBArrived
+ x1=ACBStatus
+ add x1,ACBHeader
+ ACBList(x1)=x2
+;
+.NLDNotArrived
+ dx4=0 ; don't move vertically
+.NLDNaughtyRet
+.DLARet1
+ return
+;---
+; Do animation for npc walking through a door when leaving a 
+; room and antering another one
+.DoLeavingAni
+ x1=ACBLeavingDirection
+ add x1,ACBHeader
+ dx2=ACBList(x1) ; get direction in which to leave
+ if dx2=0 then DLARet1 ; we're not doing a move
+ FrontDoorACB=0
+push dir
+push dx2
+ x1=127
+ and dx2,x1 ; mask out bit 7
+;
+; Do leaving stuff
+ gosub @RealToPhysicalExits ; change secondary exits to moving dirs
+ dir=dx2
+ gosub @RealToPhysicalDir ; change non compass exits to compass exits
+ x1=dir
+;
+; Leaving animation?
+pop x2 ; get original value of LeavingDirection
+ x3=128
+ and x3,x2 ; get top bit
+ if x3<>0 then @LeavingButNoAni ; top bit set = no leaving ani
+ if room<>currentuserroom then @LeavingButNoAni ; not leaving user room
+ gosub @GetMovingAniDv1Vec
+ ObjectNumber=dv1
+ sFrames=8
+ if x1=3 then @LeaveEWAni
+ if x1=7 then @LeaveEWAni
+ sFrames=4
+ if x1=5 then @LeaveNormalAni
+ if x1=1 then @LeaveNormalAni
+ if x1<>4 then @LeavingButNoAni ; only animate e/w
+ x3=ACBZOffset
+ add x3,ACBHeader
+ &x4=ACBList(x3) ; get current z pos
+ add x4,c4 ; bring us forward a bit
+ &ACBList(x3)=x4 ; put it back
+ add x3,c2
+ &x4=ACBList(x3) ; get current h pos
+ add x4,c4 ; compensate for added z
+ &ACBList(x3)=x4 ; put it back
+ x1=0 ; zero direction offset
+ ObjectNumber=DownStairsAnimation
+ sFrames=6
+ goto @LNANotInvis
+;
+.LeaveEWani
+; correct z-pos so that we don't go through e/w door frames
+; (x2 is leavingdir)
+push objectnumber
+push x1
+ x1=127
+ and x1,x2
+ dx2=x1
+ gosub @RealToPhysicalExits
+ x1=dx2
+ gosub @GetExitCoords ; move to centre of door
+; get offset for leaving via this door...
+ x2=ExitOffsets
+ add x1,x1
+ add x1,x1 ; 4 bytes per exit
+ add x1,x2
+ add x1,c2
+ &x2=list4(x1)
+ add x2,dv3 ; x2 is centre z of door to move towards
+ x1=ACBXOffset
+ add x1,ACBHeader
+ &dv2=ACBList(x1)
+ add x1,c2
+ &dv3=ACBList(x1)
+ add x1,c2
+ &dv4=ACBList(x1)
+ x1=2
+ if x2>dv3 then AdjustLeavingZ ; move forward a few pixels
+ x1=65534 ; move back a few pixels
+.AdjustLeavingZ
+ add dv3,x1
+pop x1
+push x1
+ add ObjectNumber,x1
+ dv1=ObjectNumber
+ gosub @FindObjectNumber
+ object=actor
+ gosub @CalcRasterOffsetObject
+ dx4=ACBHeader
+ dv6=0
+ gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+ gosub @SUAGotBlankACB ; much faster than using SetUpACB, due to scanning
+ RasterOffset=0
+pop x1
+pop objectnumber
+;
+.LeaveNormalAni
+; Do front door opening animation
+ if room<>currentuserroom then notleavefrontdoor
+ if x1<>1 then notleavefrontdoor
+ if room<>47 then notleavefrontdoor
+ dv1=3470
+ gosub @SetUpFrontDoorDv1
+ FrontDoorACB=dx4
+ sFRAMES=4
+.notleavefrontdoor
+;
+ gosub @IsLeavingDirInvisible ; secret door?
+ if result=false then LNANotInvis
+ add sFrames,c4
+.LNANotInvis
+ gosub @AAAnimateGotDir
+;
+; Do the move logic
+.LeavingButNoAni
+ if room<>currentuserroom then DLAdontKillACB
+; make sure the acb is dead so that hires co-ords given by 
+; ObjectArrives are not overwritten by SpecialAniShift
+ gosub @KillACBHeader
+.DLAdontKillACB
+ gosub @CloseFrontDoor ; Do front door closing animation
+ gosub @printleaving
+ object=actor
+ x1=ACBLeavingDirection
+ add x1,ACBHeader
+ dir=ACBList(x1) ; get direction in which to leave
+ x1=127
+ and dir,x1 ; mask out bit 7
+;
+ gosub @AAObjectArrives ; get new pos for entering
+ gosub @printarrival
+ x1=dir
+;
+; Do front door opening animation
+ if room<>currentuserroom then notenterfrontdoor
+ if x1<>5 then notenterfrontdoor
+ if room<>47 then notenterfrontdoor
+ dv1=3470
+ gosub @SetUpFrontDoorDv1
+ FrontDoorACB=dx4
+ sFRAMES=4
+ gosub @BADFsFrames
+.notenterfrontdoor
+;
+; Do arrival stuff
+ if room<>currentuserroom then @EnteringButNoAni
+ if x1=3 then @EnterNormalAni
+ if x1=7 then @EnterNormalAni ; only allowed e/w
+;
+; AAObjectArrives converts dir 2 to dir 1 when ascended stairs
+ if x1<>1 then @EnteringButNoAni
+ if room<>84 then @EnteringButNoAni
+; Don't do ascending animation if we've been repositioned 
+; quite a bit...
+ x2=dv2 ; x pos
+ sub x2,stairsx
+ if x2<16 then EnterStairsXok
+ if x2<65520 then @EnteringButNoAni ; allow +/- 16 for x pos
+.EnterStairsXok
+ x2=dv3 ; z pos
+ x3=100
+ sub x2,x3
+ if x2<24 then EnterStairsZok
+ if x2<65512 then @EnteringButNoAni ; allow +/- 24 for z pos
+.EnterStairsZok
+ x3=ACBZOffset
+ add x3,ACBHeader
+ &x4=ACBList(x3) ; get current z pos
+ add x4,c4 ; bring us forward a bit
+ &ACBList(x3)=x4 ; put it back
+ add x3,c2
+ &x4=ACBList(x3) ; get current h pos
+; 28 pixels = 8*4pix steps - 4pix to compensate for z adjustment
+ sub x4,c32
+ add x4,c4
+ &ACBList(x3)=x4 ; put it back
+ x1=0 ; zero direction offset
+ sFrames=8
+ ObjectNumber=UpStairsAnimation
+ gosub @AAAnimateGotDir
+ dv1=2707 ; standing west
+ dx4=ACBHeader
+ gosub @AlterACB ; stop at top of stairs
+ goto @EnteringButNoAni
+;
+.EnterNormalAni
+ x2=32 ; x adjustment (w)
+ if x1=7 then AdjustEnterX
+ x2=65504 ; x adjustment (e)
+.AdjustEnterX
+ x3=ACBXOffset
+ add x3,ACBHeader
+ &x4=ACBList(x3) ; get current x pos
+ add x4,x2 ; add adjustment
+; prevent entry pos going off left of screen
+ if x4<32000 then EnterXIsPositive
+ x4=4
+ goto EntryXIsOk
+.EnterXIsPositive
+; prevent entry pos going off right of screen
+ if x4<297 then EntryXIsOk
+ x4=296
+.EntryXIsOk
+ &ACBList(x3)=x4 ; and put it back
+ sFrames=8
+ gosub @IsEnteringDirInvisible ; secret door?
+ if result=false then ENANotInvis
+ add sFrames,c4
+.ENANotInvis
+ gosub @GetMovingAniDv1Vec
+ ObjectNumber=dv1
+ gosub @AAAnimateGotDir
+;
+.EnteringButNoAni
+ gosub @CloseFrontDoor ; Do front door closing animation
+;
+ x1=ACBLeavingDirection
+ add x1,ACBHeader
+ ACBList(x1)=c0 ; clear leaving flag
+;
+ if actor<>user then AAOAamoves
+ gosub @EnterNewRoom
+.AAOAamoves
+;
+pop dir
+ return
+;---
+; Do front door closing animation
+.CloseFrontDoor
+ if room<>currentuserroom then notclosefrontdoor
+ if FrontDoorACB=0 then notclosefrontdoor
+ &ACBList(FrontDoorACB)=c0
+ FrontDoorACB=0
+ dv1=3471
+ gosub @SetUpFrontDoorDv1
+.notclosefrontdoor
+ return
+;---
+.SetUpFrontDoorDv1
+push actor
+push ACBHeader
+push RasterOffset
+push ObjectNumber
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=RasterOffset
+ dv2=128
+ dv3=112
+ dv4=80 ; h
+ dv5=1 ; plot
+ dv6=0 ; non-reversed
+ x4=ACBHeader
+ gosub @SetUpACBdv1
+pop ObjectNumber
+pop RasterOffset
+pop ACBHeader
+pop actor
+ &WordWS(WordRasterOffset)=RasterOffset
+ return
+;---
+; RESULT=TRUE if REVERSE(leavingdirection) is through an invisible door
+.IsEnteringDirInvisible
+ x2=ACBLeavingDirection
+ add x2,ACBHeader
+ x2=ACBList(x2) ; get direction in which to leave
+ x3=startreversaltable
+ add x3,x2
+ x2=list5(x3)
+ goto IsDirx2Invisible
+;---
+; RESULT=TRUE if leavingdirection is through an invisible door
+.IsLeavingDirInvisible
+ x2=ACBLeavingDirection
+ add x2,ACBHeader
+ x2=ACBList(x2) ; get direction in which to leave
+.IsDirx2Invisible
+ result=false
+ if x2=2 then ILDIRet ; stairs
+ if x2=4 then ILDIRet ; stairs
+ if room<>currentuserroom then ILDIRet
+ add x2,x2
+ add x2,x2
+ add x2,x2
+ x3=StartDoorPositions
+ add x2,x3
+ add x2,c4
+ add x2,c2 ; x2 points to door type
+ &x2=Hires(x2)
+ if x2<>1 then ILDIRet ; door type 1 is invisible
+ result=true
+.ILDIRet
+ return
+;---
+.MoveIntoNewRoom
+; npc ACBList(header) wants to move into another room.
+; leaving the currently displayed room via exit g2
+;
+; if user, make sure we're not waiting to enter a room already!!
+ if ACBHeader<>PlayerACB then minrnotuser1
+ if WantNewRoom<>false then @minrret
+.minrnotuser1
+;
+; ACBObjectOffset may not have been set up (e.g. if the ACB is 
+; blank because the person has not yet entered the current room)
+ gosub @GetActorFromACBvec1 ; return actor for acbheader
+ object=actor
+ room=Currentpos(object) ; set up from ACBObjectOffset
+ dir=g2
+ gosub @AbsCheckExit
+ gosub @specialMoves
+ if result<>false then okmovetoroom
+; reverse movement offsets so we can't edge towards the door
+ goto @SASCollision
+.okmovetoroom
+;
+; npc's wait at top of stairs until the way is clear...
+ if dir<>4 then minrnotdescend
+ if actor=user then userdescend
+ if ClimbingStairs<>false then @minrret
+ if dest<>currentuserroom then minrnotdescend
+; only set ClimbingStairs if actor=user, or if actor is about to 
+; enter the user's room. this is coded here rather than in 
+; aaobjectdescends because of the delay of the user entering a 
+; new room by means of the WantNewRoom flag.
+.userdescend
+ ClimbingStairs=actor ; actor is about to descend stairs
+.minrnotdescend
+ if dest=0 then @minrret
+;
+; if moving between two rooms, neither of which is the player's 
+; room, then do a 'hard' move
+ if actor=user then DoNormalMove
+ if room=currentuserroom then DoNormalMove
+ if dest<>currentuserroom then @AAObjectArrives
+.DoNormalMove
+;
+; We can't do an animation sequence here, since we may have come from 
+; the structure handler, and the system wouldn't like it. Instead, set 
+; a flag so that the animation is shown later...
+ x1=ACBLeavingDirection
+ add x1,ACBHeader
+ ACBList(x1)=g2 ; set direction in which to leave
+;
+; execute move straight away
+ if room<>currentuserroom then OkMoveRoom1
+ GameLoopTimer=actor
+ sub gamelooptimer,c1
+.OkMoveRoom1
+;
+ if object<>user then NotNewUserRoom
+; for user, just set flag which will cause the main
+; game loop to move to a new room. Can't do it here,
+; because we came here from the animation structure handler,
+; and it would probably get upset. In any case, the exit
+; pointers for the new room aren't set up yet.
+ WantNewRoom=dest
+ UserDirection=dir ; because we have to set the user's
+; coordinates when they arrive in the new room.
+; (and I guess NPC's, if it matters for them.)
+;
+.minrret
+ return
+;
+.NotNewUserRoom
+ x1=ACBStatus
+ add x1,ACBHeader
+ ACBList(x1)=c0 ; clear "go exit" command
+ goto @ClearSearchTime ; zero the 'stuck' timer for local GD moves
+;---
+.CheckExit
+ ceroomsave=room
+ room=from
+ GOSUB ABSCHECKEXIT
+ room=ceroomsave
+ return
+;---
+.AbsCheckExit
+ code -
+  EXIT ROOM DIR STATUS DEST
+ code +
+.SODRet
+ return
+;---
+.StopPerson
+ &objectnumber=ACBList(ACBHeader)
+ gosub @getDirx1
+; getvaliddir is too slow, so if first dir found is not valid 
+; then default to dir found in direrror
+ if x1<9 then stopdirok
+ gosub @direrror
+.stopdirok
+ ObjectNumber=x1
+ GraphicsDir=ObjectNumber ; so dir is preserved over a long pause
+push dv1
+ gosub @GetStandingAniDv1Vec
+ g2=dv1 ; stopped series.
+pop dv1
+ add ObjectNumber,g2 ; stopped, looking in appropriate direction.
+.stoppersonret
+ return
+;---
+; set up x1 as walking direction. x1>8 if not walking
+.getdirx1
+ gosub @GetMovingAniDv1Vec
+ g2=dv1
+ &x1=ACBList(ACBHeader)
+ sub x1,g2 ; get dir offset
+ return
+;---
+; set up x1 as walking direction
+; if not walking, subsequent animation sequences 
+; are tested, such as standing still, until a valid direction 
+; is found
+.getvaliddirx1
+ g2=MovingAnimation ; walking in direction
+ &x1=ACBList(ACBHeader)
+ sub x1,g2 ; get dir offset
+ if x1>MaxAnimations then direrror ; out of range
+ x2=x1
+ and x2,c1
+ if x2=0 then direrror ; even numbered dir
+ x2=10
+ gosub @x1MODx2
+ if x1<8 then dirisok
+.direrror
+ x1=5 ; default to south
+.dirisok
+ return
+;---
+.ShowNewPerson
+; show person ObjectNumber
+;
+ gosub @checkmap ; used to get CurrentSquare
+ x1=15
+ and x1,currentsquare
+ dv4=peopleheight
+ if x1<>0 then SNPGotHeight ; (bug!) not a height-coded currentsquare
+ gosub @AdjustPersonHeight
+ dv4=x2 ; set height to that of the terrain
+.SNPGotHeight
+;
+ dv1=ObjectNumber
+ push dx2
+ push dx3
+ dv5=1 ; display as a sprite.
+ dv6=0 ;; GMJ 03/11/89 ;; 1 ; 0=non-reversed, -1=LR reversed
+  gosub @FindObjectNumber
+  dx4=ACBHeader ; dx4:=address of existing ACB for updating
+; with new animation sequence.
+  object=actor
+  gosub @CalcRasterOffsetObject
+;  dx1=ACBRasterOffset
+;  add dx1,dx4
+;  &RasterOffset=ACBList(dx1)
+  gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+  gosub @SUAGotBlankACB ; much faster than using SetUpACB, due to scanning
+ &Hires(dx4)=dv1 ; set objectnumber in hires so that if we leave room 
+; & then re-enter, the person is displayed with same objectnumber
+ RasterOffset=0
+ pop dx3
+ pop dx2
+ return
+;---
+.CalcRasterOffsetObject
+push dx1
+push dx2
+ dx1=ObjectGraphics
+ dx2=object
+ add dx2,dx2
+ add dx2,dx2
+ add dx1,dx2
+ add dx1,c2
+ &RasterOffset=list4(dx1)
+pop dx2
+pop dx1
+ return
+;---
+.GetExitCoords
+; get exit coords for direction x1, from strategy task.
+; find out what the coordinates of this exit are...
+; *8...
+push g2
+ g2=x1
+ gosub @GetExitCoordsg2
+pop g2
+.SASCSMRet1
+ return
+;---
+.GetExitCoordsg2
+; get exit coords for direction g2, from graphics task.
+push g1
+; find out what the coordinates of this exit are...
+; and return g2=g2*8
+; *8...
+ add g2,g2
+ add g2,g2
+ add g2,g2
+push g2
+ g3=StartDoorPositions
+ add g2,g3
+ &dv2=Hires(g2)
+ add g2,c2
+ &dv3=Hires(g2)
+ dv4=PeopleHeight
+pop g2
+pop g1
+ return
+;---
+.SASCheckStartMove
+;
+; if user, make sure we're not waiting to enter a room already
+ if actor<>user then SASCSMnotUser
+ if WantNewRoom<>false then SASCSMRet1
+.SASCSMnotUser
+ gActorX=dv2
+ gActorZ=dv3
+
+; Lastrequesteddirection may not have been set (e.g. if player is 
+; not under manual control!) - GMJ 7/9/89
+ gosub @getDirX1
+ if x1>9 then SASBadDir
+ lastrequesteddirection=x1
+.SASBadDir
+
+;
+ if LastRequestedDirection=0 then @SASNotExit
+ g2=LastRequestedDirection
+ gosub @checkforexitcollision ; collision with exit in dir g2?
+ if g2=true then @exitcollisionok
+
+; Special code to check for objects that are not necessarily 
+; in the direction of motion. I.E. Direction 2 is up, but the 
+; exit can only be reached by normal directions 1,3,5 and 7.
+ if LastRequestedDirection<>7 then NotWest2
+ g2=6
+ gosub @checkforexitcollision ; dir 6 is west #2
+ if g2=false then NotWest2
+ LastRequestedDirection=6
+ goto @exitcollisionok
+.NotWest2
+
+ if LastRequestedDirection<>3 then NotEast2
+ g2=8
+ gosub @checkforexitcollision ; dir 8 is east #2
+ if g2=false then NotEast2
+ LastRequestedDirection=8
+ goto @exitcollisionok
+.NotEast2
+
+ if LastRequestedDirection<>1 then NotNorth2
+ g2=14
+ gosub @checkforexitcollision ; dir 9 is north #2
+ if g2=false then NotNorth2
+ LastRequestedDirection=14
+ goto exitcollisionok
+.NotNorth2
+
+ if LastRequestedDirection<>5 then NotSouth2
+ g2=15
+ gosub @checkforexitcollision ; dir 14 is south #2
+ if g2=false then NotSouth2
+ LastRequestedDirection=15
+ goto exitcollisionok
+.NotSouth2
+
+ if LastRequestedDirection<>1 then NotUpStairs
+ g2=2
+ gosub @checkforexitcollision ; collision with stairs (dir 2)?
+ if g2=false then NotUpStairs
+ LastRequestedDirection=2
+ goto exitcollisionok
+
+.NotUpStairs
+ if LastRequestedDirection<>5 then @SASNotExit
+ g2=4
+ gosub @checkforexitcollision ; collision with landing stairs (dir 4)?
+ if g2=false then @SASNotExit
+ lastrequesteddirection=4
+
+; we're near enough to a door to mean
+; that the user wants to go through it.
+.ExitCollisionOk
+ GraphicsDir=LastRequestedDirection
+;
+ g2=GraphicsDir
+; climb up stairs before entering landing?
+ if g2<>2 then ECNotClimbStairs
+; Prevent GHG being called if actor has accidentally hit the stairs 
+; while trying to get to the TRUE north exit...
+ if actor<>user then @SASNotExit
+ if executingcommand<>false then @SASNotExit
+ if executingracetrack<>false then @SASNotExit
+ KeypadDirection=0
+push dx2
+push dx3
+push dx4
+ gosub @GraphicsHiresGo ; MUST use positioning for stairs
+pop dx4
+pop dx3
+pop dx2
+ goto SASNotExit
+;
+.ECNotClimbStairs
+;
+push dx2 ;&
+ dx2=g2
+; Convert any phisical on-screen exits to their true equivalents 
+; if neccessary. E.g. a south door may lead west if the room is
+; viewed from the east!
+ gosub @PhysicalToRealExits
+ g2=dx2
+pop dx2 ;&
+;
+ gosub @MoveIntoNewRoom
+ x1=ACBStatus
+ add x1,ACBHeader
+ ACBList(x1)=c0
+;
+; Sorry! No exit collisions detected.
+.SASNotExit
+ return
+;---
+; Check for exit collision with person at gActorX,gActorZ moving in 
+; direction g2. Return g2=true if close to an exit.
+.CheckForExitCollision
+push dx2 ;&
+push dx3 ;&
+;
+ if g2<>7 then NotOffLeft1
+ if gActorX<MarginX then @SASOffScreen ;(no effect if MarginX=0)
+ if gActorX<8 then @SASOffScreen ;*****
+.NotOffLeft1
+ dx1=gActorX
+ dx2=FSizeX
+ add dx2,MarginX	;dx1=gActorX, dx2=right position
+; now do 'if dx1<dx2' using signed arithmetic...
+ add dx1,MarginX
+ add dx2,MarginX
+ if dx1<dx2 then NotOffLeft
+
+;X coord is off-map and player is facing away from map
+ if g2<>3 then NotOffRight
+ if gActorX<32768 then @SASoffScreen
+.NotOffRight
+ if g2<>7 then NotOffLeft
+ if gActorX>32767 then @SASoffScreen
+.NotOffLeft
+
+ if g2<>1 then NotOffBottom1
+ if gActorZ<MarginZ then @SASOffScreen ;(no effect if MarginZ=0)
+ if gActorZ<8 then @SASOffScreen ;*****
+.NotOffBottom1
+ dx1=gActorZ
+ dx2=FSizeZ
+ add dx2,MarginZ ;dx2=bottom position
+; now do 'if dx1<dx2' using signed arithmetic...
+ add dx1,MarginZ
+ add dx2,MarginZ
+ if dx1<dx2 then NotOffTop
+
+;Z coord is off the floor map (and player faces away from map)
+ if g2<>5 then NotOffBottom
+ if dx1<32768 then @SASoffScreen
+.NotOffBottom
+ if g2<>1 then NotOffTop
+ if dx1>32767 then @SASoffScreen
+.NotOffTop
+
+ gosub @GetExitCoordsg2
+; g2 is dir*8
+ g1=g2 ; save dir*8 for GraphicsHiresGo
+; get exit coords for direction g2, from graphics task.
+ dx2=ThroughDoorOffset
+ add dx2,ExitOffsets
+ add g2,dx2
+; List4(g2) is xmin,zmin, xsize,zsize for collision
+ &dx2=list4(g2)
+ add g2,c2
+ add dv2,dx2 ; add cd offset to door x
+;
+ if dv2<32767 then DoorOnScreen
+ dv2=0		;handle doors inserted in S.DAT with -ve X
+.DoorOnScreen	;(most doors affected are secret doors)
+;
+ if gActorX<dv2 then @SASNotDoor
+ &dx2=list4(g2)
+ add g2,c2
+ add dv2,dx2
+ if gActorX>dv2 then @SASNotDoor
+;
+ &dx2=list4(g2)
+ add g2,c2
+ add dv3,dx2 ; add cd offset to door z
+ if gActorZ<dv3 then SASNotDoor
+ &dx2=list4(g2)
+ add dv3,dx2
+ if gActorZ>dv3 then SASNotDoor
+.SASoffScreen
+ g2=true
+ goto CFECret ; close to an exit
+.SASNotDoor
+ g2=false
+.CFECret
+pop dx3 ;&
+pop dx2 ;&
+.GHGRet
+ return ; not close to an exit
+;---
+.GraphicsHiresGo
+; GraphicsDir=dir
+;
+; Stop trying to find an exit while ascending the stairs
+ dx1=ACBStatus
+ add dx1,ACBHeader
+ dx1=ACBList(dx1)
+ if dx1=ACBAscending then GHGRet
+ if dx1=ACBDescending then GHGRet
+;
+; Are we allowed to move?
+ gosub @IsPersonPushed
+ if result=true then GHGRet
+ gosub @IsPersonHalted
+ if result=true then GHGRet
+;
+; Convert any true exits to their physical on-screen direction 
+; in the event that the room is viewed from a different angle.
+; E.g. if the room is viewed from the east, and we want to go west, 
+; then we must physically go via the south exit!
+ dx2=GraphicsDir
+ gosub @RealToPhysicalExits
+ g1=dx2
+ add g1,g1
+ add g1,g1 ;dir*8
+ add g1,g1
+;
+ push g1
+ dx1=StartDoorPositions
+ add g1,dx1
+ &DestX=Hires(g1)
+ add g1,c2
+ &Destz=Hires(g1)
+;
+; get offset for leaving via this door (dx2=dir)...
+ dx1=ExitOffsets
+ add dx2,dx2
+ add dx2,dx2 ; 4 bytes per exit
+ add dx1,dx2
+ &dx2=list4(dx1)
+ add destx,dx2
+ add dx1,c2
+ &dx2=list4(dx1)
+ add Destz,dx2
+;
+; Prevent going off left hand side of screen
+ if destx<16 then makedestxpos
+ if destx<32000 then destxpos
+.makedestxpos
+ destx=16
+.destxpos
+;
+ dx1=ACBDestX
+ add dx1,ACBHeader
+ &ACBList(dx1)=DestX
+ add dx1,c2
+ &ACBList(dx1)=Destz
+ dx1=ACBStatus
+ add dx1,ACBHeader
+;
+; If setting up a new GD (i.e. change of status), then start 
+; the person facing in the right direction...
+ x1=ACBList(dx1)
+ if x1=GraphicsDir then ghgDontChangeStat
+ ACBList(dx1)=GraphicsDir ; going to door in this direction.
+ x3=ACBintendedDirection
+ add x3,ACBHeader
+ ACBList(x3)=c0
+ x3=ACBXOffset
+ add x3,ACBHeader
+ &GoalNowX=ACBList(x3)
+ add x3,c2
+ &GoalNowZ=ACBList(x3)
+ gosub @StandUpIfSitting ;*
+ gosub @GetValidDirx1
+ gosub @GetStandingAniDv1Vec
+ add dv1,x1
+ dx4=ACBHeader
+ gosub @AlterACB
+.ghgDontChangeStat
+;
+ pop v1
+ asr v1
+ asr v1 ; v1=g1/8=direction of door
+ asr v1
+ return
+;---
+; Convert any phisical on-screen exits to their true equivalents 
+; if neccessary. E.g. a south door may lead west if the room is
+; viewed from the east!
+; Dx2 is the direction of the door we've just hit. Change this 
+; if the exit leads in any other direction...
+.PhysicalToRealExits
+;
+;=====
+; SE corridor off landing?
+ if room<>72 then PTRENot72
+ x1=1
+ if dx2=7 then @ChangeDx2toX1 ; west door leads north
+ x1=5
+ if dx2=3 then @ChangeDx2toX1 ; east door leads south
+ x1=7
+ if dx2=5 then @ChangeDx2toX1 ; south door leads west
+.PTRENot72
+;
+; NE corridor off landing?
+ if room<>71 then PTRENot71
+ x1=1
+ if dx2=7 then ChangeDx2toX1 ; west door leads north
+ x1=5
+ if dx2=3 then ChangeDx2toX1 ; east door leads south
+ x1=6
+ if dx2=5 then ChangeDx2toX1 ; south door leads west#2
+ x1=15
+ if dx2=8 then ChangeDx2tox1 ; east#2 door leads south#2
+.PTRENot71
+;
+; NW corridor off landing?
+ if room<>74 then PTRENot74
+ x1=5
+ if dx2=7 then ChangeDx2toX1 ; west door leads south
+ x1=1
+ if dx2=3 then ChangeDx2toX1 ; east door leads north
+ x1=8
+ if dx2=5 then ChangeDx2toX1 ; south door leads east#2
+.PTRENot74
+;=====
+;
+.PTRERet
+ return
+;---
+.ChangeDx2toX1
+ Dx2=x1
+ return
+;---
+; Convert any true exits to their physical on-screen direction 
+; in the event that the room is viewed from a different angle.
+; E.g. if the room is viewed from the east, and we want to go west, 
+; then we must physically go via the south exit!
+; Dx2 is the direction we wish to go in. Change this if the exit 
+; is facing any other direction...
+.RealToPhysicalExits
+;
+;=====
+; SE corridor off landing?
+ if room<>72 then RTPENot72
+ x1=7
+ if dx2=1 then ChangeDx2toX1 ; west door leads north
+ x1=3
+ if dx2=5 then ChangeDx2toX1 ; east door leads south
+ x1=5
+ if dx2=7 then ChangeDx2toX1 ; south door leads west
+.RTPENot72
+;
+; NE corridor off landing?
+ if room<>71 then RTPENot71
+ x1=7
+ if dx2=1 then ChangeDx2toX1 ; west door leads north
+ x1=3
+ if dx2=5 then ChangeDx2toX1 ; east door leads south
+ x1=5
+ if dx2=6 then ChangeDx2toX1 ; south door leads west#2
+ x1=8
+ if dx2=15 then ChangeDx2tox1 ; south#2 door leads east#2
+.RTPENot71
+;
+; NW corridor off landing?
+ if room<>74 then RTPENot74
+ x1=7
+ if dx2=5 then @ChangeDx2toX1 ; west door leads south
+ x1=3
+ if dx2=1 then @ChangeDx2toX1 ; east door leads north
+ x1=5
+ if dx2=8 then @ChangeDx2toX1 ; south door leads east#2
+.RTPENot74
+;=====
+;
+.RTPERet
+ return
+;---
+; Is person being pushed out of someone's way?
+.IsPersonPushed
+ x1=ACBStatus
+ add x1,ACBHeader
+ x1=ACBList(x1)
+ if x1=ACBPushedAway then GDFrozen ; being pushed out of someone's way
+ result=false
+ return
+;---
+; Is person halted by a temporary delay?
+.IsPersonHalted
+ result=false
+ x1=ACBHaltDelay
+ add x1,ACBHeader
+ x2=ACBList(x1) ; get freeze delay (if any)
+ if x2=0 then GDNotFrozen
+.GDFrozen
+ result=true
+.GDNotFrozen
+ return
+;---
+.AAMakeLocal
+; ACTOR needs to operate on OBJECT,
+; which is in the same room as them.
+;
+; Are we allowed to move?
+ gosub @IsPersonHalted
+ if result=true then @AAMLNotYet
+ gosub @IsPersonPushed
+ if result=true then @AAMLNotYet
+;
+; Make sure we go to the container if object is not on 
+; ground
+ gosub @getobjectposx2 ; x4 is returned as the last object in the 
+; containment chain that touches the ground
+ object=x4 ; this will also set ACBFindNpc to say we're following 
+; an npc if he's carrying our target object
+;
+; if the object is contained within a room object, then 
+; go to the room object rather than the object access co-ords
+ if object>79 then AAMLNotInRoomObject ; minroomobject-1
+ if object<maxnpcplus1 then AAMLNotInRoomObject ; people
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ add v1,object
+ add v1,object
+ v1=List4(v1) ; get 'at room object' flag
+ if v1=0 then AAMLNotInRoomObject
+ object=v1
+.AAMLNotInRoomObject
+;
+ x3=object
+ add x3,x3
+ add x3,x3
+ add x3,x3
+ add x3,x3
+ add x3,x3
+ add x3,x3
+; Hires(x3) gives coords of object
+ x4=x3
+ add x3,c8 ; get coords from which object may be accessed...
+ &x1=hires(x3) ; x
+ add x3,c2
+ &x2=hires(x3) ; z
+;
+; if following someone who's climbing the stairs, then try to match 
+; the position of the stairs rather than the person we're following
+ if object>MaxNpc then notfollowstairs
+ dx1=ACBStatus
+ add dx1,x4
+ dx1=ACBList(dx1)
+ if dx1=ACBDescending then okfollowstairs
+ if dx1<>ACBAscending then notfollowstairs
+.okfollowstairs
+ x2=StairsZ
+ x3=12
+ add x2,x3
+.notfollowstairs
+;
+.AAMLGotCoords1
+; Standupifsitting must be done before setting any flags for 
+; npc being at a chair, otherwise he would get up from the 
+; wrong chair!
+push x1
+push x2
+push x4
+push object
+ gosub @StandUpIfSitting
+pop object
+pop x4
+pop x2
+pop x1
+;
+; Npc tries to go to a ROOM OBJECT when not in the user's room?
+ &v1=List4(44) ; special room object positions used as flags for npcs
+ add v1,actor
+ add v1,actor
+ &List4(v1)=c0 ; clear 'at room object' flags
+ if object<MinRoomObject then NotGoRoomObject
+ if object>MaxRoomObject then NotGoRoomObject
+ List4(v1)=object ; reset 'at room object' flag ; GMJ 14/3/90
+.NotGoRoomObject
+
+; if actor<>user then xxxx4
+; if object<MinRoomObject then xxxx4
+; if object>MaxRoomObject then xxxx4
+; &v1=Hires(x4)
+;code -
+; prs "R "
+; print v1
+; message cr
+;code +
+;.xxxx4
+
+cif DebugObjects
+ if Menudebugmode=0 then @ObjectPosNoDebug
+; Draw a person at this position so that we can test access pos
+ if actor<>user then @objectposnodebug
+ if object<MinRoomObject then @objectposnodebug
+ if object>MaxRoomObject then @objectposnodebug
+push x1
+push x2
+push x3
+push x4
+push dv2
+push dv3
+ dv2=x1
+ dv3=x2
+ &dir=ACBList(playeracb)
+ x1=standinganimation
+ sub dir,x1
+ if dir>7 then @dbposret
+ dx1=6
+ add dx1,x4
+ &x5=Hires(dx1)
+ x1=acbxoffset
+ add x1,playeracb
+ &x2=ACBList(x1)
+ add x1,c2
+ &x3=ACBList(x1)
+ sub x2,dv2
+ sub x3,dv3
+ &x1=Hires(x4) ; objectnumber
+ add x4,c16
+ add x4,c4
+ add x4,c2
+ &x4=Hires(x4) ; reversalflag
+ if x4=0 then dbnotrevs
+ x4=x2
+ x2=0
+ sub x2,x4 ; reverse x
+ if dir=1 then dbnotrevs
+ if dir=5 then dbnotrevs
+ x4=startreversaltable
+ add x4,dir
+ dir=list5(x4)
+.dbnotrevs
+code -
+ message cr
+ prs "RASTER "
+ print x1
+ message space
+ if x2<32000 then dbxpos
+ x1=x2
+ x2=0
+ sub x2,x1
+ prs "-"
+.dbxpos
+ print x2
+ message space
+ if x3<32000 then dbzpos
+ x1=x3
+ x3=0
+ sub x3,x1
+ prs "-"
+.dbzpos
+ print x3
+ message space
+ print dir
+ message space
+ print x5 ; default height
+ message cr
+code +
+.dbposret
+pop dv3
+pop dv2
+pop x4
+pop x3
+pop x2
+pop x1
+.objectposnodebug
+cend
+
+ if room=currentuserroom then AAMLGotCoords2
+ if object<MinRoomObject then @AAMLOk
+ if object>MaxRoomObject then @AAMLOk
+ goto @AAMLOk1 ; set default facing south animation
+;
+.AAMlGotCoords2
+; Make sure dest is not blocked...
+ if object>MaxNpc then AAMLNotGoNpc
+ v1=object
+ gosub @Setv1ACBvec ; v1=header for actor/object v1
+ &ObjectNumber=ACBList(v1)
+push x1
+push x2
+ gosub @IsObjectSitting
+pop x2
+pop x1
+ if result=false then AAMLGotCoords3
+.AAMLNotGoNpc
+;
+push dv2
+push dv3
+ dv2=x1 ; x
+ dv3=x2 ; z
+ gosub @HiresFindVacantNoCPC
+ x1=dv2 ; x
+ x2=dv3 ; z
+pop dv3
+pop dv2
+.AAMLGotCoords3
+;
+; ACBList(ACBHeader) gives details of actor
+ x3=ACBDestX
+ add x3,ACBheader
+ &ACBList(x3)=x1 ; x
+ add x3,c2
+ &ACBList(x3)=x2 ; z
+ x3=ACBStatus
+ add x3,ACBHeader
+ x4=ACBGeneralGD
+ if object>maxnpc then makeobjectlocal
+ x4=ACBFindNPC
+.makeobjectlocal
+;
+; If setting up a new GD (i.e. change of status), then start 
+; the person facing in the right direction...
+ x5=ACBList(x3)
+ if x5=x4 then AAMLDontChangeStat
+ ACBList(x3)=x4 ; set new status
+ x3=ACBintendedDirection
+ add x3,ACBHeader
+ ACBList(x3)=c0
+ gosub @GetValidDirx1
+ gosub @GetStandingAniDv1Vec
+ add dv1,x1
+ dx4=ACBHeader
+ gosub @AlterACB
+ gosub @ClearSearchTime
+.AAMLDontChangeStat
+;
+.AAMLNotYet
+ executeProcessed=true ; no more action this turn.
+ return
+;
+; Not in user's room...
+.AAMLOk
+;
+; set hires co-ords
+ x3=ACBHeader
+ add x3,c2
+ &Hires(x3)=x1 ; x
+ add x3,c2
+ &Hires(x3)=x2 ; z
+ add x3,c4
+ &Hires(x3)=x1 ; source x
+ add x3,c2
+ &Hires(x3)=x2 ; source z
+;
+; also, if not in user room, make sure npc is stood still when user 
+; enters
+.AAMLOk1
+push dv1
+ gosub @GetStandingAniDv1Vec
+ x3=5
+ add x3,dv1
+pop dv1
+ &Hires(ACBHeader)=x3
+ return
+;---
+.MoveLocal
+; move ACTOR to cell pos noun1,noun2
+;
+; Are we allowed to move?
+ gosub @IsPersonPushed
+ if result=true then @AAMLNotYet
+ gosub @IsPersonHalted
+ if result=true then @AAMLNotYet
+;
+ code - ;7JUL90
+ x1=noun2
+ gosub @iMultX116 ; convert z from cells to pixels
+ x2=x1 ;7JUL90 push x1
+ x1=noun1
+ gosub @iMultX116 ; convert x from cells to pixels
+;7JUL90 pop x2
+ object=255 ; safe code to show we're not trying to find a person
+ sub x2,c4 ; GMJ 13/07/90 - make sure npc's sit at corrent 
+; table positions
+ code +
+ goto @AAMLGotCoords1 ; use goal code in aamakelocal
+;---
+;.ErrorHandler
+;cif st
+; gosub @SetUpPhysicalTextPtr
+;cend
+;
+;cif pc
+; v1=7
+; gosub @MCEnableTextBuffer
+;cend
+;
+; &WordWS(WordCursorXpos)=c0
+; &WordWS(WordCursorYpos)=c0
+; push v1
+; &v1=WordWS(WordErrorNumber)
+; code-
+; prs "Error ("
+; print v1
+; message cr ;'DoCr' ignores newlines; this is 'flush'
+; prs ")"
+; code+
+; pop v1
+; goto @WaitKey
+;---
+.SpecialACBKilled
+ return
+;---
+.SpecialAniObject
+;
+; Handle falling masonry
+ if dv1=FallingBlock then @SAOMasonry ; masonry acb
+ if dv1<>FallingPudding then @SAOret ; not masonry acb
+.SAOMasonry
+;
+; Don't test for masonry collisions if we've already been hit
+ if MasonryHit<>0 then @SAOret
+;
+; If masonry is within person height, then test for collision with sam
+ if dv4>96 then @SAOret ; peopleheight+height of masonry
+ x1=ACBxOffset
+ add x1,PlayerACB
+ &x2=ACBList(x1) ; player x
+ add x1,c2
+ &x3=ACBList(x1) ; player z
+ sub x2,c16
+ if dv2<x2 then SAOret ; misses to the west
+ add x2,c32
+ if dv2>x2 then SAOret ; misses to the east
+ sub x3,c8
+ if dv3<x3 then SAOret ; misses to the north
+ add x3,c16
+ if dv3>x3 then SAOret ; misses to the south
+;
+; Masonry has hit Sam!
+ MasonryHit=1 ; flag for Masonry hiting sam
+;
+.SAOret
+ return
+;---
+.SetupACBx4
+; set up object dv1 at ACBList(x4)
+ dx4=x4
+ ObjectNumber=dv1
+ dv6=0 ;; GMJ 03/11/89 ;; 1 ; 0=non-reversed, -1=LR reversed
+ gosub @FindObjectNumber
+ if dv1<MinAnimation then @SetUpStaticACBdx4
+ gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+ gosub @SUAGotBlankACB
+ return
+;---
+.AACheckIfAccessible
+; is OBJECT accessible to actor?
+; result=true if it's in the same room
+ if result=false then AACIAOk
+; set result=false if not close enough
+ if JustArrived=true then AACIAOk
+ result=false ; force AAMakeLocal to be used.
+;
+.AACIAOk
+ return
+;---
+; Mike's extensions 26/6/89...
+.MCFindObjVec
+ goto @MCFindObj
+.MCDrawObjectV1Vec
+ goto @MCDrawObjectV1
+.MCNoClipSpriteVec
+ goto @MCNoClipSprite
+;---
+.AASpecialTake
+; ACTOR is taking Object (probably from ground)
+ if room<>CurrentUserRoom then @AAST1
+ gosub @getobjectposx2 ; x4 is returned as the last object in the 
+; containment chain that touches the ground
+ if x4=object then AASTNotInRoomObject ; not contained
+ if x4<MinRoomObject then @AAReachOut ; contained in normal object
+ if x4>MaxRoomObject then @AAReachOut ; contained in normal object
+;
+; object is contained in a room object
+ x1=x4
+ gosub @IsContainerX1Concealed
+ if result=true then @AAReachOut ; concealed within room object
+;
+.AASTNotInRoomObject
+ v1=object
+ gosub @SetV1ACBvec ; return v1=header for object
+ x4=v1
+ add x4,c3
+ add x4,c3
+ &x1=Hires(x4) ; x1 is height of object
+ ObjectNumber=ReachDownAnimation
+ if x1<32 then TakeReach
+ ObjectNumber=ReachUpAnimation
+ if x1>64 then TakeReach
+ gosub @AAReachOut
+ goto TakeReachDone
+.TakeReach
+;push objectnumber
+ sframes=14
+ gosub @AAReach2 ; crouch
+; gosub TakeReachDone ; take
+;pop objectnumber
+; sframes=8
+; goto @AAReach2 ; stand up
+.TakeReachDone
+ x5=65535 ; remove from structure
+ gosub @DisplayObjectx5
+cif ST
+ gosub @MCBuildRoomVec
+cend
+.AAST1
+ return
+;---
+.AASpecialDrop
+; ACTOR is dropping Object (probably to ground)
+;
+ code - ;7JUL90
+  if prep>0 then NotOnGround
+  prep=1 ; must have height of at least 16
+.NotOnGround
+  x1=prep ; height/16 at which to drop object
+  gosub @iMultX116
+  dv4=x1 ; height in pixels
+ code +
+ gosub @SetObjectToPersonPos ; drop at person floor pos + height dv4
+;
+ if room<>CurrentUserRoom then AASD1
+ ObjectNumber=ReachDownAnimation
+ if dv4<32 then DropReach
+ ObjectNumber=ReachUpAnimation
+ if dv4>64 then DropReach
+ gosub @AAReachOut
+ goto DropReachDone
+.DropReach
+;push objectnumber
+ sframes=14
+ gosub AAReach2 ; crouch
+; gosub DropReachDone ; drop
+;pop objectnumber
+; sframes=8
+; goto AAReach2 ; stand up
+.DropReachDone
+ x5=dInsertRedraw ; draw flag to use
+ gosub @DisplayObjectx5
+cif ST
+ gosub @MCBuildRoomVec
+cend
+.AASD1
+ return
+;---
+; Show reaching out animation...
+.AAReachOut
+ x1=NpcLoopTimer
+ and x1,c1
+ ObjectNumber=ReachRightAnimation
+ if x1=0 then AAReach1
+ ObjectNumber=ReachLeftAnimation
+.AAReach1
+ sFrames=3
+.AAReach2
+; fall through...
+;
+; Animate using sequence ObjectNumber+current facing direction, 
+; using sFrames number of frames...
+.AAAnimateDir
+ x1=999 ; dir unclear as yet
+.aaanimategotdir
+;
+; failsafe to prevent illegal animation sequences being 
+; used while actor is sitting
+push ObjectNumber
+ &ObjectNumber=Hires(ACBHeader)
+ gosub @IsObjectSitting
+pop ObjectNumber
+ if result=false then @aaaNotSitting ; not already sitting
+; Only allow sitting-range animations OR stand up animation
+ if ObjectNumber<StandUpAnimation then aaaNotStandUp
+ if ObjectNumber<MaxStandUpAnimation then aaaNotSitting ; OK - stand up
+.aaaNotStandUp
+ gosub @IsObjectSitting
+ if result=true then aaaNotSitting ; OK - we're doing a sit-range animation
+;
+; Npc is being told to do a standing-range animation while seated, 
+; so replace some standing animations with their seated counterparts...
+ x2=SitSpeak
+ if ObjectNumber=3060 then ForceSittingAniX2 ; sit + speak
+ if ObjectNumber=3100 then ForceSittingAniX2 ; sit + speak
+ if ObjectNumber=3110 then ForceSittingAniX2 ; sit + speak
+ x2=SitReachUp ; goto @AAARET ; x2=SitReachUp
+ if ObjectNumber=ReachUpAnimation then ForceSittingAniX2 ; sit + reach up
+ x2=SitReach
+ if ObjectNumber=ReachLeftAnimation then ForceSittingAniX2 ; sit + reach
+ if ObjectNumber=ReachRightAnimation then ForceSittingAniX2 ; sit + reach
+ if ObjectNumber<>ReachDownAnimation then @AAARet ; sit + reach
+.ForceSittingAniX2
+ ObjectNumber=x2
+.aaaNotSitting
+;
+push verb
+push prep
+push object
+push noun1
+push noun2
+push commandfinished
+push executeprocessed
+ if x1<>999 then aagotdirok
+ gosub @getvalidDirx1
+.aagotdirok
+;
+ add ObjectNumber,x1 ; add dir offset to ani sequence
+ dv1=ObjectNumber
+ &Hires(ACBHeader)=dv1 ; set hires objectnumber
+ if room<>currentuserroom then aasdNotUserRoom1
+ &x1=ACBList(ACBHeader)
+ if x1=dv1 then AAADontChangeACB
+ dx4=ACBHeader
+ gosub @AlterACB
+.AAADontChangeACB
+ gosub @BADFsFrames ; step on animation sFrames times
+.aasdNotUserRoom1
+;
+; For some reason, it's impossible to shove someone out of the 
+; way if an expression sequence is still in the ACB.
+; (Later found to be a lack of null SHIFTs)
+; To avoid this, standing animation is forced when any animation 
+; sequence, apart from sitting, is complete
+ gosub @IsObjectSitting
+ if result=true then aasdNUR1
+push object
+ object=actor
+ gosub @IsObjectDead
+pop object
+ if result=true then aasdNUR1 ; don't get up if dead
+ if objectnumber=pickupphone then aasdNUR1
+; don't stop if doing a moving animation, such as entering a room
+ if ObjectNumber<MovingAnimation then aasdNotMoving
+ if ObjectNumber<MaxMovingAnimation then aasdNUR1
+.aasdNotMoving
+;; don't stop if reaching up/down, as we may want to continue animation 
+;; after dropping/taking an object
+; if ObjectNumber<ReachUpAnimation then aasdNotReaching
+; if ObjectNumber<MaxReachUDanimation then aasdNUR1
+;.aasdNotReaching
+ gosub @GetStandingAniDv1Vec
+ gosub @getvaliddirx1
+ add dv1,x1
+ &Hires(ACBHeader)=dv1
+ if room<>currentuserroom then aasdNUR1
+ dx4=ACBHeader
+ gosub AlterACB
+.aasdNUR1
+;
+pop executeprocessed
+pop commandfinished
+pop noun2
+pop noun1
+pop object
+pop prep
+pop verb
+.AAAret
+ return
+;---
+.AlterACB
+; change ACBList(dx4) to use object dv1 instead
+ gosub @KillACBHeader ; GMJ 15/05/90 - Kill any forks
+ ObjectNumber=dv1
+ dv6=0 ;; GMJ 03/11/89 ;; 1 ; 0=non-reversed, -1=LR reversed
+ gosub @FindObjectNumber
+ object=actor
+ gosub @CalcRasterOffsetObject
+ goto @SUAChangeACB
+;---
+; call BuildAndDisplayFrames sFrames number of times
+.BADFsFrames
+ x1=sFrames
+ sFrames=0
+.AAST2
+ room=currentpos(actor)
+ if room<>currentuserroom then aasdNotUserRoom ; room changed?
+ if actor=user then aaauser1
+ if wantnewroom<>false then @aasdNotUserRoom ; user moving?
+.aaauser1
+push ACBHeader
+push ObjectNumber
+push room
+push actor
+push x1
+ if actor=user then AAADontGetInp
+ gosub @GetInput
+ gosub @ControlPlayer ; allow player to move while someone's 
+; animating GMJ 01/07/90
+ goto AAAGotInp
+.AAADontGetInp
+ gosub @ClearKBD
+.AAAGotInp
+ gosub @BuildAndDisplayFrame
+pop x1
+pop actor
+pop room
+pop ObjectNumber
+pop ACBHeader
+ if sFrames<x1 then @AAST2 ; wait for reach out to happen.
+.aasdNotUserRoom
+ return
+;---
+.PreLoadALL
+ rasteroffset=640
+ gosub PreLoadPerson ; preload jarvis
+ rasteroffset=0
+ gosub PreLoadPerson ; preload player (sets up v2-v5)
+ v1=MenuBorderObject
+ gosub @MCDrawObjectV1 ; preload menu stuff
+ v1=MenuCGAblank
+ gosub @MCDrawObjectV1
+ v1=2410
+ gosub @MCDrawObjectV1 ; preload portrait border
+ gosub @MCPreLoadCells
+ v5=4 ; dSetProtect
+ goto PreLoadPersonV5
+;---
+; preload all walking frames for person with RasterOffet
+.PreLoadPerson
+ v2=0
+ v3=0
+ v4=0
+ v6=0 ; non-reversed
+ v5=dMarkPreload
+.PreLoadPersonV5
+ v1=1
+ &WordWS(WordRasterOffset)=RasterOffset
+.PersonPreLoadLoop
+ gosub @MCDrawObjectv1
+ add v1,c1
+ x1=50
+ if v1=9 then PreLoadNewRange
+ x1=100
+ if v1=59 then PreLoadNewRange
+ x1=150
+ if v1=109 then PreLoadNewRange
+ if v1=159 then PreloadPersonDone
+ goto PersonPreLoadLoop ; continue loading this person
+;
+.PreLoadNewRange
+ v1=x1
+ goto PersonPreLoadLoop ; continue loading this person
+;
+.PreloadPersonDone
+; raster offsets for portraits are spaced at
+; intervals of 10, not 100
+ x1=RasterOffset
+ x2=10
+ gosub @DivX1X2
+push RasterOffset
+ &WordWS(WordRasterOffset)=x1 ; return value for caller as well
+ v1=2300 ; basic portrait
+ gosub @MCDrawObjectV1 ; preload portrait
+pop RasterOffset
+ &WordWS(WordRasterOffset)=c0
+ return
+;---
+;; Load tables 4 & 5 etc...
+;.LoadWSTables
+;  &list11(16)=List4HiLoadAddress
+;  &list11(18)=List4LoLoadAddress ; set up list4 load addr
+;  &list11(20)=List4HiLoadAddress
+;  &list11(22)=List4LoLoadAddress ; set up list5 load addr
+;;
+;; load b.dat / c.dat
+;  v1=4
+;  x1=66 ; 'b.dat' ; for murders 1-3
+;  if murder<4 then LoadWST
+;  x1=67 ; 'c.dat' ; for murders 4-9
+;.LoadWST
+;  v2=0 ; offset within list4
+;  gosub @LoadFile
+;  &x3=List4(28) ; get offset for list5
+;;
+;; get list 4 address (header+list5 pointer)
+;  v1=4 ; add to list 4
+;  v2=0 ; high word 0
+;  v3=30
+;  gosub @MCAddToListPtr
+;;
+;; get the list5 address (header+list5 offset)
+;  v1=28
+;  add x3,v1
+;  v1=5 ; add to list 5
+;  v2=0 ; high word 0
+;  v3=x3 ; low word
+;  goto @MCAddToListPtr
+;;---
+;.LoadStructures
+; v1=15 ; load list 15 (structureBuffer onwards)
+; x1=83 ; 's.dat'
+; v2=0 ; offset within list15
+; gosub @LoadFile ; gosub, return
+;
+; v1=15 ; use list15, please
+; gosub @MCSetUpPtrs ; tell MC about ptrs
+; gosub @ReadObjectAreas ; read mincell, minraster, mincompressed
+; StartStructureBuffer=32
+; goto @AAEssentialInit ; gosub, return
+;-------
+.ErrorHandler
+ cif pc
+  return
+ cend
+
+
+cif DebugCheat
+
+ push v1
+cif st
+ gosub @SetUpPhysicalTextPtr
+cend
+
+cif pc
+ v1=7
+ gosub @MCEnableTextBuffer
+cend
+
+ &WordWS(WordCursorXpos)=c0
+ &WordWS(WordCursorYpos)=c0
+ &v1=WordWS(WordErrorNumber)
+code -
+ prs "Err ("
+ print v1
+ message cr ;'DoCr' ignores newlines; this is 'flush'
+ prs ")"
+code +
+pop v1
+ code -
+ print v1
+ message space
+ code +
+.nottalkingyet
+
+cend
+ return
+;---
+; Display talk portrait after a delay, and remove again later
+.HandleTalkPortrait
+ if persontalking=false then @nobodytalking ; nobody talking
+ x1=currentpos(persontalking)
+ sub portraittimer,c1 ; decrement talking timer
+ if portraittimer>26 then nottalkingyet
+ if portraittimer<25 then @PortraitBeenDrawn
+;
+; portrait not yet been drawn - draw portrait if person is still here
+ if x1<>currentuserroom then @ScrapPortrait ; otherwise scrap the action
+ if ACBStart=ACBSearchStart then @ScrapPortrait ; used in menu mode
+;
+; do text message seperately to drawing portrait, so that we 
+; can use the portrait code from elsewhere without using a message
+; by initialising the timer to 26
+ if portraittimer<26 then @doneportmessage
+code -
+ message cr ; talk message
+code +
+ m1=portraitmessage
+ gosub @Printm1dot
+ conversant=persontalking
+ gosub @TalkedToConversantVEC
+; Don't do portrait after murder, as these suggest conversation 
+; triggers, and we don't want "noise" conversations after the 
+; murder
+ if vMurderBeenDone=true then @ScrapPortrait
+ return
+;
+; Make player face npc who's talking if we're just standing still
+.doneportmessage
+push noun1
+push actor
+push ACBheader
+ &x1=ACBList(PlayerACB)
+ if x1<StandingAnimation then UserDontFaceConversant
+ if x1>MaxStandingAnimation then UserDontFaceConversant
+ x1=ACBStatus
+ add x1,PlayerACB
+ x1=ACBList(x1)
+ if x1<>0 then UserDontFaceConversant
+ actor=user
+ ACBHeader=PlayerACB
+ noun1=persontalking
+ gosub @FaceNoun1
+.UserDontFaceConversant
+;
+; make npc face player while still talking
+ actor=persontalking
+ gosub @SetActorACB
+ &x1=ACBList(ACBHeader)
+ if x1<MovingAnimation then talknotfacing
+ if x1>MaxStandingAnimation then talknotfacing
+ noun1=user
+ gosub @FaceNoun1vec ; face user
+.talknotfacing
+pop ACBHeader
+pop actor
+pop noun1
+;
+; now draw the portrait
+ v1=persontalking
+ gosub @Setv1ACBvec ; v1 = ACB of person who's talking
+ add v1,c4
+ &v2=ACBList(v1) ; v2 = x pos of person who's talking
+ portraitx=208 ; 224
+ if v2<154 then GotPortraitX
+ portraitx=0
+.GotPortraitX
+push noun1
+ noun1=persontalking
+push RasterOffset
+ dv5=dInsertRedraw
+ dv2=portraitx
+ dv4=240 ; 224 ; h
+ gosub @DrawPortraitFrameVecXH
+ dv1=2300 ; basic portrait
+.HTP1
+ dv2=16 ; x
+ add dv2,portraitx
+push dv2
+ dv4=224 ; h
+ gosub @DrawPortraitVecXH
+ dv1=2905
+pop dv2
+ dv3=240 ; z - right at the front
+ dv4=224 ; h
+ gosub @SetUpACBDv1
+ TalkACB=dx4
+pop RasterOffset
+ &WordWS(WordRasterOffset)=RasterOffset
+pop noun1
+.Stilltalking
+.nobodytalking
+ return
+;
+; portrait has been drawn
+.PortraitBeenDrawn
+ if x1<>currentuserroom then RemovePortrait ; person gone, so remove
+ if ACBStart=ACBSearchStart then RemovePortrait ; used in menu mode
+ if portraittimer>0 then @stilltalking ; still talking
+.RemovePortrait
+ if persontalking=false then ScrapP1
+ if portraittimer>25 then ScrapPortrait ; *** cause restart to 
+; crash if try to remove a portrait when it hasn't yet been drawn ***
+push noun1
+ noun1=persontalking
+push RasterOffset
+ dv5=dremoveRedraw
+ dv2=portraitx
+ dv4=232 ; 216 ; h
+ gosub @DrawPortraitFrameVecXH
+ dv1=2300 ; basic portrait
+ dv2=16 ; x
+ add dv2,portraitx
+ dv4=224 ; h
+ gosub @DrawPortraitVecXH
+ &ACBList(TalkACB)=c0 ; kill acb
+pop RasterOffset
+ &WordWS(WordRasterOffset)=RasterOffset
+pop noun1
+.ScrapPortrait
+ persontalking=false
+.ScrapP1
+ portraittimer=0
+.taOK
+ return
+;---
+.MCBuildRoomVec
+ v1=0
+ v2=0
+ goto @MCBuildRoom
+;---
+.FaceNoun1Vec
+ goto @FaceNoun1
+.GetActorFromACBVec1
+ goto @GetActorFromACB
+.StopVec1
+ goto @Stop
+.SetUpRoomVec
+ goto @SetUpRoom
+.ControlPeopleVec
+ goto @ControlPeople
+.InitFloorsVec
+ goto @InitFloorsVec1
+.MCosrdchVec0
+ goto @MCosrdch
+.MCoswrchV1Vec0
+ goto @MCoswrchV1
+.MCClearRectangleVec0
+ goto @MCClearRectangle
+.MCDisplayRoomVec
+ goto @MCDisplayRoom
+.ClearKBDVEC
+ goto @ClearKBD
+.MCloadFileVec1
+ goto @MCLoadFile
+.SetUpDotDatVec1
+ goto @SetUpDotDat
+.MCSetPaletteVec
+ goto @MCSetPalette
+.isroomx1involvedVEC
+ goto @isroomx1involved
+.SpecialConjugateVEC
+ goto @SpecialConjugate
+.WriteHiresCoordsVEC
+ goto @WriteHiresCoords
+.MCInit3dVEC
+ goto @MCEmptyRoom
+.SIsRoomEmptyExceptUserV
+ goto @SIsRoomEmptyExceptUser
+.MCCallOverlayV
+ goto @MCCallOverlay
+.MCLoadGamedataV
+ goto @MCLoadGamedata
+.MCOpenSpriteFileV
+ goto @MCOpenSpriteFile
+.MCUpdateScreenVEC
+  goto @MCUpdateScreen
+.MCCopyScreenToBufferVec
+ goto @MCCopyScreenToBuffer
+.MCEmptyRoomVec
+ goto @MCEmptyRoom
+.StartMasonryFallingVEC
+ goto @StartMasonryFalling
+;---
+.IncrementTime
+code -
+ gosub iIncrementTime ; GMJ 7jul90 iIncrementMinute must return code -
+code +
+ return
+;
+ code -
+.iIncrementTime
+ add second,c1
+ if second<30 then DoneIT
+;
+.iIncrementMinute
+ second=0
+ shownewtime=true
+ add minute,c1
+ if minute<60 then DoneIT
+.iIncrementHour
+ minute=0
+ add hour,c1
+ if hour<13 then DoneIT
+ hour=1
+.DoneIT
+code +
+ if TimeLimit=0 then NoTimeLimit
+ add TimeLimit,c1
+.NoTimeLimit
+code -
+ return
+code +
+;---
+.TimePressure
+ if TimeLimit=0 then TPret
+ m1=1500
+ if TimeLimit=1800 then TPwarning ; 0:30
+ m1=1501
+ if TimeLimit=3600 then TPwarning ; 1:00
+ m1=1502
+ if TimeLimit=5400 then TPwarning ; 1:30
+ m1=1503
+ if TimeLimit=7200 then TPwarning ; 2:00
+ m1=1504
+ if TimeLimit=9000 then TPwarning ; 2:30
+ if TimeLimit<10800 then TPret
+; out of time...
+ m1=1505
+ gosub TPwarning
+ SubGame=11 ; do "lose" sub game
+.TPret
+ return
+;---
+.TPwarning
+ persontalking=inspector
+ portraitmessage=0 ; no message
+ portraittimer=26 ; display portrait immediately, & don't print message
+ gosub @DoTextWindow ; warning in a box
+ goto @BuildAndDisplayFrame
+;---
+; Routine to call the arcade sequence SubGame
+; On exit, WON=true if the sam won the sub-game
+;
+.DoSubGame
+ if SubGame=0 then @sgRET ; no sub games waiting
+;
+; erase menu image & bottom text line (sub game window does 
+; not cover this line)
+code -
+ message blankline
+ message blankline
+ message blankline
+ message blankline
+ message blankline
+code +
+ sFrames=8
+ gosub @FullScroll ; scroll full text window
+ gosub @BuildAndDisplayFrame
+ gosub @BuildAndDisplayFrame ; show both frames
+ gosub @MCCopyScreenToBufferVec ; save room image
+ textboxdisplayed=0
+ v1=65 ; 'a' ; gamedatA is arcade games
+ gosub @MCLoadGamedataV
+ &WordWS(WordTextBufferOffset)=c0
+ v1=69 ; 'e' ; acodE is arcade games
+ v2=12 ; offset into AcodeFunctions
+ won=false ; just in case!
+code -
+ SuspendScroll=true
+ message cr ; flush normal text buffer
+ SuspendScroll=false
+code +
+ gosub @MCCallOverlayV ; call the sub-game handler
+code -
+ message blankline ; flush normal text buffer
+code +
+ PlayerACB=64 ; corrupted in maze game
+ TextBoxDisplayed=0
+ gosub @initfloorsVec
+ if SubGame>5 then sgretNewRoom ; not a game - e.g. load/save routines
+ if won=true then WonSubGame ; won - show room etc.
+;
+; lost - do delay
+.LoseSubGame
+;
+; first, increment clock by 1 hour
+code -
+ gosub @iIncrementHour
+code +
+ if TimeLimit=0 then NoIncTime
+ x1=3600
+ add TimeLimit,x1 ; 3600 secs = 1 hour
+.NoIncTime
+;
+; then, wait murder/wait 10 mins
+ samunconcious=2 ; knocked out until murder
+ if vMURDERBEENDONE=false then sgret
+ samunconcious=3 ; wait 10 mins
+.sgret
+ SubGame=0
+ return
+;
+.WonSubGame
+; sam collects objects within the maze
+ if SubGame<>1 then NotWonMaze
+ if MazeObjectTaken=0 then NotWonMaze ; didn't pick any objects up
+ currentpos(mazeobjectTaken)=c1 ; user
+ hicurrentpos(mazeobjectTaken)=c4 ; carried
+.NotWonMaze
+ if SubGame=4 then sgret1
+.sgretNewRoom
+ gosub @DisplayRoom ; won - show room (EXCEPT RIDGE GAME)
+.sgret1
+ SubGame=0
+ return
+;---

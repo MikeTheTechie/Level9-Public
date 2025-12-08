@@ -1,0 +1,1183 @@
+; Grange Murder verb code. Graham M Jones 7/6/89.
+;
+ CONST
+; QStackSize=16 ; size of stack to test repeated 'ask about' questions
+; TotalQStackSize=191 ; (QStackSize*MaxNpcPlus1)-1
+;
+ begin
+;
+.DisplayCurrentMenuVec
+code -
+ gosub @DisplayCurrentMenu
+code +
+ return
+;---
+.MCOSRdChvec
+ goto @MCosrdchVec0
+;---
+.ReadJoystickMouseVec
+ goto @ReadJoystickMouse
+;---
+.EmulatekeypadVec
+code -
+ gosub @EmulateKeypad
+code +
+ return
+;---
+.RealToPhysicalDirVec
+ goto @RealToPhysicalDir
+;---
+.DisplayRoomVec
+ goto @DisplayRoom
+;---
+.SetUpLogicalTextPtrVec
+ goto @SetUpLogicalTextPtr
+;---
+.DoCrVec
+ goto @DoCr
+;---
+.CloseDownVec
+ goto @CloseDown
+;---
+.WaitForFrameVec
+ goto @WaitForFrame
+;---
+.DisplayFrameVec
+ goto @DisplayFrame
+;---
+.DivX1X2vec
+ goto @DivX1X2
+;---
+.SinglePushFifoVec
+ goto @SinglePushFifo
+;---
+.SetV1ACBVEC
+ goto @SetV1ACB
+;---
+.SetV1ActorVEC
+ goto @SetV1Actor
+;---
+.SetActorAttributesVec
+ goto @SetActorAttributes
+;---
+.MenuVec
+ goto @Menu
+;---
+.FcNewRoomdv1VEC
+ goto @FcNewRoomdv1VEC1
+;---
+.PushNpcAwayVec
+ goto @PushNpcAway
+;---
+.DisplayBackdropVec
+ goto @DisplayBackdrop
+;---
+.GDreadSquareVec
+ goto @GDReadSquareVec1
+;---
+.GDpointOnMapVec
+ gosub @GDpointOnMapVec1
+;---
+.GDQuadMaskVec
+ goto @GDQuadMaskVec1
+;---
+.BuildAndDisplayFrameVec
+ goto @BuildAndDisplayFrame
+;---
+.ABSObjectArrivesVEC
+ goto @ABSObjectArrives
+;
+.CALLVERB
+; GIVEN VERB,PREP,NOUN1,NOUN2,
+; DO THE JUMP-TABLE INDEXING ON THE VERB
+code -
+ gosub CV1
+code +
+ return
+;
+code -
+.CV1
+ object=noun1
+ jump verbtable verb
+.noverb
+ return
+;---
+.verbtable
+ data @noverb,@noverb,@noverb,@noverb ; 0-3
+ data @noverb,@noverb,@noverb,@noverb ; 4-7
+ data @noverb,@noverb,@noverb,@noverb ; 8-11
+ data @noverb,@noverb,@noverb,@noverb ; 12-15
+ data @noverb,@noverb,@noverb,@noverb ;16-19
+ data @noverb,@noverb,@noverb,@noverb ; 20-23
+ data @noverb,@noverb,@noverb,@noverb ; 24-27
+ data @noverb,@noverb,@noverb,@noverb ; 28-31
+ data @noverb,@Vring ; (32=parsewait called elsewhere)
+ data @noverb,@noverb ; 34-35
+ data @lockdoors,@noverb,@unlockdoors,@noverb ; 36-39
+ data @noverb,@noverb,@noverb,@noverb ; 40-43
+ data @noverb,@noverb,@noverb,@noverb ; 44-47
+ data @sit,@noverb,@noverb,@noverb ; 48-51
+ data @noverb,@noverb,@noverb,@noverb ; 52-55 
+ data @noverb,@noverb,@noverb,@noverb ; 56-59 
+ data @noverb,@noverb,@noverb,@noverb ; 60-63
+ data @noverb,@noverb,@noverb,@noverb ; 64-67
+ data @noverb,@noverb,@noverb ; 68-70
+ data @noverb,@noverb,@noverb,@noverb,@noverb ; 71-75
+ data @noverb,@noverb,@noverb,@noverb ; 76-79
+ data @noverb,@noverb,@noverb,@noverb,@noverb,@noverb ; 80-85
+ data @noverb,@noverb,@noverb,@noverb ; 86-89
+ data @noverb,@noverb,@noverb ; 90-92
+ data @noverb,@noverb ; 93-94
+ data @noverb,@noverb,@noverb,@noverb,@noverb ; 95-99
+;
+ data @examine,@cut,@noverb,@spin ; 100-103
+ data @noverb,@take,@wear,@drop ; 104-107
+ data @put,@noverb,@noverb,@give ; 108-111
+ data @noverb,@noverb,@open,@close ; 112-115
+ data @hide,@noverb,@noverb,@noverb ; 116-119
+ data @noverb,@noverb,@noverb,@noverb ; 120-123
+ data @noverb,@answer,@dial,@drink ; 124-127
+ data @shoot,@eat,@noverb,@noverb ; 128-131
+;---
+; Lock all doors in the room, so as to make it inaccessible
+.LockDoors
+code +
+ gosub @GetDoorFlags
+ or x2,x3 ; mask in "door locked" flag
+code -
+ list4(x1)=x2
+ return
+;---
+.UnlockDoors
+code +
+ gosub @GetDoorFlags
+ and x2,x4 ; mask out "door locked" flag (bit 6, i.e. 64)
+code -
+ list4(x1)=x2
+ return
+;---
+; return x1=list4 offset of roomobjectflag for this
+; x2=byte for this roomobjectflag
+; x3=bit value for door flag
+; x4=bit mask for door flag
+; result=0 if door unlocked, 64 if door locked
+code +
+.GetDoorFlags
+ &x1=List4(46)
+code -
+ add x1,room
+ x2=list4(x1) ; use roomobjectflags list
+ x3=64
+ x4=191 ; mask for "door locked" flag (bit 6, i.e. 64)
+ result=64
+code +
+ and result,x2 ; set if door is locked
+ return
+code -
+;---
+; spin the globe
+.spin
+ message cr
+code +
+ gosub @PrintActorActionDot
+ gosub @AAreachout
+ v1=object
+ gosub @SetV1ACB
+ add v1,c2 ; point to x pos of globe
+ &dv2=Hires(v1)
+ add v1,c2 ; point to z pos of globe
+ &dv3=Hires(v1)
+ add v1,c2 ; point to h pos of globe
+ &dv4=Hires(v1)
+ dv1=2937 ; spinning globe
+ dv5=dInsertRedraw
+ dv6=0 ; non-reflected
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=c0
+ gosub @SetUpACBDv1
+code -
+ return
+;---
+.cut
+code +
+ gosub @PrintActorActionDot
+code -
+ return
+;---
+.wear
+code +
+ gosub @PrintActorActionDot
+ sFrames=7
+ ObjectNumber=SamUsesPerfumeAni
+ x1=0 ; no dir
+ gosub @AAAnimateGotDir
+code -
+ return
+;---
+.drink
+code +
+ gosub @PrintActorActionDot
+code -
+ return
+;---
+.shoot
+code +
+ gosub @PrintActorActionDot
+ sFrames=7
+ ObjectNumber=SamFiresGunAni
+ x1=0 ; no dir
+ gosub @AAAnimateGotDir
+code -
+ return
+;---
+.eat
+code +
+ gosub @PrintActorActionDot
+code -
+ return
+;---
+.take
+code +
+;
+; take object from an enclosed room object?
+ gosub @getobjectposx2 ; return x4=last object in containment chain
+ if x4<MinRoomObject Then NotTakeFromRoomObject
+ if x4>MaxRoomObject Then NotTakeFromRoomObject
+ x1=x4
+ gosub @IsObjectx1Open ; is room object open?
+; in the event that the room object is open, the containments 
+; will have a pos,hipos as if they were simply in the current room, 
+; as set up in DisplayAllObject
+ if result=true then NotTakeFromRoomObject
+push noun1
+code -
+ verb=iOPEN
+ object=x4
+ descriptionmode=iNONE
+ gosub @Open ; open the room object, giving all it's containments 
+; a pos,hipos as if simply in the current room
+ verb=iTAKE
+ descriptionmode=normaldescriptionmode
+ noun2=nullobject
+code +
+pop noun1
+ object=noun1
+.NotTakeFromRoomObject
+;
+ gosub @SpecialTakes
+ if result=false then takeret
+ gosub @AASpecialTake
+;
+; save old pos so that we can see if it's been taken from someone
+ x1=hicurrentpos(object)
+ x2=currentpos(object)
+push x1
+push x2
+;
+ POS=ACTOR
+ HIPOS=CARRIED
+ GOSUB @MOVEOBJECT
+;
+pop x3
+pop x1
+ if x1=carried then TakeFromPerson
+ if x1<>worn then NotTakeFromPerson ; take from PERSON?
+.TakeFromPerson
+ x2=x3
+ goto TakeFromx2
+;
+; MOVEOBJECT returns x2=room object taken from, or zero
+.NotTakeFromPerson
+ if x2=0 then NotTakeFrom ; take from ROOM OBJECT?
+.TakeFromX2
+ prep=ipfrom
+ noun2=x2 ; actor took noun1 FROM NOUN2
+.NotTakeFrom
+ GOSUB @PrintActorActionDot
+.takeret
+code -
+ return
+;---
+.drop
+; Does object look sensible on the ground?
+ gosub CanObjectBeDropped
+ if result=false then dropdead ; new command set up
+code +
+ gosub @AASpecialDrop ; prep is height to drop object at (used in 
+; racetracks)
+ prep=0
+ POS=room
+ HIPOS=0
+ GOSUB @MOVEOBJECT
+ GOSUB @PrintActorActionDot
+code -
+.dropdead
+ return
+;---
+; Can object be dropped on the ground?
+; If not, RESULT=FALSE & new command is set up to 
+; put object in a container
+.CanObjectBeDropped
+ result=true
+;
+;=====
+; Coats look silly when dropped
+;; if object=shotgun then hangcoatup
+ if object<minclothes then @COBDRet
+ if object>maxclothes then @COBDRet
+ if object=pinnafore then @COBDRet
+; Find a suitable container for the coat
+.HangCoatUp
+ verb=iPUT
+ noun2=noun1 ; noun2 is the CONTAINMENT-to-be
+ prep=ipON
+ noun1=hatstand ; hatstand is first choice
+ x1=currentpos(noun1)
+ if x1=room then COBDNewCommand
+ prep=ipIN
+ noun1=wardrobe ; wardrobe is first choice
+ x1=currentpos(noun1)
+ if x1=room then COBDNewCommand
+ noun1=chest ; chest is second choice
+ x1=currentpos(noun1)
+ if x1=room then COBDNewCommand
+;=====
+;
+; there is no suitable container in this room
+ if actor<>user then COBDFalse
+ message cr
+ m1=2841 ; no suitable container
+code +
+ gosub @printm1dot
+code -
+.COBDFalse
+ result=false
+.COBDRet
+ return
+;
+.COBDNewCommand
+code +
+ gosub @intelligentpop ; pop the DROP command
+ gosub @SinglePushFifo ; push the PUT command
+; GMJ 15/05/90 ; nowadays, all verb commands are popped after calling them, so it is 
+; GMJ 15/05/90 ; necessary to push the PUT command twice, as one will shorly be lost
+; GMJ 15/05/90  gosub @SinglePushFifo ; push the PUT command
+ commandfinished=false ; GMJ 15/05/90 
+ executeprocessed=false ; GMJ 15/05/90 
+code -
+ goto COBDFalse
+;---
+.EXAMINE
+ noun2=nullobject ; to avoid confusing data.
+ if actor=user then examine0
+code +
+ gosub @printactoractiondot
+code -
+ goto @examret
+;
+.examine0
+ message cr
+ IF NOUN1<MAXOBJECTPLUS1 THEN EXAMINE1
+ M1=2112 ; can't tell you any more
+code +
+ gosub @printM1
+code -
+ goto @examret
+;
+.EXAMINE1
+code +
+ GOSUB @SPECIALPREEXAMINE
+code -
+ object=noun1 ;***** GMJ 30th August 1990
+ IF RESULT=TRUE THEN DoneExamMess ; something prevents main examine message
+ verb=iam ; e.g. 'the knife is..' or 'you are..'
+code +
+ gosub @printOBJECTverb
+code -
+ M1=EXAMINEMESSAGES
+ ADD M1,OBJECT
+code +
+ gosub @printM1dot
+code -
+.DoneExamMess
+ processed=false
+code +
+ GOSUB @SPECIALEXAMINE
+code -
+ if processed=true then examret
+ if object>MaxNpc then NotExamNpc
+; currently examining an npc...
+ if prep=0 then examret ; not a "search" command
+code +
+ gosub @AAReachOut ; do "search animation"
+code -
+.NotExamNpc
+ SEARCHPOS=OBJECT
+ HISEARCHPOS=NONSPECIFIC
+code +
+ GOSUB @PRINTOBJECTS
+code -
+ if object>MaxNpc then examret
+;
+; set "frisk" flag so that npc contents can be examined and noted 
+; when we return to the menu
+ if TotalObjectsPrinted=0 then ExamRet
+ EnableFrisk=noun1
+;
+.examret
+ return
+;---
+.Vring
+;
+;=====
+ m1=2896
+ if object=radio then playinstrument
+ if object<>piano then NotPlayPiano
+ m1=2869
+.playinstrument
+ message cr
+code +
+ gosub @ActorM1Dot ; <actor> played the piano
+ gosub @AAReachOut
+ nextmusic=36 ; piano music
+code -
+ return
+.NotPlayPiano
+;---
+ if object<>doorbell then ringret
+code +
+ gosub @PrintActorActionDot
+code -
+ if room=currentuserroom then ringbell1
+ message cr
+ message 2800 ; omni message for doorbell ringing
+.ringbell1
+code +
+ gosub @AAreachout
+;
+; does player ring bell voluntarily?
+code -
+ if actor<>user then usernotring
+ m1=2827 ; a voice shouted, "come in"
+code +
+ gosub @printm1dot
+code -
+ goto ringret
+.usernotring
+;
+ FrontDoorOpened=false ; new arrivals wait for front door to be opened
+ object=jarvis
+ x6=110
+ add x6,actor
+code +
+ gosub @newracetrackforobject ; send jarvis to answer the door
+code -
+;=====
+;
+.ringret
+ return
+;
+;=====
+; Answer telephone...
+.Answer
+ if object<>telephone then answerret
+code +
+ gosub @printactoraction
+ m1=2530
+ gosub @printm1dot ; ...and listened
+code -
+ gosub @StartPickUpPhone
+.answerret
+.dialret
+ return
+;---
+; Dial telephone...
+.Dial
+ if object<>telephone then dialret
+code +
+ gosub @printactoractiondot
+code -
+ gosub @StartPickUpPhone
+;
+; does player dial voluntarily?
+ if actor<>user then usernotdial
+ if executingracetrack<>false then usernotdial
+ m1=2828 ; Sam breathed heavily and put the phone down.
+code +
+ gosub @printm1dot
+code -
+.usernotdial
+ return
+;---
+.StartPickUpPhone
+ sFrames=3
+ ObjectNumber=PickUpPhone
+ x1=0 ; no dir
+code +
+ gosub @AAAnimateGotDir
+code -
+.SPUPRet
+ return
+;=====
+;
+;---
+.sit
+ if room<>currentuserroom then @sitNotCUroom
+ message cr
+;
+; is chair vacant?
+ v2=noun1
+code +
+ gosub @IsChairV2Vacant
+code -
+ if result=true then SitOk1
+ noun1=nullobject ; find ANY chair
+code +
+ gosub @SinglePushFifo
+code -
+ return
+.SitOk1
+;
+; Don't sit on bed if body here!
+ if noun1<>bed then NotSitOnBody
+ if vMurderBeenDone=false then NotSitOnBody
+ v1=currentpos(involvednpc1)
+ if v1<>room then NotSitOnBody
+ if actor<>user then SamNotSitOnBody
+ message 2867
+.SamNotSitOnBody
+ goto @sitret
+.NotSitOnBody
+;
+code +
+ gosub @printactorverb
+ gosub @printdot
+ v1=object
+ gosub @SetV1ACB
+push v1
+ &dv1=ACBList(ACBHeader)
+ add v1,c16 ; v1=points to x,z,h pos for the containment, i.e. actor
+ gosub @RepositionHiresV1 ; reposition ACBheader at co-ords in hires(v1)
+pop v1
+ x2=14
+ add v1,x2
+ &x1=Hires(v1) ; get direction to face
+ if x1<>0 then gotsitdir
+ gosub @getvaliddirx1 ; if no specific sit dir, make one up!
+.gotsitdir
+code -
+ x2=startreversaltable
+ add x2,x1
+ x1=list5(x2) ; sit in reverse dir!
+ sFrames=3
+ ObjectNumber=NewSitAnimation
+code +
+ gosub @AAAnimateGotDir
+code -
+.hideNotRoomObject
+.sitret
+ return
+;
+; sit when not in user's room
+.SitNotCUroom
+ x1=SitSouthAnimation
+code +
+; set default sitting south, so that we're shown at the correct 
+; chair position in displayallobject
+ &Hires(ACBHeader)=x1
+code -
+.hide ;**********
+ return
+;---
+;.hide
+; message cr
+; if noun1<MinRoomObject then hideNotRoomObject
+; if noun1>MaxRoomObject then hideNotRoomObject
+;code +
+;; NOUN1 is a ROOM OBJECT
+; gosub @AAreachout
+; object=noun1
+;push object
+; gosub @isObjectOpen
+; if result=true then HideNoOpen
+; gosub @SetOpenFlags ; make sure the container is open
+; verb=0 ; don't print any messages
+; gosub @ShowOpenStatus
+;;
+;.HideNoOpen
+; ObjectNumber=HideAnimation ; enter (wardrobe)
+; x1=0
+; sFrames=1
+; gosub @AAAnimateGotDir
+;pop object ; object=noun1
+;code -
+; verb=iHIDE
+; PlayerHidden=true
+; goto @Close
+;---
+.open
+;
+; sub-game to open doctor's bag
+ if actor<>user then @notopenbag
+ if object<>docbag then @NotOpenBag
+ x1=currentpos(william)
+ if x1<>currentuserroom then OkOpenBag1
+ message 2897 ; leave it alone!
+ return
+.OkOpenBag1
+code +
+ SubGame=5 ; open bag
+ gosub @DoSubGame
+ object=docbag ; is corrupted when redisplaying current room
+ if won=true then OkOpenBag ; failed to open bag
+code -
+ return
+code +
+;
+; open the bag...
+.OkOpenBag
+ gosub @SetOpenFlags
+; sam takes contents
+code -
+ TotalObjectsPrinted=0
+ x1=MaxNpcPlus1
+.EmptyDocBag
+ x2=currentpos(x1)
+ if x2<>docbag then NotInDocBag
+ x2=hicurrentpos(x1)
+ if x2=0 then NotInDocBag
+; give contents to sam
+ currentpos(x1)=c1 ; user
+ hicurrentpos(x1)=c4 ; carried
+ TotalObjectsPrinted=1 ; taken something
+
+; object=user
+; searchpos=user
+; hisearchpos=nonspecific
+; gosub @printobjects
+
+.NotInDocBag
+ add x1,c1
+ if x1<MinRoomObject then EmptyDocBag
+ return
+.NotOpenBag
+;
+; user can't open wardrobe while sue's in it (murder 5)
+ if actor<>user then notopenwardrobe
+ if room<>95 then notopenwardrobe
+ if object<>wardrobe then notopenwardrobe
+code +
+ &x1=list4(44) ; special objects table
+code -
+ add x1,c4 ; 4=sue(2)*2 because word based table
+ x2=List4(x1) ; is sue contained in room object
+ if x2<>wardrobe then notopenwardrobe
+ message 2881
+ return
+.notopenwardrobe
+;
+code +
+.OpenBagC
+ gosub @IsObjectOpen
+ if result=true then openret ; already open
+ gosub @SetOpenFlags
+ gosub ShowOpenStatus ; open the object
+.openret
+code -
+ return
+;---
+.close
+code +
+ gosub @IsObjectOpen
+ if result=false then closeret ; already closed
+ gosub @ClearOpenFlags
+ gosub ShowOpenStatus ; close the object
+.closeret
+code -
+ return
+;---
+; Display 'open' panel in front of OBJECT if required
+; Set VERB=0 if no animation & messages are to be used
+code +
+.ShowOpenStatus
+ noun1=object ; noun1 is not set up when called from displayallobjects
+ if room<>currentuserroom then @OpenLogic
+ v1=Object
+ gosub @SetV1ACB
+push v1
+ if verb=0 then NoOpenCloseAni
+ if verb=ihide then NoOpenCloseAni
+ x1=14
+ add v1,x1
+ &x1=Hires(v1) ; get direction in which to face
+ sFrames=3
+ ObjectNumber=ReachLeftanimation
+ gosub @AAAnimateGotDir
+.NoOpenCloseAni
+pop x1
+;
+; show open panel/closed panel
+ &dv1=Hires(x1) ; get raster number
+ add x1,c2
+ &dv2=Hires(x1) ; x
+ add x1,c2
+ &dv3=Hires(x1) ; z
+ add dv3,c1
+ add x1,c2
+ &dv4=Hires(x1) ; h
+ add dv4,c1
+ add x1,c16
+;
+; GMJ 30/11/89 Broken window is already reversed!
+ dv6=0
+ if dv1=1686 then noreversedwindow
+ &dv6=Hires(x1) ; get reversalflag
+.noreversedwindow
+; GMJ 30/11/89
+;
+;; Fridge panel should be placed further forward
+; if noun1<>fridge then notfpanel
+; add dv3,c16
+; add dv4,c16
+;.notfpanel
+;
+ &x1=list4(42) ; list of raster number/ani sequence
+.SearchOpenAni
+ &x2=list4(x1) ; get raster to test
+ if x2=0 then @NoOpenAni
+ add x1,c2
+ &x3=list4(x1) ; get ani sequence to use
+ add x1,c2
+ if x2<>dv1 then SearchOpenAni ; rasters don't match
+;
+; found an ani sequence to use...
+ dv1=x3
+ gosub @IsObjectOpen
+ dv5=dInsertRedraw
+ if result=true then ShowOpenPanel
+ if verb=0 then NoOpenAni
+ dv5=65535 ; remove from structure
+.ShowOpenPanel
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=RasterOffset
+ gosub @MCDrawObjectdv1 ; show new grafix
+.NoOpenAni
+;
+.OpenLogic
+; show contents of wardrobe/chest or whatever
+ if object<MinRoomObject then @OpenNotRoomObject
+ if object>MaxRoomObject then @OpenNotRoomObject
+;
+ if verb=0 then NoOpenCloseMess
+ gosub @printactoraction ; actor opened the wardrobe
+ if verb<>iopen then NoOpenCloseMess
+ m1=2830
+ gosub @printm1 ; and found
+.NoOpenCloseMess
+push object
+ &x1=list4(44) ; special objects table
+; x2=40
+; add x1,x2 ; Start at MinAllObject (object 20)
+; object=MinAllObject
+ object=0 ; GMJ 30th August 1990 - people are put in wardrobes!
+ totalobjectsprinted=0
+.GetSpecialObjectPos
+ x2=list4(x1) ; container type
+ add x1,c1
+ x3=list4(x1) ; room of container
+ add x1,c1
+ if x2<>noun1 then @NoSpecialObject
+ if x3<>room then @NoSpecialObject
+push x1
+;
+; OBJECT is contained within room object NOUN1
+ hicurrentpos(object)=c0
+ currentpos(object)=c0
+ x1=Noun1
+ gosub @IsObjectx1Open
+ if result=false then ObjectIsEnclosed
+ currentpos(object)=room
+.ObjectIsEnclosed
+;
+; set hires co-ords for the object
+ if room=currentuserroom then ShowContainment
+; Containment not in user room, and we don't yet know the pos 
+; of the wardrobe, so place containments at the npc's pos
+ dv4=PeopleHeight
+ gosub @SetObjectToPersonPos ; drop at person floor pos + height dv4
+ goto @objectisinroom
+;
+; Containment is in user room, so display at the containment pos 
+; given to us by the container
+.ShowContainment
+ v1=Object
+ gosub @SetV1ACB
+ &ObjectNumber=Hires(v1)
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=c0
+push v1
+ gosub @FindAndDecode ; get ysize of containment
+pop v1
+ add ysize,ysize
+ add ysize,ysize
+ add ysize,ysize
+ add ysize,ysize ; convert to pixels
+ v2=v1
+ add v2,c2 ; v2=coords for CONTAINMENT
+ v3=v1
+ add v3,c8 ; v3=access coords for CONTAINMENT
+ v1=Noun1
+ gosub @SetV1ACB
+ add v1,c16 ; v1=containment coords for CONTAINER
+ &dv2=Hires(v1) ; x
+ &Hires(v2)=dv2
+ &Hires(v3)=dv2
+ add v1,c2
+ add v2,c2
+ add v3,c2
+ &dv3=Hires(v1) ; z
+ &Hires(v2)=dv3
+ &Hires(v3)=dv3
+ add v1,c2
+ add v2,c2
+ add v3,c2
+ &dv4=Hires(v1) ; h
+; containments are placed at the base of the container, 
+; so we must add the containment's height
+ add dv4,ysize
+ &Hires(v2)=dv4
+ x1=peopleheight
+ &Hires(v3)=x1
+;
+; set access direction
+ add v3,c2
+ x1=6
+ sub v1,x1
+ &x1=Hires(v1) ; facing direction
+ &Hires(v3)=x1 ; set access direction
+;
+; Only certain containers have their contents visible...
+ x1=noun1
+ gosub @IsContainerx1Concealed
+ if result=true then objectisvisible
+ gosub @IsObjectx1Open
+ x5=dInsertRedraw
+ if result=true then ShowOpenContents
+ if verb=0 then objectisvisible
+ x5=65535 ; remove from structure
+.ShowOpenContents
+ RasterOffset=0
+ &WordWS(WordRasterOffset)=RasterOffset
+ gosub @DisplayObjectx5
+;
+.objectisvisible
+ if verb<>iopen then objectisinroom
+ m1=space
+ gosub @printm1
+ if totalobjectsprinted<1 then OIVfirstObject
+ m1=and
+ gosub @printm1
+.OIVfirstObject
+ x1=object
+ gosub @printanobjectx1
+ add totalobjectsprinted,c1
+.objectisinroom
+pop x1
+;
+.NoSpecialObject
+ add object,c1
+ if object<MinRoomObject then @getSpecialObjectPos
+ if verb<>iopen then DoneContentsList
+ if totalobjectsprinted<>0 then DoneContentsList
+ m1=2831 ; nothing (empty)
+ gosub @printm1
+.DoneContentsList
+ if verb=0 then DCL1
+ gosub @printdot
+.DCL1
+pop object
+;; cif ST
+;;  gosub @MCBuildRoomVec
+;; cend
+;
+.OpenNotRoomObject
+ return
+;---
+; PUT, NOUN1=container, PREP, NOUN2=containment
+; (the reversed noun order is used so that the container is 
+; treated as the goal-directed object)
+code -
+.Give
+ prep=carried
+.put
+code +
+push noun1
+ noun1=noun2 ; swap noun1/2
+pop noun2
+ gosub @printactoractiondot
+ gosub @AAreachout
+ object=noun1
+ if noun2<MinRoomObject then @PutNotRoomObject
+ if noun2>MaxRoomObject then @PutNotRoomObject
+; NOUN2 is a ROOM OBJECT
+;
+;=====
+ if noun2<>fireplace then notburnobject
+ hicurrentpos(noun1)=c0
+ currentpos(noun1)=c0
+ if noun1<>photo then @PutRet
+; replace blackmail photo with ashes
+ noun1=ashes
+; fall through...
+.notburnobject
+;=====
+;
+; Close the object, so that the open panel isn't re-displayed 
+; when we want to show the contents
+ object=noun2
+ if prep<>ipIN then NotPutIn
+ gosub @isObjectOpen
+ if result=false then PutNoClose
+push noun1
+push noun2
+code -
+ verb=iCLOSE
+ descriptionmode=iNONE
+ gosub @Close
+ verb=iPUT
+ descriptionmode=normaldescriptionmode
+code +
+pop noun2
+pop noun1
+.putnoClose
+.NotPutIn
+;
+ gosub @SetOpenFlags ; make sure the container is open
+ x2=noun1
+ add x2,x2
+ &x1=list4(44) ; special objects table
+ add x1,x2
+ list4(x1)=noun2 ; set container type
+ add x1,c1
+ list4(x1)=room ; set room of container
+ verb=0 ; don't print any messages
+ gosub @ShowOpenStatus
+.PutRet
+code -
+ return
+;
+; do a normal put (i.e. not in a room object)
+code +
+.PutNotRoomObject
+; if noun2>MaxNpc then PutRet
+ if object<MaxNpcPlus1 then PutRet
+ pos=noun2
+ hipos=prep
+ gosub @MoveObject
+code -
+ return
+;---
+; OPEN/CLOSED flags are used to DISABLE the OPEN 
+; option in the menu
+code +
+.SetOpenFlags
+ if object<>docbag then SOFnotDB
+ doctorbagopen=true
+ return
+.SOFnotDB
+ gosub @GetOpenBitx3
+ or x3,x1 ; set the OPEN bit
+ List4(x2)=x3 ; put it back
+ return
+;---
+.ClearOpenFlags
+ if object<>docbag then COFnotDB
+ doctorbagopen=false
+ return
+.COFnotDB
+ gosub @GetOpenBitx3
+ x4=255
+ xor x1,x4 ; negate the open bit to create a mask
+ and x3,x1 ; clear the OPEN bit
+ List4(x2)=x3 ; put it back
+ return
+;---
+.IsObjectx1Open
+push object
+ object=x1
+ gosub IsObjectOpen
+pop object
+ return
+;---
+.IsObjectOpen
+ if object<>docbag then IOOnotDB
+ result=doctorbagopen
+ return
+.IOOnotDB
+ if object=Ntable then IOOyes
+ if object=fireplace then IOOyes ; see ashes in fire (m2)
+ gosub @GetOpenBitx3
+ and x3,x1 ; get the OPEN bit
+ result=false
+ if x3=0 then IOORet
+.IOOyes
+ result=true
+.IOORet
+ return
+;---
+; Set up: x1 = OPEN bit for this object
+;	  x2 = pointer to OPEN flags
+;	  x3 = OPEN flags byte
+.GetOpenBitx3
+;
+;=====
+ x1=1 ; bit to OR
+ if object=wardrobe then GetOpenByte
+ x1=2 ; bit to OR
+ if object=chest then GetOpenByte
+ x1=4 ; bit to OR
+ if object=fridge then GetOpenByte
+;=====
+;
+ x1=8 ; bit to OR
+.GetOpenByte
+ &x2=List4(46)
+ add x2,room
+ x3=List4(x2) ; get OPEN flags for this room
+;
+;=====
+; Use special open bit 7 for broken window in murder 2 & 5
+ if object<>window then NotWindowBroken
+ if room<>94 then NotWindowBroken
+ x3=0 ; closed
+ if murder=5 then SetWindowStatus
+ if murder<>2 then GotWindowStatus
+.SetWindowStatus
+ if Vmurderbeendone=false then GotWindowStatus
+ x3=128 ; open
+.GotWindowStatus
+ x1=128 ; mask bit
+.NotWindowBroken
+;=====
+;
+ return
+;---
+; Show OBJECT when container x1 is open?
+; e.g. some objects, such as coats look okay in wardrobes, but 
+; others, such as the shotgun, are best not displayed
+; YSIZE=HEIGHT IN PIXELS
+; XSIZE=WIDTH IN CELLS
+.IsContainerx1Concealed
+;
+;=====
+ result=false
+ if x1<>wardrobe then ICX1CNotWardrobe ; wardrobe not concealed
+ if object<MinClothes then ICX1Concealed
+ if object>MaxClothes then ICX1Concealed
+ if object<>Pinnafore then ICX1CRet ; ok for clothes except pinnafore
+.ICX1CNotWardrobe
+ if x1=Ntable then ICX1CRet
+ if x1=bed then ICX1CRet
+ if x1=shelves then ICX1CRet
+ if x1=hatstand then ICX1CRet
+;=====
+;
+.ICX1Concealed
+ result=true ;*MIKE 7 may  result=true
+.ICX1CRet
+ return
+;---
+.MoveObject
+ currentpos(Object)=pos
+ hicurrentpos(Object)=hipos
+ if object>MaxRoomObject then ClearROflag
+ x2=0
+ if object>79 then MORet
+.ClearROflag
+ &x1=list4(44) ; special objects table
+ add x1,object
+ add x1,object ; special position when contained in raster objects
+ x2=List4(x1) ; return x2 as previous room object
+ &List4(x1)=c0 ; clear the position
+.MORet
+ return
+;---
+.gdwaitforperson
+; noun1 is person to wait for
+; this command is always executed off the command queue
+;
+; don't let people wait for sam if he's e.g. waiting for the 
+; murder (this would cause an endless loop if the murder 
+; depending on sam meeting someone)
+ if noun1<>user then NotWaitUser
+ if SamUnconcious<>false then @GDWaitEnd
+.NotWaitUser
+ verb=0 ; fool specialcheckifpresent
+ object=noun1
+ gosub @checkifpresent
+ if result<>true then MOret
+ if actor<>user then @gdwaitend
+ WantMenu=true ; throw up a menu if player has been waiting for 
+; someone
+ goto @gdwaitend ; it's arrived
+;---
+.gdwaitforpersontoleave
+; noun1 is person to wait until he leaves
+; this command is always executed off the command queue
+ verb=0 ; fool specialcheckifpresent
+ object=noun1
+ gosub @checkifpresent
+ if result=false then @gdwaitend ; he's gone
+ return
+;---
+; wait for npc noun1's BUSY flag to be cleared after a racetrackreturn.
+; this flag is usually set before a telegosub, and waitforpersonfree 
+; is used to wait until they've finished the telegosub racetrack
+.gdwaitforpersonfree
+ &x1=List4(74)
+ add x1,noun1
+ sub x1,c2 ; table starts with sue (npc #2)
+ result=List4(x1)
+ and result,c2 ; get bit two only
+ if result=0 then @gdwaitend ; not busy!
+ return
+;---
+.gdwaitforperiod
+; noun1:noun2 is period to wait for
+; this command is always executed off the command queue
+ value=noun1
+ gosub @valuetimes256
+ add value,noun2 ; noun1:noun2 word value
+ if value=0 then @intelligentpop ; zero duration - time up
+
+;;; GMJ 29/12/89 ; delay/8 to compensate new frame limiting
+;; asr value
+;; asr value
+;;
+;; sub value,c4 ; decrement
+ x1=20
+ sub value,x1
+
+ if value>negative then @gdwaitend ; timer run out - time up
+push value
+ gosub @valuediv256
+ noun1=value
+pop value
+ noun2=255
+ and noun2,value
+ gosub @npcgetcurrent
+ add x1,c3 ; point x1 to noun1
+ npcstack(x1)=noun1 ; poke back the decremented value
+ add x1,c1 ; point x1 to noun2
+ npcstack(x1)=noun2
+ return
+;---
+.gdwaitend
+ executeprocessed=false ; nothing useful done
+ goto @intelligentpop
+;---
+.SHORTWAIT
+; wait for a single turn
+ commandfinished=true ; 23/12/89 executeprocessed=true ; make it take time
+ return
+;---
