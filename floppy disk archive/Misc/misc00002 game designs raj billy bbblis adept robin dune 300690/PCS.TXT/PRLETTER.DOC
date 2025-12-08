@@ -1,0 +1,165 @@
+06600000000800
+1
+2
+F0110030
+9[...................................................]001
+€
+
+
+
+
+
+
+
+
+
+
+
+Level 9 are on stand 3349, demonstrating H.U.G.E and Scapeghost. 
+
+
+                A H.U.G.E STEP INTO THE FUTURE 
+
+"H.U.G.E" is the "wHolly Universal Games Engine", Level 9's new 
+games authoring system for 16-bit computers: Amiga, ST, IBM PC, 
+Macintosh etc. It is a breakthrough tool for games programming, 
+allowing not only unprecedented 3D animation and scrolling, but 
+simultaneous development across all systems. 
+
+In other words, once a HUGE game is finished on the IBM (say) it 
+works on all the other 16-bit micros too. 
+
+"'H.U.G.E' is a good name for the new Level 9 system," commented 
+Managing Director Mike Austin, "as it includes 165,000 lines of 
+code and has taken 20,000 man-hours to develop." (When closely 
+printed, the HUGE source listing is a foot thick and weighs 
+30 pounds). "It represents a number of major advances for games 
+software, and we are confident that the acclaim that Level 9 have 
+received in the past for our high quality adventures will be 
+continued in the arcade-oriented environment of H.U.G.E". 
+
+Level 9 will be producing both original games and conversions 
+using the system, and e.g are already writing a number of H.U.G.E 
+games for one major US publisher. (See overleaf for more details 
+of H.U.G.E). 
+
+
+
+           SCAPEGHOST: ADVENTURING BEYOND THE GRAVE
+
+Level 9 - authors of over 15 top selling adventure games since the 
+firm's inception in 1981 - are launching their last ever traditional 
+adventure game at this PCS show, before switching to more arcade- 
+orientated products. 
+
+"People have been predicting the death of the adventure market for 
+years", said designer Pete Austin, "so Scapeghost is a strangely 
+appropriate final release". 
+
+In Scapeghost, you play a ghostly ex-detective, seeking revenge 
+after being falsely blamed while the real criminals go free. The 
+game combines excellent graphics, novel psychic puzzles, Level 9's 
+acclaimed adventure system and masses of graveyard humour. (See 
+page three for more details). 
+
+€
+
+
+
+
+
+
+
+
+
+
+
+            H.U.G.E: THE WHOLLY UNIVERSAL GAMES ENGINE 
+
+
+H.U.G.E is Level 9's new in-house games authoring system for: 
+   IBM PC (CGA/EGA/MCGA/Hercules/Tandy/256 colour VGA graphics); 
+   Amiga  (16 or 32 colour graphics, using the blitter extensively); 
+   Atari ST;
+   Apple Macintosh. 
+
+
+Features include: 
+   Smooth multi-directional scrolling, even of animated 3D scenes; 
+   Fast animation, with no overhead for 3D graphics; 
+   Flexible sprites, of arbitrary shape, and sprite parking; 
+   Digitised sound; 
+   Compression of graphics, code and data etc; 
+   Total portability between machines. 
+
+
+H.U.G.E can be used for most types of game, apart from vector 
+graphics games, and would be well suited for producing, e.g: 
+   Any of the current RPGs (Dungeon Master, Bard's Tale); 
+   Multi-part games (Defender of the Crown, Sports tournaments); 
+   Gauntlet-style games; 
+   "Walk-about adventures" (Leisure Suit Larry, King's Quest).  
+
+In other words, any big (e.g multiple-disk) game with 3D graphics 
+and lots of animation would suit us just fine. 
+   
+
+The H.U.G.E system consists of a machine code kernel (or "driver") 
+for each target machine, and a much bigger development system. 
+
+The development system uses many in-house utilities for e.g 
+compiling programs, defining game maps and compressing data. 
+
+The most important utility is the "Structure Editor", which builds 
+Neochrome pictures into self-contained 3D animated screens and 
+graphics subroutines, greatly reducing the amount of game programming. 
+
+The Structure Editor is itself just a very big program, written using 
+H.U.G.E. So while Level 9 currently use the Atari ST for development, 
+we thought we would test the portability of the system by copying the 
+Structure Editor to the IBM PC - and indeed it was working perfectly 
+there within two hours.  
+
+€
+
+
+
+
+
+
+
+
+
+
+
+            SCAPEGHOST: LEVEL 9'S LAST ADVENTURE
+
+
+Scapeghost is being launched at PCS; 16-bit versions are on sale 
+from us on stand 3349 and (duplicators willing) we hope to get the 
+major 8-bit versions before the end of the show. Everything will 
+be in stock within a fortnight of now. 
+
+
+Scapeghost stars an ex-cop (an in-spectre?), who was disposed of 
+when he tracked down a drugs ring, then was framed for crimes he 
+did not commit. You find yourself reincarnated in your old haunts 
+with just three nights to clear your name and get revenge on the 
+real villains. 
+
+Even with your old detective skills, your growing psychic powers, 
+and the help of kindred spirits, unravelling the mystery isn't going 
+to be easy. But the sophisticated Level 9 parser, and advanced 
+features such as go to, find and undo, will give you at least the 
+ghost of a chance. 
+
+Scapeghost features three parts, with thirty high quality pictures on 
+disk. It is available from us on stand 3349; mail order from Level 9, 
+PO Box 39, Avon BS24 9UR; or by major credit card on 0934 814450. 
+It costs #19.95 for 16-bit and 3" disks, and #14.95 for 8-bit.
+
+The full list of Scapeghost versions is as follows.. 
+  Amiga,ST,IBM PC,PCW/CPC/Spectrum+3 disks with pictures: #19.95  
+  CBM 64,BBC 48k+/Master disks with pictures:             #14.95
+  Atari XL/XE disk (text only):                           #14.95 
+  Spectrum,CBM 64,CPC,Atari XL/XE tapes (text only):      #14.95 

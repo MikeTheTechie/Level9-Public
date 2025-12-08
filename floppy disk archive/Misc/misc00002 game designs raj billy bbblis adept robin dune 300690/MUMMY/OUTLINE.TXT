@@ -1,0 +1,132 @@
+A good computer game must have a popular subject, be in a popular 
+genre, and have great graphics and sound:  
+* When searching for a subject, b-movies are a good place to look, as 
+  Cinemaware etc. have found. A cheapo movie lives or dies by its theme 
+  and script, so the subject must be able to pull in the crowds. 
+* A genre? Sierra sell masses of their 3D walk-about adventures, yet 
+  Level 9's H.U.G.E system knocks spots off them in every way. 
+* Graphics/Sound? Ancient Egypt really had style, and the music is midi. 
+
+Put them all together and what do you have?... 
+
+
+                   THE CURSE OF THE MUMMY'S TOMB! 
+
+
+You play one of a pair of reporters (American and British, male and 
+female), covering the excavation of an Egyptian necropolis at the 
+time of the first World War.  
+
+As events unfold, over several weeks of game time and many hours of 
+playing, you explore the area and learn its secrets. You will meet 
+the more notable inhabitants of this animated adventure - about 30 
+of them, each with their own goals and lives. For example: 
+
+* A rich and fanatical archeologist, whose workmen are uncovering 
+more of the ruins every day. He believes that the central mummy's tomb 
+holds the secret of eternal life and ignores the warnings, ominous 
+portents and increasing toll of workers - dead or vanished.  
+
+* A wise custodian has partly interpreted inscriptions from the 
+time of the mummy, which tell how an immortal priest led a reign of 
+blood and terror until overthrown. Other carvings, if found and taken 
+to him, hint at the means to the evil one's destruction
+
+* A fanatical religious sect worship the mummy. Their writings 
+correctly identify him as a focus of plague, as well as life, and they 
+plan to use this disease to wipe out "unbelievers". They are based in 
+the nearby souk and are a danger to all outsiders, including you and 
+your friend - who you will need to rescue later. 
+
+* Both sides in the war plot to use the mummy's powers, both to cure 
+and to spread plague through the enemy population. 
+
+* A mysterious femme fatale, a streetwise taxi driver, a pair of 
+hippy-types who got lost on the trail east, the corrupt local police. 
+Etc. There are lots of sub-plots going on simultaneously and many 
+people hope to use the power of the mummy for their own ends. Little 
+do they guess how dangerous it is... 
+
+
+                              OBJECTIVE 
+
+The mummy is a vampire-like creature; kept everlastingly alive by the 
+interaction of its dread disease and the ointments used to preserve 
+its body. It needs energy, which it gains by killing people. 
+
+Victims not entirely killed are infected, losing their free will and 
+refusing to drink so they gradually become mummified. These first- 
+stage mummies obey their evil master, who only needs access to the 
+temple once used to mummify bodies to convert them to an immortal army. 
+
+All mummies are very strong and can "swim" slowly beneath the sands, 
+clawing their way upwards to emerge inside the tents of their victims 
+who they drag down into the depths. Their weaknesses are a fear of 
+fire and water. 
+
+You need to find the secret of defeating the mummy (from a host of 
+clue inscriptions hidden about the necropolis) before the original 
+mummy can process its followers. 
+
+              PLAYING "THE CURSE OF THE MUMMY'S TOMB!" 
+
+INTRODUCTION. The game starts with a ten screen highly-animated 
+introduction, setting the Egyptian scene and acting as a rolling demo.  
+
+AERIAL MAP. The game area is shown on a scrolling aerial "photograph", 
+with spot animation, across which you steer a magnifying glass . 
+
+Click on a place of interest, and the glass enlarges to show a 
+picture and descriptive text. Move the cursor to close up the glass 
+again, or click to travel to the place. Long journeys take several 
+days - shown by an intermission screen of camels or a Nile boat. 
+
+100 "WALKABOUT" 3D SCENES. Once at a place, the game is played (much 
+like any Sierra game) by walking your 60-pixel high hero through 
+animated 3D scenes of Egyptian ruins, labyrinths and towns. Level 9's 
+H.U.G.E system allows more graphics, bigger sprites and more animation 
+than its competitors, and does this sort of thing very well indeed. 
+
+Some of the other characters are static and always found at the same 
+place, but many are mobile - following their own scripts whether you 
+are there to see them or not. They use "goal directed" commands to 
+adapt to circumstances and (building on Level 9's experience) are 
+very realistic indeed. 
+
+For commands, you press FIRE to call up a menu bar, left-right to 
+select your menu (e.g objects, people, or system) and up-down and fire 
+to select an entry from it. For example to talk to someone you move 
+across to the people menu, down it to the person you want and press 
+fire; then the menu changes to show e.g talk and examine, so you move 
+down it to talk and press fire again. An easy yet powerful system. 
+
+When people talk with you, the game pauses while their animated 
+portraits overlay the 3D screen. Text windows are similarly opened, 
+as necessary, pausing the action if the text is important, or simply 
+scrolling into and out view. Meanwhile, high-quality midi music plays. 
+
+You need to solve adventure-ish puzzles, talk (and spy on) to people 
+to find what is going on, run away from the mummies, rescue your 
+friend if they get kidnapped, and at the end find the means to defeat 
+the undead high priest and put a final end to his powers.  
+
+GRAPHICAL HIGHLIGHTS. About a dozen key incidents in the story are 
+illustrated by animated scenes, seen from a "first person" view to 
+give a change of graphical style and remove the restrictions imposed 
+on the usual scenes by their side-on 3D view. 
+
+The highlight scenes both carry forward events, and act as rewards 
+for the player who has got this far. They will be graphically as 
+wonderful as we can make them. 
+
+
+IN SUMMARY, "The Curse of the Mummy's Tomb": 
+* is an animated adventure interface which will appeal to the Sierra 
+  marketplace, while beating its competitors in just about every way,
+* uses H.U.G.E, the most advanced system around,  
+* has an attention-grabbing title and subject, 
+* 2 meg (before compression) of authentic and atmospheric pictures, 
+* digitised sound and a long midi soundtrack, 
+* and is available simultaneously for Amiga/ST/PC on 2-3 disks (3.5"). 
+
+                                 Copyright (C) 1990 Level 9 Computing 

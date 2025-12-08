@@ -1,0 +1,108 @@
+
+                          THE INHERITANCE 
+
+The Inheritance is a ghostly, graphical adventure, featuring:  
+* "First person" full screen pictures, with atmospheric graphics, 
+  animated scenery, startling spot effects and mobile people. 
+* Point-and-click control, for simplicity. The cursor changes as 
+  you move it across the picture - indicating what will happen if 
+  you click on each point. 
+* Complex plot, with a great many places, people and puzzles. 
+* Ten-screen animated intro, whoch doubles as a running demo. 
+* Midi music, plus violent digitised effects and a little speech. 
+
+NOTE: The easy-to-use interface and graphical style of this game 
+make it particularly well suited for multi-media CD-ROM versions, 
+in addition to supporting the full range of traditional 16-bit PCs.  
+
+
+                               STORY 
+
+In Regency England (1810) you have inherited Hernehowe Manor, set 
+vulture-like on the Cornish cliffs, above the gravs of ships. 
+
+Unquiet spirits throng the old house; in the village lurk smugglers 
+and highwaymen. Nearby a bell tolls in the chapel rumoured to be 
+built by the feared and tainted Knights Templars. Sheep have been 
+found torn apart and the village fears that the same fate has 
+befallen a young maid that worked at the Manor.
+
+You (as hero, or heroine) must survive a week in this ghastly old pile, 
+braving deadly traps, insane villagers, murderous relatives, ghostly 
+apparitions and the demonic force locked below the the old house. For 
+only then will you meet the terms of a will and get ownership of the 
+house and its secret: a rich seam of Cornish gold. 
+
+The village people can be befriended to help, and ghosts can be laid 
+to rest in various ways. For example, The Wet Woman of the Green room 
+can be lured outside on a cold night, so she freezes and is destroyed 
+by the morning sun. Others want to be reunited with loved ones, or 
+confronted by prophesy fulfilled. 
+
+
+                        PLAYING "THE INHERITANCE"  
+
+This is a "first person", cursor-driven adventure, which is instantly 
+easy to use and puts you right in the picture. 
+
+The cursor is normally your right hand, or whatever you are 
+carrying in your right hand (e.g a flickering torch), but it changes 
+appropriately as you move it across the picture. For example... 
+
+Where the cursor is:             What it changes to:   
+   On an exit                       Directional arrow 
+   Something worth looking at       Magnifying glass 
+   Friendly person                  Speech bubble icon 
+   Extreme left or right            "Turn" arrow 
+   Bottom line of the screen        Menu icon 
+   Closed front door                Animated knocking fist 
+   Keyhole (if you've the key)      Animated turning key      
+   Bell pull                        Animated pulling hand 
+
+When you press fire, the indicated action is carried out. 
+
+The only additions to this simple mechanism are for speech and 
+system commands: 
+* Click when the cursor is a speech bubble, and the words of words 
+  of the person spoken to overlay the screen. Use up/down and fire 
+  to select your reply from a menu of appropriate responses below. 
+* Click when the cursor is a menu icon, and the menu window scrolls 
+  up over the main screen. It shows system commands, objects carried 
+  in your pockets and status, and it works much as you would expect. 
+
+
+                         EXAMPLE OF PLAY 
+                    
+Above the fire in the library is an ornamental crest. Move the cursor 
+there (it changes to a magnifying glass) and press fire to open a 
+window with a large picture of the crest. 
+
+Attached to the crest is an ornamental sword. The cursor is now a 
+return symbol (because pressing fire would return you to the room), 
+but it changes to a clutching hand when you move it onto the sword. 
+Do this and press fire to take the sword. 
+
+Return to the room, move the cursor (which now normally shows the 
+sword, except when you move it somewhere special) over the door to 
+the Smoking room (it changes to an exit arrow) and press fire to go 
+there. 
+ 
+There's a statue in front of you. Move the (sword) cursor onto the 
+statue's hand (it waves to show this is a special place) and press 
+fire to place the sword there. The sword's weight causes a secret 
+panel to open and the game continues! 
+
+
+                         IN CONCLUSION 
+
+This story combines the rich folklore and legends of the storm-swept 
+Cornish coastline, with a search for treasure and secrets from beyond 
+the grave. 
+
+This game with its brooding atmospheric graphics and many interactive 
+animated characters, both living and dead, all easily accessed by the 
+ever-changing pointer will appeal to both the first-time player and 
+the more seasoned gamer. 
+
+All the graphics are large and detailed, with animation, shock effects 
+and midi music. So "The Inheritance" will both look and sound great. 

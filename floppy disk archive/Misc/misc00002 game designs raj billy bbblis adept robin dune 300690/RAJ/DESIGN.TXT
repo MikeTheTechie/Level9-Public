@@ -1,0 +1,970 @@
+
+
+  Champion of the Raj Design. Copyright (C) 2 July 90 by Level 9 
+
+1. INTRODUCTION
+
+"Champion of the Raj" is a game in the spirit of "Defender of the 
+Crown", set in the early 1800s when India was being united as the 
+British Raj. It has: 
+* a twelve screen animated introduction;
+* a central strategy game (a bit like the classic game "Hamurabi", 
+  which combines territorial conquest with economic investment); 
+* six arcade games (tiger hunting, elephant racing, army battle, 
+capturing the palace, battle in the Thug temple and swordfighting); 
+* many animated screens depicting local events; 
+* digitised sound effects and a midi sound track. 
+* versions for Amiga (2 disks), ST (2 double-sided disks) and IBM PC 
+  (3 * 3.5" or 5 * 5.25" disks, for EGA/VGA/CGA/TGA and with good 
+  sound on Roland/Ad Lib/Sound Blaster). 
+
+Champion of the Raj is a game for 1-6 people, who each choose one of 
+the main contenders to unify India, e.g the Viceroy of the British 
+East India Company, or the Maharaja of the warrior Sikhs. 
+
+(This avoids the charge of racism which might be made if, for example, 
+you had to always take the part of a European hero against the Indians. 
+And, because each of the six rulers have different strengths and 
+weaknesses, making winning much easier for some than than others, it 
+greatly extends the playing time of the game. It's not too hard to win 
+as the British, but can you lead the Gurkhas to conquer all India?) 
+
+Erosion of the Mogul empire means that much of India is in chaos and 
+falling under the influence of the Thug sect, who specialise in mass 
+murder. Whichever of the six contenders you choose to play, your task 
+is to bring law and order to the continent and free the peasants by 
+defeating the evil Thugs. 
+
+Control is by any of joystick, mouse, arrow keys or numeric key pad. 
+
+The graphical style resembles films such as "The Far Pavilions", 
+with lots of military uniforms and rich native colours, arched 
+Indian buildings, distant purple mountains, and people used like 
+wallpaper. 
+
+MIDI music is used to introduce notable events, and to accompany 
+arcade action. Tunes are mostly conventional European music, with 
+just an occasional Indian instrument to add atmosphere, though there 
+are short "national-anthem-type" fanfares to introduce each player 
+in a multi-player game, 
+
+
+2. Game Outline
+
+2.1 LOADING SCREEN. "Champion of the Raj" starts with a Victorian- 
+style animated screen: a heroic soldier stands proudly in a central 
+circle, while others defend the fort behind him. Around this radiate 
+ornate flags, and Indian figures process across two windows to left 
+and right. Music plays, of the rousing "Pomp and Circumstance" type. 
+
+
+2.2 ANIMATED INTRODUCTION SCREENS follow after a little while, telling  
+the story of an English hero's travel to India and introducing the 
+background to the game. They are accompanied by appropriate music... 
+ 1) London docks; hero boards ship.  
+ 2) Clipper sailing to India. 
+ 3) Ganges near Calcutta; village in foreground, ship sails past. 
+ 4) Calcutta docks; hero disembarks. 
+ 5) Bazaar; hero walks through, followed by sinister figure. 
+ 6) Hero kidnapped by Thugs, in close-up. 
+ 7) Thug prison. Guard leaves; princess helps hero escape. 
+ 8) Jungle outside Thug temple; hero and princess run off together. 
+ 9) Scenic lake; the two reach a guru's hermitage. 
+10) Guru and princess in close-up; guru explains need to unite India. 
+11) Government House; fine coach delivers hero to his destination. 
+12) Garden Party at Government House; 6 contenders are introduced. 
+13) "Last Supper"-style High Table; choose who to play in the game.  
+
+If you do nothing, the game starts again with the loading screen. Or 
+press FIRE or a key to play the game... 
+
+
+2.3 CAST MENU (screen 13 above). This screen shows the six rivals to 
+rule a unified Indian Raj, sitting at a table below a grand marquee, 
+waited upon by servants. There are icons for the number of players
+and "play"... 
+* click near the number of players to alter it, or 
+* click on one of the contenders to select him - he stands, 
+  biographical information is displayed and you can choose to add 
+  your own name by clicking above/below the spaces on the screen for 
+  its letters (and if more people are now standing than the number 
+  of players, one of the others sits), or 
+* click on "play" to start the game. 
+
+The potential rulers of the Raj are: 
+1) Viceroy of the British East India Company (Protestant),
+2) Consul of the French East India Company (Catholic),
+3) Emperor of the Mogul Empire (Moslem), 
+4) Maharaja of the Maruthra Confederacy of Hindu States, 
+5) Maharaja Singh of the Punjab (Sikh), 
+6) Chief of the Gurkhas. 
+
+These contenders all have their own characteristics and are arranged 
+in difficulty order. A single player who has won as the Viceroy (the 
+easiest option) can play again and pick a less favoured candidate. 
+Multiple players will play one contender each. 
+
+
+2.4 STRATEGY GAME. The strategy game is played in each contestant's 
+office, and is controlled by means of a hand pointer. On the wall 
+is a map showing control of the Indian states, and on the desk are 
+a book with details of the current state (whichever one you clicked 
+on last), and a bell to summon your "clerk". If the book shows your 
+own state, click on it to invest. To one side is a picture of the 
+current hero, and on the other are icons for attack, talk 
+(negotiate), a parade (which buys status) and "turn end". 
+
+Your tax income can be used to: 
+* pay any troops at base (1 thousand gold per 1 thousand troops). 
+  But, to encourage attacks, troops which capture a state live there 
+  free for a turn, "living off the land"; 
+* buy troops (2 thousand gold per 1 thousand troops); 
+* invest in economic improvements (meaning more income in future), 
+  or in better weaponry (for more effective troops); 
+* buy status, so other rulers are more likely to negotiate; 
+* keep a reserve (e.g bribery is sometimes the best way to persuade 
+  an independent ruler to join your empire. 
+
+The right mixture of spending is vital, and varies with circumstances 
+and depending on which state you are playing. 
+
+
+2.5 ARCADE GAMES. The strategy game is punctuated by six arcade games 
+(tiger hunting, elephant racing, army battle, capturing the palace, 
+battle in the Thug temple and swordfighting). Most have to be played 
+more than once. These have been designed to be instantly playable, and 
+benefit more from calm consideration than frantic joystick bashing. 
+
+Furthermore, some of them are "optional", in that it is possible to 
+win with the easiest hero (the Viceroy of the East India Company) 
+without going tiger hunting or elephant racing. And the penalty for 
+losing at games such as e.g the swordfight ("missing a year" due to 
+injury) can probably be lived with if you do everything else right. 
+
+But you will certainly have to be good at all the games to win as 
+a more difficult hero, such as the Sikh leader of the Punjab. 
+
+The final game is definitely not optional - you must capture the 
+Thug temple of Kali to break the power of the Thugs and rule India 
+in safety. 
+
+
+3. OFFICE. Each contestant has an "office" appropriate for his 
+standing and nationality, but they are all functionally equivalent. 
+
+             +------+-+-------------------+---+
+  EXAMPLE    |      | |                   |   |  The following icons 
+  OFFICE...  |      | |                   |   |  are displayed on the 
+             | ROOM | |   MAP OF INDIA   OOOO |  wall when appropriate: 
+             |WINDOW| |                 OOOOOO|  * Attack 
+             |      | |                 OOOOOO|  * Talk 
+             |      | |         HERO->   OOOO |  * Parade (Durbah) 
+             +------+ |                 OOOOOO|  * End Turn 
+             |   +-----------+         OOOOOOO| 
+             |   |   BOOK    |--------OOOOOOOO|  And ringing the bell 
+             |  _|   WITH    |________OOOOOOOO|  summons your "clerk". 
+             | / |   ICONS   |  BELL   \OOOOOO| 
+             |/  +-----------+ ON DESK  \OOOOO| 
+             +--------------------------------+
+
+People play in turns, each turn being...
+* The next (player) ruler's office is displayed. 
+* The ruler gets tax income according the the population he controls 
+  and the level of his empire's "Industry" and law. Then he pays for 
+  all troops in reserve - those "living off the land", in states 
+  captured last turn, are free. (These figures are reported by an 
+  Indian clerk, in a window which opens over the office). 
+* If any special events have occurred, e.g famine or rebellion, a 
+  window opens over the office with: a picture of the the clerk or 
+  princess, a message, and response boxes "yes", "no" and "not yet". 
+  (This latter postpones the decision and removes the window, so that 
+  you can use the map etc to get more information. But the wall icons 
+  are not displayed, so you can't do much except click on the bell 
+  to summon the clerk/princess and return to the postponed decision). 
+* Some special events are in the form of a message to visit the Bazaar 
+  or Club. If you go, the guru or army officer give information by 
+  means of a speech bubble upon the appropriate animated screens, and 
+  you must make a "yes" or "no" decision on the spot. 
+* Next is the main part of the turn: the player can learn about India, 
+  attack, talk or arrange a parade as he wishes - all by clicking upon 
+  appropriate states and icons. See below. 
+* Finally, you click on the "end turn" icon to finish.  
+
+
+3.1 OFFICE MAP 
+
+The largest thing in each office is a map showing the terrain of the 
+Indian sub-continent, from Afghanistan and Nepal southwards, divided 
+into about 25 states and principalities. The map shows political 
+control by means of national flags (capitals have more impressive 
+flagpoles) and e.g the British East India Company starts with the 
+ports of Bengal City and Calcutta, while the crumbling Mogul empire 
+controls several central states. 
+
+You can steer a hand across the map, and click on any state to select 
+it, which makes it the "current state": e.g the one attacked if you 
+then choose the attack icon. Its flag flaps on the map and its report 
+is shown in the "book". 
+
+
+3.2 OFFICE BOOK 
+
+Below the the map on one side, placed here because of the triangular 
+shape of India) is a book. When you click on the map, the book changes 
+to shows the statistics of the state chosen: 
+
+  ......................... Name of State .........................
+   
+  Defence : number of defenders      Industry       | Law and Order  
+  Graphic : of state (including 5)   Graphic        | Graphic        
+  --------+-----------------------   ---------------+--------------    
+  Attack  : number of unassigned     Wealth         : amount of money     
+  Graphic : troops in the empire     Graphic        : in treasury 
+
+The defence and attack graphics show fortifications and troops/weapons 
+respectively. The pictures reflect weaponry (military level). 
+
+The Industry graphics vary from a particularly poor bullock cart 
+to a splendid railway locomotive. Law and order varies from a ruin to 
+a smart policeman. And wealth, which reflects square root (income/10), 
+is an appropriately sized pile of treasure. 
+
+Click on any part of the book you want to know more about: e.g name for 
+a description of the state, or the defence graphic to learn which 
+number it represents (and, if it's your turn and your state, to learn 
+the cost of increasing the number and to be given the chance of doing 
+so). These details are reported on a window, decorated by the head of 
+the Hindu clerk who is assumed to be giving the report.  
+
+
+3.3 OFFICE BELL 
+
+The bell summons an Indian servant who acts as your clerk. Normally 
+this achieves little, but he occasionally has advice or postponed 
+decisions for you to make. 
+
+
+3.4 OFFICE WALL ICONS
+
+Various icons appear on the office wall when appropriate...  
+* Attack (click on this to invade the currently selected state). 
+  This icon only appears if the current state is adjacent to one of 
+  yours, you have some remaining uncommitted troops (individual 
+  troops can only attack once per turn), and you have not been 
+  defeated this turn. 
+* Talk (click to offer an alliance with the ruler). 
+  This icon only appears if you have not yet negotiated this turn. 
+* Parade (click to hold an impressive Durbah and raise your status. 
+  This influences future negotiations). This icon only appears if you 
+  can afford a Durbah, but have already held one this turn. 
+* Turn End (click to end your turn). 
+
+(If any special events have been postponed and not dealt with yet, 
+none of the above icons appear, while the bell is made more obvious.)   
+
+
+ATTACK. After clicking on the icon, a window opens with: 
+* a picture of troops on parade, 
+* who is attacking who, 
+* numbers of attackers (initially 0) and defenders (initially the 
+  0.1 percent of the population who volunteer free), 
+* consequent combat odds (the attacker really needs 2:1 or better), 
+* and icons for "+", "-" and "OK". 
+Adjust the number of attackers, by "+" and "-", and click on OK. 
+ 
+The defender then decides how many of his troops in garrison to 
+use as additional defenders (e.g troops who attacked elsewhere last 
+turn cannot be used). Computer-controlled states do this themselves; 
+if the defender is human controlled, control temporarily returns to 
+the defending player (if necessary his office is redisplayed and a 
+snatch of national anthem played) and he adjusts the number of 
+defenders in the corresponding way to that of the attacker.  
+
+If the odds are mismatched, the battle is depicted by a static screen 
+of hand-to-hand combat, with martial music and the numbers of troops 
+counting down as casualties take their toll. Finally, the result is 
+superimposed: e.g "Bengal fought off France with 2 casualties". 
+      
+If the odds are close, the attacker (or defender against a computer- 
+controlled attacker) gets the option to take over before fighting 
+starts and play the "army battle" arcade game. See later. 
+
+
+PARADE. The first Durbah screen is displayed, with local royals on 
+the reviewing stand, while you click on "+" or "-" to select the 
+number of elephants you want to pay for (which is equal to the status 
+gained). Then click on "OK" to let the elephants parade. 
+ 
+
+TALK. The clerk visits the ruler of the current state and returns 
+with his answer. Depending on your status, he either gives a "polite" 
+refusal, or else invites you to discuss politics while playing the 
+ruler's favoured sport: either Elephant Racing or man-eating Tiger 
+Hunting. 
+ 
+If you do well enough in the sport, the ruler may then offer to join 
+your empire as a protected state - provided you will give him a big 
+enough bribe. A text screen asks this; click on yes or no. 
+  
+Emperors never give up their empires, but independent states and 
+rebellious states controlled by other empires are a fair bet. 
+
+
+TURN END. Click on this to end your turn and pass control to the next 
+state. 
+ 
+4. ARCADE GAMES 
+
+Your decisions and the "random" events in the game often lead to 
+short interludes of arcade action. These are sometimes optional, 
+at the cost of losing reputation. 
+
+The guru helps disguise the loading times for arcade games. His head, 
+and the head of the current hero, are displayed on a text window, 
+initially with instructions for the game to come, and subsequently 
+with one of the guru's many wise sayings. 
+
+
+4.1 TIGER HUNT. Shoot a feared man-eater from elephant back. The game 
+is 3D, with your silhouette in the foreground and a multi-layered 
+jungle in the background, with various animals moving about among 
+the trees and vines. Eventually the tiger charges forward, getting 
+quite big in the final frame. 
+
+You have a double-barrelled shotgun, aimed by cross hairs, which 
+is automatically reloaded after each second shot, but very slowly. 
+You lose points for missed shots, shooting the wrong animal etc. 
+If you miss a charging tiger, it wins (this is shown by means of a 
+large tiger's head - snarling and opening its mouth to bite). This 
+ends the game and gets you wounded. 
+
+Sounds: tiger roar, bird squawks, gun explosion. 
+
+Nobody who matters is "killed" in Raj, but you can be badly wounded 
+while Tiger Hunting or fighting. Then you have to recuperate during 
+the next turn, and your empire is put on autopilot. (The reports are 
+still given, but your office is empty of the large hero and you can 
+not do anything much).
+
+After a the tiger hunt, if your score is positive the Raja may be 
+prepared to offer you a partnership. 
+
+
+2. ELEPHANT RACING. This is a vertically scrolling game, seen from 
+almost vertically above, with two large elephants (perhaps 4*6 
+cells) racing southwards along a wide earth track between two 
+grandstands of tiny animated spectators. Banners cross the track, 
+and there are overhanging trees etc to illustrate the 3D. Finally, 
+the first elephant to get a nose past the winning posts wins. 
+
+The game starts beside a grandstand (also used for tiger hunting and 
+the Durbah) where the two contestants climb ladders into the baskets 
+atop their elephants. Then we have the race itself, and then back to 
+the grandstand for a victory ceremony. 
+
+The racetrack is about 3 screens high, with occasional obstacles 
+and varied terrain to limit the maximum safe gallop speed. Control 
+is e.g by joystick: left/right/slower/faster, and pressing fire 
+flicks your whip out in the corresponding direction. The method of 
+play resembles Roman chariot racing and you are allowed to whip your 
+opponent. 
+
+The second elephant is allowed to go a bit faster than the leading 
+one, to give you a chance to catch up after a fall. 
+
+Two small windows show the faces of the contestants to top left and 
+top right (using existing graphics for the faces) and a small window 
+opens centrally if someone is thrown - a tiny (all people are TINY 
+on this screen, for contrast with the elephant) figure then scrambles 
+back to the elephant while the game continues. The elephants have 
+animated heads and lively trunks, and their front feet can be seen on 
+each step, but are animated fairly simply. 
+
+Sounds: cheering, elephants, footfalls. 
+
+
+3. ARMY BATTLE. Unequal battles are handled by your generals and 
+simply shown via a small semi-animated window, opened upon the 
+office screen. There are sound effects of battle, and numbers 
+of combatants (i.e numeric numbers) decrease until one side is 
+declared the winner. A player only takes command if the odds 
+are fairly even (and if both attacker and defender are players, 
+then only the attacking player gets to control troops personally). 
+
+The enemy commander may approach and offer to surrender if he can 
+run a Protected State on your behalf. This happens maybe 25% of the 
+time if you have a reasonable chance of success (i.e not worse than 
+even odds). If you accept, there is no battle and you can go on to 
+attack another state the same turn. 
+
+Conversely, while watching the battle, and retreating if things 
+go too badly, you may find some of your forces "bought off" by 
+bribes until after the fighting. 
+
+The battle screen shows the hero in the foreground (as in his 
+office, but reflected) with low hills and trees etc behind, across 
+which move the tiny (book-icon-sized) figures of troops. 
+
+The program knows about a small number of different fields of 
+combat (open, hilly, with river, and with a fortress town to 
+attack) and builds up the actual screen by using one of these to 
+position terrain features semi-randomly. E.g we might have a few 
+2*2 cell coppices of trees, which could be repeatedly inserted in 
+order to build up a scrubby wood (NOT impenetrable forest). 
+Terrain has a significant effect on combat, so don't e.g order 
+outnumbered defenders out of a town. 
+
+Guns, elephants, cavalry groups and infantry of various qualities 
+are placed on the landscape and/or can move through the landscape, 
+each group carrying a flag to show its allegiance. 
+
+Battle proceeds as in Caesar, Lords of the Rising Sun, or Prince, 
+and is quite quick as outnumbered troops (or those bombarded by the 
+artilliary) tend to panic and run. Troops automatically fight on 
+contact, except for elephants which plough through everything. 
+
+In front of our foreground hero are "Orders" and "Fight" icons; the 
+orders one calls up a speech-bubble menu with icons for guns, 
+cavalry, elephants and infantry down the left and the current 
+orders for each type down the right. (A player only has the troop 
+types up to and including that for his current weaponry level, and 
+in numbers proportionate to the troops there). Click on 
+the current orders to step onto the next option, and on OK to exit. 
+
+Orders are.. 
+Guns: fire at cavalry/elephants/etc. 
+Elephants: stand/advance/charge/retreat  
+Cavalry: stand/advance/charge/circle/retreat 
+Infantry: stand/advance/charge/retreat 
+
+The game ends with one side fleeing in general disarray. 
+
+Sounds: cannon shots, general battle, cheering crowd. 
+
+(Warning: with the other arcade games, I think I have a fairly good 
+idea of their complexity and can schedule the work properly. But I 
+am very unsure how long the army battle will take to code. If it 
+proves to be harder than I expect, the army battle may be cut or 
+changed in the released game.) 
+
+
+4. CAPTURING THE PALACE. When you capture the capital state of an 
+empire, you must capture the emperor in an arcade game or he 
+will just set up shop somewhere else (either in one of his other 
+states, or if there are none, by leading an immediate rebellion). 
+
+A graphics sequence shows cannon breaking down the gates, then a 
+white flag is raised and you play the game by fighting bravely 
+through the town streets. Once at the palace doors, another graphic 
+sequence shows you walking left-right to the throne and accepting 
+the prince's allegiance. 
+
+The game is on several scrolling screens, and uses a Gauntlet-ish 
+view from overhead (though the graphics are properly 3D, rather than 
+based on a "tile map"). You walk up the screen through the town and 
+fight or avoid a few snipers who have not surrendered but remain 
+hidden in the rubble. (Also present are some non-combatant "slave 
+girls" who cannot be shot). The joystick or mouse controls your 
+movement in 8-directions, and fire triggers your pistol. The broken 
+walls etc. block bullets. 
+
+Sounds: cannon shots, cheering, gunshot, footsteps. 
+
+
+5. BATTLE IN THE THUG TEMPLE: the finale. When you rule all of India 
+and the game is about to finish, a mysterious figure appears out of 
+the gloom. He claims to know the whereabouts of the Thug temple, 
+leads you there, but then springs an ambush by the guards. 
+
+The game is much the same as "Capturing the Palace", above, but 
+in an underground setting with lots of statues; some of them nude. 
+The soldiers are replaced by robed assassins who throw knives, and 
+it all ends with the attack on a huge, topless, 8-armed Kali statue. 
+She throws knives and is very hard to damage. 
+
+
+6. SWORDFIGHT. "Suttee" is the discredited Hindu custom whereby a 
+high-caste widow was burnt on her husband's funeral pyre. You learn 
+that the princess is about to suffer this fate (even though she's 
+not married) and hasten to help. 
+
+The scene is shown side-on, with three Thugs dragging the girl 
+towards the flames. You enter stage right, the girl breaks free 
+(leaving some of her silks behind) and escapes to safety at the 
+edge of the screen, where she acts as a cheer-leader. 
+
+The swordfight game uses a subtle control method, designed to look 
+good and simulate combat accurately: 
+* By default, the hero and his Thug opponent attack and parry 
+  each other's blows roughly alternately. So the scene resembles 
+  a proper battle even if a novice (or nobody) is playing. 
+* Control is by moving a cursor across a 3*3 grid: left-right are 
+  attack/stand/retreat, and up-down are high/middle/low blows. 
+  Your choice of attack/stand/retreat affects the probability of 
+  each parry working (retreating is best, but the hero can only 
+  retreat so far) and you press FIRE to replace the next computer- 
+  selected blow-or-parry by your currently chosen blow. Each 
+  opponent is more vulnerable to one attack type than the others, 
+  and your aim is to learn these weaknesses and exploit them. 
+* The hero wins if he defeats all the attacking Thugs without 
+  suffering too many wounds. 
+
+Sounds: clashing swords, elephants, marriage music etc. 
+
+
+6b. ASSASSINATION ATTEMPT. A Thug assassin creeps in as you sleep 
+(e.g after the seduction scene); you luckily wake and fight him 
+off, as in the swordfight above. 
+
+
+                         APPENDICES... 
+
+The contestants to rule India are, in more detail.. 
+
+Viceroy of the British East India Company. The British begin with 
+very little land, just small settlements at Bombay City and Calcutta 
+(the historical Madras one is omitted), but with many advantages. 
+They start with: 
+* Improved Infrastructure, due to control of the seas;  
+* Superior Army, due to good technology level; 
+* Small initial territory; 
+* Average Law and Order; 
+* Protestant religion; 
+* Enemy only of France; 
+* Specials: Automatic transport to Coastal States. EIC refuses tax 
+  income from England after turn 5, and thereafter requires an 
+  increasing amount of profit to be repaid. 
+
+Consul of the French East India Company. The French also start with 
+two small settlements - Pondicherry and Chandernagore - but with most 
+of the same advantages as the British. They start with: 
+* Improved Infrastructure, due to a large fleet; 
+* Superior Army, due to good technology level; 
+* Small initial territory; 
+* Average Law and Order; 
+* Catholic religion; 
+* Enemy only of Britain; 
+* Specials: can call once upon Napoleon for reinforcements, during 
+  1800-1815 inclusive, and get 50 troops. FEIC refuses tax income 
+  from France after turn 5, and thereafter requires an increasing 
+  amount of tax to be repaid. 
+
+Emperor of the Mogul Empire. He notionally rules most of India, 
+from his capital of Delhi, but in practice his control is limited 
+to the kingdoms with a reasonable proportion of Moslems: Rajputana 
+and the lands along the Ganges. His empire is kept from collapse 
+by the wealth of Bengal. It starts with: 
+* Poor Infrastructure; 
+* Poor Army (but gains from ruling the Sikhs); 
+* Large initial territory; 
+* Abysmal Law and Order; 
+* Moslem religion; 
+* Enemy of Hindu States; 
+* Special: gains double status from Durbahs. 
+
+Maharaja of the Maruthra Confederacy of Hindu states, across 
+Central India. These warlike people occasionally resort to banditry 
+against their neighbours, tend to switch to the winning side in 
+battle, and are not greatly trusted. They start with: 
+* Poor Infrastructure; 
+* Average Army; 
+* Large initial territory; 
+* Poor Law and Order; 
+* Hindu religion; 
+* Enemy of Moslem States; 
+* Special: can "raid" in place of a normal attack. This gains 1-10 
+  gold from the raided land, if they had it in the treasury. Because 
+  the raid does not end in conquest, it ends the Maruthra turn. 
+
+Maharaja Singh of the Punjab, in the northwest. In real history, 
+the alliance of the Sikhs with the Raj was a major factor in its 
+success - in this game, the Sikh warriors have a good chance of 
+expanding their empire to control India. They start with: 
+* Average Infrastructure; 
+* Good Army; 
+* small initial territory; 
+* Average Law and Order; 
+* Sikh religion; 
+* No particular enemies; 
+* Special: good initial position on the map. 
+
+Chief of the Gurkhas. Latecomers on the scene, the Gurkha warriors 
+have expanded their fledgling empire to control all of Nepal, and 
+are currently eyeing the Mogul lands to the south. They start with: 
+* Poor Infrastructure; 
+* Superior Army, due to social structure; 
+* Small initial territory; 
+* Average Law and Order; 
+* Buddhist religion; 
+* No enemies; 
+* Specials: anyone attacking Nepal does so at half strength. Gurkhas 
+  do not accept bribes to desert in battle. 
+
+
+                   STATISTICS OF INDIAN STATES 
+
+POPULATION is basically fixed. It determines the tax take, and 
+increases the cost of investment. 
+
+ARMY and TREASURY. Only independent states have these. After a 
+successful revolt, a newly independent state begins with an army 
+with 1 troop per million population, but nothing in the bank 
+because the fleeing royals take "their" money. 
+
+INDUSTRY equates to technology level, and is depicted by a series 
+of graphics from a collapsing bullock cart to a high speed steam 
+locomotive. Tax is proportional to industry. 
+
+WEAPONRY is indicated by pictures from peasants with scythes, up 
+to a field gun. There is a bonus if you control any Sikhs, and 
+others for Gurkhas and either of the Europeans, but a penalty for 
+ruling both Hindus and Moslems. Army size depends on how many troops 
+you want to pay. 
+
+LAW is shown by pictures from a ruined hovel, up to judges and 
+then a ballot box (for democracy). The proportion of tax income 
+which reaches the central government is higher in a law abiding 
+state - tax income is effectively multiplied by law and order. 
+
+RELIGION does not change and shown by the following graphics: 
+* Catholic: priest in robes, with cummerbund and walking stick 
+  sized cross. Between 1800-1815, becomes French peasant in cap. 
+* Hindu: clean shaven man in turban.
+* Moslem: bearded man in turban.
+* Protestant: priest in suit and clerical collar. 
+* Sikh: bushy bearded man in turban, holding curved dagger. 
+* Buddhist: bald monk in robes. 
+
+Religious differences have the following effects: 
+* Hindus do not mix very well with Moslems/Sikhs. An empire run 
+  by one will have greater trouble taking over states inhabited 
+  by the other, and they will be more likely to rebel. And they 
+  are unlikely to ask the other for temporary alliances. 
+* Computer controlled empires. Hindus will avoid competing with 
+  each other; Hindus compete against Moslems/Sikhs; and Catholics 
+  against Protestants. 
+* Some of the random events affect particular religions. 
+
+ENEMY. The enemy of each state defaults according to religious 
+differences (which continue to affect policy), but changes to show 
+the state or empire considered most annoying or threatening. All 
+peaceful states of an empire share the same "enemy"; if a state 
+revolts, the empire is shown as its "enemy" etc. 
+
+SPECIAL. To add variety to the game, and reflect the diversity of 
+the Indian subcontinent, every empire is given a unique advantage. 
+Some are more advantageous than others. 
+
+
+
+GENERAL NOTES ABOUT STATISTICS... 
+
+Investment. Any of the above statistics can be improved by investing 
+money. The increase is related to money divided by population, and 
+is evenly spread across the entire empire. A statistic cannot be 
+increased by more than one in any turn, and the cost of an increase 
+equals the increase squared times the population of the empire. 
+
+Average statistics for an empire are calculated on a modified root 
+mean square (RMS) basis, weighted by population: overall value = 
+square root of ((value squared * state population) for all states 
+/ total population). Fortunately, the program does the work! This 
+equation works well, and reflects the fact that rich areas have more 
+of an influence in an empire than poor states. European homelands are 
+assessed as having an effective population of 8 million. 
+
+
+                             WARFARE 
+
+Each state or empire allocates its income between reserves, 
+investment and maintaining a standing army. (If enlarging the army, 
+you pay recruits double in the first turn). Perhaps one third will 
+be spent on the army in an average computer controlled state, 
+though martial peoples like Sikhs or Gurkhas may keep more troops. 
+
+Troops can fight inside their empire, and in adjacent states (next to 
+the part of their empire containing the capital). 
+
+The army acts as a standing reserve, to be allocated piecemeal 
+according to the events of the following period. For example, a 
+revolt may need troops to quell, you may want to launch an invasion, 
+another state may offer money or land in return for military help 
+and so on. Of course, you can only use troops once, so you may miss 
+out on opportunities if you temporarily run out of available troops. 
+
+Capturing a state in a frontal assault may require quite a large 
+effort - you need 2:1 odds if losses (mainly by desertion) are to 
+be equal, and 4:1 is desirable - because I want to encourage the 
+characteristic Indian practice of waiting for a state to become 
+undefended (e.g when the old ruler dies) and accepting the "random 
+event" invitation to support a figurehead claimant to the throne. 
+
+Bear in mind that an invaded state can try to buy help from a 
+neighbour. 
+
+When you capture the capital state of an empire, you must capture 
+the emperor in an arcade game. If you succeed, you take over the 
+rest of the empire as protected states. This also applies when the 
+defeated emperor was a player. 
+
+If you attack one of your own protected states, it instantly rebels 
+and is given the usual rebel army. If you defeat the revolt of a 
+protected state, it becomes a wholly-owned part of your empire. 
+
+
+                              STATUS 
+
+Raj India was very status conscious. Though status is not reported, 
+it is very important if you hope to build an empire the "easy way". 
+Rulers are more likely to give alliances to, and accept alliances 
+from, high status people. 
+
+The main way of buying status is to hold a "Durbah", or tournament, 
+which costs anything above 11 gold. The Durbah begins with a close- 
+up of princes on a reviewing stand, followed by a distant view of a 
+grand procession of elephants. Gain in status = number of elephants 
+= cost-10. 
+
+Specific effects on status when an individual country needs to make 
+a decision.. +10 if help needed against a country who the candidate 
+has as their enemy, halved for help from a country with the wrong 
+religion (Hindu vs Moslem, or Catholic vs Protestant). 
+
+When somebody is attacked and expects to lose (i.e if the attacker 
+could use half his available troops against all the defender's 
+available troops and get 2:1 or better), they can approach one 
+neighbour for help, as a "white knight". Only neighbours with enough 
+offensive troops, to potentially redress the odds, are candidates. 
+When deciding which country to approach, the odds of each is 
+proportional to its status, modified as above. 
+
+
+
+                        WINNING AND LOSING 
+
+The game ends when your Raj covers the whole of India (with a bonus 
+if you do better than History and conquer Afghanistan too). 
+
+On the negative side, you can be assassinated/recalled by the 
+Company if profits fall too low, or if you make too many enemies 
+among the ruling Community (so spend money on banquets and 
+durbahs: the Victorian equivalents of bread and circuses). It 
+will be difficult to die (you will normally just have to spend 
+a long time recovering in hospital), but it is possible. 
+
+The game also ends if it goes on too long. (This is basically a 
+failsafe against stalemate - I think such things are impossible, but 
+it's better to be sure). 
+
+The aim is for a varied, challenging game which is not too difficult 
+to play and which has many good graphical scenes. An ideal game to 
+show friends on your PC after you come home from the pub, but also 
+one which has to be played many times to get the perfect result. 
+
+
+                        SPECIAL EVENTS 
+
+Random events can occur during each player's turn. Except for 
+assassination, you learn these by text messages... 
+* Assassination attempt. When a player owns the biggest territory, 
+  there is a 25% chance each turn that somebody tries to assassinate 
+  him. This is an arcade game, played about once per game. 
+* Seduction. Under the guise of a message from the guru in the bazaar, 
+  the hero is lured to a meeting with a "slave girl". If you consent, 
+  she disrobes, but subsequently Thugs try to surprise and kill you. 
+  * Suttee. After the third round has started, there is a chance each 
+  turn (10% / number of players) than a request is received to help 
+  the princess escape from Thugs. This is another arcade game, played 
+  once per game, and gains the winner a wife, state and 10-20 gold. 
+* Earthquake/Flood/Monsoon Fails. No income from the affected 
+  area(s) of India. Unless you assign troops and money for famine 
+  relief (population/infrastructure), the infrastructure and law-and-
+  order are reduced in the famine states, and status gets worse. 
+* Thug attacks increase to celebrate an anniversary. People are 
+  fleeing and the population will be drastically reduced unless you 
+  assign (a number of) troops to police duty. 
+* Hindu/Moslem riots (only if the empire includes both). As just above. 
+* An ancient temple is uncovered. Gain 10 gold. 
+* Rebellion. Not truly random. Rebel forces = population/2, and you 
+  defend without any garrison. If the revolt succeeds, the newly 
+  independent state will also get its own turn. 
+* Your daughter is to be married and needs a dowry (Indians only). 
+  Status change = 2*dowry - 10. 
+* Bandits raid your treasury from a neighbouring state. (Aggressive 
+  states, e.g Afghanistan and Nepal, do this to encourage you to 
+  conquer them). 
+* The heir to a random country plans to lead a rebellion (which will 
+  happen later, in its ruler's turn) and will ally with you as a 
+  protected state if he wins. You must promise at least 5 troops. 
+
+European rulers (only) have the following additional random events, 
+introduced by a full-screen picture of upper-class europeans lounging 
+in a club. And the Indian face at the bottom left of the text screen 
+is replaced by a pompous British one. In the events, the Anglo- or 
+Franco-Indians insist that you..  
+* Spend some money on their entertainment.  
+* Or that you have less Indians in high positions (reduce law and 
+  increase the risk of rebellion).
+* Or that more troops are put on permanent garrison duty in the 
+  original settlement cities. 
+* Or that you marry a plain white girl (use background of the other 
+  wedding). You get no dowry and must pay for the ceremony. 
+* Or that you return to answer before Parliament (in effect, you are 
+  wounded next turn). 
+* Or that you save money by feeding all your troops the same food as 
+  the Europeans (guarantees rebellions next turn). 
+
+               PICTURES FOR CHAMPION OF THE RAJ 
+
+All screens are full height and have a distinctive Indian and/or 
+Victorian feel. In the first instance, they are drawn for PC EGA. 
+
+LOADING SCREEN/INTRODUCTION/CAST MENU. A total of 14 animated screens 
+which tell the story of a journey to India, introduce the enemy Thugs 
+and introduce the six rivals to unite India. The screens have already 
+been described, above. 
+
+6 OFFICES. Each of the six rivals to rule India are potential player 
+characters, and they have flags and instantly distinctive "offices" 
+where strategic decisions are made. All offices have the following: 
+* relief map of India, with state boundaries and flags to show control, 
+* book (or scroll) to show details of the current selected state, 
+* bell (or equivalent) to summon a servant, 
+* large picture of the "hero" at one side. 
+* space for the parade/talk/attack/next turn icons. 
+* a window looking onto the world outside the office, with spot 
+  "cameo" animation appropriate to the nationality of the hero. 
+
+LINKING SCREENS. Arcade games are typically sandwiched between a pair 
+of "static" screens, and further such screens accompany major events. 
+The full list of such screens is...
+
+WINDOWS which open upon the main screen: 
+* text window with guru and/or hero and/or princess; 
+* rebellion Scene;
+* army recruitment/dispatch;
+* army Battle;
+* long view of battered city;
+* seduction by "slave girl", and her undressing in silhouette; 
+* kissing the princess; 
+* receive crown from former ruler; 
+* receive sport trophy. 
+
+SPECIAL EVENT SCREENS... 
+* "Club scene" for European requests for you to do something 
+* "Bazaar scene" for Indian requests for the same. This may also be 
+  used as background if you lose. The guru does the talking. 
+
+"Marquee/Grandstand scene" to introduce most active sports. This has 
+variations for: 
+* Mounting elephants before the tiger hunt, or elephant race 
+* Ordering elephants before the Durbah 
+* Collecting a trophy after the sport. 
+
+"Walk to throne scene" after the city is captured, or after you are 
+married to an Indian princess. 
+
+"Long view of Thug temple" in the jungle, before the final temple 
+capture game. 
+
+"Awake, attacked scene", showing a black-robed assassin staring at 
+the screen and about to use his strangle cord. In the foreground is 
+a bed with one or two pairs of feet below the covers. 
+
+OTHER SCREENS ARE... 
+Durbah. Elephants, the same size as on the loading screen, process 
+across the screen, through a crowd. 
+
+Close-up office maps: twice the dimensions of the normal one. They 
+have exactly the same borders, but are more detailed. 
+
+"Fireworks over the Taj Mahal" when you control India. 
+
+
+ARCADE GAME PICTURES. Some arcade games start with an introductory 
+sequence; others go straight into the action. In either case, a 
+text window is displayed while the game loads, typically showing the 
+heads of the guru and the hero - with either play instructions, or 
+one of the guru's many wise sayings. 
+
+In summary, the individual game pictures are as follows... 
+* Tiger Hunt: one screen, with current contender in foreground. Plus 
+  a close-up of the snarling tiger, opening its mouth to bite you. 
+* Elephant Race: Marquee scene; Elephant Paddock; Top-down view of 
+  north-south scrolling racetrack, between two rows of grandstands 
+  with tiny animated onlookers (so the elephants are big in 
+  comparison); Marquee scene again for the prize ceremony. 
+* Army Battle: recruitment window; then, where the result is a 
+  foregone conclusion, a window showing close-up hand-to-hand 
+  fighting soldiers is opened, to report the result. 
+  Close battles use a variety of landscape sections to build up a 
+  landscape, plus tiny soldiers to fight across it. 
+* Capturing the Palace: graphics sequence of splendid town, with 
+  cannons breaking down its gates, followed by components to allow 
+  us to make up perhaps 8 random screens of sideways-scrolling ruins. 
+  I propose to go for a Gauntlet-ish 45-degree-from-above view, with 
+  a small hero, noncombatant "slave girls"and opposing Indian 
+  peasants. A final screen shows the hero (from the side) walking 
+  along a red carpet to accept the surrender of the opposing prince. 
+  There are slightly different versions to suit e.g the surrender of 
+  different princes.  
+* Capturing the Thug Temple: Doors of Kali temple grind open. The game 
+  screens are as "Capturing the Palace", but some of the scenery is 
+  more temple-like with nude statues and the defenders are religious 
+  Thug fanatics throwing knives. The final goal is a crown, guarded by 
+  a topless 8-armed statue of Kali. The whole game then ends with 
+  fireworks over the Taj Mahal. 
+* Swordfight: This has 60-pixel high fighters, with 3 backgrounds: 
+  Riverside with bonfire (for rescuing the princess from Thugs - she 
+  remains and acts as a cheerleader); Bedroom (when defending yourself 
+  from an assassination attempt - if she's there, the "slave girl" 
+  is cheerleader for the Thugs); Palace. 
+
+
+                                MUSIC 
+
+MIDI music is used to introduce notable events, and to accompany 
+the arcade games. There is no continuous music in the office (while 
+playing the strategy game) because I think this would seen get 
+wearisome. As is usual with film music, most tunes are conventional 
+European mood music, with just an occasional Indian instrument to 
+add atmosphere. Exceptions are the short "national-anthem-type" 
+fanfares/jingles which introduce each turn in a multi-player game, 
+and ethnic music for the Indian Bazaar and English club scenes. 
+
+Tunes marked "+" need to repeat. 
+
+The introductory tunes are as follows: 
+* Title music, probably with a strong march feel, and at least one 
+  contrasting theme of an Indian character (3 mins+). 
+* Nautical music, for the sea voyage (30 secs), blending into another 
+  arrangement of the same thing (20 secs+) with an Indian feel. 
+* Bazaar theme (30 secs+); the same as that for the bazaar in the game. 
+* Shock, as the hero is struck (20 secs), blending into music for a 
+  gloomy prison with water dripping from the ceiling (20 secs+). 
+* Happy jungle music, as the hero and princess escape to her father, 
+  the old guru (50 secs+). 
+* Solemn music, as the guru explains India's sad plight (30 secs+) 
+* Light chamber music, played by the local band, as the hero attends 
+  a garden party and meets his rivals for the throne of Empire (3 mins+). 
+
+The tunes in the game are as follows: 
+* Short fanfares/jungles/themes (5-10 secs) to introduce the heroes: 
+  o British Viceroy (Rule Brittania?) 
+  o French Console (Marseillese?) 
+  o Mogul Emperor (Proud and stately) 
+  o Maruthra Maharaja (Fat and pompous) 
+  o Maharaja Singh of the Punjab (Fierce and Warlike) 
+  o Chief of the Gurkhas (use those Peruvian pan-pipes, that sound 
+    like blowing across a bottle, to illustrate Nepal's windy heights). 
+* Tiger Hunt theme (1 minute+). 
+* Elephant Race theme (30 seconds+). 
+* Army Battle theme (1 minute+). 
+* Capturing the Palace theme (running about on foot. 1 minute+). 
+* Capturing the Thug Temple theme (spooky/dripping water. 30 secs+). 
+* Swordfight theme (1 minute+). 
+* Celebratory music for parades etc (1 minute+). 
+* Oom-pah music for British club (30 secs+). 
+* Indian music for Bazaar (30 secs+). 
+* Seduction music (1 minute). 
+* Jokily sad music for if the player loses (30 secs+). 

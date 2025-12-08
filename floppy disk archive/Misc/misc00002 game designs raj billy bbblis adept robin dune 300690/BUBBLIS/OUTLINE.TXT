@@ -1,0 +1,145 @@
+
+     "BUBBLIS" DESIGN OUTLINE. COPYRIGHT (C) 19/2/90 LEVEL 9 
+     ------------------------------------------------------- 
+
+Bubblis is a Tetris-type game, but in no sense a Tetris clone. 
+(In a similar way, Sierra's games are described as "adventures" 
+although they are quite unlike the first "Adventur"). 
+
+Bubblis is set underwater, amidst animated fish and water plants, 
+and requires you to guide rising bubbles, which then collect near 
+the surface of the water. If you manage to assemble an adjacent 
+square of bubbles of the same colour, they combine into a single 
+big bubble, which then bursts - sometimes bursting the adjacent 
+small bubbles too. (Different coloured big bubbles earn different 
+scores and bonusses - e.g extra lives - when they burst). 
+
+Bubblis has a music score and digitised sound effects, including 
+"musical" popping noises, and lots of background animation. 
+
+Play gets faster as time passes, and if you fail to burst bubbles 
+regularly, they eventually build up and overflow the play area. 
+This ends the current level and, if lives remain, play resumes 
+slowly on the next level, which is made more difficult by the 
+addition of an extra type of yet higer-value bubble. (The more 
+types of bubble, the harder it is to match four in a square).  
+
+
+      CONTROLS (by cursor, mouse or numeric keypad): 
+
+Left  = rising bubble moves diagonally left 
+Right =   "      "      "       "      right 
+Up    = bubble rushes vertically as far as it can 
+Down  = timeout (pause mode). The number of timeouts is limited. 
+Fire  = burst rising bubble. This number is also limited. 
+
+
+      GRAPHICS (title, game, and high score table): 
+
+Level 9's HUGE system uses 16*16 pixel cells on a 320*192 pixel 
+screen, and each finished picture is usually made up from several 
+dozen graphical objects arranged in 3D space. 
+
+E.g, a typical office in "Raj" uses the following static objects,  
+working forward from the back: view through window, wall paper 
+(actually, this is lots of identical objects), window frame, 
+load/save icons, map on wall, game icons, large figure at desk, 
+desk itself, book/scroll, bell. Animation sequences are positioned 
+at appropriate depths so that they go in front of some objects 
+and behind others. 
+
+HUGE imposes no absolute restrictions on the artist, but it is 
+helpful to bear the following in mind: 
+* Static objects are always cell aligned. So, depending on exact 
+  position, a small object might all fit in one cell, or might 
+  lie on the corner between cells and waste four times the space. 
+* Moving sprites are not cell aligned when displayed, but should 
+  be still drawn in as few cells as possible. E.g align the Bubblis 
+  bubbles and make sure each just fits within 16*16. 
+* It costs little to re-use an existing object, so Bubblis can 
+  probably afford shoals of fish (as long as each is smallish). 
+* But artists shouldn't worry about cutting around objects in the 
+  background, unless they want to, as Level 9 have lots of practice 
+  in doing this sort of thing. 
+* When drawing animation frames for sprites, please arrange them 
+  logically. There is no need to fill each screen, as blank cells 
+  are ignored, but it is sensible to reduce the total number of 
+  picture files involved by grouping related graphics together. 
+* Pictures are drawn, in the first instance, using a consistent 
+  IBM EGA pallette. (Follow the example supplied). This is the most 
+  important version, and the one which will be seen by perhaps 80% 
+  players. We will subsequently want the palette re-adjusted for the 
+  ST (only the palette changes), and finally the graphics retouched 
+  to add 32-colours for the Amiga and MCGA. (This latter stage does 
+  not involve the addition or removal of any cells.) 
+* Level 9 are specialising in animated scenery as our trademark. 
+  E.g one of the "Raj" screens has a cricket match in the background. 
+  It is nice when animated scenery tells a short (and repeating) 
+  story, rather than just being a random collection of flags, 
+  ripples and candles. 
+
+Bubblis uses a unique typeface, closely based on an existing nice 
+typeface but modified to give bubble-like letters. Only upper case, 
+numbers and some punctuation is needed. Letters are large and have 
+black borders, so they are legible against an animated background. 
+
+Bubblis has three animated screens, all on an underwater theme: 
+* title (with brief instructions and mouse/joystick/keyboard), 
+* game (with optional second playfield for two-player game), 
+* high score (with joystick entry of player names). 
+
+
+1) TITLE SCREEN: this shows large figures of bearded Poseidon on the 
+left and a mermaid on the right, both scantily though decently clad 
+and seated on thrones. Poseiden is holding a trident and the 
+mermaid a cornocopia from which jewels are falling. The background 
+is branching coral. 
+
+Animation: both main characters are static, but their eyes blink and 
+they have two alternative mouth expressions to the default. Jewels 
+fall from the cornucopia. Small, bright fish, jellyfish and 
+seahorses swim or float through the branches of the coral. Tiny 
+bubbles rise through the water. In the foreground are the same fish 
+as in later screens. 
+
+The name "BUBBLIS" is writ large in the forground, and will be 
+animated in some way - perhaps the letters will bob up and down, 
+or perhaps they will float upwards individually. Explanatory text, 
+in a bubble-like font, scrolls sideways. 
+
+
+GAME SCREEN: this is also underwater, though in a fish tank and 
+with a more subdued background of waterweed and tank ornaments. 
+
+Animation: relatively drab fish swim about (large ones in the 
+foreground, and a shoal of single-cell fish in the background), 
+snails crawl over the glass, and small bubbles float upwards. 
+
+Monochrome fish swim across the foreground, each releasing a 
+16*16 pixel bubble of the corresponding colour as it reaches the 
+playfield. These bubbles wobble upwards and assemble in a square 
+array at the top of the screen. There is animation for small 
+bubbles bursting, four bubbles of the same colour assembling into 
+a bigger 32*32 bubble, and bigger bubbles bursting. 
+
+Score details are displayed in the same text as on the title screen, 
+and additional instructions are reported by sideways-scrolling text 
+in the bubble-like font. 
+
+
+HIGH SCORE SCREEN: this is a variant of the game screen, with the 
+addition of a high score table in the usual font, and an animated 
+cat in the background. 
+
+Additional animation: the cat blinks, narrows its eyes, licks its 
+lips (and hence nose), and fishes with a paw. 
+
+
+Bubble animation. There are perhaps nine different types of bubble, 
+each with a different colour and a distinct pattern (so as to be 
+distinct in black-and-white modes) but all recognisable as 3D 
+bubbles. They all wobble (3 frame animation?) as they rise. The 
+game also needs animation for when large bubbles form (there are 
+again about 9 different types) and when bubbles burst. Points for 
+burst bubbles are temporarily displayed on coloured circles. 
+

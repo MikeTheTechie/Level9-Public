@@ -1,0 +1,153 @@
+
+
+  STRATEGY GAME FOR BILLY THE KID. Copyright (C) Level 9 Computing  
+  ---------------------------------------------------------------- 
+
+
+The game is between Billy the Kid and Marshall Pat Garrett (neither, 
+either or both of whom are controlled by the player(s)). 
+
+Billy the Kid must recruit an outlaw gang and revenge his friend 
+Tunstall, murdered in the "Lincoln County war", by robbing the 
+opposing ranchers of all their animals and money. 
+
+Pat Garrett was not associated with the "war", and is concerned 
+only with law and order. He must deputise volunteers, stop crimes, 
+and put Billy and the other outlaws in jail. 
+
+The map shows Lincoln County (the SE quarter of New Mexico) and the 
+surrounding areas... 
+
+
+         || <- Rio Grande  Pecos River -> }   + Railway 
+         ||                               {   + 
+         |+-------+-------+-------+-------}---+---+-------+-------+ 
+         ||       |SantaFe|                   +   |       |       | 
+Railway +++++++++++       ++++++++++++++++{++++   |       |       | 
+         ||       | Town  |                       |       |       | 
+         |+-------+-------+---------------}-------+ Good- +-------+ 
+         ||       |       |               { Bitter| night-| Fort  | 
+         ||       |       |               } Lake  | Loving| Sumner| 
+         ||       |       |               {       | Trail |       | 
+ |+=======+-------+       |               ^v^v^v^v^       +-------+ 
+ ||Alb'que|Jicar- |       |               |       {       | Chisum| 
+ ||       |   iula|       |               |       }       |       | 
+ || Town  |Mount's|       |               |       {       | Ranch | 
+ |+-------+-------+       +---------------+-------^v^v^v^v^-------+ 
+ ||       |H'rison|       |     Sierra Capitan    |       {       | 
+ ||       |       |       |                       |       }       | 
+ ||       |Ranch  |       |       Mountains       | Good- {       | 
+ ||       +-------+       +-------+-------+-------+ night-}-------+ 
+ ||San    |Fort   |       |Lincoln|       |Roswell| Loving{Garland| 
+ ||Andreas|Stanton|       | City  |       |       | Trail }       | 
+ ||       |       |       |(Town) |       | Town  |       { Ranch | 
+ ||Mount's+-------+-------+-------+^v^v^v^v^v^v^v^v^  ^  ^v-------+ 
+ ||       |Mes'ero|       |T'stall|       | Reed  |       {       | 
+ ||       |Apache |       |       |       |       |       }       | 
+ ||       |       |       | Ranch |       | Ranch |       {       | 
+ |+-------+-------+       +-------+^v^v^v^v^v^v^v^v^  ^  ^v^v^v^v^v 
+ || Las   |White  |       |       |               |       |C'lsbad{ 
+ || Cruces|Sands  |       |       | Seven Rivers  |       |       } 
+ || (Town)|Desert |       |       |               |       | Caves { 
+ |+=======+=======+-------+-------+---------------+-------+-------} 
+                 ||    El Paso    |                               { 
+   [MEXICO]      ||               |      <- Texas ->              } 
+                 ||     Town      |                               {  
+                 |+---------------+-------------------------------} 
+  Rio Grande     ||                                               { 
+ (impassible) -> ||            Pecos River (readily crossable) -> } 
+                
+
+
+START POSITIONS. Billy and Pat start at the Tunstall Ranch and at 
+Roswell respectively. There is 1 outlaw at each of the Tunstall and 
+Chisum ranches, 1 deputy at each of the other ranches, and one of 
+each at the five towns in New Mexico. 
+
+There is a herd of cows to steal at each of the ranches with 
+deputies, and a possible crime at each New Mexico town - although
+only a random two of these are imminent at any time. 
+
+
+PLAY SEQUENCE: 
+ Billy moves; Billy does things in his destination; 
+ Sheriff Pat Garrett moves; Pat does things in his destination; 
+ Possee(s) move; Possee(s) fight if they have caught up with Billy; 
+ Crime "moves" to different random town if just committed/prevented; 
+ Deputy appears in random town (1-6: if empty); 
+ Possee appears in ranch if its cows have just left;  
+ Deputy appears in random town (if empty). 
+
+
+MOVING. Only Billy and Pat (and any men they take along with them) 
+are moved by the players. When moving, they can choose to either 
+stay where you are (which ends moving for that turn), or else go to 
+an adjacent location (north-south, east-west or diagonally). 
+
+Moving into occupied or friendly locations.. 
+* Pat cannot enter Mountains occupied by outlaws, for fear of ambush. 
+* If your destination is countryside (not Town or Fort) occupied by 
+  enemies, your move only succeeds if you outnumber them by at least 
+  2:1 (Billy or Pat count as 1). In this case, outlaws are captured 
+  or scattered at random into unoccupied neighbouring locations as 
+  Pat wishes, while deputies are killed. 
+* If your destination is occupied by friends (fellow outlaws/deputies, 
+  or the Tunstall/Chisum ranches for Billy, or either Fort for Pat) 
+  you collect fresh horses and can move again. 
+
+Leading people or animals..
+* Billy and Pat decide, before every individual move, how many 
+  outlaws/deputies respectively of those in the same location they 
+  want to move. Any others are left behind. Thus if Billy or Pat are 
+  making several moves that turn, by repeatedly collecting fresh 
+  horses, they can leave or collect up a whole series of men. Outlaws 
+  and deputies elsewhere cannot be moved voluntarily.  
+* Cows are left behind if Billy goes to Town, Fort or Mountain. 
+* Pat Garrett has no choice but to take arrested outlaws with him. 
+  If these outlaws ever outnumber Pat and his deputies there to 
+  guard them, they all escape and immediately join Billy. Likewise, 
+  if Pat tries to keep the captured outlaws for too long - five turns 
+  have gone past since he captured the last of them - they all escape. 
+  Pat should leave captured outlaws at the state prison in Santa Fe. 
+
+Movement restrictions.. 
+* The Rio Grande is impassible, but the Pecos River is just scenery. 
+* Pat Garrett cannot leave New Mexico, e.g to visit El Paso. 
+
+Moving possee(s).. 
+* Billy's second and subsequent ranch robbery cause a possee of 
+  vigilantes to form at the end of the turn. A possee is of 10 men. 
+  They will always attack Billy if possible, but will simply kill 
+  one outlaw and disband if their attack is at worse than 2:1 odds. 
+  Their move is after those of Billy and Pat. 
+* A possee heads towards Billy, normally following his trail, 
+  unless it can move to a location which "covers" more of Billy's 
+  possible next moves than this.  
+* A possee disbands after 6 turns, or if it moves onto mountain. 
+
+
+DESTINATION. 
+
+
+
+BETWEEN TURNS. 
+* each turn, shake 1-6. 1-5 creates a new deputy in the corresponding 
+  New Mexican town, providing the town is empty. 
+
+
+                            SCORING AND WINNING 
+
+Billy the Kid scores for: 
+* Committing crimes in town 
+* Selling cows in El Paso 
+* Killing Pat 
+
+Sheriff Pat Garrett scores for: 
+* Preventing crimes in town 
+* Each outlaw captured, each outlaw jailed, and each still in jail  
+* Killing Billy 
+
+The game ends when Billy or Pat is dead. A final gunfight between 
+them is triggered when Billy has bankrupted the Murphy-Dolan faction 
+by committing at least 5 robberies and sold all 5 sets of cows in 
+El Paso, or when Pat has prevented 10 robberies. 

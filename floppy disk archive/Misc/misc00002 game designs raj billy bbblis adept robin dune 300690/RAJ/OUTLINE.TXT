@@ -1,0 +1,156 @@
+
+Champion of the Raj Outline Design.Copyright (C) 2 July 90 by Level 9 
+
+The game is in the spirit of "Defender of the Crown" and set in the 
+early 1800s when India was being united as the British Raj. It has: 
+* a twelve screen animated introduction;
+* a central strategy game (a bit like the classic game "Hamurabi", 
+  this combines territorial conquest with economic investment); 
+* six arcade games (tiger hunting, elephant racing, army battle, 
+  capturing the palace, battle in the temple, and swordfight); 
+* many animated screens depicting local events; 
+* digitised sound effects and a midi sound track. 
+* versions for Amiga (2 disks), ST (2 double-sided disks) and IBM PC 
+  (3 * 3.5" or 5 * 5.25" disks, for EGA/VGA/CGA/TGA and with good 
+  sound on Roland/Ad Lib/Sound Blaster). 
+
+Champion of the Raj is a game for 1-6 people, who each choose one of 
+the main contenders to unify India, e.g the Viceroy of the British 
+East India Company, or the emperor of the crumbling Mogul Empire. 
+
+Erosion of the Mogul empire means that much of India is in chaos and 
+falling under the influence of the Thug sect, who specialise in mass 
+murder. Whichever of the six contenders you choose to play, your task 
+is to bring law and order to the continent and free the peasants by 
+defeating the evil Thugs. 
+
+
+                           MAIN DISPLAY 
+
+There are six versions of the main display: the headquarters of the 
+six contenders. All are quite similar, with a large map of India on 
+the wall, a book or scroll with economic information, a bell to 
+summon servants and end your turn, and "you" sitting on one side. 
+
+The map shows the Indian sub-continent from Afghanistan and Nepal 
+southwards, with the many states and principalities left by the 
+continuing collapse of the Mogul Empire. The map shows political 
+control; for example the British East India Company starts with 
+the ports of Bengal City and Calcutta, while the crumbling Mogul 
+empire still controls eight or ten central states. 
+
+Your turn starts with the collection of taxes and payment for troops 
+in barracks. Then you take multiple-choice decisions to cope with 
+special events: a servant or the princess reports on the state of 
+your empire (e.g rebellion, famine, or offer of an alliance), or one 
+of outside narrators (a bearded guru, or British colonel) may report
+on the wishes of the Indian and European communities respectively. 
+
+Next you steer a hand across the map, and click on any state to 
+select it: its flag flaps on the map, and its report is shown in 
+the "book", which you can click on for more details, or to adjust 
+a figure if you own the state shown. Information includes...
+* Industry and Law level icons, 
+* Weaponry icon and Troop numbers, in garrison and reserve, 
+* Income icon and amount of money in treasury. 
+
+Various icons appear on the office wall: 
+* Attack (click on this to invade the currently selected state); 
+* Talk   (click to offer an alliance with the ruler of this state); 
+* Parade (click to hold an impressive Durbah and raise your status. 
+          This influences future negotiations). 
+
+                          ARCADE GAMES 
+
+Your decisions and the "random" events in the game often lead to 
+short interludes of arcade action. These are sometimes optional, 
+at the cost of losing reputation, and are.. 
+
+TIGER HUNT. A group of rogue tigers have been attacking villagers, 
+and you may be invited to help deal with them before negotiations. 
+The idea is to shoot these feared man-eaters from elephant back. 
+
+The game is 3D, with your silhouette in the foreground and a multi- 
+layered jungle in the background, with various animals moving about 
+among the trees and vines. Eventually each tiger charges forward, 
+getting quite big in the final frame, while you try to hit it with 
+one of your two shots (loading a shotgun is a slow process) - miss 
+and the tiger wins; there is a close-up of its final bite. 
+
+
+ELEPHANT RACING (another way to show your worth before negotiations). 
+This version is an Indian equivalent of a Ben Hur chariot race, where 
+you must guide your tusker down the scrolling racetrack, seen from 
+above, between grandstands of cheering spectators. 
+
+Elephant Racing is not officially a contact sport, but there are 
+no rules and whipping at your opponent and barging their elephant 
+is one way to win. An additional element of skill is added by 
+the variable terrain underfoot - trying to go too fast through 
+mud will get you thrown (a window opens to show this). 
+
+
+ARMY BATTLE (attack a state, or defend yourself). Normally combat is 
+just shown by a standard view of hand-to-hand fighting, but if the 
+odds are about even you may want to take command of the battle. 
+
+Choose your initial battle plan from the half-dozen options 
+available; then modify your troops' orders as the combat unfolds 
+by means of icons upon the battle menu. Combat is fast and furious, 
+taking less than a minute, and ends with the flight of losing army. 
+
+
+CAPTURING THE PALACE. When you capture the capital state of an empire, 
+you must capture the palace. The game is played on one of five 
+scrolling city maps, viewed from 45-degrees above, with 32-pixel 
+high people (soldiers and hareem girls) moving through 3D streets, 
+buildings and open spaces. Your army has broken down the city gates, 
+but to save unnecessary bloodshed you must fight to the palace alone. 
+
+
+BATTLE IN THE THUG TEMPLE (triggered when India is united and the 
+Thugs can no longer hide). The finale. The game is much the same 
+as "Capturing the Palace", above, but the enemy soldiers are 
+replaced by robed assassins who throw knives, and it all ends 
+with the attack on an 8-armed Kali statue who throws knives. 
+
+
+SWORDFIGHT. The princess has been kidnapped and is held by a group 
+of Thugs, but wriggles free and escapes topless before grabbing e.g 
+a fan and returning as a cheerleader. 
+
+The scene is shown side-on; you enter stage left, as a 60-pixel high 
+figure, sword-fight and rescue the girl. She kisses you in close-up 
+and we cut to marriage scenes. This game is not a "joystick bash"; 
+if you do nothing the hero and opponent strike and parry roughly 
+alternately; controls allow you to advance or retreat, and to over- 
+ride the computer's choice of blow with one designed to exploit each 
+enemy's weaknesses. 
+
+The swordfight game is also played if the Thugs decide to assassinate 
+the hero; either if you allow yourself to be seduced by a "slave girl" 
+in their pay, or if it seems you are about to win. Both versions begin 
+with an "effects" picture showing the hero in bed. 
+
+
+                       EXAMPLE EVENT SCREENS
+
+The "random" events in the game are often accompanied by their own 
+screens; not actual games but with animation and movement. Eg.. 
+* Elephants process through the Durbah. 
+* Negotiation with peasants in the bazaar. 
+* Fireworks over the Taj Mahal. 
+
+
+                        WINNING AND LOSING  
+
+The game ends when your Raj covers the whole of India, or if one 
+of the computer-controlled players conquers your dominions. Or if 
+you are assassinated or e.g recalled by the East India Company when 
+profits fall too low. It will be difficult to die (you will normally 
+just miss a year recuperating) but this is possible. 
+
+Champion of the Raj is a varied and attractive game, which is easy 
+to learn and play as one of the powerful rulers, but a real challenge 
+as a weaker prince. And it can be played many times, as each ruler 
+needs different tactics to win.  

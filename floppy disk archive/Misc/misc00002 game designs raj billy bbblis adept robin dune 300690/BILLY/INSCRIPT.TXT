@@ -1,0 +1,121 @@
+
+ "BILLY THE KID" - INTRO SEQUENCE SCRIPT. Copyright (C) 28/7/90 Level 9 
+
+1. Streets of Bonito 
+   * Buggy 1 (grey horses) enters right and trots left  
+   * Buggy 2 (brown horses) enters when buggy 1 is about 1/3 of the 
+     way across the screen, from the left and trots right 
+   * Stagecoach enters as buggy 1 leaves, from the right and trotting 
+     left. The driver occasionally uses his whip. 
+   * As soon as the vehicles are clear, the dance hall window breaks 
+     with a crash and Billy comes flying out. He lies on the ground 
+     for a couple of seconds, before standing and walking back up to 
+     the door. Cut immediately. 
+
+2. Blacksmith in Doorway 
+   * Billy stands motionless in foreground; double bar doors swing 
+     open and are gone, revealing the blacksmith behind. (Make sure 
+     the doors do not start too high - Billy is quite short - and 
+     that we can see the blacksmith's right hand). 
+   * The background dancers are static; the oil lamp flickers; the 
+     blacksmith blinks. 
+   * Blacksmith talks: "So, the mother-lover's back. Draw, you son of 
+     a bitch". 
+   * Blacksmith cocks his guns in their holsters and makes a move 
+     to draw his right gun. Billy's gun appears in his hand with the 
+     muzzle flash behind (this is instantaneous). Hold for 1-2 frames. 
+   * Lose muzzle flash, but Billy's gun remains static. There is a red 
+     patch above the blacksmith's heart and his eyes roll up. Cut 
+     immediately. 
+
+3. Streets of Bonito 
+   * Dance hall doors are now open, but the blacksmith cannot be seen. 
+   * Billy runs left off the screen. 
+   * Billy reappears from the left, mounted on his trusty grey, and 
+     gallops right across the screen. When he nears the right hand 
+     side, the screen scrolls to follow him as far as it can. He exits. 
+   * As Billy gallops by the dance hall, about three men appear in its 
+     doorway and fire after him (this is shown by muzzle flashes and 
+     hopefully sound effects). 
+   * After a few seconds, four or five horsemen gallop across the 
+     screen (which remains static at its extreme right scroll position) 
+     from left to right. They occasionally fire into the air. 
+   * Meanwhile, a small bird has been flying left-right above, and (if 
+     it looks OK) a small cabin with windpump and smoking chimney sits 
+     in the distance, halfway between the gallows and the right edge. 
+
+4. Billy evades the posse 
+   * four or five small horsemen (equivalents of the above) trot across 
+     the screen from left-right in the distance. Meanwhile... 
+   * An eagle swoops down from the top left, before rising and exiting 
+     off the top right (this is a "pointer" towards Billy). 
+   * Then Billy slides up in the foreground, remains there for a 
+     while, then slides down slowly out of sight. 
+
+
+5. Hoe Down 
+   * Text: "Tunstall Ranch in Lincoln County, across the state line. 
+   * Flames flicker, men drink at the tables, two fiddlers fiddle 
+     out of sync, a banjo player strums, and perhaps 8 groups of 
+     dancers dance in front of the fire. 
+   * The dancers can promenade left and right, and they can spin 
+     around, so I suggest a dance where they promenade for a couple 
+     of cms, then spin, and repeat this perhaps three times. Then 
+     they spin around 1 1/2 times and head back the way they came. 
+   * Billy enters from the left, beyond everyone, lights a cigarette 
+     (I know we used this in Grange, but it's the best way I can think 
+     of to draw attention to him) and walks over to the farmhouse door. 
+   * Farmhouse door opens and light shines out. Cut immediately. 
+
+6. Pat and Tunstall talk 
+   * Pat and Tunstall blink, the fire flickers, when each talks his 
+     mouth moves and his eyebrows twitch a bit. 
+   * Pat speaks, "... Murphy and Dolan are dangerous men, Mr Tunstall." 
+   * A microphone boom dips down into the mirror, then up again. 
+   * Tunstall speaks, "Their threats don't worry me, Sheriff Garrett. 
+     I'm too angry about the way they are cheating the honest farmers". 
+   * Billy's head scrolls up in the mirror. 
+   * Pat's eyes turn towards the player, he grins and then speaks. 
+     Immediately Pat's words are on the screen, Tunstall's head also 
+     turns towards the player and the scene cuts. 
+     Pat says, "Well, well! Here's someone who might just help. 
+     Where've you been this past years, Billy? John Tunstall, meet 
+     the Kid, an old friend of mine and a good man in a fight". 
+
+7. Pat, Billy and Tunstall talk 
+   * They all blink and very occasionally twitch their eyebrows. 
+   * Tunstall speaks, "I'd like you to join my men, Billy. But I'm 
+     right out of cash until I visit Lincoln City tomorrow, so 
+     here's my lucky silver dollar on account. Keep it safe."  
+   * Tunstall flicks the dollar into the air. Cut. (At the time of 
+     writing, this dollar is the only graphic that we don't have). 
+
+8. Buggy Ride 
+   * Buggy and two riders enter left (the riders slightly in the lead) 
+     and trot slowly across. 
+   * As the riders are about to pass behind the tree on the right, 
+     two white pigeons fly up in the foreground near the tree and flap 
+     up and across the screen - leaving on the left. 
+   * Tunstall leans back and his buggy stops, with his horse partly 
+     hidden by the foreground tree. He points backwards. 
+   * Text, "Pat, Billy, there goes dinner!" 
+   * The two riders gallop back right-left across the screen, firing 
+     into the air as they go, and exit left. 
+   * The screen scrolls right to reveal a murderer behind the tree. Cut. 
+
+9. Assassination of Tunstall 
+   * Branches which partly hide buggy scroll left/right off screen, 
+     revealing a bunny which meanwhile hops left-right across the gap. 
+   * Murderer scrolls on from below. 
+   * Murderer raises his guns and fires both (muzzle flashes). 
+   * Tunstall slumps backwards in his seat. Cut. 
+
+10. Pat and Billy lean over Tunstall's body 
+   * They blink and very occasionally twitch their eyebrows. 
+   * Pat speaks, "Another good man dead. I swear I'll bring law to 
+     Lincoln County and hunt down every last outlaw". 
+   * Billy speaks and we cut the scene and load the game itself: 
+     "You're wrong. Murphy and Dolan paid for this killing, and I never 
+     knew a rich man hung. If you mean what you said, you'll be hunting 
+     me too. Because I vow revenge for John Tunstall and I'll do 
+     whatever I must, to drive his murderers from this land. 

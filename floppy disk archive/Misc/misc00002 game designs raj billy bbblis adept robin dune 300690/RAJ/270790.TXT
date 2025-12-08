@@ -1,0 +1,46 @@
+
+
+
+
+
+
+
+
+
+
+
+
+John Norledge                                            27/7/90  
+Darren 
+Mirrorsoft 
+
+Dear Sirs, 
+
+          Re: demo "Champion of the Raj" for ST/Amiga Format cover. 
+
+
+1. I looked at the size of the current "strategy" part of the game 
+   last night, and it is around 500K. (Raj is a BIG game). This is 
+   mostly graphics data which - because it is already compressed - 
+   will not squash down very much even if archived. 
+
+2. Any version would therefore have to be a cut-down game (losing 
+   some of the offices and events screens) and producing and testing 
+   this would take more time that I would like to spend - and would 
+   delay other work. I would rather continue finishing the full 
+   "strategy" game, for delivery next week as agreed. 
+
+3. I would be unhappy about launching the game without a musical score. 
+   And, while work on this is underway, the music will not be ready 
+   until towards the end of next month. 
+
+Given the above, and the short schedule, I think it inadvisable to go 
+ahead with a demo disk. 
+
+                         Sorry, 
+
+
+
+                               Pete Austin 
+ 
+                            

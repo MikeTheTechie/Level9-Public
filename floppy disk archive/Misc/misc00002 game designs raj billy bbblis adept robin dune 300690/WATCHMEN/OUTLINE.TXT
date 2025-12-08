@@ -1,0 +1,150 @@
+
+
+
+
+
+
+
+
+
+
+                            WATCHMEN 
+
+INTRODUCTION: "Watchmen" is a cinematic cartoon novel copyright 
+1986/87, which has had limited impact in the UK, but is reliably 
+reported to be a cult book in the USA. 
+
+The story is a bleak one, in the genre of "The Dark Knight Returns", 
+and is set in the technological near future - but in a parallel world 
+to ours which is on the edge of nuclear war. Its lead characters are 
+the "Watchmen", former super-heroes, forced into semi-retirement when 
+they lost public support and their vigilante activities became illegal. 
+With one exception, these anti-heroes do not have miraculous powers - 
+merely being stronger, quicker and more ruthless than you or I - and so 
+they are vulnerable when a murderer discovers their secret identities 
+and starts hunting them down. 
+
+The strengths of "Watchmen" are its quality of production and artwork, 
+and its many-stranded script - bulging with pessimistic but genuine 
+insights into life, and hence very appealing to an adolescent audience. 
+I love the way that iconic images are repeated throughout the book, 
+to re-introduce each "strand" of the plot - making an effortless read 
+from what might (in less skilled hands) have been merely confusing. 
+
+It is arguably a work of genius, and worlds apart in quality from the 
+usual Marvel and DC comics stuff. 
+
+OBJECTIVES. In summary a "Watchmen" game should be... 
+* True to the anti-heroes of the original. The players could choose to 
+  be Rorscharch (resurrected) or Laurie Jupiter, with Nite Owl as side- 
+  kick and Veidt and Dr Manhatten in walk-on parts. 
+* Set in the well-developed, many-faceted world of the original. 
+  This is best met by an adventure, or multi-media type product, 
+  where learning about your surroundings are a major objective. 
+* With impactful artwork resembling the graphic novel: strong central 
+  images or (particularly on decision screens), many animated scenes 
+  arranged in a page. Work on Level 9's intro sequences, and visiting 
+  UK CES, has persuaded me that "first person view" scenes are more 
+  dynamic and sexy than "side-on walkabout" scenes - so, while we need 
+  a mix in practice, the game usually tackle graphics "head on". 
+* Because "Watchmen" fans will already know the plot, this game must be 
+  a sequel. Some other SF menace is threatening the city (e.g aliens 
+  that eat into people and control them from inside, to fit with the 
+  paranoia which is one facet of the book) and must be brutally crushed. 
+
+                         WATCHMEN: THE GAME 
+
+As Rorscharch or Laurie Jupiter, your first evidence that anything is 
+wrong is when a friend (or casual acquaintance in Rorscharch's case) 
+suddenly goes berserk and tries to kill you. Your task is to explore 
+the twilight underworld of New York, track down the aliens responsible 
+and find a way of defeating them. Your task will not be an easy one, 
+because you are fighting aliens which can take over and control people, 
+so nobody can be trusted. 
+
+There are several elements to the game... 
+
+1) STRATEGY MENU. This is a composite screen made up from a central 
+panel showing the hero and his mood, around and behind which are 
+typically four little spot-animated scenes to show events going on. 
+
+These little pictures function both as icons and to report the story. 
+There are perhaps 30 of them, based on the repeated images in the 
+book, though with a lot more possible captions. You move a highlight 
+above the page, and click to go to the scene represented. 
+
+In the following example, choose the central picture panel for the 
+status of the hero, the top left the city map, the top right for the 
+street with the dog, bottom left for a crime scene, and bottom right 
+to climb onto the roof and scan the darkness with your nightsight... 
+
+          +--------------------+-------------------+ 
+          | The city slept     |   Somewhere a dog | 
+          |                    |            barked | 
+          |           +--------+--------+          | 
+          |           | Rorscharch was  |          | 
+          +-----------+ tired           +----------+ 
+          | Blood     |                 | In the   | 
+          | trickled  +--------+--------+ darkness | 
+          | in the gutter      |          something| 
+          |                    |          stirred  | 
+          +--------------------+-------------------+ 
+
+This game includes dozens of sub-plots, many going on at any time, 
+and in programming terms is not unlike "It Came From The Desert". But 
+this interface is much sexier and more appropriate for a product based 
+on a graphical novel. 
+
+2) CITY MAP. A scrolling "aerial photograph" of the city. As usual, 
+you move a cursor across the map and click on somewhere for details 
+or to go there. 
+
+3) INTERROGATION. The scum who inherit this twilight city appear as 
+large foreground figures, as in "The Legend of Billy the Kid" when 
+you talk to them. They are built up identikit-fashion, out of an 
+interchangeable set of interchangeable animated parts. These people 
+are used against identikit "head on" backgrounds, and a menu is used 
+for talking to them and persuading them to talk.  
+
+4) SKYSCRAPER CLIMB. A large figure of the hero is shown climbing the 
+face of a skyscraper, which scrolls and is two screens high. Move the 
+cursor onto their next hand/foothold, click on it and the hero will 
+move their nearest hand/foot onto the hold, provided they can reach. 
+If neither foot is supported, the hero slips to full-length; if 
+neither hand is supported they falls. Crumbling concrete adds to the 
+difficulty, and the game ends at the rooftop, where you can play... 
+
+5) SNIPER-SCOPE game. The screen shows a monochrome roofscape, lit only 
+by occasional street lights. Hidden in the gloom are people who want to 
+kill you, but you can only see them by the muzzle-flashes of their guns 
+(and they normally move after firing). Fortunately, you have a sniper 
+scope and can move a 50-pixel circle of daylight across the roofs, 
+seeing everything within the circle in colour and - of course - seeing 
+any enemy hiding there. It should look quite impressive. 
+
+6) NITE OWL flight simulator. Used in the game and as the finale. When 
+the aliens come after you with heavy weapons, it is necessary to reply 
+in kind. I envisage the rounded Nite Owl aircraft, weaving between 
+night time skyscrapers in pursuit of enemy craft, or on strafing runs. 
+The game uses sprites for the best possible appearance, and is either 
+seen through the round window of the owl craft, or else has the owl 
+craft itself in the foreground. I haven't decided. 
+
+7) CAR race. An equivalent of "5" at ground level, with pedestrians to 
+dodge (if innocent) or run down (if firing at you).  
+
+8) HAND-TO-HAND COMBAT. The screen shows a group of your enemies, and 
+possibly a few hostages. Massive great figures, too big for their feet 
+to show on the screen. They are turning their guns towards you, but 
+super-heroes react faster than mere mortals, so they appear to be in 
+slow motion and you just have time to blow them away with your machine 
+gun (shown in the foreground). Make sure to disable the most dangerous 
+enemies first, and try to miss the hostages. 
+
+When the screen has turned red, it cuts to first-person views of the 
+corridor as you walk forwards - until the next ambush. Bloody? Yes, 
+it's possibly the most overkill game concept around, but it would demo 
+beautifully on video. 
+
+
+Comments?                     Copyright (C) 1990 Level 9 Computing Ltd 

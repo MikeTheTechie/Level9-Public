@@ -1,0 +1,197 @@
+
+   "ROBIN HOOD" DESIGN OUTLINE. COPYRIGHT (C) 20/11/89 LEVEL 9 
+   ----------------------------------------------------------- 
+
+"Robin Hood" should need no introduction. This mediaeval outlaw 
+roamed Sherwood Forest in northern England, with his band of green- 
+clad "Merrie Men" archers, robbing the rich and giving to the poor. 
+
+Robin's opponents included the Sheriff of Nottingham, Guy of Gisborne 
+and false King John. Robin's band were famous in their own right and 
+included Little John, Friar Tuck, and Will Scarlett the minstrel, 
+who together helped true king Richard the Lionheart return and 
+restore justice to the Kingdom. 
+
+The game plot and sub-games are very faithful to the legends and 
+involve Robin in.. 
+* recruiting his remaining Merrie Men (e.g Little John will only join 
+  after their famous quarterstaff duel), 
+* robbing rich clerics and tax collectors of enough money to help the 
+  poor villagers (who show their gratitude by passing on information 
+  to the outlaws) and pay King Richard's ransom, 
+* defeating the Sheriff's plans (e.g rescuing Maid Marian from 
+  prison, and winning the archery contest for the golden arrow), 
+* and finally escorting good King Richard to Nottingham Castle, and 
+  opening the gates to let him ride inside and overthrow bad King John. 
+
+There is a time limit, as the Archbishop of Canterbury will be
+forced to crown King John on Michelmas - officially recognising him 
+as the true king and cancelling Richard's claim to the throne. 
+
+The game has a substantial strategy element, in that a lot of things 
+are going on, whether or not Robin gets to see them, and so he must 
+actively seek out and follow-up rumours. Merrie Men can be given 
+orders to investigate, by means of multiple-choice options, and ride 
+off across the map. Or Robin can go himself, in disguise. Of course, 
+some rumours lead to traps set by Sheriff. 
+
+As with all H.U.G.E games, Robin Hood will be available (on about 3 
+disks each) for IBM (all common graphic modes), Amiga, ST and Mac. It 
+has many animated graphics, plus background music and digitised sound. 
+
+
+GAME SCREENS. Robin Hood imitates a swashbuckling film, and contains 
+many different sub-games, each with their own screen formats... 
+
+1) 3D SCROLLING MAP OF SHERWOOD FOREST. This is the main game map 
+   and is about 2 by 2 screens, showing an animated view of the 
+   entire game territory. Places are shown by oversized cartoon 
+   pictures, and travellers etc. can be seen as they ride along the 
+   forest roads, passing behind taller trees and other scenery. 
+
+   The mouse/joystick/keyboard move a cursor across the map: 
+   * Click on Robin (the cursor changes) and then on his destination 
+     to start him moving. Robin is shown riding across the map. When 
+     he reaches an interesting destination, or encounters somebody 
+     on the road, the screen automatically changes to the appropriate 
+     sub-game for the person or place. 
+   * Click on the menu bar at the top for game control options etc. 
+     Also use this to blow Robin's horn and summon the Merrie Men. 
+   * When the cursor crosses a person or place, a window opens above 
+     the opposite corner of the map, with a larger picture of them 
+     and a text description. 
+
+2) CONVERSATION. When Robin meets someone interesting, the display 
+   shows a 3D picture of the location with the person (or people) 
+   in the foreground. Conversation is shown in a window at the 
+   bottom of the screen, with Robin's possible responses selected 
+   by the cursor. 
+
+3) IMPORTANT PLACES. Towns, villages, Robin's hideout and the like 
+   are shown as in "Grange Murders" or "Billy the Kid" (i.e a 3D 
+   Sierra-style view with about 60-pixel tall figures). 
+
+   Normally the mouse/joystick/keyboard steers Robin about. He 
+   automatically picks up objects if he walks over them, and 
+   defends himself with his staff if he collides with an enemy. 
+
+   Press fire to select the menu bar, which then functions as in 
+   game "1" (play pauses while your joystick etc. moves a cursor 
+   across the menus - fire selects the current highlit command). 
+
+   If Robin enters an interesting location (e.g the Blacksmith's 
+   shop, water mill, or wise woman's cottage), or meets someone 
+   who wants to talk to him, the screen is temporarily replaced by 
+   an animated close-up. See "2". 
+
+4) SNEAK UP ON CASTLE. This is like "3", but seen from a very low 
+   viewpoint and with Robin's apparant movement speed into the 
+   screen slowed in consequence. There are two smaller Robin 
+   figures, used as he gets further away. 
+
+   In the distance is a castle, with guards patrolling the walls. 
+   Robin must utilise the cover of bushes etc. to reach the foot 
+   of the wall without the alarm being sounded. 
+
+5) CLIMB WALL. A large figure of Robin is shown climbing the 
+   castle wall, which scrolls and is two screens high. Move the 
+   cursor onto his next hand/foothold, click on it and Robin 
+   will move his nearest hand/foot onto the hold, provided he 
+   can reach. The game ends at the top of the wall. 
+
+   If neither foot is supported, Robin slips to full-length; if 
+   neither hand is supported he falls. 
+
+6) CASTLE. Robin visits Nottingham castle several times, e.g to 
+   free Marian or open the gates for Richard. This game has a 
+   45 degree Gauntlet-type view, and the castle is shown in 3D. 
+
+   Imagine the castle sliced across, into about 5 layers: 
+   * When Robin is in the topmost turret, he might see the cross 
+     section of the turret, and below the walls and roofs of the 
+     main castle, its battlements and courtyard. 
+   * When he descends to the next slice, the castle roofs and the 
+     topmost part of the turret are removed, and instead he sees 
+     a slice through the turret, the upper floor of castle rooms 
+     which lead onto the battlements, and the courtyard below. 
+   * Continuing down, past another two slices, the ground itself 
+     is eventually removed and he sees the underground dungeon. 
+
+   Of course, if Robin climbs back up, the castle slices are added 
+   back to the image on the screen. Combined with a castle which 
+   covers several scrolling screens, and 3D graphics not restricted 
+   by cell boundaries, this should look impressive. 
+
+   Robin is controlled in the standard Gauntlet manner; steered by 
+   the mouse/joystick/keyboard and shooting when fire is pressed. 
+
+7) QUARTERSTAFF FIGHT. A one-on-one combat game, seen from the 
+   side. It is used when Robin chooses to challenge someone to 
+   battle and when he first meets Little John or Friar Tuck. 
+   If both combatants use quarterstaves, both survive. 
+
+   Health is shown by vertical scales, to left and right. 
+ 
+   Control is by joystick etc. (press fire to strike at the 
+   selected height, rather than parry). For example..
+
+         High Parry+Retreat   High Parry   High Parry+Advance
+                            \     |      /
+         Mid Parry+Retreat      --+--      Mid Parry+Advance
+                            /     |      \
+         Low Parry+Retreat    Low Parry    Low Parry+Advance
+
+   I'm sure we've all seen quite enough sword duels, so Robin will 
+   still use a quarterstaff even when fighting a knight. Knights 
+   use swords and move slower (because of wearing armour), and 
+   parrying is obviously important when fighting them. 
+
+8) ARCHERY. We may also have seen enough archery games, but archery 
+   is essential for "Robin Hood". The scene is viewed over Robin's 
+   shoulder, and you move a cursor which indicates his aiming point. 
+   To make the game challenging, Robin has a limited number of 
+   arrows, shown in the quiver slung over his shoulder, and you must 
+   aim a bit high and a bit into the wind to compensate for the curve 
+   of each arrow's flight. Wind is shown by e.g flapping flags. 
+
+   This game is used to: 
+   * Shoot a message (wound around a black arrow) into Marian's cell 
+     in Nottingham castle; 
+   * Win the archery contest; 
+   * Bring down the enemy leader, escaping after an ambush. 
+
+9) AMBUSH. This uses a Gauntlet-type view, enlarging the current part 
+   of the game map. Robin might have seen a tax collector and escort 
+   of guards trotting along a forest road, and have ridden quickly 
+   along a short cut to get ahead of them. 
+
+   Robin blows his horn to summon his Merrie Men, then the cursor is 
+   used to move them into position (click on an outlaw, move the 
+   cursor, and click again to tell him where to go). 
+
+   When all the outlaws are in position, Robin blows his horn to 
+   signal them to hide (all those in cover simply vanish) and soon 
+   the enemy riders come in sight. 
+
+   When Robin blows his horn for the third time, the outlaws leap out 
+   and attack from ambush. The enemy will retreat if they can, but 
+   if properly surrounded must fight. Robin fights as in game "6", or 
+   can blow his horn for one last time to break off combat. 
+ 
+   The idea is not to massacre the opposition, but to get them to 
+   scatter and flee. Robin can then e.g use archery to bring down 
+   the fleeing king's messenger, or go and rob the treasure cart. 
+
+
+JOYSTICK/MOUSE/KEYBOARD CONTROL 
+
+"Robin Hood" can be played entirely by mouse, by joystick, or by 
+keyboard. Control differs from game to game, but there are two 
+main control types: 
+
+1) Steering a cursor across the screen and pressing fire to select. 
+   This is used on e.g maps and menus. 
+
+2) Moving Robin in the same direction as the joystick etc is pushed, 
+   end pressing fire to attack, or choose the menus (as appropriate 
+   for the current game). 

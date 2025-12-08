@@ -1,0 +1,662 @@
+
+                    The Legend of Billy The Kid 
+
+"The noted desperado of the Southwest, whose deeds of daring and blood 
+made his name a terror in New Mexico" - Sheriff Pat F. Garrett
+
+
+Despite a hundred years of speculation, nobody knows for sure where 
+Billy the Kid was born. But in 1856 the infant Henry McCarty (this was 
+Billy's original name) and his mother were living near Indianapolis. 
+
+Mrs McCarty moved West soon afterwards, seeking a dry climate for her 
+health, and married a man called Antrim. (Which explains why Billy 
+was sometimes called Kid Antrim). Billy was raised in New Mexico at 
+Silver City, about 100 miles (140 km) west of Mesilla on the game map. 
+
+Billy grew up no worse than any boy of that time; he seems to have 
+been fairly honest, and fairly hardworking. But then events conspired 
+to outlaw him. Either, to quote Pat Garrett, "as Billy's mother was 
+passing,... a filthy loafer in the crowd made an insulting remark" 
+and he was forced into a fight where the man died. Or, according to 
+the Grant County Herald, Billy was framed for theft - allegedly as a 
+"joke" - but did not trust the court to find him innocent and made 
+the first of his many escapes from jail. 
+
+In either event, Billy fled across the border to Arizona and started 
+the period of his life that has since become legendary - stealing 
+horses, consistently winning at cards, winning the hearts of the 
+ladies, and backing down for no man. This all ended when Billy shot 
+a soldier blacksmith in Adkins' dance hall, Bonito. The killing was 
+probably self-defence but, with the army after him, Billy left Arizona 
+and returned to Lincoln County, New Mexico - where he called himself 
+William Bonney and settled down to live honestly. 
+
+Meanwhile, conflict was brewing in Lincoln County. Two dishonest 
+businessmen, Murphy and Dolan, having made a fortune cheating 
+Reservation Indians, now ran the only store in Lincoln City. Murphy 
+and Dolan charged extortionate prices for their goods, but paid poor 
+farmers next to nothing for their crops. So honest men were being 
+forced into bankruptcy, while Murphy and Dolan and their rancher 
+friends were rapidly taking control of the area. 
+
+The main threat to this evil monopoly was John H Tunstall, a recent 
+immigrant from the English-Scottish border. He had established a 
+ranch nearby and, with Alexander McSween, opened a competing store in 
+town - charging fair prices. Most of the locals were delighted, but 
+inevitably, Murphy and Dolan reacted with threats of violence. 
+
+When Billy learned what was going on, he was impressed by Tunstall's
+plans to help the local people and accepted the job of leading 
+Tunstall's men. Thus it came about that, when Tunstall was murdered 
+in 1878 by a hired gunman, Billy set out to revenge him... 
+
+
+Computer Requirements: 
+* IBM PC, Tandy 1000, Amstrad PC or any other 100% compatible. 
+* MS-DOS version 2.1 or later (type MS-DOS command "VER"). 
+* 360K (5 1/4") or 720K (3 1/2") floppy disk drive(s). 
+* 512K of RAM, or more. 
+* VGA, EGA, CGA colour, CGA black-and-white, MCGA, or Tandy TGA 
+  graphics, with a suitable monitor. 
+
+Optional Equipment: 
+* Hard disk drive. The game is at its best if installed on hard disk. 
+* Second floppy disk drive, of the same size, is strongly recommended 
+  if you intend to run the game from floppy disk, rather than hard 
+  disk. This means two disks can be read by the computer at a time, 
+  and disk swapping will be minimized. 
+* An average or fast PC. A computer even less powerful than a PC XT 
+  (8086 and 8mhz clock speed) is not recommended. You can slow down 
+  the game on a fast PC, but not speed it up on a slow one. 
+* Joystick plugged into the game port (as Joystick "A" if you have 
+  a twin adaptor). 
+* Mouse (you also need to have installed your mouse driver software 
+  before running the game). 
+* 640K of RAM. The game will happily use up to 640K of memory if this 
+  is available. (It is normally also a good idea to use a disk cache 
+  utility, such as Microsoft's SmartDrive, which uses extended memory 
+  and reduces the need for disk reads. But on a 512K machine, such 
+  utilities may be counter-productive, as they also take some main 
+  memory better used by the game's own cache utilities. For similar 
+  reasons, it is sensible not to load TSRs into memory before playing 
+  the game). 
+* Roland, AdLib, or Sound Blaster music card. If you play a lot of 
+  games but have not yet got one of these boards, we strongly recommend 
+  that you buy one. We were amazed at the difference they make. 
+
+
+Before Playing: 
+* Please use the MS-DOS "TYPE" command to read the file README.TXT on 
+  one of the game disks (probably the first). This contains the most 
+  up to date information on your particular version. 
+* Anti-virus note: Never, ever unprotect your original "The Legend of 
+  Billy the Kid" disks. If your computer asks you to do this, it could 
+  be because a virus is trying to copy itself onto them. 
+
+
+Starting "The Legend of Billy the Kid" for the first time: 
+* Boot your PC with DOS version 2.1 or higher, place the first game 
+  disk in drive A: (or drive B:) 
+* Type... 
+  A:               (or B:) 
+  BILLY 
+* Use keypad keys 2 ( ) and 8( ) to choose a display type from the 
+  list. Then press Enter ( ). (If there are several display types 
+  which all seem suitable, e.g there is more than one reference to 
+  VGA, choose the first one by preference. If this then gives 
+  problems during play, it may mean your PC is not 100% compatible 
+  and you should try again with a later equivalent from the list.) 
+* In the same way, choose: 
+  "Joystick On", or "Joystick Off"; 
+  "Mouse On", or "Mouse Off" (to use a mouse, you must have installed 
+  appropriate mouse driver software before running the game); 
+  "Roland", "AdLib", "Sound Blaster", or "Music Off"; 
+  "Sound Effects On" or "Sound Effects Off". (Sound effects can slow 
+  the game noticably on a slow PC).
+  "Play Game", or "Install on Hard Disk". (If you choose hard disk, 
+  the game next asks you for the disk name: enter e.g C: ). 
+* An animated introduction sequence follows, taking about five minutes. 
+  To skip it, press any key. At the end of this introduction, the game 
+  pauses and asks you to press a key; do so, or else it will repeat the 
+  introduction over again. 
+
+
+Starting "The "Legend of Billy the Kid" on hard disk: 
+* The first time, follow the instructions above. 
+* Next time, type 
+  C:         (or the drive you installed it on)
+  CD \OCEAN
+  BILLY
+  and the game will run without needing to ask you for all its
+  configuration information. 
+
+                           Playing the Game 
+
+
+Control Methods: 
+This manual describes how to play "The Legend of Billy the Kid" 
+entirely with a joystick, but there are three alternatives... 
+* Joystick: push it in the appropriate direction and press "fire" 
+  to act.  
+* Mouse: on menus and maps, use it as you normally would; elsewhere, 
+  move the mouse slightly in the same direction as described for the 
+  joystick and press the left button for "fire". 
+* Numeric keypad: this is used like a joystick; press keys to move 
+  (8=up, 9=up right, 6=right, 3=down right, 2=down, 1=down left, 
+  4=left, 7=up left). To "fire" press 5, Enter or the space bar. 
+
+Some of the game is controlled by menus. Steer the highlight up and 
+down with e.g the joystick and press fire to select an option. 
+
+Also within the game are nine different types of Wild West action. 
+Instructions for these are displayed on the screen the first time you 
+encounter each of these - read them and press "fire". 
+
+The following are special functions, controlled from the keyboard, that 
+work on most (but not necessarily all) screens: 
+* The + and - keys adjust game speed. 
+* The M key toggles the music on or off (providing you did not select 
+  "Music Off" when starting the game). 
+* The P key pauses the game; press R (resume) or C to continue. 
+* The S key toggles sound effects on or off (providing you selected 
+  "Sound Effects On" when starting the game). 
+* Control C quits from the game. 
+
+
+Objectives of the game: 
+The game starts when Billy the Kid and Sheriff Pat Garrett witness 
+the murder of their friend Tunstall by a gunman from the evil Murphy- 
+Dolan gang of ranchers; an event which leads to a permanent breach 
+between the two friends. 
+* If playing Sheriff Pat Garrett, you believe that the only solution to 
+  such atrocities is to bring law to Lincoln County. You pledge to hunt 
+  down all law-breakers, whoever they may be. 
+* But if playing Billy the Kid, you believe that law is powerless 
+  against rich men such as Murphy, Dolan and their friends. No judge 
+  would convict them, so justice will have to come from the barrel of 
+  your gun. 
+
+Your first big decision is which to choose: Billy or Pat? 
+* As Billy the Kid, you must get revenge for your friend, and drive 
+  the guilty ranchers from the territory by shooting and robbing them 
+  of all they own. 
+* Or as Sheriff Pat Garrett, you must bring law by tracking down the 
+  outlaw gangs which abound in lawless Lincoln County, even though 
+  this will finally mean confronting your former friend, the man who 
+  gets to be the most dangerous outlaw of them all: Billy the Kid! 
+
+If you chose Pat, please jump ahead to "A SHERIFF'S LIFE", but if you 
+chose Billy the Kid then carry on reading... 
+
+                           BEING AN OUTLAW 
+
+There's a lot to be said for an outlaw's life: you have freedom, as 
+much money as you can spend, and are respected by everyone you can 
+outdraw (and that means practically everyone). 
+
+But old outlaws are about as common as honest politicians; unless you 
+keep alert and spend your money on your friends, eventually some young 
+punk is going to get lucky and claim that reward on your head. 
+
+Your aim is to kill or bankrupt all of the Murphy-Dolan faction: the 
+ranchers and cowboys responsible for murdering your friend Tunstall. 
+When you manage this, or if your crimes make the sheriff look so bad 
+that he is thrown out of office, the game ends in a duel with Pat 
+Garrett. 
+
+Your score is your reputation, which increases with: 
+* every crime committed, with bigger scores for bigger crimes (This 
+  also increases the price on your head, and hence the number of 
+  bounty hunters pursuing you),  
+* every enemy killed or driven from the state, 
+* doing good deeds, e.g defending a widow's land. 
+
+Crimes. The Murphy-Dolan faction are dishonest businessmen and 
+ranchers, who normally hide their cowardly carcasses behind the guns 
+of hired hands. So you can't normally attack them directly, but you can 
+certainly hit them where it really hurts their kind - in their pockets. 
+You can commit a variety of crimes: bank robbery, cattle rustling, 
+train robbery, and (if they come out of hiding) sometimes use your gun. 
+
+If you just commit crimes randomly, you are unlikely to do well. Most 
+banks hold little money most of the time, most trains are not 
+carrying gold shipments, and so on. And, what is worse, each crime 
+encourages the target to buy a bigger safe and hire more guards for 
+next time. 
+
+As Billy, you need to talk to local people, and meet up with other 
+outlaws, in order to learn which are the most profitable targets for 
+crime. Not everyone is worth talking to; some people are liars; and 
+some of them need bribes or other help before they will help you in 
+return. So be generous with your money and considerate to the poor.  
+
+
+MAP OF LINCOLN COUNTY: 
+You begin the game on a map of Lincoln County, New Mexico, 1878. 
+
+Use the joystick to move a "binoculars" cursor across the map (which 
+scrolls if you try to go off the edge) and press fire when it is 
+looking at the a place you are interested in. This expands the 
+binoculars, to give a closer view of the place, and you can either 
+press fire again to go there - or else move the cursor aside to stay 
+with the map. 
+
+Visiting a place sometimes gives you a big picture of it, with a 
+menu to enter commands and probably someone in the foreground to 
+talk to. Take care how you deal with people in the game; they each 
+have their own personality and some will be willing to help you 
+with information - especially if you help them out with their 
+problems. 
+
+Other places lead you straight into an action sequence. For example, 
+if you visit a ranch that is well guarded by enemies, you will get 
+involved in a shootout. And if you visit a town, you will find 
+yourself on Main Street and can walk or ride about to visit the 
+buildings there. 
+
+In one corner of the map is a "timeout" icon. Press fire on this to 
+enter timeout (pause) mode, which stops time passing and opens a menu 
+to allow you to Continue, Save, Load, Quit or Restart. (If you intend 
+to Save your position to floppy disk, you need to have formatted a 
+blank disk before playing the game). 
+
+
+LOS PORTALES: 
+This is the hideout of your gang, the Regulators, who began as cowboys 
+employed by your friend Tunstall, and are now your loyal allies in the 
+fight to revenge his death. Tom O'Foliard is your second in command, 
+and their hideout is northeast of Fort Sumner. 
+
+You need help to carry out crimes, and this means taking along a gang 
+of outlaws. For example, it is impossible for a single person to herd 
+cows, and a lone robber would be certain to get shot if he was the 
+only outlaw escaping across town after a bank raid. 
+
+You can ask any gang to go along, but the Regulators are the best. You 
+would probably lead them on every robbery but for one snag - outlaws 
+see no reason to risk their necks again until they have spent the 
+proceeds of their last crime. You can't take it with you, so who wants 
+to die with gold in his pockets? 
+
+
+IN TOWN: 
+When you select a town on the map, such as Lincoln City or Roswell, 
+the screen changes to show you riding along Main Street and tying up 
+your horse. To leave town, return to your horse and press fire to 
+mount and ride off. 
+
+Use the joystick to walk about, along the streets or into buildings. 
+You can talk to some people, by walking up to them and pressing fire, 
+though most will ignore you and some may be so annoyed that they 
+challenge you to a duel. 
+
+The Sheriff's Office is normally best avoided, as you will certainly 
+get a hostile reception! But shop clerks can be useful sources of 
+gossip, and it would be a poor outlaw who did not visit the saloon 
+to buy a round of red-eye for everyone. The saloon is the best place 
+to meet the local outlaws, to learn of any crimes they plan and 
+perhaps to join in a game of cards. 
+
+At the start of the game, there is a gang of outlaws for every town, 
+and you should try to meet them. But be careful in any town where Pat 
+has rounded up the local gang - people in law-abiding towns do not 
+like outlaws, however well-intentioned. 
+
+
+QUICK DRAW DUEL: 
+Wait for the bell to ring, then steer the sights onto your opponent 
+and fire. If you miss, your gun will jump aside, but you may be able 
+to get in a second shot if you're quick. Your draw speed gets faster 
+as your reputation increases. 
+
+
+SHOOTOUT: 
+Use the joystick to steer your gunsights across the screen, and press 
+fire to shoot. Remember to duck! Press fire and pull the joystick back 
+to duck down (which reduces the chance of being hit), and press fire 
+and move up to rise again. While ducked, you can aim, but not yet fire. 
+
+
+CATTLE RUSTLING: 
+Your enemies are mostly ranchers, so stealing their stock is a sure 
+fire way of getting back at them. Choose an enemy ranch on the map 
+(preferably one which you have learnt is unguarded, but which has 
+stock rounded up). The idea is that several horsemen round up the 
+cows and herd them south across the Mexican border to sell (downwards 
+on the screen). 
+
+You control one horseman at a time: up/down speeds/slows the horse, 
+left/right steers it, and fire transfers control to the next rider. 
+Uncontrolled horsemen keep going in a straight line. 
+
+The cows try to keep away from all the horsemen, and so can be herded 
+fairly easily - but can you do it against the clock? There will be 
+trouble if the posse catches you north of the border. 
+
+Note that you can ride on both lowland and upland ground - as long as 
+you can find a break in the cliffs, that is. 
+
+
+TRAIN ROBBERY:
+Choose the train on the map, if you know about a gold shipment. 
+(Robbing trains is a dangerous activity, due to the persistence of 
+railroad detectives, and no outlaw gang will go along with you unless 
+they know the rewards are worth the risk). 
+
+You wait where the train has to slow for an incline, then run 
+alongside (left and right adjust your speed, and fire makes you 
+jump over obstacles), jump to catch the ladder, then run along the 
+carriage roofs to the engine - jumping the gaps between them. It's 
+easier than it sounds! 
+
+
+BANK ROBBERY: 
+Enter the bank and choose the robbery option on the menu (if it's not 
+there, this must be because you've not asked a gang to go with you). 
+
+Move the joystick left or right to transfer dynamite from the pile to 
+beside the safe. And press fire to light the fuse. 
+
+Your problem is to work out how much dynamite to use for each safe. 
+
+
+GETAWAY: 
+If you rob a bank which is guarded by Pat or his deputies, they may 
+try to ambush you on the way out of town. You just control your own 
+horse (in the same way as when cattle rustling), but can shoot by 
+pressing fire, or adjust your aim by pressing fire and simultaneously 
+moving your joystick. It's every man for himself! 
+
+
+CARDS: 
+Use the menu to play. You are not likely to make much money while 
+playing cards, but it's a useful way to meet people - even if you 
+do often end up fighting them over alleged cheating. 
+
+
+BAR ROOM BRAWL: 
+When fighting, the joystick operates as follows, with brackets for 
+the effect of pressing FIRE: 
+
+     Sway back (High Block)\(High Block)/Forwards (High Punch) 
+     Sway back (Block)     -  (Block)   -     Forwards (Punch) 
+     Sway back (Low Block) /(Low Block) \  Forwards (Low Blow)
+
+
+
+                         A SHERIFF'S LIFE  
+
+In Wild West times, the sheriff and his deputies WERE the law. They 
+could do pretty much as they liked, and it was truly said that the 
+safest place for a murderer to hide was behind a badge. 
+
+Fortunately for Lincoln County, Pat Garrett is pretty honest, by 
+the standards of the time. He tried his hand at cattle rustling in 
+the past, like many frontiersmen, but now he has settled down. 
+
+As Pat, you are determined to clean up Lincoln County. No longer will 
+"West of the Pecos" conjure up images of brawls and banditry! It will 
+be a hard job, but your sworn mission is to hunt down every last outlaw. 
+
+If you manage this, or if you jail Billy for a fifth time, the game 
+ends in a duel with the most notorious outlaw of all, Billy the Kid. 
+
+Your score is your reputation, which increases with: 
+* each time Billy is captured (even though Billy escapes the first 
+  four times), 
+* every robbery thwarted by deputies on guard, 
+* every outlaw gang defeated, whether or not Billy was involved, 
+  and especially if they have recently committed notorious crimes, 
+* every good deed done.  
+
+Budget: From your base in the Lincoln City Sheriff Office, you 
+control the law enforcement budget: hiring deputies (who guard 
+robbery targets and discourage outlaws from coming into the town 
+where they are placed), organize a posse and hire a tracker to hunt 
+down outlaw hideouts. 
+
+You could single-mindedly try to capture Billy, but this would mean 
+letting other criminals run riot and probably get you voted out of 
+office. So you must try to jail every outlaw gang in Lincoln County, 
+meanwhile pleasing the public, making Billy's life harder and earning 
+enough rewards to pay an elite tracker to hunt down Billy's hideout. 
+
+If you position deputies at random, you may have some effect in 
+reducing crime and catching outlaws, but it will not be great. The 
+idea is to guard the most tempting targets - e.g the bank with the 
+most money in its vault, or the ranch where all the cowboys are away 
+rounding up stock. 
+
+So you need as much information as you can get from local people. Not 
+everyone is worth talking to; some people are liars; and some of them 
+will ask for bribes (which you can ill-afford) or other help before 
+they will help you in return. 
+
+If you, or five deputies (out of the roughly ten that you can afford) 
+are in town when a crime is committed, you get the chance to lead a 
+posse and track the gang responsible to their lair for a shoot-out. 
+But this is expensive, as posse members want bonuses and don't like 
+taking casualties - and gangsters are less likely to venture into town 
+when lawmen are around. So you should only guard very tempting targets. 
+
+What is worse is that you will find that crime victims clamour for 
+police protection (even though outlaws are hardly going to return to 
+a newly-empty bank) and you may have to assign some of your scarce 
+deputies to quieten them down.
+
+
+MAP OF LINCOLN COUNTY: 
+You begin the game on a map of Lincoln County, New Mexico, 1878. 
+
+Use the joystick to move a "binoculars" cursor across the map (which 
+scrolls if you try to go off the edge) and press fire when it is 
+looking at the a place you are interested in. This expands the 
+binoculars, to give a closer view of the place, and you can either 
+press fire again to go there - or else move the cursor aside to stay 
+with the map. 
+
+Visiting a place sometimes gives you a big picture of it, with a 
+menu to enter commands and probably someone in the foreground to 
+talk to. Take care how you deal with people in the game; they each 
+have their own personality and some will be willing to help you 
+with information - especially if you help them out with their 
+problems. 
+
+Other places lead you straight into an action sequence. For example, 
+if you visit a ranch that is well guarded by enemies, you will get 
+involved in a shootout. And if you visit a town, you will find 
+yourself on Main Street and can walk about to visit the buildings 
+there. 
+
+In one corner of the map is a "timeout" icon. Press fire on this to 
+enter timeout (pause) mode, which stops time passing and opens a menu 
+to allow you to Continue, Save, Load, Quit or Restart. (If you intend 
+to Save your position to floppy disk, you need to have formatted a 
+blank disk before playing the game). 
+
+
+IN TOWN: 
+When you select a town on the map, such as Lincoln City or Roswell, 
+the screen changes to show you riding along Main Street and tying up 
+your horse. To leave town, return to your horse and press fire to 
+mount and ride off. 
+
+Use the joystick to walk about, along the streets or into buildings. 
+You can talk to some people, by walking up to them and pressing fire, 
+though most will ignore you and some may be so annoyed that they 
+challenge you to a duel! 
+
+The Sheriff's Office is the place to make for, as once inside you 
+can talk to the deputy or perhaps examine the wanted posters on view. 
+Shop clerks can be useful sources of gossip, especially in your 
+hometown of Roswell, and it would be a poor outlaw who did not visit 
+the saloon occasionally. You should probably avoid playing cards, 
+however. 
+
+At the start of the game, there is a gang of outlaws for every town, 
+and you should try to track them down. Be careful in lawless towns, 
+as people may not take kindly to the sheriff. 
+
+
+QUICK DRAW DUEL, SHOOTOUT, CARDS, BAR ROOM BRAWL: 
+See the instructions above. These games are exactly the same for both 
+Pat and Billy. 
+
+
+TRAIN RESCUE:
+If you are in Santa Fe, there is a slight chance that an accident on 
+the railway leads to a runaway train, heading for the town. 
+
+You wait where the train has to slow for an incline, then run 
+alongside (left and right adjust your speed, and fire makes you 
+jump over obstacles), jump to catch the ladder, then run along the 
+carriage roofs to the engine - jumping the gaps between them. 
+
+
+GETAWAY: 
+If you are in town when the local bank is robbed, you get to position 
+barricades to hamper the outlaws' escape, and deputies on the roof 
+tops to shoot them as they try to gallop away. Use the joystick to 
+move the current barricade or deputy about, and press fire to place 
+it or him, though you can't position anything too near the bank for 
+fear of alerting the robbers to your preparations. 
+
+When the outlaws swarm out and try to gallop away, your deputies fire 
+automatically, while you can push the joystick to move "Pat" and press 
+fire to shoot. 
+
+
+TRACKING: 
+Following a "GETAWAY", or if at least 5 deputies were on the scene 
+when a crime was committed, you get the chance to track the guilty 
+outlaws to their lair. 
+
+In any Sheriff's Office, you should first hire a tracker and then 
+decide how many deputies to take (they will each want a bonus). The 
+better the tracker, the more time you have to find the outlaws (as he 
+can follow a trail left long ago) and the more deputies, the better 
+your chances in the shootout when you find the outlaws. 
+
+In the tracking game, use the joystick to direct the tracker through 
+a maze of canyons: as always, up/down speeds/slows the horse, and 
+left/right steers it. Press fire and the tracker dismounts to examine 
+the ground for evidence. 
+
+Note that you will probably need to ride on both lowland and upland 
+ground, so watch out for breaks in the cliffs. 
+
+
+                              Credits: 
+
+Design: Pete Austin and others too numerous to mention.  
+Game program: Mike Austin and Kerri Cockwell.  
+System code: Mike Bryant, Mike and Nick Austin. 
+Artwork: Erik Casey, with Richard Cheek (scrolling games and 
+         many animations), Dicon Peeke (intro sequence) and Ken 
+         Jarvis (additional animated backgrounds).  
+Music: Chris Jenkins. 
+Other parts were played by members of the cast. 
+
+This game was designed in Nevada USA, and Southampton England. 
+
+
+                     More about Billy The Kid: 
+
+"Young Guns" is a fairly accurate retelling of Billy's story, from 
+his meeting with Tunstall, to the main battle in the "Lincoln County 
+War", when the McSween store was attacked. It is available on video. 
+
+Or read the following books, which can be ordered in paperback... 
+  The Authentic Life of Billy the Kid, Pat F Garrett, 
+                  University of Oklahoma Press, ISBN: 0-8061-1195-X 
+  Billy the Kid - a Handbook: Jon Tuska, 
+                  University of Nebraska Press, ISBN: 0-8032-9406-9 
+
+******************** Changes for ST version *************************
+
+Computer Requirements: 
+* Atari 520 or 1040ST. 
+* Television, or colour monitor. 
+* Double-sided floppy disk drive(s). 
+
+Optional Equipment: 
+* Hard disk drive. The game is at its best if installed on hard disk. 
+* Second floppy disk drive is recommended if you intend to run the 
+  game from floppy disk, rather than hard disk. This means two disks 
+  can be read by the computer at a time and there will be almost no 
+  disk swapping. 
+* Mouse plugged into socket 0. 
+* Joystick plugged into socket 1. 
+* Extra RAM (which will be used as cache to reduce disk reads). 
+* Synthesiser. The game normally plays music via the ST speaker, but 
+  for the best possible sound you can connect a midi synthesiser (see 
+  README file for details). 
+
+
+Before Playing: 
+* If you want to know the most up to date information about this 
+  version of the game, boot the ST with e.g a blank disk, insert 
+  the first game disk and double click on the disk icon and README.TXT. 
+* If you will want to save your position on floppy disk, format a blank 
+  disk of your own before playing. 
+* Anti-virus note: Never, ever unprotect your original "The Legend of 
+  Billy the Kid" disks. If your computer asks you to do this, it could 
+  be because a virus is trying to copy itself onto them. 
+
+
+Starting "The Legend of Billy the Kid"...  
+* From floppy disk: insert the first disk and switch on your ST. 
+* From hard disk: copy the contents of all the disks into a folder and 
+  run it from there. Read the README file, too. 
+
+
+****************** Changes for Amiga version ************************
+
+Computer Requirements: 
+* Any Amiga 
+* Television, or colour monitor. 
+* Floppy disk drive(s). 
+
+Optional Equipment: 
+* Hard disk drive. The game is at its best if installed on hard disk. 
+* Second floppy disk drive is recommended if you intend to run the 
+  game from floppy disk, rather than hard disk. This means two disks 
+  can be read by the computer at a time and there will be almost no 
+  disk swapping. 
+* Mouse plugged into joystick socket 1. 
+* Joystick plugged into joystick socket 2. 
+* Extra RAM (which will be used as cache to reduce disk reads). 
+
+
+Before Playing: 
+* If you want to know the most up to date information about this 
+  version of the game, boot the Amiga with Workbench, insert the 
+  first game disk, and double click on the disk icon and README.TXT. 
+* If you will want to save your position on floppy disk, format a blank 
+  disk of your own before playing. 
+* Anti-virus note: Never, ever unprotect your original "The Legend of 
+  Billy the Kid" disks. If your computer asks you to do this, it could 
+  be because a virus is trying to copy itself onto them. 
+
+
+Starting "The Legend of Billy the Kid"...  
+* From floppy disk: insert the first disk and switch on your Amiga. 
+* From hard disk: copy the contents of all the disks into a folder and 
+  run it from there. Read the README file, too. 
+
+
+********************** Protection mechanism **************************
+
+As Colin Gordon seems to have a good knowledge of Wild West-type 
+guns, we suggest you print silhouettes of these in the documentation, 
+each with its name. (Either at the corners of the booklet, or on a 
+separate sheet). 
+
+The game will occasionally display the shape of a gun on the screen, 
+and ask the player to enter its name. 
+
+For greater anti-photocopying security, the gun pictures could have 
+a red pattern superimposed, and be viewed through a bit of red 
+plastic film (perhaps mounted on card in the shape of a gunsight). 
+

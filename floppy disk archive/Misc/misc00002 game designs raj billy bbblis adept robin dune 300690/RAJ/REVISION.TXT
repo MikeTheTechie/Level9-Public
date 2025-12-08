@@ -1,0 +1,85 @@
+
+
+
+
+
+
+
+
+
+
+
+  CHAMPION OF THE RAJ CHANGES. Copyright (C) 2 July 90 by Level 9 
+
+The Level 9/Mirrorsoft meeting on 21 June produced many suggestions 
+for improvements. The main ones were that the game should be sexier, 
+not take itself too seriously, and disguise the time taken to load 
+overlays; and that the swordfight game must not be a "joystick bash". 
+
+Specific changes are as follows: 
+
+1) More narrators. A beautiful princess and her guru grandfather also 
+   narrate events: she is an alternative to the Indian clerk in the 
+   office, while the guru takes over Indian events from the bazaar. 
+   The British soldier still reports "European" events from his club. 
+   * In the introduction, the princess helps the hero escape from 
+     the Thug dungeon, taking him to meet her grandfather who 
+     explains the need to unify India and defeat the Thugs. (Scene 
+     7 has the princess added, and the original scene 9 is replaced 
+     by a close-up of princess and ancient sage in his hermitage). 
+   * In the game, one of the narrators (but usually the princess) 
+     periodically relates background information. A window opens, 
+     with text on one side and the animated narrator on the other. 
+   * The guru helps to disguise the time to load sub-games. His face 
+     is displayed, initially with instructions for play, and 
+     thereafter with one of his many wise sayings to read. 
+   * The princess adds glamour. She is e.g rescued from the Thugs in 
+     a swordfight game, and stars in the marriage scene. 
+
+2) Sex is introduced to the game (see later for notes) by means of: 
+   * Princess as narrator: beautiful, scantily-clad and animated. 
+   * Miscellaneous Kama Sutra carvings in the background scenery. 
+   * A bedroom scene is added, where the hero has the option to be 
+     seduced by a female "slave girl", who undresses in silhouette. 
+     This is one lead-in to an "assassination" swordfight.  
+   * The "marriage" scenes occur later, and are spiced up. 
+   * Very occasionally (perhaps once per twelve hours) someone who 
+     regularly but briefly appears, such as the waiter in the 
+     clubroom who walks across the screen, is replaced by a nude girl. 
+     The aim is to start rumours about this event, because only a few 
+     players will see her. A secret control sequence, to make her 
+     appear all the time, could be leaked to the press later. 
+   * "Capturing the Palace" has slavegirls added, who run about the 
+     place. They are non-combatants and cannot be shot. 
+   * "Capturing the Thug Temple" has lots of nude statues, and the 
+     final "Kali" adversary is topless. 
+   * The "Suttee" game is changed so that the Princess is initially 
+     held by a group of Thugs. When the second of them goes to fight 
+     the hero, she wriggles free but leaves much of her clothing 
+     behind and escapes semi-naked, before grabbing minimal protection 
+     and returning to act as a cheerleader at the side. She escapes 
+     regardless of the hero's fate. 
+The aim is for cartoon eroticism (cf "Red", Jane, or St Trinians), 
+rather than "digitised" pictures (which I think work poorly on 
+computer, and to space out nude scenes throughout the game. 
+
+3) The swordfight game is changed to a less frantic control method, 
+   while looking better and simulating combat more accurately. 
+   * By default, the hero and his thug opponent attack and parry 
+     each other's blows roughly alternately. So the scene resembles 
+     a proper battle even if a novice (or nobody) is playing. 
+   * Control is by moving a cursor across a 3*3 grid: left-right are 
+     attack/stand/retreat, and up-down are high/middle/low blows. 
+     Your choice of attack/stand/retreat affects the probability of 
+     each parry working (retreating is best, but the hero can only 
+     retreat so far) and you press FIRE to replace the next computer- 
+     selected blow-or-parry by your currently chosen blow. Each 
+     opponent is more vulnerable to one attack type than the others, 
+     and your aim is to learn these weaknesses and exploit them. 
+   * The hero wins if he defeats all the attacking Thugs without 
+     suffering too many wounds. 
+     
+4) Miscellaneous: 
+   * I will look again at the less memorable Indian names.  
+   * Beaters who get shot in the tiger game are wounded, not killed. 
+   * More humour will be added (e.g in background animations). 

@@ -1,0 +1,62 @@
+
+
+
+
+
+
+
+
+
+
+
+                                                        
+Chris Caracci                                      25 Sept 90 
+and David Riordan 
+Cinemaware 
+
+
+Dear Chris & David, 
+
+
+           RESPONSE TO "DESERT A-TYPE-BUGS-REPORT 9/25/90" 
+
+Thanks for faxing this. It has been a help to us in deciding what 
+is going on with the latest version of Desert. 
+
+In particular, we had previously thought that the lock-ups were 
+all due to a mysterious hardware-related problem, but it now seems 
+likely that most are not. 
+
+* Bugs 1, 3 and probably 4 are all the same problem. It seems likely 
+  that the game workspace is being corrupted by the new version of 
+  the hospital game. The game manages to continue, but when it 
+  de-allocates its workspace before loading the shell overlay, the 
+  corruption is discovered. ("4" occurs at exactly the same time as 
+  the others - presumably the corruption had progressed further this 
+  time and the program crashed before outputting its error message). 
+
+  As I said to Chris, it is best to quit if the game reports an error. 
+  The workspace has been corrupted in some way, so it is not surprising 
+  if you go on to get other errors - e.g the nurse in the wrong place. 
+  Nick will make "DE-ALLOCATE" errors fatal in future. 
+
+* Bug 2 is as reported. Nick will try to fix it. 
+
+* Bugs 5 and 8 are already fixed (we spotted them in testing today). 
+  Bug 5 is actually a debug feature - press keypad 1 and 3 to toggle. 
+
+* Bug 6 is puzzling. 
+
+* Bug 7 looks like the only one of the type we were expecting - i.e 
+  the game drops dead with no excuse. If there is a "mysterious 
+  hardware-related problem", this is the only real evidence for it. 
+
+                            Regards, 
+
+
+                                    Pete Austin 
+
+       PS: NICK SAYS THERE IS ACTUALLY NO SUCH THING AS A 
+       "DE-ALLOCATE ERROR", THOUGH THERE ARE SEVERAL VARIANTS 
+       SUCH AS "DE-ALLOCATE ADDRESS ERROR". IT MIGHT HELP IF 
+       YOU COULD TELL US WHICH TYPE(S) YOU'RE GETTING. THANKS 

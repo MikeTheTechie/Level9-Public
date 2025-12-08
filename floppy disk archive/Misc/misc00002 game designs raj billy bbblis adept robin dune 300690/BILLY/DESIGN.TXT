@@ -1,0 +1,1212 @@
+     "BILLY THE KID" - DESIGN. Copyright (C) 1990 Level 9 
+
+
+"Billy the Kid" is a big 16-bit game in the Cinemaware/Ubisoft mould, 
+for one player, or two players on linked machines. See the "outline 
+design" for an introduction. 
+
+Major features are: 
+
+1) Billy the Kid is famous worldwide as a Wild West hero in the Robin 
+   Hood tradition, who turned to crime for vengeance against the rich 
+   men who murdered his friends in the "Lincoln County War". Sheriff 
+   Pat Garrett, the second famous hero in this classic revenge Western, 
+   is the incorruptible marshal, determined to enforce the law, even 
+   if it means hunting down one of his own friends. 
+
+2) Nine linked arcade games, and a central strategy game played on an 
+   authentic scrolling map of Lincoln County, west of the Pecos. All 
+   on an accurate Wild West theme. 
+
+3) Over 2 meg of animated graphics. In addition to the nine arcade 
+   games, "Billy the Kid" includes twenty animated pictures to help 
+   tell the story. You meet an Old Timer panning for gold, smoke the 
+   peace pipe with the chief of an Indian village, and go upstairs 
+   in the bordello etc. Pictures have extensive animation and exceed 
+   2 megabytes before compression (not counting blank areas of course).
+
+4) Digitised sound effects, with a sound track including half-an-hour 
+   of MIDI music. (This is excellent on the Amiga, and on IBM PCs 
+   with major sound boards - Roland, Sound Blaster, AdLib - and is 
+   quite good on STs). 
+
+5) Several games in one. A single player chooses to be either Billy 
+   the Kid, or Pat Garrett, requiring two very different strategies 
+   and so extending play. Or two people can play simultaneously on 
+   connected micros, each controlling one of the heroes. 
+
+
+Example of play: 
+
+Each player moves a binoculars cursor across the map, clicks on any 
+place they want to visit and the view zooms in to an appropriate 
+arcade sequence. 
+
+Billy has the more straightforward task: he rides the range, seeking 
+opportunities for revenge against his enemies, and takes every 
+chance to rob and steal from them without getting caught. Meanwhile, 
+Pat Garrett has to combine hunting Billy and other outlaws, with 
+managing his budget and getting re-elected sheriff. 
+
+Billy might tie up his horse in Main Street, Santa Fe, swagger into 
+the saloon and discuss robbery targets over a game of cards and a 
+glass of red eye. Then join up with his gang to run off a herd of 
+Murphy-Dolan cattle, and take them across the Texas border to sell 
+in El Paso. Meanwhile Pat could track a gang of outlaws to their 
+hide-out and shoot it out with the badmen. 
+
+Billy wins if he can kill, or bankrupt by robbery, all the members 
+of the Murphy-Dolan faction. And Pat wins if he can bring law and 
+order to all the towns "west of the Pecos", and finally track down 
+Billy. Whatever else happens, the game always ends, in true Wild West 
+style, with a climactic duel between the two heroes. 
+
+                         GAME OUTLINE 
+
+LOADING SEQUENCE. The game starts with the death of Billy's friend, 
+Tunstall. The view is from behind Tunstall's buggy, blocked on the 
+road by four distant men with shotguns. The picture animates:  
+- viewpoint rises in a parallax scroll, then stops;  
+- Tunstall half-raises his open hands; 
+- the men point their guns and fire; 
+- Tunstall's body spins about and falls; 
+- after a delay, quieter gunshots are heard; 
+- the men run off into the trees; 
+- Billy arrives from the opposite side and fires after them. 
+
+A second picture shows Billy kneeling over Tunstall's body, head down, 
+hand on Tunstall's shoulder. Then: 
+- Billy raises his head and looks angrily into the distance; 
+- he draws his six shooter and fires 6 shots and 4 clicks upwards; 
+- the scene parallax scrolls upwards; 
+- the words "Billy the Kid" form in a curve above Billy's head; 
+- scrolling text reports Billy's vow of revenge.  
+
+
+ATTRACT MODE. If you do nothing, the game goes into an attract mode 
+to illustrate its features. This will show the most graphically 
+interesting games we can get onto the first disk - and the decision 
+on its precise contents will have to be left until we know how big 
+specific game programs are. 
+
+Press fire, a mouse button or a key to start play (any of these forms 
+of control can be used while playing) and display the introduction menu. 
+
+
+INTRODUCTION MENU. The screen shows Billy's and Pat's faces, with 
+brief descriptions, plus a one/two player box. Click on the one(s) 
+you want. (We'll use a pistol cursor, and a ricochet sound effect 
+when FIRE is pressed). 
+
+This screen also makes you to choose mouse, joystick or keyboard 
+control for the game. 
+
+If two people want to play, they should connect the RS232 ports of 
+their computers, and the game starts by checking that one is playing 
+Pat Garrett and one Billy the Kid. 
+
+
+GAME MAP. The game uses a 2*2 screen scrolling relief map, of Lincoln 
+county around 1880 (at this date, it was almost exactly the SE quarter 
+of New Mexico State). The map shows the lawless lands west of the 
+Pecos: from the Texas border, west across New Mexico to the Rio Grande, 
+and from El Paso north to Santa Fe. The landscape is authentic, but 
+tilted away from the viewer to reduce north-south distances. Places are 
+shown pictorially, and there is some animation (e.g pinhead cows near 
+the ranch pictures, turning wind pumps, and passing wagon trains).   
+
+Railway ++++++++++++++++++++++++++++++++++++++         ^
+         ||      Santa Fe Town            |        Goodnight- 
+         ||                               | Bitter   Loving 
+         ||                               | Lake     Trail  Fort
+ |========|                               +-------+    ^    Sumner
+ ||         Jicariula                       Fritz |    ^
+ ||         Mountains                       Ranch |   ^     Chisum
+ ||                                               +-------+ Ranch 
+ ||              White Oaks     Sierra Capitan       ^    |         
+ ||                 Town          Mountains        Good-  |         
+ ||                                                night- |         
+ ||         Fort           Lincoln        Roswell  Loving | Dedrick 
+ ||San      Stanton      City (Town)       Town    Trail  |  Ranch     
+ ||Andreas                         -----------------------+         
+ ||Mounts   Mescalero      Tunstall         Beckwith  ^   |         
+ ||         Apache         Ranch             Ranch    ^   |         
+ ||                                -----------------------+
+ || Mesilla               Sierra Guadalupe   Reed     ^   | 
+ || Town                     Mountains       Ranch    ^   | 
+ |================|                                    ^  | 
+   [MEXICO]      || El Paso       <- [TEXAS] ->        ^  | 
+                 ||  Town                              ^  | 
+  Rio Grande     ||                                       | 
+ (uncrossable)-> ||    Pecos River (readily crossable) -> | 
+                
+
+The map does not show everything at the start. Outlaw hideouts and 
+temporary robbery targets, e.g a train carrying wages for the local 
+army, are only added if you hear about them.
+
+You move an animated cursor (which looks like a sideways-8 and 
+represents binoculars) across the map, and click (press FIRE) on any 
+place you want to visit. This opens the binoculars into a much larger 
+binocular-shaped window (in the same way as GEM windows open on the 
+ST, with more details of the place (including its name). Significantly 
+move the binoculars to close this window again. 
+
+Click again to visit. Billy/Pat is shown as a small figure riding 
+across the map, followed by an arcade sequence. Either: 
+* an animated picture with someone in the foreground (e.g a friendly 
+  farmer in front of his property) and a multiple-choice menu. 
+* or, for more interesting places, an appropriate arcade game. For 
+  example, if you visit a town, you find yourself on Main Street and 
+  can walk or ride about "Sierra-style" (people are 60-pixels tall). 
+
+Timeout. In one corner of the map is a "timeout" icon. Click on this 
+to enter timeout (pause) mode, which stops time passing and opens a 
+menu to allow you to Continue, Save, Load, Quit or Restart. 
+
+(In two player mode, "timeout" only pauses you, not your opponent, 
+and the Save and Load options are omitted. Quit and Restart mean that 
+you flee the state, conceding victory to your opponent.) 
+
+
+                        STRATEGY OVERVIEW 
+
+Both heroes' scores are their reputations: life was short in the Wild 
+West, and money soon spent, but reputations outlast everything. 
+
+Billy probably wins if he kills or bankrupts all his enemies, or if 
+Pat's reputation falls so low that he is thrown out of office. And 
+Pat probably wins if he can track down Billy at his hideout (finding 
+it takes the reward money from defeating the other outlaw gangs, to 
+pay a really expert tracker), or if Billy is jailed a fifth time - 
+when there is no escape. 
+
+
+Pat Garrett and Billy the Kid mix information gathering (visiting 
+places and people, to learn the locations of outlaws and opportunities 
+for crime), with committing and preventing crimes respectively. 
+
+When the game starts, the country is lawless: there is a group of 
+outlaws near every town and Billy can rob almost at will. But every 
+time Pat Garrett defeats an outlaw gang, he brings law to its town 
+and Billy has trouble organizing robberies there. Each success also 
+increases Pat's budget. There will be some roaming outlaws in the 
+wilderness, for Billy to recruit and use to undo Pat's work in lawful 
+towns, but basically Pat steadily reduces Billy's opportunities for 
+crime - setting a limit on his score and increasing the chance that 
+he will be tracked down. 
+
+Neither Billy the Kid, nor Pat Garrett can die, except in a final 
+showdown duel between them. If they meet early in the game, they 
+either have a typically cliched Western conversation, or else one is 
+run out of town. If defeated in combat, a hero is merely wounded and 
+nursed back to health (Billy may also be jailed and have to escape). 
+
+
+BILLY'S STRATEGY. Billy can commit a variety of crimes: bank robbery, 
+cattle rustling, train robbery, and the occasional justified killing. 
+By means of these, he hopes to bankrupt or drive away the men of the 
+Murphy-Dolan faction. 
+
+But if Billy just commits crimes randomly, he is unlikely to do well. 
+Most banks hold little money most of the time, most trains are not 
+carrying gold shipments, and so on. And, what is worse, each crime 
+encourages the victim to buy a bigger safe and hire more guards for 
+next time. 
+
+Billy needs to talk to local people, and meet up with other outlaws, 
+in order to learn which are the most profitable targets for crime. 
+Of course, Billy needs to find out who is worth talking to; some 
+people are liars; and some of them need bribes or other help before 
+they will help Billy in return (if Billy has money, an option is added 
+to the menu). Billy is more likely to be helped if he is generous with 
+his money, and if he avoids anything resembling murder. 
+
+
+PAT'S STRATEGY. Pat could single-mindedly try to capture Billy, but 
+this would mean letting other criminals run riot and probably get 
+him sacked as sheriff. So he must try to jail every outlaw gang in 
+Lincoln County - with the joint aims of pleasing the public, making 
+Billy's life harder and earning enough rewards to pay an elite tracker 
+to hunt down Billy's hideout. 
+
+If Pat, or five deputies (out of the roughly ten that he can afford) 
+are in town when a crime is committed, Pat gets the chance to lead a 
+posse and track the gang responsible to their lair for a shoot-out. 
+But this is expensive, as posse members want bonuses and don't like 
+taking casualties - and gangsters are less likely to venture into town 
+when lawmen are around. So Pat should only guard very tempting targets. 
+
+What is worse is that Pat will find that crime victims clamour for 
+police protection (even though outlaws are hardly going to return to 
+a newly-empty bank) and he has to assign some of his scarce lawmen to 
+quieten them down.
+
+So Pat must also talk to and help local people, just as Billy does 
+(above) to learn the whereabouts of gang hideouts and what crimes 
+are planned, without wasting his budget. Then he can hit the outlaws 
+hard, with all his deputies, and profit from the reward money. 
+
+
+WIDER GAME. To help players get going, they are frequently approached 
+by local citizens (especially near the start) with tales to tell and 
+rumours to pass on. Later on, they will learn which of the many shop 
+clerks or ranchers are worth talking to for information. 
+
+"Billy the Kid" is played against the background of the Lincoln County 
+war, and keeps track of about 20 pseudo-random sub plots. (E.g peasants 
+need defending from a corrupt local politician, or Billy's friend needs 
+rescuing from jail). Billy's and Pat's need for information and help 
+from locals, is what draws players into the full variety of the game. 
+
+                              PLACES 
+
+The following Lincoln County places are permanently on the map: 
+
+Forts: 
+  Stanton 
+    Bad Colonel Dudley and the 9th Cavalry (blacks + white officers)
+  Sumner 
+
+Ranches: 
+  Beckwith 
+  Chisum 
+  Dedrick 
+  Fritz 
+  Reed 
+  Tunstall - initially run by good Mrs McSween, who was then bought 
+    out cheaply by bad Brady.  
+
+Towns: 
+  El Paso 
+    Undertaker 
+    Wire Office 
+    News Office - "El Paso Sun" 
+    "blank" 
+    Bank    - "Lone Star Bank" 
+    Saloon  - "El Dorado Saloon" 
+    Sheriff - "Law Office"  
+    Store   - "Guns, Pistols, Ammunition, Hardware" 
+  Lincoln City 
+    Murphy & Dolan General Store (enemy HQ) 
+    Lincoln County Bank 
+    McSween House - burnt later, after McSween died here in battle
+    Tunstall Store of clerk Sam Corbet (who hid Billy) until closed 
+    Ike Stockton's Saloon 
+    Corral, beside Lincoln Plaza. Sheriff Brady shot here.  
+    District Court House 
+    Old Jail 
+    Sheriff Office - Sheriff Brady, then Peppin.  
+    Torreon (Indian Tower) 
+  Mesilla 
+    Saloon - "Diamond Lil's" 
+    Bank   - "Catron Mutual Bank" 
+    General Store 
+    Doctor 
+  Roswell 
+    Sheriff 
+    Undertaker 
+    "blank" 
+    Hotel - "Roswell Hotel" 
+    Bank - "Shamrock Bank"  
+    Turner & Jones Merchants. Turner led bad posse against McSween 
+    Post Office of Ash Upson, who provides honest info to Pat 
+  Santa Fe 
+    Saloon - "Casey's" 
+    Doctor 
+    Hotel  - "Zang's" 
+    Saloon - "Golden Nugget" dancing girls  
+    Undertaker 
+    First National Bank of Santa Fe - run by corrupt Santa Fe ring
+    Telegraph 
+    Courthouse 
+    Jail 
+    Newspaper - "New Mexican" 
+    Livery Stables 
+  White Oaks 
+    Saloon    - "The B'You Saloon" 
+    Bank      - "Nineth State Bank" 
+    Newspaper - "Epitath" 
+    General Store - "Guns, Pistols, Ammunition, Hardware" 
+    Livery Stables  - "W.O.Corral" 
+
+Etc: 
+  Mescalero Apache Reservation 
+    "Buckshot" Roberts solo-ambushes Billy near here
+  Prospector's Diggings 
+  Cow Herds 
+    near ranches  
+  Railroad Train 
+    runs along the track. Occasionally carries gold 
+  Wagon Train 
+
+And the following places appear once they are found: 
+
+Outlaw hideouts: 
+  Regulators (Tom O'Foliard) at Los Portales, NE of Fort Sumner. 
+  El Paso: The Fugitives (Sam Newfield) 
+  Lincoln City: Seven Rivers Gang (Bob Olinger) 
+  Mesilla: Dona Ana Bunch (John Kinney) 
+  Roswell: Jesse Evans gang of rustlers
+  Santa Fe: Cooper Gang (Tom Cooper) of rustlers, on Texas Border 
+  White Oaks: Socorro Vaqueros (Pete Stewart) 
+
+Small Buildings: 
+  Three peasant farms, for if you do good deeds for "Mexicans" 
+  Blazer's Mill, a deserted shack, where "Buckshot" Roberts is met. 
+  
+
+                              PEOPLE
+
+"Billy The Kid" has about fifty unique people in the game, typically 
+seen in the foreground with animated scenery behind them. For example, 
+a clerk will be seen at the counter of his shop, and a prospector 
+against the background of his diggings. 
+
+These people are built up identikit fashion (to keep the volume of 
+graphics reasonable) out of animated parts. Thus they all are all 
+different, but all their eyes blink, their mouths move when they 
+tell you things, they twitch their eyebrows and so on.. 
+
+You talk to people by selecting from a multiple-choice menu at the 
+bottom of the screen - somewhat similar, but better implemented, 
+to the mechanism in "It Came From The Desert". 
+
+Some people are always found in the same place...  
+* Pioneers: one person for every place on the map, except towns. 
+  E.g a rancher for each ranch, a trail boss in front of the wagon 
+  train, a gang leader at each outlaw base. These people are static, 
+  and you meet one when you visit practically anywhere unless -  
+  the place is "mysteriously deserted", or you go straight into an 
+  arcade game, having been for example been met by gunfire. 
+* Shopkeepers: one person for every shop or sheriff's office, 
+  and one bartender for every bar. 
+* Bums: occasional people who hang around the sidewalks (e.g in a 
+  hillbilly rocking chair). Walk up to them to talk. 
+
+While some move about... 
+* Cowboys: Billy or Pat will occasionally meet other riders while 
+  travelling. These meetings are "random" (in that they occur 
+  regardless of where the player is going, and what else they 
+  may be doing) and are particularly useful early in the game, as 
+  cowboys can introduce players to the events of Lincoln County. 
+* Peasants are also met at "random". They are often Mexicans, and 
+  generally have hard luck stories. Helping them earns bonus points, 
+  and they are sometimes useful later. 
+* Badmen: a few opportunists, including outlaws and bounty hunters, 
+  who hope to profit from the Lincoln County war. 
+
+Most static people are unnamed (apart from Billy and Pat's second- 
+in-commands Tom O'Foliard and Barney Mason). But all mobile people 
+have names, though in some cases these may not be mentioned.
+
+The main function of all these people, apart from making the prairie 
+looked "lived in", is to provide information to Billy and Pat. Some 
+of them come up and tell you things, and others provide local gossip 
+when asked (or may be bribed). Such gossip, of course, may include 
+information about when the railroad brings gold to pay the wages of 
+the local cavalry - or when a ranch will have assembled a herd of 
+stock in preparation to selling them. 
+
+The majority of people (i.e those not known to History) have their 
+faces and personalities built up pseudo-randomly at the start of 
+each game. Thus your informant in one game might be replaced at his 
+job by a tight-lipped know-nothing in the next. 
+
+Not everyone is worth talking to (you tended to live longer in the 
+Wild West if you kept your mouth shut) and have no information to 
+give. Of the rest, some will be natural liars (and hence unreliable), 
+and some will be biased towards Pat Garrett or Billy the Kid - and 
+so help one but lie to the other. Some will only help you, after 
+you have helped - or bribed - them. 
+
+During each game, you will soon find out who to visit in each region, 
+to learn the news. 
+
+
+             CAST, SUB-PLOTS, INFORMATION AND CRIMES 
+
+Pat or Billy 
+ 1) A Mexican Peasant is met in the desert and explains he is about 
+    to be run off his land by Anglo ranchers. If the player agrees 
+    to help, this goes straight into a defensive shootout for bonus 
+    reputation.  
+ 2) In a bar, a lady is being pestered by a notorious gunslinger. She 
+    asks for help and you get the chance to challenge him for a bonus. 
+ 3) Ditto, with a Mexican picked on by cowboys. Challenge them for a 
+    bonus and they walk off, but ambush you later in town. 
+ 4) Meet a sick man in the desert. Take him to Santa Fe (travel there 
+    next) for a bonus. 
+ 5) Soldier at Fort Sumner tells you that the army are being cheated 
+    by the Murphy-Dolans, who have the meat contract. (Note: Fort 
+    Sumner is a "good" fort, under the control of Colonel Baxter, while 
+    Fort Stanton is run by corrupt Colonel Dudley). When the Murphy- 
+    Dolans (MD's) are busy, e.g making their next delivery, visit their 
+    store in town and get their copy of the books to take to the Fort. 
+    (If the MuD's are there, they gunfight Billy or refuse to admit 
+    Pat). This earns status, and cuts off the MD's income. 
+
+Pat Only 
+11) If Pat is about to defeat a gang in a shootout, the leader calls 
+    a truce and barters their escape (i.e the hideout location changes 
+    and is hidden again) in return for: 
+    * a tip-off if Billy joins them on a crime, or 
+    * an offer to leave the territory, or 
+    * the location of some buried gold. 
+12) Meet Texan Posse in the desert. Lie about Billy having stolen 
+    Texan cattle, and they join as unpaid deputies and will join any 
+    posse against Billy for a period. 
+13) Barney Mason reports the escape of an outlaw from Santa Fe. Pat 
+    can track him (without needing a posse) for a reward. 
+14) If Pat doesn't rapidly transfer at least one mobile deputy to a 
+    town which has just been robbed, a pompous local mayor accosts him
+    with the request for protection. Pat loses status, and failing to 
+    comply with the request loses more. 
+15) The same figure requests that Pat runs a local vagrant out of town 
+    and enforce a bogus claim against the prospector. Pat should 
+    refuse, as the local people always tend to favour the underdog. 
+16) While tracking Pat encounters various outlaws and must let them go, 
+    or else send them to jail with part of his posse. Outlaws include 
+    Joseph Cook from Texas (with two stolen horses), John Josua Webb 
+    (who had escaped from Las Vegas jail), George Davis (horse thief), 
+17) At one siege, Carlyle from the posse offers stupidly to go inside to 
+    negotiate. The defenders hold him until he manages to bob up to look 
+    around for a while and runs off. If Pat shoots him, the posse stop 
+    fighting and the outlaws escape. 
+18) One outlaw gang will be trapped in an old building (the standard 
+    one used for Mexican homesteads etc) when Pat catches up with them. 
+    He can either fight, or prepare a siege and send out for supplies. 
+    The roasting barbecue smells make the gang surrender. (Real event).  
+
+Billy Only 
+21) When Billy visits the Mescaleros, he finds the beef they are 
+    entitled to under treaty has been diverted to a Murphy-Dolan ranch. 
+    If Billy's next crime is cattle rustling from there, he is asked 
+    if he wants to take them to the Indians - if so, he earns no money 
+    but more reputation. Plus, at any one future time, he can ask the 
+    Indians to fake an uprising and get the governor to draw off all 
+    Pat's deputies to prevent it.  
+22) When Billy has enough money, he randomly meets a widow woman who 
+    needs almost all of it (a round amount equal to about 80-90%) to 
+    pay off her mortgage. Giving it to her earns bonus reputation. 
+23) Desert Peasant tells you his family are sick. Agree to travel to 
+    their house and stay there for a bonus (use same picture as for 
+    when healing, but with Billy and Peasant figures rather than 
+    nurse). While there, an outlaw arrives with news of a gold 
+    consignment at the bank - but it's a bluff, the safe is empty and 
+    if Billy leaves to travel there, he gets challenged in the street 
+    by a bounty hunter. 
+24) On one random journey in the Indian reservation area, "Buckshot" 
+    Roberts is waiting to ambush the Regulators (actually at Blazer's 
+    Mill). He calls on the gang to surrender, and there follows a 
+    variant of the "country ambush" shootout game, except that 
+    Roberts is the only enemy. He pops up at several positions in 
+    the rocks, and needs to be hit many times to die. 
+25) The "Seven Rivers" and "Jesse Evans" gangs ambush Billy in town. 
+26) Billy rescues his old friend Segura from jail (earning himself a 
+    free bonus rescue by Segura when he's captured the fifth time). 
+27) Tom Cooper has lots of counterfeit money, brought in by an 
+    Easterner called Duncan, and offers this instead of his share in 
+    a robbery. Billy loses reputation if he gives it to his friends, 
+    but can arrange to buy cattle and sell them across the border - 
+    as if he stole them but with much more time. 
+28) When Billy is in Lincoln, he overhears that Sheriff Brady is on 
+    his way to ambush McSween. Billy can stop this by a duel with 
+    Brady (a poor shot). 
+29) Jose Miguel Sedillo - friend of Billy's, informs him of attempted 
+    horse-robbery on Tunstall Ranch, while this is being run by Mrs 
+    McSween. If he goes there, he gets to fight a defensive shootout. 
+30) Billy randomly meets Joe Grant, drunk in a saloon. He shows Billy 
+    a stolen pearl-handled pistol, and Billy has the opportunity to 
+    rotate the barrel to an empty chamber. The gun will then just 
+    click when Joe makes Billy fight a duel later. 
+
+
+                             SCORING 
+
+Both heroes' scores are their reputations. 
+
+Billy's main aim is to kill or bankrupt all of the Murphy-Dolan 
+faction: the ranchers and cowboys responsible for murdering Tunstall. 
+He scores for: 
+* every enemy killed or driven from the state, 
+* every crime commits, with bigger scores for bigger crimes (This 
+  aspect of Billy's score is reflected in the price on his head, and 
+  hence the number of bounty hunters pursuing him),  
+* doing good deeds, e.g defending a widow's land against marauding 
+  cattlemen. 
+
+Pat Garrett's main aim is to capture or kill Billy. He scores for: 
+* each time Billy is captured, 
+* every robbery thwarted by deputies on guard, 
+* every outlaw gang defeated, whether or not Billy was involved, 
+  and especially if they have recently committed notorious robberies 
+  (this may entail leaving Billy alone for a while), 
+* every good deed done.  
+* And Pat loses points if he ignores pleas for his help. 
+
+The hero who completes his tasks first, and so triggers the final 
+duel between Pat Garrett and Billy the Kid - see just below - earns 
+a bonus, as does its survivor. 
+
+
+                           WINNING
+
+In real life, the winner was Billy the Kid, despite the fact that 
+Pat Garrett shot him, as he is the most famous. In the same way, 
+the winner of the game is not the survivor, but the hero with the 
+highest reputation at the end. 
+
+Neither hero can die, except in a final showdown duel between the 
+two of them. They are wounded instead and nursed back to health 
+(losing reputation and wasting a little time) and, in Billy's case, 
+may be thrown into prison. Billy is also imprisoned (again wasting 
+some time) if captured by Pat Garrett or Pat's deputies. Fortunately, 
+Billy was very successful at escaping from jail. 
+
+The game ends in a climactic duel, when: 
+* Billy has killed or bankrupted all his enemies, or 
+* Billy has to escape from jail a fifth time (this time fails), or 
+* Pat Garrett faces Billy at his hideout (finding this requires 
+  enough reward money to pay the most expert tracker and hence, in 
+  turn, that Pat had defeated all the outlaw gangs), or 
+* Pat's reputation falls so far that he is thrown out of office, or 
+* the time limit is up - this shouldn't really ever happen, but I 
+  want a failsafe ending so that the game does not go on forever if, 
+  e.g, the computer-controlled opponent is unusually incompetent.
+
+The speed of draw in the duel is biased in favour of whoever has the 
+higher reputation at the time. After the duel is over, the loser is 
+presumed dead, but his body is removed by friends before this can be 
+confirmed, allowing for a sequel. The winner of the duel survives of 
+course, and gets a score bonus, and the overall game is won by whoever 
+has the higher reputation. 
+
+There is no reason why the two heroes should not meet earlier, but 
+this is not allowed to trigger a duel prematurely unless both Billy 
+and Pat agree to fight. 
+
+If Billy meets Pat in town, on the sidewalk for example (you bump 
+into someone to meet them), they each decide between: 
+* ending the game with a duel (if both agree); 
+* if the town is not law abiding, Billy can choose to run Pat out 
+  of town (Pat can't return until Billy leaves); 
+* if the town is law abiding, Pat can try and arrest Billy. Billy 
+  then runs away, and has to GETAWAY (see game) past Pat's Deputies; 
+* just talking. 
+(What this means in practice is that the players in a two player game 
+can end the game early if they agree. And that as the game progresses, 
+the balance of power tilts steadily towards Sheriff Garret and - as in 
+reality - Billy should take ever more care to avoid him.)
+
+The two heroes cannot meet out of town: if e.g Billy tries to visit a 
+ranch where Pat is already talking to the rancher, he is stopped from 
+going there. This is justified on the basis that you are at a great 
+disadvantage when approaching an alert enemy across the open prairie. 
+
+So apart from when they bump into one another in town, the only 
+meetings between the two heroes are when they find each other on 
+opposing sides of an arcade game - e.g if Pat and a group of deputies 
+are guarding a bank which Billy attacks, or if both heroes get caught 
+up in the same bar-room brawl. 
+
+                              LAW 
+
+When the game starts, there is one outlaw gang associated with each 
+New Mexican town. Gang members are the source of most of the rumours 
+in the local saloon, and once Billy has made contact their hideout 
+is added on his map nearby. 
+
+While there is a gang around, the town remains lawless. It is risky 
+for Pat to be seen (he may be challenged to a duel) and the local 
+bank will be regularly robbed. Any money passing nearby is at risk. 
+
+If Pat defeats the local gang, the town becomes lawful. Pat is now 
+safe on the streets, but Billy runs the risk of being recognised and 
+challenged. Also, if the two heroes meet on the streets, Billy has 
+the upper hand in a lawless town, while Pat does in a lawful one. 
+
+There is little information to be gained in lawful saloons, but both 
+players can still look at wanted posters or read the press. 
+
+(The enlarged details of a town, seen through the binoculars, include 
+whether it is lawful of not.) 
+
+
+                          ARCADE GAMES 
+
+Player decisions, and random events, often trigger arcade games. A 
+small window opens upon the current screen, with text describing the 
+controls of the game to come, so that you can read them while the 
+game loads. 
+
+The animations mentioned for each game are not a complete list. I have 
+not attempted to list those which are inevitable when people move, 
+for example. And every face of a reasonable size in "Billy The Kid" 
+has eyes that blink. Mouths move when people talk, and faces change 
+expression (in a limited way) when appropriate. 
+
+
+                  QUICK DRAW DUEL (Billy or Pat) 
+
+This happens when e.g you challenge a cheat at cards, or between the 
+two heroes at the end of the game. 
+
+You stand in the foreground, facing your opponent in the distance. 
+Then a bell rings, allowing both to draw their guns and fire. 
+
+Press fire to start the draw, steer the sights onto your opponent, 
+and press fire again to shoot. If you miss, the recoil will jerk 
+the gun slightly off target, but against easy opponents it may be 
+possible to aim and shoot again before the opponent fires (and 
+hits). The winner is whoever hits first. 
+
+If your enemy is hit, he falls backwards with a small red patch on 
+his chest. If the hero is hit, a similar red patch appears on his 
+back, he drops his gun and slides downwards out of view. 
+
+As your relative reputation (score) increases, your draw speed 
+improves and you don't need to be quite as accurate to hit. So, at 
+first, both heroes should back down if challenged by other people 
+- particularly gunfighters - but by the end of the game both Pat and 
+Billy can realistically challenge anyone in the territory. 
+
+This also means that victory in their final duel is more likely to 
+go to whichever hero has done better in the preceding game. 
+
+BACKGROUND: Standard desert scene, outside town  
+
+CONTROLS:   Joystick/mouse/cursor keys steer a gunsight cursor 
+            FIRE shoots your gun 
+
+SOUNDS:     Gunshot, ricochet for miss, squawk for hit 
+
+ANIMATIONS: Bell, both fighters draw, dead enemy falls backwards, 
+            wounded hero scrolls downwards. 
+
+
+                     SHOOTOUT (Billy or Pat) 
+
+A shootout game is needed in several situations: either hero can be 
+randomly ambushed in the country, or in the street of a town 
+controlled by the opposition; Pat Garrett can lead a posse against 
+an outlaw gang; or Billy can attack an enemy ranch; or Billy's gang 
+of Regulators may run into deputies on guard duty - with or without 
+Pat. So this game has several scenes. 
+
+If the hero is ambushed in the country, he will sometimes be called 
+upon to surrender by a gunslinger in the foreground (but on the other 
+side of the foreground cover. If his offer is refused, the gunslinger 
+draws and fires before scrolling downwards off the screen (i.e falling 
+to the ground). The game continues as normal. 
+
+If the hero is ambushed in the street, the game is introduced by a 
+gunshot, and him shown leaping for cover. When the fighting starts, 
+it is against the same street background, with foreground cover added. 
+
+In the foreground is the upper torso of Pat or Billy, crouched in 
+cover. The joystick moves a cross-hairs cursor; press fire to shoot, 
+hold down fire and move the joystick up or down to rise or duck. 
+The aim is to shoot all the opposition before being hit three times 
+(though the hat, left and right shoulders - in that order). 
+
+Backgrounds represent town streets, an isolated ranch, and a hillside 
+with scattered rocks, among which the enemy opposition lurk and fire. 
+You try to shoot them as they bob up to shoot. If you are winning, 
+the last few fighters turn and run. 
+
+If both Billy and Pat are present, they effectively play separate 
+games from opposite views; the winner is whoever wins first. 
+
+
+BACKGROUNDS: The backgrounds are in pairs, showing the same place 
+             from the points of view of attackers and defenders. 
+             They are: 2 street scenes, ranch, wilderness. The 
+             same backgrounds are used as when you visit the same 
+             places peacefully. 
+
+CONTROLS:    Joystick/mouse/cursor keys steer a gunsight cursor.  
+             FIRE shoots your gun. 
+             If FIRE is held down, controls up/down act as rise/duck. 
+          
+SOUNDS:      Gunshot, ricochet, squawk for hit 
+
+ANIMATIONS:  Enemies bob up and fire from behind cover. If shot, they 
+             sprawl theatrically. 
+             Bullets ricochet dustily from your cover. 
+             The scenery is gradually riddled with bullet holes. 
+             Water and grain containers leak when holed. 
+             Scenery animation from the background. 
+
+
+                  CATTLE RUSTLING (Billy only) 
+
+When Billy clicks on some cows to steal them, while the map is still 
+on screen he is asked to click on the destination he wants to drive 
+them to. The distance determines how far Billy must drive the cattle 
+in the time of this game, and the destination determines the price. 
+(Stolen stock are worth almost nothing at most places, slightly more 
+at Santa Fe, and the full price at El Paso across the Texas border.) 
+
+The game starts by loading a map-style background, showing terrain 
+(though no attempt is made to make this accurately correspond to the 
+Lincoln County map). 
+
+Billy and two of his gang enter from the left, all riding horses and 
+seen from above. You only control one rider at once - the others carry 
+on in a straight line, only turning if blocked - and you switch 
+control to the next rider by pressing fire. The controlled rider 
+can be turned and moved in the 8 compass directions. 
+
+A herd of cows start at the right, and try to run from Billy's 
+horsemen. You have to herd them left, across perhaps six varied 
+screens of scrolling desert landscape, to "El Paso" in Mexico to 
+sell them. There are occasional random distractions to scare the 
+cows, such as rattlesnakes. 
+
+If Billy is too slow, a posse of Brady men catch up from the left. 
+If they get close enough before Billy reaches the state line, they 
+recapture their animals, and Billy has to fight a "shootout". 
+
+BACKGROUND: Top-down, map-style landscape, to a scale which makes 
+            horses and cows about 30 pixels long. 
+
+CONTROLS:   Joystick/mouse/cursor keys steer the current rider 
+            (the only one shown wearing a hat). Forward/backwards 
+            start/stop the horse, and left/right turn 45 degrees 
+            in the corresponding direction. 
+
+            FIRE changes control to the next rider. Uncontrolled 
+            riders move straight ahead, unless they are blocked. 
+          
+SOUNDS:     Mooing, snake rattle, "Yee Ha!". 
+
+ANIMATIONS: Tails swish. Cows occasionally snatch a mouthful of grass. 
+            Riders occasionally twirl lassos. 
+
+
+                       TRACKING (Pat only) 
+
+The display is that used for "Cattle Rustling", but with many more 
+obstructions (rocks and ravines) and lots of faint meandering trails. 
+The effect is a maze of tracks, which Pat must follow to reach the 
+gang that he is leading a posse after (i.e one that recently 
+committed a robbery). 
+
+Pat follows the tracks of an outlaw gang and occasionally dismounts 
+to check that he is going the right way. Given enough time, he would 
+always be successful, but this game is played against the clock 
+(because a storm will soon erase the evidence) and so Pat does not 
+have the chance to check on everything. 
+
+Press "fire" to dismount, examine the trail and remount; taking some 
+time. There are occasional clues beside tracks, e.g dropped coins or 
+notes, scraps of Cowboy/Indian clothing, or fire ashes. 
+
+The game adds extra clues when Pat tracks his first outlaw gang, to 
+provide an easy introduction to this game. 
+
+Some gangs are much harder to find than others (there are less clues 
+and the trail is longer). Billy's hideout, in particular, is almost 
+impossible to find. But, if Pat has enough money, he can hire a better 
+tracker who can see more relevant clues (so more are added to the 
+map) and waste less effort (so the time limit is extended). A tracker 
+costs $100-$500 and his figure replaces Pat's during this game. 
+
+BACKGROUND:  Top-down, map-style landscape (as Cattle Rustling). The 
+             scale makes horses about 30 pixels long. 
+
+CONTROLS:    Joystick/mouse/cursor keys steer Pat (or the tracker 
+             who Pat has hired to lead the posse). Forward/backwards 
+             start/stop his horse, and left/right turn 45 degrees 
+             in the corresponding direction. 
+
+             Press FIRE to briefly dismount and inspect evidence on 
+             the ground. The analysis appears in a temporary window. 
+          
+SOUNDS:      Mooing, snake rattle. 
+
+ANIMATIONS:  As "Cattle Rustling", Dismount/crouch/peer/remount. 
+
+
+                     AMBUSH/GETAWAY (Billy) 
+
+This happens in town and is seen from above (c.f Cattle Rustling and 
+Tracking). The map-style backgrounds correspond to each town. If Billy 
+robs a bank guarded by some of Pat's deputies, he and his gang are 
+attacked as they ride away. Billy's objective is then to take the 
+quickest way out of town, away from the melee. 
+
+Billy's horse gallops in the direction of his joystick, he shoots when 
+FIRE is pressed, and pressing FIRE and moving the joystick together 
+make him twist in the saddle and in future fire to one side. Meanwhile, 
+Billy's gang follow him. 
+
+If Pat is present, he can position his men before the battle, by 
+steering a cursor over the town streets and roofs and pressing FIRE to 
+place first a barricade, then Pat himself, and then each of his men - 
+but he cannot put anyone near the bank without alerting the robbers. 
+People are harder to hit if placed on roofs or in partial cover. 
+
+Pat's deputies remain fixed in place when the action starts - they 
+just fire - but Pat himself is moved, on foot, in the same way as 
+Billy is on horseback. 
+
+BACKGROUND:  Top-down, map-style landscape of the town. No detail of 
+             building fronts is shown - just their roofs. The scale 
+             makes people small and horses about 30 pixels long. 
+
+CONTROLS(A): Pat uses joystick/mouse/cursor keys steer a cursor about 
+             the screen - the cursor graphic is a larger version of 
+             whatever is to be positioned next. 
+
+             Press FIRE to drop the current object. When the final 
+             object (the last deputy) is dropped, phase B starts. 
+
+CONTROLS(B): Joystick/mouse/cursor keys steer Billy on horseback, 
+             or Pat on foot). Forward/backwards start/stop him, and 
+             left/right turn 45 degrees in the corresponding 
+             direction. Press FIRE to shoot forwards. 
+
+             When FIRE is held down and the joystick (etc) moved 
+             right or left, your direction of fire is turned in steps 
+             of 45 degrees, relative to your direction of facing. 
+
+SOUNDS:      Gunfire, ricochet, squawk for hit, "Get 'em, boys!"   
+
+ANIMATIONS:  Shot outlaws on horseback fall backwards, their horses 
+             continuing, and lie on the ground. Deputies on roofs 
+             slide over the edge and fall. Casualties then lie where 
+             they fell until the game is over. 
+
+
+             MOVING AROUND TOWN (Billy or Pat) 
+
+This is done on foot or horseback, through 3D scenery, in much the 
+same way as in Sierra Online games. People are big, at 60-pixels tall, 
+and horses are even bigger. 
+
+When you walk up to someone, or into a small shop, or to a visually 
+interesting place, the scene changes to a large "first person" 
+picture and a multiple-choice menu. E.g on entering the telegraph 
+office, you get a head-and-shoulders picture of the clerk. 
+
+Information can be got from the local newspaper, at the printer's: 
+each front page is shown, made up from graphic text about the 
+latest exploits of our heroes, items about robbery targets, and 
+humorous tales of frontier life. There are reward posters at the 
+local jail, with pictures of local outlaws. And buying drinks in the 
+saloon can get information and/or offers to join in planned crimes. 
+
+BACKGROUNDS: There are 6 unique towns, each with 2-8 non-scrolling 
+             street, pictures (built up from identikit shop fronts etc). 
+             The only buildings where you walk about indoors are the 
+             bars, all slightly different; most of which have only a 
+             single room, but one in Santa Fe has a second screen with 
+             dancing girls. 
+             Enter any other building, and you see a "first person" 
+             picture of the shopkeeper (or equivalent) in a room. 
+          
+CONTROLS:    Joystick/mouse/cursor keys steer the hero, as he walks 
+             or rides about. (The joystick has to be kept pushed to 
+             keep walking, but with mouse or keyboard you continue 
+             walking until you select stop or another direction). 
+             Bump into someone to talk to them. 
+             FIRE does nothing. 
+
+SOUNDS:      Tune which the pianist plays as the girls dance. 
+
+ANIMATIONS:  Walking, riding and too many background animations to 
+             mention. 
+
+
+                  TRAIN ROBBERY (Billy or Pat) 
+
+A parallax-scrolling game seen from the side. A huge (full-screen 
+height) train steams past Billy, who then springs from hiding and 
+runs to catch it up. Push the joystick sideways to control his speed, 
+and push fire to jump over cacti etc. When Billy reaches a ladder 
+down the side of one carriage, raise the joystick to climb and then 
+run forwards, pressing fire to jump from carriage to carriage. 
+
+If Billy reaches the locomotive, a graphic sequence shows him drawing 
+his gun, the engineer braking and the gang escaping with the loot. 
+But if Billy is too slow, the train reaches a wooden viaduct above a 
+ravine; he is knocked off and the robbery fails. 
+
+Pat gets the opportunity to play this game when he happens upon a 
+runaway train. He saves the train, rather than robbing it. 
+
+BACKGROUND: Side-on, parallax-scrolling desert landscape, with a 
+            very large animated railway train in front. The train 
+            is 6 screens long and people are about 60 pixels tall. 
+
+CONTROLS:   Joystick/mouse/cursor keys. Left makes Billy run faster 
+            than the train; right makes him run slower. Up makes him 
+            climb up the ladder to the train roof, and down would 
+            make him climb down. 
+            FIRE jumps Billy over cacti, or between carriages. 
+
+SOUNDS:     Wheels on track, bell, whistle.  
+
+ANIMATIONS: Wheels rotate, pistons and connecting rods move, driver 
+            and assistant shovel coal etc in the cab, bell rings, 
+            whistle sounds, scenery scrolls past, vulture flaps on 
+            telegraph post, window opens at end - showing the driver 
+            surrendering at gunpoint, followed by a hand pulling the 
+            brake lever. 
+
+                  BANK ROBBERY (Billy only) 
+
+Billy and the gang crouch in front of a safe, beside a pile of sticks 
+of dynamite. Click on the sticks to put them under the safe, one at a 
+time. Then click on the fuse to light it. After the explosion, the 
+safe is either unharmed, or opened, or else converted to a snowstorm 
+of dollar bills, depending on whether you used the right amount of 
+explosive. (The right amount is one stick for every hinge and lock on 
+the safe). 
+
+BACKGROUND: Animated scene of Billy and his gang, crouched around a 
+            safe in the bank. There are about ten alternative safes. 
+            On the left is an oval window, showing the bank manager 
+            working to free himself (he acts as a timer). 
+
+CONTROLS:   Joystick/mouse/cursor keys move a hand cursor in the 
+            usual way. When the hand is carrying a stick of 
+            dynamite, press FIRE to drop it. When the empty hand 
+            is over a stick of dynamite, press FIRE to take it. 
+            Click on the plunger at the end of the fuse to 
+            trigger the explosion. 
+
+SOUNDS:     Sizzle of burning fuse. Explosion. Shouts of "Help" if 
+            the bank manager gets free in time. 
+
+ANIMATIONS: Bank clerk saws at bonds to get free. Spark moves 
+            along fuse. Screen replaced by just safe. Explosion. 
+            Open safe, with whisp of smoke. Snowstorm of bills. 
+
+
+                   CARDS (Billy or Pat) 
+
+Billy was an expert gambler. A small round table, surrounded by the 
+players, is seen from diagonally above, with cards and coins on top. 
+The scene is lit centrally, with deep shadows. 
+
+Pontoon is played by by clicking on a menu, and can earn modest 
+amounts of money, pass the time (e.g while Billy waits for his gang 
+to spend their loot), or lead other people into giving you help 
+(e.g to get their money back). It may lead to a duel. 
+
+BACKGROUND: Card table and three card players, seen from a "first 
+            person" view. The fourth player is you. 
+
+CONTROLS:   Joystick/mouse/cursor keys steer a hand cursor 
+
+SOUNDS:     
+
+ANIMATIONS: Opposite player sweeps an arm across table to collect the 
+            cards, shuffles them by cutting the pack and merging the 
+            two halves, and flicks the cards onto the table to deal. 
+
+
+                BAR ROOM BRAWL (Billy or Pat). 
+
+Each town has at least one saloon, which you walk through in 3D, 
+Sierra-style (with 60-pixel tall people). They are good sources of 
+information, but there is always the danger that a fight may break 
+out. Once it has, you can grab nearby objects (e.g a chair or bottle) 
+by pressing fire. 
+
+If a hostile cowboy gets close, a window opens showing enlarged 
+figures of Pat or Billy and his opponent, from the waist up. 
+Controls let you: hit your opponent on the head with whatever's 
+carried, punch to the jaw, punch to the stomach, or parry. The 
+violence is stylized; e.g a chair will splinter when it hits 
+someone's head. When your opponent is defeated, the window closes 
+and the brawl continues - perhaps with the defeated cowboy falling 
+through a window, door or balcony railings nearby - until someone 
+else challenges you. 
+
+BACKGROUND: Usual bar room, with occasional overlaid oval window 
+
+CONTROLS:   Joystick/mouse/cursor keys walk you about as usual, and 
+            FIRE picks up any nearby chair or bottle. 
+
+            When fighting, the joystick (etc) operates as follows, 
+            with brackets for the effect of pressing FIRE. If you 
+            are holding a weapon, the High Punch swings it down 
+            towards your opponent's head: 
+
+            Sway back (High Block)\(High Block)/Forwards (High Punch) 
+            Sway back (Block)     -  (Block)   -     Forwards (Punch) 
+            Sway back (Low Block) /(Low Block) \  Forwards (Low Blow)
+
+SOUNDS:     Thwack of fist on flesh, "Oof!", Crunch of breaking chair, 
+            sound of breaking glass. 
+
+ANIMATIONS: lots in the background scene. In the foreground window, 
+            characters temporarily over-react to blows - screwing up 
+            eyes and collapsing neck when hit on the head, head thrown 
+            back by punch on jaw, body doubled over by blow to stomach. 
+            The idea is for a cartoon-style of violence. 
+
+
+                      ANIMATED PICTURES
+
+In addition to the pictures directly involved in games, there are 
+about 20 animated scenes to help tell the story. The first category 
+have people that you can get information from; the people are built 
+up photo-fit fashion, so that e.g all clerks look different...
+* Newspaper Office + Reporter in visor; 
+* Telegraph Office + Clerk; 
+* General Store + Shopkeeper; 
+* Prospector (Old Timer) panning for gold; 
+* Covered Wagon Train + Leader; 
+* Indian Village, where you smoke and talk with the Chief; 
+* US Cavalry Fort + Soldier; 
+* Bordello Bedroom + Bimbo (both Pat and Billy love the same girl); 
+* Ranch Bedroom + Girl, nursing you back to health; 
+* Ranch + Rancher. There are two alternative ranch styles, a large 
+  one (also used for the shootout game) and a Mexican smallholding 
+  with no wind pump and just one of the buildings. In front is a 
+  Mexican Peasant, Old Timer or Widow Woman; 
+* Bank + Manager. 
+
+And others are there to tell the story of the game... 
+* Wanted Posters on Wall; 
+* Copy of Local Paper, with information; 
+* The Regulators, Billy's Gang, in the desert; 
+* Pat's posse ditto; 
+* Campfire in the Wilderness; 
+* Jailbreak. Billy's fellow outlaws use dynamite to blast a hole 
+  in the cell wall and, after a shootout game, he rides away; 
+* Player Win (Desert Sunset + Elegaic text);  
+* Player Loss (lonely graveyard);  
+* Title sequence (Finale of Lincoln County war). 
+
+                         APPENDIX 1: TURNS
+
+There are no definite "turns" but, so that winning doesn't simply 
+become a matter of joystick waggling (or key pressing) as fast as is 
+humanly possible, delays are introduced: 
+
+Billy normally wanders about by himself, but if he opts to rob a 
+bank, for example, the game automatically takes him back to his 
+hideout where he collects his gang before returning to commit the 
+robbery. (This is shown in full the first few times it happens, 
+but after this is just mentioned in a text message, to save time). 
+Unfortunately for Billy, his gang won't go out on another robbery 
+until they have spent the proceeds of the last one. 
+
+Pat is on a budget and gets money at intervals, but his deputies 
+insist on bonus payments before they will e.g track down outlaws. 
+
+The gang/deputies also refuse to cooperate if they were badly shot 
+up recently, unless the proposed target is a tempting one, or the 
+bonus payments very large. But their caution wears off eventually. 
+
+This feature is especially relevant to the two-player game, and is 
+minimized when only one person is playing. 
+
+
+                        APPENDIX 2: CONTROL  
+
+"Billy the Kid" does not need a rigid menu structure. Instead, 
+decisions are either made by context or by one-off menus on individual 
+screens. For example, if Billy is walking along Main Street and goes 
+to his tethered horse, he automatically mounts and leaves town. If 
+instead he walks through into the Telegraph Office, a picture of the 
+clerk is displayed, with menu options including to e.g offer a bribe 
+for information. 
+
+
+                        APPENDIX 3: TIME 
+
+It is my impression, having done a lot of research, that the settlers 
+of the American West had, to coin a phrase, little time for Time. 
+
+Billy The Kid, in particular, seems to have made few long term plans 
+after Tunstall's death. When he had money, he spent it. When he was 
+broke, he stole cows or horses from whoever he considered an enemy. 
+
+It is important that the game reflects Billy's attitude; day and night 
+are ignored, and there is no intrusive clock or calendar. Nor is there 
+much attempt at "realistic" travel times. 
+
+Days pass at about 1 minute per game day, and the date is shown on the 
+heading of newspapers, but players need not worry much about it.  
+
+(One earlier design attempt of mine was a turn-based game with a very 
+precise notion of time. This resulted in e.g Billy constantly having 
+to calculate travel times, and to look far into the future to check 
+that he could not quite be intercepted by Pat Garrett - which was 
+completely unrealistic and rather boring. Avalon Hill's board game, 
+"The Legend of Robin Hood", illustrates the same mistake.)
+
+Billy is only really affected by time in connection with... 
+* Robbery opportunities. The amount of e.g money in a bank, varies 
+  from time-to-time, and by talking to people Billy may learn when 
+  a gold shipment is expected. To make life as easy as possible for 
+  the Billy player, one of the other outlaws will keep track of all 
+  such known (or rumoured) crime opportunities, and remind Billy 
+  when the time comes. 
+* Hotels. If Billy just wants to let time go by quickly, e.g until 
+  the date of a good opportunity for robbery, he just asks a barman 
+  for a room until then. In the one-player game, the intervening 
+  time passes instantly.  
+  
+Sheriff Pat Garrett is also reminded of robbery opportunities in the 
+same way as Billy (but by a deputy, who also reports robberies that 
+take place), and can stay in hotels if he wishes. In addition.. 
+* Pat gets a regular monthly budget to spend on law enforcement. 
+* Pat can stay in any Sheriff Office, which works in the same way as 
+  staying at a hotel, but is free. 
+
+                         APPENDIX 4: MONEY 
+
+It may seem a strange thing to say about someone who committed a 
+great many robberies, but Billy did not care very much about money 
+either. His attitude seems to have been, "easy come, easy go". 
+
+Billy gets money from the proceeds of robberies, and Pat gets both a 
+regular budget and rewards for tracking down gangs. Neither of them 
+need any money at all for everyday life (except for playing cards). 
+
+Billy has no real use for money. Pat in contrast, although his income 
+is much higher as he controls the County law-enforcement budget, needs 
+as much money as possible to pay deputies and trackers. 
+
+If a hero does have money, some additional options are added to the 
+command menus where appropriate. These are: 
+* "buy drinks on the house" at a bar ($5), 
+* "go upstairs with a girl" at a bar ($5), 
+* "offer a bribe" when asking questions (program picks $1-$5), 
+* "give some money" when talking to poor people ($20). 
+(When a menu is displayed which allows a hero to spend money, his 
+current wealth is shown too.) 
+
+Other costs are as follows: 
+* Deputy, per month ............. $20 
+* posse bonus, per deputy ...... $5 
+* Tracker to head posse ........ $100-$500 (depending on skill)
+* All Billy's money is confiscated if he is jailed 
+
+Typical income is follows: 
+* Billy gets for stolen animal .. $5 (e.g for each of 20 cows) 
+* Billy's share of robbery ...... $5-$100 
+* Pat's budget, per month ....... $200
+* Reward for individual ......... $50 
+* Reward for "captured" gang .... $200-$500 
+
+Wealth has no effect on score, except indirectly: 
+* helping the poor increases the reputation of either hero; 
+* buying drinks does too; 
+* stealing money increases Billy's score - but it's the theft, 
+  rather than the ownership of the money, which matters. 
+
+                         APPENDIX 5: MUSIC 
+
+"Billy the Kid" has digitised sound effects, and about 20-30 minutes 
+of MIDI music (made up from short themes to accompany the action). 
+The music is very good indeed on Amigas, and IBM PCs with the major 
+sound boards (Roland, Sound Blaster, AdLib), and is quite good on STs. 

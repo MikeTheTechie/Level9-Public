@@ -1,0 +1,9 @@
+5) CLIMB WALL. A large figure of Robin is shown climbing the 
+   castle wall, which scrolls and is two screens high. Move the 
+   cursor onto his next hand/foothold, click on it and Robin 
+   will move his nearest hand/foot onto the hold, provided he 
+   can reach. The game ends at the top of the wall. 
+
+   If neither foot is supported, Robin slips to full-length; if 
+   neither hand is supported he falls. 
+

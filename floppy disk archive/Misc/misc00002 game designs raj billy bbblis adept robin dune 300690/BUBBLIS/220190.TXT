@@ -1,0 +1,61 @@
+
+
+
+
+
+
+
+
+
+
+Ian G Harling                                             22/1/90 
+4 Aberdeen Road 
+Redland 
+Bristol BS6 6HT 
+0272 744214 
+
+Dear Ian, 
+
+         As I said over the 'phone, Level 9 are developing a small 
+Tetris-family game called Bubblis - probably either for release on 
+a compilation, or as a pause-mode game within a larger product. 
+
+I have long wanted to do a "little computer fish" game, and Bubblis 
+is an excuse to produce an animated fishtank. (I've dropped the idea 
+of using Vegas style effects - they will fit very nicely into 
+another game I'm working on instead). 
+
+The enclosed Amiga disk (which is confidential and fingerprinted) 
+should give you some idea what we want in the way of animation. 
+Basically, I'd like lots (up to about 10% of the screen) of movement, 
+but I want cameos rather than lots of random action. The incidents 
+in the background should tell little repeating stories. 
+
+You don't need to program the animation - I'll do this - but give 
+me an idea in words what you intend, and supply the animation frames 
+needed. If a fish eats some weed, for example, I need the animation 
+necessary to replace what's eaten - and if some creature wanders off 
+into the distance, it has to wander back again (unless another one 
+hatches). 
+
+I like realism, and expect any living creatures to be accurate, but 
+if you want to add mermaids or a pottery fishtank castle that's OK 
+by me. And don't forget we need a suitably bubbly palette. 
+
+On the Amiga disk is a picture file to show the palette which is 
+needed for the IBM. Please keep this unchanged - even to the rather 
+silly order of the colours. Please also only use the top 192 pixels 
+of the Amiga screen. 
+
+1) I am offering #500 for three pictures for "Bubblis", any 
+   associated animations and the typeface for the game. 
+
+2) If you are prepared to do the pictures, please 'phone me with 
+   a timescale, and next post some pencil/ink sketches of the 
+   screens, with written notes on proposed animations. 
+
+3) If the project works well and in a reasonable timescale, Level 9 
+   have a lot of more substantial projects on hand and hope that you 
+   will be able to do more graphics for us. But first things first; 
+   let's get Bubblis done. 
+

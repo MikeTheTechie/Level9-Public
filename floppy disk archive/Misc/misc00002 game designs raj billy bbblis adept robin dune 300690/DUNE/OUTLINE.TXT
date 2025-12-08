@@ -1,0 +1,398 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   "DUNE" - OUTLINE DESIGN. Copyright (C) 1990 Level 9 Computing 
+
+"Epic" is the only word to describe Frank Herbert's classic science 
+fiction novel, Dune. 
+
+The basic story is simple.. The Atreides Family are lured into 
+exchanging their secure base for tenuous control of the desert 
+planet Dune. They are betrayed and defeated by Baron Harkonnen, but 
+Paul Atreides escapes into the desert, where he joins the local 
+Fremen tribes. Paul uses his advanced mental and physical skills to 
+become leader of the Fremen, and leads an army of sandworm-riding 
+desert warriors to defeat the Harkonnens. Finally, by threatening to 
+block the supply of Spice, a drug vital for spaceflight which is 
+only found on Dune, Paul becomes Galactic Emperor. 
+
+But this is just one narrative strand out of perhaps a dozen which 
+make up the book. For example, Dune also tells how.. The Fremen plan, 
+aided by planetologist Lyet Kynes, to make the desert bloom; the Bene 
+Gesseret are trying to breed a "Kwisatz Hederach" who can see the 
+future and give them control; The Harkonnens are plotting as much 
+against each other, as to gain control of the Empire; Paul Atreides 
+gradually attains manhood; and the secrets of the planet Dune unfold.   
+
+The intertwining of so many stories is what makes Dune such a good 
+novel, but it gives rise to two major problems when converting the 
+book to other formats. The film attempted to cram everything in, 
+becoming disjointed and confusing (in my opinion) - clearly a danger 
+for the game as well. Conversely, if we were to just follow a single 
+plot strand, this would mean discarding 90% of the book. 
+
+
+It seems to me that there are three possible types of game, which may 
+avoid these dangers and make the most of the potential of Dune...
+
+1) A conventional RPG (role-playing game) in the D&D mould. The 
+   player starts by designing a hero - or group of heroes - who 
+   then wander about the planet, fighting enemies, solving puzzles, 
+   collecting treasures and steadily gaining in power - to arm 
+   themselves for a final duel with the enemy leader. 
+
+   I am told that one game has already been produced along these 
+   lines; a board game which is no longer in print. And its 
+   advantages include: 
+   * it makes the most of the map of Dune; 
+   * the different races correspond well to traditional fantasy 
+     "character types" (Bene Gesserit=Witches, Space Guild=Magicians, 
+     Sardaukar=Warriors, Fremen=Rangers and so on); 
+   * an infinite potential for expansion. 
+
+   But it has three weaknesses, which I think outweigh them: 
+   * the book's storyline is lost; 
+   * a great many non-authentic puzzles and places are needed; 
+   * head-to-head competition, in a niche market, with games bearing 
+     the official "D&D" license. 
+
+
+The other two designs are similar in many ways...
+
+2) A political strategy game, where half-a-dozen groups compete for 
+   power over Dune. Several people play at once, or a single player 
+   can pick one and let the computer control the remainder from: Paul 
+   Atreides and Fremen; Harkonnens; Bene Gesserit; Emperor and 
+   Sardaukar; Spacing Guild and Smugglers; etc. 
+
+   Each group is personified by a single character (e.g the Bene 
+   Gesserit by Reverend Mother Mohaim), and they have differing aims 
+   and victory conditions. 
+
+   The result is very like a multi-player board game, played on a 
+   scrolling map of Arrakis, with the option of including a few 
+   small arcade games to break up a what is basically a combination 
+   war and FRP game. (E.g for the Harkonnen player it's almost a 
+   100% war game, and for the Bene Gesserit it's almost pure FRP).  
+
+3) An arcade/strategy game, from the viewpoint of Paul Atreides (or 
+   Jessica, his mother, if you play as a female). This starts with a 
+   sequence of arcade games and narrative screens, telling the story 
+   of Paul's escape to meet up with the Fremen in the desert. 
+
+   Then a Cinemaware-style strategy game, with Paul controlling the 
+   guerrilla war against the Fremen, and also travelling in person to 
+   contact allies such as planetologist Lyet Kynes. 
+   
+   The final battle game results in Paul's sandworm-riding troops 
+   breaking through the Harkonnen defences, and the game ends with a 
+   climactic duel-to-the-death against Feyd-Rautha. 
+
+Both these latter games have some role-playing elements, with the 
+hero(es) travelling about Dune to recruit allies and learn the story 
+of the planet. And both have spies to report about far-off places. 
+
+Where they differ is in the relative proportion of time devoted to 
+arcade and action games ("3" is much more arcade-orientated) and in 
+playing time ("2" is a one-session game which can be played several 
+times as different heroes, while "3" is one big Cinemaware-ish game). 
+
+I prefer the final, more arcade-oriented design, as I think this is 
+probably what players want - though I could adapt the design, without 
+much trouble, to form the basis of a political strategy alternative. 
+
+
+The chosen design follows the book faithfully where Paul Atreides is 
+concerned, and allows us to report just the right amount of background 
+detail about events elsewhere. 
+
+It has the right mix of arcade action and strategy to appeal to 
+mainstream full-price game buyers, with the sort of mistake-tolerant 
+sub-games that can be played on sight, yet which add greatly to the 
+atmosphere and enjoyment of the game. 
+
+And, being coded by Level 9, it has: 
+* state-of-the-art animated 3D graphics, 
+* digitised speech and sound, and 30 minute Midi soundtrack, 
+* simultaneous versions for Amiga, ST and IBM (all graphic modes), 
+* unrivalled compression - reducing the cost and inconvenience of 
+  a multi-disk game. 
+
+
+                          ARCADE GAMES 
+
+The game starts by introducing the player to Dune, and telling how 
+the Atreides came to Arrakis (planet Dune's proper name) and how 
+Paul escaped to the Fremen. This is done by a linear sequence of 
+text windows, short arcade games, and the sort of animated graphics 
+which Level 9's HUGE system does so well. 
+
+Early screens include the Reverend Mother Mohaim giving Paul the "Gom 
+Jabbar" test for being "human", while explaining some of the 
+background to the story. Then follows the space journey to Dune. 
+
+
+The first game is the most impressive one, and immediately introduces 
+the player to Dune. This is the ORNITHOPTER FLIGHT SIMULATOR. 
+
+Flight over the deserts of Dune is by means of flapping-winged craft 
+known as Ornithopters, and this game recreates Paul's first encounter 
+with the realities of desert life. (Note: like all games, this will 
+be played by Jessica if the player opts to be female). 
+
+ORNITHOPTER FLIGHT SIMULATOR. The screen looks forwards from the 
+ornithopter cockpit: Paul's head is in the foreground, and just to one 
+side is a radar display of the surrounding area, and something showing 
+the angle of the wings as they beat. Giant pistons pump on either 
+side, and the whole effect is faintly Victorian. 
+
+Through the windscreen is a 3D landscape, possibly bobbing up and 
+down by a couple of pixels as the wings flap: the desert and mountains 
+of Dune. Landmarks and vehicles, such as crawling space factories and 
+other ornithopters, are shown either as sprites, or alternatively as 
+filled polygons in the mid-ground - switching to sprites in the 
+extreme distance or if they get very close. 
+
+Use the joystick to control the ornithopter... 
+* Left/right: 'thopter tilts and gradually turns. 
+* Forward: 'thopter tilts, and starts to accellerate and climb.
+  To take off, push forward to accelerate and gain height. When you 
+  are high enough, pull backwards briefly to stop the climb. 
+* Backwards: 'thopter tilts up, and starts to slow and descend.
+  To land, pull the joystick backwards until the 'thopter stops 
+  moving forwards and is descending (it won't fly backwards). 
+* Push FIRE to shoot the craft's lasers. 
+
+The ornithopter is first used for an emergency flight to the desert, 
+where Paul has to land and rescue the workers of a doomed spice 
+factory. No navigation or combat is involved. 
+
+Later in the game, this sub-game is used for fighting off Harkonnen 
+craft, when Paul is flying around the map in Lyet Kynes' ornithopter. 
+
+
+Dune continues with animated screens, showing Harkonnen spaceships 
+and the capture of Arrakis. Paul and Jessica are captured and taken 
+to be killed in the desert, but manage to overcome their guards. 
+(The knife fight game - see below - could be used here if you like, 
+but I'd prefer to press on.) 
+
+Escaping from the crashed 'thopter, Paul and Jessica must cross the 
+flat sand before any sandworms arrive, but without rythmic footsteps 
+as these will summon worms faster. This is the SAND WALK. 
+
+SAND WALK. Background music signals the approach of a worm, as Paul 
+and Jessica walk across the sands to safety. They are seen from the 
+side, as 60-pixel high figures. Waggle the joystick to take each step, 
+making sure not to do so rythmically, or the sands boom in time with 
+Paul's steps and hasten the approach of a giant sandworm. 
+
+Paul must reach the rocks before dying of thirst, and must not attract 
+a sandworm: these are so big that only part of a mouth is ever seen in 
+this sub-game, emerging from the sand to swallow the escapers. 
+
+
+The escapers are not yet safe when they reach solid rock, for a 
+sandworm has arrived to eat the 'thopter. And it will track them down 
+soon, unless Paul completes a ROCK CLIMB and scales the cliffs to a 
+cave far above. 
+
+ROCK CLIMB. Paul's figure is seen from behind. The joystick moves 
+a cursor; click on a limb to move it, then on the point on the cliff 
+Paul should move that hand/foot to. Repeat. Paul slips if neither 
+foot is on a hold, and falls if neither hand is on a hold. Again, 
+the game is against the clock, and music gets steadily louder as 
+the Sandworm slithers nearer. 
+
+
+Paul and Jessica reach the cave and see the mouth of the sandworm 
+chewing futilely at the entrance, in an attempt to get at them. 
+
+Animated screens introduce the Fremen, for the cave is one of their 
+Sietches, or underground communities. Their leader, Stilgar, explains 
+the history of these people and Paul and Jessica are introduced to 
+Spice. (Paul has to prove his qualities as a warrior so, again, there 
+could be a knife fight game at this point.)  
+
+
+Finally Paul (or Jessica) has to prove their worth to join the Fremen 
+by a SANDWORM RIDE. This completes the player's introduction to 
+Dune, and leads into the strategy game. 
+
+SANDWORM RIDE  Paul waits near an animated "thumper", until an 
+enormous (100*1000 pixel) worm rises out of the sand to engulf it. 
+
+Paul, shown as a 16-pixel figure from the side, runs towards the 
+sand worm and swings his hook to hit one of a line of crevices in its 
+side. If he gets it right, he is swept up into the air; if he misses 
+too many times then the worm crashes down upon him. 
+
+Similar crevices open and close with the worm's movement, and Paul 
+repeats this process several times to climb up its side. Then he is 
+left riding the worm (see "Battle Map"), until he steers it to a 
+Sietch (presumably where he started) and dismounts. 
+
+(This game also occurs again, before the final battle when Paul leads 
+his troops against the Harkonnen base).
+
+
+Paul has now finished the linear introduction to Dune. Animated 
+graphics and text describe how: the Fremen accept Paul as their 
+leader, Chani accepts him as her lover, and they all accept Jessica 
+as Reverend Mother. Thereafter Paul (or Jessica) controls the Fremen. 
+
+The real game starts here. Paul travels about Dune, making allies and 
+learning the weaknesses of the Harkonnens, meanwhile commanding his 
+Fremen troops in a guerilla war. 
+
+
+The STRATEGY MAP is useable at any time, though Paul can only order 
+Fremen troops about if he is at the main base. The map is a 2 * 2
+screen scrolling relief map of Arrakis (Dune), showing places as a 
+conventional map does - click on something for details and to select 
+it, or click twice to travel there. 
+
+The Strategy Map shows all the known places on Dune: known Fremen 
+and Harkonnen bases, Lyet Kynes' research base and so forth. Hidden 
+places, such as the Smugglers' base and some Fremen Sietches, are 
+added once Paul learns of them. 
+
+To transfer Fremen troops or civilians to a place, Paul must be in 
+the main Fremen base. He clicks on a small icon, which overlays the 
+map, to switch into command mode - and then on one of the options 
+which is displayed. To move people to a place, he pushes the joystick 
+forwards. Pulling the joystick backwards evacuates them. But water and 
+other bulk supplies cannot be moved, so Paul can't afford to move too 
+many people to safety. 
+
+Click twice on the Strategy Map to travel to the place selected. 
+Movement is initially by Sandworm. The screen switches to the Battle 
+Map (see below - an enlarged equivalent of the Strategy Map) and 
+Paul's worm is seen travelling in a straight line across it - 
+automatically heading for the place selected. Push the joystick if 
+you want to disable "autopilot", and thereafter steer the worm with 
+the joystick. Press FIRE to shoot (though the worm is your best 
+weapon as it swallows whoever it collides with), and run into a rocky 
+outcrop or a building to dismount. 
+
+Once Paul has visited Lyet Kynes, he can travel in the latter's 
+'thopter (at your choice), which flies across the Strategy Map in 
+the same way as Sandworms move across the Battle Map. As the 
+Strategy Map has a smaller scale, this is much faster, and also 
+the 'thopter can cross rock and so reach places near the Harkonnen 
+base at Arakeen. (But the 'thopter may be intercepted by enemy 
+ornithopters, which calls up the flight simulator game for the fight). 
+
+
+When Paul reaches his destination, the map screen is replaced by an 
+animated LOCATION PICTURE of the place. 
+
+LOCATION PICTURES. There are perhaps a dozen such pictures, one for 
+every different type of place in the game. They include Lyet Kynes 
+in his ecological lab, a spy in a dark corner of Arakeen, and 
+smugglers beside their hidden landing pad. Obviously, similar places, 
+such as Fremen Sietches, share one animated picture between them. 
+
+Multiple-choice options allow Paul to negotiate or give orders, before 
+he returns to the desert - so allowing the maximum of variation and 
+interest in Paul's dealing with potential allies, but without 
+requiring players to learn a parser, or do much real work.   
+
+
+BATTLE MAP. This is an enlargement of the Strategy Map, about 12 * 12 
+screens in total, showing places and geographic features, tiny people 
+(perhaps 4-5 pixels across) and big sandworms - all from above. 
+
+The Battle Map is used for Sandworm movement (see above) and for 
+any battles where Paul personally takes part. He presses FIRE to 
+shoot, or simply steers his sandworm over enemies. If Paul's 
+sandworm is too badly injured, it dives into the sand and he must 
+wait for fighting to cease before summoning another Worm. 
+
+
+"Dune" Tactics. To win his guerilla war against the Harkonnens, Paul 
+must increase his Fremen troops, whilst maximising enemy casualties. 
+He only has a limited time, as the Sardaukar are seeking out Fremen 
+bases and - even if the people escape - vital water is lost when each 
+base is destroyed. Assuming Paul gains the advantage in numbers, he 
+can lead his troops against the depleted enemies and defeat them. 
+
+Paul can attempt the following tactics (amongst others)... 
+* Visit Kynes to borrow his Ornithopter, for rapid movement. The game 
+  is played against the clock (roughly 1 minute = 1 game day, but only 
+  when travelling) and speed is valuable.  
+* Discover the whereabouts of the hidden Fremen Sietches, and recruit 
+  their warriors. 
+* Promise the Smugglers whatever they want, to keep them from helping 
+  the Harkonnens in the final battle. 
+* Visit Arakeen city, to learn from spies where the enemy will attack. 
+* Withdraw civilians from attack targets. (He can't evacuate too many 
+  bases, though, as there is too little water in any Sietch to support 
+  many evacuees.)
+* Mass Fremen troops in just a few of the attack targets - to wipe out 
+  the Sardaukar sent there. Repeat. 
+* Use a lasgun-shield explosion where it will do most good (this 
+  boobytrap is allowed once, in the hand-to-hand combat sub-game). 
+* Obtain and use the "family atomics", at the right moment, to blow 
+  a hole in the rock barrier around Arakeen and allow sandworms to 
+  reach the Harkonnen base for the final attack. 
+* When the odds are right (the Fremen having been reinforced, and the 
+  Sardaukar whittled down), lead an attack against Arakeen. 
+
+Obviously, Paul will not have to get everything right in order to win: 
+but he must get very close to earn a maximum score. 
+
+
+When enemy troops attack defended Fremen Sietches, HAND-TO-HAND COMBAT 
+results (though the game is only played if Paul is present). 
+
+HAND-TO-HAND COMBAT (used for e.g defensive battles). A Gauntlet- 
+like game (with 32-pixel high people and realistic graphics) for 
+combat in the Fremen's caves, or surface ruins. 
+
+Use the joystick to move Paul in 8 directions, and FIRE to shoot. 
+
+
+If the final attack on Arakeen is successful, the finale of the game 
+is a KNIFE DUEL against the enemy champion. 
+
+KNIFE DUEL. Paul and Feyd-Rautha are seen from the side, as 60-pixel 
+high characters, and fight in the usual way. Controls are grouped to 
+be as simple as possible (further simplification would only be 
+possible with loss of functions, though this may yet be desirable)... 
+
+   Without Fire     >>forwards>>     Fire Pressed     >>forwards>> 
+
+Jump back    Jump   Jump forward     High Parry  High Slash  High Jab
+          \    |    /                           \    |     /
+Backwards - Nothing -    Forward     Parry      -  Slash   -  Jab
+          /    |    \                           /    |     \
+Duck back    Duck   Duck forward     Low Parry   Low Slash   Low Jab
+
+Both players have electronic shields, which flare up when blows land: 
+improving the graphics and reducing the strength of blows. 
+
+When Paul wins, he is in the perfect position to blackmail the 
+Emperor, and take control as ruler of the Galactic Empire. 
+
+
+Conclusion. Obviously, this outline just represents a first look at 
+"Dune", but I hope it demonstrates a game which captures the essence 
+of the original, and shows the potential which this title has to be 
+as good a game as it is a book. 

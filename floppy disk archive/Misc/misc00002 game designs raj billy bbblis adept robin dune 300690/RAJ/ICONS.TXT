@@ -1,0 +1,87 @@
+
+
+   ICONS FOR DEFENDER OF THE RAJ. Copyright (C) 1989 Level 9 
+
+At the bottom right of the map (placed here because of the triangular 
+shape of India) is a book. When you click on the map, pages turn in 
+the book and it shows statistics of the state chosen: 
+
+  ......................... Name of State .........................
+   
+  Defence : number of defenders      Infrastructure | Law and Order  
+  Graphic : of state (including 5)   Graphic        | Graphic        
+  --------+-----------------------   ---------------+--------------    
+  Attack  : number of unassigned     Wealth         : number of money
+  Graphic : troops in the empire     Graphic        : in treasury 
+
+The defence and attack graphics show fortifications and troops/weapons 
+respectively. The pictures reflect fighting spirit (military level). 
+
+The infrastructure graphics vary from a particularly poor bullock cart 
+to a splendid railway locomotive. Law and order varies from a ruin to 
+a smart policeman. And wealth, which reflects square root (income/10), 
+is an appropriately sized pile of treasure. 
+
+Click on any part of the book you want to know more about: e.g name for 
+a description of the state, or the defence graphic to learn which number 
+it represents (and, if it's your turn and your state, to learn the 
+cost of increasing the number and to be given the chance of doing so). 
+These details are reported on a window, decorated by the head of the 
+Hindu servant who is assumed to be giving the report.  
+
+
+Icons (graphics) are 1 cell high (16 pixels) and 2 cells wide. 
+State names and the numbers are in an ornate-ish typeface 7 or 8 
+pixels high. Numbers are probably just printed, but we probably 
+need the 25-odd state names in graphics which follow the slight 
+curves of the book. 
+
+The overall book is three or four cells high, so it might be 
+possible to cell-align the icons. But this doesn't look right in 
+practice, because the icons tend to be too cramped together 
+vertically, so only the upper or the lower icons are aligned,
+leaving a gap of about 8 pixels between them. 
+
+There are ten alternative icons in each position, reflecting the 
+increasing wealth and stability of a state. These are.. 
+
+Defence.                      Attack: 
+0. Hedge+Hedge                0. Peasant with upraised club 
+1. Earth bank+hedge           1. Peasants with knives 
+2. Earth bank+bank            2. Soldiers with Spears 
+3. Pallisade+bank             3. Soldiers with Rifles 
+4. Pallisade+pallisade        4. Elephant 
+5. Wooden tower+pallisade     5. Elephant as rifle platform  
+6. Wooden tower+stone wall    6. Cavalry with Sabres 
+7. Stone wall+stone wall      7. Cavalry with pistols 
+8. Stone tower+stone wall     8. Cannon 
+9. Stone wall+stone wall      9. Field Gun 
+ 
+Infrastructure:               Law and Order: 
+0. Beggar                     0. Smoking hovel 
+1. Peasant, weeding           1. Menacing tax collector with club
+2. Peasant with Hoe           2. Smiling tax collector
+3. Lifting water from Well    3. District Agent at desk 
+4. Bullock+plough             4. Ditto, with clerk 
+5. Bullock cart               5. Policeman 
+6. Horse and Cart             6. Two policemen 
+7. Steam Engine (Rocket)      7. Judge 
+8. Steam Engine (Tank Engine) 8. Two judges 
+9. Steam Engine (HiTech)      9. Ballot Box and voting slip
+
+Gold: 
+0. Two or three copper coins 
+1. Small pile of copper coins 
+2. Large pile of copper coins 
+3. Pile of copper + 1 gold 
+4. Small Pile of Gold Coins 
+5. Large ditto 
+6. Stack of Gold Bars 
+7. Large ditto
+8. Heap of Gems/Jewellery 
+9. Large ditto
+
+Animation. I don't want heavy animation of the book icons, but 
+"twinkles" are vital for the gold and gems. A few other low-key 
+animations are probably also desirable, but don't go over the 
+top and have e.g puffs of smoke from the engines. 

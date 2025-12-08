@@ -1,0 +1,259 @@
+
+   The Army Battle was described in the design as follows: 
+
+Unequal battles are handled by your generals and simply shown via 
+a small semi-animated window, opened upon the office screen. There 
+are sound effects of battle, and numbers of combatants (i.e numeric 
+numbers) decrease until one side is declared the winner. A player 
+only takes command if the odds are fairly even (and if both attacker 
+and defender are players, then only the attacking player gets to 
+control troops personally). 
+
+The enemy commander may approach and offer to surrender if he can 
+run a Protected State on your behalf. This happens maybe 25% of the 
+time if you have a reasonable chance of success (i.e not worse than 
+even odds). If you accept, there is no battle and you can go on to 
+attack another state the same turn. 
+
+Conversely, while watching the battle, and retreating if things 
+go too badly, you may find some of your forces "bought off" by 
+bribes until after the fighting. 
+
+The battle screen shows the hero in the foreground (as in his 
+office, but reflected) with low hills and trees etc behind, across 
+which move the tiny (book-icon-sized) figures of troops. 
+
+The program knows about a small number of different fields of 
+combat (open, hilly, with river, and with a fortress town to 
+attack) and builds up the actual screen by using one of these to 
+position terrain features semi-randomly. E.g we might have a few 
+2*2 cell coppices of trees, which could be repeatedly inserted in 
+order to build up a scrubby wood (NOT impenetrable forest). 
+Terrain has a significant effect on combat, so don't e.g order 
+outnumbered defenders out of a town. 
+
+Guns, elephants, cavalry groups and infantry of various qualities 
+are placed on the landscape and/or can move through the landscape, 
+each group carrying a flag to show its allegiance. 
+
+Battle proceeds as in Caesar, Lords of the Rising Sun, or Prince, 
+and is quite quick as outnumbered troops (or those bombarded by the 
+artilliary) tend to panic and run. Troops automatically fight on 
+contact, except for elephants which plough through everything. 
+
+In front of our foreground hero are "Orders" and "Fight" icons; the 
+orders one calls up a speech-bubble menu with icons for guns, 
+cavalry, elephants and infantry down the left and the current 
+orders for each type down the right. (A player only has the troop 
+types up to and including that for his current weaponry level, and 
+in numbers proportionate to the troops there). Click on 
+the current orders to step onto the next option, and on OK to exit. 
+
+Orders are.. 
+Guns: fire at cavalry/elephants/etc. 
+Elephants: stand/advance/charge/retreat  
+Cavalry: stand/advance/charge/circle/retreat 
+Infantry: stand/advance/charge/retreat 
+
+The game ends with one side fleeing in general disarray. 
+
+Sounds: cannon shots, general battle, cheering crowd. 
+
+                              Notes: 
+
+In order of hand-to-hand effectiveness, troops are Elephants, Cavalry, 
+Infantry and Guns. (Guns are more effective at long range, but are 
+crewed by small numbers of men and easily overrun in close combat). 
+
+
+COMPOSITION OF ARMIES... 
+
+Each side has 1 troop unit per 1,000 men present. But if this results 
+in more than 30 troops total on screen, the troops on each side are 
+divided by 2, 3, or 4 etc. until the numbers are small enough. 
+
+Forces depend on each side's Weaponry Level (alias "Fighting Spirit): 
+0  Peasants   100% Infantry 
+1  Peasants   100% Infantry 
+2  Peasants   100% Infantry 
+3  Rifles     100% Infantry 
+4  Elephants  90% Infantry + 10% Elephants 
+5  Elephants  80% Infantry + 20% Elephants 
+6  Cavalry    70% Infantry + 20% Elephants + 10% Cavalry 
+7  Cavalry    60% Infantry + 20% Elephants + 20% Cavalry  
+8  Guns       50% Infantry + 20% Elephants + 20% Cavalry + 10% Guns 
+9  Guns       40% Infantry + 20% Elephants + 20% Cavalry + 20% Guns 
+
+The 10% and 20% figures are rounded to the nearest unit, with the 
+proviso that 10% entails "at least 1" and 20% "at least 2" units. 
+
+
+SETUP... 
+
+The computer automatically sets up the opposing armies facing each 
+other on the west (player) and east (computer) of the screen, facing 
+right and left respectively. 
+
+To give some idea of perspective, north is shown about thirty 
+degrees anticlockwise of due upwards, which means that troops attack 
+across the screen in diagonal lines.  
+
+There are three alternative 2D landscapes. Terraine is shown by ground 
+colour and includes hills, roads/plain and swamp. Different units are 
+better on different types of terrain. 
+
+A hill on each side is assumed to be the headquarters, a small tent 
+is placed here and any guns set up nearby. 
+
+Infantry are in lines, with a maximum of say 8 units on each line 
+(extra infantry build up in parallel lines behind the first) and 
+set up in front of the headquarters. 
+
+Elephants are placed randomly on one side of the hill (above or below) 
+and cavalry on the other. Each of these are in a single line. 
+
+
+ORDERS... 
+
+No cursor is normally displayed. Press "fire" to pause the battle and 
+display a cursor and the war menu. Click on "fight" to lose the cursor 
+and menu again - and restart the fighting. 
+
+An example war menu is... 
+  Infantry Icon     stand      
+  Cavalry Icon      circle    
+  Elephant Icon     charge     Infantry Icon 
+  Guns Icon         bombard    Elephant Icon 
+  Fight 
+
+Only troops represented in the players' command have icons on the left 
+(so if your Weaponry is low, the guns icon will not be shown; and if 
+all your infantry are fleeing in panic, neither is their icon). 
+
+Only enemy troops on the field (including panicking troops this time) 
+can have their icons appearing on the right. In addition to troop 
+types, there is a special icon for the enemy headquarters tent. 
+
+Targetless Commands are: Stand (default),Advance,Circle,Melee,Retreat.
+And those with targets are:    Charge, Bombard (only Guns can Bombard, 
+                               and this is all they do except Stand). 
+
+Command text is printed, to cope with foreign languages. 
+
+
+FIGHTING AND COMBAT... 
+
+Tables keep the following information for every unit type: 
+* Exhaustion (increased by Charge, Bombard and Melee commands and 
+  very slowly decreased by Stand - NB there is hysteresis here, i.e 
+  marginally un-exhausted troops remain exhausted). All units of a 
+  type become exhausted at the same time, and cannot be ordered to 
+  obey tiring commands. (When you click on anything to do with them 
+  on the menu, a message such as "Your gunners are exhausted" becomes 
+  visible on the screen). 
+* Current Command.  
+* Which unit is the "Leader" of this type. 
+* Destination of the "Leader" of this type. 
+
+And the following for every unit...  
+* Ruler: Player or Enemy. 
+* Unit Type: Infantry, Cavalry, Elephant, Guns, or Tent. 
+* Relative Position compared to the "Leader" of this type.   
+* Position on map.  
+* Heading Direction and Graphics Type (units have graphics for 
+  standing, moving and fighting). 
+* Wounds (increased by blows from enemy units). This is initialised 
+  to a small random number, so that not every unit will react quite 
+  the same. Units panic and run when their wounds reach a set limit. 
+
+
+Panicking units are uncontrollable and retreat due left or right and 
+off the map - always using the moving version of their graphics - 
+but the situation is slightly more complex for controllable units... 
+
+At the end of each frame, units check what is around them. The 
+following decisions are made from the top, until you get a match.  
+* Exhausted units change their command to Stand, but keep the same 
+  graphics type. 
+* Newly-badly-wounded units panic and adjust their facing and graphics 
+  ready to run. Badly wounded guns, who cannot run, explode! 
+* Standing or moving units, who realise they have an enemy diagonally 
+  or straight ahead, change to use fighting graphics. 
+* Fighting units in the same situation continue fighting. 
+* Units with an enemy nearby, turn to face them but continue using 
+  the same type of graphics. 
+* Fighting units stop fighting; switching to standing if that is their 
+  order, or otherwise to moving. 
+
+The progress of battle is reported by occasional short text 
+messages across the bottom of the screen. E.g: "Your gunners are 
+nearly exhausted". 
+
+
+Movement. Units of each type move as a group, centred around one of 
+them, designated as the "leader". The leader is initialised to a 
+central unit of each type, which retains leadership unless it panics 
+- when we pick another, non-panicker, to take on the mantle of 
+command. 
+
+If you command your cavalry to charge the enemy infantry, their 
+leader heads for the leader of the infantry - with the other horsemen 
+following in a line on either side. First the leader is moved on a 
+straight line for its target, then the others each make for their 
+relative positions on either side; facing in the same direction as 
+the leader, and moving at the same speed +-1 pixel in each direction 
+(the slight variation in speed is used to re-align the troops). 
+
+If the troops move in a significantly different arrangement, or if 
+any panic, the relative positions of the remainder are rearranged so 
+that they will move towards perfect formation as they go along. 
+
+If individual troops "collide" with enemy troops, they stop moving 
+and fight, but when a leader collides in this way not only does it 
+stop, but all the troops of its type go into melee mode for as long 
+as the leader is fighting. (Meleed units try to find a nearby enemy 
+unit to head for and fight - if none, they head for the enemy tent). 
+
+
+COMBAT 
+
+Any troop using combat graphics will hit a single enemy unit each 
+turn, if there is one nearby and approximately in front. 
+
+The amount of damage done depends on who is fighting. 
+* Normal damage is "10*Weaponry of Attacker/Weaponry of Defender" 
+  points per unit, per turn. On this scale, all units take about 100 
+  points to destroy them (We'll fine-tune the exact figures later). 
+* Guns are destroyed by any hit from anything close. 
+* Elephants do triple damage to infantry on roads/plain, providing 
+  their orders were to Charge. 
+* Cavalry do double damage to infantry on roads/plain or hills, 
+  providing their orders were to Charge.  
+* Cavalry panic if hit by elephants (or visa versa). 
+* The damage done by guns falls off with distance - at maximum range 
+  it is perhaps 1/4 of the full amount. (Gunners get exhausted if 
+  asked to fire continuously, so this feature means that you want to 
+  save at least some of your fire until "you can see the whites of 
+  their eyes". 
+* The command tent cannot be destroyed by gunfire, but is destroyed 
+  by any hit from anything close. Destroying it is equivalent to a 
+  triple hit against all the units on that side. 
+
+
+ENEMY TACTICS 
+
+If the enemy is inferior in Weaponry, his troops will immediately 
+move to attack. His infantry advance, while his elephants and 
+cavalry either circle or charge something at random. His guns 
+fire at whichever type of your troops are nearest to them. 
+
+If the enemy is superior, his infantry stand while his elephants and 
+cavalry circle. His guns fire at your elephants/cavalry if there are 
+any of these, then switch to infantry if these get close. 
+
+In either case, after a random interval, the enemy pieces try to 
+charge your command tent - followed by charging whichever type of 
+unit is nearest. 
+
+Enemy units pay no heed to terrain in their decisions. 
+

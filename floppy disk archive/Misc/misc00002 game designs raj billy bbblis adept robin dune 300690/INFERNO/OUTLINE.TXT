@@ -1,0 +1,131 @@
+
+  "INFERNO" - OUTLINE DESIGN. Copyright (C) 1990 Level 9 Computing 
+
+Dante's "Inferno" is the first part of his "Divine Comedy" trilogy, the 
+greatest work ever written in Italian (though it's long been translated 
+into just about every language). More importantly for our purposes, it 
+is a name that most people will know, and the story has superb scenery. 
+
+Dante travels through the twenty-four circles of Hell, in an arduous 
+journey towards God. Passing the famous sign, "Abandon all hope, ye 
+who enter here", Virgil escorts the poet ever deeper, through the 
+circles of Hell in turn. Each punishment fits the crime: e.g the 
+Lustful are buffeted by howling wind, Misers roll immense rocks, the 
+Violent swim in blood, Hypocrites struggle inside their heavy gold 
+cloaks, and so on. 
+
+Although Virgil has some power over the many and varied demons, he and 
+Dante must use their wits on several occasions to escape and come safe 
+to the centre of Hell - from where they return to Earth. 
+
+                        INFERNO: THE GAME 
+
+"Inferno" follows the travel of Dante across the landscape of Hell, 
+guided by Virgil. He meets and outwits lots of demons, on his way to 
+defeating Lucifer himself. 
+
+The game has a "first person" display and can be compared to "Dungeon 
+Master" crossed with a 16-bit "Lords of Midnight". It is set above 
+ground and the display is a full-screen, animated, landscaped picture 
+of your surroundings - ensuring maximum impact. 
+
+You will meet a huge variety of demons and several sinners. They 
+approach in 3D, and some get very large indeed when they get close. 
+You can fight the demons (much as in Dungeon Master) or, because 
+"Inferno" is a fantasy role-playing adventure rather than a killing 
+game, talk to the more peaceful ones using a system of menus. 
+
+The control mechanism is deliberately streamlined, and the aims of this 
+game are to gain objects of power, rescue unjustly sentenced sinners 
+and eventually escape from Hell. The game has a very large map, with a 
+great many puzzles and sub-plots, so this will take quite a while. 
+
+
+                  INFERNO: BACKGROUND GRAPHICS 
+
+The screen shows your view forward. This is "landscaped": assembled 
+from component mountains, ruins, canyons etc - each of which is 
+available in many sizes so the perspective is correct. Some features 
+are animated (e.g jets of steam, volcanoes on the horizon, falling 
+brimstone etc). 
+
+Movement is as in "Lords or Midnight", or "Dungeon Master": push the 
+joystick left/right to turn, or forwards/back to move, and the screen 
+jumps to show the scene from your new viewpoint. 
+
+Demons are built up identikit fashion to allow a huge variety of body 
+shapes (like grotesque equivalents of the large people in Billy the 
+Kid) and are also stored in several sizes, so they too get bigger as 
+they approach. They all have animated mouths and eyes, and some have 
+attack animations (e.g waving weapons). 
+
+There are also some special 3D animations: e.g when Geryon flies from 
+the distance and lands before you, a leviathan emerges from the river, 
+or a truly truly massive demon reaches down to grab you and the camera 
+follows you up his body and down his throat. 
+
+In heavily populated regions, the background switches to one of 
+several "Heironymous Bosch-like" pictures, animated and depicting the 
+class of sinners appropriate to the area. There will usually be a 
+guardian demon in the foreground to negotiate with; hopefully you 
+will have acquired the knowledge or "key object" needed to pass him. 
+
+
+              INFERNO: FOREGROUND GRAPHICS AND CONTROL 
+
+The player controls Dante and Virgil, and on occasion up to two other 
+rescued sinners. The heads and shoulders of this party are shown from 
+behind in the foreground, where you control them by clicking the 
+cursor. The two in the front rank get to to fight etc., while the 
+back two are held in reserve. 
+
+Press FIRE to switch from the joystick controlling movement, to it 
+controlling a skeleton-hand cursor instead. (Click on a movement 
+icon, between the rearmost party members, to switch back). 
+
+By pointing this hand at whatever you want to act upon, and then 
+pressing FIRE, you can fully control the game. The results should be 
+pretty obvious in each case (or at least, easy to learn)... 
+
+Click the hand on    Effects 
+-----------------    ------- 
+Any Hero (e.g Dante) pause game and open a window showing the face and 
+                     name of the hero, his status and load/save icons. 
+Backpack he wears    ditto, showing face and possessions (as icons). 
+Object he holds      ditto, showing face and special powers (as icons). 
+or Weapon he holds   starts/stops it being waved, to fight. 
+Long-range weapon    cursor changes to e.g an arrow; next click on an 
+         he holds    enemy in the distance to shoot it. 
+Scenery in distance  overlay screen by descriptive text. 
+Demon in distance    ditto, plus a menu if it wants to talk. 
+Static object        use it (e.g push button, open door). 
+Object on ground     pick it up (replaces cursor). 
+Object in backpack   pick it up (replaces cursor, window closes). 
+                     Once an object has replaced the cursor, click on: 
+                     * demon, to aim/throw/give it (as appropriate), 
+                     * backpack or ground, to drop it there, 
+                     * held weapon/object to swap them round. 
+Special power icon   cursor changes to a sparkle and the powers window 
+                     closes; now click on the target of the power. 
+Movement icon        lose cursor and return to "movement mode". 
+
+I hope these are obvious in practice. Basically, the rule is that you 
+click on something to pick it up (or activate its power if you're 
+already holding it). If the cursor changes, you next click on the 
+destination of the object or power. 
+
+Conversation uses menus. Click on a nearby demon, or wait until one 
+talks to you; a menu overlays the screen and you use up/down and fire 
+to select your reply from the menu. When the conversation is 
+over, you revert to e.g controlling the hand. 
+
+                             SUMMARY 
+
+This is a game that will appeal to the broad range of markets from 
+fantasy role playing, through arcade adventures to true adventure 
+players. With a huge game map, lots of puzzles and quests, demonic 
+combat, the best possible atmospheric graphics, digitised sound and 
+midi music, it should be a game worthy of Dante's vision. And every 
+single scene would look good on a demo video. 
+
+                               Copyright (C) 1990 Level 9 Computing. 

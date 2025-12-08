@@ -1,0 +1,147 @@
+
+
+    PICTURES FOR CHAMPION OF THE RAJ. Copyright (C) 1989 Level 9 
+
+This is a 1-6 player computer game, where players take the parts of 
+the following contenders to become ruler of a united Indian Raj: 
+1) Viceroy of the British East India Company (Protestant), 
+2) Consul of the French East India Company (Catholic), 
+3) Emperor of the Moghul Empire (Moslem), 
+4) Maharajah of the Maruthra Confederacy of Hindu States, 
+5) Maharajah Singh of the Punjab (Sikh), 
+6) Chief of the Gurkhas. 
+
+These very different people are all potential player characters, 
+and they have flags and instantly distinctive "offices" where 
+strategic decisions are made. 
+
+All screens are full height and have a distinctive Indian and/or 
+Victorian feel. In the first instance, they are drawn with 
+IBM/EGA pallettes. 
+
+
+LOADING SCREEN. Victorian-style screen, with a heroic British 
+Soldier, surrounded by flags and a parade. The flags twitch, the 
+central figure can smile and also shoot his revolver in the air. 
+People defend the curtain wall behind him. To bottom left and right 
+are two windows, across which parade entertainers and elephants 
+respectively (these latter are the same as used in the Durbah). 
+
+
+CAST MENU. Has the faces of the six contenders, in a circle. Click 
+on a face to select that person and open a window with just their 
+face, a text description and "OK". Already chosen heads are 
+indicated in some way on the main screen, e.g on a nice-shaped 
+background which gets beighter, and clicking on one of these 
+cancels the choice. In the centre of the screen is "Start". 
+
+
+6 OFFICES. Each contender has a very distinctive office, though all 
+of them have the following in identical positions: 
+* big map of India, 
+* book (or equivalent) to show details of the current selected state, 
+* bell (or equivalent) to summon a servant, 
+* large picture of the contender at one side. 
+* space for the Durbah/talk/attack windows. 
+
+Offices have spot animations, ten icons for each of infrastructure, 
+fighting spirit, law and order, and income, seven religious for 
+religion, and flags etc for the map. 
+
+
+                         LINKING SCREENS  
+
+Arcade games are typically sandwiched between a pair of "static" 
+screens, and further such screens accompany major events. The full 
+list of such screens is ...
+
+"Club scene" for European requests for you to do something 
+"Bazaar scene" for Indian requests for the same. This may also be 
+                     used as background if you lose.  
+
+"Marquee/Grandstand scene" to introduce most active sports. This has 
+several slight variations for: 
+* Mounting elephants before the tiger hunt, or elephant race 
+* Ordering elephants before the Durbah 
+* Collecting a trophy, as after winning a match at e.g Wembley, 
+  after the sport. 
+
+"Rebellion Scene" window opening upon office, or 
+"Army Battle" window, or 
+"Long view of battered city" to introduce the (re) capture city game. 
+
+"Walk to throne scene" after the city is captured, or after you are 
+                     married to an Indian princess. 
+
+"Long view of Thug temple" in the jungle, before the final temple 
+                     capture game. 
+
+"Fireworks over the Taj Mahal" when you control India. 
+
+"Awake, attacked scene", showing a black-robed assassin staring at 
+                     the screen and about to use his strangle cord. 
+"Bedroom scene", used as one background for the Grange-style 
+                     swordfight game and, overlayed by a window, 
+                     to show the princess starting to disrobe. 
+
+
+
+                         ARCADE GAMES 
+
+
+Some arcade games start with an introductory sequence; others go 
+straight into the action. In either case, when the player is first 
+expected to control the game, a text window is opened upon the 
+game screen, with the head of the contender (cf "cast menu") and 
+explanatory instructions. 
+
+TIGER HUNT: one screen, with current contender in foreground, as 
+      described in the design. Plus a close-up of the snarling 
+      tiger, opening its mouth to bite you. 
+
+ELEPHANT RACE: top-down view of scrolling racetrack, between two 
+      grandstands with tiny animated onlookers. The elephants are 
+      very big in comparison, the the race is intended to resemble 
+      the chariot race in Ben Hur. 
+
+ARMY BATTLE: where the result is a foregone conclusion, a window 
+      showing close-up hand-to-hand fighting soldiers is opened 
+      upon the office, to report the result. 
+
+      Close battles use a variety of landscape sections to build 
+      us a landscape, plus tiny soldiers to fight across it. 
+
+CAPTURING THE PALACE: graphics sequence of splendid town, with 
+      cannons breaking down its gates, followed by components to 
+      allow us to make up perhaps 8 random screens of sideways- 
+      scrolling ruins. I propose to go for an Adept-style top-down 
+      view, with small contenders and opposing Indian peasants. 
+      The final goal is the palace gate. A final screen shows the 
+      contender (from the side) walking along a (left/right) red 
+      carpet to accept the surrender of the opposing prince. There 
+      are slightly different versions to suit e.g the surrender of 
+      the different contenders.  
+
+CAPTURING THUG TEMPLE: Doors of Kali temple grind open. The game 
+      screens are as "Capturing the Palace", but some of the 
+      scenery is more temple-like and the defenders are religious 
+      Thug fanatics throwing knives. The final goal is a jewel, 
+      guarded by an animated 8-armed statue of Kali. The whole 
+      game then ends with fireworks over the Taj Mahal. 
+
+SWORDFIGHT: Thus has Grange-scale figures, with 3 backgrounds: 
+      * Riverside with bonfire, for Suttee rescue; 
+      * Bedroom (shares graphics with other pictures); 
+      * Palace (ditto). 
+      If you rescue the princess, there are windows with her 
+      father's head and hers, followed by a l-r wedding procession 
+      through the palace. 
+
+ASSASSINATION: Effects picture of assassins attacking you in bed. 
+      Then a swordfight as above, in the bedroom. 
+
+DURBAH: Elephants, the same size as on the loading screen, process 
+      through a crowd across the screen. 
+
+CLOSE-UP office map: twice the dimensions of the existing one. 
+      They have exactly the same borders, but are more detailed. 

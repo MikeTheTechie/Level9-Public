@@ -1,0 +1,124 @@
+
+
+
+
+
+
+
+
+
+
+
+
+Bob Jacobs                                                21/11/89 
+Cinemaware 
+
+Dear Bob, 
+
+         Following your conversation with Mike yesterday, I thought 
+it would minimise the risk of any possible confusion if I sent you 
+a typed version of Level 9's plans for "It Came From The Desert".         
+
+Congratulations on getting the Amiga version out so fast, by they 
+way. I had assumed that the strategy game would require a few weeks 
+to finish, but your team obviously all work very hard. And the game 
+seems a good one. 
+
+We could argue about whether the "clock" has started on Level 9's 
+deadline, but we definitely have enough data to start work on the 
+project and have done so. 
+
+
+Level 9's approach will be as follows: 
+
+GRAPHICS. Some picture files are almost empty (typically those 
+containing animation frames) and we are starting by merging these 
+to keep the total number of files more manageable. 
+
+Next, we will reduce the graphics to 16 colour, using an EGA 
+palette (which is the main way the pictures will be seen). 
+
+And finally we'll produce alternative palettes, to improve the 
+colours for MCGA and VGA etc, and at the other extreme to allow 
+display of satisfactory graphics in mono and 4-colour CGA. 
+
+
+ARCADE GAMES will be re-coded using Level 9's system, so as to 
+get the maximum possible speed on computers which do not have 
+the Amiga's advantages as regards graphics hardware. 
+
+
+THE STRATEGY GAME will NOT be recoded (this would be far too risky, 
+as the story logic is complex and the time too short). We will 
+definitely use the game logic data, and will will try to also use 
+the C routines which read it; incorporating this strategy code 
+directly in the other versions of the game. Fortunately C is fairly 
+portable, and the code is well written (though we would have liked 
+more comments!). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The routines to load pictures etc will be replaced, text will be 
+compressed etc., but the heart of the game should thus be the same 
+on all versions. 
+
+
+BUGS. Needless to say, Level 9 will do our best to avoid introducing 
+bugs into the program, and will try to fix any found. 
+
+The question of any existing bugs from the Amiga version is trickier. 
+I'm sure Cinemaware have tried to produce a bug-free product, but 
+the game is sufficiently complex that a few may remain. 
+
+In the end, it should be your decision as to whether bugs are fixed, 
+as it may be better to leave minor bugs in place - in order that all 
+versions of the game go wrong consistently. 
+
+Bugs in the strategy game (e.g if Dr Wells still returns from the 
+dead) can probably only be safely fixed by Cinemaware, and we'll 
+incorporate the new date if you decide to change it. 
+
+Spelling mistakes (if any) can be fixed here, if desired. 
+
+I don't expect any real bugs in animated graphics and arcade games, 
+but we'll fix any we learn of while re-coding.  
+
+
+HELP. Mike has already faxed Randy Platt about what we would like, 
+but here it is in a slightly neater form: 
+
+* Released version of the strategy game, as soon as it is ready. 
+
+* The bits and pieces needed to so that we have the complete Amiga 
+  source. We don't need "MovE", but would like the Sonix driver and 
+  MAKE files etc. 
+
+* Source formats of data files. (I am told, for example, some of 
+  the data on the Amiga still contains text comments, and it may 
+  be that we can pre-process the files to save space). Data files 
+  include the Maps (desert and hospital) and the game logic. 
+
+* Source format of music. 
+
+
+                       Many thanks, 
+
+
+                                   Pete Austin 

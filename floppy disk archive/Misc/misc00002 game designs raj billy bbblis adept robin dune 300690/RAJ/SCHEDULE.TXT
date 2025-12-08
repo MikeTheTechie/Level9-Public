@@ -1,0 +1,59 @@
+
+
+
+
+
+
+
+
+
+
+
+              Specification of "Champion of the Raj"    11/7/90 
+
+The program will use Level 9's "HUGE" system to carry out the 
+functions described in the "Champion of the Raj Design", which 
+forms the major part of the Specification and must be read in 
+conjunction with this schedule. 
+
+
+                            Schedule  
+
+The major remaining activities follow (remember that Level 9 have 
+already spent a lot of time on the game if you add the numbers up)... 
+* Loading sequence graphics (Dicon, 1 month, to 10/8/90)
+* Enhancements to other graphics, as discussed with Mirrorsoft: 
+  about 5 screens worth - more humorous cameos, princess, slavegirl, 
+  nude statues etc. (Ken, 2 weeks. Dicon, 2 weeks, to 31/8/90) 
+* Loading sequence animation (Richard, 3 weeks to 31/8/90) 
+
+* Soundtrack music (Chris, 4 weeks to 31/8/90), plus about three 
+  days from Mike to e.g synchronise it to the action 
+
+* Strategy game, working with icon input, displaying the right 
+  static screens (or a temporary one, if waiting for e.g princess 
+  artwork) and reporting when arcade games should be called: 
+                    (Pete, 2 weeks to 27/7/90) 
+
+  Arcade games, which have already had a fair amount of work... 
+* Tiger Shoot       (Pete, 1 week to   3/8/90) 
+* Elephant Race     (Pete, 2 weeks to 24/8/90) 
+* Swordfight        (Pete, 2 weeks to 31/8/90) 
+* Army Battle       (Pete, 3 weeks to 21/9/90) 
+* Capture Palace    (Graham, 3 weeks to 14/9/90) 
+
+* Manual            (Pete, 2 days, by 31/7/90) 
+
+The above assumes a single version, because Level 9's HUGE system 
+produces genuinely portable games. Nevertheless, production of the 
+three final versions will be say 3 days - with all members of Level 9 
+helping out as needed. 
+
+Milestones: 
+1st Stage    11/7/90       Agreed Specification 
+2nd Stage    27/7/90       (30%) Strategy Game, Manual.  
+3rd Stage    24/8/90       (50%) Tiger Shoot, Elephant Race 
+4th Stage    14/9/90       (70%) Intro sequence, Sword Fight, 
+                           Capture Palace. 
+Final        31/9/90       Army Battle, Music and Sound FX integrated, 
+                           Port to other two target machines. 

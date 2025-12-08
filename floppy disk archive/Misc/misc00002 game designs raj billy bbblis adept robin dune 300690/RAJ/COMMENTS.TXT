@@ -1,0 +1,90 @@
+
+
+
+
+
+
+
+
+
+
+
+John Norledge                                            27/9/90 
+Mirrorsoft 
+071 583 3494 
+
+Dear John, 
+
+          Comments on Raj manual (26/9/90). 
+
+1) Line and character spacing. For my taste, I find everything is too 
+   close together horizontally and the lines are too far apart 
+   vertically. You should also be able to use a slightly increased 
+   font size (bearing in mind that this document is going to be reduced 
+   from A4 to about A5. 
+
+2) Aspect ratio of pages. I thought "soft-box" packaging was a kind of 
+   truncated A5 - i.e squarer than the example manual. 
+
+3) Contents page. This would help readers e.g find the loading 
+   instructions for their particular computer. 
+
+4) New page for a new topic. I suggest that you consider starting a new 
+   page with the following headings: 
+   IBM PC / Atari ST / Amiga / Choice Screen / Headquarters Screen / 
+   Running Your Empire / Arcade Games / Elephant Racing / Capturing the 
+   Palace / Sword Fights. By preference, multi-page topics should start 
+   on a left hand page wherever this can be arranged. 
+
+   It would also be nice to get topics like the introduction onto a 
+   single page - rather than 1 1/4 pages. 
+
+   (I know you know about this sort of thing, but it's not been done on 
+   the version here). 
+
+5) If you would like some little illustrations for the manual, e.g to 
+   fill in any gaps left by "4" or to introduce each sub-game, Dicon 
+   (who did the game artwork) is available today and on Friday - and 
+   I could get you something by Monday am. He is very good, but I don't
+   want to ask him to do anything unless they are likely to be used. 
+   Please contact me if you are interested. 
+
+6) Some the original manual has been fairly crudely removed (e.g most 
+   of the "Optional Equipment" from the IBM section - which will 
+   certainly be of interest to prospective buyers. I took Cinemaware 
+   manuals as my guide here. It no longer even mentions the README file, 
+   which is vital). I would not complain, save that the sparse line 
+   spacing of the manual makes it look as if you are trying to pad out 
+   the text to fill a space which is now too large for it. 
+
+7) Specific comments... 
+
+Lose the "Synthesiser" mention for the Atari ST. We are planning this, 
+but have not written the code yet and don't want a firm commitment in 
+the manual. Details will go in the README file. 
+
+Could you put a box around the book details (page 13)? 
+
+The titles format unfortunately in several cases, see especially the 
+successive letters "R EM" at the top of page 15. 
+
+Lose the mention of "When the odds are close...described later)." on 
+page 16. 
+
+Please lose the mention of "with Richard Cheek (additional animations)" 
+from the credits as he has left Level 9 in unfortunate circumstances. 
+The last time we saw him was when I gave him an advance against his 
+payment for future work. He did not do very much on the game before 
+leaving. (For legal reasons I should add that there are doubtless 
+hundreds of other Richard Cheeks against whom we have no complaint.) 
+
+Please add the name of Chris Jenkins' Indian friend to the credits for 
+music. I will send another fax when he tells me what it is! 
+
+                       Best wishes, 
+
+
+                                   Pete Austin 
+
+
+PS: Please could someone 'phone me about point 5. Many thanks. 

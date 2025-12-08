@@ -1,0 +1,512 @@
+
+                       Champion of the Raj 
+
+The Mogul emperors ruled India for two centuries. They brought law 
+to the people and graced its cities with marvellous buildings like 
+the Red Fort of Agra and the Taj Mahal. 
+
+But by 1800 their empire is collapsing, riven by feuds and rebellions, 
+and India has reverted to a host of warring states.  
+
+The Thugs have taken bloody advantage of this chaos. They are evil 
+fanatics who murder thousands of people as sacrifices to the goddess 
+Kali. By ruthless terrorism, they are rapidly winning power over the 
+whole of India. 
+
+No single state can fight the Thugs, who are quickly increasing in 
+numbers and power. So it is vital that a strong leader emerges to 
+unite India against them, before they can plunge the land into a 
+bloodbath. 
+
+You are one of six rival leaders, each fighting to unite India: 
+* Viceroy of the British East India Company, 
+* Consul of the French East India Company, 
+* Emperor of the remnant of the Mogul Empire, 
+* Maharajah of the Maruthras, 
+* Maharajah Singh of the warlike Sikhs, 
+* Chief of the Gurkhas. 
+(If more that one person is playing, you each pick a leader). 
+
+The rivals each have their own advantages and disadvantages. You 
+should probably try winning as the Viceroy first, and leave the 
+Gurkhas until last; they have great problems expanding their 
+fledgling state in the mountains to conquer the Indian plains. 
+
+Whoever wins must both defeat his rivals and smash the Thugs. It will 
+not be easy! 
+
+
+Computer Requirements: 
+* IBM PC, Tandy 1000, Amstrad PC or any other 100% compatible. 
+* MS-DOS version 2.1 or later (type MS-DOS command "VER"). 
+* 360K (5 1/4") or 720K (3 1/2") floppy disk drive(s). 
+* 512K of RAM, or more. 
+* VGA, EGA, CGA colour, CGA black-and-white, MCGA, or Tandy TGA 
+  graphics, with a suitable monitor. 
+
+Optional Equipment: 
+* Hard disk drive. The game is at its best, installed on hard disk. 
+* Second floppy disk drive, of the same size, is strongly recommended 
+  if you intend to run the game from floppy disk, rather than hard 
+  disk. This means two disks can be read by the computer at a time, 
+  and disk swapping will be minimized. 
+* An average or fast PC. A computer even less powerful than a PC XT 
+  (8086 and 8mhz clock speed) is not recommended. You can slow down 
+  the game on a fast PC, but not speed it up on a slow one. 
+* Joystick plugged into the game port (as Joystick "A" if you have 
+  a twin adaptor). 
+* Mouse (you also need to have installed your mouse driver software 
+  before running the game). 
+* 640K of RAM. The game will happily use up to 640K of memory if this 
+  is available - using the extra as cache. (If your PC has extended 
+  memory, it is normally also a good idea to use a disk cache utility, 
+  such as Microsoft's SmartDrive, to further reduce disk reads.) 
+* Roland, AdLib, or Sound Blaster music card. If you play a lot of 
+  games but have not yet got one of these boards, we recommend 
+  that you try one. We were amazed at the difference they make. 
+
+
+Before Playing: 
+* Please use the MS-DOS "TYPE" command to read the file README.TXT on 
+  one of the game disks (probably the first). This contains the most 
+  up to date information on your particular version. 
+* Anti-virus note: Never, ever unprotect your original "Champion of 
+  the Raj" disks. If your computer asks you to do this, it could be 
+  because a virus is trying to copy itself onto them. 
+
+
+Starting "Champion of the Raj" for the first time: 
+* Boot your PC with DOS version 2.1 or later (i.e any operating 
+  system version produced in recent years), and then place the first 
+  game disk in drive A: (or drive B:) 
+* Type... 
+  A:               (or B:) 
+  RAJ 
+* Use keypad keys 2 ( ) and 8( ) to choose a display type from the 
+  list. Then press Enter ( ). (If there are several display types 
+  which all seem suitable, e.g there is more than one reference to 
+  VGA, choose the first one by preference. If this then gives 
+  problems during play, it may mean your PC is not 100% compatible, 
+  so try again with a later equivalent from the list.) 
+* In the same way, choose: 
+  "Joystick On", or "Joystick Off"; 
+  "Mouse On", or "Mouse Off" (to use a mouse, you must have installed 
+  appropriate mouse driver software before running the game); 
+  "Roland", "AdLib", "Sound Blaster", or "Music Off"; 
+  "Sound Effects On" or "Sound Effects Off". (Sound effects can slow 
+  the game noticeably on a slow PC).
+  "Play Game", or "Install on Hard Disk". (If you choose hard disk, 
+  the game next asks you for the disk name: enter e.g C: ). 
+* An animated introduction sequence follows, taking about five minutes. 
+  To skip it, press any key. At the end of this introduction, the game 
+  pauses and asks you to press a key; do so, or else the game will 
+  repeat the introduction over again. 
+
+
+Starting "Champion of the Raj" on hard disk: 
+* The first time, follow the instructions above. 
+* Next time, type 
+  C:         (or the drive you installed it on)
+  CD \MIRRORSOFT
+  RAJ 
+  and the game will run without needing to ask you for all its
+  configuration information. 
+
+                           Playing the Game 
+
+
+Control Methods: 
+This manual describes how to play "Champion of the Raj" entirely 
+with a joystick, but there are three alternatives... 
+* Joystick: push it in the appropriate direction and press "fire" 
+  to act.  
+* Mouse: on menus and maps, use it as you normally would; elsewhere, 
+  move the mouse slightly in the same direction as described for the 
+  joystick and press the left button for "fire". 
+* Numeric keypad: this is used like a joystick; press keys to move 
+  (8=up, 9=up right, 6=right, 3=down right, 2=down, 1=down left, 
+  4=left, 7=up left). To "fire" press 5, Enter or the space bar. 
+
+You normally use the joystick/mouse/keypad to move a hand around the 
+screen. Most of the game is controlled by icons (little pictures for 
+e.g Yes, No, Talk, Fight etc) and you move the hand so that its 
+finger-tip is on the icon you want, and press fire to select it. 
+(This is also called "clicking on" the icon).  
+
+Only icons which make sense are shown; e.g you will not get the chance 
+to attack if you have no troops available. 
+
+Champion of the Raj also includes six arcade games, with different 
+types of Indian action. Instructions for these are displayed on the 
+screen the first time you encounter them. 
+
+The following special functions, controlled from the keyboard, work 
+on most (but not necessarily all) screens: 
+* The + and - keys adjust game speed. 
+* The M key switches the music on or off (though you don't get music 
+  if you selected "Music Off" when starting the game). 
+* The P key pauses the game; press R (resume) or C to continue. 
+* The S key toggles sound effects on or off (providing you chose 
+  "Sound Effects On" when starting). 
+* Control C cancels the game and quits to the operating system. 
+
+
+                         CHOICE SCREEN 
+
+The game starts at a banquet, where the six rivals to govern India 
+have met before going their separate ways. 
+
+Select + and - to adjust the number of players (1-6 people can play). 
+
+Next point at a sitting ruler and press fire to make him stand, or 
+do the same to a standing ruler to make him sit. The standing rulers 
+are the ones you have chosen to play. There can never be more 
+rulers standing than the number of players chosen, so any excess sit 
+automatically. 
+
+When you are happy with the ruler (or rulers) standing, select "play" 
+to start the game. A window opens for each ruler, so you can enter the 
+name of the person playing him (click above or below each letter to 
+adjust it, then click on OK to continue). And then the game starts...  
+
+
+                         HEADQUARTERS SCREEN 
+
+You have a headquarters appropriate for your rank and nationality, 
+and run your empire from here. 
+
+It includes a map of India, a book (or scroll) on the table in 
+front of it, icons on the wall, and a bell to end your turn.  
+
+
+MAP 
+
+The map shows about twenty Indian states and four port cities (which 
+are controlled separately from the surrounding states). 
+
+Independent states have no flags or plain blue flags, while others 
+have the national flags of their current emperor. Capital states have 
+crowns on top of their flagpoles. 
+
+When you click on any Indian state on the map, its flag flutters, 
+its details appear on the book, and appropriate icons appear on the 
+wall. (For example, if the state is next to one of yours, so that 
+your armies can reach it, the attack icon will usually appear). 
+Clicking on the champion, sitting on one side of the headquarters, is 
+the same as clicking on your own capital state.  
+
+Click on the bar above the map to roll it up or down (revealing more 
+icons on the wall behind). 
+
+
+BOOK (or Scroll) 
+
+The book shows details (icons and numbers) of the current Indian 
+state (the one whose flag is flapping)... 
+
+                             State-Name 
+  Attacking-Weaponry   Army-size           Industry   Law-and-Order 
+  Defensive-Weaponry   Minimum-Defenders   Gold       Treasury 
+
+Click on any of these nine pieces of information to find out more. 
+For example, click on... 
+* State Name for details of religion and current status, 
+* Attacking-Weaponry icon for what percentage number the icon means, 
+* Gold Icon for precisely how much tax the emperor will get next turn. 
+
+If the state is part of an empire, the Army-size, Income and Treasury 
+information are for the empire as a whole. 
+
+If the state is your own capital, clicking on the book lets you invest 
+for the future. For example, click on... 
+* Army Size for the chance to hire more troops, or 
+* Industry for the chance to invest in industry (your tax income is 
+  proportional to the population, industry and law of your empire, 
+  so investment is worth considering). 
+
+
+ICONS ON THE WALL 
+
+These are your current commands, and are only displayed when 
+appropriate. Click on... 
+* Attack, to fight the current state (the one whose flag is flapping); 
+* Talk, to negotiate instead (this is more likely to be successful if 
+  your status is high and, even if the state's ruler agrees to a 
+  meeting, you will still have to prove your prowess in an arcade game); 
+* Parade (or Durbah) to hold a festival and so raise your status; 
+* Decision, to return to a decision postponed earlier; 
+* Quit (behind the map) to exit; 
+* Save (behind the map) to save your position on disk;  
+* Load (behind the map) to load a saved position from disk;  
+
+
+BELL 
+
+Click on the bell to end your turn. If you postponed a decision 
+earlier (e.g whether to help earthquake victims), but did not use the 
+decision icon to go back to it, this is the same as answering "no". 
+
+
+
+                         RUNNING YOUR EMPIRE 
+
+ECONOMY 
+
+Your tax income depends on the population you rule, and the level of 
+your empire's industry and law. 
+
+You pay 1 gold for each of your troops each turn, but troops who you 
+used to capture another state last turn are "living off the land" and 
+cost nothing. If you have a big army, it's cheaper to use it! 
+
+New troops cost twice this much to hire. 
+ 
+You may decide to use the Book to invest money in your economy 
+(industry and law) to increase your future taxes, or in weaponry, so 
+your troops fight better). Costs depend on the population of your 
+empire, so it sometimes pays to keep small. 
+
+When adding a state to your empire, it is better to capture states 
+with good economies, as they will benefit the average figures of 
+your empire. Unfortunately, the best places tend to be other people's 
+capitals. 
+
+
+STATUS 
+
+Alternatively, you can invest in a high status and select the Durbah 
+(or Parade) icon to invite your fellow rulers to a festival. The more 
+elephants you hire (click on the up icons) the better. The idea is to 
+impress people, so that they are more likely to join your empire 
+peacefully in the future. 
+
+Select talk to negotiate with another prince. If your status is good 
+enough, and if there are no religious obstacles, the prince will 
+probably invite you to a sporting occasion. And if you prove your 
+prowess at his chosen sport (Elephant Racing, or Tiger Hunting), he 
+will ally his state into your empire. 
+
+ATTACKING 
+
+Click on a state next to one of yours, and the Attack icon will 
+usually appear. You can attack provided you have not already been 
+defeated this turn, and still have some troops available (victorious 
+troops from previous battles stay where they are, living off the land, 
+and can't be used again until next turn). 
+
+Select the attack icon, then click on the up and down icons to adjust 
+your troops, and finally on OK. As a general rule, attacking troops 
+need at least 2:1 odds to do well.  
+
+If the defender is also a player, let them adjust their defending 
+troops in the same way. (You also get to do this, if you are the 
+defender and e.g the computer is attacking you). 
+
+If the battle is likely to be a walk-over, the computer handles 
+everything without bothering you. But when the odds are close, it is 
+probably worth taking personal command of your armies in battle. 
+(This game is described later). 
+
+When you capture the capital of an empire, you must capture the 
+ruler's palace in order to gain full control. (See later for the game). 
+Succeed, and all the vassal states of the empire are captured with 
+its capital. Fail, and you only get the capital. 
+
+ARCADE GAMES 
+
+Your decisions and the "random" events in the game often lead to 
+arcade game sequences. 
+
+The guru appears whenever a game loads, initially to give you 
+instructions and subsequently with wise advice. 
+
+
+                            TIGER HUNT. 
+
+Even today, tigers kill dozens of Indian people each year. (As I 
+write, I bear scratches from a playful, tame, 7 pound cat, so it is 
+not surprising that angry, wild, 700 pound cats are somewhat deadly.) 
+At the time of the Raj, much of India was plagued by rogue tigers. 
+
+These man-eaters must be shot, to save hundreds of lives, and what 
+greater proof of your skill and courage can there be than to kill an 
+animal which is willing and able to kill you and others? 
+
+Steer the cross-hairs to aim and press fire to shoot. The recoil kicks 
+the gun sideways, but you have a second barrel still to fire. Miss 
+twice and you are in trouble, because reloading takes several seconds. 
+
+
+                           ELEPHANT RACING. 
+
+Climb atop your elephant and you're ready for the off. 
+
+This is a vertically scrolling game, where two elephants race south 
+along a wide earth track between grandstands of spectators. And the 
+first elephant to get a nose past the winning posts wins. 
+
+Push the joystick left and right to steer, up to slow and down to 
+speed your elephant. Or press fire and move the joystick to whip 
+in the corresponding direction. 
+
+Watch out for dirty tactics from your opponent, and don't go too fast 
+for the ground underfoot. 
+
+
+                       CAPTURING THE PALACE. 
+
+You have captured the capital state of an empire, but your troops are 
+still dealing with the remnants of the defeated armies (those who have 
+not already run away). 
+
+Then news reaches you that the former rulers are preparing to leave 
+their palace and lead the vassal states of the empire against you. 
+Unless you can reach the palace soon, you will find that you have 
+captured the capital but lost the empire. 
+
+You must make your way up the screen and enter the palace gates. 
+Push the joystick in any of 8 directions to move, and push fire to 
+shoot. Avoid the enemy bullets, and don't shoot women. 
+
+
+                   BATTLE IN THE THUG TEMPLE. 
+
+You rule all India and your armies, freed from the need to battle 
+your rivals, are driving back the Thugs on all fronts. But the 
+fight is far from won. The Thug priests are plotting a coup against 
+your government tonight, and they could yet seize power unless you 
+can stop them. There is no time to gather your troops. 
+
+The only chance is for a lone attacker to creep into the last Thug, 
+seize Kali's jewel which symbolizes their power, and escape safely 
+with it. The Thugs obey whoever controls this artifact, so you will 
+have broken their power forever. 
+
+Find the statue of Kali, grab the jewel she guards (just walk up to 
+it) and escape from the palace alive. Push the joystick in any of 8 
+directions to move, and push fire to shoot. Avoid the Thugs and their 
+knives. 
+
+
+SWORD FIGHTS.  
+
+I suspect that more Indian royalty have lost their lives to assassins 
+than all the other causes of death put together. There are plenty of 
+people who would like you to die suddenly and mysteriously. 
+
+In the swordfight game, you need not control individual blows. Even if 
+you were to do nothing but watch, your champion and his Thug opponent 
+would attack and parry each other's blows roughly alternately. 
+
+Control is by moving a highlight across a 3*3 grid... 
+
+Left-to-right movement controls whether your hero tried to attack, 
+stand or retreat. In turn, these affect the probability of parries 
+working (retreating is safest, but a hero can only retreat so far).  
+
+Up-down movement selects high, middle or low blows. Each opponent 
+is more vulnerable to one attack type than the others, and your aim 
+is to learn his weaknesses and exploit them. Press fire to replace 
+the next blow (or parry) which the computer has picked for you by
+the blow that you prefer. 
+
+Keep a watch on the wounds you have suffered. If is better to retreat 
+a little and live, than to attack valiantly and die of your injuries. 
+
+
+                             Credits: 
+
+Designer and Director: Pete Austin.  
+Game program: Pete Austin, Mike Austin and Kerri Cockwell.  
+System code: Mike Bryant, Mike and Nick Austin. 
+Artwork: Dicon Peeke, with Richard Cheek (additional animations) 
+         and Ken Jarvis (additional animated backgrounds).  
+Music: Chris Jenkins. 
+Other parts were played by members of the cast. 
+
+******************** Changes for ST version *************************
+
+Computer Requirements: 
+* Atari 520 or 1040ST. 
+* Television, or colour monitor. 
+* Double-sided floppy disk drive(s). 
+
+Optional Equipment: 
+* Hard disk drive. The game is at its best if installed on hard disk. 
+* Second floppy disk drive is recommended if you intend to run the 
+  game from floppy disk, rather than hard disk. This means two disks 
+  can be read by the computer at a time and there will be almost no 
+  disk swapping. 
+* Mouse plugged into socket 0. 
+* Joystick plugged into socket 1. 
+* Extra RAM (which will be used as cache to reduce disk reads). 
+* Synthesiser. The game normally plays music via the ST speaker, but 
+  for the best possible sound you can connect a midi synthesiser (see 
+  README file for details). 
+
+
+Before Playing: 
+* If you want to know the most up to date information about this 
+  version of the game, boot the ST with e.g a blank disk, insert 
+  the first game disk and double click on the disk icon and README.TXT. 
+* If you will want to save your position on floppy disk, format a blank 
+  disk of your own before playing. 
+* Anti-virus note: Never, ever unprotect your original "Champion of 
+  the Raj" disks. If your computer asks you to do this, it could 
+  be because a virus is trying to copy itself onto them. 
+
+
+Starting "Champion of the Raj"...  
+* From floppy disk: insert the first disk and switch on your ST. 
+* From hard disk: copy the contents of all the disks into a folder and 
+  run it from there. Read the README file, too. 
+
+
+****************** Changes for Amiga version ************************
+
+Computer Requirements: 
+* Any Amiga 
+* Television, or colour monitor. 
+* Floppy disk drive(s). 
+
+Optional Equipment: 
+* Hard disk drive. The game is at its best if installed on hard disk. 
+* Second floppy disk drive is recommended if you intend to run the 
+  game from floppy disk, rather than hard disk. This means two disks 
+  can be read by the computer at a time and there will be almost no 
+  disk swapping. 
+* Mouse plugged into joystick socket 1. 
+* Joystick plugged into joystick socket 2. 
+* Extra RAM (which will be used as cache to reduce disk reads). 
+
+
+Before Playing: 
+* If you want to know the most up to date information about this 
+  version of the game, boot the Amiga with Workbench, insert the 
+  first game disk, and double click on the disk icon and README.TXT. 
+* If you will want to save your position on floppy disk, format a blank 
+  disk of your own before playing. 
+* Anti-virus note: Never, ever unprotect your original "Champion of the 
+  Raj" disks. If your computer asks you to do this, it could be because 
+  a virus is trying to copy itself onto them. 
+
+
+Starting "Champion of the Raj"...  
+* From floppy disk: insert the first disk and switch on your Amiga. 
+* From hard disk: copy the contents of all the disks into a folder and 
+  run it from there. Read the README file, too. 
+
+
+********************** Protection mechanism **************************
+
+I propose that we print the silhouettes of Hindu gods in the 
+documentation, each with his or her name. (Either at the corners of 
+the booklet, or on a separate sheet). 
+
+The game will occasionally display the shape of a god on the screen, 
+and ask the player to enter his or her name. 
+
+For greater anti-photocopying security, the god pictures could have 
+a red pattern superimposed, and be viewed through a piece of red 
+plastic film (perhaps mounted on card in the shape of prayer wheel). 
+

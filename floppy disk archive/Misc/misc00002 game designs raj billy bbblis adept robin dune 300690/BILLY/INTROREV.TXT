@@ -1,0 +1,64 @@
+
+
+
+
+
+
+
+
+
+
+
+Dear Dicon, 
+
+           Thanks for the two disks of Billy Intro graphics. I think 
+we must by now have the complete set - though I confess that I 
+currently find it impossible to know what goes with what. I have not 
+seen any hoe-down dancers, for example. 
+
+Would it be possible to send a complete set of "final" components 
+of all the pictures, grouped so that each picture is within a single 
+folder? The filenames, though descriptive, are no real help with this. 
+
+Also there should be a "show" version of every picture (again, I have 
+not seen one for the hoe-down), or two for scrolling pictures. 
+
+Detailed comments: 
+
+1/3. Good. 
+2. Good. Richard can animate the blacksmith here. 
+4. Good.  
+5. Good. But where are the people? I also can't (I think) find any 
+   idea of how the fire should look, and there's no show picture. 
+6. OK. 
+7. Great artwork, but why did you reverse the people in the picture 
+   and put Pat Garrett in the foreground, talking, with Billy listening 
+   to him? It's TUNSTALL who is offering Billy a job. (See design). 
+   This really matters for the intro. How much work would it be to 
+   swap around Garrett and Tunstall? Or is another change possible? 
+   I want Tunstall to be able to flip a "lucky silver dollar" to Billy 
+   as an advance on wages in this picture - the coin becomes a motif. 
+8. Good, I think. There's no "show" version for the main part of 8 
+   so I really have no idea what you intend. 
+9. Good. But: 
+   a) The design of the wagon seat means Tunstall cannot collapse back 
+      as drawn (it looks almost as high as his shoulders). 
+   b) The branch is NOT spindly: it has no gaps and occupies 70 cells 
+      (or about 30% of the screen). Please add gaps and halve the 
+      number of cells occupied.
+   c) For the branch scrolling to make sense, we cannot have static 
+      foreground scenery. The bush on the left will have to go. 
+   d) Furthermore, the way you have drawn "8" and "9" links them so 
+      tightly together that you know - as an observer - that the killer 
+      has only walked a yard or two east between the two. I had been 
+      envisaging him "circling round". This means, among other things, 
+      that the branch has to tie in with the tree in "8". Alter the tree 
+      a bit in "8". 
+   e) The killer's guns are so high, they're hidden by his hat. 
+10. Good people/wheels/background. Please lose Billy's gun; he is not 
+    the killer. Please also amend the wagon, which still looks like a 
+    railway sleeper floating above the wheels. Please make the 
+    "suspension" more obvious, and do something to make the body of 
+    the wagon look like what it is (I thought the seat would help, 
+    but you can't really see it). Add fittings? the far side? 
+
