@@ -1,454 +1,0 @@
-0660103030566
-1
-2M.J.Austin#Group 16
-9[....................................................]
-â
-
-
-
-
-
-
-
-
-
-
-
-ÅâD3-DesignandConstructionofPalEncoder
-Ä
-â
-
-
-
-
-ÅâM.J.Austin
-
-ÅâLabGroup16
-
-ÅâTutor:ProfessorWilloughby
-
-
-
-
-1.SummaryÄ
-
-Thisreportdescribesthedesignandconstructionofananalogue
-PALencoderfromsimpletransistorcircuitsandsmallintegrated
-circuits,withadedicatedICforthechromamodulator.Problems
-encounteredintheimplementationarediscussed.Acomplete
-circuitisproducedwhichproducesamonochromedisplayandshould
-becapableofcolouroutputwithaminoradjustment.
-
-
-â2.ContentsÄ
-                                             Pagenumber
-1.   Summary                                      2
-2.   Contents                                     3
-3.   Symbols                                      4
-4.   Introduction                                 5
-5.   Specification                                6
-6.   Design                                       7
-     6.1  Analoguesection                        8
-     6.2  Digitalsection                        10
-7    Implementation andTesting                  11
-8    ReviewoftheDesign                        12
-9    Conclusion                                  13
-10   References                                  14
-11   Appendices
-     11.1Appendix1-ResistorMatrix           15
-     11.2Appendix2-DoubleSyncDetector      16
-12   Diagrams
-     12.1 Fig1-BlockDiagram                  18
-     12.2Fig2-Analoguecircuitdiagram       19
-     12.3Fig3-Digitalcircuitdiagram        20
-
-
-
-
-
-â
-3.ListofSymbolsÄ
-
-pk-pk:    peaktopeaksignal.
-IGFET:   insulatedgatefield-effecttransistor.
-R:       redsignal.
-G:        greensignal.
-B:        bluesignal.
-Y:       mixtureofR,G,Btogivetheluminance.
-sync:   asignalwhichgivestheTVinformationonwheneachline
-          andscreenframestart.
-nF:       nanoFarads.
-uF:       microFarads.
-uS:       microseconds.
-MHz:      megaHertz.
-
-â4.Introduction
-
-ÄTheobjectiveofthisinvestigationistodesignandbuildan
-analoguePALencoder,i.e.asystemwhichconvertsRGBandsync
-signalsintoasinglesignalconformingtothePALstandards.
-ThereadershouldunderstandthePALsystem,detailsofwhichmay
-befoundintheD3designnotes(reference1),orelsewhere.
-ThesystemwilluseacommercialIC,theLM1889forthechroma
-modulator,buttheremainderoftheencoderwillbedesignedusing
-simplediscretecomponents.
-
-â
-5.SpecificationÄ
-â
-ÄThesystemshouldconvertRGBcolourcomponents,andaseparate
-syncsignalintoastandardcompositevideooutputcapableof
-drivingaPALcolourmonitor.TheRGBandsyncinputssuppliedare
-1voltpk-pk.Thecircuitshouldnotloadthesesupplies
-significantly.
-
-Thedesignistobebasedupondiscretetransistorcircuitsand
-TTL/CMOSintegratedcircuits,plusaLM1889IC(ref.2)forthe
-chromamodulator.Operationalamplifierscannotbeusedduetothe
-highfrequenciesinvolved.
-
-
-â6.DesignÄ
-â
-ÄAblockdiagramofthesystemtobeproducedisgiveninthe
-designnotes(1),figA2.1.Thesystemmayclearlybesplitinto
-twosections-analogue(upper)anddigital(lower).Asthedesign
-teamconsistedoftwolaboratorygroupsoftwopeopleeach,one
-groupwasassignedtoeachsection.
-
-The'analogue'sectionincludestheresistormatrices,analogue
-addersandthecircuitryneededtointerfacewiththeLM1889
-chromamodulatorIC.
-The'digital'sectionincludeseverythingelse,viz:burstgate
-generation,thesub-carrieroscillator,andtheotherassorted
-logicalgates.
-
-Bothsectionswereeachsplitupintoseveralsectionswhichcould
-thenbedesignedseparatelybyindividualmembersofeachgroup.
-
-Å6.1.AnalogueSection
-Ä
-Theanaloguepartmaybesplitintologicalblocks,asshownin
-Fig1,whichwillnowbediscussedindividually:
-
-Themainrequirementsfortheinputbufferswasthattheyshould
-haveaveryhighinputimpedence,anddistorttheinputvery
-little.Thehighestinputimpedencewouldbegivenbyusing
-IGFETs,butthiswouldgiveproblemswithinterfacingtothe
-bipolartransistorstobeusedintherestofthedesign.An
-acceptableinputimpedanceisgivenbyuseoftheemitterfollower
-circuit,asshownonthemainanaloguecircuitdiagram,fig2.
-
-Theresistormatricesweredesigned.Thenodalanalysistofind
-theresistorvaluesneededaregiveninAppendix1.
-
-Thediagramshowstheuseofaninvertingmixingamptoobtain-Y,
-whichisthenre-invertedtoobtain+Y.Analternativeapproach
-wouldhavebeentousealong-tailpairsubtractorasafinal
-stagetogiveR-YandB-Y.Neithersolutionisperfect,asthey
-bothgivetimingshiftsbetweenthecoloursignalsandY.Thereis
-littlereasonforchoosingonedesignortheother,exceptthat
-thelong-tailedpairshouldreallyuseamatchedpairof
-transistors.Toavoidthis,thedouble-inversionapproachwasused
-instead.
-
-Themixingampisasimpletransistorcircuit,shownbelow:
-
-
-
-
-
-
-
-
-Anothersimpletransistorcircuitisusedfortheinversionstage,
-shownonthemainanaloguecircuitdiagram,fig2.
-
-ToavoidanyproblemswiththeDCshiftsintroducedateach
-transistorcircuit,capacitorswereinsertedwhereshowntoAC
-couplethesignal.Largevaluecapacitors(1uF)wereusedtoavoid
-distortingthesignal.Capacitorsmaybeusedherebecausethe
-signalreturnstozeroateveryline-syncpulse.
-
-Theconnectionstothechromamodulatorchipwerealsoestablished
-duringthedesignphase.ThesewereproducedusingtheLM1889data
-sheet,andareshownonthemainanaloguecircuitdiagram,fig2.
-
-Å6.2.DigitalSectionÄ
-
-1.ChromaOscillator
-
-Thecircuitforthebasic17.7344MHzoscillatorisgiveninthe
-designnotes(1).TogeneratetheUandVsignals,whichare90êoÄ
-outofphase,twobistableswereused.Thiscircuitisshownon
-themaindigitalcircuitdiagram,fig3.
-
-2.DoubleSyncDetector
-
-Inordertodetectthestartofaframe,thesystemlooksforthe
-doublesyncpulsepresentonlythere.Thisisquiteeasilydone
-usingtworetriggerablemonostables.Thecircuitandtiming
-calculationsaregiveninAppendix2.Themonostableperiodsare
-foundtobe48uSand80uS.
-
-3.BurstGateSynchronisation
-
-Thisisusedtopositionthecolourburstonthe'BackPorch'part
-ofthesignal,justaftertheframesync.Thismayrealisedusing
-thesamecircuitasforthedouble-syncdetector.Thecalculations
-forthisuseareinAppendix2andgivemonostableperiodsof
-5.6uSand2.25uS.
-
-4.LevelShifter
-
-Thiscircuitisdesignedtoconvertthe1Vpk-pksyncsignaltoa
-TTLcompatiblelevelforusebytheabovecircuits.Itusesa
-transistorand74LS04buffer.Thecircuitisshownonthemain
-digitalcircuitdiagram,fig3.
-
-5.GenerationofColourBurst
-
-Inthiscircuit,the+-VandUsignalsaregatedtogetherwiththe
-outputfromtheburst-gatingmonostabletogeneratethecolour
-burstsignal.Thecircuitusedisshownhere:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ThepurposeofgateAistosuppresstheburstgateoutputduring
-frameblankingperiods.TheORgatesumsthe+-VandUoutputsto
-generatea+-135êoÄcoloursub-carriersignal.â
-7.ImplementationandTestingÄ
-
-Thesystemwasimplementedonestageatatime,testingeachnew
-stageonitsownandconnecteduptothepreviousstagesbefore
-proceedingwithanother.Initially,thetwolabgroupsworkedin
-parallelontheanalogueanddigitalsectionsofthedesign.
-
-Aspartofthetesting,theYandsyncsignals(nocolour
-component)weremixedtogetherandfeddirectlyintothecolour
-monitor.Thisgaveasatisfactorymonochromedisplay,althoughthe
-intensitiesofthevariouscoloursdidnotformthecorrectgrey
-scale(duetothetolerancesofthemixingresistors).
-
-Whilstbuildingthedigitalsystem,itwasfoundthatthe
-amplitudeoftheburstwastoohigh.Itwasreducedfrom5Vto
-0.3Vpk-pkbya15K-1Kresistordividerpriortofeedingintothe
-lumincance,chromaandburstmixer.
-
-Theanalogueanddigitalsectionswereconnectedtogether.The
-outputofthewholesystemwasthenconnectedtoacolourmonitor.
-Amonochromedisplaywasproduced.Thecircuitwascheckedusing
-anoscilloscope,anditwasfoundthattheamplitudeoftheR-Y
-andB-Ywasabout0.3Vandhencetoolowtoproduceacolour
-display.(colourmonitorshavecircuits,'chromakillers'which
-removeanycoloursignaliftheamplitudeofthecolourcomponent
-istoolow).Two4K7resistorswereaddedtotheR-YandB-Yadder
-circuitstoincreasetheamplitude,asshownbelow:
-
-
-
-
-
-
-
-
-
-
-
-Whenconnectedthisstillgaveamonochromepicture,buta
-'ripple'onthedisplaywasseenwhichwasthoughttocorrespond
-totheeffectofthehighfrequencycoloursignal.
-
-â8.ReviewofthedesignÄ
-
-Theoutputofthecircuitwasexaminewithanoscilloscopeand
-comparedwiththewaveformgiveninthedesignnotes(reference
-1),pg11.Thesignalproducedappearedtobeasspecifiedinall
-respectsexceptthechrominanceamplitudewhichwasabout0.7
-timesitscorrectvalue.Timedidnotpermittheinsertionofa
-separateamplificationstagetofurtherincreasetheR-YandB-Y
-signalsfedtotheLM1889.
-
-Comparingthecircuitproducedwiththefullyworkingdesign
-distibutedafterthecircuithadbeenbuilt(Appendix4),some
-possibledefectsinthebasicdesignbecomeclear:
-
-1)Thephaseshiftinthechromasub-carrieroscillatorbetweenU
-and+-Vcomponentsduetodifferentnumbersofpropogationdelays
-shouldbecorrectedforbyuseofadelayline.
-
-2)ThechromabiastotheLM1889shouldbegeneratedfromthe
-videosignalsused(usingthetransmisiongatesasa'hold'
-functionandacapacitortoaveragethesignal.)Thisshould
-produceamorestablesystemwithoutincreasingcomplexity
-unacceptably.
-
-â9.ConclusionÄ
-
-APALencoderwasproducedwhichgeneratedsignalswhichgavea
-monochromedisplay.Thecolourcomponentswerealsopresent,but
-theamplitudeofthechrominancesignalwastoolowtobe
-acceptedbythemonitor.Thesignalproducedwascomparedwiththe
-PALspecificationandwasfoundtobeidenticalinallother
-respects,sowithmoretime,theencodershouldhaveworked
-correctly.
-
-
-â10.ReferencesÄ
-
-1.DesignExperimentD3DesignNotes-AnaloguePALEncoder.
-DepartmentofElectronics,UniversityofSouthampton1985.
-
-2.TTLDatasheetfor74LS123dualretriggerablemonostable.
-
-â11.1.Appendix1-NodalAnalysisforresistormatrixÄ
-
-Thecircuitusedforthemixingisasshownhere:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-TheY(luminance)signalmustbeproducedaccordingtotheformula
-Y=0.3R+0.59G+0.11B.Theappropriateresistorvaluesare
-foundasfollows:
-
-       V†RÄR†GÄR†BÄ+V†GÄR†RÄR†BÄ+V†BÄR†RÄR†GÄ
-V†BASEÄ=  ------------------------
-     R†GÄR†BÄ+R†RÄR†BÄ+R†RÄR†GÄ
-
-
-Therestofthecircuithasagainof1,sotogive1voltoutput
-fromtheoverallcircuit,V†BASEÄ=1V,so:
-
-    †ÄR†BÄ=4700ohms(preferredvalue=4700)
-     R†RÄ=1723ohms(preferredvalues=560+1200)
-     R†GÄ=876ohms(preferredvalues=470+390)
-
-Theseareintheratio0.35:0.45:0.19,whichisacceptablefor
-thisexperiment.Foramoreaccuratesystem,theyshouldbe
-correctedfor,usingpotentiometersorprecisionresistors.
-
-â11.2.Appendix2-DoubleSyncDetectorÄ
-
-Thepurposeofthiscircuitistodetectthedoublesyncpulsesat
-theendofaframe.Thismaybedoneusingtworetriggerable
-monostablesasshownbelow:
-
-_______________________________________à
-Ä(1)||||||||||
-|_||_||_||_||_|
-
-______________________________________
-(2)||||||
-___||___||___||____
-
-__________________________________________
-||
-|_____________|
-
-<-64uS-><-48uS-><-80uS->
-
-
-ÅTimingDiagramforDoubleSyncDetector
-Ä
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ÅBlockDiagramofDoubleSyncDetector
-
-ÄThecircuitoperatesbydetectingthechangeinperiodbetweenthe
-syncpulses.(1)istheinputwaveformtothefirstmonostable.
-Itsperiodis48uSbecauseitmustbebetweenhalfalineperiod
-(32uS)and1lineperiod(64uS).(2)istheoutputofthefirst
-monostable,andtheinputtothesecond.Theperiodofthisis
-80uS,i.e.between1and1.5lineperiods.
-
-ThevaluesforR1C1andR2C2canbecalculatedasfollowsfromthe
-TTLdatasheet(2)pg6-85.
-     
-     Periodtw=KRC(RinKohm,CinpF,twinns)
-Kmaybefoundfromfigure9onpg6-90inthedatasheet(2).
-
-Approximately10kohmand10nFgivestw=40uS+-16uS
-
-Fortheburstgatesynchronisationcircuit,anidenticalcircuit
-wasused,butthetimingsrequiredare5.6uSand2.25uS.Toobtain
-thesetimings,thefirstmonostableshouldhaveC=1nFandR=12Kohm
-togivetw=5.6uS.ThesecondmonostableneedsC=1nFandR=4K7to
-givetw=2.1uS(thissecondmonostabledeterminesthecolourburst
-width).
-
-
-
-â12.1.Fig1-BlockDiagramÄ
-
-
-â12.2.Fig2-AnalogueCircuitDiagramÄ
-
-
-â12.3.Fig3-DigitalCircuitDiagramÄ
-
-
-
-
-
-
-
-
-
-
-
-
-
-**************************************************************
-**************************************************************
-
-Takewithme:
-     Post
-     AcornZ80+DNFSRomCopy+ChallengerSoftware(disk)
-     +anyotherROMSlyingabout!
-     OldModem
-
-Getfromsomewhere:
-     XMODEMforCPM+IBM
-*************************************************************
-*************************************************************
-
-Don'tForgettheElectrialEngineeringLabWrite-Up
-
-**************************************************************
-**************************************************************
-

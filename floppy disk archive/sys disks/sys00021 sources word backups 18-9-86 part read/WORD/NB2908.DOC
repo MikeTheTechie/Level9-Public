@@ -1,53 +1,0 @@
-0660603030566
-1   
-2   
-9[....................................................]
-                                                 29thAugust1986
-NigelBrown,
-Enlli,
-Pisgah,
-LlanfihangelyCreuddyn,
-Dyfed,
-SY234NE.
-
-
-DearNigel,
-
-          ThanksforthetranslatordiskwhichIreceivedabouta
-weekago.Ihavestillnothadachancetohaveaproperlook!
-
-     Ithinkprobablythebestthingisforyoutohavealookat
-themainZ80programwewanttotranslate-thetextsquasher.
-Thisisincludedonadisk.Pointstonote:
-
-1)Linenumberswillhavetobestrippedoffbeforedoinganything
-
-2)Thesourcewasoriginallyinabout4sections.Thereisjust
-onelarge64Kfileonthedisk,becauseitwasslightlyeasierto
-handle.Splititupagainifyouwish,thedivisionsareobvious.
-
-3)I'veenclosedasampletextfile-"MESSAGE.TXT",andthe
-squashedequivalent-"SQUASH.DAT",alongwiththevariousbits
-neededtoconvertitintoagame-"FINISH.PRG"andtorunit-
-"MENU.PRG".Thisshouldallowfortesting.
-
-4)Ifyouwanttodotheconversionyourself,Iwouldaskthatyou
-trytouseourdriverprogram.Thisisstandardacrossanumberof
-machines,soportabilityisenhanced.Tohandleserialfiles,
-storethementirelyinmemoryanddoalldiski/oatfilelevel-
-memoryischeap!Driverdocumentationisenclosed,asisthe
-source.NotethatA6isneededastheparameterblockpointer,
-socouldyouchangetheconversionprogramsoasnottoneedthis?
-(Unlessawkward)
-
-5)IbelieveyouhaveacopyofGENST-anassembler,andMONST,a
-monitor.Phonemeifyouneedanyhelpwiththese.
-
-                    YoursSincerely,
-
-
-
-
-
-                              MikeAustin.
-

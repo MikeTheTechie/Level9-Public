@@ -1,275 +1,0 @@
-0660103030566
-1FR1Communications
-2M.J.Austin#AFW
-9[....................................................]
-â
-
-
-
-
-
-
-
-
-
-
-
-ÅâFR1-ThePrinciplesofModulationinCommunications
-Ä
-â
-
-
-
-
-ÅâM.J.Austin
-
-ÅâLabGroup16
-
-ÅâTutor:ProfessorWilloughby
-
-à1.WhyModulate?Ä
-
-Therearetwomainreasonswhymodulationisnecessary:
-
-     1)Mostsignalstobetransmitted,suchasspeechormusic
-areofrelativelylowfrequency,uptoabout20KHz.Thewavelength
-ofa20KHzsignal(forEMwaves)isabout15000metres.For
-reasonabletransmissionefficiency,thetransmittingaerialwould
-havetobeabout4000mhigh,whichwouldposequiteahazardfor
-aircraft(aswellasbeingrathercostly).
-
-     2)Ifthesignalsweretransmitteddirectly,thenonlyone
-broadcastcouldbesentatoncebyanybodywithinrange-ifmore
-thanonesignalwassent,theywouldbecomeinseperablymixed.
-
-Thepurposeofthevarioustypesofmodulationistotransmitthe
-messagesignalbysuper-imposingitonahighfrequencycarrier.
-Byusingdifferentcarrierfrequencies,manymessagesmaybe
-transmittedatthesametime.
-
-à2.AmplitudeModulationÄ
-
-Thisisthesimplestformofmodulationtoimplement,especially
-forthereceiver.Theamplitudeofthehigh-frequencycarrieris
-variedbythemessagesignal,asshowninthisdiagram:
-
-
-
-
-          messagesignal---------------------------------
-
-
-
-
-
-          carriermodulated---------------------------------
-          bymessagesignal
-
-
-
-Mathematically,thismayberepresentedas:
-
-     V†mÄ(t)=V(1+M†aÄb(t))cosw†cÄt
-
-Whereb(t)isthemessagesignal,and
-     Maisthemodulationindex.(Toavoidovermodulation,M†aÄis
-chosensothatthemagnitudeofM†aÄb(t)<1)
-
-     Torecoverthemessagesignalatthereceiver,averysimple
-circuitmaybeused(thoughmorecomplexcircuitsgivebetter
-qualityreception):
-
-
-
-
-
-
-
-
-
-------->--------------------------
-                                   !
-                                   !
-                              ------------
-                              !         !
-                              !         !
-                              !         -Recovered
-     modulatedsignal      C  -          R  message
-                              !         -signal
-                              !          !
-                              !         !
-                              ------------
-                                   !
-                                   !
-                       -----------------------------------
-
-Byexpandingtheaboveequation,thespectrumoffrequenciesused
-bythetransmittedsignalmaybefound:
-
-     V†mÄ(t)=V(1+M†aÄcosw†sÄt)cosw†cÄt
-
-          =Vcosw†cÄt+1VM†aÄcos(w†cÄ+w†sÄ)t+1VM†aÄcos(w†cÄ-w†sÄ)t
-                         22
-
-Thusthemodulationgivesrisetoamainfrequencyatthecarrier
-frequency,andtwosidebandsoneitherside,separatedbythe
-frequencyofthemessagesignal:
-
-                                   
-                              
-                             1V
-                              1
-                              1
-                              1
-                   1           11
-    Lowersideband 1           11Upperside-band
-                   1           11
-                   1           11
-             ---------------------------------     
-                 w†cÄ-w†sÄw†cÄw†cÄ+w†sÄ
-
-Foramoregeneralmessagesignal,therewillbemanyfrequency
-components.ItmaybeshownbyFourierAnalysisthatwhenthisis
-modulated,itgivesrisetoaspectrumasshownbelow:
-
-
-
-
-
-                              !
-                              !
-                              !
-                              !
-                              !
-                              !
-                              !
-                              !
-                              !
-                              !
-             -----------------------------------
-w†cÄ-w†sÄw†cÄw†cÄ+w†sÄ
-
-àVariationsonAMÄ
-
-TherearevariousmodificationswhicharemadetothebasicAM
-systemforspecialisedapplications:
-
-1)SingleSidebandmodulation
-     Onesidebandandthecarrierarebothsuppressed.Thismeans
-thatthebandwidthusedfortransmissionissmaller.However,the
-receiverwillbemuchmoreexpensive,asthecarriermustbe
-accuratelyre-inserted.
-
-2)VestigialSidebandModulation
-     Onesidebandistransmittedcompletely,theotherpartially.
-Thisreducesthebandwidthrequirmentwithoutincreasingthecost
-ofthereceivertoomuch.Thissystemisusedfortelevision
-broadcasting.
-
-
-à2)FrequencyModulationÄ
-
-WhileAMisfineformanypurposes,itdoeshavesomeproblems.
-Mostnotableamongsttheseisthatwhenthesignalstrength
-fluctuates,thedemodulatedsignalbecomesdistorted.Thisisa
-majorprobleminmobilereceptione.g.cars
-
-Thisproblemisavoidedbyusingfrequencymodulation.Asignalis
-addedtothecarrier,andthefrequencyofthissignalis
-controlledbythemessagesignal.
-
-ThissystemisclearlymorecomplexthanAM,butitisindependent
-ofamplitude,andgenerallymoreresistanttodistortion.
-
-Thetransmittedwavemaybewrittenas:
-
-     V†mÄ(t)=Vcos(w†tÄ+dfsinw†sÄt)
-                         f†sÄ
-
-whereb(t)isthemessagesignal,
-wcthecarrierangularfrequency,wsthemessageangularfrequency
-dfisthemaximumfrequencydeviationfromthecarrierfrequency,
-anddfisdefinedasthemodulationindex.
-f†sÄ
-
-Iftheaboveequationisexpanded,annthorderBessolfunctionis
-generated.Thusasinglemessagefrequencyproducesaninfinite
-numberofsidebandcomponentsaroundthecarrier.Thesedecay
-furtherfromthecarrier,rapidlybecominginsignificant.
-
-Standardtablesareavailablewhichrelatethemodulationindexto
-thenumberofsignificantsidebands,andhencethebandwidth
-required.Forexample,modulationindex=1radianhastwo
-significantsidebandsoneithersideofthecarrier.These
-sidebandsareseparatedbythemessagefrequency,w†sÄ,sothe
-bandwidthrequiredinthiscaseis2w†sÄ.
-    
-Becauseofthisvariablebandwidth,FMmaybeeasilytailoredto
-particularapplications,beinggiventheamountofbandwidth
-required,andnomore.
-
-àNarrowBandFMÄ
-Inthiscase,onlythefirstsidebandisused.Thisisdoneby
-makingthemodulationindex<0.6,whichmakeshighersidebands
-insignificant.ThissystemusesthesamebandwidthasAM,buthas
-asuperiorsignaltonoiseratio,soitispreferredwherethe
-costofthereceiverislessimportantthanthequalityof
-reception.
-
-àPhaseModulationÄ
-Inthis,thephaseofthemodulatingsignalisvariedwithrespect
-tothecarrier.Thisgivesatotalsignalbroadlysimilartothat
-producedbyFM.
-
-àPulseCodeModulation
-
-ÄItisoftenpossibletotransmitdigitalsignalsratherthanusing
-analoguemodulation.Theanaloguemessagesignalissampled,and
-thecorrespondingpulsetrainistransmitted.Thismethodgives
-theusualadvantagesofdigitalsystems:noiseimmunity,easeof
-processing,etc.
-
-àDeltaModulationÄ
-
-ThisisanextensionofPCM.Whentheanaloguesignalissampled,
-thedifferencefromtheprevioussignaliscalculated.Onlythe
-differenceneedstobetransmitted.Providedthesignalchanges
-relativelyslowlycomparedtothesamplingrate,thisdifference
-willbeonaveragebesmallerthanthemaximumamplitudeofthe
-signal,andthismethodwillrequirelessinformationtorepresent
-thesamesignal.
-
-àMultiplexingÄ
-
-Whentransmittingsignalsoverlongdistances,suchasphone
-lines,thecostofthecablescanbeveryhigh.Ifonewirewas
-usedperphonecall,averylargenumberofcableswouldbe
-required.Bymultiplexing,asinglelinecansupportmany
-simultaneoussignals.Therearetwocommonwaysofachievingthis:
-
-àFrequencyDivisionMultiplexing(FDM)Ä
-
-Eachmessagesignalisusedtomodulateacarrieratadifferent
-frequency.Allthemodulatedsignalsmaythenbeaddedtogether
-andtransmitteddowntheline.Thereceivermustdemodulatethem
-allindividually.
-
-àTimeDivisionMultiplexing(TDM)Ä
-
-Eachmessagesignalneedstobecompressedintime,andasmall
-burstofsignalfromeachistransmittedinturn.Inpractice,
-thisisusuallydonedigitally(bypulsecodemodulation:PCM).
-
-Theoretically,TDMisverysimilartoFDM:
-inFDMthesignalsco-existintimebutareseparatedby
-frequency;
-inTDMthesignalsareseparatedintimebutmixedupin
-frequency.
-
-However,TDMcircuitryissimplerbecauseitisdigital,andthe
-samedigitalencoder/decodermaybeusedtohandleallthe
-channels.(wherasforFDM,manyoscillatorsofdifferent
-frequenciesareneeded).Themainproblemwithitistheneedto
-keepbothendssynchronised.
-
-

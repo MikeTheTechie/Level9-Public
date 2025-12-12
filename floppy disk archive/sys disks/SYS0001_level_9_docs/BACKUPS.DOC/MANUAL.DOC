@@ -1,725 +1,0 @@
-0660103030566
-1Adventure Manual
-2Copyright (C) 1985page #Level 9 Computing
-9[....................................................]
-ÅâINTRODUCTION
-Ä
-ThismanualdescribesLevel9'sAdventureSystem.Itissupplied
-withtwodiskscontainingourStandardAdventure:
-ADVENTURESYSTEM(driveA:)
-STANDARDADVENTUREPROGRAM(driveB:)
-Youshouldalsohavelistingsoftheadventureprogram.Other
-adventuresarecreatedbymodifyingthestandardgame
-
-ÖWarning.ÄAlltheprograms,dataandlistingsthatyouhavebeen
-suppliedwitharecopyright(C)1985Level9Computing.Adventure
-programsproducedusingtheadventuresystemarealsocopyright
-(C)Level9Computingsincetheycontaincodewrittenbyus.
-
-Alotofefforthasbeeninvestedintheadventuresystem,so
-Level9willtakeactionagainstanyonewhosuppliesordiscloses
-detailstoanypersonnotauthorisedbyLevel9.TelephoneWeston
-(0934)814450tocheckifyou'reapproachedbysomeonewhoclaims
-tobeauthorised,beforesayinganythingorhandinganythingover.
-
-
-
-ÅâCONTENTS
-Ä
-1Starting
-
-2TEXTMESSAGES
-
-3EXITS
-
-4LISTS
-
-5RUNTIME
-
-6PROGRAM(A-CODE)
-
-7SPELLINGCHECKING
-
-8PRINTING
-
-9CODINGSIZES&STANDARDS
-
-â1Introduction
-
-ÄThismanualisdividedintotwosections.Thefirstisthe
-usermanualwhichdescribesthedevelopmentofacode,entryof
-textmessagesetc.Thesecondsectionisatechnicaldescription
-ofthesystem.
-
-TheadventuresystemallowsyoutoprogramanadventureontheCPM
-system,creatingandtestingeverythingexceptmusicandthe
-picturesforagraphicalgame(theseareaddedlater).Level9
-willtransferthecompletedgametoothermicros.
-
-YouwillbeusingaversionofCPM.Asummaryofusefulcommands
-isgiveninappendixA.
-
-First,copytheADVENTURESYSTEMandSTANDARDADVENTUREPROGRAM
-disks.Fordetailsofthis,seeAppendixAonCPMversions.
-
-NowusethenewADVENTURESYSTEMdiskindriveAandthenew
-STANDARDADVENTUREPROGRAMdiskintherighthandone(driveB).
-Allthefilesthatyou'llneedtoworryaboutareonthedriveB
-disk.ThedriveA:systemdiskholdsthecompileretc.
-
-Thecomponentsofanadventureareasfollows:
-TextMessages:Allthemessagesoutputbytheadventurefor
-locationdescriptions,objectdetails,error
-messagesandreportsofwhathappensastheplayer
-doesthings.Keywordstoberecognizedbythe
-programarealsorecordedhere.
-Exits:Howthelocationsoftheadventureareconnected.
-Lists:Arraydata..Initialpositionsofobjectsetc.
-Program:Thea-code(shortforadventure-code)source.
-
-Istronglyadviseyoutobaseyourgameonthestandardadventure
-provided.Thestandardgamealreadyhandlesmostsimplegame
-features,movement,taking/droppingobjectsetc-youonlyhaveto
-enterthenewkeywords,exitdetails,initialpositionsofobjects
-etc,andthecorrecttextdescriptionsofthingsandplaces.Then
-addthespecialcasestotheprogramtohandlethepuzzlesinthe
-game.
-
-Eachtimeyoumodifythetext,keywords,exitsorlists,use
-"RUNTIME"tobuildtheruntimedatafortheadventure.Then
-compileandruntheprogramtotestit.
-
-Whenyoumodifytheprogram,simplycompileandRUNitandtest
-yourchanges.
-
-NOTE:Level9havemanualsformostoftheutilityprogramsused
-increatingadventures.Alltherelevantfeaturesshouldbe
-describedinthisAdventureManual,butifyoufeelthatyouneed
-moredetailsthenwecanprobablylendyouaspecificmanual.
-Pleaseask.
-
-â2TextMessagesÄ
-
-Inthenewadventuresystem,messages,exitsandacodesourceare
-alleditedusinganystandardCPMeditor.Twoeditorsaresupplied
-ontheadventuresystemdisk.Detailsoftheseeditorsaregiven
-inAppendixB.
-
-Themessagesmustbesquashedbeforetheycanbeusedbythe
-adventureprogram.Thisisafairlyslowprocesswhichtakesupto
-aboutanhourifyourgamehasalotoftext.Savethemessages
-beforebeforeyoustartthesqueeze,thentype:SQUASH(return)
-
-Whensquashingisover,thecompressedtextisautomaticallysaved
-asSQUASH.DATforsubsequentusebytheadventureprogram.
-
-â3ExitsÄ
-
-ACP/Mwordprocessorcalled"PerfectWriter"(PW)isusedtoedit
-theexits(howtheadventuregamelocationsareconnected).
-
-Thereisonelineofdataperexit.Theexitsaredescribedin
-order:firsttheexitsfromroom1,thenthosefromroom2andso
-onuntiltheexitsfromthelastroomhavebeendescribed.The
-formatofthedataforanexitisasfollows:
-LDITDirectionDestination
-
-Lisnormally0,butis1forthelastexitfromalocation.
-Disnormally0,butis1iftheexitisviaadoor.
-Iisnormally0,butis1iftheexitisinvisible
-(notreportedbyLOOK).
-Tis0foraone-wayexit,or1foratwo-wayexit.
-
-Directionhasvaluesasfollows:
-1=north2=northeast3=east4=south5=southeast
-6=southwest7=west8=northwest9=up10=down
-11=in12=out13=across
-
-Andthedestinationissimplythelocationwheretheexitleads.
-
-Hereisanexampleofsomeexitdata:
-;Thedatastartswithroom1
-01012103;2-waydoor,NEfromroom1toroom103
-0000412;1-way,Sfromroom1toroom12
-10101112;1-way,INfromroom1toroom12.Last
-exit
-;Room2
-110131;2-waydoor,Efromroom2toroom1.
-                        Lastexit
-;Room3
-0001834;2-way,NWfromroom3toroom34
-1100150;1-way,Nfromroom3toroom50.Last
-                         exit.
-
-Thelastlineofthedatamustconsistof:
-000000
-
-
-Youshouldnotdefineatwo-wayexittwice;itcanbedefinedat
-eitherendbutneednotbedescribedatboth.Thissavesmemory.
-
-Eachlocationmusthaveatleastoneexitdefinedfromit.Ifyou
-arenotcareful,youmayfindthatwhenthetimecomestoenter
-theexitsforanewlocationyouhavealreadydefinedallits
-exitsfromtheirotherends.Thenyou'dhavetoredefineanexit
-andsowastespace.Trytoavoidthis.
-
-Thefilenameoftheexitdatausedbytheadventureprogramis:
-B:EXIT.DAT
-â5ListsÄ
-
-AZ80assemblercalled"Compass"isusedtodefinethelistsused
-bytheadventureprogram.ThisisdescribedindetailinAppendix
-C.Thelistsarethea-codeequivalantofarraysandareusedfor
-suchthingsastheinitialandcurrentpositionsofobjectsinthe
-game.
-
-Thefirstbytesofthelistdatamustresemblethefollowing:
-DEFWLIST1;Size=SSSbytes;FirstEntryisnumber80
-DEFWLIST2;Size=SSSbytes;FirstEntryisnumber80
-..........
-DEFWLIST8Size=SSSbytes;FirstEntryisnumberNNN
-DEFWEND
-LIST1-9andENDarelabels.Foraworkspacelist(e.gLIST2:
-currentobjectpositions),replaceitslabelbyasuitableaddress
-between&8000and&8FFF(&means"hexadecimal").Thelabelofa
-permanentlist(e.gLIST1:initialobjectpositions)willbe
-definedatthestartofthecorrespondingdata.ENDwillbe
-definedafterthelastpermanentlist.
-
-Anexamplelistmightbeasfollows:
-LIST1
-DEFB10;Object80startsinroom10
-DEFB99;Object81startsinroom99
-DEFB255;255isthehighestvalueforalist
-entry
-DEFB30;Object83startposition
-
-
-â6Program(A-code)Ä
-
-â6.1RUNTIME
-
-ÄWhenyou'vecreatednewversionsofsqueezedexitsorlistsand
-wanttotestthem,thesemustbebuiltintotheadventureruntime
-system.FromCP/M,enter:
-RUNTIME(return)
-Waitforittocomplete.Ifthemessage"ERRORINDATA"appears,
-gobackandcorrecttheappropriatepartofthedatabeforetrying
-again.
-
-RUNTIMEgetsdatafromthefollowingfiles(allondriveB:):
-EXIT.DAT
-LIST.DAT
-
-Oncetheruntimesystemhasbeenbuilt,andtheacodecompiled,
-enterRUNtoplaythegame.
-
-Theadventureprogramiswrittenusingacompiledlanguagecalled
-A-CODE.Thea-codesourceiseditedusingoneoftheeditors
-describedabove.Filenamesusetheextension'.TXT'andinthe
-WorminParadisethemainpartofthefilenamestartswith'A'
-e.g.EDB:ASPECIAL.TXT
-
-â6.2A-CodeCompiler
-Ä
-Thesourceofaprogramissplitinto5ormorepartswhichmaybe
-editedseparately.IntheWorminParadise,thesehavethe
-followingnames:
-ACONST.TXT
-ACORE.TXT
-APARSE.TXT
-AVERB.TXT
-ASPECIAL.TXT
-
-Thenormalediting/developmentcycleiscontrolledbyfunction
-keyswhicharesetupbythefile'BEGIN.SUB'.Thisfileiscalled
-bypressingf9.Keysf0tof4editASPECIAL.TXTtoACONST.TXT
-respectively.Keyf7isusedtodeletealineintheL9editor.
-
-Keyf8doesacompletecompilation,f9justcompilestheASPECIAL
-file.Thelatterisobviouslymuchfaster.Thusagoodwayof
-workingistoenteranddebugnewcodeinASPECIAL.Whenitis
-perfect,itmaybetransferredtoAVERBbyeditingASPECIAL(with
-PerfectWriter),deletingallbutthecodetobetransferred,then
-savethistoadummyfile.Thefollowingsequenceofcommandswill
-thenthencompletethetransfer:
-CONCAT(return)
-B:AVERB.NEW(return)
-B:AVERB.TXT(return)
-B:DUMMY.TXT(return)
-(return)
-DELB:AVERB.TXT(return)
-Y(return)
-RENB:AVERB.NEWASB:AVERB.TXT(return)
-ThecodeshouldnowbeeditedoutofASPECIAL.
-â6.3A-CodeSourceFormat
-Ä
-EachpartofthefilemaystartwithsectionsdefiningCONSTANTs,
-VARiablesandTABLE(lists).Anyornoneofthesesectionsmaybe
-usedineachpart.BEGINmustbeusedbeforeanycodestarts.The
-formatofthesesectionsisobviousfromthesampleprograms
-supplied.
-
-â6.3.1A-CodeStatementsÄ
-
-Adventuresareprogrammedinaa-code,asimplifiedversionof
-BASIC.Itincludesseveralfacilitiestailoredforadventure
-programmingandomitsunnecessaryfeaturessuchascomplexmaths.
-
-Allsymbolsusedintheprogrammaybeofanylength,12
-charactersaresignificant.Becarefulifyouusemorecharacters,
-asobscurebugscansometimesoccur(despitethecompilerchecking
-forredifinedsymbols).Youareallowedupto127variablesina
-program.
-
-Numericvaluesarealldecimal&+ve,between0and65535(-
-1=65535)
-
-Thereare9lists(numbered1to9)whichtaketheplaceof
-arrays.Theycanhold1-bytevalues(0-255).Thefirstentryina
-listisnumber0.Seesection5andaboveformoredetails.
-
-Jumps(GOSUB,GOTO&IF..THEN)arenormallyshortrange;within
-about40lines.Foralongerjump,addan"@"infrontoftheline
-number.e.g:
-10GOTO20
-20IFY2=1THEN@50000
-Don'taddan"@"unlessyouneedto,asthisincreasesthecode
-size.Whilstprogramming,useaversionofBEGIN.SUBwhichselects
-option7beforecompiling,andleaveoutthe@s.Option7onthe
-compilermenuforcesalljumpstobelongform.Whentheprogram
-isnearlycomplete,removetheselectionofoption7fromthe
-BEGIN.SUBfile,andproducealistingoftheerrorsgenerated.
-
-Thea-codestatementsareasfollows(v1,v2,v3&v4indicate
-variables,nindicatesanumber,@nisalist,andlnisaline
-number):
-
-â6.3.2AssignmentÄ
-
-v1=v2v1=nvariable=avariableoraconstant
-v1=@n(v2)v1=@n(n)variable=alistelement
-@1(v1)=v2@1(n)=v2listelement=avariable
-
-â6.3.3FlowofControlÄ
-
-GOSUBlnRETURNAsGOSUB/RETURNinBASIC
-GOTOlnAsGOTOinBASIC
-
-IFv1=v2THENlnIfv1=nTHENlnIftrue,GOTOline
-IFv1<>v2THENlnIFv1<>nTHENln""""
-IFv1<v2THENlnIFv1<nTHENln""""
-IFv1>v2THENlnIFv1>nTHENln""""
-
-CALL@ln,v1"ONv1GOTO",lnindicatesalinewithaDATA
-statement
-DATAln1,ln2etc..Alistoflinenumbersusedbythe
-correspondingJUMP.IFv1=0GOTOln1,IFv1=1GOTOln2etc..
-
-â6.3.4MathsÄ
-
-ADDv1,v2SUBv1,v2Addv2tov1;subtractv2
-                                        fromv1
-
-â6.3.5InputÄ
-
-INPUTv1,v2,v3,v4Waitfortheplayertotypesomething:
-Thevariableshavenofunctioninthenewadventure
-system.Whattheusertypedisreturnedinlist9one
-wordatatime.Theformatofthetextreturnedisastwo
-bytevaluesfornormalwordsandasciivalues,or4byte
-valuesfornumericinput.Valuesreturnedareinorderof
-messagenumberofthematch.Formoredetails,see
-     AppendixDonthenewtextsystem
-
-â6.3.6OutputÄ
-
-MESSAGEv1MESSAGEnPrintthespecified
-message
-PRINTv1Printv1asanumber
-
-â6.3.7MiscAdventureFeaturesÄ
-
-CLEARSetallvariablesto0
-SCREENTSelectgraphicsmode(i.e.splitscreen)
-CLEARGCleargraphicsscreen
-PICTUREv1Displaypicture
-EXITv1,v2,v3,v4EXITfrom,direction,status("DIT"sect4),
-destination.Setupv1&v2.V3andv4are
-returned
-RANDOMv1v1=arandomnumberbetween0and255
-STACKClearthestack(gettingridofunusedGOSUB
-addresses)
-STOPNofunctionincurrentsystem
-DRIVERv1Calldriverfunctionv1.Argumentspassedin
-LIST9.FirstentryinListisfunctiontocall,
-subsequententriesaretheparameterblock.
-
-SAVESavevariablesandworkspaceliststodisk
-RESTOREOppositeofSAVE
-
-âAppendixA-CPMcommandsÄ
-
-Å1TorchZ80Ä
-
-HELPPrintslistofcommands
-DUPCopiesfromdiskindriveàBtoAÄ,whichit
-formatsfirst.
-FORMATB:FormatsdiskindriveB
-DIRB:DisplaysdirectoryondriveB
-DIRB:[PLSDisplaylotsofinformationonfiles.
-COPYfilename1TOfilename2
-RENAMEfilename1ASfilename2
-
-Å2AcornZ80Ä
-
-COPYCopieswholediskfromdriveàAtoBÄ
-FORMATB:FormatsdiskindriveB
-DIRB:DisplaysdirectoryondriveB
-STAT*.*Displaysinformationonfiles.
-PIPfilename2=filename1
-Copiesfilename1tofilename2
-RENfilename2=filename1
-
-âAppendixB
-
-EDITORS
-ÄThefirst,PerfectWriterisonlyusedforblock
-copying,correctingspellingandothersothisticatedapplications.
-Torunit,enterthefollowingfromCPM:
-K(return)
-PWB:filename.TXT(return)
-
-Aftersomeextensivediskaccesses,PerfectWriterwilleventually
-displaythefile.Themostusefulcommandsare:
-f1-upapage
-f2-downapage
-f7-deleteline
-copy-normaldeleteaction
-escspace-markstartofblocktobedeleted
-ctrl-W-deleteblock
-ctrl-Y-putlastblockdeletedtocurrentcursor
-position.
-ctrl-Xctrl-W(return)-savefile
-
-ACP/Mwordprocessorcalled"PerfectWriter"(PW)isusedtoedit
-thekeywords(wordsrecognisedbytheadventuregame).Tostart
-itfromCP/M,editingKEYWORD.DATforexample,enter:
-CK(return)Initialisefunctionkeys
-forPW
-PWB:KEYWORD.DAT(return)StartPerfectWriter
-Tosavethekeyworddatabacktodisk,enter:
-(ctrlX)(ctrlW)
-IfyouareusingPerfectWriter,toloadNEWWORD.DATforexample,
-enter:
-(ctrlX)(ctrlR)
-B:NEWWORD.DAT(return)
-
-Thekeywordsareeditedusingthewordprocessingfacilitiesof
-PerfectWriter.Keysf1-f5,f7andf9workmuchasin
-Acornsoft's"View"(f1is"topoftext",f2is"bottomoftext",
-f3is"deletetoendofline",f4is"beginningofline",f5is
-"endofline",f7is"deleteline"andf9isdelete)andthe
-cursorkeysworknormally.COPYhasbeenconfiguredtoactas
-DELETE.PerfectWriterworksin"InsertMode"normally,so
-alteringtextentailsdeletingtheoldversionandthentypingthe
-new.Ifyouprefer,youcanchangeto"OverwriteMode",which
-allowsyoutosimplytypethenewversionontotheold,replacing
-it,byentering:
-(ctrlX)MOVERWRITE(return)
-Toreturntoinserting(PWcallsitdeletingOverwriteMode),
-enter:
-(ctrlX)(ctrlM)OVERWRITE(return)
-
-
-Theothereditorwasproducedin-housebyLevel9.Itwillbe
-usedfarmoreasitisverymuchfasterandeasiertouse.Italso
-displayslinenumbersattheleftofthescreenwhichisessential
-forusewiththeadventurecompiler.Themaincommandsareas
-below:
-
-f7-deleteline
-shift-cursorkeys-movetotop/bottomofscreen
-ctrl-cursorkeys-movetotop/bottomofsource
-orstart/endofline
-ctrl-D-deletecharacterfollowingcursor
-ctrl-S-searchsource
-ctrl-L-centretextoncurrentline(especiallyusedin
-search)
-ctrl-C-savesource/leaveeditor
-
-Whencreatingormodifyingamessage,notethat:
-*Squarebrackets,viz[and]areusedaroundeachmessage.
-Amessagenumberfollowedbyacolonshouldbeplacedafterthe[
-toindicatethemessagenumber.Commentsmaybeplacedinthetext
-afterasemi-colonoutsidethesquarebrackets.
-*%means"return+linefeed".Toavoidaccidentalblank
-lineswhenthegameruns,%hasnoeffectifonehasjustbeen
-printed.
-*_meansspace(thisisneededbecausenormaltrailingand
-multiplespacesareprunedautomatically:use_ifyouwantthem
-kept).
-*Word-wrapisautomaticwhenthegameisrunning(i.ewords
-willnotbehalfononelineandhalfonthenext).Youdon'tneed
-toworryaboutthis.
-*Incontrast,thereisnoword-wrapatallduringmessage
-creationormodification.Thefirstcharacterofalinedirectly
-followsthelastoneofthelinebefore.
-âAppendixC-CompassÄ
-
-TostartCOMPASSfromCP/M,typeCOMPASS(return),pressCandenter:
-O01000(return)
-IfyouwanttoloadthelistdatasourceinLIST.Z80,enter:
-U(return)
-B:LIST.Z80
-Andtosaveit,aftereditingperhaps,enter:
-W(return)
-B:LIST.Z80
-
-Compassprovidesline-basededitinglikethatofBBCBASIC(very
-differentfromPerfectWriter!).Notethatthesource(i.elist
-data)iskeptcontinuouslyrenumbered.Somecommandsare:
-BBeginningofprogram.
-DlnumDeletespecifiedline.
-DlnumlnumDeleterangeoflines.
-F"string"Findnextlinecontainingstring.Press
-(return)tofindthenextline,or
-(escape)tostop.
-IlnumStartinsertingafterthespecified
-line.Press(return)onan"empty"line
-tostop.
-LlnumListfromspecifiedline.Press(escapeto
-stop).
-PlnumlnumPrintspecifiedline(s).
-
-Thefirstbytesofthelistdatamustresemblethefollowing:
-DEFWLIST1;Size=SSSbytes;FirstEntryisnumber80
-DEFWLIST2;Size=SSSbytes;FirstEntryisnumber80
-..........
-DEFWLIST8Size=SSSbytes;FirstEntryisnumberNNN
-DEFWEND
-LIST1-9andENDarelabels.Foraworkspacelist(e.gLIST2:
-currentobjectpositions),replaceitslabelbyasuitableaddress
-between&8000and&8FFF(&means"hexadecimal").Thelabelofa
-permanentlist(e.gLIST1:initialobjectpositions)willbe
-definedatthestartofthecorrespondingdata.ENDwillbe
-definedafterthelastpermanentlist.
-
-Anexamplelistmightbeasfollows:
-LIST1
-DEFB10;Object80startsinroom10
-DEFB99;Object81startsinroom99
-DEFB255;255isthehighestvalueforalist
-entry
-DEFB30;Object83startposition
-
-Thelistdatamustbeassembledforusebytheadventureprogram.
-Enter:
-A(return)Toassemblethelistdata,and
-S(return)Savetheassembledcode,to:
-B:LIST.DAT
-ÅâAppendixD-NewTextformat
-Ä
-ÅD.1TextEntryandOutput
-
-ÄTextisentered,asdescribedelsewhereinastandardtextfile
-usinganyconvenienteditor.Theformatusedtodefinemessagesis
-asindicatedbytheexamplebelow:
-
-[1:Thisismessage1.]
-[2:Thisismessage2.Linesmaybeverylong
-andsplitoverseveral
-
-lineswithoutregardtotheformatting.Multiplespacesand
-carriagereturnsareignored.Toforcetheinsertionofspaces,
-theunderlinecharacter_isusedinplaceofthespace.Toforce
-theinsertionofacarriagereturn,apercentsymbol%isused.
-Notethatacarriagereturnisnotprintedifthecursorisatthe
-startofaline,sotoprintmultiplecrs,use%_%_%_%toputa
-spacebetweeneach.]
-
-[Thisismessage3.Ifnonumberisspecified,itisassumedthat
-themessagenumberisincremented.Youareadvisednottorelyon
-thisformatasitcancomplicatemodifyingthetext.]
-[100:Thisismessage100.Notethatmessagesshouldbeenteredin
-numericorder.]
-
-;Thisisacomment
-
-[101:Whatnext?_];Messageprintedbeforeinput(another
-;comment).NotethatcommentsareterminatedbyaCR,somore
-;semicolonsneedtobeused.
-
-[102:Textisstoredinthecompressedformmostlyinlower-case.
-Textis,however,reproducedasitisentered.Inmanycasesthis
-maybedonebyobeyingarulei.e.converttoUppercaseaftera
-fullstop.Atthestartofaline******
-Toavoidwastingmemoryinthecompressedform,youshould****]
-
-ÅD.2InputAnalysis.
-Ä
-Thereisnokeywordtableinthenewadventuresystem.Allwords
-tobeunderstoodbythegameareenteredinthemessages,andall
-wordsinthemessagescanberecognizedbythegame.Tomakethe
-scanningtaskpossible,onlywordswhicharespcificallymarkedin
-thetextarerecognized.
-
-Wordsinthetextaremarkedusinganup-arrowsymbol^plusa
-singlelettertogivethewordtype.Thisisoneofthefollowing:
-          V=verb=1
-         J=conjunction=2
-         P=preposition=3
-         N=nountype   =4
-         A=adjective  =5
-         C=ProperNoun=6
-
-Whenawordisentered(whilstthegameisrunning),theAcode
-programreceivesallthematcheswiththewordastwobytevalues
-fromeachmatchinList9,inorderofmessagenumber.
-
-ÅD.3ValuesreturnedbyInput
-Ä
-Thissectionoftheappendixisslightlytechnicalandmaybe
-omittedifyouarenotinterested.Itisnotnecessaryto
-understandthissectioninordertowriteacodeprogramsusingthe
-system,becausehigherlevelcallsarealwaysused.
-
-Eachtwo-bytevaluereturnedbyinputhasthefollowing
-components:
-     High-order3bits:wordtypeasgivenabove.
-     Remaining15bits:messagenumberinwhichmatchwasfound.
-ThevaluesarereturnedinList9high-orderfirst,thenlow-order
-insuccessivebytes.
-
-MatcheswitheachinputisreturnedeachtimeINPUTiscalled.
-Whentheendofthelineisfound,asingletwo-bytevalueofzero
-isreturned.Subsequentcallstoinputwillfetchinputfromthe
-user,andcontinuetoreturnitonewordatatime.
-
-Whenthematchingprocessencountersanon-alphanumericcharacter,
-thisisreturnedasanasciicodeinthefollowingform:
-     High-order8bits=0
-     Low-order8bits=asciicode
-
-Whenthematchingprocessencountersanumber,itisreturnedasa
-3bytevalueinthefollowingformat:
-     Firstbyte=1
-     Secondbyte=lo-orderbyteofnumber
-     Thirdbyte=mid-orderbyteofnumber
-     Fourthbyte=hi-orderbyteofnumber
-
-ÅD.4AcodeInputSupportRoutinesÄ
-
-TodecodethedatareturnedbyINPUTintoaformwhichcanbe
-readilyprocessed,agreatdealofworkhasbeenputinto
-producingacoderoutineswhichparsethecommands.These
-routinesarealltobefoundinthesourcefileAPARSE.TXT.
-
-Theroutinesmaybedividedintoanumberoflevels:
-
-1.Lowestlevel.AroutineREADINPUTLISTseparatesoutwordtype
-andvalue.(Forcomplexreasons,thetypesarethenumbersgiven
-abovemultipliedby2.Theseisofnoconsequenceastheyare
-alwaysreferredtobylabelse.g.NOUNTYPE).Forasciicharacters
-andnumbers,twopseudo-wordtypesarereturned-ASCIITYPEand
-NUMBERTYPE.Allvaluesarereturnedrelativetosomeconstants
-withnameslikeNOUNOFFSETsoastomaketheirrangeacceptable
-(e.g.singlebyte)
-
-2.AroutineCHECKTYPEzipsthroughlist9lookingforaninputof
-typeSEARCHTYPE.Thisisofusetoanyroutinewhichislooking
-wordsofspecifictype.e.g.Atthestartofasentence,themost
-likelyinputisaverb.Laterinthesentence,averbisunlikely,
-soitischeckedforaftercheckingfornounsetc.
-
-3.TheroutinePARSEINPUTdoesaslightlysimplifiedformofthe
-prioritycheckingdescribedin(2).Itgetsinputasitneedsit,
-andreturnsthevariablesVERB,PREP,NOUN2(anynounusedaftera
-preposition)andOBJECTTABLEasalistofobjectsspecified(or
-excludedwithEXCEPT).Appropriateerrormessagesareprintedfor
-sceneryinthisroutine(soastoavoidstoringtheirvalues).
-
-4.ThehighestleveloftheparserisaroutinePRESENTMULTIPLE.
-ThistakestheVERB,PREP,NOUN2,OBJECTTABLE()formatof
-PARSEINPUTandcallstheappropriateverbhandlersonceforeach
-object.ThevariableNOUN1issetupforeachobjectinturn.The
-routinemustdoaroutineattheendofitsprocessing,unless
-somethingofvastsignificanceoccurs-e.g.theplayermoving.
-
-âAppendixE.1-ObjectPositionsÄ
-
-Eachobjectinthenewadventuresystemhasapositionconsisting
-of2bytes-thelowandhipositions.Thesearestoredintwo
-separatetables,LOCURRENTPOSandHICURRENTPOS.Thehiposition
-determinestheeffectoftheloposition.Ifhipos=0,theobject
-isinroomlopos.Ifhipos<>0,theobjectiscontainedbyan
-objectofnumberlopos.Thetypeofcontainmentisgivenbythe
-valueofhipos.Forexample,sometypesofcontainmentareas
-follows: IN,ON,UNDER,INSIDE,BEHIND,STANDINGON,CARRIEDBY.
-
-Notethatallpeopleinthegame,includingtheplayerare
-objects.ThusobjectstheplayeriscarryinghaveLOPOS=PLAYERand
-HIPOS=CARRIEDorWORN.
-
-ÅE.2-UsingObjectPositionsÄ
-
-ÅE.2.1-CHECKOBJECTPOS
-
-ÄAdventuregamesoftenneedtocheckifanobjectisinacertain
-position.Tocheckbothhiandlopositionsisalittlecumbersome
-withthecurrentacode.Itisoftensufficientonlytocheckthe
-hiorlopositions.Forexample,ifanobjectneedstobecarried
-foraparticularpuzzle,justcheckingthehipositionmaybe
-enoughÅÄ(especiallyifothercharactershaveadifferentwayof
-holdingthings).
-
-ThereisausefulroutineCHECKOBJECTPOSwhichhasseveral
-functions.ItisgiventheparametersOBJECT,HIPOSandPOS.The
-routineismulti-functioned,dependentonthevaluesofthese:
-
-     IfPOS=0,OBJECTmayhaveanyLOCURRENTPOS
-     IfHIPOS=NONSPECIFIC,OBJECTmayhaveanyHICURRENTPOS
-     ForothervaluesofPOSandHIPOS,anexactmatchis
-required.
-
-TheroutinereturnsRESULT=TRUEiftheobjectisatthespecified
-co-ordinates.Thepowerofthisroutinecomesfromitstree-
-searchingnature.Ifitdoesnotfindontheimmediatepositionof
-theobject,itlooksattheobjectcontainingit(ifany),andso
-on.
-
-ÅE.2.2-GETNEXTOBJECTÄ
-
-Theaboveroutinesearchesinonedirectionalongtheobject
-positionstree.GETNEXTOBJECTsearchesintheotherdirection.
-i.e.givenanobject,itfindsalltheobjectscontainedwithin
-it.Itisusedindirectoryscanning,andotherspecialised
-applications.
-
-Becauseoftheenormousamountoflist-scanninginvolved,the
-routinehasbeenwritteninmachinecodeforspeed
-
-Touse,youmustsetSP=0,GOSUBINITGETOBJandinitialise
-SEARCHPOSandHISEARCHPOStothecontainer.Thispositionfollows
-exactlythesamerulesdiscussedbeforei.e.:
-     HISEARCHPOS=0,SEARCHPOS=roomnumberinwhichtofind
-objects.
-
-     HISEARCHPOS<>0,SEARCHPOS=objectnumberinwhichtofind
-objects.Therearetwosub-classestothis:
-          HISEARCHPOS=containmenttypee.g.IN,ONetc.
-          HISEARCHPOS=NONSPECIFIC,willfindallobjectscontained
-bytheobject.
-
-     
-Afterthisinitialising,thesubroutineGETNEXTOBJECTmaybeused
-togeteachobject,oneatatime.
-
-Therearefurtherdetailsinthecommentssurrounding
-GETNEXTOBJECTinACORE.TXT,andexamplesofuseINASPECIAL.TXTin
-theWormInParadise.Youwillnotoftenneedtousethisroutine,
-butwhenyoudo,itisessential.
-
-
-â
