@@ -5,13 +5,13 @@ The Level 9 archive is based on around 1000 floppy disks from various systems wh
 This GitHub repo is a work in progress. Here are some of the folders which I have processed so far.
 
 ## "floppy disk archive" 
-contains the files from the floppy disks retrieved from the Level 9 archive. some if the dusks could not be read due to degradation of the media. However, in many cases there are several copies of affected folders/systems, so I have tried to pull together all the necessary files from multiple disks 
+contains the files from the floppy disks retrieved from the Level 9 archive. some if the disks could not be read due to degradation of the media. However, in many cases there are several copies of affected folders/systems, so I have tried to pull together all the necessary files from multiple disks into the following folders:
 ## "game sources" 
 contains source codes for specific games 
 ## "sys sources" 
 contains source code for both the game authoring system (squasher, acode compiler, etc.) and the runtime systems.
 ## "sys sources/docs" 
-contains a manual for the overall system, but unfortunately it's in 1st word format, and needs converting to a more modern word processor format and/or pdf
+contains a manual for the overall system converted to MS Word from the original which was in 1st word format
 # Next steps
 1. As noted above, documentation needs converting into modern formats.
 2. There are about 20,000 sheets of paper to be scanned.
