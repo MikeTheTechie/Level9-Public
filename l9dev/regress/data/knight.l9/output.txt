@@ -1,0 +1,2211 @@
+
+Looking for gameplay log on disk - 'log.bat'
+
+Executing instructions in file 'log.bat'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Welcome to Knight Orc, copyright (c) 1987 from Level 9 Computing and Rainbird.
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and OOPS to take back bad moves). 
+ 
+Grindleguts struggled awake, groaning piteously. The world bucked and swayed,
+his headache was agony and he ached in every limb. Grindleguts' mouth tasted
+like a Hobbit's armpit and he seemed to have lost another tooth - he could not
+quite remember what had happened after they captured the Inn, yesternight, but
+he was sure it must have been fun! He moaned again and prepared to wallow in
+his hangover. 
+ 
+A sharp object stabbed at Grindleguts' ribs again, interrupting his enjoyment
+of his misery. Grindleguts risked ungluing one bloodshot eye and squinted at
+the world. A shaft of sunlight stabbed back. It was still light. It was very
+light! Some idiot had woken him in the middle of the day! 
+ 
+What now? #title: Knight Orc test script
+#comment: MSX version 
+#SEED 42
+Seed set to 42
+QUIT
+Really restart? YES
+Welcome to Knight Orc, copyright (c) 1987 from Level 9 Computing and Rainbird.
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and OOPS to take back bad moves). 
+ 
+Grindleguts struggled awake, groaning piteously. The world bucked and swayed,
+his headache was agony and he ached in every limb. Grindleguts' mouth tasted
+like a Hobbit's armpit and he seemed to have lost another tooth - he could not
+quite remember what had happened after they captured the Inn, yesternight, but
+he was sure it must have been fun! He moaned again and prepared to wallow in
+his hangover. 
+ 
+A sharp object stabbed at Grindleguts' ribs again, interrupting his enjoyment
+of his misery. Grindleguts risked ungluing one bloodshot eye and squinted at
+the world. A shaft of sunlight stabbed back. It was still light. It was very
+light! Some idiot had woken him in the middle of the day! 
+ 
+What now? #SEED 42
+Seed set to 42
+E
+You, Grindleguts, leap furiously at the jabbing figure beside you - and
+discover, to your horror, that your legs are fastened to some huge animal! To
+the shrill sound of human merriment, you slide slowly round the horse to which
+you have been tied and hang helplessly below it. 
+ 
+Your captors are dressed in a variety of styles, from long white robes to the
+full armour of a knight, mounting another horse nearby. He catches your glance
+and curls his upper lip in disdain. "You don't stand a chance, little man", he
+says, spitting contemptuously, "I can't think why the orcs chose you as their
+champion". Lowering his visor, he rides out into the full sunlight. 
+ 
+One of the robed figures hauls you back upright, jeering "Go on, Sir Orc,
+you're next" and gives your horse a prod with his spear, laughing as the
+frightened beast rears and bolts. 
+ 
+What now? E
+You bravely charge the knight. 
+The knight takes aim and, WHOOMPH, his lance meets your chest and you fall
+backwards, breaking your bonds. The crowd roar as you fall, stunned, to the
+hard ground .... 
+ 
+Some time later, you awake. Bruised and battered, but you must be still alive!
+At first it seems to be night, but you gradually realise that you are buried. 
+ 
+You are in a huge pile of garbage, with the other rubbish thrown away after
+the tournament. An exit leads downwards and outside. You can see a putty knife
+and a hooded cloak. 
+What now? TAKE KNIFE AND CLOAK
+You take the putty knife. 
+You take the hooded cloak. 
+What now? WEAR CLOAK
+You wear the hooded cloak. 
+What now? EXAMINE KNIFE
+It is rusty and blunt, barely able to carve the slime off a puddle. 
+A male voice in the distance shouts, "Does anyone have any treasure to spare?"
+What now? OUT
+You go outside and are on a trampled field, pock-marked by the feet of humans
+and their horses. An exit leads west. You can see a pile of garbage. 
+What now? W
+You go west and are on a jousting field; an acre of firm meadow, divided by a
+fence which guides and separates the contestants. The grass is surrounded by
+garish pavilions and a tented grandstand, big enough for hundreds of people to
+watch the fight. Exits lead north, east, south and west. 
+What now? N
+You go north and are on a dismal fairground in a rowan coppice. In the
+distance is a castle. Exits lead in all directions and inside. You can see a
+flagpole. 
+A female voice in the distance shouts, "Hey! Give that back!" 
+What now? EXAMINE FLAGPOLE
+It is an ugly white post, a hundred feet tall, stuck in the mud. Fastened to
+it is a halyard. 
+The prophet enters from the northeast. 
+We won't bother with "What now" from now on. 
+> TAKE HALYARD
+You take the halyard. 
+> GO TO CASTLE
+You go northwest and are in a juniper thicket. 
+You go northwest and are outside an ugly castle in a hornbeam tangle. Exits
+lead in all directions and inside. You can see a drawbridge. The drawbridge is
+closed. 
+> EXAMINE DRAWBRIDGE
+It is a moving bridge, nailed together from big tree-trunks, which can be
+swung down across the castle's moat and allow you to enter. The drawbridge is
+closed. Fastened to it is a note. 
+A male voice in the distance shouts, "Are there any orcs listening?" 
+> READ NOTE
+It is printed with "Knock very carefully" in many languages, including
+cartoons for Yellow Eye Readers. It also warns that the drawbridge can't be
+re-opened from inside the castle. 
+> THROW KNIFE AT DRAWBRIDGE
+It hits the drawbridge, which flies open and hits the ground with a thump,
+narrowly missing you. 
+The drawbridge is wide open. 
+> TAKE KNIFE
+You take the putty knife. 
+A male voice in the distance shouts, "Anyone seen the orc? I want to kill it."
+> N
+You go north and are standing on the drawbridge which leads into the castle.
+Exits lead north, inside and outside. 
+> DROP KNIFE
+You drop the putty knife. 
+> N
+You go north and are in a cobbled castle courtyard, surrounded by untidy ranks
+of wooden sheds which sprawl crookedly against the outer stone walls. Your
+guts rumble in sympathy with the tempting sounds of byre and stable, and the
+pungent smell of the mews soon gets the saliva flowing.
+ 
+High above this homely chaos rears the stark square masonry of the keep; an
+ominous white door leading into its grim interior. Exits lead north through a
+door, south and outside. You can see a great chest and an ominous white
+doorway. 
+> N
+You go north through the door and are in the single, large entrance hall at
+the base of the keep. Its soft mudrock floor has been polished smooth by use
+and the route from the entrance door to the back of the hall has worn into a
+ditch. The rounded treads of a spiral staircase emerge from the end of this
+furrow and coil upwards into the wall. Exits lead south through a door and
+upwards. You can see the knight in white satin. The pallid knight leaps up in
+a rage. "How dare you enter my home", he splutters, "You will pay for this
+insult!" 
+> UP
+You go upwards and are on the dangerously rounded steps of a narrow, sunwise
+stone staircase, which winds upwards within the stone wall of the keep. Exits
+lead upwards and downwards. 
+> UP 
+You go upwards and are on a stone walkway, between the rotting planks of the
+patched roof and the pitted limestone parapet around the edge of the keep.
+From this high lookout, there is a dizzying view across the whole forest
+though you can't quite make out the orc lair beyond the viaduct. In the
+distance is a gibbet, a clearing, a crossroads, a fairground, a forest lawn, a
+cave, a royal oak, a tower, a viaduct and a well. An exit leads downwards. 
+A female voice in the distance shouts, "Does anyone have any treasure to
+spare?" 
+> RUN TO CLEARING
+The pallid knight leaps up in a rage. "How dare you enter my home", he
+splutters, "You will pay for this insult!" 
+You are in a clearing in a rowan edgewood. In the distance is a castle. Exits
+lead in all directions. You can see a goat. 
+Synonym the wizard enters from the northwest. A female voice in the distance
+shouts, "I've got a valuable golden ruler." A male voice in the distance
+shouts, "Does anyone have any treasure to spare?" 
+> EXAMINE GOAT
+It is an obnoxious creature with sharp horns. It is tied up with a tether. 
+Synonym the wizard mumbles quietly. The goat stares at you. A male voice in
+the distance shouts, "Anyone seen the orc? I want to kill it." 
+> TAKE TETHER
+You take the tether. 
+> TIE TETHER TO HALYARD
+The ropes join magically. 
+Synonym the wizard gives you a long stare. The goat goes north. 
+> RUN TO ROYAL OAK
+You are inside the rotten trunk of the royal oak, in a wide chamber lined with
+leaves and cobwebs. Just enough light seeps in from outside for you to be able
+to see the ridged and knotted wood all around. An exit leads outside. You can
+see a gold sovereign and a washing line. 
+A male voice in the distance shouts, "I've just found a valuable golden rod."
+A male voice in the distance shouts, "Right, you asked for it!" 
+> TAKE WASHING LINE
+You take the washing line. 
+> TIE LINE TO ROPE
+The ropes join magically. 
+A male voice in the distance shouts, "Are there any orcs listening?" 
+> TAKE SOVEREIGN
+You take the gold sovereign. 
+> GO TO WELL
+You go outside and are beside the royal oak in an alder tangle. 
+You go east and are in a beech heartwood. 
+You go east and are in a beech scrubland. 
+You go east and are beside a quaint little well in a beech spinney. In the
+distance is a castle. Exits lead in all directions and downwards. You can see
+a welcome mat and a hardwood roller. 
+> EXAMINE MAT
+It is decorated with the following message: 
+"Welcome to the Orc's Head Inn, prop B.Wallop, purveyor of the only beer in
+all Middle Earth. 
+Rules of the tavern: no credit, no spitting, no smoking, no killing unless
+provoked, no elves without a health certificate, no hobbits without a lead, no
+snakes, rabid dogs or orcs allowed". Underneath it is a key. 
+A male voice in the distance shouts, "Help!" 
+> TIE ROPE TO ROLLER
+You fasten the coil of rope to the hardwood roller. It hangs down into the
+depths of the well. 
+> DOWN
+You climb the rope... . You go downwards and are at the bottom of the well,
+standing ankle-deep in mud. An exit leads upwards. You can see a hessian
+hawser and a bucket. 
+> TAKE HAWSER
+You take the hessian hawser. 
+> UP
+You go upwards and are beside a quaint little well in a beech spinney. In the
+distance is a castle. Exits lead in all directions and downwards. You can see
+a welcome mat and a hardwood roller. 
+A male voice in the distance shouts, "Can someone tell me how to get down the
+well?" 
+> UNTIE ROPE
+You unfasten the coil of rope. 
+> TIE HAWSER TO ROPE
+The ropes join magically. 
+> TAKE MAT AND KEY
+You take the welcome mat. A key falls from under the mat and clatters on the
+ground. 
+You take the key. 
+A male voice in the distance shouts, "How do I get through the Paradise Gate?"
+> NW
+You go northwest and are beside a gibbet in a beech ghostwood. In the distance
+is a castle. Exits lead east, south, southeast, southwest and west. You can
+see a barrow wight and a wolf. 
+It paces up and down. 
+> EXAMINE GIBBET
+It is a homely construction, used for executions. "A good thing too", you
+think, "If more criminals were hung, there would be less of them after the
+loot". Fastened to it is a noose. 
+The barrow wight paws the ground. 
+> TAKE NOOSE
+You take the noose. 
+The wolf stares at you. 
+> TIE NOOSE TO ROPE
+The ropes join magically. 
+The wolf paces up and down. A male voice in the distance shouts, "Goodbye
+folks, I'm leaving." 
+> W
+You go west and are a little way south of a tower, separated from it by a
+thorn hedge in a beech forest. In the distance is a castle. Exits lead north,
+east, south, southeast, southwest and west. 
+A voice in the distance shouts, "Hey! Give that back!" 
+> PUT MAT ON HEDGE
+You put the welcome mat on the thorn hedge. 
+> N
+You clamber over the hedge. You go north and are at the base of the tower
+where Rapunzel lives. It is a peculiarly spiky building with no way in. Exits
+lead south and upwards. You can see Rapunzel. Rapunzel is looking out of an
+upper window of the tower, pouting sexily and letting down her incredibly long
+hair. 
+She gives you a dirty look. 
+> CUT HAIR
+You cut off a good length of Rapunzel's hair, by hacking at it with nails and
+teeth. Rapunzel shouts angrily, hauls in her remaining tresses and disappears
+into the tower. You hear loud cursing and threats of vengeance against orcs. 
+> TAKE HAIR
+You take the piece of plaitted hair. 
+> TIE HAIR TO ROPE
+The ropes join magically. 
+> GO TO CROSSROADS
+You go south and are a little way south of a tower, separated from it by a
+thorn hedge in a beech forest. 
+You go southeast and are in a beech scrubland. 
+You go southeast and are in a beech wildwood. 
+You go east and are at a crossroads in a beech woodland. In the distance is a
+castle. Exits lead in all directions. You can see some signposts. 
+> EXAMINE SIGNPOSTS
+They are two signposts, set at opposite corners of the crossroads. They
+indicate "NOWHERE" to west, north and east. 
+A horn blatts in the distance and you hear hooves approaching at a gallop. 
+> TIE ROPE BETWEEN SIGNPOSTS
+You fasten the coil of rope between the signposts. The rope is now tied
+tightly between the two posts, making an effective trip-wire. 
+A male voice in the distance shouts, "Stop attacking me!" 
+A mounted hunter bursts through the trees and spurs his nag towards you.
+Repeated shouts of "Yoiks! Tally ho!", together with his choice of red as
+camouflage, demonstrate his hunting skill. The fool is waving a lassoo and
+clinging on for dear life. 
+> EXAMINE HUNTER 
+He is a chinless wonder, dressed neatly in hunting pink and jodhpurs. He is
+riding a swift horse. The hunter is carrying a poignard and a lassoo. 
+The stupid hunter doesn't see your rope! His horse ducks under it and runs
+away, but he is caught mid-chest and hurled, stunned, to the ground at your
+feet. 
+> TAKE LASSOO
+You take the lassoo. 
+A male voice in the distance shouts, "Does anyone have any treasure to spare?"
+> UNTIE ROPE
+You unfasten the coil of rope. 
+> TIE LASSOO TO ROPE
+The ropes join magically. 
+A female voice in the distance shouts, "Are there any orcs listening?" 
+> RUN TO FOREST LAWN
+Genghis takes the gold sovereign. 
+You are on a forest lawn in a hornbeam underbrush. In the distance is a
+castle. Exits lead in all directions. You can see the green knight. He is
+riding a green horse. The green knight is carrying a war axe and some reins. 
+> EXAMINE KNIGHT
+He is "A handsome, parfait knight, great-muscled, fit and slim. 
+Almost a giant in height, and long and straight of limb. 
+Clad all in green is he, and green his skin and hair. 
+His eyebrows are mossy, bright emerald his stare. 
+No shield, helm or plastron, nor bright chain mail has he. 
+Of armour he has none. Just, in one hand, holly. 
+Storm-like and strong, he seems. And swift to strike and stun. 
+Dreadful his blows, one deems. Once dealt, true death has come." 
+ 
+In other words, he is a bully of the worst type. He is riding a green horse.
+The green knight is carrying a war axe and some reins. 
+> TAKE AXE
+You take the war axe. 
+The green knight puffs himself up and stares down scornfully from the back of
+his overgrown pony, 
+"If thee be brave, not coward base, 
+Then thee must now my challenge face. 
+With this, my axe, strike blow for blow. 
+I'll let thee strike first. Have a go!" 
+He indicates his mighty axe. 
+ 
+> KILL HORSE 
+With a surprisingly dextrous stroke you behead the horse. The green knight
+shouts in surprise but, before he can retaliate, the massive steed has fallen
+on him! He is trapped, but only for the time being. 
+The green knight looks dazed. A male voice in the distance shouts, "How do I
+get through the Paradise Gate?" 
+> TAKE REINS
+You take the reins. 
+The green knight struggles on the ground. 
+> TIE REINS TO ROPE
+The ropes join magically. 
+With a massive effort, the green knight clambers to his feet and dusts himself
+down. The green knight takes the head. 
+> N
+You go north and are in a hornbeam scrubland. Exits lead in all directions. 
+> N
+You go north and are in a hornbeam ghostwood. Exits lead in all directions. 
+> N
+You go north and are in a hornbeam coppice. Exits lead in all directions. 
+> W
+You go west and are in a hornbeam clump. Exits lead in all directions. 
+A male voice in the distance shouts, "I want some gold." 
+> W
+You go west and are in a holly edgewood. Exits lead in all directions. You can
+see a gold heart. 
+> TAKE GOLD HEART
+You take the gold heart. 
+> GO TO CASTLE
+You go southeast and are in a hornbeam forest. 
+You go southeast and are in a hornbeam scrubland. You can see the valkyrie. 
+She goes west. You go east and are in a hornbeam spinney. 
+You go east and are outside an ugly castle in a hornbeam tangle. Exits lead in
+all directions and inside. You can see a drawbridge. The drawbridge is wide
+open. 
+> N
+You go north and are standing on the drawbridge which leads into the castle.
+Exits lead north, inside and outside. You can see a putty knife. 
+A male voice in the distance shouts, "Anyone seen the orc? I want to kill it."
+A male voice in the distance shouts, "Who's stolen all the treasure?" 
+> N
+You go north and are in a cobbled castle courtyard, surrounded by untidy ranks
+of wooden sheds which sprawl crookedly against the outer stone walls. Your
+guts rumble in sympathy with the tempting sounds of byre and stable, and the
+pungent smell of the mews soon gets the saliva flowing.
+ 
+High above this homely chaos rears the stark square masonry of the keep; an
+ominous white door leading into its grim interior. Exits lead north through a
+door, south and outside. You can see a great chest and an ominous white
+doorway. 
+> UNLOCK CHEST
+The lock opens with a little click. 
+> OPEN CHEST
+The chest swings open. The hinged lid is prevented from falling backwards too
+far by a cord tied between it and the chest. 
+> TAKE CORD
+You take the cord. The heavy lid falls backwards and strikes the ground with a
+tremendous crash. 
+Denzyl enters from outside. 
+> TIE CORD TO ROPE
+The ropes join magically. 
+Denzyl scratches himself. 
+> DROP KEY
+You drop the key. 
+A male voice in the distance shouts, "Right, you asked for it!" 
+> DROP AXE 
+You drop the war axe. 
+Denzyl mumbles quietly. 
+> FIND CAVE
+You go south and are standing on the drawbridge. You can see a putty knife. 
+Denzyl enters from the north. 
+You go south and are outside an ugly castle in a hornbeam tangle. You can see
+a drawbridge. The drawbridge is wide open. 
+You go east and are in a juniper heartwood. 
+Kris the ant-warrior enters from the south. You go east and are outside a cave
+in a juniper scrubland. In the distance is a castle. Exits lead in all
+directions and inside. 
+> IN
+You go inside and are in the hermit's horrid little cave, decorated with
+cartoons and Christmas cracker mottos. An exit leads outside. You can see the
+hermit and a trophy cabinet. 
+> GIVE GOLD HEART TO HERMIT 
+You give the gold heart to the hermit. The hermit examines it and bursts out
+laughing. 
+The hermit turns his back on you and walks over to his trophy cabinet. His
+shoulders are shaking with mirth. He puts the gold heart inside the trophy
+cabinet. 
+> HIT HERMIT
+While the hermit isn't looking, you clobber the old fool on the back of his
+head and knock him out cold. 
+> EXAMINE HERMIT
+He is unconscious. He is wearing a belt and some saffron robes. 
+> TAKE BELT
+You take the belt. 
+A male voice in the distance shouts, "Goodbye folks, I'm leaving." 
+> TIE BELT TO ROPE
+The ropes join magically. 
+A female voice in the distance shouts, "Hey! Give that back!" 
+> RUN TO INN
+You are in the public bar of the Orc's Head Inn, squashed between serried
+ranks of shove-halfpenny games and the lacquered bar top with its sticky
+puddles and rows of imitation kegs. Magic wall-trumpets whine with Hobbit and
+Westron music and the mood is one of gloom and depression. It all makes you
+quite homesick. Exits lead east, west and outside. You can see the innkeeper,
+an empty glass and a bar. 
+The innkeeper scratches himself. 
+> EXAMINE BAR
+It is just the right height to rest your chin on. You avoid doing this,
+though, in case it gives people ideas. Underneath it is a spear. 
+The innkeeper examines the spear. 
+> TAKE SPEAR 
+You take the spear. 
+The innkeeper polishes the bar. 
+> RUN TO VIADUCT
+You are just north of a broken viaduct in a pine grove. In the distance is a
+castle. Exits lead north, northeast, east, south, west and northwest. 
+> TIE ROPE TO SPEAR
+You fasten the coil of rope to the spear. 
+> S
+You go south and are standing on the viaduct, just north of a huge gap where
+the southern end of the viaduct has been washed away. To the south, across the
+chasm, is a huge orc's head, carved from the rock. Its nose seems to have been
+damaged, but enough remains to hold a large metal ring over the gap in the
+viaduct. An exit leads north. 
+A male voice in the distance shouts, "Right, you asked for it!" 
+> THROW SPEAR
+A funny little gnome appears on the horizon and sprints towards you, yelling
+"Stop! I don't know if you are allowed to do that". He waves a book as he
+runs, shouting, "To prove that you are, tell me one word from The Sign of the
+Orc, by Peter McBride. What is the word at page 34, line 4, word 3?"
+REMARKABLY 
+The gnome runs past you and vanishes into the distance.
+The spear sails through the air and neatly slips through the ring! An
+excellent shot! And just in time too, because an ugly crowd of people advance
+to block your retreat. The green knight stalks forwards, eager for revenge,
+and you stumble backwards into the chasm. There is no way back now! 
+ 
+Fortunately, the spear has lodged securely in the ring above, and the rope
+hanging from it proves surprisingly strong, so the effect is that you escape,
+swinging in a graceful arc through the air, jeering at your pursuers all the
+while... 
+ 
+And crunch into the far wall of the chasm. After a long while, the darkness
+fades, the stars clear and the land stops spinning, so you stagger upright and
+check for signs of damage. Not many bones are broken but, patting at your
+cranial ridge, you discover with a shock that you are wearing some kind of
+visor - and presumably have been doing so all along! It seems to have been
+knocked loose and can be raised at any time from now on. However, I would
+advise you to leave it in place until you've explored the land south of the
+chasm. 
+ 
+Do you want to follow my advice and leave the visor alone? YES 
+You're about to move to another part of the game. Do you want to save your
+position first, just in case? NO 
+Play the program cassette containing "Hordes of the Mountain King". 
+Welcome to "Hordes of the Mountain King", the next part of Knight Orc from
+Level 9 Computing, copyright (c) 1987. 
+(This version allows you to use RAM SAVE, RAM RESTORE and OOPS). 
+ 
+You stroll around the side of Orc Mountain, whistling merrily and working out
+how to most impress the other orcs with your great cleverness. Not everyone
+could have escaped, single handed, from so many humans! You recognize a rocky
+outcrop outsider the lair, whoop happily, "Hey! Oink, Brainz, I'm home!" and
+promptly get smacked on the nose by a thrown log. 
+ 
+As you waken, you see a group of orcs standing around. "Who'd a thought it,"
+snorts a pig-like individual, "Stupid Grindleguts didn't even bring us any
+food. I vote we eats him." Luckily, the other orcs are too busy rifling your
+possessions to listen. 
+ 
+After fighting over who gets what, the orcs jostle their way south towards the
+archway to the orc lair, leaving you penniless. 
+ 
+You are just south of a glowing gate on a grassy plain. Exits lead south,
+southwest and west. You can see a silver loaf. 
+> S 
+You go south and are at an archway beside a huge mountain to the east. Exits
+lead north, east, south, southwest, west and northwest. You can see an ancient
+inscription. 
+> READ INSCRIPTION
+It is a poem: 
+"In deep grottos where no one goes, 
+rats nibble toes, ghosts moan their woes 
+and nothing grows: you need what glows. 
+ 
+In velvet night where nothing's bright, 
+all corners tight, no ways are right, 
+fight the wight's bite: glow casts a light. 
+ 
+In pitchest dark where monsters bark, 
+boojum is snark, choices are stark, 
+to meet the mark, glow makes a spark." 
+ 
+The letters are carved into the stone and look slightly luminous. 
+A far-off female voice shouts, "Anyone seen any orcs?" 
+> E
+You go east. It is dark. 
+> CAST GLOW AT ME
+You are now glowing. You are at a crossover between passageways. Exits lead
+east, south and west. 
+> E
+You go east and are at a junction in the passageway. Exits lead north, south
+and west. 
+A far-off female voice shouts, "I want to kill me an oik!" 
+> N
+You go north and are in a dim tunnel, too long to be properly lit by your GLOW
+spell. Exits lead east, south and west. 
+A remote male voice shouts, "Are there any orcs listening?" 
+> W
+You go west and are in the headquarters cave of the Orc Lair, from where past
+hordes have sallied forth to burn and despoil the Land. An exit leads east.
+You can see Grok. 
+> FOLLOW OINK
+You go east and are in a dim tunnel. 
+Oink enters from the east. 
+> EXAMINE OINK
+He is a stupidly greedy orc. He is wearing a steel helmet. 
+Oink goes west. 
+You go west and are in the headquarters cave of the Orc Lair, from where past
+hordes have sallied forth to burn and despoil the Land. An exit leads east.
+You can see Grok and Oink. 
+> FOLLOW OINK
+He goes east. 
+You go east and are in a dim tunnel, too long to be properly lit by your GLOW
+spell. Exits lead east, south and west. You can see Oink. 
+He goes south. 
+You go south and are at a junction in the passageway. Exits lead north, south
+and west. You can see Oink. 
+He goes west. 
+You go west and are at a crossover between passageways. Exits lead east, south
+and west. You can see Oink. 
+He goes south. 
+You go south and are in a maze of little dust-dry passages. Exits lead north,
+south and southeast. You can see Oink. 
+He goes south. 
+You go south and are in a maze of dry little dusty passages. Exits lead north
+and east. You can see Oink. 
+He goes east. 
+You go east and are in a maze of dusty little dry passages. Exits lead east,
+west and northwest. You can see Oink. 
+He goes east. 
+You go east and are in a maze of dusty dry little passages. An exit leads
+west. You can see Oink and some wriggly writing. 
+> STEAL HELMET
+You take the steel helmet. Oink is enraged by the theft. He snarls, "So, you
+want to fight!" 
+He attacks you, but you dodge. 
+> RUN TO GROK
+You are in the headquarters cave of the Orc Lair, from where past hordes have
+sallied forth to burn and despoil the Land. An exit leads east. You can see
+Grok. 
+He says, "Why haven't you brought me any food?" 
+> EXAMINE GROK
+He is the leader of the orcs - a great bully, all scars and stink. He is
+carrying a crumpled map. 
+> READ MAP
+Grok hides the map and shouts, "Get your hands off my map! And where's my rat
+pie?" 
+> WEAR HELMET
+You wear the steel helmet. 
+A far-off female voice shouts, "Hi folks, I'm back!" 
+> FIND RAT PIE
+You go east and are in a dim tunnel. 
+You go east and are on the landing. 
+You go upwards. As you reach the top of the stairs, an orc reaches out with a
+large club and hits you over the head! Boiinnnggg.... The helmet is slightly
+dented, but you are unharmed. You go upwards and are in a greasy kitchen.
+Exits lead south, west and downwards. You can see Brainz, a kitchen knife, a
+crude tray and a flour sack. 
+> TAKE KNIFE
+You take the kitchen knife. 
+A far-off female voice shouts, "Shut up!" 
+> EXAMINE TRAY
+It is a hedgehog-shaped piece of wood. On it is a rat pie. 
+> TAKE PIE
+You take the rat pie. 
+Brainz looks around suspiciously. A remote male voice shouts, "How do I get
+through the Paradise Gate?" 
+> TAKE SACK
+You take the flour sack. 
+> RUN TO GROK
+You are in the headquarters cave of the Orc Lair, from where past hordes have
+sallied forth to burn and despoil the Land. An exit leads east. You can see
+Grok. 
+Grok seems delighted, "Ahh. Rat pie! And about time too!" He drops the map,
+grabs the pie and pushes his face into it. A remote male voice shouts, "Are
+there any orcs listening?" 
+> TAKE MAP
+You take the crumpled map. 
+Grok wolfs down great chunks of rat pie. 
+> RUN TO ARCHWAY
+You are at an archway beside a huge mountain to the east. Exits lead north,
+east, south, southwest, west and northwest. You can see an ancient
+inscription. 
+> READ MAP 
+It is a parchment picture, showing the land around here. A blue river flows
+down the middle, from a bridge at the top to a marsh at the southern end. At
+the top right is the mountain; south of there is a small forest; across the
+river is a castle and north of that is an odd house and a graveyard. 
+> E
+You go east and are at a crossover between passageways. Exits lead east, south
+and west. You can see the Prophet of Greater Manchester. 
+> S
+You go south and are in a maze of little dust-dry passages. Exits lead north,
+south and southeast. 
+A remote male voice shouts, "Anyone seen any orcs?" 
+> S
+You go south and are in a maze of dry little dusty passages. Exits lead north
+and east. 
+> E
+You go east and are in a maze of dusty little dry passages. Exits lead east,
+west and northwest. 
+> E
+You go east and are in a maze of dusty dry little passages. An exit leads
+west. You can see some wriggly writing. 
+> READ WRITING
+The letters are barely visible against the background of the writing. You
+haven't a clue what they say. 
+> W
+You go west and are in a maze of dusty little dry passages. Exits lead east,
+west and northwest. 
+> CAST GLOW AT WALL
+The existing glow spell wears off. The wall is now glowing. 
+> E
+You go east. It is dark. The writing is now visible! 
+A far-off female voice shouts, "Can anyone hear me?" 
+> READ WRITING
+The wriggly writing is a line of faint, luminous letters! Now that the room is
+dark, you can make out the word "COLD". 
+> W
+You go west. It is dark. 
+> CAST GLOW AT ME
+You are now glowing. You are in a maze of dusty little dry passages. Exits
+lead east, west and northwest. 
+> RUN TO HOUSE
+You are outside a spooky-looking house on a north-south road. Exits lead
+north, east, south, southeast, southwest, west, northwest and inside. 
+> IN
+You go inside and are in a porch. Exits lead north, west and outside. 
+> N
+You go north and are in a brown study. Exits lead east, south and upwards. You
+can see a grate. Inside it is a nasty hot fire. 
+A far-off female voice shouts, "Won't anyone tell me how to see in the dark?" 
+> CAST COLD AT FIRE
+A blue ray zaps out from your hand! The fire is now extinguished. 
+> EXAMINE GRATE
+It is a strange kind of fire basket. It's too hot to make out anything else.
+(Except that it is embossed with the word "EYE".) 
+A far-off female voice shouts, "Anyone seen any orcs?" 
+> UP
+You go upwards and are on a flight of stairs. Exits lead north, south through
+a door, west, upwards and downwards. 
+> S
+You go south through the door and are in a bedroom. Exits lead north through a
+door, downwards and inside. You can see a mouse and a four-poster bed. 
+The mouse nibbles the floorboards. A remote male voice shouts, "Stop following
+me!" A far-off female voice shouts, "Can someone help me with the drawbridge?"
+> LOOK UNDER BED
+It is a strange low table. Underneath it is a small hole. 
+The mouse sniffs around under the bed. 
+> PUT KNIFE IN HOLE
+You put the kitchen knife inside the small hole. 
+The mouse sniffs around a little. 
+> CLOSE DOOR
+You close the door. 
+The mouse sniffs around under the bed. 
+> CATCH MOUSE
+The mouse is too fast for you to catch. 
+The mouse runs back under the bed. You hear a thud and the mouse rebounds from
+under the bed and escapes through a little crack. A remote male voice shouts,
+"Which bush is the Rainbird supposed to be in then?" 
+> PUT MAP IN CRACK
+You put the crumpled map inside the narrow crack. 
+> WAIT FOR MOUSE
+A mouse enters through a crevice in the wall. 
+> PUT HELMET IN CREVICE
+You put the steel helmet inside the tiny crevice. 
+The mouse sniffs around under the bed. 
+> CATCH MOUSE
+The mouse is too fast for you to catch. 
+The mouse runs back under the bed. You hear a thud and the mouse rebounds from
+under the bed and bumps into the door. It starts running round in circles,
+looking for any way of getting out of sight. 
+> DROP SACK
+You drop the flour sack. 
+The mouse runs back under the bed. You hear a thud and the mouse rebounds from
+under the bed the mouse sees some cover! It runs into it. 
+> TAKE SACK
+You take the flour sack. 
+> CAST EYE
+A floating eye appears nearby. 
+The floating eye studies its surroundings. 
+> EYE, GO INTO HOLE
+The floating eye nods slowly. 
+The mouse is squeaking very quickly. It goes inside. The eye is now in a
+mouse-hole. An exit leads outside. It can see a glittering card. Now you know
+what is in the hole, you should be able to remove its contents. A far-off
+female voice shouts, "Shut up!" A remote male voice shouts, "Gotcha! Hehehe!"
+A remote male voice shouts, "Which bush is the Rainbird supposed to be in
+then?" 
+> TAKE CARD
+You take the glittering card. 
+> GO TO GARDEN
+You go north through the door and are on a flight of stairs. 
+You go downwards and are in a brown study. You can see a grate. 
+You go south and are in a porch. 
+The mouse is squeaking very quickly. 
+You go west and are outside a spooky-looking house on a north-south road. 
+The mouse is squeaking very quickly. You go west and are in a rose garden,
+beside an ugly shed on a grassy plain. Exits lead in all directions. You can
+see a clove of garlic, a tiny marrow, a apple tree and a statue. 
+> W
+You go west through the door and are inside the shed. An exit leads east
+through a door. You can see the custodian and a termite-riddled door. 
+The mouse is squeaking very quickly. The custodian examines the mysterious
+note. 
+> CLOSE DOOR
+You close the termite-riddled door. On the back of the door is a note! 
+The custodian whistles tunelessly. A far-off female voice shouts, "Stop
+following me!" 
+> READ NOTE
+It is torn from a fertilizer packet. Only one word stands out clearly, namely
+"GROW". 
+The mouse grooms its fur with a hind paw. The custodian goes east through the
+door. 
+> E
+You go east through the door and are in a rose garden, beside an ugly shed on
+a grassy plain. Exits lead in all directions. You can see the custodian, a
+clove of garlic, a tiny marrow, a apple tree and a statue. 
+The mouse is squeaking very quickly. The custodian goes east. 
+> CAST GROW AT MARROW
+The marrow grows hugely! 
+A remote male voice shouts, "Which bush is the Rainbird supposed to be in
+then?" 
+> EXAMINE MARROW
+It is now a champion, with great white letters spelling "CURE". 
+The mouse is squeaking very quickly. The mouse squeaks quietly. 
+> TAKE GARLIC
+You take the clove of garlic. 
+> N
+You go north and are on a grassy plain. Exits lead in all directions. 
+The mouse is squeaking very quickly. The mouse stares at you with beady eyes.
+A remote male voice shouts, "Where do I take treasure?" 
+> N
+You go north and are on a grassy plain. Exits lead in all directions. You can
+see a ghost and a silver candlestick. 
+The ghost goes southeast. 
+> NW
+You go northwest and are in a graveyard on a grassy plain. Exits lead north,
+northeast, east, south and southeast. You can see a gravestone. 
+The mouse grooms its fur with a hind paw. 
+> S
+You go south and are in the necropolis. Exits lead north and south through a
+door. You can see a mock-gothic tomb. 
+The mouse is squeaking very quickly. 
+> S
+The door is closing! Do you want to continue? YES
+You go south through the door and are inside the bone-chilling barrow. An exit
+leads north through a door. You can see the vampire and a half coin. The door
+shuts with a solid clunk. You realise with alarm that the it can't be opened
+from this side! 
+The mouse squeaks quietly. 
+> TAKE COIN
+You take the half coin. 
+> WAIT FOR VAMPIRE
+A far-off female voice shouts, "Where do I take treasure?" A remote male voice
+shouts, "Where has the custodian got to?" 
+> CAST CURE AT MOUSE
+The mouse is completely healed. 
+The mouse is squeaking very quickly. The vampire wakes up and stretches, He
+descends gratefully on the mouse and, between sips, turns to you. "Many
+thanks, oh ye of little height. I needed that! As a reward I'll describe the
+magic knives spell". With a few quick gestures he explains how KNIVES works
+and opens the door for you. 
+> N
+You go north through the door and are in the necropolis. Exits lead north and
+south through a door. You can see a mock-gothic tomb. 
+> WAIT FOR GHOST
+A remote male voice shouts, "What do I do with the Valkyrie?" 
+The valkyrie enters from the north. 
+The valkyrie takes the mouse. 
+Erik Bloodeagle enters from the north. 
+Erik Bloodeagle mutters, "I smell an orc". 
+Erik Bloodeagle backs uneasily away. 
+John Doe enters from the north. 
+John Doe goes south through the door. 
+Erik Bloodeagle goes north. 
+The valkyrie enters from the north. 
+The valkyrie goes south through the door. 
+The valkyrie enters from the south through the door. 
+The valkyrie goes north. 
+A ghost enters from the north. 
+> FOLLOW GHOST 
+It goes north. 
+You go north and are in a graveyard on a grassy plain. Exits lead north,
+northeast, east, south and southeast. You can see a ghost and a gravestone. 
+The ghost goes southeast. You go southeast and are on a grassy plain. Exits
+lead in all directions. You can see a ghost and a silver candlestick. 
+The ghost goes southeast. You go southeast and are on a north-south road.
+Exits lead north, south, southwest, west and northwest. You can see a ghost. 
+It goes south. You go south and are outside a spooky-looking house on a
+north-south road. Exits lead north, east, south, southeast, southwest, west,
+northwest and inside. You can see the custodian and a ghost. 
+The custodian goes south. The ghost goes east. 
+You go east and are in a porch. Exits lead north, west and outside. You can
+see a ghost. 
+It goes north. 
+You go north and are in a brown study. Exits lead east, south and upwards. You
+can see a ghost and a grate. Inside it is a nasty hot fire. 
+The ghost goes upwards. 
+You go upwards and are on a flight of stairs. Exits lead north, south through
+a door, west, upwards and downwards. You can see a ghost. 
+It goes north. 
+You go north and are in a bedroom. Exits lead south and downwards. You can see
+a ghost. 
+The ghost waves a shimmering arm over the western wall and an opening appears!
+It goes west. 
+You go west and are in a secret room. An exit leads east. You can see a ghost
+and some dry bones. 
+The ghost goes east. 
+You go east and are in a bedroom. Exits lead south, west and downwards. You
+can see a ghost. 
+It goes west. 
+You go west and are in a secret room. An exit leads east. You can see a ghost
+and some dry bones. 
+The ghost examines the dry bones. 
+> STOP FOLLOWING GHOST
+OK. 
+It goes east. 
+> TAKE BONES
+You take the dry bones. 
+A far-off female voice shouts, "Can someone help me with the drawbridge?" 
+> DROP BONES
+The bones form themselves into the word "SLOW"! You drop the dry bones. 
+> FIND MOUSE
+You go east and are in a bedroom. You can see a ghost. 
+It goes south. 
+You go south and are on a flight of stairs. You can see a ghost. 
+It goes downwards. 
+You go downwards and are in a brown study. You can see a ghost and a grate.
+Inside it is a nasty hot fire. 
+The ghost goes south. 
+You go south and are in a porch. You can see a ghost. 
+It goes west. 
+You go west and are outside a spooky-looking house on a north-south road. You
+can see a ghost. 
+It goes northwest. You go south and are at a junction. The road continues
+north and west. 
+You go southeast and are on a grassy plain. 
+You go southeast and are on a bank at the west side of a north-south river. 
+You go south and are on a grassy plain. 
+You go south and are on a grassy plain. 
+You go northeast and are in a marsh. You can see a frog. 
+It goes east. You go northeast and are on a bank at the eastern side of a
+north-south river. 
+You go north and are on a bank at the eastern side of a north-south river. 
+You go northeast and are on a grassy plain. You can see a silver plate. 
+You go north and are on a grassy plain. You can see Sam the Grey Earl. 
+You go north and are on a grassy plain. 
+You go north and are beside a huge mountain to the east. 
+You go north and are beside a huge mountain to the east. 
+You go north and are at an archway beside a huge mountain to the east. You can
+see an ancient inscription. 
+You go north and are just south of a glowing gate on a grassy plain. Exits
+lead south, southwest and west. You can see a mouse, John Doe and a silver
+loaf. 
+John Doe goes southwest. 
+> CAST SLOW AT MOUSE
+That's better! The mouse squeaks out, "You have captured me, so I'll stop
+hiding. Also, you may find the DEATH spell useful." 
+> GO TO FOREST
+You go south and are at an archway beside a huge mountain to the east. You can
+see an ancient inscription. 
+You go south and are beside a huge mountain to the east. 
+You go south and are beside a huge mountain to the east. 
+You go southeast and are beside a huge mountain to the north. You can see a
+silver fish. 
+You go southeast and are on a grassy plain. 
+You go southeast and are on a grassy plain. You can see Amazon Grace. 
+You go south and are in a forest. 
+You go south and are standing beside a little lake in a clearing in a forest.
+Exits lead in all directions. You can see some ants, a comfortable perch, an
+huge anthill and a marble pedestal. On the comfortable perch is the Rainbird. 
+> EXAMINE PEDESTAL
+It is a short pedestal, about 3 feet high. On it is a great black book. 
+The Rainbird walks around. A far-off female voice shouts, "Does anyone have
+any treasure to spare? I only need another two to go up a level." The druid
+enters from the northeast. 
+> EXAMINE BOOK
+"You can only read me once", babbles the book, "and learn one new spell. Do
+you want to turn my pages yet?" NO
+The Rainbird flaps around. The druid kneels down by the lake and breathes on
+its waters, which instantly become smooth and sparkly. The word "CHARISMA"
+shimmers in the depths. 
+> EXAMINE RAINBIRD
+He high up in a bush; much too high to reach. 
+The druid goes northwest. 
+> RAINBIRD, TELL ME ABOUT PERCH
+The Rainbird clears his throat. "Er, well.. The comfortable perch is my perch.
+To help seekers after knowledge such as yourself, it is inscribed with the
+name of the LOCATE spell." 
+A far-off voice shouts, "Gotcha! Hehehe!" 
+> WAIT FOR DRUID
+The Rainbird walks around. 
+Sam the Grey Earl enters from the south. 
+He goes northwest. 
+The druid enters from the northeast. 
+> WAIT 
+The druid kneels down by the lake and breathes on its waters, which instantly
+become smooth and sparkly. The word "CHARISMA" shimmers in the depths. 
+The druid goes northwest. 
+Thud the Barbarian enters from the southwest. 
+Thud the Barbarian backs uneasily away. 
+Thud the Barbarian goes northeast. 
+> CAST CHARISMA AT ME 
+You are now more handsome. 
+> FIND FROG
+You go southwest and are in a forest. 
+You go southwest and are on a grassy plain. 
+You go west and are in a marsh. 
+You go west and are sprawled in a puddle of liquid mud in a marsh. Exits lead
+in all directions. You can see the custodian, a frog and a metal plaque. 
+The custodian examines the metal plaque. The frog goes south. Brunhilde enters
+from the southwest. 
+> FOLLOW FROG
+You go south and are in a marsh. Exits lead north, northeast, east, west and
+northwest. You can see a frog. 
+> KISS FROG 
+The frog turns even greener, spits and wipes its mouth in disgust. 
+It goes northeast. A far-off female voice shouts, "Gotcha! Hehehe!" 
+You go northeast and are in a marsh. Exits lead in all directions. You can see
+a frog. 
+It goes southwest. You go southwest and are in a marsh. Exits lead north,
+northeast, east, west and northwest. You can see a frog and a smooth pebble. 
+The frog goes west. You go west and are in a marsh. Exits lead north,
+northeast, east, west and northwest. You can see a frog. 
+> EXAMINE FROG
+The frog croaks loudly. 
+The frog catches a fly and eats it. It goes north. 
+You go north and are in a marsh. Exits lead in all directions. You can see a
+frog and a silver hare. 
+The frog goes north. You go north and are in a marsh. Exits lead in all
+directions. You can see a frog. 
+The frog hops abound a bit. It goes southeast. You go southeast and are
+sprawled in a puddle of liquid mud in a marsh. Exits lead in all directions.
+You can see Brunhilde, a frog and a metal plaque. 
+Brunhilde goes southwest. The frog goes east. A slimy daemon reaches out of
+the mud and claws your leg! It slithers back under the surface. You go east
+and are in a marsh. Exits lead in all directions. You can see a frog. 
+It goes northeast. You go northeast and are on a grassy plain. Exits lead in
+all directions. You can see a frog. 
+The frog splashes around in the mud. It goes southwest. You go southwest and
+are in a marsh. Exits lead in all directions. You can see a frog. 
+It goes southwest. You go southwest and are in a marsh. Exits lead north,
+northeast, east, west and northwest. You can see a frog and a smooth pebble. 
+The frog goes west. You go west and are in a marsh. Exits lead north,
+northeast, east, west and northwest. You can see Brunhilde and a frog. 
+The frog catches a fly and eats it. It goes north. You go north and are in a
+marsh. Exits lead in all directions. You can see a frog and a silver hare. 
+The frog goes north. You go north and are in a marsh. Exits lead in all
+directions. You can see a frog. 
+It goes west. You go west and are on a grassy plain. Exits lead in all
+directions. You can see a frog. 
+The frog hops abound a bit. It goes south. You go south and are on a grassy
+plain. Exits lead in all directions. You can see Heathcliffe and a frog. 
+It goes east. You go east and are in a marsh. Exits lead in all directions.
+You can see a frog and a silver hare. 
+The frog goes east. You go east and are sprawled in a puddle of liquid mud in
+a marsh. Exits lead in all directions. You can see a frog and a metal plaque. 
+The frog goes east. A slimy daemon reaches out of the mud and claws your leg!
+It slithers back under the surface. You go east and are in a marsh. Exits lead
+in all directions. You can see a frog. 
+It goes northeast. You go northeast and are on a grassy plain. Exits lead in
+all directions. You can see a frog. 
+The frog splashes around in the mud. It goes southwest. You go southwest and
+are in a marsh. Exits lead in all directions. You can see a frog. 
+It goes southwest. You go southwest and are in a marsh. Exits lead north,
+northeast, east, west and northwest. You can see a frog and a smooth pebble. 
+The frog goes west. You go west and are in a marsh. Exits lead north,
+northeast, east, west and northwest. You can see Brunhilde and a frog. 
+It goes north. You go north and are in a marsh. Exits lead in all directions.
+You can see a frog and a silver hare. 
+The frog catches a fly and eats it. The frog goes north. You go north and are
+in a marsh. Exits lead in all directions. You can see a frog. 
+The frog hops abound a bit. It goes southeast. You go southeast and are
+sprawled in a puddle of liquid mud in a marsh. Exits lead in all directions.
+You can see a frog and a metal plaque. 
+The frog goes east. A slimy daemon reaches out of the mud and claws your leg!
+It slithers back under the surface. You go east and are in a marsh. Exits lead
+in all directions. You can see a frog. 
+The frog splashes around in the mud. It goes southwest. You go southwest and
+are in a marsh. Exits lead north, northeast, east, west and northwest. You can
+see a frog and a smooth pebble. 
+> EXAMINE PEBBLE
+It is carved with the single word "JUMP". 
+The frog goes northwest. 
+You go northwest and are in a marsh. Exits lead in all directions. You can see
+Heathcliffe, a frog and a silver hare. 
+The frog goes south. You go south and are in a marsh. Exits lead north,
+northeast, east, west and northwest. You can see Brunhilde and a frog. 
+The frog catches a fly and eats it. It goes north. You go north and are in a
+marsh. Exits lead in all directions. You can see Heathcliffe, a frog and a
+silver hare. 
+Heathcliffe goes north. The frog goes north. Brunhilde enters from the south.
+You go north and are in a marsh. Exits lead in all directions. You can see
+Heathcliffe and a frog. 
+> GO TO MOUNTAIN
+You go northeast and are on a bank at the eastern side of a north-south river.
+You go northeast and are on a grassy plain. 
+You go north and are on a grassy plain. You can see a silver plate. 
+You go north and are on a grassy plain. 
+You go north and are on a grassy plain. 
+You go north and are beside a huge mountain to the east. 
+You go north and are beside a huge mountain to the east. 
+You go north and are at an archway beside a huge mountain to the east. Exits
+lead north, east, south, southwest, west and northwest. You can see an ancient
+inscription. 
+> E
+You go east and are at a crossover between passageways. Exits lead east, south
+and west. You can see Oink. 
+> CAST GLOW AT ME
+The existing glow spell wears off. You are now glowing. 
+Oink goes south. 
+> E
+You go east and are at a junction in the passageway. Exits lead north, south
+and west. 
+> S
+You go south and are in a tunnel. Exits lead north and east. 
+The noise becomes louder. A loud bellowing noise comes from a short distance
+away. 
+> E
+You go east and are in a mine gallery. Exits lead east and west. 
+A far-off female voice shouts, "Shut up!" There is a very loud bellowing
+coming from the next room. 
+> CAST JUMP NORTH
+You are in the salt mine. Carved into the salt is the word "SWORD". An exit
+leads north. 
+> N
+Did you know that you can say "GO TO somewhere" to go to a far off place? E.g
+"GO TO CASTLE" or "GOTO CLEARING". 
+You go north and are on the landing, below a flight of well-polished stairs.
+Exits lead east, west and upwards. 
+> W
+You go west and are in a dim tunnel, too long to be properly lit by your GLOW
+spell. Exits lead east, south and west. 
+A far-off female voice shouts, "Where has the custodian got to?" 
+> S
+You go south and are at a junction in the passageway. Exits lead north, south
+and west. 
+> S
+You go south and are in a tunnel. Exits lead north and east. 
+There is a very loud bellowing coming from the next room. 
+> E 
+There is a strong smell of dragon from that direction. Do you really want to
+meet it? NO
+A far-off female voice shouts, "Can anyone hear me?" There is a very loud
+bellowing coming from the next room. 
+> WAIT
+A far-off female voice shouts, "Anyone seen any orcs?" There is a very loud
+bellowing coming from the next room. 
+The dragon arrives with a flurry of smoke from the east. 
+The dragon backs away down the tunnel tail first, going east. There is a very
+loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+The noise dies away a bit. A loud bellowing noise comes from a short distance
+away. 
+A loud bellowing noise comes from a short distance away. 
+A loud bellowing noise comes from a short distance away. 
+A loud bellowing noise comes from a short distance away. 
+The noise dies away a bit. There is a faint snoring noise. 
+There is a faint snoring noise. 
+> E
+You go east and are in a mine gallery. Exits lead east and west. You can see a
+glittering card, a flour sack, a half coin and a clove of garlic. 
+A loud bellowing noise comes from a short distance away. 
+> E
+You go east and are in a sandstone excavation. Exits lead south and west. 
+There is a very loud bellowing coming from the next room. 
+> WAIT FOR DRAGON
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+The dragon arrives with a flurry of smoke from the south. 
+> CAST JUMP SOUTH
+You are in a stone-lined room with a huge pile of gold welded to the floor. An
+exit leads north. You can see a small scale and a heap of loot. There is a
+very loud bellowing coming from the next room. 
+> GET SCALE
+You take the small scale. 
+There is a very loud bellowing coming from the next room. 
+> WAIT FOR DRAGON
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+The noise becomes louder. A loud bellowing noise comes from a short distance
+away. 
+A loud bellowing noise comes from a short distance away. 
+A loud bellowing noise comes from a short distance away. 
+A loud bellowing noise comes from a short distance away. 
+The noise becomes louder. There is a faint snoring noise. 
+There is a faint snoring noise. 
+There is a faint snoring noise. 
+There is a faint snoring noise. 
+The noise dies away a bit. A loud bellowing noise comes from a short distance
+away. 
+A loud bellowing noise comes from a short distance away. 
+A loud bellowing noise comes from a short distance away. 
+A loud bellowing noise comes from a short distance away. 
+The noise dies away a bit. There is a very loud bellowing coming from the next
+room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+There is a very loud bellowing coming from the next room. 
+The noise dies away a bit. The dragon backs into the room, tail first from the
+north. 
+> N
+You go north and are in a sandstone excavation. Exits lead south and west. 
+There is a very loud bellowing coming from the next room. 
+> W
+You go west and are in a mine gallery. Exits lead east and west. You can see a
+glittering card, a flour sack, a half coin and a clove of garlic. 
+A remote male voice shouts, "Hi folks, I'm back!" A remote male voice shouts,
+"Does anyone have any treasure to spare? I only need another two to go up a
+level." A loud bellowing noise comes from a short distance away. 
+> TAKE ALL
+A loud bellowing noise comes from a short distance away. 
+You take the glittering card. 
+A loud bellowing noise comes from a short distance away. 
+You take the flour sack. 
+A loud bellowing noise comes from a short distance away. 
+You take the half coin. 
+The noise becomes louder. There is a very loud bellowing coming from the next
+room. 
+You take the clove of garlic. 
+There is a very loud bellowing coming from the next room. 
+> LOOK
+You are in a mine gallery. Exits lead east and west. 
+A mouse enters from the west. There is a very loud bellowing coming from the
+next room. 
+> TAKE MOUSE
+You take the mouse. 
+There is a very loud bellowing coming from the next room. 
+> FIND DRAGON 
+There is a strong smell of dragon from that direction. Do you really want to
+meet it? YES
+You go east and are in a sandstone excavation. Exits lead south and west. You
+can see the dragon. 
+The dragon lumbers forwards, intent on killing all in its path, but it
+overlooks the mouse! The reckless rodent seizes its opportunity and darts
+past, sharp teeth nipping at the dragon's vulnerable spot. "Oh woe is me! I
+knew I'd get bit in the end!", shrieks the armoured monster, "Someone get this
+brute of a mouse off me and I'll be peaceful!" 
+> W
+You go west and are in a mine gallery. Exits lead east and west. 
+A remote male voice shouts, "Hi folks, I'm back!" A far-off female voice
+shouts, "Does anyone have any treasure to spare? I only need another two to go
+up a level." 
+> W
+You go west and are in a tunnel. Exits lead north and east. You can see Sam
+the Grey Earl. 
+The mouse stares at you with beady eyes. Sam the Grey Earl looks around
+suspiciously. 
+> KILL SAM
+You thump Sam the Grey Earl. He is dead. 
+The mouse is squeaking very quickly. The mouse squeaks quietly. 
+Sam the Grey Earl is dead. 
+The mouse is squeaking very quickly. 
+> WAIT FOR VALKYRIE
+The mouse squeaks quietly. 
+The valkyrie enters from the north. 
+> GIVE CARD TO VALKYRIE
+You give the glittering card to the valkyrie. 
+She takes Sam the Grey Earl. A far-off female voice shouts, "Where has the
+custodian got to?" 
+> FOLLOW VALKYRIE
+The mouse is squeaking very quickly. The mouse squeaks quietly. The valkyrie
+goes north. 
+You go north and are at a junction in the passageway. Exits lead north, south
+and west. You can see the valkyrie and the Prophet of Greater Manchester. 
+The valkyrie goes west. 
+You go west and are at a crossover between passageways. Exits lead east, south
+and west. You can see Oink and the valkyrie. 
+Oink goes east. The valkyrie goes west. 
+You go west and are at an archway beside a huge mountain to the east. Exits
+lead north, east, south, southwest, west and northwest. You can see the
+valkyrie and an ancient inscription. 
+The mouse is squeaking very quickly. The valkyrie goes north. You go north and
+are just south of a glowing gate on a grassy plain. Exits lead south,
+southwest and west. You can see the valkyrie and a silver loaf. 
+The valkyrie goes north. You'll have to find the way yourself. 
+> CAST DEATH AT ME
+A black ray streaks out from you! You drop stone dead. You lie there, unable
+to move, until the valkyrie arrives. She picks you up, flies swiftly through
+the air and swoops gracefully through a golden gate. Then she drops you
+unceremoniously into the middle of a big pink cloud... You are sitting in a
+cloud much bigger than a man's hand. Tinkly music plays irritatingly in the
+background. You can see the valkyrie. 
+She drops Sam the Grey Earl. 
+> GET CARD FROM VALKYRIE
+You take the glittering card from the valkyrie. She tries to grab it back. 
+> REMOVE VISOR
+You remove the transparent visor. The whole world shifts and pales and starts
+to resemble a huge warehouse... 
+ 
+You're about to move to another part of the game. Do you want to save your
+position first, just in case? NO 
+Play the program cassette containing "A Kind of Magic". 
+> LOOK
+You are sitting in a grimy repair shed. Tinkly music plays irritatingly in the
+background. An exit leads east through a door. You can see the nurse robot,
+the immobilized form of an exceedingly tiny schoolboy and a metal door. 
+> OPEN DOOR
+You open the metal door. 
+The nurse robot wrinkles her nose. 
+> E
+You go east through the door and are in a walk-in cupboard. An exit leads west
+through a door. You can see a reprogrammer. 
+> GET REPROGRAMMER
+You take the reprogrammer. 
+> WEAR VISOR
+You wear the polythene visor. Everything goes all shimmery and magical... 
+ 
+You're about to move to another part of the game. Do you want to save your
+position first, just in case? NO 
+Now play the program cassette containing "Hordes of the Mountain King". 
+With a jangle of harps, two nymphs float in and peer at you. The first turns
+its nose up in distaste, "This one looks pretty beat up. Maybe we should
+retire it." The second flicks at you with an oily rag, "That's beside the
+point. It's policy to give everything the benefit of the doubt." You awake to
+find...
+You are just south of a glowing gate on a grassy plain. Exits lead south,
+southwest and west. You can see a mouse, a silver loaf, a flour sack, a half
+coin, a clove of garlic and a small scale. 
+> FIND MOUSE
+The mouse is squeaking very quickly. The mouse stares at you with beady eyes.
+A remote male voice shouts, "Anyone seen any orcs?" 
+> RECRUIT MOUSE
+It is now yours to command. 
+The mouse is squeaking very quickly. It grooms its fur with a hind paw. 
+> FIND DRAGON
+You go south and are at an archway beside a huge mountain to the east. You can
+see an ancient inscription. 
+You go east and are at a crossover between passageways. 
+You go east and are at a junction in the passageway. 
+You go south and are in a tunnel. You can see the Prophet of Greater
+Manchester. 
+You go east and are in a mine gallery. Exits lead east and west. You can see
+the dragon. 
+> RECRUIT DRAGON
+He is now yours to command. 
+> GO TO MARSH
+You go west and are in a tunnel. You can see the Prophet of Greater
+Manchester. 
+You go north and are at a junction in the passageway. 
+You go west and are at a crossover between passageways. 
+You go west and are at an archway beside a huge mountain to the east. You can
+see an ancient inscription. 
+You go southwest and are on a bank at the eastern side of a north-south river.
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. You
+can see the Wily Wizard, Thud the Barbarian and a silver salver. 
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are in a marsh. 
+You go south and are sprawled in a puddle of liquid mud in a marsh. Exits lead
+in all directions. You can see a metal plaque. 
+Susan enters from the northwest. 
+> FIND MOUSE
+You go northeast and are in a marsh. 
+You go north and are on a grassy plain. You can see Heathcliffe. 
+He goes southeast. You go north and are on a grassy plain. 
+You go north and are on a grassy plain. You can see a silver plate. 
+You go north and are on a grassy plain. 
+You go north and are on a grassy plain. You can see Dame Luck. 
+You go north and are beside a huge mountain to the east. 
+You go north and are beside a huge mountain to the east. 
+You go north and are at an archway beside a huge mountain to the east. You can
+see an ancient inscription. 
+You go north and are just south of a glowing gate on a grassy plain. Exits
+lead south, southwest and west. You can see a mouse, a silver loaf, a flour
+sack, a half coin, a clove of garlic and a small scale. 
+> TAKE MOUSE
+You take the mouse. 
+It grooms its fur with a hind paw. 
+> GO TO MARSH
+You go southwest and are on an east-west road. You can see the troll, Amazon
+Grace and a lump of driftwood. 
+The mouse is squeaking very quickly. You go south and are on a bank at the
+eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. 
+The mouse is squeaking very quickly. You go south and are on a bank at the
+eastern side of a north-south river. You can see the valkyrie. 
+She goes south. You go south and are on a bank at the eastern side of a
+north-south river. You can see the valkyrie, the body of Thud the Barbarian
+and a silver salver. 
+The valkyrie takes Thud the Barbarian. You go south and are on a bank at the
+eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. 
+The mouse is squeaking very quickly. You go south and are in a marsh. 
+You go south and are sprawled in a puddle of liquid mud in a marsh. Exits lead
+in all directions. You can see the custodian and a metal plaque. 
+The custodian goes northwest. A slimy daemon reaches out of the mud and claws
+your leg! It slithers back under the surface. 
+> MOUSE, WAIT 1, CLEAN PLAQUE
+The mouse says, "All in a day's work!" 
+A far-off female voice shouts, "Does anyone have any treasure to spare? I only
+need another two to go up a level." 
+> CLEAN PLAQUE
+You rub the metal plaque. The plaque looks a little cleaner now. 
+The mouse rubs the metal plaque. The plaque is now readable! It says, "Fed up
+with books? Burn them with a FIREBALL." 
+A slimy daemon reaches out of the mud and claws your leg! It slithers back
+under the surface. The plaque corrodes again, becoming unreadable. 
+> GO TO FOREST
+You go northeast and are in a marsh. 
+You go northeast and are on a grassy plain. 
+You go east and are in a forest. 
+You go east and are standing beside a little lake in a clearing in a forest.
+Exits lead in all directions. You can see the druid, some ants, a comfortable
+perch, an huge anthill and a marble pedestal. On the comfortable perch is the
+Rainbird. 
+The druid kneels down by the lake and breathes on its waters, which instantly
+become smooth and sparkly. The word "CHARISMA" shimmers in the depths. 
+> MOUSE, WAIT 1, KILL ANTS
+The mouse says, "No sooner said than done." 
+It grooms its fur with a hind paw. The druid goes northwest. 
+> KILL ANTS 
+You kill about a hundred ants. There are about 1000 ants here. 
+More ants clamber from the anthill. A far-off female voice shouts, "Where do I
+take treasure?" A remote male voice shouts, "Where has the custodian got to?" 
+You kill about a hundred ants. There are about 1000 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 1000 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 1000 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 1000 ants here. 
+The mouse kills about a hundred ants. There are about 900 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 900 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 900 ants here. 
+The mouse kills about a hundred ants. There are about 800 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 800 ants here. 
+The mouse kills about a hundred ants. There are about 700 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 700 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 700 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 700 ants here. 
+The mouse kills about a hundred ants. There are about 600 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 600 ants here. 
+The mouse kills about a hundred ants. There are about 500 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 500 ants here. 
+The mouse kills about a hundred ants. There are about 400 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 400 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 400 ants here. 
+The mouse kills about a hundred ants. There are about 300 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 300 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 300 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 300 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 300 ants here. 
+The mouse kills about a hundred ants. There are about 200 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 200 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 200 ants here. 
+The mouse kills about a hundred ants. There are about 100 ants here. More ants
+clamber from the anthill. 
+You kill about a hundred ants. There are about 100 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 100 ants here. 
+More ants clamber from the anthill. 
+You kill about a hundred ants. There are about 100 ants here. 
+The mouse kills about a hundred ants. There are no ants left on the surface! 
+You'll have to find the way yourself. 
+> EXAMINE AMBER
+It is a lump of what looks like solid yellow treakle, protecting, at its
+centre, the word "MAGICIAN". 
+More ants clamber from the anthill. 
+> FIND SACK
+You go northwest and are in a forest. You can see the Liquidiser and a silver
+spoon. 
+The Liquidiser takes the silver spoon. You go northwest and are on a grassy
+plain. 
+You go northwest and are on a grassy plain. 
+You go north and are on a grassy plain. You can see Dame Luck. 
+You go north and are beside a huge mountain to the east. You can see Sam the
+Grey Earl and Thud the Barbarian. 
+You go north and are beside a huge mountain to the east. 
+Sam the Grey Earl enters from the south. You go north and are at an archway
+beside a huge mountain to the east. You can see an ancient inscription. 
+You go north and are just south of a glowing gate on a grassy plain. Exits
+lead south, southwest and west. You can see a silver loaf, a flour sack, a
+half coin, a clove of garlic and a small scale. 
+> TAKE SACK
+You take the flour sack. 
+A remote male voice shouts, "Can someone help me with the drawbridge?" 
+> FIND SPOON
+You go south and are at an archway beside a huge mountain to the east. You can
+see an ancient inscription. 
+You go south and are beside a huge mountain to the east. You can see Sam the
+Grey Earl. 
+You go south and are beside a huge mountain to the east. You can see Thud the
+Barbarian and Dame Luck. 
+Sam the Grey Earl enters from the north. You go southeast and are beside a
+huge mountain to the north. You can see a silver fish. 
+You go south and are on a grassy plain. 
+You go south and are on a grassy plain. 
+You go south and are on a grassy plain. 
+You go south and are on a grassy plain. Exits lead in all directions. You can
+see the Liquidiser. 
+> PUT SPOON IN SACK
+You put the silver spoon inside the flour sack. The Liquidiser looks really
+pissed off. He looks furious. 
+The mouse is squeaking very quickly. The Liquidiser shouts "Take that, orcish
+slime!" and demolishes you. You are injured. 
+> FIND STAR
+You go southwest and are in a marsh. You can see Brunhilde. 
+Heathcliffe enters from the north. You go southwest and are sprawled in a
+puddle of liquid mud in a marsh. You can see a metal plaque. 
+Brunhilde enters from the northeast. Heathcliffe enters from the northeast. A
+slimy daemon reaches out of the mud and claws your leg! It slithers back under
+the surface. You go northwest and are in a marsh. You can see Susan. 
+Heathcliffe enters from the southeast. You go northwest and are on a bank at
+the west side of a north-south river. 
+You go west and are on a grassy plain. 
+You go west and are beside a castle to the south. Exits lead north, northeast,
+east, southeast, west and northwest. You can see a silver star. 
+> PUT STAR IN SACK
+You put the silver star inside the flour sack. 
+A remote male voice shouts, "Shut up!" A remote male voice shouts, "Gotcha!
+Hehehe!" A remote male voice shouts, "Which bush is the Rainbird supposed to
+be in then?" A far-off female voice shouts, "Anyone seen any orcs?" 
+> FIND LOAF
+You go southeast and are beside a castle to the west. You can see a silver
+fox. 
+You go southeast and are on a grassy plain. 
+Susan enters from the northeast. The Lady of Shallot enters from the north.
+You go northeast and are in a marsh. You can see Heathcliffe. 
+Susan enters from the southwest. You go northeast and are on a bank at the
+eastern side of a north-south river. 
+Heathcliffe enters from the southwest. Susan enters from the southwest. The
+Liquidiser enters from the southeast. You go northeast and are on a grassy
+plain. 
+Susan enters from the southwest. You go north and are on a grassy plain. You
+can see a silver plate. 
+Sam the Grey Earl enters from the southwest. You go north and are on a grassy
+plain. 
+You go north and are on a grassy plain. 
+You go north and are beside a huge mountain to the east. 
+You go north and are beside a huge mountain to the east. 
+You go north and are at an archway beside a huge mountain to the east. You can
+see an ancient inscription. 
+The Prophet of Greater Manchester enters from the east. You go north and are
+just south of a glowing gate on a grassy plain. Exits lead south, southwest
+and west. You can see a silver loaf, a half coin, a clove of garlic and a
+small scale. 
+> PUT LOAF IN SACK
+You put the silver loaf inside the flour sack. 
+Amazon Grace enters from the southwest. 
+> FIND CANDLESTICK
+You go southwest and are on an east-west road. You can see a lump of
+driftwood. 
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. You
+can see Dame Luck. 
+The mouse is squeaking very quickly. Sam the Grey Earl enters from the east.
+You go south and are on a bank at the eastern side of a north-south river. 
+Sam the Grey Earl enters from the north. You go south and are on a bank at the
+eastern side of a north-south river. You can see the Wily Wizard, Thud the
+Barbarian, Susan and a silver salver. 
+Susan takes the silver salver. You go south and are on a bank at the eastern
+side of a north-south river. 
+You go south and are on a bank at the eastern side of a north-south river. You
+can see Heathcliffe and the Liquidiser. 
+You go south and are in a marsh. You can see Brunhilde. 
+You go south and are sprawled in a puddle of liquid mud in a marsh. You can
+see a frog and a metal plaque. 
+Brunhilde enters from the north. A slimy daemon reaches out of the mud and
+claws your leg! It slithers back under the surface. You go northwest and are
+in a marsh. You can see the Lady of Shallot. 
+A frog enters from the southeast. You go northwest and are on a bank at the
+west side of a north-south river. 
+You go west and are on a grassy plain. 
+You go northwest and are on a grassy plain. 
+You go northwest and are at a junction. The road continues south and east. 
+You go north and are in a rose garden, beside an ugly shed on a grassy plain.
+You can see a huge marrow, a apple tree and a statue. 
+The custodian enters from the west through the door. I don't know what you
+mean. You go north and are on a grassy plain. 
+You go north and are on a grassy plain. Exits lead in all directions. You can
+see a silver candlestick. 
+> PUT CANDLESTICK IN SACK
+You put the silver candlestick inside the flour sack. 
+The mouse is squeaking very quickly. Erik Bloodeagle enters from the
+southeast. 
+> FIND FOX
+You go southeast and are on a north-south road. You can see a ghost. 
+The mouse is squeaking very quickly. It goes south. You go south and are
+outside a spooky-looking house on a north-south road. You can see a ghost. 
+It goes east. You go south and are at a junction. The road continues north and
+west. 
+You go southeast and are on a grassy plain. 
+You go south and are on a grassy plain. 
+You go south and are beside a castle to the west. Exits lead north, northeast,
+east, south, southeast and northwest. You can see a silver fox. 
+> PUT FOX IN SACK
+You put the silver fox inside the flour sack. 
+> FIND HARE
+You go southeast and are on a grassy plain. 
+You go east and are in a marsh. Exits lead in all directions. You can see a
+silver hare. 
+Sam the Grey Earl enters from the east. 
+> PUT HARE IN SACK
+You put the silver hare inside the flour sack. 
+Sam the Grey Earl whistles tunelessly. Heathcliffe enters from the east. 
+> FIND PLATE
+You go northeast and are in a marsh. 
+Sam the Grey Earl enters from the southwest. Heathcliffe enters from the
+southwest. You go northeast and are on a grassy plain. You can see Herne the
+Hunter. 
+You go north and are on a grassy plain. 
+The Liquidiser enters from the southwest. You go north and are on a grassy
+plain. Exits lead in all directions. You can see John Doe and a silver plate. 
+John Doe takes the silver plate. Dame Luck enters from the northwest. 
+> PUT PLATE IN SACK
+You put the silver plate inside the flour sack. John Doe looks really pissed
+off. He looks furious. 
+He whistles tunelessly. Dame Luck smiles uncertainly. 
+> FIND SLIVER
+You go southwest and are on a bank at the eastern side of a north-south river.
+You can see Thud the Barbarian. 
+John Doe enters from the northeast. Sam the Grey Earl enters from the
+southeast. You go south and are on a bank at the eastern side of a north-south
+river. You can see the Wily Wizard and the body of Susan. 
+The Wily Wizard goes south. Sam the Grey Earl enters from the north. John Doe
+enters from the north. Thud the Barbarian enters from the north. You go south
+and are in a marsh. You can see Heathcliffe and the Wily Wizard. 
+He goes south. Sam the Grey Earl enters from the north. John Doe enters from
+the north. You go south and are sprawled in a puddle of liquid mud in a marsh.
+You can see the Wily Wizard, a frog and a metal plaque. 
+John Doe enters from the north. You go northwest and are in a marsh. You can
+see Brunhilde. 
+A frog enters from the southeast. You go northwest and are on a bank at the
+west side of a north-south river. You can see the Lady of Shallot. 
+Brunhilde enters from the southeast. A frog enters from the southeast. You go
+west and are on a grassy plain. 
+Brunhilde enters from the east. A frog enters from the east. You go northwest
+and are on a grassy plain. 
+You go north and are at a junction. The road continues north and west. 
+You go north and are outside a spooky-looking house on a north-south road. 
+You go north and are on a north-south road. You can see Erik Bloodeagle. 
+You go north and are on a north-south road. 
+You go north and are at a junction. The road continues south and east. 
+You go north and are on a grassy plain. Exits lead in all directions. You can
+see a silver sliver. 
+> PUT SLIVER IN SACK
+You put the silver sliver inside the flour sack. 
+A remote male voice shouts, "Can someone help me with the drawbridge?" 
+> FIND SALVER
+You go southeast and are at a junction. The road continues north and west. 
+You go southwest and are on a north-south road. 
+You go south and are on a north-south road. You can see Erik Bloodeagle. 
+You go south and are outside a spooky-looking house on a north-south road. 
+You go south and are at a junction. The road continues north and west. 
+Sam the Grey Earl enters from the south. You go east and are on a grassy
+plain. 
+Sam the Grey Earl enters from the west. You go east and are on a bank at the
+west side of a north-south river. Exits lead northeast, east, south,
+southeast, southwest and west. You can see a silver salver. 
+> PUT SALVER IN SACK
+You put the silver salver inside the flour sack. 
+> GO TO BRIDGE
+You go west and are on a grassy plain. You can see Sam the Grey Earl. 
+Brunhilde enters from the southwest. You go northwest and are outside a
+spooky-looking house on a north-south road. You can see Erik Bloodeagle. 
+You go north and are on a north-south road. 
+You go north and are on a north-south road. 
+You go north and are at a junction. The road continues south and east. 
+You go north and are on a grassy plain. 
+You go east and are at a junction. The road continues south and east. 
+You go east and are on an east-west road. 
+A huge troll leaps out to block your path! She stands at the base of the
+bridge, palm outstretched, and bellows, "Oi! One treasure toll for crossing!"
+You are on an east-west road. You can see the troll. 
+> #SEED 2733
+Seed set to 2733
+REMOVE SPOON AND STAR FROM SACK
+You remove the silver spoon from the flour sack. 
+The troll takes the silver spoon. The troll shouts "I've just pinched some
+loot from a filthy oik." 
+You remove the silver star from the flour sack. 
+> W
+You go west and are at a junction. The road continues south and east. Exits
+lead north, northeast, east, south, southeast, southwest, west and northwest. 
+The troll enters from the east. 
+> REMOVE LOAF AND CANDLESTICK FROM SACK
+You remove the silver loaf from the flour sack. 
+The troll whispers, "Money, money, money." 
+You remove the silver candlestick from the flour sack. 
+> WAIT
+The troll takes the silver star. Sam the Grey Earl enters from the southwest. 
+The troll takes the silver candlestick. 
+The troll takes the silver loaf. 
+> W
+You go west and are on a grassy plain. Exits lead in all directions. 
+The troll enters from the east. 
+> REMOVE FOX AND HARE FROM SACK
+You remove the silver fox from the flour sack. 
+The troll takes the silver fox. The troll shouts "I've just rooked a vile
+orc." 
+You remove the silver hare from the flour sack. 
+Sam the Grey Earl enters from the east. 
+> W
+You go west and are on a grassy plain. Exits lead in all directions. 
+The troll enters from the east. Sam the Grey Earl enters from the east. 
+> REMOVE PLATE AND SLIVER FROM SACK
+You remove the silver plate from the flour sack. 
+You remove the silver sliver from the flour sack. 
+The troll takes the silver plate. 
+> W
+You go west and are on a grassy plain. Exits lead north, northeast, east,
+south and southeast. 
+Sam the Grey Earl enters from the east. 
+> DROP SLIVER, SALVER AND HARE
+You drop the silver sliver. 
+The troll enters from the east. 
+You drop the silver salver. 
+You drop the silver hare. 
+> RUN TO BRIDGE
+You are on an ugly bridge on a river. Exits lead north through a door,
+northeast, east, south, southeast, southwest, west and northwest. You can see
+a slippery rope. 
+> OPEN DOOR
+The first bolt is now open. A loud alarm goes off from somewhere inside. 
+> OPEN DOOR
+The second bolt is now open. 
+> OPEN DOOR
+As the third bolt is slid back, the door swings open. 
+> N
+You go north through the door and are in the troll's lair. An exit leads south
+through a door. You can see a plump wallet. 
+> GET WALLET
+You take the plump wallet. 
+> WAIT
+The troll enters from the south through the door. The troll rushes up and is
+horrified to find you inside. She sees that you have her wallet! Her voice
+suddenly starts to drip with honey, "Now now, my good orc, let's be reasonable
+about this. If you give my wallet back, I'll tell you where there is a
+treasure beyond price. What do you say?" NO
+The troll says, "Very well, without my wallet life is hardly worth living. I
+shall help you, for a while, and might even deign to carry out commands if
+recruited nicely!" 
+> RECRUIT TROLL
+She is now yours to command. 
+> TROLL, DROP ALL
+The troll says, "All in a day's work!" 
+> TROLL, FOLLOW ME
+The troll says, "Right away, boss." 
+She drops the silver star. 
+> WAIT
+The troll takes the silver star. The troll shouts "I've found the priceless
+silver star." A remote male voice shouts, "What do I do with the Valkyrie?" 
+The troll drops the silver spoon. 
+The troll drops the silver plate. 
+The troll drops the silver salver. 
+The troll drops the silver hare. 
+The troll drops the silver fox. 
+The troll drops the silver candlestick. 
+The troll drops the silver loaf. 
+> TROLL, DROP STAR
+The troll says, "No sooner said than done." 
+She drops the silver star. 
+> S
+You go south through the door and are on an ugly bridge on a river. Exits lead
+north through a door, northeast, east, south, southeast, southwest, west and
+northwest. You can see Sam the Grey Earl, Erik Bloodeagle, Susan and a
+slippery rope. 
+The troll enters from the north through the door. 
+> TROLL, WAIT 1, PULL ROPE
+The troll says, "All in a day's work!" 
+> PULL ROPE 
+The rope comes up slowly. 
+The rope comes completely out of the water, pulling a ring with it. Just in
+time! The huge fish leaps and seems rather put out that its favourite exercise
+rope has been removed. It splashes sadly back into the water. 
+> EXAMINE RING
+It is chunky and glitzy, with faint marks round the edge. 
+The troll chuckles at the thought of some money-making scheme. Sam the Grey
+Earl looks around suspiciously. 
+> TAKE RING
+You take the silvery ring. 
+The troll whispers, "Money, money, money." A remote male voice shouts, "Stop
+following me!" A far-off female voice shouts, "Can someone help me with the
+drawbridge?" 
+> TROLL, STOP
+The troll says, "Right away, boss." 
+She whispers, "Money, money, money." Susan claps her hands in delight. 
+> FIND COIN
+You go northeast and are on a bank at the eastern side of a north-south river.
+Erik Bloodeagle enters from the southwest. You go east and are just south of a
+glowing gate on a grassy plain. Exits lead south, southwest and west. You can
+see a mouse, a half coin, a clove of garlic and a small scale. 
+> GET COIN
+You take the half coin. 
+The mouse is squeaking very quickly. 
+> GO TO TROLL
+You go southwest and are on an east-west road. You can see a lump of
+driftwood. 
+You go west and are on an ugly bridge on a river. Exits lead north through a
+door, northeast, east, south, southeast, southwest, west and northwest. You
+can see the troll, Sam the Grey Earl, Susan and a slippery rope. 
+> TROLL, FOLLOW ME
+The troll says, "All in a day's work!" 
+> GO TO GRAVEYARD
+You go southwest and are on a bank at the west side of a north-south river. 
+Sam the Grey Earl enters from the northeast. You go west and are at a
+junction. The road continues north and west. 
+Sam the Grey Earl enters from the east. You go west and are at a junction. The
+road continues south and east. 
+Sam the Grey Earl enters from the east. You go west and are on a grassy plain.
+Thud the Barbarian enters from the southeast. You go west and are in a
+graveyard on a grassy plain. Exits lead north, northeast, east, south and
+southeast. You can see a gravestone. 
+> WAIT FOR TROLL
+The troll enters from the east. 
+> TROLL, STOP
+The troll says, "Right away, boss." 
+She whispers, "Money, money, money." 
+> GIVE COIN TO TROLL
+You give the half coin to the troll. 
+> TROLL, WAIT 1, PUT COIN IN RECESS
+She says, "No sooner said than done." 
+> S
+You go south and are in the necropolis. Exits lead north and south through a
+door. You can see a mock-gothic tomb. 
+> EXAMINE TOMB
+It is decorated marble. 
+A remote male voice shouts, "Are there any orcs listening?" The tomb beside
+you opens. 
+> EXAMINE TOMB
+It is decorated marble. In the tomb is a huge stone slab. An inscription
+carved into it reads "DETECT". 
+The tomb closes. 
+> N
+You go north and are in a graveyard on a grassy plain. Exits lead north,
+northeast, east, south and southeast. You can see the troll and a gravestone. 
+A far-off voice shouts, "Won't anyone tell me how to see in the dark?" 
+> TROLL, FOLLOW ME
+The troll says, "No sooner said than done." 
+> GO TO GARDEN
+You go southeast and are on a grassy plain. 
+The troll enters from the northwest. You go south and are on a grassy plain. 
+You go south and are in a rose garden, beside an ugly shed on a grassy plain.
+Exits lead in all directions. You can see Heathcliffe, the Lady of Shallot, a
+huge marrow, a apple tree and a statue. 
+> WAIT FOR TROLL
+Heathcliffe whistles tunelessly. The troll enters from the north. 
+> TROLL, WAIT 1, CATCH APPLE
+The troll says, "Right away, boss." 
+The Lady of Shallot wrinkles her nose. 
+> SHAKE TREE
+You shake the apple tree. An apple starts to fall from the tree. 
+The troll catches the rotten apple. Heathcliffe picks his nose. 
+> EXAMINE APPLE
+It is half-rotten fruit, with blotches making up the word "EMPATHY". 
+A far-off female voice shouts, "Gotcha! Hehehe!" 
+> GO TO HOUSE
+You go east and are outside a spooky-looking house on a north-south road.
+Exits lead north, east, south, southeast, southwest, west, northwest and
+inside. 
+The troll enters from the west. Heathcliffe enters from the west. The Lady of
+Shallot enters from the west. 
+> IN
+You go inside and are in a porch. Exits lead north, west and outside. 
+The Lady of Shallot enters from the west. 
+> N
+You go north and are in a brown study. Exits lead east, south and upwards. You
+can see the custodian and a grate. Inside it is a nasty hot fire. 
+The custodian goes south. 
+> PUT RING IN FIRE
+You put the silvery ring inside the nasty hot fire. The ring lands in the fire
+and starts to glow red-hot. The word "EXORCISE" shines brightly. 
+The troll enters from the south. 
+> RUN TO DRIFTWOOD
+The mouse is squeaking very quickly. 
+You are on an east-west road. To the west is a huge bridge. Exits lead north,
+northeast, east, south, southeast, southwest and west. You can see a mouse and
+a lump of driftwood. 
+> CAST EXORCISE AT DRIFTWOOD
+There is a flash of magic. The existing slow spell wears off. The existing
+glow spell wears off. The existing charisma spell wears off. 
+> EXAMINE DRIFTWOOD
+It is a small piece of rotten wood. Tasty insects buzz around it, occasionally
+landing in the carved letters of the word "FLY". 
+The mouse stares at you with beady eyes. 
+> RUN TO GARDEN
+You are in a rose garden, beside an ugly shed on a grassy plain. Exits lead in
+all directions. You can see a huge marrow, a apple tree and a statue. 
+Thud the Barbarian enters from the southeast. 
+> CAST FLY AT STATUE
+The statue is now flying. 
+The troll enters from the southeast. 
+> EXAMINE STATUE
+It is small and remarkably ugly. It is flying. Underneath the statue is
+written the word "SHIELD." 
+Thud the Barbarian smiles uncertainly. 
+> GO TO CASTLE
+You go south and are at a junction. The road continues south and east. 
+The troll enters from the north. You go south and are on a north-south road. 
+The troll enters from the north. You go south and are just north of a crystal
+castle on a north-south road. Exits lead north, northeast, east, south, west
+and northwest. You can see some ropes overhead. 
+The troll enters from the north. 
+> CAST KNIVES AT ROPES
+Hundreds of little knives shoot from your fingertips! The ropes are severed!
+The drawbridge smashes down onto the ground with a noise like thunder.
+Hundreds of screaming humans appear on the battlements and start making
+threatening gestures towards you. 
+The troll chuckles at the thought of some money-making scheme. A remote male
+voice shouts, "Which bush is the Rainbird supposed to be in then?" 
+> CAST SHIELD AT ME
+You are enclosed by a shimmering bubble. 
+The humans on the battlements grind their axes and argue the best way to fry
+orcs. 
+> S
+The humans pour out the boiling oil! You are protected by the shield spell.
+You go south. It is dark. 
+> CAST GLOW AT ME
+You are now glowing. You are in the castle courtyard. To the south is a huge
+pool of acid, blocking the way to a door at the southern end of the courtyard.
+Exits lead north and south. 
+> CAST FLY AT ME
+You are now flying. 
+> S
+You go south and are above a pool of acid. Exits lead north and south through
+a door. You can see a button. 
+> EXAMINE DOOR
+It looks exactly as you would expect. . 
+> CAST SWORD
+A broadsword appears in your hand. 
+> PUSH BUTTON WITH BROADSWORD
+You reach into the acid with the magical sword, and the door swings open. 
+A peculiar voice in the distance shouts, "Where do I take treasure?" 
+> S
+You go south through the door and are in a plain hall in the castle. Exits
+lead north through a door, east and west. 
+> W
+You go west and are on the steps down to the dungeon. Exits lead north and
+east. 
+> N
+You go north and are in the castle dungeon. Exits lead north and south. You
+can see the jailor and a ball and chain. A jailor of very strange appearance
+jumps out of the shadows. "Aha! A convict!", he babbles unconvincingly, trying
+to conceal the wooden leg and parrot left over from his previous job. 
+The jailor fastens a ball and chain to you. 
+> N
+You go north and are in a prison cell. An exit leads south. You can see some
+rusty armour and a bronze scabbard. 
+> TAKE ARMOUR
+You take the rusty armour. 
+A far-off voice shouts, "Hi folks, I'm back!" 
+> WEAR ARMOUR
+You wear the rusty armour. 
+> EXAMINE SCABBARD
+It is a mole-skin sheath, cunningly cut from the least-spotty part of a mole.
+Inside it is a dagger. 
+> EXAMINE DAGGER
+It is a short, sword-like weapon, inscribed with "TELEPORT". 
+> S
+You go south and are in the castle dungeon. Exits lead north and south. You
+can see the jailor. 
+A remote male voice shouts, "Gotcha! Hehehe!" 
+> S
+You go south and are on the steps down to the dungeon. Exits lead north and
+east. 
+> E
+You go east and are in a plain hall in the castle. Exits lead north through a
+door, east and west. 
+> E
+You go east and are in a scarred corridor, blasted by some sort of electrical
+discharges. Exits lead north through a door and west. 
+> OPEN DOOR
+Lightning bolts lash out from the door! They ricochet all over the armour and
+earth themselves through the ball and chain. Amazingly, you are unharmed. A
+further tug opens the door. 
+> N
+You go north through the door and are in a long library. Exits lead north and
+south through a door. You can see the monk and some parchment scrolls. 
+The monk is purple with rage, "How dare you disturb me! You shall pay for this
+insolence!" He turns to a pile of scrolls next to him. 
+> CAST FIREBALL
+A glowing fireball appears at your fingertips! 
+The glowing fireball pulsates gently. 
+The monk picks out a favourite scroll. 
+> FIREBALL, HIT SCROLLS
+The glowing fireball agrees with a flicker of the eyelids. 
+The fireball explodes! The scrolls catch fire! The monk panics and beats a
+hasty retreat. 
+> N
+You go north and are in an appallingly neat office. An exit leads south. You
+can see a carved wooden panel. 
+> EXAMINE PANEL
+It is a great lump of wood, inscribed with "LIGHTNING". 
+> RUN TO FOREST
+You fly onto the river. 
+You are standing beside a little lake in a clearing in a forest. Exits lead in
+all directions. You can see some ants, a comfortable perch, an huge anthill
+and a marble pedestal. On the comfortable perch is the Rainbird. 
+> CAST MAGICIAN AT ME
+Triumphal music sounds. You are now a magician! 
+> RECRUIT RAINBIRD
+He is now yours to command. 
+> RAINBIRD, GO TO EXIT AND WAIT
+The Rainbird says, "No sooner said than done." 
+He goes southwest. 
+> FIND SCALE
+You go northwest and are in a forest. 
+The troll enters from the south. You go northwest and are on a grassy plain.
+You can see Erik Bloodeagle. 
+The troll enters from the southeast. You go northwest and are on a grassy
+plain. 
+The troll enters from the southeast. You go north and are on a grassy plain. 
+The troll enters from the south. You go north and are beside a huge mountain
+to the east. 
+The troll enters from the south. You go north and are beside a huge mountain
+to the east. 
+The troll enters from the south. You go north and are at an archway beside a
+huge mountain to the east. You can see an ancient inscription. 
+The troll enters from the south. You go north and are just south of a glowing
+gate on a grassy plain. Exits lead south, southwest and west. You can see a
+clove of garlic and a small scale. 
+The troll enters from the south. Suddenly, the gate opens. Two nymphs emerge
+and throw out the mouse, before darting back inside. 
+> GET SCALE
+You take the small scale. 
+The mouse is squeaking very quickly. The troll chuckles at the thought of some
+money-making scheme. A remote male voice shouts, "How do I get through the
+Paradise Gate?" 
+> RUN TO DRAGON
+You are at a crossover between passageways. Exits lead east, south and west.
+You can see the dragon. 
+> GIVE SCALE TO DRAGON
+You give the small scale to the dragon. 
+The troll enters from the west. 
+> DRAGON, RUN TO EXIT AND WAIT
+The dragon says, "Right away, boss." 
+> RUN TO TROLL
+The troll whispers, "Money, money, money." 
+> TROLL, RUN TO EXIT AND WAIT
+The troll says, "No sooner said than done." 
+> RUN TO MOUSE
+You are just south of a glowing gate on a grassy plain. Exits lead south,
+southwest and west. You can see a mouse and a clove of garlic. 
+> MOUSE, RUN TO EXIT AND WAIT
+The mouse says, "All in a day's work!" 
+The mouse is squeaking very quickly. 
+> RUN TO EXIT 
+You are just north of an exit ramp, leading away through a curtain of light on
+a grassy plain. Exits lead north, northeast, east, south, west and northwest.
+You can see the dragon, a mouse, the Rainbird and the troll. 
+> DRAGON, GO SOUTH
+The dragon says, "No sooner said than done." 
+He goes south. The dragon's smoke sets off an alarm! The emergency exit opens!
+> S
+You go south and are on a wide road. Exits lead north, west through a door and
+northwest. You can see the dragon and a plant growing from the wall. 
+> W
+You go west through the door and are in a chequered corridor, marked "NO
+ROBOTS". To the west is a thin red line drawn on the ground. Exits lead
+northeast, east through a door, west and upwards. You can see an inspection
+hatch. 
+> E
+You go east through the door and are on a wide road. Exits lead north, west
+through a door and northwest. You can see the dragon and a plant growing from
+the wall. 
+> N
+You go north and are just north of an exit ramp, leading away through a
+curtain of light on a grassy plain. Exits lead north, northeast, east, south,
+west and northwest. You can see a mouse, the Rainbird and the troll. 
+> TROLL, TAKE MOUSE
+The troll says, "No sooner said than done." 
+She takes the mouse. 
+> TROLL, GO TO HATCH
+The troll says, "All in a day's work!" 
+The mouse is squeaking very quickly. She goes south. 
+> RAINBIRD, FOLLOW ME
+The Rainbird says, "Right away, boss." 
+He stretches its wings. A remote male voice shouts, "Won't anyone tell me how
+to see in the dark?" 
+> FIND DRAGON
+You go south and are on a wide road. Exits lead north, west through a door and
+northwest. You can see the dragon, the troll and a plant growing from the
+wall. 
+The mouse is squeaking very quickly. The troll goes west through the door. The
+Rainbird enters from the north. The deafening alarm carries on. 
+> DRAGON, FOLLOW ME
+The dragon says, "Right away, boss." 
+> GO TO HATCH
+You go west through the door and are in a chequered corridor, marked "NO
+ROBOTS". To the west is a thin red line drawn on the ground. Exits lead
+northeast, east through a door, west and upwards. You can see the troll and an
+inspection hatch. 
+> TROLL, PUT MOUSE INTO HATCH
+The troll says, "Right away, boss." 
+She puts the mouse inside the inspection hatch. You hear chewing noises and a
+moment later the field disappears. The mouse runs back out and jumps to the
+floor. 
+> TROLL, FOLLOW ME
+The troll says, "No sooner said than done." 
+The mouse grooms its fur with a hind paw. 
+> MOUSE, FOLLOW ME
+The mouse says, "All in a day's work!" 
+The Rainbird enters from the east through the door. 
+> W
+You go west and are in a simrock foyer, decorated with vidi-posters and the
+like, advertising everything from theme parks to no-cal restaurants. To the
+west is a large entrance door. Exits lead east and inside. You can see a
+plastic kiosk. The cashier sees you! She looks terrified and pushes a button
+by the side of her desk. The large entrance door swings shut and closes with a
+solid-sounding thunk. She rushes out of the only door which, unfortunately, is
+on the far side of the cubicle. 
+The troll enters from the east. 
+> TROLL, TAKE RAINBIRD
+She says, "Right away, boss." 
+The Rainbird enters from the east. The deafening alarm carries on. 
+> TROLL, PUT RAINBIRD INTO OPENING 
+The troll says, "Right away, boss." 
+The Rainbird stretches its wings. The rainbird squeezes through the window and
+waddles over to peck the "open" button. The main door opens and you and your
+allies rush through it! You have escaped! No more are you a mere orc slave in
+Reveline's lifesize adventure game; you now have the opportunity to make a
+great new future in the outside world... provided you can escape the police
+who are even now arriving to investigate the fire alarm. But this is a problem
+for the next game. For the moment, you have won brilliantly! You score 1000
+out of 1000. 
+ 
+Thy life is at an end. Type OOPS, RAM RESTORE, RESTORE or RESTART. #quit
+

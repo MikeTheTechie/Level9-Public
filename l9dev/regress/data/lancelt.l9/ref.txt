@@ -1,0 +1,2966 @@
+
+Looking for gameplay log on disk - 'log.bat'
+
+Executing instructions in file 'log.bat'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Welcome to "Lancelot", copyright (C) 1988 from Level 9 and Mandarin. (You can
+use Ram Save and Ram Restore to save a position in memory, and Undo to retrace
+your steps). 
+ 
+When Squire Lancelot was of age, he took his journey towards Camelot. For the
+reputation of King Arthur was known to all the world, and everyone praised the
+fellowship of the Round Table.. 
+You could go straight to the final part, the Quest for the Holy Grail, but I
+assume you want Lancelot's full story. Shall we start at the beginning?
+#title: Lancelot test script
+#comment: MSX version 
+#SEED 42
+Seed set to 42
+YES
+ 
+Lancelot was riding east along on a forest road. Leafy branches hung over the
+track, which was deep rutted and churned by heavy ox carts and the footprints
+of men and horses. This was the road to the great city of Camelot, the heart
+of the kingdom. 
+Thy command, Sire? RESTART
+Really restart? YES
+Welcome to "Lancelot", copyright (C) 1988 from Level 9 and Mandarin. (You can
+use Ram Save and Ram Restore to save a position in memory, and Undo to retrace
+your steps). 
+ 
+When Squire Lancelot was of age, he took his journey towards Camelot. For the
+reputation of King Arthur was known to all the world, and everyone praised the
+fellowship of the Round Table.. 
+You could go straight to the final part, the Quest for the Holy Grail, but I
+assume you want Lancelot's full story. Shall we start at the beginning?
+#SEED 42
+Seed set to 42
+YES
+ 
+Lancelot was riding east along on a forest road. Leafy branches hung over the
+track, which was deep rutted and churned by heavy ox carts and the footprints
+of men and horses. This was the road to the great city of Camelot, the heart
+of the kingdom. 
+Thy command, Sire? E 
+Squire Lancelot rode east and was wading through a ford. Though the river was
+wide, it ran swiftly here. Lancelot could see the Black Knight. 
+ 
+The Black Knight sat straight and proud upon his horse and challenged
+Lancelot, "Squire, no man can pass this way save with my permission. You must
+prove your worth before you may cross this ford". 
+Thy command, Sire? ATTACK KNIGHT
+They fought for a long time, with neither man giving any quarter. First one
+had the upper hand, then the other, and each soon came to know that his
+opponent was a valiant knight. They fought on, trading blow for blow, until at
+last the Black Knight yielded. Did Lancelot accept his surrender? YES
+ 
+The Black Knight removed his helm and showed himself to be King Arthur.
+"Gramercy, sir, you fought well and chivalrously. In truth you were a most
+worthy opponent," he said with a bow. "It would please me to knight you and to
+have you join the company at the Round Table. Come to me tomorrow, at my
+castle in Camelot". 
+The king summoned his guards from the bushes beyond, where they had waited to
+watch the fight, and the royal party rode for the city. 
+Thy command, Sire? E
+Squire Lancelot rode east and was on a road lined with great elms. Between
+their branches he could see peasants at work on the land. To the east was the
+great city of Camelot. Its pale walls reflected the colours of the setting
+sun, and seemed to grow in majesty each time he looked up. Lancelot spurred on
+his mount, eager to reach his goal with all speed. 
+Thy command, Sire? E
+Squire Lancelot rode east and was on the road through the castle village.
+Untidy mud and straw huts dotted the roadside. Lancelot could see some
+peasants and a pot of stew. Lancelot scarce noticed the serfs nor their
+hovels, for his eyes were fixed upon the walls and towers of Camelot that
+filled the sky before him. 
+Thy command, Sire? E
+Squire Lancelot rode east and was outside the Serfs' Gate. A muddy track led
+through the narrow opening, and the hubbub of voices could be heard from
+beyond. The double gates were of thick oak, and no larger than need be to
+admit a straw wagon or a mounted knight. Lancelot could see a beggar. Dusk
+began to suck the colours from the greying world, leaving only the pools of
+light from the torches of Camelot. 
+Thy command, Sire? E
+Squire Lancelot alit from his horse and walked east and was inside the Serfs'
+Gate. Piles of rubbish littered the ground, while soldiers and servant lads
+scurried to and fro. Lancelot could see Sir Kay. Two young urchins turned to
+stare at squire Lancelot, then ran off to spread word of the new arrival. 
+ 
+Sir Kay stared full at the newcomer. "Well I never! See what the cat dragged
+in. If you have business in this place, I suggest you go and sleep in the
+mews. They cost nothing, which should suit you fine, and are close by here".
+He gestured arrogantly to the east and north, "Be off with you, squire. There
+is a curfew for the rabble, you know". 
+Thy command, Sire? GO TO MERLIN
+Squire Lancelot went east, mounting his horse and was on the west way. Narrow,
+crooked lanes splayed out into the depths of the city. Lancelot could see a
+town crier. 
+Squire Lancelot rode north and was in the north warren, among the twisting
+lanes of the city. As Lancelot rode, the skies darkened to black and rain
+started to fall. 
+Lancelot was all but struck by peelings thrown from a high window. Lancelot
+rode north and was on the road outside the mews. Lancelot realised that this
+was the place Kay had named. 
+Squire Lancelot rode west and was on the road. Just to the west the paved
+surface gave way to a mud track. A stable boy came forth, carrying a pitchfork
+full of steaming straw. Lancelot halted his mount to let him pass by, and the
+boy grunted his thanks. 
+Squire Lancelot rode west and was on the road. Parts of it were very muddy,
+and he had to ride in twists and turns to avoid the puddles. As Lancelot came
+by, there was a loud barking and baying. 
+Squire Lancelot rode west and was on the road, where it dwindled to an end.
+Against the wall grew a stone coloured host of GIANT plants, the like of which
+Lancelot had never seen. 
+ 
+A wrinkled hand, enwrapped in a long flapping sleeve, beckoned to him from an
+attic window. 
+Squire Lancelot alit from his horse and walked north and was on a flight of
+ill-lit stairs. The smells of old parchment, herbs and GRASSY substances
+drifted down from above. 
+ 
+(You will have noticed that some of the words in this game are in capital
+letters, e.g "GRASSY" above. These are nothing to do with solving the game
+itself, but are clues to a prize competition run in late 1988. From March 1989
+onwards, Level 9's cluesheets include details of the contest questions, a full
+solution, and how the whole thing went).
+ 
+Squire Lancelot went north and was in the study; almost a CIRCLE in shape,
+with tons of wood panelling and doorways to north and east. Curiously
+fashioned devices of wood and brass stood upon the table and the floor.
+Lancelot could see Merlin. The sun streamed through the window, and set a
+rainbow gleaming from a great glass jar. 
+Merlin said, "Greetings, Lancelot. Your coming was foretold to me in a dream".
+Thy command, Sire? MERLIN, GREETINGS
+Merlin asked Lancelot if he was in good health. 
+Merlin said, "Well I never. You look in need of rest and lodgings for the
+night. Prithee make yourself at home here". 
+Thy command, Sire? N
+Squire Lancelot went north and was in the guest room. It was dimly lit and not
+at all clean. The room was crammed with things great and small that Merlin had
+accumulated and then put aside over many long years. Lancelot could see a bed.
+It was nearly buried beneath unpaid bills but, after much rummaging and
+tidying, Lancelot at length cleared enough space for himself. 
+Merlin entered from the south. Squire Lancelot lay down on the bed. 
+To save time, I'll change to ">" prompts. 
+> SLEEP
+Squire Lancelot lay himself down and made what comfort he could, ready for
+sleep. 
+Merlin said to Lancelot, "I have something of import to tell you. Know you
+well that it is destined that the Queen will come to matter much to you. Her
+fate and yours are bound together". Squire Lancelot was full comfortable on
+the bed. 
+> SLEEP
+Squire Lancelot lay himself down and made what comfort he could, ready for
+sleep. 
+Merlin went south. Squire Lancelot soon descended into sleep. In the morning,
+he woke refreshed and ready for the challenges of the new day. 
+> S
+Squire Lancelot went south and was in the study; almost a CIRCLE in shape,
+with tons of wood panelling and doorways to north and east. Curiously
+fashioned devices of wood and brass stood upon the table and the floor.
+Lancelot could see Merlin. 
+Merlin went east. 
+> E
+Squire Lancelot went east and was in Merlin's library. It contained more books
+than there were stones on the HEATH. Some leant drunkenly against each other
+on shelves, others lay on a large desk, amidst a jumble of papers. Lancelot
+could see Merlin and some books. 
+Merlin said to Lancelot, "You will not show yourself to be a noble and valiant
+knight here in Camelot". He learned his quality would be weighed, for ounces
+or tons, by his actions in the lands beyond, be they large or MICRO. 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "a selection of
+Tristram of Cornwall's WELL-KNOWN compositions for the harp". 
+Merlin went west. 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "the sound of a
+horn can be heard in the distance". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "a true knight is
+always true to his lady". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "THE legends of
+wounded king Pellam of the Marsh". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "Turquin's Manor
+can not be entered by no knight alone". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "only a knight,
+free of sin, shall reach the Grail". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "THE key to the key
+is cancellation, and much help". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "Elaine is cursed,
+yet blessed, for she will bear the best of knights". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "Orkney's shrubs
+can hide a multitude". 
+> READ BOOK
+Squire Lancelot picked a two pound book at random and read "Arthur's missing
+knights are found in nine places". 
+> GO TO ARTHUR
+Merlin entered from the west. 
+Squire Lancelot went west and was in the study; almost a CIRCLE in shape, with
+tons of wood panelling and doorways to north and east. 
+Squire Lancelot went south and was on a flight of ill-lit stairs. 
+Squire Lancelot went south, mounting his horse and was on the road, where it
+dwindled to an end. 
+Squire Lancelot rode east and was on the road. Parts of it were very muddy,
+and he had to ride in twists and turns to avoid the puddles. 
+Squire Lancelot rode east and was on the road. Just to the west the paved
+surface gave way to a mud track. 
+Squire Lancelot rode east and was on the road outside the mews. 
+Squire Lancelot rode southeast and was on the north way, that ran between the
+warrens and the royal castle wall. Lancelot could see a town crier. A pilgrim
+turned his eyes to the south for a last sight of the cathedral before he set
+out upon his journey. 
+Squire Lancelot rode south and was on the market square, where Lancelot had to
+wind his way between makeshift stalls and animal pens. 
+Squire Lancelot rode east and was on the lawns beside Arthur's castle. As
+Lancelot looked about, he was minded of the formal gardens of his native
+France, and did think fondly of home. 
+Squire Lancelot alit from his horse and walked north through the door and was
+in the great hall of the Round Table. Lancelot could see some sieges and a
+Round Table. 
+Lancelot stood and gazed about him. This was his first sight of the Round
+Table, and he longed to join its chivalrous company. 
+Squire Lancelot went north and was in Arthur's echoing hall. Hundreds of wall
+torches gave a flickering gold glow to the room, making it seem welcoming
+despite its size. Lancelot could see Guenever and King Arthur. 
+A company of guards were quick to do their duty, springing forward TO seize
+the newcomer, but the young king recognised him and stepped forward in
+greeting. 
+> ARTHUR, GREETINGS
+King Arthur murmured politely. 
+Guenever pushed a wisp of hair back into place. King Arthur said, "Welcome to
+Camelot, Lancelot. Merlin has foretold that you are fated to become the
+greatest of all knights. We are honoured to have you at our court". 
+> WAIT
+Time passed. 
+Guenever smiled at Lancelot. King Arthur said, "I was much taken with your
+deeds at our meeting at the ford. You fought with great valour". 
+> WAIT
+Time passed. 
+King Arthur added musingly, "Of course, I was pleased that you did not kill
+me. Else there had been all sorts of trouble". 
+> WAIT
+Time passed. 
+Guenever pursed her lips in thought. King Arthur knighted Lancelot, and bade
+him stay and dine with them. As they sat at table and the drinks flowed,
+Lancelot stole many a glance at Queen Guenever. Truly, he thought, she was a
+most beautiful and stately woman. And as the evening wore on, it came to him
+that he was fast losing his heart to her. 
+At times, their eyes met and Guenever did look away coyly, like a maiden. At
+length, with his heart in his mouth, he essayed to beg of her the favour of
+being her champion. As he had feared, she refused for that she should not be
+championed by a novice, and for a dreadful moment Lancelot thought she would
+rebuff him entirely. 
+But then Guenever smiled knowingly at him and bade him to return to her when
+he had proved himself to be worthy of her favour. At this, Lancelot was
+drunken with pride and joy, and swore he would not fail, but would go to
+Logris without delay, there to honour Guenever with noble deeds and battles
+chivalrously won. 
+Sithen Arthur looked upon Lancelot and said, "There are sieges yet to be
+filled at this Round Table, and knights of which I have heard - all honourable
+fellows, the which I need - who are held captive by rebel lords who live
+beyond my rule. Now, could you but bring them to Camelot as free men, that
+would prove you to be a full worthy knight". 
+> S
+Sir Lancelot went south and was in the great hall of the Round Table. Fragrant
+rushes covered the floor; a trampled pathway along the east wall showing where
+many people had pushed past the table. Lancelot could see some sieges and a
+Round Table. 
+> S
+Sir Lancelot went south through the door, mounting his horse and was on the
+lawns beside Arthur's castle. The main drive curved north across the grass and
+entered into the castle gates. Opposite this, on the south side of the lawns,
+stood the cathedral, with its slender wooden spire reaching high unto the
+heavens. 
+> W
+Sir Lancelot rode west and was on the market square, where Lancelot had to
+wind his way between makeshift stalls and animal pens. The square was edged on
+three sides by inns and the shops of craftsmen, but was open to the east where
+wide lawns lay before the cathedral. 
+> N
+Sir Lancelot rode north and was on the north way, that ran between the warrens
+and the royal castle wall. It led on to a wider, paved road out of the city. 
+> N
+Sir Lancelot rode north and was on the King's road. It was a wide well-worn
+fairway, smoothly paved with flags of stone. The road narrowed to a cart width
+as it passed through the northmost city gate. Lancelot knew that this gate led
+to Logris, the main part of the country, where he might meet further
+adventure. 
+> N
+ 
+Lancelot is about to start another part of the game. Do you want to save his
+position first, just in case? NO 
+Play the game tape to load part 2. 
+ 
+Lancelot was on a wide avenue. It was a fine highway to the north, and fully
+paved with flat stones. By order of the King, such roads were kept free of
+weeds and smothering bushes. Lancelot could see the Damosel Maledisant.
+Lancelot looked about him at the Realm of Logris. Here were fierce dragons to
+be fought, and fair damosels to be succoured. Here too were those captive
+knights that he must free to complete the company of the Round Table. 
+> DAMOSEL, GREETINGS
+She said, "You are supposed to be the great knight, do it yourself. 
+The Damosel Maledisant said, "Greetings, you poor excuse for a knight. My
+lady, Dame Lyonesse, is besieged. She needs help, and I suppose you will have
+to do". 
+> GO TO DAME
+Sir Lancelot rode north and was at a crossroads. A fine lady in a carriage,
+with a retinue of liveried servants, passed across from east to west at a
+steady trot. 
+The Damosel Maledisant entered from the south. 
+Sir Lancelot rode west and was on a Roman road through forest Sauvage. 
+The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on an east-west Roman road. Lancelot could see
+some briers. 
+The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a great clearing beside the Castle of forest
+Sauvage. 
+The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a junction in the forest. 
+The Damosel Maledisant entered from the east. 
+Sir Lancelot rode north and was on a straight track. 
+The Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was on the track outside Turquin's manor. 
+The Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was on a country road. 
+The Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was at a main road. Lancelot could see some dead
+wood and an elm tree. Peasants walked down in the road, bearing their goods to
+market and gossiping the while. 
+The Damosel Maledisant entered from the south. 
+The meantime, came a lady out of the castle and cried aloud, "O Lancelot, thou
+flower of all knights, help me to recover my falcon, for she is slipped from
+me and the lunes about her feet are entangled fast in the branches of yonder
+elm". 
+> UP
+Sir Lancelot could not climb the tree while encumbered with his heavy armour,
+so he shed himself of its weight and left it heaped upon the ground. Lancelot
+dismounted and went upwards and was in the lower branches of the elm. Pushing
+the leaves aside, Lancelot could see the upper branches reaching high above.
+From far above, Lancelot heard the hawk mewing miserably. Clearly the bird was
+trapped up YONDER. 
+> UP
+Sir Lancelot went upwards and was at the top of the elm. The wind blew more
+strongly and the whole treetop swayed in the breeze. Lancelot could see a
+hawk. Lancelot grabbed at a branch as his balance slipped, and the hawk
+spitefully bit a chunk out of his hand. 
+> UNTIE LUNES
+Sir Lancelot untied the tangled lunes, and tossed the hawk down to the ground.
+A cry of joy from below heralded its safe arrival. 
+> DOWN
+Sir Lancelot went downwards and was in the lower branches of the elm. Pushing
+the leaves aside, Lancelot could see the upper branches reaching high above. 
+> DOWN
+Sir Lancelot went downwards, mounting his horse and was at a main road, a wide
+smooth highway, lined with regal elm trees. Lancelot could see Sir Phelot, the
+Damosel Maledisant, a Lady, some dead wood and an elm tree. 
+As the Lady turned away and wept, Sir Phelot sneered down from his great horse
+and taunted Lancelot, "My wife has done as I bade her. Now, without your
+armour, you are helpless as a maid. The hour is come that you must die!" The
+Damosel Maledisant said "Ha ha! Not so great now, are you, Lancelot?". The
+Lady looked guilty. 
+> GET DEAD WOOD
+Sir Lancelot took the dead wood. 
+Sir Phelot smote Sir Lancelot. Lancelot was but lightly wounded. 
+> THROW WOOD AT SIR PHELOT
+The wood smote Sir Phelot on the one side of the head, so that he fell in a
+swoon upon the ground. Then Sir Lancelot took the sword out of his hand and
+struck his head from the body, for Sir Phelot was a false knight who would
+have slain Sir Lancelot most treacherously. 
+ 
+The lady departed, weeping. And therewithal, Sir Lancelot put his armour upon
+him as fast as he might, for he feared an attack from the knight's castle that
+stood nearby. 
+> GO TO DAME
+Sir Lancelot rode north and was at a country junction. As he rested on a small
+KNOLL, Lancelot heard the howls of a brachet, far to his right. 
+The Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was in the black launds. Lancelot could see the
+Black Knight. 
+The Black Knight directed his horse to the middle of the road and sat,
+awaiting Lancelot's attack. The Damosel Maledisant entered from the south. 
+The Black Knight said, "None shall pass" and blocked Sir Lancelot. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Black Knight. He was but lightly wounded. 
+The Black Knight smote Sir Lancelot. Lancelot was scarcely harmed. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Black Knight. He was badly hurt. 
+The Black Knight smote Sir Lancelot. Lancelot was scarcely harmed. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Black Knight. He was close to death. 
+The Black Knight yielded. Did Lancelot spare him? YES
+He rode away, striking Lancelot to the ground as he left. The Damosel
+Maledisant said "Ha ha! Not so great now, are you, Lancelot?". 
+> GO TO DAME
+Sir Lancelot rode north and was in the green launds. Lancelot could see the
+Green Knight. 
+The Green Knight said, "None shall pass me". The Damosel Maledisant entered
+from the south. 
+The Green Knight said, "None shall pass" and blocked Sir Lancelot. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Green Knight. He was but lightly wounded. 
+The Green Knight smote Sir Lancelot. Lancelot was scarcely harmed. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Green Knight. He was badly hurt. 
+The Green Knight smote Sir Lancelot. Lancelot was scarcely harmed. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Green Knight. He was close to death. 
+The Green Knight yielded. Did Lancelot spare him? YES
+He rode away, striking Lancelot to the ground as he left. The Damosel
+Maledisant said "Ha ha! Not so great now, are you, Lancelot?". 
+> GO TO DAME
+Sir Lancelot rode north and was in the red launds. Lancelot could see the Red
+Knight. 
+The Red Knight challenged Lancelot. The Damosel Maledisant entered from the
+south. 
+The Red Knight said, "None shall pass" and blocked Sir Lancelot. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Red Knight. He was but lightly wounded. 
+He smote Sir Lancelot. Lancelot was scarcely harmed. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Red Knight. He was badly hurt. 
+He smote Sir Lancelot. Lancelot was scarcely harmed. 
+> ATTACK KNIGHT
+Sir Lancelot smote the Red Knight. He was close to death. 
+He yielded. Did Lancelot spare him? YES
+He rode away, saluting Lancelot. 
+> GO TO DAME
+Sir Lancelot rode north and was at a siegeworks. Lancelot could see a horn and
+a siege army. The remains of past battles lay scattered about the field. 
+The Damosel Maledisant entered from the south. 
+A flurry of arrows dissuaded Sir Lancelot. 
+> BLOW HORN
+A horn sounded. The commander rode up, trembling visibly. 
+He had been besieging Dame Lyonesse, but had no wish to do battle with Sir
+Lancelot and promised to desist and withdraw his army. Lancelot was free to
+enter the castle at his will. He offered the services of the red knight to
+Lancelot. He rode off with his army in a great hurry. 
+The Red Knight entered from the north. 
+> GO TO DAME
+Sir Lancelot dismounted and went north and was in Castle Lyonesse, an imposing
+building in smooth pale stone, atop a hill. This EMINENCE's position gave a
+view of the surrounding country, like unto that of a circling eagle. Within,
+the rooms were light and airy. 
+Dame Lyonesse greeted Lancelot and thanked him warmly for restoring her
+estates unto her. She said that Lynet, the Damosel Maledisant, could stay with
+him. 
+Dame Lyonesse then retired to tend to her wounded soldiers. 
+The Red Knight entered from the south. The Damosel Maledisant entered from the
+south. 
+> GO TO BRIERS
+The Red Knight looked around. 
+Sir Lancelot went south, mounting his horse and was at a siegeworks. Lancelot
+could see a horn. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was in the red launds. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was in the green launds. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was in the black launds. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was at a country junction. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was at a main road. Lancelot could see an elm
+tree. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was on a country road. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was on the track outside Turquin's manor. Lancelot
+could see Sir Turquin. 
+The Red Knight entered from the north. 
+Sir Turquin greeted Lancelot with a roar, and challenged him to do battle. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was on a straight track. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode south and was at a junction in the forest. 
+The Red Knight entered from the north. The Damosel Maledisant entered from the
+north. 
+Sir Lancelot rode east and was at a great clearing beside the Castle of forest
+Sauvage. 
+The Red Knight entered from the west. The Damosel Maledisant entered from the
+west. 
+Sir Lancelot rode east and was on an east-west Roman road. Lancelot could see
+some briers. 
+The Red Knight entered from the west. The Damosel Maledisant entered from the
+west. 
+> KNIGHT, WAIT, CUT BRIERS, CUT BRIERS
+The Red Knight turned in acceptance. 
+> CUT BRIERS
+Sir Lancelot chopped away at the briers. 
+The Red Knight chopped away at the briers. 
+The briers grew again. 
+> CUT BRIERS
+Sir Lancelot chopped away at the briers. 
+The Red Knight chopped through the main stem. The briers shrivelled magically
+and disappeared. 
+> GO TO CASTLE
+Sir Lancelot rode north and was in an apple tree clearing beside Castle
+Chariot. 
+Lancelot lay him down in the shade, for he was full tired from his travails,
+and he fell into a sleep. At length he was awakened by the coming of four
+royal ladies, riding forth from the castle. 
+The Red Knight entered from the south. Queen Morgan said, "Lancelot, you must
+choose one of us to be your beloved, or you will never leave this forest". The
+Damosel Maledisant entered from the south. 
+Lancelot could not go that way. 
+Queen Northgales winked at Lancelot. Queen Outisles raised an eyebrow at
+Lancelot. The Damosel Maledisant looked from Lancelot to the Queens and said,
+"Humph! If you are going to dally with these trollops, I will be off". The
+Damosel Maledisant rode south. 
+> CHOOSE GUENEVER
+The queens were furious that Lancelot would not choose one of them. Hundreds
+of guards sallied from the castle and dragged Lancelot away to a cell beneath
+the castle. 
+> WAIT
+Time passed. 
+A maiden entered from the west. 
+> WAIT
+Time passed. 
+The maiden said, "Greetings Lancelot. It grieves me that such a handsome
+knight has been interred in this foul prison". 
+> WAIT
+Time passed. 
+The maiden offered some food to Lancelot. 
+> TAKE FOOD
+Sir Lancelot took the food. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The maiden went west. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+Another night and day passed, with no visitors for Lancelot. 
+> WAIT
+Time passed. 
+Queen Morgan entered from the west. 
+> WAIT
+Time passed. 
+Queen Morgan offered Lancelot a glass of wine, "Drink this," she said
+imperiously, "Then will you feel better". 
+> TAKE WINE
+Sir Lancelot took the glass of wine. 
+> WAIT
+Time passed. 
+Queen Morgan said, "Have you changed your mind? Are you yet willing to love
+only me?" NO
+She said, "Then you shall stay here for another day". Queen Morgan went west. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+A maiden entered from the west. 
+> GIVE WINE TO MAIDEN
+Sir Lancelot gave the glass of wine to the maiden. The maiden drank the love
+potion and fell in love with Lancelot. Knowing that her new beloved desired
+only freedom, she kissed him chastely and opened the castle doors. 
+> OUT
+Sir Lancelot went outside through the door and was in a north-south prison
+corridor, beneath the fortress. Lancelot could see the Red Knight. A low moan
+echoed hollowly around the stone walls. 
+He pressed out a dent in his shield. 
+> N
+Sir Lancelot went north through the door and was in another prison cell.
+Lancelot could see Gawain. 
+Gawain said, "Lancelot, you are come in my time of greatest peril. How can I
+thank you for rescuing me?". The Red Knight entered from the south through the
+door. 
+> GAWAIN, FOLLOW ME
+Gawain said, "Very well". 
+> S
+Sir Lancelot went south through the door and was in a north-south prison
+corridor, beneath the fortress. 
+Gawain entered from the north through the door. The Red Knight entered from
+the north through the door. 
+> OUT
+Sir Lancelot went outside, mounting his horse and was in an apple tree
+clearing beside Castle Chariot. In the clearing stood on old apple tree, its
+branches casting welcome shade on the trimmed grass. Above the encompassing
+wood rose the conical roofs of Castle Chariot. 
+Gawain entered from the north. The Red Knight entered from the north. 
+> GO TO MELIOT
+The Red Knight examined his sword. 
+Sir Lancelot rode south and was on an east-west Roman road. Lancelot could see
+the Damosel Maledisant. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant was sitting by the side of the road. "Well", she said, "I
+hope you enjoyed yourself". 
+Sir Lancelot rode west and was at a great clearing beside the Castle of forest
+Sauvage. 
+Gawain entered from the east. The Red Knight entered from the east. The
+Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a junction in the forest. 
+Gawain entered from the east. The Red Knight entered from the east. The
+Damosel Maledisant entered from the east. 
+Sir Lancelot rode north and was on a straight track. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was on the track outside Turquin's manor. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was on a country road. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was at a main road. Lancelot could see an elm
+tree. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was at a country junction. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode east and was on an overgrown road. A brachet ran away north
+as Lancelot drew close, looking ever backwards to see if he would follow. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode north and was on a stone road. Lancelot could see a brachet.
+The brachet pointed its nose towards the east and bayed mournfully. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. The brachet whined pleadingly at
+Lancelot. 
+Sir Lancelot rode east and was on an overgrown road. As an eagle flew
+overhead, Lancelot thought back to ARTHUR and Camelot, far away. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. Lancelot heard a brachet barking
+from the west. 
+Sir Lancelot rode south and was on a riverbank. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode east and was crossing a decrepit bridge. Lancelot made his
+way forward slowly, testing each footfall with care. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was outside a manor house. There were people inside
+there, for Lancelot could hear a soft keening from somewhere within the manor.
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot dismounted and went north and was in a decaying hall. Birds
+roosted in the ROCKY ledges of its walls. Lancelot could see Meliot and a
+Damosel. The damosel did bend over Sir Meliot and wept bitter tears. 
+Gawain entered from the south. The Red Knight entered from the south. 
+Meliot said, "Sir Lancelot, prithee give me succour. My wounds may only be
+cured by a cloth belonging to the witch that made them". The Damosel
+Maledisant entered from the south. 
+> GO TO CHAPEL
+Sir Lancelot went south, mounting his horse and was outside a manor house. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was in forest Meliot. The soft clink of weapons
+sounded to the south. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was on a dangerous road. 
+A host of swarthy knaves leapt into the track, lashing out at Lancelot with
+clubs and scythes. But within six strokes, Sir Lancelot had stricken them all
+to the earth. The survivors fled south for sanctuary, towards a forest chapel.
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot dismounted and went south and was in the churchyard outside
+Chapel Perilous. Lancelot saw, around the entrance of the chapel, many fair
+rich shields turned up-so-down. Lancelot recognised many of the shields as
+those of former great knights. As he marvelled WHERE they hung, he bethought
+himself to hear a scraping. Perhaps swords were unsheathed nearby. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+> S
+Sir Lancelot went south and was inside the chapel, where dark wooden pillars
+rose up to darker rafters. Lancelot could see some Thirty Knights. Each knight
+was taller by a yard than any man that ever he had seen, and they all grinned
+and gnashed at Sir Lancelot. 
+Gawain entered from outside. The Red Knight entered from outside. The Damosel
+Maledisant entered from outside. The knights spake all together, with a grimly
+voice, and said, "Knight Lancelot, put down your sword straight away, and go
+not inside the inner chapel, and we may show you mercy". 
+> S
+Sir Lancelot went south and was in the inner chamber, where the air was stale
+and foul with the smell of rottenness. Lancelot could see Hellawes and a
+cloth. 
+Hellawes greeted him in sweet tones. Lancelot thought he heard music as she
+said, "Alas Lancelot, if you do not surrender you WILL die for it. Put down
+your sword". 
+Gawain entered from outside. The Red Knight entered from outside. The Damosel
+Maledisant entered from outside. 
+> GET CLOTH
+Sir Lancelot took the cloth. Hellawes' protests were in vain. As soon as
+Lancelot had hold of the magic fabric, there was a great storm and a tempest.
+The evil witch vanished, and all her knights with her. 
+> GO TO MELIOT
+Sir Lancelot went outside and was inside the chapel. 
+Gawain entered from inside. The Red Knight entered from inside. The Damosel
+Maledisant entered from inside. 
+Sir Lancelot went outside and was in the churchyard outside Chapel Perilous. 
+Gawain entered from inside. The Red Knight entered from inside. The Damosel
+Maledisant entered from inside. 
+Sir Lancelot went north, mounting his horse and was on a dangerous road. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was in forest Meliot. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was outside a manor house. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot dismounted and went north and was in a decaying hall. Birds
+roosted in the ROCKY ledges of its walls. Lancelot could see Meliot and a
+Damosel. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Meliot touched the cloth to his grievous wounds and was rightway healed.
+He rode off to Camelot with his maid, there to join Arthur. 
+> GO TO BROCH
+Sir Lancelot went south, mounting his horse and was outside a manor house. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode west and was crossing a decrepit bridge. 
+Gawain entered from the east. The Red Knight entered from the east. The
+Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a riverbank. 
+Gawain entered from the east. The Red Knight entered from the east. The
+Damosel Maledisant entered from the east. 
+Sir Lancelot rode north and was on an overgrown road. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode west and was on a stone road. 
+Gawain entered from the east. The Red Knight entered from the east. The
+Damosel Maledisant entered from the east. 
+Sir Lancelot rode south and was on an overgrown road. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode west and was at a country junction. 
+Gawain entered from the east. The Red Knight entered from the east. The
+Damosel Maledisant entered from the east. 
+Sir Lancelot rode south and was at a main road. Lancelot could see an elm
+tree. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was on a country road. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was on the track outside Turquin's manor. Lancelot
+could see Sir Turquin. 
+Gawain entered from the north. The Red Knight entered from the north. Sir
+Turquin challenged Lancelot, "Fight and be vanquished, knave". The Damosel
+Maledisant entered from the north. 
+Sir Lancelot rode south and was on a straight track. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was at a junction in the forest. 
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode east and was at a great clearing beside the Castle of forest
+Sauvage. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on an east-west Roman road. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a Roman road through forest Sauvage. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a crossroads. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode north and was on the great north road. In places, the track
+had been stamped into a hard smooth surface, and smaller tracks led off to
+many villages and settlements along the way. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was in the marches. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was in Scotland. Lancelot found but poor fodder
+for his horse and worried ever about ambush. For the Scots had but lately
+fought against King ARTHUR'S men and Lancelot thought to hear the music of the
+pipes
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was in the Orkneys. A group of hardy sheep stared
+back at Lancelot, before running away into a fold of the ground. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was in a glen. Lancelot could see some bushes. 
+Gawain entered from the south. The Red Knight entered from the south. The
+Damosel Maledisant entered from the south. 
+Sir Lancelot rode west and was beside a broch. The round tower looked but a
+poor fortress, but he knew that its thick stone walls were a strong defence.
+Lancelot could see a guard and a portcullis. 
+Gawain entered from the east. The Red Knight entered from the east. The
+Damosel Maledisant entered from the east. The guard signalled to someone
+inside the tower. The portcullis started to descend. 
+> E
+Sir Lancelot rode east and was in a glen. It which sloped west through low
+forest, to a narrow beck where salmon hid beneath the YELLOW gorse. Above the
+trees, the mountainside was all purple with heather. Lancelot could see some
+bushes. 
+Gawain entered from the west. The Red Knight entered from the west. The
+Damosel Maledisant entered from the west. 
+> KNIGHT, UP, UP, LIGHT BEACON
+The Red Knight promptly agreed. 
+He rode upwards. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+Gawain looked around. The Red Knight lit the beacon, which flared briefly and
+then died away. A guard entered from the west. 
+> WAIT
+Time passed. 
+The guard rode upwards. 
+> W
+Sir Lancelot rode west and was beside a broch. The round tower looked but a
+poor fortress, but he knew that its thick stone walls were a strong defence.
+Lancelot could see a portcullis. 
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+> IN
+Sir Lancelot dismounted and went inside and was in a stable, which was the
+only room on the ground floor of the broch. Lancelot looked at the stairs to
+the west and fancied that the local people lived in the upper levels of the
+broch, while there seemed to be cellars below. 
+Gawain entered from outside. The Damosel Maledisant entered from outside. 
+> GO TO BASEMENT
+Sir Lancelot went west and was on the stairs. The grating of a chair on a
+wooden floor sounded from somewhere up above. 
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot went downwards and was at the base of the stairs. 
+Gawain entered from above. The Damosel Maledisant entered from above. 
+Sir Lancelot went east and was in the basement, a low, damp storeroom. Some
+sacks had split, spilling little mounds of barley on the floor. Lancelot could
+see a trapdoor. On it was a chest. As his eyes accustomed to the gloom,
+Lancelot saw the deeper shadow of a doorway in the eastern wall. 
+Gawain entered from the west. The Damosel Maledisant entered from the west. 
+> UNBOLT DOOR
+Sir Lancelot slid back the bolts. 
+The Red Knight entered from the west. 
+> E
+Sir Lancelot went east through the door and was in a prison, with scarce room
+enough for a man to lie at length. Lancelot could see Lamorak. 
+Gawain entered from the west through the door. The Red Knight entered from the
+west through the door. Lamorak said, "I cannot tell you how grateful I am that
+you have saved me". The Damosel Maledisant entered from the west through the
+door. 
+> W
+Sir Lancelot went west through the door and was in the basement, a low, damp
+storeroom. Some sacks had split, spilling little mounds of barley on the
+floor. Lancelot could see a trapdoor. On it was a chest. 
+Gawain entered from the east through the door. The Red Knight entered from the
+east through the door. Lamorak entered from the east through the door. The
+Damosel Maledisant entered from the east through the door. 
+> KNIGHT, WAIT, PUSH CHEST
+The Red Knight agreed. 
+> PUSH CHEST
+Sir Lancelot strained against the chest. Too few people were helping. 
+The Red Knight strained against the chest. The chest slid away from the
+trapdoor. 
+> DOWN
+Sir Lancelot went downwards and was in a tunnel. A thin rain of dust trickled
+down from the ceiling. 
+Gawain entered from above. The Red Knight entered from above. Lamorak entered
+from above. The Damosel Maledisant entered from above. 
+> OUT
+Sir Lancelot went outside, mounting his horse and was on a beach, a small bay
+forming a deep curve between two jagged headlands. Lancelot fancied to see
+MERLIN'S name in the shape of a shoal of fish. 
+Gawain entered from the west. The Red Knight entered from the west. Lamorak
+entered from the west. The Damosel Maledisant entered from the west. 
+> GO TO TURRET
+Sir Lancelot rode north and was beside a broch. Lancelot could see a guard and
+a portcullis. 
+Gawain entered from the south. The Red Knight entered from the south. Lamorak
+entered from the south. The Damosel Maledisant entered from the south. The
+guard signalled to someone inside the tower. The portcullis started to
+descend. 
+Sir Lancelot rode east and was in a glen. Lancelot could see some bushes. 
+Gawain entered from the west. The Red Knight entered from the west. Lamorak
+entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode south and was in the Orkneys. 
+Gawain entered from the north. The Red Knight entered from the north. Lamorak
+entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was in Scotland. 
+Gawain entered from the north. The Red Knight entered from the north. Lamorak
+entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was in the marches. 
+Gawain entered from the north. The Red Knight entered from the north. Lamorak
+entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was on the great north road. 
+Gawain entered from the north. The Red Knight entered from the north. Lamorak
+entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was at a crossroads. 
+Gawain entered from the north. The Red Knight entered from the north. Lamorak
+entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode west and was on a Roman road through forest Sauvage. 
+Gawain entered from the east. The Red Knight entered from the east. Lamorak
+entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on an east-west Roman road. 
+Gawain entered from the east. The Red Knight entered from the east. Lamorak
+entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a great clearing beside the Castle of forest
+Sauvage. 
+Gawain entered from the east. The Red Knight entered from the east. Lamorak
+entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a junction in the forest. 
+Gawain entered from the east. The Red Knight entered from the east. Lamorak
+entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a Roman road beside a turret. The long
+straight highway stretched east-west as far as the eye could see. The turret
+threw a long dark shadow across it. Lancelot saw the door of the turret open
+and close again quickly, yet nobody emerged. 
+Gawain entered from the east. The Red Knight entered from the east. Lamorak
+entered from the east. The Damosel Maledisant entered from the east. 
+> IN
+Sir Lancelot rode inside and was in Garlon's turret, a squat tower built of
+small stones mortared together. Heavy shutters hung beside the narrow arched
+window. Lancelot could see some shutters. Bright sun streamed in through the
+window, casting a wide pool of golden light on the floor. 
+Gawain entered from the north. The Red Knight entered from the north. Lamorak
+entered from the north. Lancelot heard footsteps follow him inside. The
+Damosel Maledisant entered from the north. 
+> CLOSE SHUTTERS
+With the shutters closed, the turret was completely dark. Lancelot heard foul
+cursing from nearby as Garlon realized he had lost the advantage of his
+invisibility. 
+Gawain waited in readiness. The Red Knight examined his sword. Someone
+invisible smote Sir Lancelot. Lancelot was scarcely harmed. The Damosel
+Maledisant said "That was a cowardly trick". 
+> KILL GARLON
+Sir Lancelot smote someone invisible. He was badly hurt. 
+Gawain hummed a popular ballad. Lamorak pressed out a dent in his shield.
+Someone invisible smote Sir Lancelot. Lancelot was scarcely harmed. 
+Sir Lancelot smote someone invisible. He was dead. With Garlon dead, Lancelot
+had removed from the land a foul scourge that had been the death of many good
+knights. 
+The Red Knight looked around. 
+Someone invisible was dead. 
+The Red Knight examined his sword. 
+> GO TO BREUNIS
+The Red Knight hummed a popular ballad. 
+Sir Lancelot rode north and was on a Roman road beside a turret. 
+Gawain entered from the south. The Red Knight entered from the south. Lamorak
+entered from the south. The Damosel Maledisant entered from the south. 
+Sir Lancelot rode west and was on a marsh road. 
+Gawain entered from the east. The Red Knight entered from the east. Lamorak
+entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a forest road. 
+Gawain entered from the east. The Red Knight entered from the east. Lamorak
+entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode north and was in a forest maze. Lancelot could see Sir
+Breunis. 
+Gawain entered from the south. The Red Knight entered from the south. Lamorak
+entered from the south. Sir Breunis said, "You have trespassed in my forest
+and you shall die". The Damosel Maledisant entered from the south. 
+> KILL BREUNIS
+Sir Lancelot smote Sir Breunis. He was badly hurt. 
+Lamorak examined his sword. Sir Breunis rode east. 
+Sir Lancelot rode east and was in a forest maze. Lancelot could see Sir
+Breunis. 
+Gawain entered from the west. The Red Knight entered from the west. Lamorak
+entered from the west. Sir Breunis smote Sir Lancelot. Lancelot was unhurt.
+The Damosel Maledisant entered from the west. 
+Sir Lancelot smote Sir Breunis. He was close to death. 
+Lamorak pressed out a dent in his shield. Sir Breunis rode east. 
+Sir Lancelot rode east and was in a forest maze. Twigs and branches rustled
+and unseen birds set up a great crying. Lancelot could see Sir Breunis. 
+Gawain entered from the west. The Red Knight entered from the west. Lamorak
+entered from the west. Sir Breunis rode east. The Damosel Maledisant entered
+from the west. 
+Sir Lancelot rode east and was in a forest maze. Lancelot could see Sir
+Breunis. 
+Gawain entered from the west. The Red Knight entered from the west. Lamorak
+entered from the west. Sir Breunis rode north. The Damosel Maledisant entered
+from the west. 
+Sir Lancelot rode north and was in a forest maze. Lancelot could see Sir
+Breunis. 
+Gawain entered from the south. The Red Knight entered from the south. Lamorak
+entered from the south. Sir Breunis smote Sir Lancelot. Lancelot was unhurt.
+The Damosel Maledisant entered from the south. 
+Sir Lancelot smote Sir Breunis. He was gravely wounded. 
+The Red Knight looked around. Lamorak waited in readiness. Sir Breunis rode
+north. 
+Sir Lancelot rode north and was at the wailing Castle, which loomed into view
+between the trees. It had the air of a place accursed. Lancelot could see Sir
+Pedivere and Sir Breunis. 
+Sir Pedivere said, "Sir Lancelot, prithee slay Sir Breunis that I may be
+free". Gawain entered from the south. The Red Knight entered from the south.
+Lamorak entered from the south. Sir Breunis smote Sir Lancelot. Lancelot was
+unhurt. The Damosel Maledisant entered from the south. 
+Sir Lancelot smote Sir Breunis. He was dead. 
+Sir Pedivere thanked Lancelot for destroying Breunis, and offered his
+services. Lamorak took his leave and returned to Camelot. 
+Sir Breunis was dead. 
+The Red Knight hummed a popular ballad. 
+> GO TO ELAINE
+Sir Lancelot rode south and was in a forest maze. 
+Sir Pedivere entered from the north. Gawain entered from the north. The Red
+Knight entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was in a forest maze. 
+Sir Pedivere entered from the north. Gawain entered from the north. The Red
+Knight entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode west and was in a forest maze. 
+Sir Pedivere entered from the east. Gawain entered from the east. The Red
+Knight entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was in a forest maze. 
+Sir Pedivere entered from the east. Gawain entered from the east. The Red
+Knight entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was in a forest maze. 
+Sir Pedivere entered from the east. Gawain entered from the east. The Red
+Knight entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode south and was on a forest road. 
+Sir Pedivere entered from the north. Gawain entered from the north. The Red
+Knight entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode east and was on a marsh road. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a Roman road beside a turret. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a junction in the forest. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a great clearing beside the Castle of forest
+Sauvage. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on an east-west Roman road. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a Roman road through forest Sauvage. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a crossroads. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on the coast road. The road tilted and shook
+beneath the hooves of Lancelot's horse. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on the west shore of a wide sea. Lancelot could
+see a boat. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west.
+Sir Lancelot got in. The boat was on the west shore of a wide sea. Lancelot
+could see Sir Pedivere, Gawain, the Red Knight and the Damosel Maledisant. 
+Sir Pedivere got in. Gawain got in. The Red Knight got in. The Damosel
+Maledisant got in. Sir Lancelot directed the boat to the southeast and was on
+the sea. In the boat were Sir Pedivere, Gawain, the Red Knight and the Damosel
+Maledisant. 
+Sir Pedivere pressed out a dent in his shield. Gawain looked around. Sir
+Lancelot directed the boat to the southeast and was on the sea. In the boat
+were Sir Pedivere, Gawain, the Red Knight and the Damosel Maledisant. 
+Gawain waited in readiness. Sir Lancelot directed the boat to the east and was
+on the far shore. In the boat were Sir Pedivere, Gawain, the Red Knight and
+the Damosel Maledisant. 
+Sir Lancelot got out. 
+Sir Pedivere got out. Gawain got out. The Red Knight got out. The Damosel
+Maledisant got out. Sir Lancelot rode east and was on a shore beside a tower.
+Lancelot could see an inscription. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot dismounted and went south and was on some stairs. 
+Sir Pedivere entered from the north. Gawain entered from the north. The Red
+Knight entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot went upwards and was in a room with a bath, so filled with steam
+that it was nigh impossible to see. Lancelot could see a bath. 
+In the bath sat Elaine, naked as a needle, and Lancelot thought that she was
+the most beautiful woman that he had ever seen, except for Queen Guenever.
+Sir Lancelot led Elaine from the cauldron. She was delighted to be rescued,
+but hastened to quit the room and cover her nakedness. At the door, she
+briefly turned back, with a shy smile and invited Lancelot to visit her at
+Corbin Castle. 
+Sir Pedivere entered from below. Gawain entered from below. The Red Knight
+entered from below. The Damosel Maledisant entered from below. 
+> GO TO CORBIN
+Sir Lancelot went downwards and was on some stairs. 
+Sir Pedivere entered from above. Gawain entered from above. The Red Knight
+entered from above. The Damosel Maledisant entered from above. 
+Sir Lancelot went north, mounting his horse and was on a shore beside a tower.
+Sir Pedivere entered from the south. Gawain entered from the south. The Red
+Knight entered from the south. The Damosel Maledisant entered from the south. 
+Sir Lancelot rode west and was on the far shore, where a narrow path wound
+east through a strange country. Lancelot could see a boat. 
+Sir Pedivere entered from the east. Gawain entered from the east. The Red
+Knight entered from the east. The Damosel Maledisant entered from the east. 
+> E
+Sir Lancelot rode east and was on a shore beside a tower. From here a narrow
+track led up, past a slender tower built upon a rocky hill, and on towards a
+village. There could be seen squat, solid cottages and a small stone church. 
+Sir Pedivere entered from the west. Gawain entered from the west. The Red
+Knight entered from the west. The Damosel Maledisant entered from the west. 
+> E
+Sir Lancelot rode east and was in Corbin village, an INHABITATION where the
+people ate mainly fish. A cluster of tiny stone houses around the castle.
+Their doors faced inland, and smoke blew furiously from the chimneys. 
+> E
+Sir Lancelot dismounted and went east and was in a chapel beside a tomb, a
+simple building, with a wooden cross. Within, it was empty, but for a tomb
+GRAVE and the tick of beetles. Lancelot found a fiendly dragon in the chapel. 
+The battle raged from noon to dusk, till at last, Lancelot, though sorely
+wounded with deep scores and burns, slew the great beast with one desperate
+lunge. 
+> W
+Sir Lancelot went west, mounting his horse and was in Corbin village, an
+INHABITATION where the people ate mainly fish. A cluster of tiny stone houses
+around the castle. Their doors faced inland, and smoke blew furiously from the
+chimneys. 
+> IN
+Sir Lancelot dismounted and went inside and was in the hall of Corbin Castle.
+Stuffed ducks hung everywhere, trophies of the hunt, to EMBELLISH the walls.
+Lancelot could see Elaine. 
+King Pelles, father of Elaine had commanded a feast to honour Lancelot. For he
+knew well the prophesy that Sir Lancelot should get a child upon his daughter,
+the which would be named Sir Galahad and would complete Arthur's Round Table
+knights. 
+The banquet was magnificent and, afterwards, King Pelles bade his goodnights
+and withdrew, leaving Elaine and her saviour alone. 
+Before Lancelot had time to think of pleasantries, he realised that Elaine was
+blushingly flirting with him. In truth, she made her love for him plain. Then,
+whispering, "Come to me tonight, in the east bedroom", she slipped quietly
+upstairs. 
+> UP
+Sir Lancelot went upwards and was on the gallery above the hall. There were
+bedrooms to east and south. 
+Lancelot knew that his honour was at stake. 
+> S
+Sir Lancelot went south through the door and was in the perilous bedroom.
+Tattered drapes of heavy grey cloth billowed oftimes in the draught. Their
+DEEP shadows moved like strange birds. Lancelot could see a panel and a bed.
+On it was a pillow. Lancelot shivered with cold. 
+> GET PILLOW
+Sir Lancelot took the pillow. 
+> LIE
+Lancelot fell asleep straightway. But during the night he was awakened by the
+creaking of the panel opening. A glowing spear flew from within the opening.
+It smote Lancelot in the shoulder, wounding him sorely, then it vanished. The
+panel ground shut again. Sir Lancelot was gravely wounded. 
+> LIE
+Lancelot fell asleep straightway. But during the night he was awakened by the
+creaking of the panel opening. A Magical Knight emerged. 
+> CLOSE PANEL
+The panel moved a little, but would not close completely. 
+The Magical Knight smote Sir Lancelot. Lancelot was badly hurt. 
+> CLOSE PANEL
+The panel was now almost half shut. 
+The Magical Knight smote Sir Lancelot. Lancelot was badly hurt. 
+> CLOSE PANEL
+The panel shut completely. 
+The Magical Knight smote Sir Lancelot. Lancelot was badly hurt. 
+> KILL KNIGHT
+Sir Lancelot smote the Magical Knight. He was but lightly wounded. 
+The Magical Knight smote Sir Lancelot. Lancelot was badly hurt. 
+Sir Lancelot smote the Magical Knight. He was badly hurt. 
+The Magical Knight smote Sir Lancelot. Lancelot was badly hurt. 
+Sir Lancelot smote the Magical Knight. He was close to death. 
+The Magical Knight smote Sir Lancelot. Lancelot was sorely hurt. 
+Sir Lancelot smote the Magical Knight. He was dead. 
+The Magical Knight was dead. 
+> LIE
+Lancelot fell asleep straightway. But during the night he was awakened by the
+creaking of the panel opening. An old man emerged, enveloped in adders which
+seethed constantly around him. In his hand he bore a spear of vengeance. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The old man blessed Lancelot for not attacking him, and sang how Joseph of
+Arimathea had come into that land to prepare the way for the Grail. Then he
+returned through the panel. 
+> LIE
+Lancelot fell asleep straightway. But during the night he was awakened by the
+creaking of the panel opening. Four gentlewomen and a bishop emerged, then
+withdrew back through the panel, which closed again behind them. 
+> LIE
+Lancelot fell asleep straightway. But during the night he was awakened by the
+creaking of the panel opening. At last, a cock crowed in the castle grounds
+and the bedroom door opened to permit Lancelot to leave. 
+> N
+Sir Lancelot went north through the door and was on the gallery above the
+hall. There were bedrooms to east and south. As Lancelot readied himself to
+leave the castle, he met Dame Brisen, who was Elaine's lady and the greatest
+enchantress that was in the world. 
+Dame Brisen brought Lancelot a cup of drugged wine, and showed him a ring,
+like that worn by Guenever, and said that the Queen was waiting for him. And
+Lancelot weened that maiden Elaine had been Queen Guenever and he took her in
+his arms. 
+When they had lain together, Lancelot remembered himself and left. But his
+anger and guilt did not last, because it was not by his intent that he was
+unfaithful to Guenever. And Lancelot knew that it was his fate to sire Galahad
+by Elaine, despite all his efforts. 
+> GO TO SERVAGE
+Sir Lancelot rode west and was on a shore beside a tower. Lancelot could see
+Sir Pedivere, Gawain, the Red Knight and the Damosel Maledisant. 
+Gawain examined his sword. 
+Sir Lancelot rode west and was on the far shore. Lancelot could see a boat. 
+Sir Pedivere entered from the east. Gawain entered from the east. The Red
+Knight entered from the east. The Damosel Maledisant entered from the east.
+Sir Lancelot got in. The boat was on the far shore. Lancelot could see Sir
+Pedivere, Gawain, the Red Knight and the Damosel Maledisant. 
+Sir Pedivere got in. Gawain got in. The Red Knight got in. The Damosel
+Maledisant got in. Sir Lancelot directed the boat to the north and was on the
+sea. In the boat were Sir Pedivere, Gawain, the Red Knight and the Damosel
+Maledisant. 
+Gawain looked around. The Red Knight waited in readiness. Sir Lancelot
+directed the boat to the north and was on the east shore of the Isle of
+Servage. In the boat were Sir Pedivere, Gawain, the Red Knight and the Damosel
+Maledisant. 
+Sir Pedivere examined his sword. Gawain hummed a popular ballad. 
+> UP
+Sir Lancelot got out. 
+Sir Pedivere got out. Gawain got out. The Red Knight got out. The Damosel
+Maledisant got out. Sir Lancelot rode upwards and was on an island. Some
+fishermen appeared and came up to Lancelot. Speaking softly, for fear of being
+overheard, they warned him about the lord of Servage, saying that Sir Nabon le
+Noir was an evil giant who was wont to eat his visitors. Even now, a knight
+awaited this doom in the castle prison. 
+Sir Pedivere entered from below. Gawain entered from below. The Red Knight
+entered from below. The Damosel Maledisant entered from below. 
+> IN
+Sir Lancelot dismounted and went inside and was inside the tower. Lancelot
+could see Giant Nabon and a keyhole. 
+The giant spoke, "Sir Lancelot, I fear you not, for it was prophesied that I
+should be slain by a blow from the right hand of a saint. But that cannot be,
+for I hewed the right hand from the only saint that ever was in these parts,
+and now keep it in my pillow. So be you afeared, Sir Knight, for tomorrow we
+shall fight and you shall die". The giant laughed savagely then, yawning,
+returned to his bed to sleep. 
+Sir Pedivere entered from the south. Gawain entered from the south. The Red
+Knight entered from the south. The Damosel Maledisant entered from the south. 
+> GIVE PILLOW TO KNIGHT
+Sir Lancelot gave the pillow to the Red Knight. He said, "Thank you". 
+He waited in readiness. 
+> KNIGHT, WAIT, PUT PILLOW UNDER HEAD
+The Red Knight nodded. 
+> GET SACK
+Sir Lancelot took the sack. 
+The Red Knight put the pillow underneath Giant Nabon. The giant slept on
+soundly. 
+> LOOK IN SACK
+It was a large hessian sack. In it was a relic. 
+> EXAMINE RELIC
+It was the mummified hand of some long-dead saint. 
+The Red Knight looked around. 
+> HIT GIANT WITH HAND
+The giant collapsed in a pile of dust as the saintly hand struck him full on
+the head. 
+Sir Pedivere waited in readiness. The Damosel Maledisant said "Cowardly
+beast". 
+> KNIGHT, WAIT, OPEN DOOR
+The Red Knight nodded. 
+Sir Pedivere pressed out a dent in his shield. 
+> OPEN DOOR
+Sir Lancelot tried to open the door, but could not do so without the aid of
+another. 
+The Red Knight opened the door. The Damosel Maledisant said "Methinks you
+needed help". 
+> E
+Sir Lancelot went east through the door and was in a prison, where the cells
+did seem to have been made from ancient caves. Lancelot could see Bors de
+Ganis. 
+Bors said, "Hail Sir Lancelot, I thank you for rescuing me". Sir Pedivere
+entered from the west through the door. Gawain entered from the west through
+the door. The Red Knight entered from the west through the door. The Damosel
+Maledisant entered from the west through the door. 
+> GO TO TURQUIN
+Bors de Ganis waited in readiness. Sir Pedivere examined his sword. 
+Sir Lancelot went west through the door and was inside the tower. Lancelot
+could see a keyhole. 
+Bors de Ganis entered from the east through the door. Sir Pedivere entered
+from the east through the door. Gawain entered from the east through the door.
+The Red Knight entered from the east through the door. The Damosel Maledisant
+entered from the east through the door. 
+Sir Lancelot went south, mounting his horse and was on an island. 
+Bors de Ganis entered from the north. Sir Pedivere entered from the north.
+Gawain entered from the north. The Red Knight entered from the north. The
+Damosel Maledisant entered from the north. 
+Sir Lancelot rode downwards and was on the east shore of the Isle of Servage.
+Lancelot could see a boat. 
+Bors de Ganis entered from above. Sir Pedivere entered from above. Gawain
+entered from above. The Red Knight entered from above. The Damosel Maledisant
+entered from above. Sir Lancelot got in. The boat was on the east shore of the
+Isle of Servage. Lancelot could see Bors de Ganis, Sir Pedivere, Gawain, the
+Red Knight and the Damosel Maledisant. 
+Bors de Ganis got in. Sir Pedivere got in. Gawain got in. The Red Knight took
+his leave and returned to Camelot. The Damosel Maledisant got in. Sir Lancelot
+directed the boat to the west and was on the sea. In the boat were Bors de
+Ganis, Sir Pedivere, Gawain and the Damosel Maledisant. 
+Sir Lancelot directed the boat to the west and was on the sea. In the boat
+were Bors de Ganis, Sir Pedivere, Gawain and the Damosel Maledisant. 
+Bors de Ganis looked around. Sir Lancelot directed the boat to the west and
+was on the west shore of a wide sea. In the boat were Bors de Ganis, Sir
+Pedivere, Gawain and the Damosel Maledisant. 
+Sir Lancelot got out. 
+Bors de Ganis got out. Sir Pedivere got out. Gawain got out. The Damosel
+Maledisant got out. Sir Lancelot rode west and was on the coast road. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a crossroads. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a Roman road through forest Sauvage. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on an east-west Roman road. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a great clearing beside the Castle of forest
+Sauvage. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a junction in the forest. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode north and was on a straight track. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south.
+Gawain entered from the south. The Damosel Maledisant entered from the south. 
+Sir Lancelot rode north and was on the track outside Turquin's manor. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south.
+Gawain entered from the south. Sir Turquin entered from inside through the
+door. The Damosel Maledisant entered from the south. 
+Sir Pedivere hummed a popular ballad. Sir Turquin challenged Lancelot, "Fight
+and be vanquished, knave". The Damosel Maledisant said "You cannot refuse a
+challenge". 
+> IN
+Sir Lancelot knocked on the door. There was a brief pause, then a shower of
+dirty water splashed down from above. 
+> ATTACK TURQUIN
+Sir Lancelot smote Sir Turquin. He was but lightly wounded. 
+Gawain looked around. And smote Sir Lancelot. Lancelot was slightly hurt. 
+> ATTACK TURQUIN
+Sir Lancelot smote Sir Turquin. He was badly hurt. 
+Gawain waited in readiness. Sir Turquin smote Sir Lancelot. Lancelot was
+slightly hurt. 
+> ATTACK TURQUIN
+Sir Lancelot smote Sir Turquin. He was close to death. 
+Sir Turquin submitted and fled inside his manor. The Damosel Maledisant said
+"He did not seem a worthy opponent". 
+> IN
+Sir Lancelot dismounted and went inside through the door and was in the
+gateway of Turquin's manor. The manor was open and defenceless. Lancelot could
+see some loose planks and a secret panel. 
+Lancelot heard the sound of running feet, as Turquin's gatekeepers fled north.
+He could scarce believe his good fortune in taking the manor so easily. 
+Bors de Ganis entered from outside through the door. Sir Pedivere entered from
+outside through the door. Gawain entered from outside through the door. The
+Damosel Maledisant entered from outside through the door. 
+> N
+Sir Lancelot trod on the loose planks. The panel opened. An arrow flew from
+the open panel, but Lancelot dodged it easily. Lancelot went north and was in
+a wide arch below the gatehouse, under a wide arch of stone dressed with
+crumbling mortar. Here, too, the floor was timbered, and ill-fitted planks
+moved beneath his feet. Lancelot felt the floor move unsteadily. Did he jump
+back? YES
+Lancelot was in the gateway of Turquin's manor. The manor was open and
+defenceless. Lancelot could see Bors de Ganis, Sir Pedivere, Gawain, the
+Damosel Maledisant, some loose planks and a secret panel. 
+Bors de Ganis examined his sword. Gawain hummed a popular ballad. The Damosel
+Maledisant said "You should have seen that coming". The panel closed. 
+> GAWAIN, WAIT, GO IN, BREAK CROSSBOW, WAIT 25
+Gawain promptly agreed. 
+Bors de Ganis looked around. Sir Pedivere waited in readiness. 
+> STAND ON PLANKS
+Sir Lancelot got on. Lancelot trod on the loose planks. The panel opened. An
+arrow flew from the open panel, but Lancelot dodged it easily. 
+Gawain went inside. The Damosel Maledisant said "You should have seen that
+coming". The panel closed. 
+> WAIT
+Time passed. 
+Bors de Ganis hummed a popular ballad. 
+> N
+Sir Lancelot went north and was in a wide arch below the gatehouse, under a
+wide arch of stone dressed with crumbling mortar. Lancelot felt the floor move
+unsteadily. Did he jump back? NO
+The floor felt unstable, but was balanced by the weight of someone in the
+secret passage and did not collapse. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south. The
+Damosel Maledisant entered from the south. 
+> N
+Sir Lancelot went north and was in the central courtyard of Turquin's manor, a
+small stone-flagged square. An ugly building lay to the north side. The manor
+had the air of a place deserted. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south. The
+Damosel Maledisant entered from the south. 
+> N
+Sir Lancelot went north and was in an upper prison. A great unfenced pit was
+set into the centre of the floor. Lancelot could see a winch, a cage and a
+lever. The rattle of dice came from behind the thick oak door of a guardroom
+to the west, and mingled with the faint clank of chains from the pit. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south. The
+Damosel Maledisant entered from the south. 
+> BORS, WAIT, TURN WINCH, WAIT 7, TURN WINCH
+Bors de Ganis said, "Very well". 
+> GET INTO CAGE
+Sir Lancelot got in. Lancelot was in an upper prison. A great unfenced pit was
+set into the centre of the floor. Lancelot could see Bors de Ganis, Sir
+Pedivere, the Damosel Maledisant, a winch and a lever. 
+The cage descended. Sir Pedivere said, "I fear I did not manage to do all you
+wanted". 
+> WAIT
+Time passed. 
+Ector said, "Hail Sir Lancelot. We salute you, we who have been held prisoner
+for so long by the wicked Sir Turquin". 
+> ECTOR, GET INTO CAGE
+Ector de Maris promptly agreed. 
+He got in. Brandiles looked around. Marhaus waited in readiness. 
+> AGRAVAIN, GET INTO CAGE
+Agravain nodded. 
+He got in. Brian pressed out a dent in his shield. Geheris looked around.
+Lionel waited in readiness. Marhaus examined his sword. 
+> ALIDUKE, GET INTO CAGE
+Aliduke nodded. 
+Ector de Maris pressed out a dent in his shield. Aliduke got in. Lionel looked
+around. Marhaus waited in readiness. 
+> BRANDILES, GET INTO CAGE
+Brandiles nodded. 
+Agravain pressed out a dent in his shield. Brandiles got in. Geheris looked
+around. Marhaus waited in readiness. 
+> BRIAN, GET INTO CAGE
+Brian agreed. 
+Ector de Maris hummed a popular ballad. Brandiles pressed out a dent in his
+shield. Brian got in. Gareth looked around. Lionel waited in readiness. 
+> GEHERIS, GET INTO CAGE
+Geheris agreed. 
+Aliduke hummed a popular ballad. Geheris got in. Lionel pressed out a dent in
+his shield. Marhaus looked around. 
+> WAIT
+Time passed. 
+The cage rose. Marhaus waited in readiness. From within the guardroom, "I
+think you should go and look". 
+> ECTOR, GET OUT OF CAGE
+Ector de Maris nodded. 
+Bors de Ganis got in. Sir Pedivere said, "There was not time to attend to
+everything". He looked around. Ector de Maris got out. Agravain waited in
+readiness. 
+> AGRAVAIN, GET OUT OF CAGE
+Agravain agreed. 
+Bors de Ganis hummed a popular ballad. Agravain got out. Brian pressed out a
+dent in his shield. From within the guardroom, "Who are you trying to order
+around? I am in charge here". 
+> ALIDUKE, GET OUT OF CAGE
+Aliduke agreed. 
+Bors de Ganis hummed a popular ballad. Agravain pressed out a dent in his
+shield. Aliduke got out. Brandiles looked around. Brian waited in readiness. 
+> BRANDILES, GET OUT OF CAGE
+Brandiles promptly agreed. 
+Bors de Ganis looked around. Aliduke waited in readiness. Brandiles got out.
+Geheris examined his sword. From within the guardroom, "It was only an idea". 
+> BRIAN, GET OUT OF CAGE
+Brian promptly agreed. 
+Bors de Ganis looked around. Agravain waited in readiness. Brian got out. 
+> GEHERIS, GET OUT OF CAGE
+Geheris nodded. 
+Bors de Ganis pressed out a dent in his shield. Ector de Maris looked around.
+Aliduke waited in readiness. Geheris got out. From within the guardroom,
+"Since you are so keen, you go and look". 
+> GET OUT OF CAGE
+Sir Lancelot got out. 
+Bors de Ganis got out. Sir Pedivere got out. Geheris pressed out a dent in his
+shield. The Damosel Maledisant got out. 
+> WAIT
+Time passed. 
+Bors de Ganis examined his sword. Sir Pedivere hummed a popular ballad.
+Agravain pressed out a dent in his shield. Aliduke looked around. From within
+the guardroom, a guard emerged and saw Lancelot. He turned round and shouted
+to the others within. Dozens of guards poured forth from the guardroom. They
+drove the party from the castle, with Lancelot fighting a heroic rearguard
+action. 
+> IN
+Sir Lancelot dismounted and went inside through the door and was in the
+gateway of Turquin's manor. The manor was open and defenceless. Lancelot could
+see some loose planks and a secret panel. 
+Bors de Ganis entered from outside through the door. Sir Pedivere entered from
+outside through the door. The Damosel Maledisant entered from outside through
+the door. 
+> N
+Sir Lancelot went north and was in a wide arch below the gatehouse, under a
+wide arch of stone dressed with crumbling mortar. Lancelot felt the floor move
+unsteadily. Did he jump back? NO
+The floor felt unstable, but was balanced by the weight of someone in the
+secret passage and did not collapse. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south. The
+Damosel Maledisant entered from the south. 
+> N
+Sir Lancelot went north and was in the central courtyard of Turquin's manor, a
+small stone-flagged square. An ugly building lay to the north side. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south. The
+Damosel Maledisant entered from the south. 
+> N
+Sir Lancelot went north and was in an upper prison. A great unfenced pit was
+set into the centre of the floor. Lancelot could see a winch, a cage and a
+lever. 
+Bors de Ganis entered from the south. Sir Pedivere entered from the south. The
+Damosel Maledisant entered from the south. From within the guardroom, someone.
+> BORS, WAIT, TURN WINCH, WAIT 4, TURN WINCH
+Bors de Ganis promptly agreed. 
+Sir Pedivere looked around. 
+> GET INTO CAGE
+Sir Lancelot got in. Lancelot was in an upper prison. A great unfenced pit was
+set into the centre of the floor. Lancelot could see Bors de Ganis, Sir
+Pedivere, the Damosel Maledisant, a winch and a lever. 
+The cage descended. Sir Pedivere said, "There was not time to attend to
+everything". The Damosel Maledisant curled her lip at Lancelot. 
+> WAIT
+Time passed. 
+Gareth hummed a popular ballad. Lionel pressed out a dent in his shield. 
+> GARETH, GET INTO CAGE
+Gareth said, "Very well". 
+He got in. Marhaus examined his sword. 
+> LIONEL, GET INTO CAGE
+Lionel promptly agreed. 
+Lionel got in. 
+> MARHAUS, GET INTO CAGE
+Marhaus nodded. 
+Lionel waited in readiness. Marhaus got in. 
+> WAIT
+Time passed. 
+The cage rose. 
+> GARETH, GET OUT OF CAGE
+Gareth turned in acceptance. 
+Bors de Ganis got in. Sir Pedivere had not been able to complete Lancelot's
+command. Gareth got out. Lionel looked around. From within the guardroom,
+someone. 
+> LIONEL, GET OUT OF CAGE
+Lionel agreed. 
+Bors de Ganis hummed a popular ballad. Gawain entered from the south. Lionel
+got out. Marhaus looked around. 
+> MARHAUS, GET OUT OF CAGE
+Marhaus agreed. 
+Gawain got in. Lionel looked around. Marhaus got out. From within the
+guardroom, someone. 
+> GET OUT OF CAGE
+Sir Lancelot got out. 
+Bors de Ganis got out. Sir Pedivere got out. Gawain got out. Gareth hummed a
+popular ballad. Lionel pressed out a dent in his shield. The Damosel
+Maledisant got out. 
+> GARETH, FOLLOW ME
+Gareth turned in acceptance. 
+Gawain had not been able to complete Lancelot's command. From within the
+guardroom, someone. 
+> LIONEL, FOLLOW ME
+Lionel said, "Very well". 
+Sir Pedivere examined his sword. Gareth looked around. 
+> MARHAUS, FOLLOW ME
+Marhaus said, "Very well". 
+Bors de Ganis examined his sword. Lionel pressed out a dent in his shield.
+From within the guardroom, someone. 
+> S
+Sir Lancelot went south and was in the central courtyard of Turquin's manor, a
+small stone-flagged square. An ugly building lay to the north side. 
+Bors de Ganis entered from the north. Sir Pedivere entered from the north.
+Gawain entered from the north. Gareth entered from the north. Lionel entered
+from the north. Marhaus entered from the north. The Damosel Maledisant entered
+from the north. 
+> S
+Sir Lancelot went south and was in a wide arch below the gatehouse, under a
+wide arch of stone dressed with crumbling mortar. Lancelot felt the floor move
+unsteadily. Did he jump back? NO
+The floor felt unstable, but was balanced by the weight of someone in the
+secret passage and did not collapse. 
+Bors de Ganis entered from the north. Sir Pedivere entered from the north.
+Gawain entered from the north. Gareth entered from the north. Lionel entered
+from the north. Marhaus entered from the north. The Damosel Maledisant entered
+from the north. 
+> S
+Sir Lancelot went south and was in the gateway of Turquin's manor. The manor
+was open and defenceless. Lancelot could see some loose planks and a secret
+panel. 
+Bors de Ganis entered from the north. Sir Pedivere entered from the north.
+Gawain entered from the north. Gareth entered from the north. Lionel entered
+from the north. Marhaus entered from the north. The Damosel Maledisant entered
+from the north. 
+> OUT
+Sir Lancelot went outside through the door, mounting his horse and was on the
+track outside Turquin's manor, lined on either side with hedges of box.
+Lancelot could see Ector de Maris, Agravain, Aliduke, Brandiles, Brian and
+Geheris. 
+Bors de Ganis entered from inside through the door. Sir Pedivere entered from
+inside through the door. Gawain entered from inside through the door.
+Brandiles took his leave and returned to Camelot. Brian pressed out a dent in
+his shield. Geheris looked around. Gareth entered from inside through the
+door. Lionel entered from inside through the door. Marhaus entered from inside
+through the door. The Damosel Maledisant entered from inside through the door.
+> WAIT
+Time passed. 
+Gawain waited in readiness. Ector de Maris took his leave and returned to
+Camelot. Marhaus examined his sword. 
+> WAIT
+Time passed. 
+Sir Pedivere hummed a popular ballad. Agravain took his leave and returned to
+Camelot. Aliduke pressed out a dent in his shield. Gareth looked around.
+Marhaus waited in readiness. 
+> WAIT
+Time passed. 
+Aliduke took his leave and returned to Camelot. Gareth examined his sword.
+Marhaus hummed a popular ballad. 
+> WAIT
+Time passed. 
+Gawain pressed out a dent in his shield. Brian took his leave and returned to
+Camelot. Geheris looked around. Lionel waited in readiness. Marhaus examined
+his sword. 
+> WAIT
+Time passed. 
+Bors de Ganis hummed a popular ballad. Sir Pedivere pressed out a dent in his
+shield. Geheris took his leave and returned to Camelot. 
+> WAIT
+Time passed. 
+Sir Pedivere looked around. Gawain waited in readiness. Gareth took his leave
+and returned to Camelot. 
+> WAIT
+Time passed. 
+Gawain examined his sword. Lionel took his leave and returned to Camelot. 
+> WAIT
+Time passed. 
+Marhaus took his leave and returned to Camelot. 
+> GO TO MERMAID
+Gawain hummed a popular ballad. 
+Sir Lancelot rode south and was on a straight track. 
+Bors de Ganis entered from the north. Sir Pedivere entered from the north.
+Gawain entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode south and was at a junction in the forest. 
+Bors de Ganis entered from the north. Sir Pedivere entered from the north.
+Gawain entered from the north. The Damosel Maledisant entered from the north. 
+Sir Lancelot rode east and was at a great clearing beside the Castle of forest
+Sauvage. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west.
+Gawain entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on an east-west Roman road. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west.
+Gawain entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a Roman road through forest Sauvage. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west.
+Gawain entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a crossroads. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west.
+Gawain entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on the coast road. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west.
+Gawain entered from the west. The Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on the west shore of a wide sea. Lancelot could
+see a boat. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west.
+Gawain entered from the west. The Damosel Maledisant entered from the west.
+Sir Lancelot got in. The boat was on the west shore of a wide sea. Lancelot
+could see Bors de Ganis, Sir Pedivere, Gawain and the Damosel Maledisant. 
+Bors de Ganis got in. Sir Pedivere got in. Gawain got in. The Damosel
+Maledisant got in. Sir Lancelot directed the boat to the southeast and was on
+the sea. In the boat were Bors de Ganis, Sir Pedivere, Gawain and the Damosel
+Maledisant. 
+Gawain examined his sword. Sir Lancelot directed the boat to the south and was
+on the sea beside a rock, where a comely mermaid sat a-combing her long
+tresses. Lancelot could see a mermaid. In the boat were Bors de Ganis, Sir
+Pedivere, Gawain and the Damosel Maledisant. 
+> PEDIVERE, WAIT, GO WEST
+Sir Pedivere turned in acceptance. 
+Gawain waited in readiness. 
+> GET HARP
+Sir Lancelot took the harp. Sir Lancelot could see that the mermaid was very
+annoyed. 
+Sir Pedivere directed the boat to the west. The boat was on the sea. The water
+was so deep as to be a rich blue-black. As giant waves passed, children of
+distant STORMS, Lancelot watched the fish leap. In it were Bors de Ganis, Sir
+Pedivere, Gawain and the Damosel Maledisant. 
+> GO TO TINTAGEL
+Sir Lancelot directed the boat to the north and was on the sea. In the boat
+were Bors de Ganis, Sir Pedivere, Gawain and the Damosel Maledisant. 
+Sir Lancelot directed the boat to the north and was on the west shore of a
+wide sea. In the boat were Bors de Ganis, Sir Pedivere, Gawain and the Damosel
+Maledisant. 
+Sir Lancelot got out. 
+Bors de Ganis got out. Sir Pedivere got out. Gawain got out. The Damosel
+Maledisant got out. Sir Lancelot rode west and was on the coast road. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a crossroads. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a Roman road through forest Sauvage. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on an east-west Roman road. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a great clearing beside the Castle of forest
+Sauvage. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was at a junction in the forest. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a Roman road beside a turret. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a marsh road. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a forest road. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a winding road. The liveried figure of a
+herald hastened from the west. "O Lancelot, flower of chivalry, now have I
+found thee", he cried. "The Sessoine host have landed from their ships and lie
+in siege about Tintagel. My lord bade me ride through their army and to bring
+King Arthur's knights to our aid. Prithee come with all speed!" 
+Spurring his horse, the herald rode quickly away. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode west and was on a windswept tor. 
+Bors de Ganis entered from the east. Sir Pedivere entered from the east.
+Gawain entered from the east. The Damosel Maledisant entered from the east. 
+Sir Lancelot rode upwards and was on a walled road. Mounted, Lancelot could
+see over the walls to the rolling lands to the northwest, where a great army
+lay encamped around the castle of Tintagel. 
+Bors de Ganis entered from below. Sir Pedivere entered from below. Gawain
+entered from below. The Damosel Maledisant entered from below. A carter
+entered from the northeast. 
+Sir Lancelot rode northwest and was at Tintagel. Lancelot could see an army.
+The land about the castle was filled with the tents and hosts of a besieging
+army, landed from their nearby ships. 
+Bors de Ganis entered from the southeast. Sir Pedivere entered from the
+southeast. Gawain entered from the southeast. The Damosel Maledisant entered
+from the southeast. A ripple of fear ran through the army as Lancelot came
+into view. 
+The army blocked Sir Lancelot and waved their pikes menacingly. 
+> SE
+Sir Lancelot rode southeast and was on a walled road. The dry stone wall was
+the home for dozens of birds, their droppings ENTOMBED in its crevices. 
+Bors de Ganis entered from the northwest. Sir Pedivere entered from the
+northwest. Gawain entered from the northwest. 
+> WAIT
+Time passed. 
+Sir Pedivere pressed out a dent in his shield. Gawain looked around. The
+Damosel Maledisant entered from the northwest. 
+> WAIT
+Time passed. 
+Bors de Ganis examined his sword. The Damosel Maledisant rode downwards. A
+carter entered from the northeast. 
+> IN
+Sir Lancelot got in. The cart was on a walled road. The dry stone wall was the
+home for dozens of birds, their droppings ENTOMBED in its crevices. Lancelot
+could see Bors de Ganis, Sir Pedivere, Gawain and a carter. 
+Bors de Ganis got in. Sir Pedivere got in. Gawain got in. 
+> WAIT
+Time passed. 
+Bors de Ganis hummed a popular ballad. Gawain pressed out a dent in his
+shield. The carter rode northeast. The cart was on a road. Lancelot could see
+a carter and some sentries. 
+> WAIT
+Time passed. 
+The carter drove his cart up to the sentries, who gave it a cursory glance,
+missing the lump that was Lancelot, and waved it on. The carter rode
+northeast. The cart was on a beach. Lancelot could see a carter, a cauldron, a
+fire and some ships. 
+> OUT
+Sir Lancelot got out. 
+Bors de Ganis got out. Sir Pedivere got out. Gawain got out. The carter rode
+southwest. 
+> EMPTY CAULDRON
+The soup drained away. 
+Gawain waited in readiness. 
+> BORS, PUT COALS IN CAULDRON
+Bors de Ganis nodded. 
+He was in excruciating pain. He put the hot coals in the cauldron. 
+> BORS, GET CAULDRON THEN GO UP, DROP CAULDRON
+Bors de Ganis promptly agreed. 
+He took the cauldron. Sir Pedivere looked around. Gawain waited in readiness.
+A carter entered from the southwest. Bors de Ganis was in excruciating pain. 
+> UP
+Sir Lancelot dismounted and went upwards and was on board a Sessoine warship.
+The timbers creaked beneath his feet, and the air was thick with the smell of
+pitch. Lancelot could see a pile of sails. 
+Bors de Ganis entered from below. Sir Pedivere entered from the south. Gawain
+entered from the south. Bors de Ganis was in dreadful pain. 
+> WAIT
+Time passed. 
+Bors de Ganis dropped the cauldron. 
+> BORS, PUT COALS ON SAILS
+Bors de Ganis nodded. 
+He was in excruciating pain. He put the hot coals on the pile of sails. The
+sails caught fire! Full fiercely did they burn, the flames spreading fast to
+engulf much of the deck, and carried by the breeze to set afire the others of
+the fleet. 
+Their fleet lost, the Sessoines could do nought but surrender. King Mark of
+Cornwall declared Lancelot a hero and bade him enter Tintagel city in triumph.
+> GO TO CORNWALL
+Sir Lancelot rode southwest and was on a road. Sentries leant upon their
+spears along towards the sea edge. Though at their ease, they seemed ever
+watchful. 
+Bors de Ganis entered from the northeast. Sir Pedivere entered from the
+northeast. Gawain entered from the northeast. 
+Sir Lancelot rode southwest and was on a walled road. 
+Bors de Ganis entered from the northeast. Sir Pedivere entered from the
+northeast. Gawain entered from the northeast. 
+Sir Lancelot rode northwest and was at Tintagel, the headland jutting out
+fiercely into the foaming ocean below. Atop the sheer ESCARPMENT rose the dark
+grey castle, surrounded by wheeling seagulls. Its battlements commanded the
+sea approaches from Wales and the lands of north Cornwall behind. 
+Bors de Ganis entered from the southeast. Sir Pedivere entered from the
+southeast. Gawain entered from the southeast. 
+> IN
+As Lancelot entered the castle, King Mark stepped forward. "Welcome, Sir
+Knight", he said, "You have our thanks for ridding us of our besiegers. But I
+believe they were helped by Sir Tristram, your fellow knight of the Table
+Round, and my prisoner. I cannot chance that you will seek to free him". 
+ 
+Thereupon, King Mark signalled treacherously to his guards, who seized
+Lancelot and threw him into the dungeons. 
+Tristram said, "Hello Lancelot, have you brought my harp?" Bors de Ganis
+entered from the south. Sir Pedivere entered from the south. Gawain entered
+from the south. 
+> GIVE HARP TO TRISTRAM
+Sir Lancelot gave the harp to Tristram. He said, "Thank you". 
+He played a hauntingly beautiful tune, his fair head bent low over the harp,
+engrossed in his music. Soon all the guards fell under the enchantment of his
+music, and gladly opened the cells. Then Tristram led the escape of the
+prisoners by leaping down from the chapel window. 
+> LOOK
+Lancelot was at Tintagel, the headland jutting out fiercely into the foaming
+ocean below. Atop the sheer ESCARPMENT rose the dark grey castle, surrounded
+by wheeling seagulls. Its battlements commanded the sea approaches from Wales
+and the lands of north Cornwall behind. Lancelot could see Tristram, Bors de
+Ganis, Sir Pedivere and Gawain. 
+Tristram hummed a popular ballad. Gawain took his leave and returned to
+Camelot. 
+> GO TO ARTHUR
+Sir Lancelot rode southeast and was on a walled road. 
+Bors de Ganis entered from the northwest. Sir Pedivere entered from the
+northwest. 
+Sir Lancelot rode downwards and was on a windswept tor. Lancelot could see the
+Damosel Maledisant. 
+Bors de Ganis entered from above. Sir Pedivere entered from above. The Damosel
+Maledisant was sitting by the side of the road. "Well", she said, "I hope you
+enjoyed yourself". 
+Sir Lancelot rode east and was on a winding road. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a forest road. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a marsh road. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a Roman road beside a turret. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a junction in the forest. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a great clearing beside the Castle of forest
+Sauvage. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on an east-west Roman road. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was on a Roman road through forest Sauvage. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode east and was at a crossroads. 
+Bors de Ganis entered from the west. Sir Pedivere entered from the west. The
+Damosel Maledisant entered from the west. 
+Sir Lancelot rode south and was on a wide avenue. It was a fine highway to the
+north, and fully paved with flat stones. By order of the King, such roads were
+kept free of weeds and smothering bushes. 
+Bors de Ganis entered from the north. Sir Pedivere entered from the north. The
+Damosel Maledisant entered from the north. 
+> S
+ 
+Lancelot is about to start another part of the game. Do you want to save his
+position first, just in case? NO 
+Play the game tape to load part 1. 
+ 
+Lancelot was on the King's road. It was a wide well-worn fairway, smoothly
+paved with flags of stone. The road narrowed to a cart width as it passed
+through the northmost city gate. 
+> GO TO ARTHUR
+Sir Bors de Ganis sharpened his sword. Sir Lancelot rode south and was on the
+north way, that ran between the warrens and the royal castle wall. 
+Sir Bors de Ganis entered from the north. Sir Lancelot rode south and was on
+the market square, where Lancelot had to wind his way between makeshift stalls
+and animal pens. 
+Sir Bors de Ganis entered from the north. 
+Sir Lancelot rode east and was on the lawns beside Arthur's castle. 
+Sir Bors de Ganis entered from the west. 
+Sir Lancelot alit from his horse and walked north through the door and was in
+the great hall of the Round Table. Lancelot could see some sieges and a Round
+Table. 
+Sir Bors de Ganis entered from the south through the door. 
+Sir Lancelot went north and was in Arthur's echoing hall. Hundreds of wall
+torches gave a flickering gold glow to the room, making it seem welcoming
+despite its size. Lancelot could see Guenever and King Arthur. 
+Sir Bors de Ganis entered from the south. Guenever referred to a sheaf of
+letters from Lynet, the Damosel Maledisant, in which she described Lancelot's
+deeds and praised him full highly. She passed them on to Arthur, who read the
+reports and smiled. 
+Then Arthur stood and proclaimed to all that Lancelot had proved himself the
+best knight in all the land and a worthy champion for its Queen. 
+Guenever left, inviting Lancelot to join her and her knights, in the Maying
+celebrations in the meadows of Westminster. King Arthur frowned at a young
+servant who had slopped water on the floor. 
+> GO TO MEADOWS
+Sir Lancelot went south and was in the great hall of the Round Table. Lancelot
+could see some sieges and a Round Table. 
+Sir Bors de Ganis entered from the north. 
+Sir Lancelot went south through the door, mounting his horse and was on the
+lawns beside Arthur's castle. Lancelot could see a beggar and Sir Kay. 
+Sir Bors de Ganis entered from the north through the door. The beggar went
+south. Sir Kay alit from his horse and walked north through the door. 
+Sir Lancelot rode west and was on the market square, where Lancelot had to
+wind his way between makeshift stalls and animal pens. Lancelot could see a
+town crier. 
+Sir Lancelot rode south and was on the south way, before the Bishop's Gate.
+Peasants and traders, on their way to market, mingled with city folk and
+priests about their business. 
+Sir Lancelot alit from his horse and walked south through the door and was
+inside the Bishop's Gate, that guarded the southern entrance to the city. A
+soldier sauntered through the gate and emptied a slop bucket into the river
+beyond. 
+Sir Lancelot went south, mounting his horse and was on the bridge over the
+River Camel. The river gurgled beneath the rough-hewn timbers. A peasant boy
+climbed from below the bridge and scuttled away. He had a fishing line in his
+hand and three fine fat fishes hanging from his belt. 
+Sir Lancelot rode south and was outside the Bishop's Gate. The road stretched
+away southwards across broad green meadows and into woodland beyond. 
+Sir Lancelot rode south and was in Westminster meadows. The lush wet grass was
+dotted with clumps of fragrant wild flowers. Lancelot could see a carter. He
+was driving a cart. Lancelot found the queen was no longer there, and all
+around were the signs of a battle but recently fought. It seemed that Queen
+Guenever had been captured by Sir Meliagaunt and carried off southwards to his
+castle. 
+> GO TO MELIAGAUNT
+The carter collected some straw from the meadows. 
+Hidden archers shot and killed his horse from under Lancelot. 
+> GET INTO CART
+Sir Lancelot got in the cart. Lancelot was in Westminster meadows. The lush
+wet grass was dotted with clumps of fragrant wild flowers. Lancelot could see
+a carter. 
+The carter went north. Lancelot was outside the Bishop's Gate. Lancelot could
+see a carter. 
+> WAIT
+Time passed. 
+The carter went north. Lancelot was on the bridge over the River Camel. The
+river gurgled beneath the rough-hewn timbers. Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter went north. Lancelot was inside the Bishop's Gate, that guarded the
+southern entrance to the city. Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter went north through the door. Lancelot was on the south way, before
+the Bishop's Gate. Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter went north. Lancelot was on the market square, where Lancelot had
+to wind his way between makeshift stalls and animal pens. Lancelot could see a
+town crier and a carter. 
+> WAIT
+Time passed. 
+The carter delivered some straw. 
+> WAIT
+Time passed. 
+The town crier cried, "Latest news! Dragons kill Turnance villagers". The
+carter collected some vegetables and milk from the market. 
+> WAIT
+Time passed. 
+The town crier cried, "Sessoines invade Cornwall! Tintagel besieged". The
+carter went south. Lancelot was on the south way, before the Bishop's Gate.
+Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter went south through the door. Lancelot was inside the Bishop's Gate,
+that guarded the southern entrance to the city. Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter went south. Lancelot was on the bridge over the River Camel. The
+river gurgled beneath the rough-hewn timbers. Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter went south. Lancelot was outside the Bishop's Gate. Lancelot could
+see a carter. 
+> WAIT
+Time passed. 
+The carter went south. Lancelot was in Westminster meadows. Lancelot could see
+a carter. 
+> WAIT
+Time passed. 
+The carter smuggled Lancelot past the hidden archers. He went south. Lancelot
+was on a straight way, that ran broad and true through a well-kempt wood.
+Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter went south. Lancelot was on the east side of castle Meliagaunt.
+Lancelot could see a carter. 
+> WAIT
+Time passed. 
+The carter delivered some foodstuffs to the castle. 
+> OUT
+Sir Lancelot got out. 
+The carter went north. 
+> IN
+Sir Lancelot went inside and was in Meliagaunt's hall. Lancelot could see Sir
+Meliagaunt. As Lancelot thrust through the door, yet furious for the death of
+his horse, the defenders of Castle Meliagaunt turned and ran. 
+Sir Meliagaunt seemed sore afraid to see Lancelot. 
+> WAIT
+Time passed. 
+Sir Meliagaunt went upwards. 
+> UP
+Sir Lancelot went upwards and was on the stairs, leading up to a landing, with
+doors to the north, west and south. The stone treads were wide and flat.
+Lancelot could see Sir Meliagaunt. Lancelot climbed the stairs,
+three-at-a-time, eager to make sure the Queen was safe. 
+Sir Meliagaunt went north. 
+> N
+Sir Lancelot went north and was in the royal suite, which had been pressed
+into service as lodgings for the Queen's Knights. Straw beds had been set up,
+and a trestle table laid with wines and sweetmeats. Lancelot could see some
+Queen's knights and Sir Meliagaunt. Lancelot came upon the knights as they
+tended their wounds from their battle with Meliagaunt's men. Those who could,
+stood to attention and cheered their saviour. As he walked amongst them,
+Lancelot heard the fair voice of Guenever coming from a room to the north. 
+Sir Meliagaunt went north. 
+> N
+Sir Lancelot went north and was in Guenever's boudoir. It was richly
+furnished, even to having a carpet upon the floor, and was filled with a scent
+of fresh lavender. Lancelot could see Guenever, Sir Meliagaunt and a bed. The
+sounds of gardeners at work drifted up through the barred window. 
+Sir Meliagaunt knelt to Guenever, "My Queen, forgive me for trying to kidnap
+you. It was done in a moment of madness". 
+Guenever stared at Lancelot, who looked for a moment as though he might slay
+Sir Meliagaunt where he knelt. Then the Queen drew herself up to her full
+height, and insisted that Lancelot should spare him. As it was late, Guenever
+made it known that she would spend the night at Meliagaunt's castle. But she
+made it clear that Lancelot would be on hand to protect her and that her
+knights would sleep outside her door. 
+As he turned to leave, Guenever whispered in Lancelot's ear, "Come to me
+tonight, my saviour". 
+> S
+Sir Lancelot went south and was in the royal suite, which had been pressed
+into service as lodgings for the Queen's Knights. Straw beds had been set up,
+and a trestle table laid with wines and sweetmeats. Lancelot could see some
+Queen's knights. 
+Sir Meliagaunt entered from the north. 
+> S
+Sir Lancelot went south and was on the stairs, leading up to a landing, with
+doors to the north, west and south. The stone treads were wide and flat. 
+Sir Meliagaunt entered from the north. 
+> W
+Sir Lancelot went west and was in the guest suite, a comfortable, airy room,
+with rushes and rose petals fresh strewn upon the floor, and a cheerful fire
+burning in the hearth. Lancelot could see a bed and a chest. A servant
+appeared and asked courteously if Lancelot had need of ought for his comfort.
+Lancelot thanked her and sent her away. 
+> EXAMINE CHEST
+It was about a yard high and made of oak. The heavy lid opened from the top,
+but the hinges had rusted from lack of use. In it were some gloves and a hat. 
+> TAKE GLOVES AND HAT
+Sir Lancelot took the gloves. 
+Sir Lancelot took the hat. 
+> WEAR GLOVES
+Sir Lancelot wore the gloves. 
+> E
+Sir Lancelot went east and was on the stairs, leading up to a landing, with
+doors to the north, west and south. The stone treads were wide and flat. 
+> DOWN
+Sir Lancelot went downwards and was in Meliagaunt's hall. 
+> OUT
+Sir Lancelot went outside and was on the east side of castle Meliagaunt. It
+was set high on an ISTHMUS in a lake, wafted by the perfume of its moat. Only
+the narrowest of windows broke its smooth stone walls. It was strong and
+solid, built to withstand any siege. Lancelot could see no way in save over
+the drawbridge. And no way in at all when that was raised. The sentries on the
+battlements watched Lancelot silently. 
+> W
+Sir Lancelot went west and was in a formal garden, with short hedges of box
+and lawns of soft scented camomile. Lancelot could see a window. 
+> UP
+Overcome by passion for Guenever, Lancelot bent back the thick iron bars and
+climbed within. His hand was hurt, but he paid no heed to its slight
+bleeding... 
+When Lancelot awoke the next morn, he heard the sound of footsteps approaching
+from within the castle. 
+> DOWN
+Sir Lancelot climbed the ivy. Lancelot was in a formal garden, with short
+hedges of box and lawns of soft scented camomile. Lancelot could see a window.
+> E
+Sir Lancelot went east and was on the east side of castle Meliagaunt. It was
+set high on an ISTHMUS in a lake, wafted by the perfume of its moat. Only the
+narrowest of windows broke its smooth stone walls. It was strong and solid,
+built to withstand any siege. Lancelot could see no way in save over the
+drawbridge. And no way in at all when that was raised. 
+> IN
+Sir Lancelot went inside and was in Meliagaunt's hall. 
+> U
+Sir Lancelot went upwards and was on the stairs, leading up to a landing, with
+doors to the north, west and south. The stone treads were wide and flat. 
+> N
+Sir Lancelot went north and was in the royal suite, which had been pressed
+into service as lodgings for the Queen's Knights. Straw beds had been set up,
+and a trestle table laid with wines and sweetmeats. Lancelot could see some
+Queen's knights. 
+Lancelot heard shouting from the Queen's room. 
+> N
+Sir Lancelot went north and was in Guenever's boudoir. It was richly
+furnished, even to having a carpet upon the floor, and was filled with a scent
+of fresh lavender. Lancelot could see Guenever, Sir Meliagaunt and a bed. 
+Sir Meliagaunt was standing over the Queen, his sword poised to strike. Tense
+and white with anger, Meliagaunt spat out an accusation of adultery against
+the Queen. 
+ 
+Lancelot, inflamed by his words, sprang to her defence, and challenged
+Meliagaunt to a battle for the Queen's honour. Sir Meliagaunt curled his lip
+at the young knight and accepted the challenge, setting the time for three
+days thence. Sweeping up his weapons, he called the castle guards, ordered the
+window to be secured, and left angrily with the Queen, clutching her tightly
+by the arm. 
+> S
+Sir Lancelot went south and was in the royal suite, which had been pressed
+into service as lodgings for the Queen's Knights. Straw beds had been set up,
+and a trestle table laid with wines and sweetmeats. 
+> S
+Sir Lancelot went south and was on the stairs, leading up to a landing, with
+doors to the north, west and south. The stone treads were wide and flat. 
+> D
+The floor gave way with a great splintering. Lancelot dropped a long way and
+smote his head, not waking until much later. 
+> LOOK
+Lancelot was in a small dark prison. The only light came from a tiny barred
+window, set high up against the ceiling. Lancelot could see a damosel. 
+> WAIT
+Time passed. 
+The damosel promised Lancelot his freedom if he would promise to love her,
+giving her a kiss to seal the bargain. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The damosel sighed and left. The damosel went outside. 
+> WAIT
+Time passed. 
+A night and a day passed. 
+> WAIT
+Time passed. 
+A damosel entered from outside. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The damosel promised Lancelot his freedom if he would promise to love her,
+giving her a kiss to seal the bargain. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The damosel sighed and left. The damosel went outside. 
+> WAIT
+Time passed. 
+A night and a day passed. 
+> WAIT
+Time passed. 
+A damosel entered from outside. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The damosel told Lancelot that Guenever was to be executed that day, as her
+champion had not appeared to defend her honour. The damosel saw his grievous
+suffering and, filled with pity, offered to free Lancelot in exchange for just
+a kiss, with no promise intended. 
+> KISS DAMOSEL
+Sir Lancelot kissed the damosel, and she opened the door and left. A new horse
+was found, and Lancelot made ready to go. 
+> GO TO GUENEVER
+Sir Lancelot went outside and was in Meliagaunt's hall. 
+Sir Lancelot went north, mounting his horse and was on the east side of castle
+Meliagaunt. 
+Sir Lancelot rode north and was on a straight way, that ran broad and true
+through a well-kempt wood. A fair damosel sang gaily as she picked the May
+blossom. 
+Sir Lancelot rode north and was in Westminster meadows. 
+Sir Lancelot rode north and was outside the Bishop's Gate. 
+Sir Lancelot rode north and was on the bridge over the River Camel. The river
+gurgled beneath the rough-hewn timbers. 
+A carter entered from the north. 
+Sir Lancelot alit from his horse and walked north and was inside the Bishop's
+Gate, that guarded the southern entrance to the city. 
+Sir Lancelot went north through the door, mounting his horse and was on the
+south way, before the Bishop's Gate. 
+Sir Lancelot rode north and was on the market square, where Lancelot had to
+wind his way between makeshift stalls and animal pens. 
+Sir Lancelot rode east and was on the lawns beside Arthur's castle. The main
+drive curved north across the grass and entered into the castle gates.
+Opposite this, on the south side of the lawns, stood the cathedral, with its
+slender wooden spire reaching high unto the heavens. Lancelot could see a
+crowd, Sir Meliagaunt and a pyre. Fastened to it was Guenever. 
+The crowd started a slow hand-clap. Sir Meliagaunt stoked the fire. 
+> FIGHT MELIAGAUNT
+Meliagaunt was sorely afeared of Lancelot and agreed to fight only when
+Lancelot offered to take off half his armour and have one hand tied behind his
+back. This was done, and the two did come to fight. 
+"This will take but a moment!" called Meliagaunt, and so it did. For Lancelot
+taunted Meliagaunt with his naked side, and when the other did lunge at him,
+Lancelot stepped apace and with one mighty blow, clove Meliagaunt in two, even
+down to his breastbone. 
+Thus was the honour of the Queen proven and Guenever freed. 
+Guenever thanked Lancelot for saving her, and was gracious as befitted her
+rank, but tears stood in her eyes. 
+ 
+Now all the Knights of the Round Table were assembled, saving only one, and
+life proceeded apace at court. Lancelot lived happily, always triumphing in
+the many tournaments that were held, performing valiant deeds on the hunts,
+and oftimes taking pleasure in secret with Guenever. 
+ 
+Full twenty years passed thuswise, until a prophecy appeared above the one yet
+empty seat at the Round Table, the Siege Perilous. This read, "Four hundred
+Winters and four and fifty accomplished after the passion of our Lord Jesus
+Christ ought this siege to be fulfilled". And so it was, for Galahad the Haut
+Prince arrived at Camelot that very day, and the company was complete. 
+ 
+That evening, the Holy Grail appeared to the knights, as is described in the
+book. But it departed all too soon and the most part of the company swore to
+find its resting place and perhaps bring the Grail back to Camelot. 
+ 
+Lancelot knew that he must put aside earthly pleasures and see Guenever no
+more. He retired to his chamber to prepare for the events of the morrow,
+setting aside his armour and weapons for the moment. But he knew he could not,
+in honour, leave without saying goodbye to his love. 
+> E
+Sir Lancelot went east through the door and was on the stairs. His footsteps
+on the bare stones echoed around the walls. His bedchamber lay to the left of
+the half-landing, past a window that looked out over the lands surrounding
+Camelot. A maidservant scurried past him, from the Queen's Room at the top of
+the rightmost stairs. 
+> E
+Lancelot was in Guenever's bedchamber, a place of soft warmth and feminine
+comfort Embroideries of scenes from romantic legends, hung on the walls.
+Lancelot could see Guenever, a footstool and a bed. 
+Guenever smiled serenely. There was a knock on the door. 
+> GUENEVER, WAIT, CLOSE DOOR
+Guenever promptly agreed. 
+> OPEN DOOR
+Sir Lancelot opened the door and a knight entered. 
+Guenever closed the door. Sir Colgreavaunce smote Sir Lancelot. Lancelot was
+unhurt. 
+> KILL COLGREAVAUNCE
+Sir Lancelot struck down the knight and stripped him of his armour and
+weapons. Feverishly, he threw the armour on himself, and Guenever's nimble
+fingers saw to the fastenings. Thus armed, he flung open the door and drove
+off the other knights like dogs.
+ 
+Lancelot had once again proved his honour, and that of the Queen, in combat.
+And, on the following day, he departed with the other knights to seek the Holy
+Grail. 
+ 
+Lancelot is about to start another part of the game. Do you want to go ahead? YES 
+Play the game tape to load part 3. 
+ 
+Welcome to the Quest for the Holy Grail, the final part of "Lancelot",
+copyright (C) 1988 from Level 9 and Mandarin. 
+(This version allows you to use Ram Save and Ram Restore to save a position in
+memory, and Undo to take back bad moves).
+ 
+The company of knights went each his own way, all searching for the Holy
+Grail. But Lancelot lagged behind, worried lest he fail in his duty, and had
+barely reached Vagon Castle, at the eastern side of Camelot, when darkness
+came... 
+ 
+Lancelot was in Vagon castle where he had spent the night, bedded on rough
+straw as befits one who would follow Our Lord. The drip of water echoed off
+the bare stone floor and walls. Lancelot could see an altar. Only the altar
+had been dressed with colour and richness. 
+What now? PRAY 
+Sir Lancelot, the dutiful knight, bended his knee and made humble prayer at
+the holy altar, that God would bless his quest. For it was not by sword, but
+by the will of the Almighty that the Holy GRAIL might be attained. 
+What now? OUT
+Sir Lancelot went outside, mounting his horse, and was on a track leading
+east. The squat bulk of Vagon Castle dominated the western skyline, its dark
+grey turrets standing out against the sky. Occasional peasants and men-at-arms
+trudged past along the track. They were returning to ARTHUR'S city from the
+distant forest, their passage raising much dust, for it had not rained for
+many a day. 
+What now? E
+Sir Lancelot rode east and was at a fork in the road, marked by a great stone
+cross. A rough and narrow track led southeast through a thorn thicket, while
+to the northeast lay a wide road, that ran smooth into the distance. Lancelot
+could see a bejewelled crown and a stone cross. Lancelot mopped his brown, FOR
+the weather was hot. Then he seemed to hear the clear ringing of church bells
+to the left. 
+What now? EXAMINE CROSS
+It was a stony cross bearing the inscription, "This way to peace" (pointing to
+the northeast) and, "This way to death" (pointing to the southeast). 
+ 
+Lancelot slept beside the cross and dreamt of a goodly knight, led astray by a
+fair damosel. 
+What now? NE
+Sir Lancelot rode northeast and was on a paved road leading north, with a fine
+smooth surface of dressed stone flags, its grass verges close mown and
+speckled with small bright flowers. Sparrows and finches sang gaily in the
+well-kempt beech hedges on either hand, before flying low into the nearby
+woodland. 
+What now? N
+Sir Lancelot rode north and was outside a fine church with a tall, turreted
+tower and high arched windows of stained glass. From the neatly dressed
+stonework of the buttresses to the copper windvane atop the leaded roof, it
+spoke of great craftsmanship and dedication to the glory of its lord. Lancelot
+could see a smiling preacher. 
+ 
+The preacher stepped forth, from where he had been standing just outside the
+chapel porch and said, "Sir Lancelot, prince amongst knights, I greet you. I
+know of your quest and can help. If you will but pay me with the jewelled
+crown as a token of service to my Lord, I will help shorten your quest for the
+Holy Grail". 
+What now? MAKE SIGN OF CROSS
+Sir Lancelot made the sign of the cross. The smiling preacher was revealed as
+a fiend, spun around and and disappeared, cackling foul insults, into the air.
+What now? S
+Sir Lancelot rode south and was on a paved road leading north, with a fine
+smooth surface of dressed stone flags, its grass verges close mown and
+speckled with small bright flowers. 
+What now? SW
+Sir Lancelot rode southwest and was at a fork in the road, marked by a great
+stone cross. A rough and narrow track led southeast through a thorn thicket,
+while to the northeast lay a wide road, that ran smooth into the distance.
+Lancelot could see a bejewelled crown and a stone cross. 
+That's enough "What now" prompts. 
+> SE
+Sir Lancelot rode southeast and was on a thorny track leading south through a
+dense growth of brier and bramble. Lancelot could see a penniless cleric and a
+thorn thicket. Long, sharp thorns clawed at Lancelot's cloak, slowing his
+passage, and Lancelot pressed his horse hard to one side to allow a woodman to
+pass with a heavy bundle of sticks. The peasant sweated under their weight and
+under the sun that beat on his back. 
+> S
+Sir Lancelot rode south and was in shady woodland, on a winding path that ran
+north and east below the canopy of leaves. The great beeches rose high on
+either side, their dense crowns touching and all but shutting out the sky.
+Sunlight dappled the branch tips and stray shafts broke through and danced in
+the woods beneath. Lancelot could see a knight. 
+ 
+The knight urged his steed down the track towards Lancelot, tilted his lance
+in greeting and said, "Hold fast traveller, I will give passage to any knight
+but he that is called Sir Lancelot. By your leave, please tell me your name". 
+Some pious priests entered from the east. 
+> KNIGHT, LANCELOT
+"Then die, Sir Lancelot!" he cried, urging his mount into the charge and
+swinging his sword about him. 
+The knight smote Sir Lancelot. Lancelot was slightly injured. 
+> ATTACK KNIGHT
+Sir Lancelot smote the knight. He was unharmed. 
+He smote Sir Lancelot. Lancelot was sorely hurt. The pious priests greeted the
+knight cheerfully. He asked for their blessing, which was gladly given. 
+> ATTACK KNIGHT
+Sir Lancelot smote the knight. He was almost unharmed. 
+The knight smote Sir Lancelot. Lancelot was gravely wounded. The pious priests
+went north. 
+> ATTACK KNIGHT
+Sir Lancelot smote the knight. He was almost unharmed. 
+The knight smote Sir Lancelot. Lancelot was nigh unto death. 
+> ATTACK KNIGHT
+Sir Lancelot smote the knight. He was slightly hurt. 
+The green knight had Lancelot at his mercy. He raised his sword to MAYBE
+strike the final blow, but then held back and lowered his blade. "Sir
+Lancelot," he said, "I must avow that you have fought bravely, and I shall
+spare your life. You are free to pass". 
+> E
+Sir Lancelot rode east and was on an east-west woodland road in the middle of
+a dense forest. A profusion of bright flowers bejewelled the smooth green
+sward all around. A shaft of sunlight shone down TO the middle of the
+clearing. Lancelot could see a damosel and a resplendent pavilion. The damosel
+stepped forward and, raising her slender arms in welcome, invited him inside.
+The weary knight was entranced by her soft tones and her great beauty, and he
+looked upon her in wonder as she beckoned towards the pavilion. 
+> IN
+The fair damosel took Lancelot by the hand and led him into the pavilion. Sir
+Lancelot dismounted and walked inside and was in an airy pavilion that was
+clad in soft shade, lit only by the warm glow of sunlight filtered through the
+gay fabrics of the tent. Lancelot could see a damosel and a comfortable bed.
+The damosel held out a plate of three dainty cakes to Lancelot, saying "Please
+eat your fill". 
+The damosel said, "Please eat the cakes, for my sake if not for yours". 
+> MAKE SIGN OF CROSS
+Sir Lancelot made the sign of the cross. The pavilion turned up-so-down, and
+then it changed unto a smoke, and a black cloud, and in an instant the
+resplendent pavilion vanished in a whirling cloud of evil. Lancelot was adread
+and called aloud to Jesu Christ for help that he might complete the quest. 
+> E
+Sir Lancelot rode east and was at a ford across a south-flowing river. Full
+steep and rocky were the valley sides on either hand. A tumble of elder, larch
+and willow found purchase on the western side, yet opposite was nought but
+stunted gorse. Lancelot could see a black knight. 
+ 
+Of a sudden, the black knight rode out to greet Lancelot crying, "No worldly
+knight shall pass me". And straightway he smote Lancelot a mighty blow that
+spilled him to the ground. 
+> E
+The black knight stood aside and waved on Sir Lancelot. Lancelot rode east and
+was in a bleak wasteland with only a couple of clumps of coarse grass and
+stunted heathers struggling to survive in the hard stony ground. All was
+silent in that barren land, save for the faint sound of distant running water.
+High above, a heron winged steadily eastward, beating a lonely track through a
+vast empty sky. 
+> E
+Sir Lancelot rode east and was at the crossing of two roads. The stony waste
+stretched out both east and west as far as the eye could see. To the north it
+was bounded by a high cliff, its rugged face crossed by a thin straggling
+path. Southwards, a patch of dusty greenery told of water and human
+habitation. Lancelot could see a stone cross. 
+> EXAMINE CROSS
+It was the height of a man and fashioned in the Gaelic manner, with a circle
+at the juncture of arms and upright. The surface had been carved with flowing
+patterns, and smoothed by the sands that blew across the waste. 
+ 
+Lancelot slept beside the cross and had a dream. He thought he came to a great
+place which seemed a chapel, and there he found a tree on the one side that
+was wormeaten and weak, and on the other side a lily. And him thought a good
+man said, "Should not he do great folly that would let this flower perish to
+succour the rotten tree, that it dropped not to earth?". 
+> N
+Sir Lancelot rode north and was at the base of a cliff, so tall and rugged
+that its top was scarcely to be seen. Coarse leaved trees grew low amongst the
+tumbled rocks. Two salamanders FOUGHT lazily in the hot sunshine. Then, seeing
+the knight, they turned and scuttled swiftly up a rough path. 
+> UP
+Sir Lancelot rode upwards and was on a rocky path amongst the shrubs that grew
+at the base of the cliff. The path bended sometimes to left and right, but
+travelled generally eastwards and upwards. 
+ 
+A follower of Nacien the Hermit ran down the path towards Lancelot, shouting,
+"Turn back from this path, I beg you". Then he vanished as swiftly as he came.
+> UP
+Sir Lancelot rode upwards and was on a steep path part way up the cliff. Here
+it narrowed as it wound its way around a rugged outcrop. 
+ 
+A second disciple appeared and pleaded, "Oh, worthy knight. Why dost thou
+condemn us, that do you no harm?" Then he withdrew behind the ridge. 
+> UP
+Sir Lancelot rode upwards and was on a path near the top of a cliff close to
+the top. The shrubs far below were mere splashes of green amongst the stark
+shadows of the jagged rocks at the base of the cliff. 
+ 
+A third follower of Nacien came forth and said unto Lancelot, "Turn back from
+this path, I beg you. Else my lord says that all his disciples must cast
+themselves from the cliffs above". Then he ran away upwards. 
+> UP
+Sir Lancelot rode upwards and was on a path outside a hermitage, a crude stone
+hovel with a battered roof of turves. A sheepskin hung across the entrance and
+flapped loosely in the wind that gusted across the clifftop. 
+ 
+A fourth robed figure arrived to plead with Lancelot. "I am Nacien", he
+claimed, "Please come no further, for it is written that we are doomed should
+you attain the hermitage". He raise his hands in supplication, then
+disappeared. 
+> IN
+Sir Lancelot rode inside and was in Nacien's hermitage, a place of cold
+austerity. The crude lodgings of a man who had forsworn the comforts and
+pleasures of this world. Lancelot could see Nacien the Hermit. 
+ 
+Nacien laid aside his Bible and rose from his low stool as Lancelot entered.
+He heard the knight tell his tale of visitations upon the cliff path, and
+shook his head in wonder.
+ 
+Right well had Lancelot done to press on, for it was not the hermit's
+followers, but fiends in their images, which had sought to turn Lancelot aside
+from the true path. Nacien praised Lancelot for his faithfulness, in pressing
+on against an enemy he could not fight with weapons, and offered unto him a
+CHALICE. 
+> GET CHALICE
+Sir Lancelot took the beautiful chalice. 
+Nacien the Hermit sat cross-legged on the floor. 
+> OUT
+Sir Lancelot rode outside and was on a path outside a hermitage, a crude stone
+hovel with a battered roof of turves. A sheepskin hung across the entrance and
+flapped loosely in the wind that gusted across the clifftop. 
+> DOWN
+Sir Lancelot rode downwards and was on a path near the top of a cliff close to
+the top. The shrubs far below were mere splashes of green amongst the stark
+shadows of the jagged rocks at the base of the cliff. 
+> DOWN
+Sir Lancelot rode downwards and was on a steep path part way up the cliff.
+Here it narrowed as it wound its way around a rugged outcrop. 
+> DOWN
+Sir Lancelot rode downwards and was on a rocky path amongst the shrubs that
+grew at the base of the cliff. The path bended sometimes to left and right,
+but travelled generally eastwards and upwards. 
+> DOWN
+Sir Lancelot rode downwards and was at the base of a cliff, so tall and rugged
+that its top was scarcely to be seen. Coarse leaved trees grew low amongst the
+tumbled rocks. 
+> S
+Sir Lancelot rode south and was at the crossing of two roads. The stony waste
+stretched out both east and west as far as the eye could see. To the north it
+was bounded by a high cliff, its rugged face crossed by a thin straggling
+path. Southwards, a patch of dusty greenery told of water and human
+habitation. Lancelot could see a stone cross. 
+Galahad entered from the south. 
+> S
+Sir Lancelot rode south and was beside a well encompassed by a low wall of
+dressed stone. A clump of hardy trees grew close by, giving welcome shade in
+that dry, dusty land. Lancelot could see a thirsting pilgrim and a well. The
+sunshine glinted harshly off a great white building on a slight HILL to the
+south. 
+The pilgrim muttered, "Have pity upon me, kind sir. I have not drunk for nigh
+on a week". A penniless cleric entered from the south. 
+> GIVE CHALICE TO PILGRIM
+Sir Lancelot gave the beautiful chalice to the thirsting pilgrim. With the
+help of Lancelot, the pilgrim reached into the well and filled the chalice. He
+drank deeply, and was forthwith revived by the healing holy water. He handed
+the chalice back to Lancelot, rose up and once more set out upon his
+pilgrimage. 
+The penniless cleric went north. 
+> N
+Sir Lancelot rode north and was at the crossing of two roads. The stony waste
+stretched out both east and west as far as the eye could see. To the north it
+was bounded by a high cliff, its rugged face crossed by a thin straggling
+path. Southwards, a patch of dusty greenery told of water and human
+habitation. Lancelot could see a penniless cleric, some pious priests and a
+stone cross. 
+> E
+Sir Lancelot rode east and was on a stony road that tracked through the
+wasteland. His horse picked a careful passage between the hard flints and
+troublesome pebbles. Through the wavering air that rose from that hot earth,
+Lancelot could see a distant wall of green in the east. 
+> E
+Sir Lancelot rode east and was on a forest ride of smooth sward. Gentle
+breezes stirred the trees WHILE Lancelot rode along.
+ 
+Then, of a sudden, the woodland peace was shattered by the appearance of a
+cruel dwarf with lustful rage burning in his eyes. He dashed off through the
+HAZES to the south, his knife at the throat of a trembling maid.
+ 
+As he passed, a group of knights appeared, riding north, and between them they
+bore Sir Ector, bound naked to his mount. And they flogged his body with sharp
+thorns that tore his flesh. For certain, there would be little time to rescue
+both, but should he turn first in aid of the innocent maiden or of his own
+brother? 
+Galahad entered from the east. 
+> S
+Did you know that you can go quickly to a far off place? E.g Run to Boat, or
+Go to Chapel.
+Sir Lancelot rode south and was in a flower strewn glade surrounded by oaks
+and flowering shrubs on all but the northern side. As Lancelot rode out into
+the sunlight, the vile dwarf released his helpless victim and took to his
+heels in terror. The maiden gave her heartfelt thanks to her saviour and bade
+him farewell. 
+> N
+Sir Lancelot rode north and was on a forest ride of smooth sward. 
+> N
+Sir Lancelot rode north and was in a woodland glade encompassed entirely by
+close-set oaks. There was no way out save for the southern path whence
+Lancelot had come. 
+ 
+In the midst of the glade, Lancelot found Sir Ector beset by a merciless band
+of knights. Yet cowardly were they, as well as evil, and at the sight of
+Lancelot they fled forthwith without a fight. The worthy knight freed Sir
+Ector, who thanked him most gratefully before setting off once more upon his
+own quest. 
+> GO TO ABBEY
+Sir Lancelot rode south and was on a forest ride. 
+Sir Lancelot rode west and was on a stony road. 
+Lancelot heard a voice call in urgent warning, "Galahad is in danger for his
+life". Lancelot took direction from the voice and hastened to the aid of his
+son, riding swiftly to the place where he was in danger... Lancelot was on a
+steep path. Lancelot could see Galahad and some barbarous knights. 
+> WAIT FOR GALAHAD
+Time passed. 
+Galahad greeted Lancelot as his father, and it were marvel to tell of his joy.
+ 
+The evil knights called out, "Lancelot, flee for your life, or die at our
+hands. We intend to kill Galahad, and nought you can do shall prevent us. 
+> KILL KNIGHTS
+Sir Lancelot smote the barbarous knights. They were unharmed. 
+The barbarous knights smote Sir Lancelot. Lancelot was slightly injured. 
+Sir Lancelot smote the barbarous knights. They were almost unharmed. 
+The barbarous knights smote Sir Lancelot. Lancelot was injured. 
+Sir Lancelot smote the barbarous knights. They were almost unharmed. 
+The barbarous knights smote Sir Lancelot. Lancelot was gravely wounded. 
+Sir Lancelot smote the barbarous knights. They were almost unharmed. 
+Of a sudden, the skies opened, and bolts of lightning struck down Galahad's
+foes to left and right, and those fled in terror that were not slain. One last
+great bolt struck the stake and loosed Galahad from his bonds. The young
+knight dropped to his knees and humbly gave thanks to the lord for his
+deliverance. Then rising, he turned to Lancelot and offered to help him to
+attain the Grail. 
+> GALAHAD, FOLLOW ME
+Galahad nodded. 
+He knelt down and prayed. 
+> GO TO ABBEY
+Sir Lancelot rode downwards and was on a rocky path. 
+Galahad entered from above. 
+Sir Lancelot rode downwards and was at the base of a cliff. 
+Galahad entered from above. 
+Sir Lancelot rode south and was at the crossing of two roads. Lancelot could
+see a stone cross. 
+Galahad entered from the north. 
+Sir Lancelot rode south and was beside a well. Lancelot could see a well. 
+Galahad entered from the north. 
+Sir Lancelot rode south and was in the white ABBEY, standing square in the
+centre of the nave, between the slender fluted pillars of solid silver that
+rose high to the soaring vault of the ceiling. Lancelot could see a circular
+shield and a huge tomb. 
+Galahad entered from the north. 
+> GALAHAD, GET SHIELD
+Galahad said, "Very well". 
+Galahad knelt and prayed, then Galahad took the circular shield. 
+> EXAMINE TOMB
+It was made of great slabs of stone. It was undecorated, but bore the daunting
+inscription, "Only the best knight in the world may open this tomb and live".
+The tomb was closed. 
+Galahad prayed for strength. 
+> GALAHAD, OPEN TOMB
+Galahad nodded. 
+Galahad opened the huge tomb. A foul fiend emerged with a hideous shriek, that
+clawed at his heart like talons of ice and fire. 
+> GALAHAD, KILL FIEND
+Galahad agreed. 
+Galahad said "God our father will protect us". Galahad advanced and struck out
+at the fiend. As he did so, a host of angels sprung to his aid and, quailing
+before their power, the fiend fled. 
+> EXAMINE TOMB
+It was made of great slabs of stone. It was undecorated, but bore the daunting
+inscription, "Only the best knight in the world may open this tomb and live".
+In it was a dead body. 
+> EXAMINE BODY
+It was the body of a false christian, an unbeliever whose presence was a focus
+of evil in the consecrated ground. 
+Galahad knelt down and prayed. 
+> GO TO BOAT
+Sir Lancelot rode north and was beside a well. Lancelot could see a well. 
+Galahad entered from the south. 
+Sir Lancelot rode north and was at the crossing of two roads. Lancelot could
+see a stone cross. 
+Galahad entered from the south. 
+Sir Lancelot rode east and was on a stony road. 
+Galahad entered from the west. 
+Sir Lancelot rode east and was on a forest ride. 
+Galahad entered from the west. 
+Sir Lancelot rode east and was on a bleak shore, whipped by the cold salt wind
+and battered by the surging waves. Lancelot's TOUR had brought him to this
+place, but he found little here to treasure. Lancelot could see a boat. In it
+were a metal-rimmed horn and a shining sword. 
+Galahad entered from the west. 
+> GALAHAD, GET SWORD
+Galahad agreed. 
+He took the shining sword. 
+> GET HORN
+Sir Lancelot took the metal-rimmed horn. 
+> IN
+Sir Lancelot got in. The boat was on a bleak shore, whipped by the cold salt
+wind and battered by the surging waves. Lancelot's TOUR had brought him to
+this place, but he found little here to treasure. Lancelot could see Galahad. 
+He got in. The boat was on a bleak shore, whipped by the cold salt wind and
+battered by the surging waves. Lancelot's TOUR had brought him to this place,
+but he found little here to treasure. In it was Galahad. 
+> BLOW HORN
+Sir Lancelot blew the horn, and a magical wind sprang up. 
+Galahad said "My prayers have been answered. Praise be to God". He sank into
+silent meditation. 
+> GALAHAD, GO TO TURNANCE
+Galahad nodded. 
+Galahad directed the boat to the southeast. The boat was on the sea. In it was
+Galahad. 
+> WAIT
+Time passed. 
+Galahad directed the boat to the southeast. The boat was on the isle of
+Turnance. In it was Galahad. 
+> OUT
+Sir Lancelot got out. 
+Galahad got out. 
+> UP
+Sir Lancelot rode upwards and was on a path that wound up the cliff zigzagging
+narrowly up the steep and jagged face. The footing was treacherous, worn
+smooth by the passage of many people and by the rivulets of water that
+trickled down from above. 
+ 
+A poor fisherman appeared and said, "Good knight, give us succour! Two great
+dragons are laying waste to this isle and striking terror into my people. They
+live yonder in clearings at the ends of that path". He pointed swiftly
+eastwards, then ran off with a terrible wailing. 
+Galahad entered from the north. 
+> E
+Sir Lancelot rode east and was on a small hillock clad with springy turf and
+fragrant heathers. It rose like an island out of a sea of trees. A path wound
+across the KNOLL, all twisted like the engraving on a silver cup, and
+disappeared among the trees on either side. An angry roar rumbled from the
+woods to the south and was echoed by another mighty roar in the far north. 
+Galahad entered from the west. 
+> GO TO RED DRAGON
+Sir Lancelot rode north and was on a path leading north along a cliff top. A
+ragged strip of blood-stained sackcloth hung from a jagged branch tip, left by
+some poor peasant in his flight. 
+Galahad entered from the south. 
+Sir Lancelot rode north and was on a path through a pine wood. 
+Galahad entered from the south. 
+Sir Lancelot rode north and was at a clearing amongst the pines surrounded by
+blackened, broken trees. The bare ground has been scorched and stamped by the
+dragon in its unceasing fury, until it was as hard and unyielding as stone.
+Lancelot could see a red dragon. A poor, solitary sapling was caught by a
+sudden breath of wind and nodded towards the great beast. On the instant, it
+lashed out a massive red claw and tore the young tree bodily from the ground. 
+Galahad entered from the south. The red dragon smote Sir Lancelot. Lancelot
+was slightly injured. 
+> S
+Sir Lancelot rode south and was on a path through a pine wood deep within the
+wood. To the north, the path opened into a clearing, its entrance marked by
+two shattered, burnt tree stumps. 
+Galahad entered from the north. A red dragon entered from the north. 
+> S
+Sir Lancelot rode south and was on a path leading north along a cliff top that
+lead north into a wood of tamarisk and juniper. For the length of a spear on
+either side, bushes were trampled and great branches broken, as if by the
+passage of some massive beast. 
+Galahad entered from the north. A red dragon entered from the north. 
+> S
+Sir Lancelot rode south and was on a small hillock clad with springy turf and
+fragrant heathers. It rose like an island out of a sea of trees. A path wound
+across the KNOLL, all twisted like the engraving on a silver cup, and
+disappeared among the trees on either side. 
+Galahad entered from the north. A red dragon entered from the north. 
+> GALAHAD, KILL DRAGON
+Galahad consented. 
+He smote the red dragon. It was unharmed. And smote Sir Lancelot. Lancelot was
+slightly injured. 
+> GO TO BLACK DRAGON
+Galahad smote the red dragon. It was unharmed. And smote Sir Lancelot.
+Lancelot was sorely hurt. 
+Sir Lancelot rode south and was on a path straggling down from a hillock. The
+wood was silent save for the quiet rustlings of small timid creatures that
+crept warily through the undergrowth. 
+Sir Lancelot rode south and was on an overgrown path. A coughing roar came
+from the southern end of the path, followed close by a billow of black smoke. 
+Sir Lancelot rode south and was in a blackened clearing strewn with fallen
+trees, their boughs trampled and flattened. The air was heavy with acrid smoke
+and the stench of dragon. Lancelot could see a black dragon. Lancelot peered
+through the gloom, but could see no paths out, other than the one by which he
+had come. 
+The black dragon smote Sir Lancelot. Lancelot was sorely hurt. 
+> N
+Sir Lancelot rode north and was on an overgrown path within a dismal wood. A
+haze of smoke blocked out the sun, and the poor light that seeped through was
+absorbed by the soot and ash that lay thickly all around. 
+A black dragon entered from the south. 
+> N
+Sir Lancelot rode north and was on a path straggling down from a hillock
+heading south into a gloomy wood, the trees stunted and clad with grimy
+leaves. 
+A black dragon entered from the south. 
+> N
+Sir Lancelot rode north and was on a small hillock clad with springy turf and
+fragrant heathers. It rose like an island out of a sea of trees. A path wound
+across the KNOLL, all twisted like the engraving on a silver cup, and
+disappeared among the trees on either side. Lancelot could see Galahad and a
+red dragon. 
+Galahad smote the red dragon. It was unharmed. The red dragon smote Sir
+Lancelot. Lancelot was slightly injured. A black dragon entered from the
+south. 
+> WAIT
+Time passed. 
+Galahad smote the red dragon. It was unharmed. 
+ 
+The red and the black dragons set about each other forthwith and fought a
+roaring, savage battle. At last the great red beast dropped to the ground,
+wounded unto death. Yet even as it died, it gave a mighty lash with its
+flailsome tail that did break the neck of its slayer. When all was still, the
+people of the isle came up and brought unto Lancelot a cup of mead in token of
+their gratitude. 
+> GO TO BOAT
+The red dragon was dead. 
+Lancelot the dragon-slayer rode west and was on a path that wound up the
+cliff. 
+Galahad entered from the east. 
+Lancelot the dragon-slayer rode north and was on the isle of Turnance on a
+narrow, rocky beach at the foot of a cliff. A well-worn footpath lead upwards.
+Lancelot could see a boat. 
+Galahad entered from the south. 
+> IN
+Lancelot the dragon-slayer got in. The boat was on the isle of Turnance on a
+narrow, rocky beach at the foot of a cliff. A well-worn footpath lead upwards.
+Lancelot could see Galahad. 
+Galahad got in. The boat was on the isle of Turnance on a narrow, rocky beach
+at the foot of a cliff. A well-worn footpath lead upwards. In it was Galahad. 
+> GALAHAD, GO TO WALL
+Galahad smiled. 
+Galahad directed the boat to the north. The boat was on the sea. In it was
+Galahad. 
+> WAIT
+Time passed. 
+Galahad directed the boat to the north. The boat was on the sea. In it was
+Galahad. 
+> WAIT
+Time passed. 
+Galahad directed the boat to the north. The boat was on the shore at sand
+isle. Lancelot could see a wall of fire across the isle. In the boat was
+Galahad. 
+> OUT
+Sir Lancelot got out. 
+Galahad got out. 
+> EMPTY CUP
+The mead drained away. 
+> GIVE CHALICE TO GALAHAD
+Sir Lancelot gave the beautiful chalice to Galahad. He said, "Thank you". 
+> GALAHAD, WAIT, FILL CHALICE, THROW CHALICE AT WALL, FILL CHALICE, THROW CHALICE AT WALL
+Galahad said, "Yes". 
+> FILL CUP, THROW CUP AT WALL, FILL CUP, THROW CUP AT WALL
+Sir Lancelot filled the metal cup. 
+Galahad filled the beautiful chalice. 
+The salt water helped to dampen the flames. 
+The salt water helped to dampen the flames. 
+The fire welled up more fiercely. 
+Sir Lancelot filled the metal cup. 
+Galahad filled the beautiful chalice. 
+The fire welled up more fiercely. 
+The salt water helped to dampen the flames. 
+The salt water finally quenched the flames. 
+> N
+Sir Lancelot rode north and was on a sand dune that crumbled and shifted.
+Lancelot could see a sand dune. Fine sand ran back and filled the footprints,
+wiping out all traces of passage. 
+Galahad entered from the south. 
+> FILL CUP
+Sir Lancelot filled the metal cup. 
+Galahad looked holy. 
+> S
+Sir Lancelot rode south and was on the shore at sand isle. It was a small flat
+isle, encompassed by the ocean on three sides. Lancelot could see a boat. 
+Galahad entered from the north. 
+> GO TO BOAT
+Galahad sank into silent meditation. 
+Galahad looked holy. 
+> IN
+Sir Lancelot got in. The boat was on the shore at sand isle. It was a small
+flat isle, encompassed by the ocean on three sides. Lancelot could see
+Galahad. 
+He got in. The boat was on the shore at sand isle. It was a small flat isle,
+encompassed by the ocean on three sides. In it was Galahad. 
+> GALAHAD, GO TO ANTECHAPEL
+Galahad nodded. 
+He directed the boat to the southeast. The boat was on the sea. In it was
+Galahad. 
+> WAIT
+Time passed. 
+Galahad directed the boat to the east. The boat was on a dark shore. In it was
+Galahad. 
+> OUT
+Sir Lancelot got out. 
+Galahad got out. 
+> GET CHALICE FROM GALAHAD
+Sir Lancelot took the beautiful chalice from Galahad. 
+Galahad rode east. 
+> FILL CHALICE
+Sir Lancelot filled the beautiful chalice. 
+> GO TO ANTECHAPEL
+Sir Lancelot rode east and was on a pavement. At the other end, Lancelot could
+see a squat grey antechapel, its ancient walls part clad in glossy ivy. 
+Galahad entered from the east. 
+Sir Lancelot dismounted and walked east and was in an antechapel, a small
+room, lined with panelling of pale oak and furnished with pews of the same
+warm wood. A single candle was set in a holder on one wall and sent a
+flickering pale light into the room. Lancelot could see Bors, Percival and a
+heavy key. Bors and Percival were there and bowed low to Lancelot, and
+welcomed him that he had joined them. 
+Bors greeted him. "Hail, Lancelot. Percival and I are here to help you".
+Percival agreed, "We will give you whatever aid we can". Galahad entered from
+the west. 
+> GIVE CHALICE TO BORS
+Sir Lancelot gave the chalice of water to Bors. He said, "Thank you". 
+> GIVE CUP TO PERCIVAL
+Sir Lancelot gave the cup of sand to Percival. He said, "Thank you". 
+> GIVE HORN TO GALAHAD
+Sir Lancelot gave the metal-rimmed horn to Galahad. He said, "Thank you". 
+Bors seemed to commune with his soul. 
+> BORS, WAIT 3 THEN THROW WATER
+Bors consented. 
+> PERCIVAL, WAIT 2 THEN THROW SAND
+Percival said, "Very well". 
+> GALAHAD, WAIT, BLOW HORN
+Galahad said, "Yes". 
+> GET KEY
+Sir Lancelot took the heavy key. A fire spirit appeared. 
+The salt water quenched the fire spirit entirely. A water spirit appeared. The
+sand soaked up the water spirit. A sand spirit appeared. Galahad blew the
+horn, and a magical wind sprang up. The wind blew away the sand spirit and
+scattered it. Singing voices told Lancelot to have faith in God and to walk
+onwards to the Grail. 
+> UNLOCK DOOR
+Lancelot the spirit-slayer opened the door. 
+Bors prayed for guidance. Galahad said "My prayers have been answered. Praise
+be to God". 
+> E
+Lancelot the spirit-slayer went east through the door, mounting his horse, and
+was in a dark valley lined with standing stones. The eternal guardians of the
+way, their heavy presence weighing on the spirits of all who walked between
+their serried ranks. A deep rumbling came from the east, and it rolled among
+the silent stones and echoed from the valley walls. 
+> E
+Lancelot the spirit-slayer dismounted and walked east and was in a castle of
+gaunt grey stone. A flight of steps, guarded by two great lions, lead up to a
+door at the eastern end. Lancelot could see some savage lions. At the sight of
+Lancelot, the lions leaped up as if to block the way to the east. 
+> E
+Lancelot the spirit-slayer went east and was in a majestic corridor wide
+enough for six knights to ride abreast, and high enough to fly a falcon. The
+walls were hung with richly embroidered tapestries and the flags of kings and
+princes. Though no sound reached the ear, it seemed there was the music of
+angels close at hand. Glorious light beckoned him from a chamber at the
+eastern end. 
+> E
+Lancelot the spirit-slayer went east and was in the Grail chamber, a room of
+light and life. Heavenly sunlight streamed through the tall windows of stained
+glass and filled the chamber with the colours of glory. Lancelot could see the
+Holy Grail. 
+ 
+And angels did sing while the holy Joseph of Arimathea did say mass for the
+knights. Lancelot dropped on bended knee and gave grateful thanks to the Lord
+for that he had fulfilled his quest. 
+ 
+At length, Lancelot withdrew from the chamber of the Holy Grail, and
+eventually returned to Camelot. The worthy knights, Galahad, Bors and Percival
+were also blessed and did attain the Grail in the fullness of time. 
+ 
+Lancelot returned to Camelot, where he told Arthur of his deeds, and then, at
+length, he retired to serve God as a hermit. 
+ 
+As for the history of Arthur and of Guenever, that is for another time.
+Meanwhile, congratulations on winning this game!.. 
+ 
+Lancelot scored 960 out of 1000. 
+ 
+Thy adventure is over. 
+Please type Restart, Undo, Restore or Ram Restore: #quit
+

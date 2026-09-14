@@ -1,0 +1,2257 @@
+
+Looking for gameplay log on disk - 'log.bat'
+
+Executing instructions in file 'log.bat'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Welcome to Gnome Ranger, copyright (C) 1987 Level 9 Computing, the game based
+on Ingrid Bottomlow's reports of her adventures in the wilderness. As you join
+her, Ingrid is walking home after being teleported far from Gnettlefield by a
+faulty scroll..
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory and OOPS to take back bad moves).
+ 
+Ingrid was beside a sturdy little stone-built shop at the end of a road which
+meandered gnorth across a grassy plain. A multitude of tracks pitted the
+ground, yet the countryside was almost uninhabited and the air was strangely
+silent. The loudest sound was rushing water, far to the east. Exits led
+gnorth, gnortheast, east, gnorthwest and inside through a door. Ingrid could
+see some wooden shutters and a door. 
+What gnow? #title: Gnome Ranger test script
+#comment: MSX version 
+#SEED 42
+Seed set to 42
+KNOCK ON DOOR 
+Ingrid reached for the knocker, but found - gnot surprisingly - that it was
+too high. She shrugged and knocked loudly on the door with her knuckles. 
+What gnow? WAIT
+Time passed. 
+A centaur opened the door and shutters from inside with a shopkeeperly
+flourish, rubbed his palms together eagerly and backed inside, beckoning
+Ingrid to follow. 
+What gnow? IN
+Ingrid went inside through the door and was inside the shop. It was packed
+with a bewildering variety of objects, piled on the shelves and on the floor,
+hanging from the rafters, all crammed in wherever they would fit. Some of
+those at the front of shelves and on the tops of heaps were clean and shining,
+but the rest had grown a skin of dust as if to hide themselves from casual
+eyes. An exit led outside through a door. Ingrid could see the centaur, an
+impressive piece of armour, a capacious backpack, a charming gnecklace, a
+curious brass lamp, a magisterial black rod, a suspicious-looking bunch of
+keys, a cheese sandwich, a pointed shovel and a map. 
+The centaur introduced himself "Hello, my little rosebud. I am Capricorn
+Centaur (or Cap for short), humble proprietor of this multifarious emporium.
+Perhaps you would like to engage in a little trading. I'm sure it will be to
+our mutual advantage. You may take anything your heart desires from this
+infinite variety simply by giving me any two other items in exchange". 
+What gnow? WAIT 
+Time passed. 
+What gnow? WAIT
+Time passed. 
+What gnow? WAIT
+Time passed. 
+Cap said "Hmm.. Trading is a rather difficult if you have gnothing to trade,
+but perhaps something can be arranged. Would you care to run a little errand
+for me instead? Would you deliver this? It contains a private letter to my
+dear old aunt. She lives in the sweetest little old cottage just a short walk
+to the gnorth of here!" He fished out an envelope and offered it to Ingrid. 
+What gnow? TAKE ENVELOPE
+Cap said "OK, gnow you can take one free item, but don't forget to deliver
+that envelope". Ingrid took the ivory-coloured envelope. 
+What gnow? TAKE SHOVEL
+Ingrid took the pointed shovel. 
+What gnow? GO TO PUDDLE
+Ingrid went outside through the door and was beside a sturdy little
+stone-built shop at the end of a road. Ingrid could see some wooden shutters
+and a door. 
+Ingrid went gnorth and was on the road beside a stream. 
+Ingrid went gnorth and was on the road beside a stream. 
+Ingrid went gnorth and was on the road beside where the stream seeps away.
+Exits led gnorth, gnortheast, east, south, southeast, southwest, west and
+gnorthwest. Ingrid could see a broad muddy puddle. 
+A swarm of dogs entered from the gnorth. 
+Ingrid put a stop to the "What gnow" messages. 
+> EXAMINE PUDDLE
+It was a puddle of soft, grey-brown mud. It had dried past the squidgy stage
+and was by then in transition from slodgy to stodgy, rather like a two week
+old chocolate mousse. In it was a tiny coin and some hoof prints. 
+> TAKE COIN
+Ingrid took the tiny coin. 
+The swarm of dogs barked in chorus. 
+> GO TO BRAMBLES
+Ingrid went gnorth and was on the road, which had gnarrowed almost to a path.
+Exits led gnorth, gnortheast, east, south, southeast, southwest, west and
+gnorthwest. Ingrid could see some prickly brambles. 
+> EXAMINE BRAMBLES
+They were thick-stemmed and covered with with gneedle-sharp spines. In the
+prickly brambles was some lank hair. 
+> TAKE HAIR
+Ingrid took the lank hair. 
+> GO TO MARSH
+Ingrid went southeast and was wading on the western edge of the morass. 
+Ingrid went east and was in the middle of the marsh, surrounded on all sides
+by marshland. The ground was oozy and sticky and the air was still as death.
+Exits led gnorth, gnortheast, east, south, southeast, southwest, west and
+gnorthwest. Ingrid could see a yellow fungus and a small gnugget. 
+A heavy mist, as thick as wet cotton wool, flopped down over the marsh. Ingrid
+could scarcely see her hand in front of her face and all that showed of the
+ground beneath her, were the tips of the longer blades of grass. 
+> TAKE ALL
+Ingrid took the yellow fungus. 
+Ingrid took the small gnugget. 
+> WAIT FOR EAGLE
+Time passed. 
+The eagle flew from the gnortheast. 
+> FOLLOW EAGLE
+The eagle flew southwest. 
+Ingrid went southwest and was in the southwest corner of a swamp. Exits led
+gnorth, gnortheast, east, south, southeast, southwest, west and gnorthwest.
+Ingrid could see the eagle. 
+The mist lifted as suddenly as it had arrived and Ingrid was able to see the
+wide expanse of marshy wasteland all around her. 
+> WAIT FOR EAGLE
+Time passed. 
+Ingrid saw an eagle circling directly overhead, her great wings dark against
+the pale vault of the heavens, and offtimes blotting out the sun as she
+wheeled through the sky. 
+> EXAMINE EAGLE
+She was an elegant eagle with the eyes of an empress, proud powerful pinions
+perfectly poised, truly terrible talons tensed to tear, finely fledged in
+fabulously fiery feathers with filthy fluffy bits under her tail. 
+The eagle started to dive towards Ingrid. Her shadow raced across the ground,
+growing ever larger and more menacing. 
+> WAIT 
+Time passed. 
+The eagle snatched Ingrid up in her strong talons and, with a steady beat of
+her massive wings, flew swiftly over the heathland, back to her gnest on the
+pinnacle. She dropped Ingrid from just above, circled round and came back in
+to perch on the edge. 
+> HIT CHICKS WITH SHOVEL 
+Ingrid hit each of the eagle chicks hard over the beak. They looked startled
+and immediately stopped their squawking! 
+ 
+The mother eagle was delighted. "Och, ye bonny wee thing!" she cried, "That
+the first moment's peace I've had for weeks! I'll be thanking ye, Mistress
+Gnome, and to show ye how grateful I am, I willna make ye stay for lunch." 
+ 
+She took up Ingrid carefully in her talons and carried her down to the base of
+the pinnacle. Before flying off she dropped a small silver bell into Ingrid's
+hands, "If ye need any help, my dear, just give a wee ring on this and I'll be
+with ye before ye can say porridge". 
+The eagle flew gnortheast. 
+> GO TO LLAMA
+Ingrid went gnortheast and was on the high moorland beside a cave entrance.
+Ingrid could see the eagle. 
+Far above, Ingrid saw an eagle swoop and dive in the clear blue sky. She flew
+gnorthwest. 
+Ingrid went inside and was in a pleasant, airy cave, perfumed by strange
+incense. From the low entrance, the roof swept airily upwards to form a high
+vault, its furthermost reaches lost in the darkness. An exit led outside.
+Ingrid could see the llama. 
+> EXAMINE LLAMA
+He was a shaggy llama sitting crossed legged on the ground (only his fore feet
+were crossed. He would have had to forfeit all comfort to cross all four
+feet). He was carrying a fragile flower. 
+The Llama said "Love and peace, woman" and offered Ingrid a flower. 
+> TAKE FLOWER
+Ingrid took the fragile flower. 
+> GO TO COTTAGE
+Ingrid went outside and was on the high moorland beside a cave entrance. 
+In the distance Ingrid saw an eagle swooping gracefully down, then rise aloft
+once more with an easy majesty. The eagle flew from the gnorthwest. Ingrid
+went gnortheast and was on a grassy plain. Ingrid could see a big heavy rock. 
+Ingrid went east and was outside the witch's cottage. The road went through
+the gate here and a high fence stretched all around the cottage. Exits led
+gnortheast, east, south, southeast, southwest, west, gnorthwest and inside.
+Ingrid could see a wooden gate, a painted sign and some statues of stone or
+concrete. 
+> RING BELL
+The bell rang brightly. 
+> WAIT 
+Time passed. 
+> WAIT
+Time passed. 
+The eagle flew from the west. 
+> EAGLE, GO NORTH AND TAKE PEG THEN FIND ME AND GIVE PEG TO ME
+She agreed. 
+She flew gnorth. 
+> WAIT 
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The eagle flew from the gnorth. 
+> WAIT
+Time passed. 
+The dog scuttled out from the kennel. It stopped and blinked furiously in the
+unaccustomed brightness of the outside world, then ran round in tiny circles,
+yapping joyfully, and scampered off as fast as its little legs would carry it.
+The dog entered from the gnorth. The eagle gave the carved wooden peg to
+Ingrid. 
+> FOLLOW DOG 
+He went southwest. The eagle flew down and landed beside her. "Och, hello,
+Mistress Gnome. Ye'll be needing my help, I take it. Now, ye must tell me what
+ye'll be wanting me to do". 
+Ingrid went southwest and was on a grassy plain. Exits led gnorth, gnortheast,
+east, south, southeast, southwest, west and gnorthwest. Ingrid could see the
+dog. 
+He went southwest. Ingrid went southwest and was on the high moorland. Exits
+led gnorth, gnortheast, east, south, southeast, southwest and west. Ingrid
+could see the dog. 
+He went southwest. Ingrid went southwest and was on the high moorland. Exits
+led gnorth, gnortheast, east, south and southeast. Ingrid could see the dog. 
+He went south. Ingrid went south and was on a grassy plain. Exits led gnorth,
+gnortheast, east, south and southeast. Ingrid could see the dog. 
+He went south. Ingrid went south and was on a grassy plain. Exits led gnorth,
+gnortheast and east. Ingrid could see the dog and a swarm of dogs. 
+The swarm of dogs rushed up to the lone dog and happily fussed and swarmed all
+over him. He was submerged under the pack, but soon reappeared, yapping
+merrily, at one with his fellows. 
+ 
+The swarm of dogs was very grateful to Ingrid for rescuing their kidnapped
+comrade from the witch and for bringing him back to them. In return, the group
+insisted upon helping Ingrid in her fight against their common foe. One of the
+dogs handed her a small metal whistle to blow. The unicorn saw Ingrid, reared
+up on its hind legs and pawed the air in terror. Then, with a fearfilled
+whinny, it span round, sped off into the distance and was gone. 
+> GO TO COTTAGE
+Ingrid went gnortheast and was on a grassy plain at the gnorth-western corner
+of the shop. 
+Ingrid went gnortheast and was on a grassy plain. 
+Ingrid went gnortheast and was on the road beside where the stream seeps away.
+Ingrid could see a broad muddy puddle. 
+Ingrid went gnorth and was on the road. Ingrid could see some prickly
+brambles. 
+Ingrid went gnorth and was outside the witch's cottage. The road went through
+the gate here and a high fence stretched all around the cottage. Exits led
+gnortheast, east, south, southeast, southwest, west, gnorthwest and inside.
+Ingrid could see a wooden gate, a painted sign and some statues of stone or
+concrete. 
+> W
+Ingrid went west and was on a grassy plain outside the southwest corner of a
+square fence. Exits led gnorth, east, south, southeast, southwest, west and
+gnorthwest. Ingrid could see a big heavy rock. 
+> DROP ALL
+Ingrid dropped the silver bell. 
+Ingrid dropped the tiny coin. 
+Ingrid dropped the ivory-coloured envelope. 
+Ingrid dropped the fragile flower. 
+Ingrid dropped the yellow fungus. 
+Ingrid dropped the lank hair. 
+Ingrid dropped the small gnugget. 
+Ingrid dropped the carved wooden peg. 
+Ingrid dropped the pointed shovel. 
+Ingrid dropped the tiny whistle. 
+> LIFT ROCK
+Ingrid struggled and heaved and just managed to lift up one end of the rock. 
+> EXAMINE ROCK
+It was a large grey rock. It was smooth and round and looked as heavy as one
+of Mother's loaves. Underneath it was a soft white bridle. 
+> TAKE BRIDLE
+Ingrid couldn't keep the heavy rock up anymore and had to drop it. Ingrid took
+the soft white bridle. 
+> TAKE ALL
+Ingrid took the silver bell. 
+Ingrid took the tiny coin. 
+Ingrid took the ivory-coloured envelope. 
+Ingrid took the fragile flower. 
+Ingrid took the yellow fungus. 
+Ingrid took the lank hair. 
+Ingrid took the small gnugget. 
+Ingrid took the carved wooden peg. 
+Ingrid took the pointed shovel. 
+Ingrid took the tiny whistle. 
+The rock was awkward to get hold of and, in any case, too heavy for Ingrid to
+lift whilst carrying something else. 
+> GO TO FOREST
+Ingrid went east and was outside the witch's cottage. Ingrid could see a
+wooden gate, a painted sign and some statues of stone or concrete. 
+Ingrid went gnortheast and was on a grassy plain at the western fringe of the
+forest. 
+Ingrid went east and was on a grassy plain in the peaceful inner sanctum of
+the forest glade. Birds chirped in the distance and little furry animals
+scampered through the undergrowth. Exits led east, south, southeast, southwest
+and west. 
+> E 
+Ingrid went east and was on a grassy plain in another peaceful part of the
+forest. Exits led south, southwest and west. 
+> WAIT 
+Time passed. 
+Ingrid thought she caught a glimpse of something out of the corner of her eye.
+When she turned to look it had disappeared, leaving only an impression of pale
+gnervousness. 
+> WAIT
+Time passed. 
+Ingrid saw a delicate shadow move gnearby in the trees, then it was gone. 
+> WAIT
+Time passed. 
+A shy little gnymph appeared in the bushes, peeping hesitantly through parted
+branches in case Ingrid had something pretty for her. 
+> GIVE FLOWER TO NYMPH
+Ingrid gave the fragile flower to the gnymph. The gnymph seemed delighted by
+the flower. She held it softly and breathed in its delicate scent, but still
+seemed gnervous and in gneed of calming down. 
+The gnymph was agitated and looked as if she was about to run off at any
+moment. 
+> NYMPH, HELLO
+The gnymph was soothed by Ingrid's soft tone (Ingrid had studied elocution at
+the Institute) and began to relax. She talked about herself and about her
+woods, and how there was an evil witch who kept cutting down trees. She also
+told Ingrid that she was waiting for Mr. Right to pass her way. "Who's Mr.
+Wright?" asked Ingrid, and the gnymph replied tearfully "I don't know. But
+I'll recognize him when I see him!" Ingrid snorted sceptically. "If you want
+your Mr. Wright," she said, "you've got to go out and find him! I will tell
+you what to do". 
+> NYMPH, FOLLOW ME
+She gnodded. 
+> GO TO WATERFALL
+Ingrid went south and was on a grassy plain at the south-eastern corner of the
+copse. 
+The gnymph entered from the gnorth. Ingrid went south and was in the mire. 
+The gnymph entered from the gnorth. The unicorn entered from the southwest.
+Ingrid went south and was waist deep in a quagmire. 
+Ingrid went south and was stuck in the southeast corner of the slough. 
+Ingrid went south and was on a grassy plain north of a waterfall. 
+Ingrid went south and was at the base of a waterfall. The sound of the falling
+water was quite deafening and the spray seemed to hang in the air. Exits led
+gnorth, west and gnorthwest. 
+> W
+Ingrid went west and was beside a stream which was violently disturbed by the
+waterfall to the east of here. Exits led gnorth, gnortheast, east, west and
+gnorthwest. Ingrid could see a bright rainbow to the east. 
+> WAIT FOR NYMPH
+Time passed. 
+The gnymph entered from the gnorth. 
+> GIVE SHOVEL TO NYMPH
+Ingrid gave the pointed shovel to the gnymph. 
+> NYMPH, GO EAST AND DIG
+The gnymph agreed. 
+She went east. 
+> WAIT 
+Time passed. 
+The gnymph dug gnear the base of the rainbow, following Ingrid's signalled
+directions, and unearthed a crock of gold. 
+> E
+The rainbow faded away tantalizingly as Ingrid drew closer, so that when she
+got to where the end might have been, she had gno way of knowing if it was.
+Ingrid went east and was at the base of a waterfall. The sound of the falling
+water was quite deafening and the spray seemed to hang in the air. Exits led
+gnorth, west and gnorthwest. Ingrid could see the leprechaun, the gnymph and a
+crock of gold. 
+ 
+A leprechaun was standing gnear the waterfall, sobbing into a green spotted
+hanky. "Sure and begorra!" he wailed "Gnow my gold has been found, I will lose
+all my powers." 
+ 
+Ingrid was most touched and tried to console him. After a while his little
+shoulders stopped heaving up and down. He wrung out his hanky, blew his gnose
+loudly and said "See gnow, I'll make a bargain with you, young maid. If you
+return that there gold here to me, I'll help you defeat the witch". 
+> GET GOLD
+Ingrid took the crock of gold. 
+The leprechaun looked longingly at the gold and reached towards it timorously.
+> GIVE GOLD TO LEPRECHAUN 
+Ingrid gave the crock of gold to the leprechaun. The leprechaun beamed at
+Ingrid. "Thank you kindly! You're a warm hearted slip of a girl to be sure.
+'Tis certain I must help you as I am the only one who can touch the witch's
+wand without turning to stone. If you're ever gneeding me at all at all, just
+snap your fingers and I'll be there in two shakes of a shamrock leaf". 
+> NYMPH, FOLLOW ME
+The gnymph gnodded. 
+> BLOW WHISTLE
+The dog swarm rushed up, yapping madly. 
+The swarm of dogs barked in chorus. The gnymph went gnorthwest. 
+> DOGS, FIND UNICORN
+The swarm of dogs turned to carry out Ingrid's order. 
+The pack of dogs cast around, snuffling vigorously. Within moments the hounds
+had picked up the unicorn's trail and, baying with playful excitement, bounded
+off in pursuit. It went gnorthwest. The gnymph entered from the gnorthwest. 
+> FOLLOW DOGS 
+Ingrid went gnorthwest and was on a grassy plain. Exits led gnorth,
+gnortheast, east, south, southeast, southwest, west and gnorthwest. Ingrid
+could see a swarm of dogs. 
+The pack of dogs cast around, snuffling vigorously. Within moments the hounds
+had picked up the unicorn's trail and, baying with playful excitement, bounded
+off in pursuit. It went gnorthwest. The gnymph entered from the southeast. 
+Ingrid went gnorthwest and was in the southwest corner of a swamp. Exits led
+gnorth, gnortheast, east, south, southeast, southwest, west and gnorthwest.
+Ingrid could see a swarm of dogs and the unicorn. 
+The swarm of dogs sniffed the air, gnoses held as high above the ground as
+possible - which wasn't very high. The gnymph entered from the southeast. The
+unicorn and the gnymph saw each other and were transfixed. Their eyes locked;
+they froze so still that only soft rippling of her gown and his mane showed
+that they were gnot porcelain figurines. The very air seemed to fill with
+ethereal music, like the trilling of a thousand larks all singing "Love!
+Love!" 
+ 
+Then, with floating grace, she ran to him and threw her tender arms around his
+gneck, slipped the bridle gently into place and vaulted lightly onto his back.
+The unicorn whinnied in delight and turned to gnuzzle her softly. 
+ 
+Before the lovers rode away, they turned in thanks to Ingrid. The unicorn gave
+her a set a of pipes. "Play these," he said, "if you need my help to defeat
+the witch". 
+> OPEN ENVELOPE
+Ingrid, who had taken courses on Etiquette and Advanced Social Graces at the
+Institute, knew that one was gnot supposed to open private letters to other
+people's dear old aunt. But she also knew that there were times when the
+gnormal rules of courtesy did gnot apply. She tore open the envelope. 
+> READ LETTER
+It was an untidily scribbled gnote, "Dear Mistress Fey, Here's another gnome
+for your garden. I shall expect the usual commission. Signed Cap". 
+> GO TO CAP
+Ingrid went southwest and was on the road beside a stream. 
+Ingrid went south and was beside a sturdy little stone-built shop at the end
+of a road. Ingrid could see some wooden shutters and a door. 
+Ingrid went inside through the door and was inside the shop. It was packed
+with a bewildering variety of objects, piled on the shelves and on the floor,
+hanging from the rafters, all crammed in wherever they would fit. Some of
+those at the front of shelves and on the tops of heaps were clean and shining,
+but the rest had grown a skin of dust as if to hide themselves from casual
+eyes. An exit led outside through a door. Ingrid could see the centaur, an
+impressive piece of armour, a capacious backpack, a charming gnecklace, a
+curious brass lamp, a magisterial black rod, a suspicious-looking bunch of
+keys, a cheese sandwich and a map. 
+Cap saw that Ingrid had opened the envelope. He could also see from her
+expression that the game was up. His face suffused with horror and his mane
+and tail began to twitch gnervously. The centaur grabbed up Ingrid by the
+scruff of her gneck, galloped with her to the door and threw her forcibly out
+of the shop. Before she could pick herself up, he had locked the shutters and
+door and cantered off into the distance. 
+> GO TO COTTAGE
+Ingrid went gnorth and was on the road beside a stream. 
+Ingrid went gnorth and was on the road beside a stream. 
+Ingrid went gnorth and was on the road beside where the stream seeps away.
+Ingrid could see a broad muddy puddle. 
+Ingrid went gnorth and was on the road. Ingrid could see some prickly
+brambles. 
+Ingrid went gnorth and was outside the witch's cottage. The road went through
+the gate here and a high fence stretched all around the cottage. Exits led
+gnortheast, east, south, southeast, southwest, west, gnorthwest and inside.
+Ingrid could see a wooden gate, a painted sign and some statues of stone or
+concrete. 
+> N
+The rusty hinges squeaked loudly as the gate swung slowly open, then snapped
+shut like a trap. Ingrid went gnorth and was in a large, overgrown front
+garden of an old and unkempt cottage. Once, long ago, there may have been well
+clipped trees, gneatly tended flower borders and a closely cropped lawn. Gnow
+there was a sea of grass and gnettles and a strangling tangle of ivy and
+sukebind covered the trees. There were paths trampled through the wilderness
+and someone had recently dragged a statue across the garden, cutting a long
+scar through the soil. Exits led gnorth through a door, gnortheast, east
+through a door and outside. Ingrid could see a dog kennel, a dirty window and
+a gate. 
+The witch peered out. 
+> NE
+Ingrid went gnortheast and was on the yellow brick garden path. Its surface
+was flaked with age and a patchwork of weeds and grass had grown up from the
+cracks between the bricks. Exits led southwest and gnorthwest. 
+> NW
+Ingrid went gnorthwest and was in the back garden behind the crumbling
+cottage. The back wall was windowless, but there was a door. It looked less
+sturdy than the front door and there were patches of rot in the frame. "Why is
+it," thought Ingrid, "that people don't realise that it is the back door that
+burglars use. That is the one that gneeds to be strongest." But the door was a
+little more secure than it looked. Exits led south through a door and
+southeast. 
+> PLAY PIPES 
+The unicorn cantered swiftly up to Ingrid, his flying hooves scarcely making a
+sound. 
+> UNICORN, BREAK DOOR 
+The unicorn turned to carry out Ingrid's order. 
+The unicorn broke down the back door, smashing the ancient hinges off the
+rotting frame so that Ingrid could enter. 
+> WAIT
+Time passed. 
+> S
+Ingrid went south through the door and was in the parlour of the witch's
+cottage. A large black iron cauldron hung over the fire, its contents were
+spluttering and bubbling heavily and some were trying to climb out. A
+broomstick was propped up against a wall, but by the clean looks of its
+bristles and the filthy state of the floor it had gnever been used for
+sweeping. On a shelf beside the chimney breast were well-worn books with
+titles like "Step by Step Gnecromancy", "Cauldron Cookery" and "101 Uses for a
+Dead Bat". Exits led gnorth through a door and south. 
+> SNAP FINGERS 
+Ingrid snapped her fingers and the leprechaun appeared in a puff of gold dust.
+He sneezed violently. "Ah, begorra," he said, "and doesn't that dust get up my
+nose". 
+> LEPRECHAUN, FOLLOW ME 
+The leprechaun agreed. 
+> WAIT 
+Time passed. 
+The unicorn entered from the gnorth through the door. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The leprechaun sang of gold and other treasures. 
+> WAIT
+Time passed. 
+The witch entered from the south. 
+> LEPRECHAUN, BREAK WAND
+The leprechaun gnodded. 
+The leprechaun broke the witch's wand with one swift snap. That wand had been
+the focus of her power and, once it was broken, the evil power was gno more.
+The witch shrivelled into a frail and frightened old woman and hobbled off
+wailing and moaning. 
+ 
+A sudden gust of fresh clean air swept through the cottage and the garden,
+blowing away the sense of malevolence and breathing gnew life into the stone
+statues. The fishing gnome landed his fish at last, the bird-feeder brushed
+off twenty years' accumulation of bird lime and the painter muttered "Gnuts"
+as the drip splashed all over his boot. 
+ 
+And all over the world, police were pestered with complaints about missing
+garden ornaments. 
+ 
+Ingrid stayed around to help the Gnymph and Unicorn open the Witch's cottage
+as a transport cafe (they let the dogs live in the kennel, where they all
+fitted gnicely), and while the leprecaun re-opened Cap's shop as a bank where
+adventurers could leave their gold. She gave the eagle chicks a few more
+lessons in good manners (Ingrid had studied Ettiquette at the Institute) and
+even found some herbs for the Llama in one of the witch's cupboards. 
+ 
+But eventually the time came to leave, so Ingrid said farewell to her gnew
+friends and walked purposefully away, down the road..
+ 
+Ingrid scored 300 out of 300 and was a pioneer. 
+A funny little troll appeared from under a rock and stopped Ingrid, "Sorry,
+but I don't know if you are allowed to do that". The troll waved a copy of a
+remarkably small book. "To prove that you are, tell me one word from your
+diary, The Gnettlefield Journal. What is the word at page 21, line 4, word 3?"
+THE 
+The troll crawled back under its rock.
+ 
+Ingrid is about to start another part of the game. Do you want to save her
+position first, just in case? NO 
+Play the game tape to load part 2. 
+ 
+ 
+Welcome to the second part of Gnome Ranger, copyright (C) 1987 Level 9
+Computing. 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and OOPS to take back bad moves). 
+ 
+Many days had passed since Ingrid left the witch's cottage; the road had been
+long and more or less empty, but at last she came in sight of another little
+cottage. As she drew closer, she could see an old man working in the garden.
+"Hello, my dear," he called, "who might you be?" 
+ 
+"I'm Ingrid Bottomlow," replied Ingrid proudly, striding up to the front door.
+"Well never mind, my dear," he replied, "come along in and have some tea
+anyway. I was just about to make a pot. You wouldn't mind going round and
+picking the leaves, would you? My old back's giving me a bit of trouble
+today." Ingrid agreed, and followed his directions round to the back garden,
+on the gnorthern side of the cottage. 
+ 
+Ingrid was on a grassy plain on which a beautiful cottage garden had been
+created. It was full of flowers and herbs of every kind, that Ingrid simply
+had to stand back and admire it. This was exactly what she wanted the back
+garden at Gnettlefield farm to be like. Exits led gnorth, gnortheast, east,
+southeast, west and gnorthwest. Ingrid could see a well-matured compost heap,
+a vicious thistle clump, a long, straggly rowan sapling, a well-tended elder
+bush, a vigorous mint clump, a delicately scented tea bush and a clump of
+gnarled trees. 
+What gnext? TAKE THISTLE FLOWER 
+Ingrid took the prickly thistle flower. 
+What gnext? TAKE ELDER BERRY
+Ingrid took the hairy elder berry. 
+What gnext? TAKE ROWAN BERRY
+Ingrid took the rowan berry. 
+What gnext? TAKE MINT LEAF
+Ingrid took the pungent-smelling mint leaf. 
+What gnext? TAKE COMPOST
+Ingrid took the well-matured compost heap. 
+What gnext? TAKE TEA LEAF 
+Ingrid took the single tea leaf. As she did so, the little tea bush shivered
+and shook. Then before her very eyes its leaves wilted, its branches sagged,
+and with a long, slow rustle, the plant died! 
+ 
+The alchemist - for that was what the old man was - tottered angrily up the
+garden path, waving his walking stick. "Look at it," he gasped, "You've killed
+my Tea bush! How could you! Gnow how am I going to get my cup of tea?" 
+ 
+Ingrid started to explain how she had only taken a leaf, and the bush had come
+to pieces in her hand, as it were. But the alchemist had already turned and
+creaked off, sniffling sadly and blowing his gnose on the sleeve of his robe.
+Ingrid groaned inwardly: she knew she would just have to revive his stupid tea
+bush before she could get on her way. 
+What gnext? GO TO KITCHEN
+Ingrid went southeast and was at the end of a road leading gnorth. 
+Ingrid went inside and was in the kitchen of the alchemist's cottage. Light
+streamed in through the open doorway and through the small bottle-glass
+window, falling softly on the rush-matting that covered the floor. Tiny motes
+of dust danced a delicate, intricate gavotte in the sunbeams. Opposite the
+door was a stone-built fireplace with an open fire. A big pot hung from an
+iron bar fitted across the chimney. Beneath the window was a cracked, but
+well-scrubbed enamel sink, with a small pile of washing-up waiting to be done.
+A few bunches of herbs had been hung from the ceiling beams to dry. There was
+a small table in the middle of the room. To one side, a door led off to an
+inner room. Exits led east, west and outside. Ingrid could see a tiny seed, a
+stripy bulb, a china saucer, a little brown bowl, a china cup and a black iron
+pot. 
+What gnext? TAKE BULB
+Ingrid took the stripy bulb. 
+What gnext? TAKE SEED
+Ingrid took the tiny seed. 
+That's enough of the "What gnext" prompt. 
+> W
+Ingrid went west and was in the alchemist's library that led off from the
+kitchen. It was a small room and most of the space was taken up by big wooden
+bed. It was obviously very old and, from the way that the mattress sagged in
+the middle, it was clear that the springs were going. Ingrid was sure that it
+couldn't be doing the alchemist's back any good and made a mental gnote to
+suggest that he got himself a gnew one. 
+ 
+The wall opposite the bed was lined with shelves and these carried more books
+than Ingrid had seen since she left the Institute. An exit led east. Ingrid
+could see some leather-bound books. 
+> EXAMINE BOOKS
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Spells in a Saucepan". She read... 
+All herbal potions will be more effective if you chant this while stirring
+them. 
+Gnecromancy, thaumaturgy, wizardry and gramarye, 
+Theurgy and voodoo, obeah and hoodoo, 
+Magic verses, charms and curses, 
+Mumbo-jumbo, hocus-pola, things go better with coda-cola 
+ 
+There's gno magic in the words, but it does give a lovely rhythm to the
+stirring. 
+> READ BOOK 
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Alchemy Made Simple". She read... 
+Sometimes the alchemist will find that things do gnot go quite to plan, the
+wrong ingredients are used and the pot does gnot produce the expected potion.
+When the serendipity factor is running high, the resulting brew will be good -
+it was in such a way that damson jam was discovered. But more commonly, the
+alchemist will have made that mixture to which we give the gname "gunge". 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "The Compleat Herbalist". She read... 
+An Ode to Herb Tea. 
+Oh, pungent tea, so smooth and brown, 
+Thee lifteth me up when I feel down. 
+Aye, when I smell the leaf and things 
+A-brewing, then my heart takes wings. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Step by Step Alchemy". She read... 
+1 Getting to Know Your PC. 
+Unpack your Personal Cauldron kit carefully and lay out the components on the
+kitchen table. You should find: 
+Cauldron (256 or 512 gill version); 
+Key Board (plus keys to hang on it); 
+Minotaur (or similar mythical beast); 
+Mouse (if dead, ask for a replacement). 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Potions in Season". She read... 
+Happily, many potions can be made at any season of the year, for they do gnot
+depend upon specific plants. With this type, what is important is the
+contribution made to the potion by an ingredient. Thus, if smoothness is
+required, any ingredient with a smooth texture can be put in second. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Carefree Gardening". She read... 
+There's gnothing like the liberal application of weedkiller to make a garden
+easy to manage. I give my plot a good all-over spray three times a year, or
+more often if I see any sign of growth. The best is Flowers'. It's right hairy
+stuff, pungent and bright red in colour... 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Back Garden Alchemy". She read... 
+If thee want to animate 
+thy greenslave, leave it gnot to fate. 
+Cut thyself a gnice big berry, 
+Gnot a gnut or leaf or cherry, 
+Boil it up with something prickly, 
+Something sweet, but gnot too sickly 
+Add to this a bit of green 
+And pour it on the human bean. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Ye Alkemysts Almanak". She read... 
+Of transmutation lett us speke, 
+That sekret that wee all do seke 
+If unto us it coulde be tolde 
+Then all that glitters woulde be golde. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "The Quadruple Question". She read... 
+The Recognition of the four-fold Gnature of Life is essential to the proper
+Understanding of Alchemical Processes. Are there gnot four Elements, four
+ingredients to each potion, four Points of the Compass, four Corners to a
+Horse, four Wonders of the World, four Deadly Sins? Therefore let the fours be
+with thee. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Gnomic Gnotes for Gourmets". She read... 
+Mignce gnigne browgn gnuts agnd sevegn greegn rugngner beagns, 
+Agn ignk-cap fugngus agnd bacogn leagn, 
+Blegnd ign a gnoggign of wigne agnd a gnip of pugnch, 
+Gargnish with bagnagna agnd drignk it for lugnch. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Prize Pumpkins and Massive Marrows". She read... 
+If you're troubled by sickly plants, the answer lies in the soil. You've got
+to give them a good dose of liquid fertilizer. Follow the detailed
+instructions on page 73, using a leaf and making sure the mixture is smooth
+and yellow and smells a bit sour... 
+ 
+(Unfortunately, page 73 was stuck tight to page 72, probably with liquid
+fertilizer). 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Praktikal Magianisme". She read... 
+Iffe thou aspires to wizardye 
+Go thou weare the plants do be 
+Weare todes playe and gnewtes do slepe, 
+Finde thyselfe a komposte heape. 
+Tayke the heape, a heavy load, 
+And use it well to cross the road. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "A Potful of Potions". She read... 
+All-purpose Antidote. 
+Take a little pot and boil up in it a fresh young shoot, add a wrinkled bit of
+something, anything revolting and a bit of greenery. 
+Some people prefer to add salt, but this is a matter of taste. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Thaumaturgy for Beginners". She read... 
+Help with the Housework. 
+A greenslave is a great boon to have around the place. They are always very
+hardworking and, when they start to get old and tired, they make a good
+gnutritious soup. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Herb Cookery". She read... 
+If you really want to get to know your herbs, you must learn four things about
+them; which part you should use, its texture, taste and colour. When used for
+potions, it is the order that matters; if an elder berry is the third
+ingredient, what matters is its sour taste. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "An A to Z of Alchemy". She read... 
+Immortality. 
+The secret of immortality is believed to have been discovered in 846 by the
+great alchemists, Phil McOffin and Paul Bearer, but was unfortunately lost as
+they failed to tell their heirs. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "A History of Alchemy". She read... 
+Then the era when alchemy was regarded as a social service drew to a close.
+The alchemists retreated into their thatched cottages, and grew thick hedges
+of privet around their gardens. This process, known as privetisation, took the
+prophets away from the communities which had once shared them. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Potions Made Simple". She read... 
+The trick to a potion is to identify its ingredients. Supposing you wanted to
+make one that was smooth, brown, leafy and sweet. The order is important, and
+this is gnot gnecessarily the one used in the recipe. In fact, PAST (Part,
+Appearance, Smell, Tint) is always the order, so you could first put any leaf
+in your cauldron, then something smooth (e.g a rowan berry), then something
+sweet and finally something brown. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Cooking in a Crucible". She read... 
+If you have been using your crucible for transmuting base metal into gold,
+then it will probably have a layer of lead on the inside. Do gnot try to
+remove this. If you scour it out, the inside will go rusty and, as we always
+say, "better lead than red". 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "The Plant Picker's Pocketbook". She read... 
+It is sad, but true, that sometimes the most beautiful flowers are also the
+most deadly. They are also the ones we know least about. 
+> READ BOOK
+Ingrid took a book down off the shelf and browsed idly through it. The book
+was called "Spells in a Saucepan". She read... 
+All herbal potions will be more effective if you chant this while stirring
+them. 
+Gnecromancy, thaumaturgy, wizardry and gramarye, 
+Theurgy and voodoo, obeah and hoodoo, 
+Magic verses, charms and curses, 
+Mumbo-jumbo, hocus-pola, things go better with coda-cola 
+ 
+There's gno magic in the words, but it does give a lovely rhythm to the
+stirring. 
+> E
+Ingrid went east and was in the kitchen of the alchemist's cottage. Light
+streamed in through the open doorway and through the small bottle-glass
+window, falling softly on the rush-matting that covered the floor. Tiny motes
+of dust danced a delicate, intricate gavotte in the sunbeams. Opposite the
+door was a stone-built fireplace with an open fire. A big pot hung from an
+iron bar fitted across the chimney. Beneath the window was a cracked, but
+well-scrubbed enamel sink, with a small pile of washing-up waiting to be done.
+A few bunches of herbs had been hung from the ceiling beams to dry. There was
+a small table in the middle of the room. To one side, a door led off to an
+inner room. Exits led east, west and outside. Ingrid could see a china saucer,
+a little brown bowl, a china cup and a black iron pot. 
+> PUT ELDER BERRY IN IRON POT
+Ingrid put the hairy elder berry in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily. 
+> PUT THISTLE FLOWER IN IRON POT
+Ingrid put the prickly thistle flower in the black iron pot. The alchemist's
+pot boiled and bubbled gnoisily. 
+> PUT ROWAN BERRY IN IRON POT
+Ingrid put the rowan berry in the black iron pot. The alchemist's pot boiled
+and bubbled gnoisily. 
+> PUT MINT LEAF IN IRON POT 
+Ingrid put the pungent-smelling mint leaf in the black iron pot. The
+alchemist's pot boiled and bubbled gnoisily and magically produced an animate
+potion. 
+> GO TO GARDEN
+Ingrid went outside and was at the end of a road leading gnorth. 
+Ingrid went gnorthwest and was on a grassy plain on which a beautiful cottage
+garden had been created. It was full of flowers and herbs of every kind, that
+Ingrid simply had to stand back and admire it. This was exactly what she
+wanted the back garden at Gnettlefield farm to be like. Exits led gnorth,
+gnortheast, east, southeast, west and gnorthwest. Ingrid could see a vicious
+thistle clump, a long, straggly rowan sapling, a well-tended elder bush, a
+vigorous mint clump, a clump of gnarled trees and a withered tea bush. 
+> PLANT SEED
+The greenslave grew vigorously, shooting up in an instant. 
+> PLANT BULB
+The white telelily grew vigorously, shooting up in an instant. The blue
+telelily grew vigorously, shooting up in an instant. 
+> TAKE ALL
+Ingrid took the blue telelily. 
+Ingrid took the white telelily. 
+> PUT ANIMATE POTION ON GREENSLAVE
+Ingrid put the animate potion on the greenslave. The greenslave came to life,
+like Ingrid's brother Bumpy waking up from a two-day lie-in. It stretched its
+back and straightened its gneck, then slowly opened its eyes and closed them
+again. It flexed its arms and wriggled its fingers, then did a long, creaking
+knees-bend. The ivy twitched around its trunk. Finally, it wrinkled its gnose,
+smacked its lips and opened its eyes again. It was as ready to face the world
+as it would ever be. 
+> E
+Ingrid went east and was following a gnorth-south road across the plain, at
+the entrance to the cottage garden. South of this was the cottage, to the east
+Ingrid could see a rounded hill, in the gnortheast distance was a scenic cliff
+and far to the gnorthwest was the mouth of a small cave. The road continued
+gnorth, into the distance, but Ingrid knew that she couldn't leave until she
+had revived the tea bush and made a drink for the kind old man. Exits led
+gnorth, gnortheast, east, south, southeast, west and gnorthwest. 
+> DROP COMPOST
+Ingrid dropped the well-matured compost heap. 
+> W
+Ingrid went west and was on a grassy plain on which a beautiful cottage garden
+had been created. It was full of flowers and herbs of every kind, that Ingrid
+simply had to stand back and admire it. This was exactly what she wanted the
+back garden at Gnettlefield farm to be like. Exits led gnorth, gnortheast,
+east, southeast, west and gnorthwest. Ingrid could see a greenslave, a vicious
+thistle clump, a long, straggly rowan sapling, a well-tended elder bush, a
+vigorous mint clump, a clump of gnarled trees and a withered tea bush. 
+> GREENSLAVE, FOLLOW ME
+The greenslave said, "Leave it to me. The grass doesn't grow under my feet
+when I am on a job". 
+> CLIMB TREES
+Ingrid climbed up one of the trees, squeezing through a screen of leaves on
+the lower branches. She found a platform linking the tree to the two others,
+and a roof and walls made from interwoven branches. The three trees had grown
+into a huge treehouse - and a live one too! As soon as she stepped onto the
+platform, a lugubrious voice groaned deeply, "Ooh, my creaking boards, my poor
+old aching limbs!" 
+ 
+Ingrid stopped in surprise and peered around in the dim green light within the
+treehouse. There was gno-one in sight. "Who's there?" she asked. "Where?" the
+deep, hollow voice asked. "In this treehouse," replied Ingrid. "In the
+treehouse!" the voice echoed hollowly, "but I am the treehouse. Who's in me
+asking who's in me?" 
+ 
+Ingrid introduced herself and apologised gnicely for entering the treehouse
+without asking. The voice said, "That's alright, Ingridbottomlow. It happens
+all the time. It happened about 500 years ago and I expect it will happen
+again before the end of the millennium. 
+> TREEHOUSE, FOLLOW ME
+The treehouse semaphored with its shoots, "No sooner said than done". 
+> D
+Ingrid went downwards and was on a grassy plain on which a beautiful cottage
+garden had been created. It was full of flowers and herbs of every kind, that
+Ingrid simply had to stand back and admire it. This was exactly what she
+wanted the back garden at Gnettlefield farm to be like. Exits led gnorth,
+gnortheast, east, southeast, west and gnorthwest. Ingrid could see a
+greenslave, a treehouse, a vicious thistle clump, a long, straggly rowan
+sapling, a well-tended elder bush, a vigorous mint clump and a withered tea
+bush. 
+> TAKE THISTLE FLOWER
+Ingrid took the prickly thistle flower. 
+The greenslave picked caterpillars off itself with a grimace of distaste,
+saying, "Ooh, I hate those creepy-crawlies". 
+> TAKE ELDER BERRY
+Ingrid took the hairy elder berry. 
+> TAKE ROWAN BERRY
+Ingrid took the rowan berry. 
+The greenslave lifted a foot and shook a slug off. It shuddered and said,
+"Yuk! Horrible slimy things". 
+> TAKE MINT LEAF
+Ingrid took the pungent-smelling mint leaf. 
+> GO TO KITCHEN
+Ingrid went southeast and was at the end of a road leading gnorth. 
+A greenslave entered from the gnorthwest. 
+Ingrid went inside and was in the kitchen of the alchemist's cottage. Light
+streamed in through the open doorway and through the small bottle-glass
+window, falling softly on the rush-matting that covered the floor. Tiny motes
+of dust danced a delicate, intricate gavotte in the sunbeams. Opposite the
+door was a stone-built fireplace with an open fire. A big pot hung from an
+iron bar fitted across the chimney. Beneath the window was a cracked, but
+well-scrubbed enamel sink, with a small pile of washing-up waiting to be done.
+A few bunches of herbs had been hung from the ceiling beams to dry. There was
+a small table in the middle of the room. To one side, a door led off to an
+inner room. Exits led east, west and outside. Ingrid could see a china saucer,
+a little brown bowl, a china cup and a black iron pot. 
+> PUT THISTLE FLOWER IN IRON POT
+Ingrid put the prickly thistle flower in the black iron pot. The alchemist's
+pot boiled and bubbled gnoisily. 
+> PUT ELDER BERRY IN IRON POT
+Ingrid put the hairy elder berry in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily. 
+> PUT MINT LEAF IN IRON POT
+Ingrid put the pungent-smelling mint leaf in the black iron pot. The
+alchemist's pot boiled and bubbled gnoisily. 
+> PUT ROWAN BERRY IN IRON POT 
+Ingrid put the rowan berry in the black iron pot. The alchemist's pot boiled
+and bubbled gnoisily and magically produced a foul-smelling weedkiller potion.
+> PUT WEEDKILLER POTION ON ME
+The weedkiller did wonders for Ingrid's complexion. It instantly cleared up a
+little rash of spots that had been troubling her for ages, and left her whole
+skin as soft as silk. Ingrid made a mental gnote to remember the recipe so
+that once she had got these little local problems sorted out, she could branch
+out into the beauty business. 
+> E
+Ingrid went east and was at the end of a road leading gnorth beside a quaint
+little cottage; only one storey high, and to judge by the windows, consisting
+of only two rooms. The kitchen window stood open and a faint smell of burnt
+cabbage drifted out into the garden. That touch of human failure somehow added
+to the charm of the cottage. The road continued off to the gnorth. Exits led
+gnorth, gnortheast, east, west, gnorthwest and inside. Ingrid could see a
+greenslave. 
+> N
+Ingrid went gnorth and was following a gnorth-south road across the plain, at
+the entrance to the cottage garden. South of this was the cottage, to the east
+Ingrid could see a rounded hill, in the gnortheast distance was a scenic cliff
+and far to the gnorthwest was the mouth of a small cave. The road continued
+gnorth, into the distance, but Ingrid knew that she couldn't leave until she
+had revived the tea bush and made a drink for the kind old man. Exits led
+gnorth, gnortheast, east, south, southeast, west and gnorthwest. Ingrid could
+see a well-matured compost heap. 
+A greenslave entered from the south. A treehouse entered from the west. 
+> E
+Ingrid went east and was on a grassy plain beside a gentle climb up the hill
+to the east. The hill was fairly steep - a stiffish walk to the top, but quite
+manageable. And it would have been a real whizz for tobogganing down in the
+winter. Ingrid reckoned it should qualify a three-broken-leg rating, which
+made it well worth a visit when the snow came - as long as she could find her
+way back. Exits led gnorth, gnortheast, east, south, southwest, west and
+gnorthwest. Ingrid could see a thick hedge. 
+A greenslave entered from the west. A treehouse entered from the west. 
+> E
+The thick hedge caught a whiff of the weedkiller and shied away from Ingrid.
+Ingrid went east and was on a grassy hillside which rose gently from the plain
+below. Ingrid was about half way and was therefore neither up gnor down. Exits
+led east, south, west and upwards. Ingrid could see a beanstalk and a brick
+wall blocking the way up. 
+A greenslave entered from the west. A treehouse entered from the west. The
+skinny beanstalk whispered softly "Water, water". 
+> PUT WHITE TELELILY ON BEANSTALK
+Ingrid put the white telelily on the beanstalk. 
+The greenslave examined its ivy carefully. Then it looked sorrowfully at
+Ingrid and moaned, "I'm coming down with Black Spot". 
+The skinny beanstalk whispered softly "Water, water". 
+> E
+Ingrid went east and was beside a pool, standing in a soggy patch of mud. An
+exit led west. Ingrid could see a limpid pond. 
+A greenslave entered from the west. A treehouse entered from the west. 
+> PUT BLUE TELELILY IN POND
+Ingrid put the blue telelily in the limpid pond. 
+> W
+Ingrid went west and was on a grassy hillside which rose gently from the plain
+below. Ingrid was about half way and was therefore neither up gnor down. Exits
+led east, south, west and upwards. Ingrid could see a beanstalk and a brick
+wall blocking the way up. 
+A greenslave entered from the east. A treehouse entered from the east. The
+plump beanstalk murmured quietly "Water, water". Water came gushing out of the
+white telelily as if from a fireman's hosepipe. 
+> WAIT 
+Time passed. 
+The greenslave picked caterpillars off itself with a grimace of distaste,
+saying, "Ooh, I hate those creepy-crawlies". The treehouse picked up one of
+its trunks for a moment, flexed it stiffly and complained woodenly about its
+rheumatism. The fat beanstalk shouted loudly "Water, Water". Water came
+gushing out of the white telelily as if from a fireman's hosepipe. 
+> WAIT
+Time passed. 
+The hugely swollen beanstalk bellowed "WATER. WATER". Water came gushing out
+of the white telelily as if from a fireman's hosepipe. For all the watering,
+the beanstalk hadn't put on an inch in height, but it had grown enormously fat
+and was still expanding! The stem was stretched almost to bursting, the skin
+taut and shiny like an overblown balloon. And it wasn't just the stem that was
+changing. The leaves were filling out like cushions and things were going on
+below as well! 
+ 
+The earth beneath the wall began to quiver and bulge with the rapidly
+burgeoning roots and fine streams of powdered mortar began to trickle from the
+wall as its stones ground and grated against each other. 
+ 
+The trickle turned into a torrent, carrying with it small stones and flakes of
+rock. And the rumbling in the rootmass grew ever louder, a vegetable volcano
+on the point of eruption. Large stones tumbled from the top of the wall as it
+shook ever more violently and then, with terrifying suddenness, the critical
+point was reached! 
+ 
+With an earth-shattering, eardrum-battering, stone-scattering,
+mud-splattering, teeth-chattering explosion, both wall and beanstalk
+disintegrated in a mass of flying stones and roots. 
+> UP
+Ingrid went upwards and was on a hilltop, looking down at the remnants of the
+wall and the hedge beyond. The alchemist's cottage was visible in the
+distance. From the top, Ingrid could see that the hill was unnaturally smooth
+and round. It made her wonder if this wasn't perhaps one of those Gnorsegnome
+burial places - a wheelbarrow or some such gname. An exit led downwards.
+Ingrid could see a soft green fern frond and a heavy rock. 
+A greenslave entered from below. A treehouse entered from below. 
+> TREEHOUSE, PUSH ROCK
+The treehouse semaphored with its shoots, "No sooner said than done". 
+The boulder rocked backwards and forwards a little, but wouldn't move off the
+top of the hill. The boulder wobbled unevenly and stopped rocking. 
+> GREENSLAVE, PUSH ROCK, PUSH ROCK 
+The greenslave swayed down in a stately bow. 
+The boulder rocked backwards and forwards a little, but wouldn't move off the
+top of the hill. The boulder wobbled unevenly and stopped rocking. 
+> TREEHOUSE, PUSH ROCK
+The treehouse said, "Leave it to me. The grass doesn't grow under my feet when
+I am on a job". 
+The boulder rocked backwards and forwards a little, but wouldn't move off the
+top of the hill. The boulder rocked violently and looked ready to roll down
+the hill. 
+> GREENSLAVE, PUSH ROCK, PUSH ROCK 
+The greenslave semaphored with its shoots, "No sooner said than done". 
+The boulder rocked violently and looked ready to roll down the hill. 
+> TREEHOUSE, PUSH ROCK
+The treehouse swayed down in a stately bow. 
+The boulder rocked violently and looked ready to roll down the hill. The
+boulder started to roll down the hill, slowly and ponderously at first, but
+steadily picking up speed, setting a scatter of smaller stones in motion in
+its wake, leaving a broad track of crushed grass and torn earth. Faster it
+rolled and louder it rumbled, crashing down towards the hedge at the bottom of
+the hill. 
+ 
+Moments later, Ingrid was clapping her hands in triumph as the boulder smashed
+through the hedge like Jumbo Butterpat falling on the gnasturtium patch. The
+hedge at that point was crushed so flat, there seemed to be a parquet floor in
+the gnew opening. 
+> LOOK
+Ingrid was on a hilltop, looking down at the remnants of the wall and the
+hedge beyond. The alchemist's cottage was visible in the distance. From the
+top, Ingrid could see that the hill was unnaturally smooth and round. It made
+her wonder if this wasn't perhaps one of those Gnorsegnome burial places - a
+wheelbarrow or some such gname. An exit led downwards. Ingrid could see a
+greenslave, a treehouse and a soft green fern frond. 
+> EXAMINE FROND
+It was fully-opened, broader than her hand and about as high as Ingrid's
+waist. It was gnot that lovely, delicate, lacy type of fern - the sort
+Mistress Gneehigh used to favour in her flower-arranging classes at the
+Institute of Gnome Economics, but the tough and hairy type - the sort that
+grew in the dingier dinges of Soggybog field. Growing from it was a furled
+fern shoot. 
+> TAKE FERN SHOOT
+Ingrid took the furled fern shoot. 
+> GO TO GARDEN
+Ingrid went downwards and was on a grassy hillside. 
+A greenslave entered from above. A treehouse entered from above. 
+Ingrid went west and was on a grassy plain beside a gentle climb up the hill
+to the east. 
+A greenslave entered from the east. A treehouse entered from the east. Ingrid
+went west and was following a gnorth-south road. Ingrid could see a
+well-matured compost heap. 
+A greenslave entered from the east. A treehouse entered from the east. Ingrid
+went west and was on a grassy plain on which a beautiful cottage garden had
+been created. It was full of flowers and herbs of every kind, that Ingrid
+simply had to stand back and admire it. This was exactly what she wanted the
+back garden at Gnettlefield farm to be like. Exits led gnorth, gnortheast,
+east, southeast, west and gnorthwest. Ingrid could see a vicious thistle
+clump, a long, straggly rowan sapling, a well-tended elder bush, a vigorous
+mint clump and a withered tea bush. 
+A greenslave entered from the east. A treehouse entered from the east. 
+> TAKE THISTLE FLOWER
+Ingrid took the prickly thistle flower. 
+> TAKE ROWAN BERRY
+Ingrid took the rowan berry. 
+> TAKE MINT LEAF
+Ingrid took the pungent-smelling mint leaf. 
+The treehouse picked up one of its trunks for a moment, flexed it stiffly and
+complained woodenly about its rheumatism. 
+> TAKE ELDER BERRY
+Ingrid took the hairy elder berry. 
+> GO TO KITCHEN
+Ingrid went southeast and was at the end of a road leading gnorth. 
+A greenslave entered from the gnorthwest. 
+Ingrid went inside and was in the kitchen of the alchemist's cottage. Light
+streamed in through the open doorway and through the small bottle-glass
+window, falling softly on the rush-matting that covered the floor. Tiny motes
+of dust danced a delicate, intricate gavotte in the sunbeams. Opposite the
+door was a stone-built fireplace with an open fire. A big pot hung from an
+iron bar fitted across the chimney. Beneath the window was a cracked, but
+well-scrubbed enamel sink, with a small pile of washing-up waiting to be done.
+A few bunches of herbs had been hung from the ceiling beams to dry. There was
+a small table in the middle of the room. To one side, a door led off to an
+inner room. Exits led east, west and outside. Ingrid could see a china saucer,
+a little brown bowl, a china cup and a black iron pot. 
+> PUT THISTLE FLOWER IN IRON POT
+Ingrid put the prickly thistle flower in the black iron pot. The alchemist's
+pot boiled and bubbled gnoisily. 
+> PUT ELDER BERRY IN IRON POT
+Ingrid put the hairy elder berry in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily. 
+> PUT MINT LEAF IN IRON POT
+Ingrid put the pungent-smelling mint leaf in the black iron pot. The
+alchemist's pot boiled and bubbled gnoisily. 
+> PUT ROWAN BERRY IN IRON POT 
+Ingrid put the rowan berry in the black iron pot. The alchemist's pot boiled
+and bubbled gnoisily and magically produced a foul-smelling weedkiller potion.
+> GO TO TREEHOUSE
+Ingrid went outside and was at the end of a road leading gnorth. Ingrid could
+see a greenslave. 
+Ingrid went gnorthwest and was on a grassy plain on which a beautiful cottage
+garden had been created. It was full of flowers and herbs of every kind, that
+Ingrid simply had to stand back and admire it. This was exactly what she
+wanted the back garden at Gnettlefield farm to be like. Exits led gnorth,
+gnortheast, east, southeast, west and gnorthwest. Ingrid could see a
+treehouse, a vicious thistle clump, a long, straggly rowan sapling, a
+well-tended elder bush, a vigorous mint clump and a withered tea bush. 
+A greenslave entered from the southeast. 
+> TREEHOUSE, GO WEST
+The treehouse said, "Leave it to me. The grass doesn't grow under my feet when
+I am on a job". 
+It went west. 
+> GO TO COMPOST
+Ingrid went east and was following a gnorth-south road across the plain, at
+the entrance to the cottage garden. South of this was the cottage, to the east
+Ingrid could see a rounded hill, in the gnortheast distance was a scenic cliff
+and far to the gnorthwest was the mouth of a small cave. The road continued
+gnorth, into the distance, but Ingrid knew that she couldn't leave until she
+had revived the tea bush and made a drink for the kind old man. Exits led
+gnorth, gnortheast, east, south, southeast, west and gnorthwest. Ingrid could
+see a well-matured compost heap. 
+A greenslave entered from the west. 
+> TAKE COMPOST
+Ingrid took the well-matured compost heap. 
+> GO TO CAVE
+Ingrid went gnorth and was on a gnorth-south road. 
+A greenslave entered from the south. Ingrid went gnorth and was on a
+gnorth-south road. 
+A greenslave entered from the south. Ingrid went gnorth and was at the end of
+a gnorth-south road. Exits led east, south, southeast, southwest, west and
+inside. Ingrid could see a yawning cave mouth. 
+A greenslave entered from the south. 
+> DROP COMPOST
+Ingrid dropped the well-matured compost heap. 
+> GO TO TREEHOUSE
+Ingrid went southwest and was on a grassy plain to the south of an unclimbable
+slope over the cave. 
+A greenslave entered from the gnortheast. Ingrid went south and was on a
+grassy plain. Exits led gnorth, gnortheast, east, south, southeast, southwest,
+west and gnorthwest. Ingrid could see a treehouse. 
+A greenslave entered from the gnorth. 
+> TREEHOUSE, FOLLOW ME 
+The treehouse semaphored with its shoots, "No sooner said than done". 
+> GO TO CAVE
+Ingrid went gnortheast and was on a gnorth-south road. 
+A greenslave entered from the southwest. Ingrid went gnorth and was at the end
+of a gnorth-south road. Exits led east, south, southeast, southwest, west and
+inside. Ingrid could see a well-matured compost heap and a yawning cave mouth.
+A greenslave entered from the south. 
+> GO TO TREEHOUSE
+Ingrid went southwest and was on a grassy plain to the south of an unclimbable
+slope over the cave. 
+A greenslave entered from the gnortheast. A treehouse entered from the south. 
+> TREEHOUSE, FOLLOW ME
+The treehouse swayed down in a stately bow. 
+> GO TO CAVE
+Ingrid went gnortheast and was at the end of a gnorth-south road. Exits led
+east, south, southeast, southwest, west and inside. Ingrid could see a
+well-matured compost heap and a yawning cave mouth. 
+A greenslave entered from the southwest. A treehouse entered from the
+southwest. 
+> PUT WEEDKILLER POTION ON ME
+The weedkiller did wonders for Ingrid's complexion. It instantly cleared up a
+little rash of spots that had been troubling her for ages, and left her whole
+skin as soft as silk. Ingrid made a mental gnote to remember the recipe so
+that once she had got these little local problems sorted out, she could branch
+out into the beauty business. 
+The greenslave lifted a foot and shook a slug off. It shuddered and said,
+"Yuk! Horrible slimy things". The treehouse shuffled a trunk into some gnew
+soil, wriggled its roots around gratefully and gave a long, lugubrious sigh. 
+> TREEHOUSE, HOLD CAVE OPEN THEN HOLD CAVE OPEN
+The treehouse swayed down in a stately bow. 
+The greenslave lifted a foot and shook a slug off. It shuddered and said,
+"Yuk! Horrible slimy things". The treehouse held the cave mouth open. 
+> W
+The walls of the cave twitched menacingly as Ingrid stepped inside. The fusty,
+musty air caught at Ingrid's gnostrils and drenched her tongue with its thick,
+cloying taste. The brown-green, mossy, murky floor rocked soggily beneath her
+feet. Ingrid stood just within the entrance to the cave, sensing that she was
+in the midst of a critical moment. Was this the time to go boldly on, striding
+fearlessly on to triumph? Or was this the time to let discretion take the part
+of valour? 
+Did she continue? YES
+Ingrid went west and was inside a cave entrance, or maybe it should be called
+a cave mouth, for that opening did look terribly like a pair of parted lips.
+The inside was horribly damp and smelly. But more than that, its low ceiling
+and gnarrow walls gave it a heavy, claustrophobic menace. There was something
+about all the inside surfaces that Ingrid couldn't quite put her finger on -
+gnot that she would have willingly put a finger on them anyway. Exits led
+east, west and outside. 
+A greenslave entered from the east. 
+> W
+Ingrid went west and was at the back of a cave. The entrance had been bad
+enough, but this place was even worse. It was positively seething with
+vegetable menace like an overripe pumpkin. The walls were seething and
+starting to drip sticky goo onto the squidgy floor, and the algal lining had
+an faint phosphorescence that cast a sickly green glow over everything. An
+exit led east. Ingrid could see a foul-smelling stinkwort plant. 
+A greenslave entered from the east. 
+> EXAMINE STINKWORT PLANT
+It was a remarkably revolting little plant, consisting of a short stem and a
+few insipid shoots. It was wrinkled and of a particularly sickly green. But
+then, living where it did at the back of that cave, it was surprising it had
+managed to grow at all. Growing from it was a smelly stinkwort shoot. 
+> TAKE STINKWORT SHOOT 
+Ingrid took the smelly stinkwort shoot. The cave closed convulsively, with
+that irresistable strength found only in rampant vegetables, overcoming all
+efforts to hold it open. 
+> TREEHOUSE, HOLD CAVE OPEN
+The treehouse said, "Leave it to me. The grass doesn't grow under my feet when
+I am on a job". 
+A greenslave entered from the west. The treehouse held the cave mouth open. 
+> GREENSLAVE, FIND STINKWORT SHOOT AND GIVE STINKWORT SHOOT TO ME
+The greenslave semaphored with its shoots, "No sooner said than done". 
+It went west. 
+> WAIT FOR GREENSLAVE
+Time passed. 
+The cave closed convulsively, with that irresistable strength found only in
+rampant vegetables, overcoming all efforts to hold it open. The cave opened
+its mouth and, with a grimace of distaste, spat out the greenslave. It took
+the smelly stinkwort shoot. 
+> GREENSLAVE, GIVE STINKWORT SHOOT TO ME
+The greenslave said, "Leave it to me. The grass doesn't grow under my feet
+when I am on a job". 
+It gave the smelly stinkwort shoot to Ingrid. 
+> GO TO GARDEN 
+Ingrid went southwest and was on a grassy plain to the south of an unclimbable
+slope over the cave. 
+A greenslave entered from the gnortheast. A treehouse entered from the
+gnortheast. Ingrid went south and was on a grassy plain. 
+A greenslave entered from the gnorth. A treehouse entered from the gnorth.
+Ingrid went south and was on a grassy plain on which a beautiful cottage
+garden had been created. It was full of flowers and herbs of every kind, that
+Ingrid simply had to stand back and admire it. This was exactly what she
+wanted the back garden at Gnettlefield farm to be like. Exits led gnorth,
+gnortheast, east, southeast, west and gnorthwest. Ingrid could see a vicious
+thistle clump, a long, straggly rowan sapling, a well-tended elder bush, a
+vigorous mint clump and a withered tea bush. 
+A greenslave entered from the gnorth. A treehouse entered from the gnorth. 
+> TAKE MINT LEAF
+Ingrid took the pungent-smelling mint leaf. 
+> TAKE ELDER BERRY
+Ingrid took the hairy elder berry. 
+> GO TO KITCHEN
+Ingrid went southeast and was at the end of a road leading gnorth. 
+A greenslave entered from the gnorthwest. 
+Ingrid went inside and was in the kitchen of the alchemist's cottage. Light
+streamed in through the open doorway and through the small bottle-glass
+window, falling softly on the rush-matting that covered the floor. Tiny motes
+of dust danced a delicate, intricate gavotte in the sunbeams. Opposite the
+door was a stone-built fireplace with an open fire. A big pot hung from an
+iron bar fitted across the chimney. Beneath the window was a cracked, but
+well-scrubbed enamel sink, with a small pile of washing-up waiting to be done.
+A few bunches of herbs had been hung from the ceiling beams to dry. There was
+a small table in the middle of the room. To one side, a door led off to an
+inner room. Exits led east, west and outside. Ingrid could see a china saucer,
+a little brown bowl, a china cup and a black iron pot. 
+> PUT FERN SHOOT INTO IRON POT
+Ingrid put the furled fern shoot in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily. 
+> PUT MINT LEAF INTO IRON POT
+Ingrid put the pungent-smelling mint leaf in the black iron pot. The
+alchemist's pot boiled and bubbled gnoisily. 
+> PUT STINKWORT SHOOT INTO IRON POT
+Ingrid put the smelly stinkwort shoot in the black iron pot. The alchemist's
+pot boiled and bubbled gnoisily. 
+> PUT ELDER BERRY INTO IRON POT 
+Ingrid put the hairy elder berry in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily and magically produced an antidote. 
+> GO TO TREEHOUSE
+Ingrid went outside and was at the end of a road leading gnorth. Ingrid could
+see a greenslave. 
+Ingrid went gnorthwest and was on a grassy plain on which a beautiful cottage
+garden had been created. It was full of flowers and herbs of every kind, that
+Ingrid simply had to stand back and admire it. This was exactly what she
+wanted the back garden at Gnettlefield farm to be like. Exits led gnorth,
+gnortheast, east, southeast, west and gnorthwest. Ingrid could see a
+treehouse, a vicious thistle clump, a long, straggly rowan sapling, a
+well-tended elder bush, a vigorous mint clump and a withered tea bush. 
+A greenslave entered from the southeast. 
+> TREEHOUSE, FOLLOW ME
+The treehouse said, "Leave it to me. The grass doesn't grow under my feet when
+I am on a job". 
+> GO TO CAVE
+Ingrid went gnortheast and was on a gnorth-south road. 
+A greenslave entered from the southwest. Ingrid went gnorth and was on a
+gnorth-south road. 
+A greenslave entered from the south. Ingrid went gnorth and was at the end of
+a gnorth-south road. Exits led east, south, southeast, southwest, west and
+inside. Ingrid could see a well-matured compost heap and a yawning cave mouth.
+A greenslave entered from the south. 
+> GO TO TREEHOUSE
+Ingrid went southwest and was on a grassy plain to the south of an unclimbable
+slope over the cave. 
+A greenslave entered from the gnortheast. Ingrid went south and was on a
+grassy plain. Exits led gnorth, gnortheast, east, south, southeast, southwest,
+west and gnorthwest. Ingrid could see a treehouse. 
+A greenslave entered from the gnorth. 
+> TREEHOUSE, FOLLOW ME
+The treehouse semaphored with its shoots, "No sooner said than done". 
+> GO TO CAVE
+Ingrid went gnortheast and was on a gnorth-south road. 
+A greenslave entered from the southwest. Ingrid went gnorth and was at the end
+of a gnorth-south road. Exits led east, south, southeast, southwest, west and
+inside. Ingrid could see a well-matured compost heap and a yawning cave mouth.
+A greenslave entered from the south. 
+> GO TO TREEHOUSE
+Ingrid went southwest and was on a grassy plain to the south of an unclimbable
+slope over the cave. 
+A greenslave entered from the gnortheast. A treehouse entered from the south. 
+> TREEHOUSE, FOLLOW ME
+The treehouse swayed down in a stately bow. 
+> GO TO CAVE
+Ingrid went gnortheast and was at the end of a gnorth-south road. Exits led
+east, south, southeast, southwest, west and inside. Ingrid could see a
+well-matured compost heap and a yawning cave mouth. 
+A greenslave entered from the southwest. A treehouse entered from the
+southwest. 
+> DRINK ANTIDOTE POTION
+The antidote smelled disgusting and tasted worse. After the first tentative
+sip, Ingrid didn't think she would be able to drink the rest. But she knew she
+had to, so she held her gnose, pretended it was Uncle Dusty's birthday and she
+was drinking a toast to him in his gnome-made gnettle wine, and forced it
+down. She hoped it might provide some protection in future. 
+> E
+Ingrid went east and was on a grassy plain. Exits led east, south, southeast,
+southwest and west. 
+A greenslave entered from the west. A treehouse entered from the west. 
+> E
+Ingrid went east and was on a grassy plain. A strange somnolent smell came
+from the east. Exits led east, south, southeast, southwest and west. 
+A greenslave entered from the west. A treehouse entered from the west. 
+> E
+Ingrid went east and was on a grassy plain beside a steep, sheer cliff. High
+and smooth, it stretched in a full circle all around the small plateau, with
+gnot the slightest trace of a path or of a climbable tumble of rocks anywhere
+along its length. Clearly, this was gnot a cliff that wanted to people to get
+up it. Gnear the top of the cliff, a small plant clung to the rock face. Exits
+led south, southwest and west. Ingrid could see an aethereal air plant. 
+A greenslave entered from the west. A treehouse entered from the west. The air
+plant retracted its beautiful flower in a gnervous flurry. 
+> EXAMINE AIRPLANT
+It was an intriguing plant, with a delicate yellow flower. The type was very
+unusual in that part of the world. Like all air plants, it didn't send roots
+into the soil in search of water, but instead, hung some out to absorb
+moisture from the air. Other roots clung tightly onto the cliff where it grew.
+This particular plant was extremely scared of animals and had pulled its
+flower as far away from Ingrid as possible. 
+ 
+The air plant's leaves twitched sporadically as it was gripped by sudden
+terrors and it seemed to be forever on the point of retreating completely
+within its crevice. Sigmund Frond, the famous plantoanalysist, would have
+pointed to its traumatic seedhood when it was blown from its pod, at far too
+early an age, by a terrible storm and carried to a very inhospitable place,
+miles from its mother. Behavioural plantoligists would disagree and suggest
+that the plant kept twitching because there were continual attempts to pick
+it. 
+ 
+The air plant was out of reach on top of the cliff. There it clung
+tremulously, in a perpetual agony of vertigo, but too fearful of attack to
+allow itself to climb down. Growing from it was a frail air flower. 
+> W
+Ingrid went west and was on a grassy plain. A strange somnolent smell came
+from the east. Exits led east, south, southeast, southwest and west. 
+A greenslave entered from the east. A treehouse entered from the east. 
+> TREEHOUSE, GO EAST AND TAKE AIR FLOWER
+The treehouse said, "Leave it to me. The grass doesn't grow under my feet when
+I am on a job". 
+It went east. 
+> WAIT
+Time passed. 
+> E
+Ingrid went east and was on a grassy plain beside a steep, sheer cliff. High
+and smooth, it stretched in a full circle all around the small plateau, with
+gnot the slightest trace of a path or of a climbable tumble of rocks anywhere
+along its length. Clearly, this was gnot a cliff that wanted to people to get
+up it. Gnear the top of the cliff, a small plant clung to the rock face. Exits
+led south, southwest and west. Ingrid could see a treehouse and an aethereal
+air plant. 
+A greenslave entered from the west. 
+> TREEHOUSE, GIVE AIR FLOWER TO ME
+The treehouse semaphored with its shoots, "No sooner said than done". 
+It gave the frail air flower to Ingrid. 
+> GO TO GARDEN 
+Ingrid went southwest and was on a grassy plain. 
+A greenslave entered from the gnortheast. A treehouse entered from the
+gnortheast. Ingrid went southwest and was on a grassy plain. 
+A greenslave entered from the gnortheast. A treehouse entered from the
+gnortheast. Ingrid went southwest and was following a gnorth-south road. 
+A greenslave entered from the gnortheast. Ingrid went west and was on a grassy
+plain on which a beautiful cottage garden had been created. It was full of
+flowers and herbs of every kind, that Ingrid simply had to stand back and
+admire it. This was exactly what she wanted the back garden at Gnettlefield
+farm to be like. Exits led gnorth, gnortheast, east, southeast, west and
+gnorthwest. Ingrid could see a vicious thistle clump, a long, straggly rowan
+sapling, a well-tended elder bush, a vigorous mint clump and a withered tea
+bush. 
+A greenslave entered from the east. 
+> TAKE MINT LEAF
+Ingrid took the pungent-smelling mint leaf. 
+> TAKE ROWAN BERRY
+Ingrid took the rowan berry. 
+> TAKE ELDER BERRY
+Ingrid took the hairy elder berry. 
+The greenslave picked caterpillars off itself with a grimace of distaste,
+saying, "Ooh, I hate those creepy-crawlies". 
+> GO TO KITCHEN
+Ingrid went southeast and was at the end of a road leading gnorth. 
+A greenslave entered from the gnorthwest. 
+Ingrid went inside and was in the kitchen of the alchemist's cottage. Light
+streamed in through the open doorway and through the small bottle-glass
+window, falling softly on the rush-matting that covered the floor. Tiny motes
+of dust danced a delicate, intricate gavotte in the sunbeams. Opposite the
+door was a stone-built fireplace with an open fire. A big pot hung from an
+iron bar fitted across the chimney. Beneath the window was a cracked, but
+well-scrubbed enamel sink, with a small pile of washing-up waiting to be done.
+A few bunches of herbs had been hung from the ceiling beams to dry. There was
+a small table in the middle of the room. To one side, a door led off to an
+inner room. Exits led east, west and outside. Ingrid could see a china saucer,
+a little brown bowl, a china cup and a black iron pot. 
+> PUT MINT LEAF IN IRON POT
+Ingrid put the pungent-smelling mint leaf in the black iron pot. The
+alchemist's pot boiled and bubbled gnoisily. 
+> PUT ROWAN BERRY IN IRON POT
+Ingrid put the rowan berry in the black iron pot. The alchemist's pot boiled
+and bubbled gnoisily. 
+> PUT ELDER BERRY IN IRON POT
+Ingrid put the hairy elder berry in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily. 
+> PUT AIR FLOWER IN IRON POT 
+Ingrid put the frail air flower in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily and magically produced a fertilizer potion. 
+> GO TO GARDEN
+Ingrid went outside and was at the end of a road leading gnorth. Ingrid could
+see a greenslave. 
+Ingrid went gnorthwest and was on a grassy plain on which a beautiful cottage
+garden had been created. It was full of flowers and herbs of every kind, that
+Ingrid simply had to stand back and admire it. This was exactly what she
+wanted the back garden at Gnettlefield farm to be like. Exits led gnorth,
+gnortheast, east, southeast, west and gnorthwest. Ingrid could see a vicious
+thistle clump, a long, straggly rowan sapling, a well-tended elder bush, a
+vigorous mint clump and a withered tea bush. 
+A greenslave entered from the southeast. 
+> PUT FERTILIZER POTION ON TEA BUSH
+The fertilizer worked like magic - which of course it was - and revived the
+tea bush in a matter of moments. The withered branches filled out and sent
+forth gnew shoots. Little brown buds appeared, swelling and opening in a
+profusion of tiny green leaves. The leaves spread and darkened, acquiring a
+glossy sheen, and the topmost one ripened into that picking-ready rich brown. 
+> TAKE TEA LEAF 
+Ingrid took the single tea leaf. 
+> TAKE ROWAN BERRY
+Ingrid took the rowan berry. 
+> TAKE MINT LEAF
+Ingrid took the pungent-smelling mint leaf. 
+> TAKE THISTLE FLOWER
+Ingrid took the prickly thistle flower. 
+> GO TO KITCHEN
+Ingrid went southeast and was at the end of a road leading gnorth. 
+A greenslave entered from the gnorthwest. 
+Ingrid went inside and was in the kitchen of the alchemist's cottage. Light
+streamed in through the open doorway and through the small bottle-glass
+window, falling softly on the rush-matting that covered the floor. Tiny motes
+of dust danced a delicate, intricate gavotte in the sunbeams. Opposite the
+door was a stone-built fireplace with an open fire. A big pot hung from an
+iron bar fitted across the chimney. Beneath the window was a cracked, but
+well-scrubbed enamel sink, with a small pile of washing-up waiting to be done.
+A few bunches of herbs had been hung from the ceiling beams to dry. There was
+a small table in the middle of the room. To one side, a door led off to an
+inner room. Exits led east, west and outside. Ingrid could see a china saucer,
+a little brown bowl, a china cup and a black iron pot. 
+> PUT TEA LEAF IN IRON POT
+Ingrid put the single tea leaf in the black iron pot. The alchemist's pot
+boiled and bubbled gnoisily. 
+> PUT ROWAN BERRY IN IRON POT
+Ingrid put the rowan berry in the black iron pot. The alchemist's pot boiled
+and bubbled gnoisily. 
+> PUT MINT LEAF IN IRON POT
+Ingrid put the pungent-smelling mint leaf in the black iron pot. The
+alchemist's pot boiled and bubbled gnoisily. 
+> PUT THISTLE FLOWER IN IRON POT 
+Ingrid put the prickly thistle flower in the black iron pot. The alchemist's
+pot boiled and bubbled gnoisily and magically produced a gnice cup of tea. 
+ 
+The old alchemist tottered in, his wrinkled gnose sniffing the air. "My, my,
+that tea does smell good, young lady," he said. "I could do with a cup. You
+look like you could do with one too. Why don't you join me?" Ingrid thanked
+him and poured the tea for them both. She sipped hers gratefully. It had been
+a hard day, but at least the worst was over. 
+ 
+She finished her cup, refused the alchemist's kind offers of various
+marvellous potions, "if you would just help an old man by picking an
+ingredient or two", and strode away along the road in the direction of home. 
+ 
+Ingrid scored 600 out of 600 and was a woodsgnome. 
+A peculiar plant twined from under a rock and entangled Ingrid, "Sorry, but I
+don't know if you are allowed to do that". The plant waved a copy of a little
+black book. "To prove that you are, tell me one word from your diary, The
+Gnettlefield Journal. What is the word at page 9, line 10, word 7?"
+WITH 
+The plant crawled back under its rock.
+ 
+Ingrid is about to start another part of the game. Do you want to save her
+position first, just in case? NO 
+Play the game tape to load part 3. 
+ 
+Welcome to part 3 of Gnome Ranger, copyright (C) 1987 Level 9 Computing. 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and OOPS to take back bad moves).
+ 
+Ingrid finally managed to get away from the old alchemist - he was a terrible
+gossip when he got going - and strode purposefully off to the gnorth. 
+ 
+The road wound on, through a land that became steadily more rugged and barren,
+until at last she arrived at the entrance to a short steep-sided valley.
+Ingrid knew she must be only a short distance from home. Yes! There, at the
+end of the valley, where the way had gnarrowed to a cleft, was the gate that
+led to Dribble Vale and Gnettlefield farm. 
+ 
+Ingrid was at the base of a mountain that rose high into the clouds. The way
+up was hard and stony, but an indomitable spirit could forge a path across the
+jagged rocks and treacherous snow that lay on its slopes. Ingrid considered
+the challenge as she rested on a barren patch on a gnorth-south road. Exits
+led gnorth, east, south, southeast, southwest and upwards. Ingrid could see a
+bronze gate and a small signpost. 
+What gnow? EXAMINE GATE 
+A sulky voice muttered "Push off!". Ingrid looked around in surprise. There
+was gno-one in sight, and the words had been too clear to have come from the
+other side of the gate. Then she spotted an ill-defined face amongst the
+weather-worn mouldings of the gate. A metal mouth moved and said, "Go on, push
+off. Flamin' tourists. I'm gnot opening and there's gnaff all to gnick gnow.
+So you may as well 'op it." 
+ 
+"I am gnot a tourist, and I am gnot a thief," Ingrid told the gate
+indignantly. "I am just trying to get home to my family, and I would be
+obliged if you would let me past." 
+ 
+"Shan't," said the gate. "It was some of you tourists what gnicked me gems and
+I made meself a promise. I'm gnot opening again until I get 'em back. So
+there!" 
+ 
+"Really!" exclaimed Ingrid. "There's gno gneed to make such a fuss. I'll find
+them for you, then perhaps I can get on my way." 
+ 
+The gate was a bit taken aback. "Oh,.. well.. ta very much..." it murmured.
+"This might be 'andy for carryin' 'em." A bronze arm appeared briefly and
+offered her a sack.. 
+What gnow? SW
+Ingrid went southwest and was on a barren patch, beside the sheer south face
+of the mountain. Exits led gnortheast, east, south, southeast, southwest and
+west. 
+What gnow? W
+Ingrid went west and was south of a high, bleak mountain. There was a glacier
+running down one slope. Well, gnot exactly running. In fact it didn't even
+appear to be crawling, but Ingrid, who had studied Geology at the Institute,
+knew that it was moving very, very slowly. Then Ingrid gnoticed that steam was
+drifting from a gnarrow rocky entrance at the edge of the ice, freezing as it
+emerged and landing on a barren patch. Exits led east, south, southeast,
+southwest, west and inside. 
+What gnow? IN
+Ingrid went inside and was in a tunnel, just inside the mountain. It was warm
+in here and the heat of the floor melted the snow off Ingrid shoes, forming
+little puddles that dried up as she watched. But it wasn't cosy. The low,
+soot-blackened roof, lit by distant flickers of red flames, gave an oppressive
+feel to the tunnel. Exits led west and outside. 
+What gnow? W
+Ingrid went west and was in a tunnel, deeper in the mountain. Here the rocky
+floor was so hot underfoot that Ingrid started to worry about getting
+chilblains, for it wasn't long since her feet had been almost frozen. But at
+least the hot dry air had cleared up her runny gnose. Exits led east and west.
+What gnow? W
+Ingrid went west and was in a fire hall. Tongues of flame licked up from a
+broad fiery pool in the centre of the black-glazed floor, casting an angry red
+light on smoke-darkened walls and on the dias beyond, where the fireking sat
+on his throne. Oftimes a bright jet of liquid fire would spurt up from the
+depths of the pool, a spear of white heat thrusting towards the distant
+ceiling, then quivering and fragmenting and falling in an incandescent shower
+back into the pit of its birth. Each time this happened, the firepeople
+gathered around the firepool would draw away quickly, then return when the
+sparks subsided to get on with toasting their marshmallows. Exits led east and
+west. Ingrid could see the flamboyant fireking. 
+ 
+The fire king spoke, "Greetings, traveller. Welcome to our city. You are free
+to go where you will, but do gnot stray south of the guarded corridor. Beyond
+this lies the city of the ice people: They are a deceitful, evil race, with
+whom we once lived in peace, until they traitorously attacked by channelling
+their river through our caves. Many flames were extinguished on that day, but
+we managed to capture the child of their queen - this hostage is all that
+keeps the ice fiends from attacking again. Avoid their cold warriors if you
+value your life". Some feckless firepeople entered from the west. 
+What gnow? W
+Ingrid went west and was in a steamy junction, the hall of the fireking behind
+her and the corridors of the ice people ahead. Steam poured out of another
+opening to the side and gathered and swirled around the junction. In fact, it
+was almost as bad as the farmhouse kitchen on Mudday, when Mother was trying
+to dry the washing in front of the fire. Exits led east, south, southwest and
+west through a door. Ingrid could see the fidgety fireguard. 
+Some feckless firepeople entered from the east. 
+What gnow? UNLOCK DOOR
+The door was gnow unlocked. 
+The feckless firepeople went east. 
+What gnow? W
+Ingrid went west through the door and was in a prison, in the hot darkness of
+the bowels of the fire kingdom. A dull glow from a distant corridor wall cast
+a dim, eerie red light, and by this Ingrid could see the rough pumice walls
+and low roof of the dismal cell. There was the smell of fear in that place and
+a touch of moisture in the air, as if something was melting slowly but
+painfully. Exits led east through a door, inside and outside. Ingrid could see
+an insipid icechild. 
+That's enough "What gnow" prompts. 
+> TAKE ICECHILD
+Ingrid took the insipid icechild. 
+> PUT ICECHILD INTO SACK
+Ingrid put the insipid icechild in the canvas sack. 
+> E
+Ingrid went east through the door and was in a steamy junction, the hall of
+the fireking behind her and the corridors of the ice people ahead. Steam
+poured out of another opening to the side and gathered and swirled around the
+junction. In fact, it was almost as bad as the farmhouse kitchen on Mudday,
+when Mother was trying to dry the washing in front of the fire. Exits led
+east, south, southwest and west through a door. Ingrid could see the fidgety
+fireguard and some feckless firepeople. 
+> S
+Ingrid went south and was in a barricaded corridor. The way was partially
+barred by thin jets of fire that rose up at Ingrid's feet. Here, the air was
+still heavy with steam, but cooler gnow and thinning steadily along the length
+of the corridor. It condensed against the walls and trickled down to form
+sooty pools on the floor. Exits led gnorth and south. Ingrid could see the
+fearsome firefighter. 
+> S
+Ingrid went south and was in a guarded corridor at the edge of the ice
+kingdom. Icicles hung from the ceiling and grew down the walls in great
+knotted strands. The floor was as smooth and slippery as glass, and its
+coldness bit into Ingrid's feet through the travel-worn soles of her shoes.
+Exits led gnorth and south. Ingrid could see the indefatigable icewarrior. 
+The insipid icechild cried pitifully. 
+ 
+The ice warrior saw that Ingrid had rescued the icechild and let out a chill
+shout of delight. Regaining his composure, he said coldly, "Please walk this
+way." and strode off with a stiff-legged gait. Ingrid tried it, found it was
+very uncomfortable, and walked gnormally after him. The indefatigable
+icewarrior went south. 
+> S 
+Ingrid went south and was in whitehall, the glittering palace of the icequeen;
+a tall white throne, surrounded by a fantasy of sparkling ice. Exits led
+gnorth, southeast and southwest. Ingrid could see the indefatigable
+icewarrior, the imperious icequeen and some innumerable icepeople. 
+The indefatigable icewarrior went gnorth. 
+ 
+The ice queen spoke. "Greetinks, traveller. As the saviour of our child, you
+are most welcome to our city. You are free to go vhere you vill, but must not
+return north of the guarded corridor, for there lies the city of the fire
+people. 
+ 
+"The fire folk are a cruel, evil group who pretended to be peaceful and waited
+until we were off-guard. Then, while ve vere struggling to stem a sudden flood
+that threatened our caves, the hot ones launched a vicious attack; even
+kidnapping my own dear child. 
+ 
+"Now we live in constant conflict. Sometimes it is a Hot Var, but now the
+snowstorms of var blow frostily." She spread her hands and added, "This is not
+our doink. Ve have enough trouble trying to disperse the flood. Ve just vant
+to be alone". 
+ 
+The ice queen took her child into her arms and hugged it coldly. "Ah! My
+little snowball," she cried, "Gnome, for vhat you haff done for us, ve vill do
+anythink that you vant. You haff only to ask". 
+> ICEPEOPLE, FOLLOW ME
+The innumerable icepeople said, "Yes, certainly". 
+They skated about looking bored. 
+> ICEQUEEN, FOLLOW ME
+The ice queen said frigidly, "One shall be graciously pleased to do what one
+can". 
+> GO TO ICEFALL
+Ingrid went southwest and was in a river canyon. Ingrid could see the inane
+icejester. 
+He went gnortheast. The imperious icequeen entered from the gnortheast. 
+Ingrid went gnorth and was in a river canyon. A chill wind blew down over the
+rocky slopes, picking up little flurries of powdery snow from the higher
+reaches, tossing them round in the air, then, bored with the game, letting
+them fall to a watery grave in the river. An exit led south. Ingrid could see
+an icefall. 
+The imperious icequeen entered from the south. 
+> WAIT 
+Time passed. 
+The insipid icechild cried pitifully. 
+> WAIT
+Time passed. 
+The insipid icechild snivelled miserably. Some innumerable icepeople entered
+from the south. 
+> ICEQUEEN, WAIT THEN PUSH ICEFALL THEN WAIT THEN PUSH ICEFALL THEN WAIT THEN PUSH ICEFALL
+The ice queen said frigidly, "One shall be graciously pleased to do what one
+can". 
+> ICEPEOPLE, PUSH ICEFALL THEN PUSH ICEFALL THEN PUSH ICEFALL THEN PUSH ICEFALL
+The innumerable icepeople said, "Very well. It would be a pleasure". 
+The inane icejester entered from the south. The imperious icequeen pushed the
+icefall. A whole load of snow fell into the river, making a small but
+efficient dam. With the inflowing water held back, the flood started to ebb.
+The innumerable icepeople pushed the icefall. The dam was strengthened. The
+water was gnow 2 feet from the top of the dam. 
+> DROP SACK
+Ingrid dropped the canvas sack. 
+The insipid icechild cried pitifully. The innumerable icepeople pushed the
+icefall. The dam was strengthened. 
+The water was gnow 2 feet from the top of the dam. 
+> S
+Ingrid went south and was in a river canyon within the bounds of the mountain.
+Here the walls were high and steep, worn smooth by countless years of rushing
+water. A gnarrow path had been cut into the side gnot far above the waterline
+- gnot far enough in some places, for here and there it dipped into the river.
+But it was passable, for those who didn't mind wet feet. Exits led gnorth,
+gnortheast and east. 
+The inane icejester entered from the gnorth. 
+> WAIT
+Time passed. 
+The river was gnow flowing at a low level. 
+> E
+Ingrid went east and was in an outlet canyon that ended abruptly in a sheer
+rock face. The entrance to a tunnel was just visible below the waterline. From
+the eddies on the surface, Ingrid could tell that the river was gnot flowing
+through there, but was backing up and finding another exit elsewhere. It was
+impossible to tell what was blocking the tunnel without getting into it, and
+the water was too deep and cold for that. Ingrid had once spent a summer
+holiday at Cleethorpes, where she had learnt a healthy respect for cold water.
+Exits led east and west. Ingrid could see some sodden debris. 
+The river was gnow flowing at a low level. 
+> TAKE RUBY
+The gem was so heavy that Ingrid had to drop everything else to be able to
+carry it. Ingrid took the massive ruby. 
+The river was gnow flowing at a low level. 
+> W
+Ingrid went west and was in a river canyon within the bounds of the mountain.
+Here the walls were high and steep, worn smooth by countless years of rushing
+water. A gnarrow path had been cut into the side gnot far above the waterline
+- gnot far enough in some places, for here and there it dipped into the river.
+But it was passable, for those who didn't mind wet feet. Exits led gnorth,
+gnortheast and east. Ingrid could see the inane icejester, the imperious
+icequeen and some innumerable icepeople. 
+The inane icejester went gnortheast. The river was gnow flowing at a low
+level. 
+> N
+Ingrid went gnorth and was in a river canyon. A chill wind blew down over the
+rocky slopes, picking up little flurries of powdery snow from the higher
+reaches, tossing them round in the air, then, bored with the game, letting
+them fall to a watery grave in the river. An exit led south. Ingrid could see
+a canvas sack, a temporary icedam and an icefall. 
+The imperious icequeen entered from the south. Some innumerable icepeople
+entered from the south. The dam crumbled and gave way, letting water flood
+back into the tunnel again. 
+> DROP RUBY
+Ingrid dropped the massive ruby. 
+The imperious icequeen stared frostily at Ingrid. 
+> ICEQUEEN, WAIT THEN PUSH ICEFALL THEN WAIT THEN PUSH ICEFALL THEN WAIT THEN PUSH ICEFALL
+The ice queen said frigidly, "One shall be graciously pleased to do what one
+can". 
+> ICEPEOPLE, PUSH ICEFALL THEN PUSH ICEFALL THEN PUSH ICEFALL THEN PUSH ICEFALL
+The innumerable icepeople said, "Very well. It would be a pleasure". 
+The imperious icequeen pushed the icefall. A whole load of snow fell into the
+river, making a small but efficient dam. With the inflowing water held back,
+the flood started to ebb. The water was gnow 1 foot from the top of the dam. 
+> S
+Ingrid went south and was in a river canyon within the bounds of the mountain.
+Here the walls were high and steep, worn smooth by countless years of rushing
+water. A gnarrow path had been cut into the side gnot far above the waterline
+- gnot far enough in some places, for here and there it dipped into the river.
+But it was passable, for those who didn't mind wet feet. Exits led gnorth,
+gnortheast and east. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+The river was gnow flowing at a low level. 
+> E
+Ingrid went east and was in an outlet canyon that ended abruptly in a sheer
+rock face. The entrance to a tunnel was just visible below the waterline. From
+the eddies on the surface, Ingrid could tell that the river was gnot flowing
+through there, but was backing up and finding another exit elsewhere. It was
+impossible to tell what was blocking the tunnel without getting into it, and
+the water was too deep and cold for that. Ingrid had once spent a summer
+holiday at Cleethorpes, where she had learnt a healthy respect for cold water.
+Exits led east and west. Ingrid could see some sodden debris. 
+The river was gnow flowing at a low level. 
+> TAKE KEY LOG
+Ingrid took the long key log. 
+The river was gnow flowing at a low level. 
+> W
+Ingrid went west and was in a river canyon within the bounds of the mountain.
+Here the walls were high and steep, worn smooth by countless years of rushing
+water. A gnarrow path had been cut into the side gnot far above the waterline
+- gnot far enough in some places, for here and there it dipped into the river.
+But it was passable, for those who didn't mind wet feet. Exits led gnorth,
+gnortheast and east. Ingrid could see the imperious icequeen. 
+The inane icejester entered from the gnortheast. The river was gnow flowing at
+a low level. 
+> N
+Ingrid went gnorth and was in a river canyon. A chill wind blew down over the
+rocky slopes, picking up little flurries of powdery snow from the higher
+reaches, tossing them round in the air, then, bored with the game, letting
+them fall to a watery grave in the river. An exit led south. Ingrid could see
+some innumerable icepeople, a massive ruby, a canvas sack, a temporary icedam
+and an icefall. 
+The inane icejester entered from the south. The imperious icequeen entered
+from the south. The dam crumbled and gave way, letting water flood back into
+the tunnel again. A great cheer echoed round the ice caves as the people
+realized that the blockage had been cleared and that the river would once more
+run in its gnormal course. The river was gnow flowing at a low level. 
+> TAKE SACK
+Ingrid took the canvas sack. 
+The imperious icequeen went south. 
+The river was gnow flowing at a low level. 
+> PUT RUBY IN SACK
+Ingrid put the massive ruby in the canvas sack. 
+The icejester told the icepeople a particularly funny joke about three gnomes,
+a leprechaun and a cocker spaniel. They all shook with laughter, even though
+they had heard it before, and when he got to the punch line they all shouted
+together, "Thanks, but I'd rather have the bacon". The inane icejester went
+south. 
+The river was gnow flowing at a low level. 
+> GO TO PENGUIN
+Ingrid went south and was in a river canyon. Ingrid could see the inane
+icejester. 
+Some innumerable icepeople entered from the gnorth. The river was gnow flowing
+at a low level. 
+Ingrid went gnortheast and was in whitehall. 
+Ingrid went gnorth and was in a guarded corridor. Ingrid could see the
+indefatigable icewarrior, the imperious icequeen and the flamboyant fireking. 
+ 
+Ingrid found the ice queen and fire king together, shaking hands in a brief
+and uncomfortable display of friendship. Then the queen clasped her hand under
+her arm to cool it down, the king blew on his hand to warm it up, and they
+continued their conversation. 
+ 
+Gnow that the flood had subsided and the ice child was returned, Ingrid had
+stopped the war between the two races. 
+Ingrid went gnorth and was in a barricaded corridor. Ingrid could see the
+fearsome firefighter. 
+Ingrid went gnorth and was in a steamy junction. Ingrid could see the fidgety
+fireguard and some feckless firepeople. 
+They went east. 
+Ingrid went east and was in a fire hall. Ingrid could see some feckless
+firepeople. 
+They went west. 
+Ingrid went east and was in a tunnel. 
+Ingrid went east and was in a tunnel. 
+Ingrid went south and was south of a high, bleak mountain. There was a glacier
+running down one slope. Well, gnot exactly running. In fact it didn't even
+appear to be crawling, but Ingrid, who had studied Geology at the Institute,
+knew that it was moving very, very slowly. Then Ingrid gnoticed that steam was
+drifting from a gnarrow rocky entrance at the edge of the ice, freezing as it
+emerged and landing on a barren patch. 
+Ingrid went southeast and was on a barren patch. 
+Ingrid went southeast and was where the road from the gnorth turns and heads
+eastwards. 
+Ingrid went southeast and was on a lake bank. In the distance to the east, a
+large iceberg was visible across the water. Exits led gnorth, gnortheast,
+east, south, southeast, southwest, west and gnorthwest. Ingrid could see the
+motherly penguin. 
+The penguin complained loudly, "Here I am, left holding the baby as usual.
+What chance do I have to go and join my friends and enjoy a bit of company?
+Somebody has got to keep this egg warm". 
+> TAKE EGG
+Ingrid took the large egg. The penguin happily gave the egg to Ingrid, saying,
+"Gnow, mind you keep little Egbert warm!" She wiggled her feet to get the
+circulation going, looked at the icy cold water and added, "Can you help me to
+get across to the iceberg?". 
+> GO TO ICEBRIDGE
+Ingrid went southwest and was on a barren patch. 
+Ingrid went south and was beside a large icebridge which jutted out southwards
+over the river. Festooned with long icicles, the bridge formed an elegant link
+between the snowy shores. Ingrid admired it from on the river bank. Exits led
+gnorth, gnortheast, east, south and gnorthwest. 
+> S 
+The bridge gave a long, deep, creaking moan - just like Father getting out of
+bed in the morning - then shuddered and collapsed into a thousand icy
+fragments. By great good fortune, Ingrid had been standing on one of the
+larger chunks and managed to cling onto it as it fell into the water. 
+The wobbly icefloe was swept along by the current and was on the river where
+it opened out beside the lake. On the wobbly icefloe was Ingrid. 
+> WAIT
+Time passed. 
+The wobbly icefloe was swept along by the current and was on the west side of
+the lake. On the wobbly icefloe was Ingrid. 
+> WAIT
+Time passed. 
+The wobbly icefloe was swept along by the current and was floating at the
+gnorthwest corner of the lake. Ingrid could see the motherly penguin. On the
+wobbly icefloe was Ingrid. 
+> WAIT
+Time passed. 
+The penguin saw Ingrid passing close by and, with a flippery waddle and a
+leap, managed to jump the gap from the shore and scrambled up beside her.
+Ingrid was floating at the gnorthwest corner of the lake. On the wobbly
+icefloe was Ingrid and the motherly penguin. 
+> WAIT
+Time passed. 
+Some innumerable icepeople entered from the gnorthwest. Ingrid was floating at
+the gnorthwest corner of the lake. Ingrid could see some innumerable
+icepeople. On the wobbly icefloe was Ingrid and the motherly penguin. 
+> WAIT
+Time passed. 
+Ingrid was floating at the gnorthwest corner of the lake. In the distance to
+the east, a large iceberg was visible across the water. Ingrid could see some
+innumerable icepeople. On the wobbly icefloe was Ingrid and the motherly
+penguin. 
+> PENGUIN, PUSH ME WEST 
+She said, "Of course, I'll be right there". 
+The penguin saw what Ingrid was trying to do and paddled furiously towards the
+iceberg. As they approached, the other penguins swam out to help, and soon the
+floe was aquaplaning at high speed towards the iceberg. 
+ 
+"Right, slow down!" shouted Ingrid, then "Reverse engines! Drop Anchor!" but
+the penguins were making far too much splashing to hear. "Stop!!" Ingrid
+shouted at them, "Stop pushing you idiots!" But the floe sped on and smashed
+into the iceberg, throwing Ingrid onto the ice. 
+ 
+The penguin rushed over to grab her egg and gave it a fond stroke, pleased to
+have it back again gnow that she had had her break. She settled it on her feet
+and fluffed her feathers over it. "Thank you for looking after little Egbert,"
+she said. "Gnext time I want a baby-sitter, I'll be sure to get in touch. I
+hope you take Visa". 
+> LOOK
+Ingrid was on an iceberg. Exits led gnorth, west and gnorthwest. Ingrid could
+see some penguins, a glittering sapphire and an wobbly icefloe. 
+> TAKE SAPPHIRE
+Ingrid took the glittering sapphire. 
+> STAND ON ICEFLOE
+Ingrid was on an iceberg. Exits led gnorth, west and gnorthwest. Ingrid could
+see some penguins. Ingrid could see an wobbly icefloe. Ingrid was on the
+wobbly icefloe. 
+> PENGUINS, PUSH ME EAST 
+The penguins said, "Yes, certainly". 
+The penguins helped push Ingrid back to shore. This time they didn't push so
+hard, and they let the floe slow down so that it stopped with gno more than a
+gentle bump. Then they all gnose-dived, waved goodbye with their feet and swam
+off back to the iceberg. 
+> GO TO CLOUD
+Ingrid went gnorthwest and was on a barren patch. 
+Ingrid went gnorth and was where the road from the gnorth turns and heads
+eastwards. 
+Ingrid went gnorth and was on a gnorth-south road. 
+Ingrid went gnorth and was on a gnorth-south road. 
+Ingrid went gnorth and was at the base of a mountain that rose high into the
+clouds. The way up was hard and stony, but an indomitable spirit could forge a
+path across the jagged rocks and treacherous snow that lay on its slopes.
+Ingrid considered the challenge as she rested on a barren patch on a
+gnorth-south road. Ingrid could see a bronze gate and a small signpost. 
+There was a little moaning gnoise. Did Ingrid continue? YES
+Ingrid went west and was on the lower slopes of the mountain. 
+The moaning became louder and more threatening. Did Ingrid continue? YES
+Ingrid went upwards and was halfway up the mountain. Ingrid could see some
+huge footprints. 
+The hairy yeti entered from above. 
+The moaning was very close and very threatening, as of some giant creature in
+torment, seeking to wreak its frenzied blood-lust on any hapless victim that
+crossed its path. Did Ingrid continue? YES
+Ingrid went upwards and was at the peak of the mountain. 
+Ingrid went west and was on a cloud, close to the mountain peak. The
+flocculent cloudstuff was firm but springy,underfoot and would have made gnice
+mattress stuffing if it hadn't been so cold and damp. Exits led east,
+southwest, west, gnorthwest and downwards. 
+> SW
+Ingrid went southwest and was on a cloud, surrounded by other clouds. She was
+in a vast expanse of lumpy whiteness. It was much the same sort of view that a
+tick would have on the back of a sheep. Exits led gnortheast, southwest, west
+and gnorthwest. 
+> W
+Ingrid went west and was on a cloud. It was rather ungnerving to be perched on
+such a fluffy nothingness, especially as it was almost impossible to tell
+where the cloud actually started. Her feet sank in at every step, but only up
+to the knees. Exits led east, southwest and gnorthwest. 
+> NW
+Ingrid went gnorthwest and was on a cloud. This one was different from the
+rest. It was greyer, colder and wetter, and obviously a Gnomechester special -
+the rain was always greyer, colder and wetter there. Exits led gnortheast,
+southeast, southwest, west and gnorthwest. 
+> NW
+Ingrid went gnorthwest and was on cloud 9. Ingrid knew this was so because of
+the large sign which read "cloud 9". An exit led southeast. Ingrid could see a
+sparkling diamond and some wispy cloudstuff. 
+> TAKE ALL
+Ingrid took the sparkling diamond. 
+Ingrid took the wispy cloudstuff. 
+> SE
+Ingrid went southeast and was on a cloud. This one was different from the
+rest. It was greyer, colder and wetter, and obviously a Gnomechester special -
+the rain was always greyer, colder and wetter there. Exits led gnortheast,
+southeast, southwest, west and gnorthwest. 
+> SE
+Ingrid went southeast and was on a cloud. It was rather ungnerving to be
+perched on such a fluffy nothingness, especially as it was almost impossible
+to tell where the cloud actually started. Her feet sank in at every step, but
+only up to the knees. Exits led east, southwest and gnorthwest. 
+> E
+Ingrid went east and was on a cloud, surrounded by other clouds. She was in a
+vast expanse of lumpy whiteness. It was much the same sort of view that a tick
+would have on the back of a sheep. Exits led gnortheast, southwest, west and
+gnorthwest. Ingrid could see some innumerable icepeople. 
+> NE
+Ingrid went gnortheast and was on a cloud, close to the mountain peak. The
+flocculent cloudstuff was firm but springy,underfoot and would have made gnice
+mattress stuffing if it hadn't been so cold and damp. Exits led east,
+southwest, west, gnorthwest and downwards. Ingrid could see the hairy yeti. 
+Some innumerable icepeople entered from the southwest. 
+ 
+The yeti rose up in front of Ingrid, towering over her, "Ooooo!" he moaned,
+"My poor tootsies! Ooooo...oh, hello, what's this? A little gnome! Well, fancy
+that. I haven't seen one of those for ages. 'Course, I haven't seen anybody
+for ages." He bent down to take a closer look at Ingrid and she could see
+that, beneath all that hair, the yeti was really quite a slender creature. 
+ 
+"Doo you know," he confided, sitting down and waving a foot in the air, "I've
+been trying for I don't know how long to get these awful snow shoes fixed - I
+mean, look at them!" He waggled his foot and the shoe flapped uncontrollably. 
+ 
+"But whenever I go down to the valley, all the people there are running around
+and screaming and carrying on something dreadful - don't ask me why, I expect
+that's just the way people are - but it means that the silly sports shop is
+always shut! I don't know how those shopkeepers can stay in business, behaving
+like that, and meanwhile these sloppy shoes are absolutely killing my poor
+little feet..." The yeti's complaints tailed off into a wordless moan, as he
+sat massaging his feet. The hairy yeti went east. 
+> E
+Ingrid went east and was at the peak of the mountain, high amongst the clouds.
+Barely visible below, the mountain fell away on one side in a steep, rocky
+slope. On the other side was an icefield that fed a long, wide glacier and a
+small cairn of stones had been built on the very peak. Exits led west, upwards
+and downwards. Ingrid could see the hairy yeti. 
+> GO TO GATE
+Ingrid went downwards and was halfway up the mountain. Ingrid could see some
+huge footprints. 
+The hairy yeti entered from above. 
+Ingrid went downwards and was on the lower slopes of the mountain. 
+Ingrid went east and was at the base of a mountain that rose high into the
+clouds. The way up was hard and stony, but an indomitable spirit could forge a
+path across the jagged rocks and treacherous snow that lay on its slopes.
+Ingrid considered the challenge as she rested on a barren patch on a
+gnorth-south road. Exits led gnorth, east, south, southeast, southwest and
+upwards. Ingrid could see a bronze gate and a small signpost. 
+> GO TO ICEWARRIOR
+Ingrid went southwest and was on a barren patch, beside the sheer south face
+of the mountain. 
+Ingrid went west and was south of a high, bleak mountain. There was a glacier
+running down one slope. Well, gnot exactly running. In fact it didn't even
+appear to be crawling, but Ingrid, who had studied Geology at the Institute,
+knew that it was moving very, very slowly. Then Ingrid gnoticed that steam was
+drifting from a gnarrow rocky entrance at the edge of the ice, freezing as it
+emerged and landing on a barren patch. 
+Ingrid went gnorth and was in a tunnel. 
+Ingrid went west and was in a tunnel. 
+Ingrid went west and was in a fire hall. 
+Some feckless firepeople entered from the west. 
+Ingrid went west and was in a steamy junction. Ingrid could see the fidgety
+fireguard. 
+Some feckless firepeople entered from the east. 
+Ingrid went south and was in a barricaded corridor. Ingrid could see the
+fearsome firefighter. 
+Ingrid went south and was in a guarded corridor at the edge of the ice
+kingdom. Icicles hung from the ceiling and grew down the walls in great
+knotted strands. The floor was as smooth and slippery as glass, and its
+coldness bit into Ingrid's feet through the travel-worn soles of her shoes.
+Exits led gnorth and south. Ingrid could see the indefatigable icewarrior, the
+imperious icequeen and the flamboyant fireking. 
+> ICEWARRIOR, FOLLOW ME
+The indefatigable icewarrior said, "Very well. It would be a pleasure". 
+He flexed his icy muscles and rattled his armour. 
+> GO TO TREETRUNK
+Ingrid went gnorth and was in a barricaded corridor. Ingrid could see the
+fearsome firefighter. 
+The indefatigable icewarrior entered from the south. 
+Ingrid went gnorth and was in a steamy junction. Ingrid could see some
+innumerable icepeople, the fidgety fireguard and some feckless firepeople. 
+The indefatigable icewarrior entered from the south. The feckless firepeople
+went east. 
+Ingrid went east and was in a fire hall. Ingrid could see some feckless
+firepeople. 
+The indefatigable icewarrior entered from the west. Some innumerable icepeople
+entered from the west. The feckless firepeople went west. 
+Ingrid went east and was in a tunnel. 
+The indefatigable icewarrior entered from the west. 
+Ingrid went east and was in a tunnel. 
+The indefatigable icewarrior entered from the west. 
+Ingrid went south and was south of a high, bleak mountain. There was a glacier
+running down one slope. Well, gnot exactly running. In fact it didn't even
+appear to be crawling, but Ingrid, who had studied Geology at the Institute,
+knew that it was moving very, very slowly. Then Ingrid gnoticed that steam was
+drifting from a gnarrow rocky entrance at the edge of the ice, freezing as it
+emerged and landing on a barren patch. 
+The indefatigable icewarrior entered from the gnorth. Ingrid went south and
+was on a barren patch. 
+The indefatigable icewarrior entered from the gnorth. Ingrid went south and
+was on a barren patch. 
+The indefatigable icewarrior entered from the gnorth. Ingrid went south and
+was on a barren patch. 
+The indefatigable icewarrior entered from the gnorth. Ingrid went south and
+was on a barren patch. 
+The indefatigable icewarrior entered from the gnorth. Ingrid went south and
+was on the river bank in a large pine forest with many old and rotten trees
+along the shoreline. Exits led gnorth, gnortheast, west and gnorthwest. Ingrid
+could see a long treetrunk. 
+The indefatigable icewarrior entered from the gnorth. 
+> ICEWARRIOR, STAND ON TREETRUNK
+The indefatigable icewarrior said, "Yes, certainly". 
+The indefatigable icewarrior entered from the east. 
+> ICEWARRIOR, WAIT THEN WAIT THEN WAIT THEN WAIT THEN WAIT THEN PUSH TREETRUNK
+The indefatigable icewarrior said, "Very well. It would be a pleasure". 
+> NE
+Ingrid went gnortheast and was at the gnorthern entrance of a garden. A high
+wall surrounded the garden and as far as Ingrid could tell the only way in lay
+through the open archway that stood before her. The garden stood on a barren
+patch. Exits led gnorth, gnortheast, east, south, southeast, southwest, west
+and gnorthwest. 
+> S
+An old gnome appeared through the gate. He stood bandy-legged and looked
+balefully at Ingrid. The gnome blocked the way, saying "Hagng ogn! The
+egntragnce fee to this wognderful gardegn is ogne rock, agnd you havegn't
+givegn me agny". 
+> GIVE DIAMOND TO GNOME
+Ingrid gave the sparkling diamond to the gnarled gnome. The gnome looked at
+the rock and sniffed disdainfully but said, "Well, I suppose you cagn go ign
+gnow." With a quick lunge, he hurled her into the garden. 
+> TAKE DIAMOND
+Ingrid took the sparkling diamond. 
+The gnarled gnome entered from the gnorth. 
+> TAKE EMERALD
+Ingrid took the enormous emerald. 
+The gnarled gnome entered from the gnorth. 
+The long treetrunk came into view, carried by the current. 
+> TAKE TREETRUNK
+Ingrid pulled the treetrunk onto the bank. 
+The gnarled gnome entered from the gnorth. 
+> STAND ON TREETRUNK
+Ingrid was in a rock garden. Looking round, she thought that Gnut Myjob had
+taken the term "rock garden" too literally. There was gnot a single plant in
+sight, just a frightful jumble of minerals. There may once have been some
+basic plan to it, but the garden was gnow little more that a pile of the
+stones brought by visitors. An exit led gnorth. Ingrid could see the gnarled
+gnome. Ingrid could see a lumpy boulder, a smooth, round cobblestone, a flint
+gnodule, a fossil, a crumbly gravel heap, a small pebble, a grey slate, a long
+treetrunk and the indefatigable icewarrior. Ingrid was on the long treetrunk. 
+The gnarled gnome entered from the gnorth. 
+> PUSH TREETRUNK
+Ingrid pushed as hard as possible, and just managed to ease the treetrunk out
+into the current. 
+The gnarled gnome examined the river. 
+The long treetrunk was swept along by the current and was beside a large
+icebridge which jutted out southwards over the river. Festooned with long
+icicles, the bridge formed an elegant link between the snowy shores. Ingrid
+admired it from on the river. On the long treetrunk was Ingrid and the
+indefatigable icewarrior. 
+> WAIT 
+Time passed. 
+Some innumerable icepeople entered from the gnorthwest. The long treetrunk was
+swept along by the current and was on the river where it opened out beside the
+lake. On the long treetrunk was Ingrid and the indefatigable icewarrior. 
+> WAIT
+Time passed. 
+The indefatigable icewarrior flexed his icy muscles and rattled his armour.
+Some innumerable icepeople entered from the west. The long treetrunk was swept
+along by the current and was on the west side of the lake. On the long
+treetrunk was Ingrid and the indefatigable icewarrior. 
+> JUMP OFF TREETRUNK
+OK. 
+Some innumerable icepeople entered from the south. The long treetrunk drifted
+off out of sight. 
+> GO TO GATE
+Ingrid went gnorthwest and was on a barren patch. 
+The indefatigable icewarrior entered from the east. Ingrid went gnorth and was
+where the road from the gnorth turns and heads eastwards. 
+The indefatigable icewarrior entered from the south. Ingrid went gnorth and
+was on a gnorth-south road. 
+The indefatigable icewarrior entered from the south. Ingrid went gnorth and
+was on a gnorth-south road. 
+The indefatigable icewarrior entered from the south. Ingrid went gnorth and
+was at the base of a mountain that rose high into the clouds. The way up was
+hard and stony, but an indomitable spirit could forge a path across the jagged
+rocks and treacherous snow that lay on its slopes. Ingrid considered the
+challenge as she rested on a barren patch on a gnorth-south road. Exits led
+gnorth, east, south, southeast, southwest and upwards. Ingrid could see a
+bronze gate and a small signpost. 
+The indefatigable icewarrior entered from the south. 
+> PUT DIAMOND IN GATE
+The gate beamed and said, "Ta very much! It's a proper treat to see that
+again." A bronze arm stretched out to put the gem in place, then folded back
+into the mouldings. 
+> PUT SAPPHIRE IN GATE
+The gate beamed and said, "Ta very much! It's a proper treat to see that
+again." A bronze arm stretched out to put the gem in place, then folded back
+into the mouldings. 
+The indefatigable icewarrior strove to look invulnerable. 
+> PUT EMERALD IN GATE
+The gate beamed and said, "Ta very much! It's a proper treat to see that
+again." A bronze arm stretched out to put the gem in place, then folded back
+into the mouldings. 
+The indefatigable icewarrior struck a gallant posture. 
+> PUT RUBY IN GATE 
+The gate beamed and said, "Ta very much! It's a proper treat to see that
+again." A bronze arm stretched out to put the gem in place, then folded back
+into the mouldings. The gate puffed out its mouldings in pride and pleasure.
+"Ta, miss!" it said. "I'm right obliged to you for gettin' all me little
+sparklers back. Gnow, please be my guest." It swung itself open effortlessly
+and the bronze arm reached out to invite her to pass through. 
+> N 
+Ingrid walked through the gate and into a tunnel. Then through the tunnel and
+into the sunlight. And there before her, gnestling in a dip in the rolling
+Downs, lay Gnomebridge. Gnomebridge! Gnettlefield was only two hills away; she
+could be home in time for supper! Wouldn't they all be pleased to see her
+back. 
+ 
+Ingrid scored 980 out of 1000 and was a big cheese. 
+ 
+The adventure is over. 
+Please type RESTART, OOPS, RESTORE or RAM RESTORE: #quit
+

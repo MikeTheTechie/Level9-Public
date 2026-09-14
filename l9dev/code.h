@@ -6,11 +6,6 @@
 
 #include "common.h"
 
-// For PC code generation (1.5 feature)
-// See gamedata segment layout in pccode.c
-#define PCListVector 4
-#define PCvarsoffset 144
-
 // function declarations needed for forward references in code.c
 void MCPushPop(uint8_t *, int);
 void MCAddSub(uint8_t *);

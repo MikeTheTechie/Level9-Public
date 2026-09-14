@@ -1,0 +1,2753 @@
+
+Looking for gameplay log on disk - 'log.bat'
+
+Executing instructions in file 'log.bat'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Welcome to the Secret Diary of Adrian Mole from Level 9 and Mosaic. If you are
+loading from tape, and it is still running, STOP THE TAPE IMMEDIATELY.
+ 
+ 
+ 
+Thursday  January 1st  BANK HOLIDAY IN ENGLAND, IRELAND, SCOTLAND AND WALES.
+These are my new year resolutions: 
+1. I will help the blind across the road. 
+2. I will hang my trousers up. 
+3. I will put the sleeves back on my records. 
+4. I will not start smoking. 
+5. I will stop squeezing my spots. 
+6. I will be kind to the dog. 
+7. I will help the poor and ignorant. 
+8. After hearing the disgusting noises from downstairs last night, I have also
+vowed never to drink alcohol. 
+9. I will try to make everyone like me. 
+ 
+My father got the dog drunk on cherry brandy at the party last night. If the
+RSPCA hear about it he could get done.
+ 
+Friday  January 2nd  BANK HOLIDAY IN SCOTLAND. FULL MOON.
+I feel rotten today. It's my mother's fault for singing 'My Way' at two
+o'clock in the morning at the top of the stairs at the top of her voice. Just
+my luck to have a mother like her. I wish people could choose their mothers!
+There is a chance my parents could be alcoholics. Next year I could be in a
+Children's Home.
+ 
+Saturday  January 3rd.
+Today was a dead loss. This is what comes of living in a cul-de-sac.
+ 
+Sunday  January 4th  SECOND AFTER CHRISTMAS.
+The dog choked on a chicken bone but we held it upside down and banged it
+hard, and the bone fell out. I've left the dog at grandma's to recover from
+its ordeal.
+ 
+Monday  January 5th.
+I, Adrian Mole, score 40 percent, which makes me a lowly schoolboy.
+ 
+Looked at 'Big and Bouncy'. Measured my thing. It was eleven centimetres.
+ 
+Tuesday  January 6th  EPIPHANY. NEW MOON.
+I think I am turning into an intellectual. It must be all the worry. 
+ 
+I will look up 'Epiphany' in my new dictionary.
+ 
+Wednesday  January 7th.
+ 
+Thursday  January 8th.
+ 
+Friday  January 9th.
+Read 'War and Peace'. It is like a Russian version of 'Dallas'.
+ 
+Saturday  January 10th.
+ 
+Sunday  January 11th  FIRST AFTER EPIPHANY.
+ 
+Monday  January 12th.
+I, Adrian Mole, score 40 percent, which makes me a lowly schoolboy.
+ 
+ 
+Tuesday  January 13th.
+Mr Lucas came in this morning to see if my mother needed any help in the
+house. He is very kind.
+ 
+Wednesday  January 14th.
+There is a new girl in our class. She sits next to me in Geography. She is all
+right. Her name is Pandora, but she likes being called 'Box'. Don't ask me
+why. I might fall in love with her. It's time I fell in love, after all I am
+thirteen and three quarters years old.
+ 
+Thursday  January 15th.
+Pandora has got hair the colour of treacle, and it's long like girls' hair
+should be. Her eyes are the same colour as the dog's. She has quite a good
+figure. I saw her playing netball and her chest was wobbling. I felt a bit
+funny. I think this is it!
+ 
+Friday  January 16th.
+It is Geography today so I sit next to Pandora for a whole hour. She looks
+better every day.
+Choose one of the following for me:
+1) tell Pandora about her eyes being the same as the dog's.
+2) lend Pandora my blue felt-tip pen.
+3) try indulging in small-talk.
+#title: Secret Diary of Adrian Mole test script
+#comment: MSX version 
+9
+ 
+Type someone's name to learn about them, a command, HELP for a list of
+commands, or 1-9 to return to the game. Then press ENTER or RETURN.
+#seed 42
+Seed set to 42
+RESTART
+ 
+ 
+Thursday  January 1st  BANK HOLIDAY IN ENGLAND, IRELAND, SCOTLAND AND WALES.
+These are my new year resolutions: 
+1. I will help the blind across the road. 
+2. I will hang my trousers up. 
+3. I will put the sleeves back on my records. 
+4. I will not start smoking. 
+5. I will stop squeezing my spots. 
+6. I will be kind to the dog. 
+7. I will help the poor and ignorant. 
+8. After hearing the disgusting noises from downstairs last night, I have also
+vowed never to drink alcohol. 
+9. I will try to make everyone like me. 
+ 
+My father got the dog drunk on cherry brandy at the party last night. If the
+RSPCA hear about it he could get done.
+ 
+Friday  January 2nd  BANK HOLIDAY IN SCOTLAND. FULL MOON.
+I feel rotten today. It's my mother's fault for singing 'My Way' at two
+o'clock in the morning at the top of the stairs at the top of her voice. Just
+my luck to have a mother like her. I wish people could choose their mothers!
+There is a chance my parents could be alcoholics. Next year I could be in a
+Children's Home.
+ 
+Saturday  January 3rd.
+ 
+Sunday  January 4th  SECOND AFTER CHRISTMAS.
+Sent a poem to the BBC. It is called 'The Tap' but it is really very deep,
+about life and stuff like that: 
+The tap drips and keeps me awake, 
+In the morning there will be a lake. 
+For the want of a washer the carpet will spoil, 
+Then for another my father will toil. 
+My father could snuff it while he is at work. 
+Dad, fit a washer don't be a burke!
+ 
+Monday  January 5th.
+I, Adrian Mole, score 40 percent, which makes me a lowly schoolboy.
+ 
+ 
+Tuesday  January 6th  EPIPHANY. NEW MOON.
+I think I am turning into an intellectual. It must be all the worry. 
+ 
+I will look up 'Epiphany' in my new dictionary.
+ 
+Wednesday  January 7th.
+Read 'War and Peace'. It is like a Russian version of 'Dallas'.
+ 
+Thursday  January 8th.
+ 
+Friday  January 9th.
+ 
+Saturday  January 10th.
+ 
+Sunday  January 11th  FIRST AFTER EPIPHANY.
+Mr Lucas came in this morning to see if my mother needed any help in the
+house. He is very kind.
+ 
+Monday  January 12th.
+I, Adrian Mole, score 40 percent, which makes me a lowly schoolboy.
+ 
+ 
+Tuesday  January 13th.
+My mother is not doing any tidying up. There has been a slice of bacon between
+the cooker and the fridge for three days to my knowledge.
+ 
+Wednesday  January 14th.
+There is a new girl in our class. She sits next to me in Geography. She is all
+right. Her name is Pandora, but she likes being called 'Box'. Don't ask me
+why. I might fall in love with her. It's time I fell in love, after all I am
+thirteen and three quarters years old.
+ 
+I think my poetry is a bit morbid, it is normally very deep and profound and
+reflects deeply on Life. The BBC does quite a lot of comic poetry, so I have
+tried satire for a change. An artist must write about lots of different
+things! 
+ 
+My first comic piece is about Mr Dock's car. He is our English teacher. 
+ 
+Dock Leaf's got a Fiat, covered in red rust. 
+Its paint is blue, its smoke is too, 
+The wing mirrors are bust. 
+ 
+Dock Leaf's in his banger, bouncing down the lane. 
+The engine coughs, exhaust falls off 
+And then it stops again. 
+ 
+There are twelve verses and it took ages to write; almost thirty minutes.
+ 
+Thursday  January 15th.
+Brought my poem to school.
+Which of the following shall I do?
+1) show the poem to Nigel.
+2) show the poem to Pandora.
+3) keep the poem secret.
+3
+I keep the poem secret. After all, it is about a teacher. I do not want to
+take foolish risks.Pandora has got hair the colour of treacle, and it's long
+like girls' hair should be. Her eyes are the same colour as the dog's. She has
+quite a good figure. I saw her playing netball and her chest was wobbling. I
+felt a bit funny. I think this is it!
+ 
+Friday  January 16th.
+It is Geography today so I sit next to Pandora for a whole hour. She looks
+better every day.
+What shall I do?
+1) lend Pandora my blue felt-tip pen.
+2) tell Pandora about her eyes being the same as the dog's.
+3) try indulging in small-talk.
+3
+I try indulging in small-talk and tell Pandora about Cecil, my prolific
+hamster; a cute little creature with golden fur. The small-talk is rapidly
+growing into a conversation when Pandora asks to see him.
+Choose one of the following for me:
+1) have to admit that Cecil is no more.
+2) return to my work.
+3) pretend that Cecil is temporarily absent.
+3
+I pretend that Cecil is temporarily absent and will return soon. It does not
+sound very convincing, I'm afraid.
+ 
+Saturday  January 17th.
+I was woken early this morning. Mrs Lucas is concreting the front of their
+house and the concrete lorry had to keep its engine running while she
+shovelled the concrete around before it set. Mr Lucas made her a cup of tea.
+He really is kind.
+ 
+Sunday  January 18th  SECOND AFTER EPIPHANY. OXFORD HILARY TERM STARTS.
+ 
+Monday  January 19th.
+I, Adrian Mole, score 38 percent, which makes me a middling thicko.
+ 
+My mother isn't very bright. She still hasn't washed my PE shorts and I need
+them tomorrow. She is not like the mothers on television.
+ 
+Tuesday  January 20th  FULL MOON.
+ 
+Wednesday  January 21st.
+I saw Nigel on the way home. He told me Pandora's father was a milkman! I have
+gone off her a bit.
+ 
+Thursday  January 22nd.
+Bump into Pandora.
+Which of the following shall I do?
+1) ask her about her father.
+2) say that her father's lowly job doesn't matter to me.
+3) ask if she gets cheap yoghurt.
+3
+I ask if she gets cheap yoghurt. Pandora will look into it.
+ 
+Friday  January 23rd.
+Went to the barber's today. I asked for a 'flick-head' (the latest style) but
+the barber, an Italian geriatric of at least forty, said he had never heard of
+it and cut my hair in a short back and sides. I will have to wear a hat at all
+times!
+ 
+Saturday  January 24th.
+Pandora can't get discounted dairy products after all. I have gone off her a
+lot.
+ 
+Sunday  January 25th  THIRD AFTER EPIPHANY.
+My mother has got a job doing her rotten typing in an insurance office! She
+starts on Monday! Mr Lucas works at the same place. He is going to give her a
+lift every day.
+ 
+Monday  January 26th.
+I, Adrian Mole, score 39 percent, which makes me an average thicko.
+ 
+ 
+Tuesday  January 27th.
+Nigel has asked me to a disco at the youth club tonight; it is being held to
+raise funds for a new packet of ping-pong balls. I don't know if I will go
+because Nigel is a punk at weekends. His mother lets him be one providing he
+wears a string vest under his bondage T-shirt.
+What shall I do?
+1) stay at home.
+2) go to the disco.
+3) invite Pandora to the disco.
+3
+I invite Pandora to the disco. She is already invited by four other boys.
+Choose one of the following for me:
+1) stay at home.
+2) go to the disco.
+3) investigate the disco.
+3
+I investigate the disco. It sounds OK from outside so I enter for five pence.
+What a mistake!
+ 
+This is the last time I come to a disco! Everybody here is a punk except me
+and Rick Lemon, the youth leader. Nigel has been showing off all night. Now he
+wants to put a safety pin through his ear.
+Which of the following shall I do?
+1) watch.
+2) put a safety pin through my ear.
+3) help Pandora to stop him.
+3
+I help Pandora to stop him.
+ 
+Wednesday  January 28th  LAST QUARTER.
+Now I KNOW I am an intellectual. I saw Malcolm Muggeridge on the television
+last night and understood nearly every word.
+ 
+Thursday  January 29th.
+Postmen on strike. My father is delighted, it means we can't get any bills.
+ 
+Friday  January 30th.
+ 
+Saturday  January 31st.
+Pandora is going out with Nigel!!!!! I think I will never get over this shock.
+ 
+Sunday  February 1st  FOURTH AFTER EPIPHANY.
+10 a.m. I am ill with all the worry, too weak to write more. Nobody has
+noticed that I haven't eaten any breakfast.
+ 
+2 p.m. Had two junior aspirins at midday and rallied a bit. Perhaps when I am
+famous and my diary is discovered people will understand the torment of being
+an almost fourteen year old undiscovered intellectual.
+ 
+Midnight. Had a crab-paste sandwich and a satsuma (for the good of my skin).
+Felt a bit better. I hope Nigel falls off his racing bike and is squashed flat
+by a lorry.
+ 
+Monday  February 2nd  PRESENTATION.
+I, Adrian Mole, score 42 percent, which makes me an unimportant schoolboy.
+ 
+Pandora! Why?
+ 
+Tuesday  February 3rd.
+ 
+Wednesday  February 4th  NEW MOON.
+Early this morning I saw Pandora walking down the drive of 69 Elm Tree Avenue.
+She had a riding hat and jodhpurs on so she couldn't have been on the way to
+school. I couldn't let her see me. I was delivering charity envelopes and I
+didn't want her to know that I was doing a menial job. Also I didn't know what
+to say. So now I know where Pandora lives!
+What shall I do?
+1) have a good look at the house.
+2) find out where she is going.
+3) respect her privacy.
+3
+I respect her privacy.
+ 
+Thursday  February 5th.
+Barry Kent has been done by the police for riding a bike without a rear light.
+I hope he gets sent to a detention centre. A short sharp shock would do him
+good.
+ 
+Friday  February 6th  THE QUEEN'S ACCESSION, 1952.
+Pandora and Nigel have split up! It is all round the school. This is the best
+news I have had for ages.
+ 
+Saturday  February 7th.
+The dog choked on a chicken bone but we held it upside down and banged it
+hard, and the bone fell out. I've left the dog at grandma's to recover from
+its ordeal.
+ 
+Sunday  February 8th  FIFTH AFTER EPIPHANY.
+ 
+Monday  February 9th.
+I, Adrian Mole, score 41 percent, which makes me a namby-pamby schoolboy.
+ 
+I have joined a group at school called the Good Samaritans. We go out into the
+community helping and stuff like that. We miss Maths on Monday. 
+ 
+I have been put in the old age pensioners group. I will get a cassette so I
+can tape all the old fogeys' stories about war and stuff. I hope I get one
+with a good memory.
+ 
+Tuesday  February 10th.
+The Samaritans met today during break. The old people were shared out. I have
+got an old man called Bert Baxter. He is eighty nine so I don't suppose I'll
+have him for long. I'm going round to see him soon. I hope he hasn't got a
+dog. I'm fed up with dogs. They are either at the vet's or standing in front
+of the television.
+ 
+Wednesday  February 11th  FIRST QUARTER.
+ 
+Thursday  February 12th  LINCOLN'S BIRTHDAY.
+An estate agent's catalogue came through the door today. I have put it in the
+dustbin before my parents can see it and get ideas.
+ 
+Friday  February 13th.
+My father wouldn't give me a note excusing me from Games so I was nearly
+frozen to death.
+ 
+Saturday  February 14th  ST VALENTINE'S DAY.
+Go to see Bert Baxter after tea. My father dropped me off on his way to play
+badminton. Mr Baxter's house is hidden behind a massive overgrown privet
+hedge. I knock on the door but nothing happens.
+Choose one of the following for me:
+1) knock again.
+2) leave.
+3) go round the house to look in a window.
+3
+I go round the house to look in a window. The first thing I see is an enormous
+massive Alsatian leaping up, barking madly, and trying to scratch through the
+glass to get me. I run back to the front door and I hear the sounds of bottles
+being knocked over and a man swearing.
+Which of the following shall I do?
+1) write a note and push it through the door.
+2) continue knocking.
+3) run off.
+3
+I run off. I hope I got the wrong house!
+ 
+A very nice man called Brother Ludovic has just called at the house and spoken
+to me at great length about the Meaning of Life. He was wearing very strange
+purple robes and had a shaved head. He explained that ordinary clothes and
+hairstyles symbolised something called 'spiritual death'. Brother Ludovic
+belongs to a religious society called the Purple People. He asked me to join.
+I asked him what this entailed but before he could tell me, my parents drew up
+in the car and Brother Ludovic ran off. He said, "Parents are evil. We will
+speak again, O child."
+What shall I do?
+1) ask Directory Enquiries about the Purple People.
+2) think hard.
+3) tell Nigel.
+3
+I tell Nigel about the Purple People. He says he is not interested in fringe
+religions because "there is no money in it". Nigel thinks you can find the
+Meaning of Life in a dictionary!
+ 
+Sunday  February 15th  SEPTUAGESIMA.
+ 
+Monday  February 16th  WASHINGTON'S BIRTHDAY OBSERVANCE.
+I, Adrian Mole, score 38 percent, which makes me a middling thicko.
+ 
+Bert Baxter has phoned the school to complain that I didn't turn up to help
+him. He thinks it is typical of today's youth. I told Mr Scruton, the
+headmaster, what really happened but I can tell that he didn't believe me. He
+gave me a lecture on how old people fought for me during the World Wars. He
+has ordered me back to Mr Baxter's house.
+ 
+I am going through a religious experience. Brother Ludovic met me out of
+school and explained at great length about his religious beliefs. He said that
+money, exams and work are evil. He advised me to give him all my money and not
+to do my O levels. He also told me not to tell my parents about our
+conversation. I made arrangements to visit the Purple People's headquarters
+soon. The address is 20a Disraeli Terrace.
+ 
+Tuesday  February 17th.
+Went to Bert Baxter's. He didn't answer the door. Perhaps he is dead.
+ 
+Wednesday  February 18th  FULL MOON.
+Thought about Bert Baxter.
+Choose one of the following for me:
+1) go to his house again.
+2) persuade Nigel to go.
+3) don't go.
+3
+I don't go. Mr Baxter does not deserve me.
+ 
+Thursday  February 19th  PRINCE ANDREW BORN, 1960.
+ 
+Friday  February 20th.
+Read 'Origin of Species'. It is not as good as the TV series.
+ 
+Saturday  February 21st.
+Get up early to have a bath, then experiment with a purple bath towel,
+wrapping it round myself like brother Ludovic does. Toy with the idea of
+shaving my head.
+Which of the following shall I do?
+1) shave half my hair off.
+2) shave all my hair off.
+3) decide not to.
+3
+I decide not to in the end.
+Considered visiting Brother Ludovic.
+What shall I do?
+1) go round to number 20a Disraeli Terrace.
+2) decide against it.
+3) tell my parents.
+3
+I tell my parents about the Purple People.
+They decide I can't be trusted to keep my Building Society savings book in my
+room. My mother says: "You'd give your money to any Tom, Dick or Ludovic who
+asked for it." This is not fair! I didn't part with any money, did I?
+ 
+My mother is on at me to visit Mr Baxter.
+Choose one of the following for me:
+1) leave the Samaritans.
+2) go to his house again.
+3) persuade Nigel to go.
+3
+I persuade Nigel to go. He doesn't like his job looking after kids in a
+playgroup. In fact he is as sick as a parrot. Nigel is delighted to swap with
+me and visit a real old age pensioner. (He has not met Bert Baxter!)
+ 
+Sunday  February 22nd  SEXAGESIMA.
+ 
+Monday  February 23rd.
+I, Adrian Mole, score 38 percent, which makes me a middling thicko.
+ 
+I am feeling rebellious, so I will wear red socks to school tomorrow. It is
+strictly forbidden, but I don't care any more. Anyway, they are the only clean
+pair I can find.
+ 
+Tuesday  February 24th  ST MATTHIAS.
+Which of the following shall I do?
+1) wear the socks over my shoes.
+2) wear only one red sock.
+3) put on the red socks.
+3
+I put on the red socks and go to school. 
+ 
+Miss Sproxton spotted my red socks in assembly! The old bag reported me to
+pop-eyed Scruton. He had me in his office and gave me a lecture on the dangers
+of being a nonconformist. Then he sent me home to change into regulation black
+socks.
+What shall I do?
+1) return to school in red socks.
+2) change to black socks and return to school.
+3) tell my father.
+3
+I tell my father. He instantly turns into a raving loony! He phones the
+school, drags Scruton out of a caretakers' strike meeting and shouts about
+victimisation. Scruton says if I come to school in black socks everything will
+be forgiven but my father says I will wear whatever socks I like. Scruton says
+he is anxious to maintain standards. My father says the England World Cup team
+in 1966 did not wear black socks, nor did Sir Edmund Hilary in 1953. He puts
+the 'phone down, saying "Round one to me".
+Choose one of the following for me:
+1) take off my socks and return to school.
+2) stay at home for the rest of the day.
+3) change to black socks and return to school.
+3
+I change to black socks and return to school. It is the only thing to do.
+ 
+Wednesday  February 25th.
+Nigel thinks Bert Baxter is great when you get to know him. Nigel says he is
+dead clean and tidy, doesn't drink or smoke and is always telling funny
+stories about the war. It certainly shows that you can't judge by first
+impressions! 
+ 
+Nigel is very happy visiting Bert but he doesn't think it's fair on me. I
+should have a turn too.
+Which of the following shall I do?
+1) tell Nigel I'd rather look after playgroup kids.
+2) go to meet Bert Baxter.
+3) leave the Samaritans.
+3
+I leave the Samaritans, there are very few other members anyway.
+ 
+Nigel's parents are going to London for the weekend so Nigel is throwing a
+party on Saturday night for 50 close friends. Nigel's parents don't know about
+the party. All guests must dress in black from head to toe; and all must bring
+a bottle.
+What shall I do?
+1) ask my mother to buy me a black outfit.
+2) buy a tin of black dye.
+3) buy a can of black paint.
+3
+I buy a can of black paint to paint everything with. Paint plimsolls, jeans
+etc and leave on bedroom floor. 
+ 
+Return to find dog lying on top of them, unable to move because it is stuck to
+the paint. Brutalise dog, then spend the next hour pulling dog hairs off
+clothes with tweezers. Clothes stiff like plate armour.
+ 
+Thursday  February 26th.
+Woke up, had the type of mystical vision which changes your entire life, went
+to school, visited Bert Baxter. 
+ 
+In the vision, Sue Townsend (housewife, superstar and mother of many) appeared
+surrounded by choirs of TV researchers. She spoke golden words of infinite
+wisdom. "Listen Mole, you pretentious little moron, Bert Baxter is my
+favourite character and I am not letting you get rid of him. You, kid, are
+going to meet him whether you like it or not." My God!
+ 
+Friday  February 27th  LAST QUARTER.
+ 
+Bert Baxter is not a nice old age pensioner at all! He smokes and drinks beer
+and has an Alsatian dog called Sabre who has to be locked in the kitchen. He
+didn't stop growling once. 
+ 
+Bert Baxter's bedroom is the most disgusting room I have ever seen (and I'm no
+stranger to squalor). It is probably because he eats beetroot sandwiches in
+bed. 
+ 
+Bert Baxter gave me ten pence to buy the Morning Star from the newsagent's. So
+he is a communist as well as everything else! This is just my luck for being a
+Good Samaritan!
+ 
+Saturday  February 28th.
+Nigel's party was dead disappointing; it finished at 9.30 when a neighbour
+told the police that black-clothed devil worshippers had broken into Nigel's
+house.
+ 
+Sunday  March 1st  QUINQUAGESIMA. ST DAVID'S DAY.
+Nigel's parents have locked him in the house. He is not allowed out until the
+black footprints have been removed from the lounge carpet.
+ 
+Monday  March 2nd.
+I, Adrian Mole, score 37 percent, which makes me an ordinary thicko.
+ 
+The dog has been sent to the beauty shop to have black paint cut out of its
+fur.
+ 
+Tuesday  March 3rd  SHROVE TUESDAY.
+It is a pity there aren't more intellectuals living round here. Mr Lucas wears
+corduroy trousers but he is an insurance man. Just my luck.
+ 
+Wednesday  March 4th  ASH WEDNESDAY.
+Mr Lucas was in the kitchen with my mother. The room was full of smoke. They
+were laughing but when I came in, they stopped. 
+ 
+Mrs Lucas was next door cleaning the drains. She looked as if she was in a bad
+mood. I think Mr and Mrs Lucas have got an unhappy marriage. Poor Mr Lucas!
+ 
+Thursday  March 5th.
+ 
+Friday  March 6th  NEW MOON.
+Woke up with tongue ache. I've never heard of anyone suffering from tongue
+ache before. Perhaps I will make medical history.
+Choose one of the following for me:
+1) keep quiet about it.
+2) tell my mother.
+3) try and talk without moving my tongue.
+3
+I try and talk without moving my tongue. A dismal failure. Not only does my
+tongue ache more, but my teeth feel funny. Perhaps I have lockjaw.
+Which of the following shall I do?
+1) consult the library encyclopaedia.
+2) ignore the tongue ache.
+3) book an appointment with Dr Gray.
+3
+I book an appointment with Dr Gray though his receptionist will not let me see
+him for ages. By then my jaw could be irreversibly locked!
+ 
+Saturday  March 7th.
+My mother has gone to a women's workshop on assertiveness training. Men aren't
+allowed. I asked my father what 'assertiveness training' is. He said "God
+knows, but whatever it is, it's bad news for me". 
+ 
+We had boil-in-the-bag cod in butter sauce and oven-cooked chips for dinner.
+My father opened a bottle of Austrian white wine and let me have some. I don't
+know much about wine but it seemed a pleasant enough vintage, very smooth and
+warming. We watched a repeated film on television, then my mother came home
+and started bossing us around. She said "The worm has turned", and "Things are
+going to be different around here", and things like that. Then she went into
+the kitchen and started making a chart dividing all the housework into three.
+What shall I do?
+1) agree with my mother's idea.
+2) point out I do a lot anyway.
+3) go out to let it blow over.
+3
+I go out to let it blow over. I come back to find the chart pinned to my door.
+ 
+Sunday  March 8th  FIRST IN LENT.
+I did body-building exercises for most of the day. I measured my muscles this
+evening, but there is no improvement.
+ 
+Monday  March 9th  COMMONWEALTH DAY.
+I, Adrian Mole, score 34 percent, which makes me a mediocre thicko.
+ 
+Got up. Looked at the chart of jobs on the wall.
+Choose one of the following for me:
+1) start doing them.
+2) think about applying to the European Court.
+3) refuse to do the work.
+3
+I refuse to do the work. My refusal lasts about 2 minutes; my mother can be
+very convincing when she tries!
+ 
+Cleaned toilet, washed basin and bath. Made breakfast, put washing in machine,
+went to school. Had school dinner. Had Domestic Science - made apple crumble.
+Came home. Vacuumed hall, lounge and breakfast room. Peeled potatoes, chopped
+up cabbage, cut finger, rinsed blood off cabbage. Put chops under grill,
+looked in cookery book for recipe for gravy. Made gravy. Strained lumps out
+with a colander. Set table, served dinner, washed up. Put burnt saucepans in
+to soak. Got washing out of machine; everything blue, including white
+underwear and handkerchiefs. Hung washing on clothes-horse. Fed dog. Ironed PE
+kit, cleaned shoes. Did homework. Took dog for a walk, had bath. Cleaned bath.
+Made three cups of tea. Washed cups up. Went to bed. Just my luck to have an
+assertive mother!
+ 
+Dr Gray wasn't interested in hearing about my tongue ache. He told me off for
+wasting his time. He said I was a malingering hypochondriac and has ordered me
+not to be ill for at least six months. 
+ 
+I promise to try.
+ 
+Tuesday  March 10th  PRINCE EDWARD BORN, 1964.
+Prince Edward in newspaper. Why couldn't I have been born he, and he me? I am
+treated like a serf.
+ 
+Wednesday  March 11th.
+ 
+Thursday  March 12th.
+ 
+Friday  March 13th  MOON'S FIRST QUARTER.
+Just my luck, I've got a pimple on the end of my chin.
+ 
+Saturday  March 14th.
+Woke up this morning to find my face covered in huge red spots. My mother said
+that they were caused by nerves but I am still convinced that my diet is
+inadequate. We have been eating a lot of boil-in-the-bag stuff lately. Perhaps
+I am allergic to plastic.
+Which of the following shall I do?
+1) do the housework as usual.
+2) stay in bed.
+3) ring grandma for help.
+3
+I ring grandma for help and she comes round in a taxi to take me to her house
+and put me to bed. I am there now. It is very clean and peaceful with no jobs
+to do. I am wearing my dead grandad's pyjamas. I have just had a bowl of
+barley and beef soup. It is my first proper nourishment for weeks. 
+ 
+I expect there will be a row when my mother comes home and finds that I have
+gone. But frankly, my dear diary, I don't give a damn.My father has got the
+flu. I'm not surprised with the diet we get. My mother wants to go out in the
+rain to get him a vitamin C drink, but as I tell her, "It's too late now".
+It's a miracle we don't all get scurvy.
+What shall I do?
+1) try to persuade my mother to stay indoors.
+2) let my mother go.
+3) bravely venture out into the rain.
+3
+I bravely venture out into the rain with #1 from my mother. 
+ 
+The chemist has changed into a drug store. It is full of nappies, baby foods
+and health biscuits. But no drugs. I ask an assistant where they are, but she
+just gives me a funny look. 
+ 
+At last I find the flu medicines. They are on some narrow shelves in the
+corner, hidden by sneezing customers.
+Choose one of the following for me:
+1) choose some time-pills called Cold Comfort.
+2) choose a cheap powder called Lemon-Aid.
+3) choose a lipstick called Nose Nurse.
+3
+I choose a lipstick called Nose Nurse because it was on TV. Also so I can find
+out how a lipstick cures colds.
+ 
+The assistant is whispering to the checkout woman as I go to pay. They
+probably think I am noble to go shopping on such an awful day.
+ 
+Sunday  March 15th  SECOND IN LENT.
+My father is still lazing about in bed. He is supposed to be ill, but I notice
+he is still smoking!
+ 
+The spot on my chin is getting bigger. It is my mother's fault for not knowing
+about vitamins.
+Which of the following shall I do?
+1) put Savlon on the spot.
+2) put a plaster over the spot.
+3) scratch the spot.
+3
+I scratch the spot to release the pressure. Yeuck!
+ 
+Monday  March 16th.
+I, Adrian Mole, score 33 percent, which makes me an unimportant thicko.
+ 
+I have found a word in the dictionary which describes my father. It is
+malingerer. He is still in bed guzzling vitamin C.
+ 
+The spot is itching like mad.
+ 
+Tuesday  March 17th  ST PATRICK'S DAY. BANK HOLIDAY IN N. IRELAND AND REP. OF
+IRELAND.
+I think the spot is a boil. Just my luck to have it where everyone can see it
+What shall I do?
+1) squeeze the spot.
+2) show the spot to my mother.
+3) try to ignore the spot.
+3
+I try to ignore the spot but this is difficult. It seems to stare back
+whenever I go near a mirror.
+ 
+Wednesday  March 18th.
+There are mirrors everywhere. Pandora caught me looking at the spot reflected
+in a glass door, a metal lamp and a shop window. She said that she might
+understand me being vain if I had anything to be vain about. I explained about
+the spot, but she just said "Adrian, I would respect you more if you didn't
+make up such ridiculous excuses".
+ 
+Thursday  March 19th.
+My father got his car back from the garage today. He was cleaning it and
+gloating over it for a whole two hours. I noticed that the stick-on waving
+hand I bought him for Christmas was missing from the rear window. I told him
+he ought to complain to the garage but he said he didn't want to make a fuss.
+ 
+Friday  March 20th  FIRST DAY OF SPRING. FULL MOON.
+ 
+Saturday  March 21st.
+P.C. Gordon called today. Someone has reported me for trying to buy drugs. It
+is not true! 
+ 
+The policeman explained how dangerous drugs are, while my parents looked at me
+suspiciously. I could tell my mother was dead worried, she lit two cigarettes
+at the same time and didn't complain when my father's beer can sprayed the
+carpet. I denied everything.
+ 
+Sunday  March 22nd  THIRD IN LENT. BRITISH SUMMER TIME BEGINS.
+Pandora says I will have a criminal record on the police computer. She is
+getting up a petition about it. 
+ 
+She comforted me emotionally behind her father's tool shed, so the day was not
+all bad.
+ 
+Monday  March 23rd.
+I, Adrian Mole, score 34 percent, which makes me a mediocre thicko.
+ 
+Great news! Mars bars have got bigger!
+ 
+Tuesday  March 24th.
+It all adds up. A bad home, poor diet, not liking punk. I am definitely an
+intellectual.
+ 
+Wednesday  March 25th  ANNUNCIATION OF B.V.MARY.
+ 
+Thursday  March 26th.
+ 
+Friday  March 27th.
+ 
+Saturday  March 28th  LAST QUARTER.
+ 
+Sunday  March 29th  FOURTH IN LENT. MOTHERING SUNDAY.
+My mother has arranged what she called a 'civilised meeting' for tomorrow. Mr
+Lucas is going to be there. Naturally I am not invited. I am going to listen
+at the door.
+ 
+Monday  March 30th.
+I, Adrian Mole, score 34 percent, which makes me a mediocre thicko.
+ 
+A terrible thing happened last night. My father and Mr Lucas had a fight in
+the FRONT garden, the whole street came outside to watch! My mother tried to
+separate them but they both told her to "keep out of it". Mr O'Leary tried to
+help my father, he kept shouting "Give the smarmy bugger one for me, George".
+The civilised meeting broke up at about five o'clock when my father found out
+how long my mother and Mr Lucas had been in love. 
+ 
+The fight was quite exciting really. I had a good view from my bedroom window.
+Mrs O'Leary said, "'Tis the child I feel sorry for", and all the people looked
+up and saw me, so I looked especially sad. I expect the incident will give me
+a trauma at some stage in the future. I'm all right at the moment, but you
+never know.
+ 
+Tuesday  March 31st.
+My mother has gone to Sheffield with Mr Lucas. I am the child of a one-parent
+family.
+ 
+I, Adrian Mole, score 34 percent, which makes me a mediocre thicko.
+ 
+ 
+That's the end of this part of the game. Would you like to continue with the
+next part? 
+YES
+Check the program tape/disk is in the drive and press ENTER or RETURN. If
+using tape, check the recorder is set to PLAY (if the tape isn't moving, press
+ENTER or RETURN again).
+Welcome to part two of the Secret Diary of Adrian Mole from Level 9 and
+Mosaic. If you are loading from tape, and it has not stopped, then STOP THE
+TAPE IMMEDIATELY.
+ 
+ 
+Wednesday  April 1st  ALL FOOL'S DAY.
+Nigel rang up this morning and pretended he was an undertaker and asked when
+he was to pick up the body. Honestly! He has got no sense of humour.
+ 
+I had a good laugh telling girls that their petticoats were showing when they
+weren't. 
+ 
+I was born exactly thirteen years and three hundred and sixty-four days ago.
+ 
+Thursday  April 2nd.
+I am fourteen today! Got a track suit and a football from my father. (He is
+completely insensitive to my needs.) Best of all was ten pounds from my mother
+and five pounds from Mr Lucas. (Conscience money.) 
+ 
+Nigel sent a joke card; it said on the front, "Who's sexy, charming,
+intelligent and handsome?" Inside it said, "Well it certainly ain't you
+buddy!!!" Nigel wrote "No offence mate". He put ten pence inside the envelope.
+ 
+So at last I am fourteen! Had a good look at myself in the mirror tonight and
+I think I can detect a certain maturity. (Apart from the rotten spots.)
+ 
+Friday  April 3rd.
+I have formed a club for non-smokers at school. It's called Stub It Out, or
+SIT for short. Our club activities consist of drawing lurid posters showing
+smokers coughing and choking and searching first years for fags and matches.
+Choose one of the following for me:
+1) visit Headmaster Scruton.
+2) invite my parents to join.
+3) invite Pandora to join.
+3
+I invite Pandora to join, but she says it would not be honest for her to
+participate unless she was a convinced non-smoker. She hopes to join when she
+finishes her current box of Benson & Hedges.
+ 
+There is hope when Pandora's box is empty. (An intellectual joke.) Ha! Ha! Ha!
+ 
+Got full marks in the Geography test today. Yes! I am proud to report that I
+got twenty out of twenty! I was also complimented on the neat presentation of
+my work. There is nothing that I do not know about the Norwegian leather
+industry.
+ 
+Saturday  April 4th  NEW MOON.
+ 
+Sunday  April 5th  PASSION SUNDAY.
+Looked at "Big and Bouncy". It is Passion Sunday after all!
+ 
+Monday  April 6th.
+I, Adrian Mole, score 33 percent, which makes me an unimportant thicko.
+ 
+I am a prefect! My first duty is as late duty prefect. I have to wait by the
+gap in the railings and take the name of anyone sneaking late into school.
+ 
+It is dead good because I get to miss morning assembly.
+ 
+Tuesday  April 7th.
+ 
+Wednesday  April 8th.
+School filthy. The cleaners are on strike.
+ 
+Thursday  April 9th.
+The house is looking extremely squalid because my father is not doing any
+housework. The dog is pining for my mother.
+ 
+Friday  April 10th.
+Second meeting of SIT. We resolve that further action is needed.
+Which of the following shall I do?
+1) lead a deputation from SIT to the staff room.
+2) get up a petition against smoking.
+3) lecture the filthy smokers in the boys' toilets.
+3
+I lecture the filthy smokers in the boys' toilets about the evils of smoking.
+It does little good.
+ 
+They threaten to put my head down the toilet, but I don't flinch in my duties
+as saints are used to being ill-treated by the ignorant.
+ 
+Saturday  April 11th  FIRST QUARTER.
+Had a postcard from my mother. She is living in a flat in Sheffield and wants
+me to visit her and Lucas as soon as possible.
+ 
+Why can't my mother write a letter like any normal person? Why should the
+postman be able to read my confidential business?
+What shall I do?
+1) ask my father if I can go.
+2) make up my mind to go immediately, without telling my father.
+3) decide to go by train without paying.
+3
+I decide to go by train without paying. It is not really cheating because I
+can't afford the fare and my alternative would be hitch-hiking so BR would not
+be paid anyway. All it costs them is a a few extra drops of fuel. That's what
+Nigel says, anyway.
+ 
+Sunday  April 12th  PALM SUNDAY.
+7.45 a.m. At Leicester Station. Must get onto the train for Sheffield without
+a proper ticket.
+Choose one of the following for me:
+1) buy a platform ticket.
+2) pretend to have left something on a train.
+3) mingle with a group of people entering.
+3
+I mingle with a group of people entering, and try to reach the platform
+unseen. But the ticket collector calls me back. I am compelled to buy a
+platform ticket.
+The journey is dead scary. I keep expecting a guard to appear. 
+ 
+8.24 a.m. Trapped on a train near Sheffield. Must think of a way to leave.
+Which of the following shall I do?
+1) make up my mind to find a back way out of Sheffield station.
+2) mingle with the departing passengers.
+3) leap from the moving train.
+3
+I leap from the moving train, or rather I try to. The train slows down near
+the station but the door is very stiff. As I struggle with it, a man stops me
+leaving. Jumping would be very dangerous.
+What shall I do?
+1) make up my mind to find a back way out of Sheffield station.
+2) give myself up.
+3) mingle with the departing passengers.
+3
+I mingle with the departing passengers and push past the ticket barrier. But a
+guard grabs me.
+I am treated like a criminal! Imprisoned in the station office until my mother
+pays my fare. She is not pleased.
+My mother started crying when she saw me. It was a bit embarrassing but quite
+nice at the same time. We got a taxi from the station, Sheffield looks OK,
+just like home really. I didn't see any knife and fork factories. I expect
+Margaret Thatcher has closed them all down.
+ 
+Lucas was out flogging insurance so I had my mother all to myself until eight
+o'clock. The flat is dead grotty, it is modern but small. You can hear the
+neighbours coughing. My mother is used to better things. I am dead tired, so
+will stop.
+ 
+I wish my mother would come home, I had forgotten how nice she is.
+ 
+Monday  April 13th.
+I, Adrian Mole, score 29 percent, which makes me a middling creep.
+ 
+My mother wants to show me Sheffield.
+Choose one of the following for me:
+1) say I will only come if she will come back to Leicester at the end of the
+week.
+2) go shopping.
+3) say I am not interested in Sheffield.
+3
+I say I am not interested in Sheffield and we have a serious argument. My
+mother says my nose is always in a book or stuck up in the air, it is the
+fault of my father.
+ 
+Eventually I am persuaded to go out.
+ 
+We had a Chinese Businessman's Lunch and then went to see a Monty Python film
+all about the life of Jesus. It was dead daring, I felt guilty laughing.
+ 
+Lucas got back early and cooked dinner.
+Which of the following shall I do?
+1) manage to force it down.
+2) say I am not hungry.
+3) add lots of salt while he is not looking.
+3
+I add lots of salt while he is not looking, so the food tastes revolting. Ha!
+Ha! Ha!
+ 
+Later on I phoned my father from a call-box; I just had time to shout, "Don't
+forget to feed the dog", before the pips went. 
+ 
+Retired to bed early because of all the slopping Lucas was doing.
+ 
+Tuesday  April 14th.
+Helped my mother to paint her kitchen. She is doing it brown and cream, it
+looks awful, just like the toilets at school.
+ 
+Lucas has bought me a penknife. He is trying to bribe me into liking him
+again.
+What shall I do?
+1) accept the penknife.
+2) refuse the penknife.
+3) state my opinion of the kitchen.
+3
+I state my opinion of the kitchen and the flat. I explain in detail that it is
+bloody awful. My mother and Lucas are speechless.
+ 
+Wednesday  April 15th.
+Lucas was not at work today so I had to put up with his lechery all day. He is
+constantly touching my mother's hand or kissing her or putting his arm round
+her shoulders, I don't know how she stands it, it would drive me mad.
+ 
+He and my mother are driving out into the countryside this afternoon.
+Choose one of the following for me:
+1) go with them.
+2) go along but remain in the car.
+3) stay behind.
+3
+I stay behind and go for a trudge round Sheffield instead.
+ 
+Came back, had a bath, thought about the dog, went to sleep. Home tomorrow.
+ 
+Thursday  April 16th.
+2.10 p.m. So my little sojourn in Sheffield is drawing to a close. I am
+catching the 7.10 p.m. train which only leaves five hours to do my packing. My
+father was right. I didn't need two suitcases of clothes. Still it is better
+to be safe than sorry, I always say. I shan't be sorry to leave this sordid
+flat with the coughing neighbours, though naturally I have some regrets about
+my mother's stubbornness in refusing to come home with me.
+ 
+11 p.m. My father met me at the station, the dog jumped up to meet me, missed,
+and nearly fell in front of the 9.23 p.m. Birmingham express.
+ 
+Friday  April 17th  GOOD FRIDAY.
+ 
+Saturday  April 18th.
+Stayed in bed until 6 p.m.
+ 
+Sunday  April 19th  EASTER SUNDAY.
+Found a bird's nest in Bert Baxter's hedge. Now the hedge can't be trimmed
+this year. It will grow into a jungle.
+ 
+Monday  April 20th  BANK HOLIDAY IN UK (EXCEPT SCOTLAND).
+I, Adrian Mole, score 27 percent, which makes me a suburban creep.
+ 
+ 
+Tuesday  April 21st.
+Nothing happened today.
+ 
+Wednesday  April 22nd.
+Went to see the vicar tonight. I asked him about the meaning of life but he
+was too busy to reply. Just my luck!
+ 
+Thursday  April 23rd  ST GEORGE'S DAY.
+Just measured my thing. It has grown one centimetre. I might be needing it
+soon.
+ 
+Friday  April 24th.
+Bert Baxter keeps taking his new set of false teeth out for a look.
+Fortunately I possess a strong stomach.
+ 
+Saturday  April 25th.
+ 
+Sunday  April 26th.
+ 
+Monday  April 27th.
+I, Adrian Mole, score 27 percent, which makes me a suburban creep.
+ 
+Barry Kent has been late three times in one week. So it is my unfortunate duty
+to report him to Mr Scruton.
+Which of the following shall I do?
+1) let Barry Kent off with a warning.
+2) report Barry Kent.
+3) ask Barry Kent for 25p to keep quiet.
+3
+I ask Barry Kent for 25p to keep quiet. Barry Kent just laughs.
+ 
+Next Stub It Out meeting. I feel that direct action is necessary to further
+the non-smoking cause.
+What shall I do?
+1) declare my bedroom a non-smoking zone.
+2) write anti-smoking graffiti in the toilets.
+3) volunteer to deface an advertising board.
+3
+I volunteer to deface an advertising board near the school. It has a giant
+picture of a cigarette packet with the slogan, "Black Gold".
+ 
+Tuesday  April 28th.
+Barry Kent duffs me up in the cloakroom. He hangs me from a coathook and
+demands that I tell him when anyone is late. He wants to blackmail them.
+Choose one of the following for me:
+1) try to escape.
+2) refuse.
+3) agree.
+3
+I agree. After all, no one will be late if it means being menaced by Barry
+Kent! It is my duty as a prefect to tell him.
+ 
+10.30 a.m. The poster has a giant picture of a cigarette packet with the
+slogan "Black Death". Ha! Ha! Ha!
+ 
+Wednesday  April 29th.
+I.S.I.R.T.A. on World Service. Very hilarious.
+ 
+Thursday  April 30th.
+The cigarette poster has been repaired.
+ 
+Friday  May 1st.
+ 
+Saturday  May 2nd.
+Told Bert my mother has run away with an insurance man. He said 'Was it an Act
+of God?' Then he laughed until his eyes watered.
+ 
+Sunday  May 3rd  SECOND AFTER EASTER.
+I have decided to decorate my room. I can't live a moment longer with Noddy
+wallpaper. At my age it is positively indecent to wake up to Big Ears and the
+rest of the Toyland idiots running round the walls. My father says I can do
+what I like as long as I buy everything needed and do it myself.
+Which of the following shall I do?
+1) make up my mind to wallpaper the room.
+2) decide to paint the walls.
+3) decide to try something different.
+3
+I decide to try something different. Most rooms are dead boring. I need to
+surround myself with intellectual inspiration.
+What shall I do?
+1) choose a textured filler to spread on the walls.
+2) choose cork tiles.
+3) choose carpet on the walls.
+3
+I choose carpet on the walls. All the best places have this! Then I work out
+the cost.I make up my mind to wallpaper the room. I don't know why people
+think this is difficult.
+Choose one of the following for me:
+1) choose more Noddy paper.
+2) choose a pattern of rocket ships.
+3) choose bamboo pattern paper.
+3
+I choose bamboo pattern paper. It is dead cultural and dead expensive; I can
+only just afford it because of the end-of-line, seconds, special offer signs.
+ 
+The stupid cashier refuses to sell me any wallpaper paste. It is company
+policy because I am young. Another customer has to buy it for me, then I pay
+him.
+ 
+Monday  May 4th  BANK HOLIDAY IN UK. NEW MOON.
+I, Adrian Mole, score 28 percent, which makes me an ordinary creep.
+ 
+My room is finished. The bamboo pattern looks dead good. I will hang a curtain
+over the corner where the paper ran out.
+ 
+Tuesday  May 5th.
+ 
+Wednesday  May 6th.
+Went to the youth club with Nigel. It was dead good. We played ping-pong until
+the balls cracked.
+ 
+Thursday  May 7th.
+Next SIT meeting. Only I turned up. Decided to suspend Stub It Out for a
+while.Mr Hill told us about training animals in Science today. He says you can
+teach any animal by rewarding it for doing what you want. He doesn't know our
+dog. No one could teach it anything!
+ 
+Friday  May 8th.
+I told my father about training animals and now he wants me to try training
+the dog!!! All because it ate his Daily Express again.
+Which of the following shall I do?
+1) say it's not MY dog.
+2) agree to help.
+3) explain that you can't teach an old dog new tricks.
+3
+I explain that you can't teach an old dog new tricks but he says it's always
+learning new ways of costing him money.
+ 
+Saturday  May 9th.
+Radio 4 play about unhappiness.
+ 
+Sunday  May 10th  THIRD AFTER EASTER. MOTHER'S DAY, USA AND CANADA. MOON'S
+FIRST QUARTER.
+ 
+Monday  May 11th.
+I, Adrian Mole, score 29 percent, which makes me a middling creep.
+ 
+I ask Mr Hill about teaching dogs. He says it must be easier than teaching
+kids. Just my luck to have a comedian for a teacher!!!
+ 
+Tuesday  May 12th.
+The stupid dog is looking worried. I wonder if it knows that I've written to
+Barbara Woodhouse?
+ 
+Wednesday  May 13th.
+Pandora is an expert with animals. She trained her horse, Blossom, to jump
+over fences by breathing up its nose. She breathed up its nose, I mean. Not
+that Blossom was jet-propelled. Ha! Ha! Ha!
+ 
+She also gave it sugar lumps as a reward. I wonder if I should reward the dog?
+What shall I do?
+1) breathe up the dog's nose.
+2) get some dog biscuits.
+3) buy sugar lumps for the dog.
+3
+I buy sugar lumps for the dog. It seems to like them, but I have second
+thoughts. Probably it is another sign of being an intellectual. Sugar cubes
+may be bad for the dog's teeth; perhaps I can make icing from them.
+ 
+Thursday  May 14th.
+School was dead good. Barry Kent was sent home for wearing a punk rock
+T-shirt.
+ 
+Friday  May 15th.
+I have decided to be a poet. My father says there is no career structure and
+no pension and other boring things, but I am quite decided.
+ 
+Saturday  May 16th.
+Nigel has arranged a blind date for me with Sharon Bott. I am meeting her at
+the roller-skating rink next Saturday. I am dead nervous. I don't even know
+how to roller-skate.
+Choose one of the following for me:
+1) borrow Nigel's disco skates.
+2) ask my father to buy a pair of skates.
+3) chicken out.
+3
+I chicken out. From what I hear, Sharon Bott is altogether too much for me to
+handle.
+ 
+Sunday  May 17th.
+Nigel came round this morning. He is still mad about Pandora. I tried to take
+his mind off her by talking about the Norwegian leather industry but he
+couldn't get interested somehow.
+ 
+Monday  May 18th.
+I, Adrian Mole, score 27 percent, which makes me a suburban creep.
+ 
+ 
+Tuesday  May 19th  FULL MOON.
+Barry Kent said he would do me over unless I gave him twenty-five pence every
+day. I told him he was wasting his time demanding money with menaces from me.
+I never have any spare money. My parents put my pocket money straight into my
+building society account and give me fifteen pence a day for a Mars bar. Barry
+Kent said I would have to give him my dinner money! I told him my father pays
+it by cheque since it went up by sixty pence a day, but Barry Kent hit me in
+the goolies and walked off saying, "There's more where that came from".
+Which of the following shall I do?
+1) tell Scruton about Barry Kent.
+2) offer Barry Kent my Mars bar money.
+3) put my name down for a paper round.
+3
+I put my name down for a paper round.
+ 
+Wednesday  May 20th.
+Woke up with a pain in my goolies. Told my father. He wanted to look but I
+didn't want him to so he said I would have to soldier on. He wouldn't give me
+a note excusing me from Games, so I had to stumble around in the mud again.
+ 
+Bert Baxter was laughing about the dog. My father told him that I had
+forgotten about training it. This is not true! We Moles never forget.
+What shall I do?
+1) train it as an attack dog.
+2) train it to fetch the newspaper.
+3) train it to sit.
+3
+I train it to sit. The dog is good at this. But it is not so good at standing
+up when called. I thought it had got the idea once, and made a fuss of it as a
+reward, but the dog just wanted a stretch.
+ 
+Thursday  May 21st.
+Nigel says the dog didn't know I was calling it. It thought I was shouting at
+some other dog! He says I should experiment with names and suggests we call
+the dog Clint because of the squinty glint in its eyes.
+ 
+Friday  May 22nd.
+Saw Barry Kent smoking quite openly in the school corridor. He has certainly
+got a nerve! I felt it was my duty to report him to Mrs Bull. I did this
+purely out of concern for Barry Kent's health.
+ 
+Saturday  May 23rd.
+Unblocked Bert Baxter's drain, it was full of old bones and tea leaves. I told
+Bert that he really ought to use tea-bags. After all this is the twentieth
+century.
+ 
+Sunday  May 24th  ROGATION SUNDAY.
+Success! Clint the dog will come when called. Everyone is most impressed. I
+could be a farmer when I grow up, because of my skill with animals. I have
+always wanted to be rich.
+ 
+Monday  May 25th.
+I, Adrian Mole, score 27 percent, which makes me a suburban creep.
+ 
+ 
+Tuesday  May 26th  MOON'S LAST QUARTER.
+Got a letter from Mr Cherry the newsagent to say I can start a paper round
+tomorrow. Worse luck!
+ 
+Wednesday  May 27th.
+Got up at six o'clock for my paper round. I got Elm Tree Avenue. It is dead
+posh. All the papers they read are very heavy: The Times, the Guardian and the
+Daily Torygraph. Just my luck!
+ 
+Thursday  May 28th  ASCENSION DAY.
+Exhausted by my paper round. Delivered 25 Punch magazines as well as the
+papers.
+ 
+Friday  May 29th.
+The people at 65 Elm Tree Avenue have a ferocious Alsatian. It barks and leaps
+at the front door and tries to bite my hand as I post their newspaper. I am
+glad the dog is locked inside the house.
+Choose one of the following for me:
+1) leave the paper on the doorstep.
+2) lure the dog away.
+3) waggle their Telegraph through the letter-box.
+3
+I waggle their Telegraph through the letter-box so that the dog chews it to
+bits. Ha! Ha! Ha!
+ 
+Saturday  May 30th.
+Delivered a telephone directory today. It is called Byte.
+ 
+Sunday  May 31st  SUNDAY AFTER ASCENSION.
+ 
+Monday  June 1st  BANK HOLIDAY IN THE REP. OF IRELAND.
+I, Adrian Mole, score 26 percent, which makes me a spotty creep.
+ 
+The papers got mixed up today. Elm Tree Avenue got the Sun and the Mirror,
+while the Corporation Row council estate got the heavy papers.
+ 
+I don't know why everyone went so mad. You'd think they would enjoy reading a
+different paper for a change.
+ 
+Mr Hill asked me to give a talk in Science about training Clint. He said it
+was a success story for scientific principle.
+ 
+Tuesday  June 2nd  NEW MOON.
+Mr Cherry gave me hundreds of newspaper Bingo cards to deliver with the
+papers. I said that I didn't have time before school, but he told me to do my
+best.
+Which of the following shall I do?
+1) push all the cards through one letter-box.
+2) deliver the Bingo cards properly.
+3) keep the cards for a while.
+3
+I keep the cards for a while. There is no time to deliver them in the morning.
+What shall I do?
+1) deliver them after school instead.
+2) sell the cards to Barry Kent.
+3) keep the cards myself.
+3
+I keep the cards myself. Perhaps I will win a million!
+ 
+Wednesday  June 3rd.
+Clint has been kidnapped! There was an awful noise of falling dustbins last
+night. My father wanted to wait until morning, but I made him investigate.
+ 
+There was a scrap of paper pinned to our front door. It said, "The DOG you
+were EXPERIMENTING ON has been RESCUED. Ban ALL EXPERIMENTS on ANIMALS. Signed
+the Animal Liberation Faction". Clint was gone from the coal shed. I 'phoned
+the police but they were busy.
+ 
+I was seriously menaced at school today; Barry Kent threw my snaplock
+executive briefcase on to the rugby pitch. I have got to find two pounds
+quickly before he starts throwing ME onto the rugby pitch.
+Choose one of the following for me:
+1) ask my father.
+2) ask Mr Cherry.
+3) ask Bert Baxter.
+3
+I ask Bert Baxter for money. He says I should neither a borrower nor a lender
+be and gives me fifty pence.
+ 
+Thursday  June 4th.
+A policewoman arrived first thing this morning. She read the note from the
+A.L.F. and asked for a sample of my handwriting. I am being victimised! Even
+my father is suspicious.
+ 
+Friday  June 5th.
+No sign of the dog.
+ 
+Saturday  June 6th.
+Me and my father cleaned the house. We had no choice. My grandma is coming to
+tea.
+ 
+Sunday  June 7th  WHIT SUNDAY.
+Still no sign of the dog.
+ 
+Monday  June 8th.
+I, Adrian Mole, score 23 percent, which makes me a namby-pamby creep.
+ 
+I must do something to find Clint the dog.
+Which of the following shall I do?
+1) ask Barry Kent about the dog.
+2) ask Pandora for help.
+3) ask grandma for help.
+3
+I ask grandma for help, but she says she does not know any dognappers.
+ 
+Tuesday  June 9th  MOON'S FIRST QUARTER.
+Barry Kent is a member of the Animal Liberation Faction. There is a horrible
+magazine from them in his desk. It is all about monkeys.
+ 
+Barry Kent must have the dog.
+What shall I do?
+1) tell grandma that Barry Kent has our dog.
+2) tell Barry Kent that I know he has Clint.
+3) tell my father that Barry Kent has the dog.
+3
+I tell my father that Barry Kent has the dog. He will go round there tomorrow.
+ 
+Checked the Bingo cards. Thirty-nine of them were just one number away from
+winning a million pounds. How unlucky can you get, us Moles must be cursed! So
+near and yet I won nothing!
+ 
+It is the same with my father. He collected fifty moneymatch cards at the
+petrol station yet none of them matched.
+ 
+Wednesday  June 10th.
+I told my father about being seriously menaced today. I was forced to because
+Barry Kent seriously damaged the badge on my school blazer.
+ 
+Thursday  June 11th.
+My father told the police about Barry Kent, but they can do nothing without
+evidence. That never stops the Sweeney on TV!
+ 
+Friday  June 12th.
+Barry Kent duffed me up in the cloakroom today. He called me a copper's nark
+and other things too bad to write down.
+ 
+Saturday  June 13th.
+Barry Kent denied all knowledge of the dog, and laughed when my father asked
+for it back. My father went to see his father and had a serious argument. I
+think my father is dead brave. Barry Kent's father looks like a big ape and
+has got more hair on the back of his hands than my father has on his entire
+head.
+ 
+My grandma found out about the argument..
+ 
+She listened to the story and then she put on her coat, thinned her lips and
+went out. Soon afterwards she came back in, took her coat off, fluffed her
+hair out and called Barry Kent in. He was leading the dog.
+ 
+Sunday  June 14th  TRINITY SUNDAY.
+The dog has forgotten all its training. It showed its gratitude by eating my
+father's Daily Express.My grandma got to find out about the menacing (my
+father didn't want her to know on account of her diabetes). She listened to it
+all then she put her hat on, thinned her lips and went out. She was gone one
+hour and seven minutes, she came in, took her coat off, fluffed her hair out
+and took #27.18 from the anti-mugger belt round her waist. Then she got the
+tea ready. Pilchards, tomatoes and ginger cake. I bought her a box of diabetic
+chocolates from the chemist's as a token of my esteem.
+ 
+Monday  June 15th.
+I, Adrian Mole, score 22 percent, which makes me a lowly creep.
+ 
+It is all round the school that an old lady of seventy-six frightened Barry
+Kent and his dad into returning my menaces money. Barry Kent daren't show his
+face. His gang are electing a new leader.
+ 
+Tuesday  June 16th.
+Did a good drawing of the Incredible Hulk smashing Craig Thomas to bits. Ms
+Fossington-Gore said it was a powerful statement of monolithic oppression.
+ 
+Wednesday  June 17th  FULL MOON.
+Got a present from Auntie Susan. It is an embroidered toothbrush holder and it
+was made by one of the prisoners! She is called Grace Pool. Auntie Susan said
+that I should write and thank her! It is bad enough that my father's sister
+works in Holloway Prison. But now I am expected to start writing to the
+prisoners! Grace Pool could be a murderess or anything!
+ 
+Thursday  June 18th.
+The dog is at the vet's again. It trod in the glue my father was using to tile
+the kitchen floor. Its paws got stuck tight and my father had to cut round the
+dog with a Stanley knife. I told the stupid dog to keep out of the kitchen,
+but would it listen?
+ 
+Friday  June 19th.
+ Thought about writing to thank Grace Pool.
+Choose one of the following for me:
+1) write to Auntie Susan instead.
+2) don't write.
+3) write to thank her for the present.
+3
+I write to thank her for the present. She is in 'D' Wing. I put:
+ 
+Dear Miss Pool, Thank you for making the toothbrush holder. It is charming.
+  Yours, with kind regards, Adrian
+ 
+Saturday  June 20th.
+Dead good play on Radio 4 about editorial censorship.
+ 
+Sunday  June 21st  FIRST AFTER TRINITY. FATHER'S DAY.
+ 
+Monday  June 22nd.
+I, Adrian Mole, score 23 percent, which makes me a namby-pamby creep.
+ 
+Pandora and I had a good talk about life today. We both agreed that on the
+whole it is a good thing so at last we agree on something.
+ 
+Tuesday  June 23rd.
+I am getting worried about exams. My problem is that I am too intellectual. I
+am always thinking things like: is there a God? And: Why is there VAT on
+computerised books but not on printed ones? These thoughts clutter my brain up
+and won't let me remember facts.
+ 
+Wednesday  June 24th.
+Wake up with a sore throat, can't swallow. Shivery. everything a hazy blur.
+Which of the following shall I do?
+1) attract attention by banging on the floor with my shoe.
+2) shout downstairs.
+3) tuck a message inside the dog's collar.
+3
+I tuck a message inside the dog's collar and send it downstairs. Wait for
+ages, then hear the dog barking in the street. It hasn't delivered the
+message!
+ 
+I have to go to the toilet, but how I get there I don't know. Then I am forced
+to go downstairs and tell my father I am ill. My father looks in my mouth and
+says, "Christ Almighty, Adrian, your tonsils look like Polaris missiles! What
+are you doing down here? Get back into bed at once, you fool".
+ 
+Thursday  June 25th  MOON'S LAST QUARTER.
+I have got tonsillitis. It is official. I am on antibiotics.
+ 
+Friday  June 26th.
+Pandora sits by my bed reading to me. Every word is like a rock dropping on my
+head.
+What shall I do?
+1) ask her to stop.
+2) endure it in silence.
+3) decide to read to her when she is ill.
+3
+I decide to read to her when she is ill.
+ 
+Saturday  June 27th.
+A 'get well' card from my mother.
+ 
+Sunday  June 28th  SECOND AFTER TRINITY.
+Doctor says our thermometer is faulty. I feel slightly better.
+ 
+Monday  June 29th.
+I, Adrian Mole, score 21 percent, which makes me an unrespectable creep.
+ 
+Pandora brought me a 'get well' card. She made it herself with felt-tip pens.
+She signed it: "Forever yours, Pan". I wanted to kiss her but my lips are
+cracked. 
+ 
+Why hasn't my mother been to see me?
+ 
+Tuesday  June 30th.
+My mother has just left to catch the train for Sheffield. I am worn out with
+all the emotion. I am having a relapse.
+ 
+I, Adrian Mole, score 21 percent, which makes me an unrespectable creep.
+ 
+ 
+That's the end of this part of the game. Would you like to continue with the
+next part? 
+YES
+Check the program tape/disk is in the drive and press ENTER or RETURN. If
+using tape, check the recorder is set to PLAY (if the tape isn't moving, press
+ENTER or RETURN again).
+Welcome to the Secret Diary of Adrian Mole from Level 9 and Mosaic. If you are
+loading from tape, and it has not stopped, then STOP THE TAPE IMMEDIATELY.
+ 
+ 
+Wednesday  July 1st  DOMINION DAY, CANADA. NEW MOON.
+ 
+Thursday  July 2nd.
+My school work is plummeting down to new depths. I only got five out of twenty
+for spelling. I think I might be anorexic.
+ 
+Friday  July 3rd.
+ 
+Saturday  July 4th  INDEPENDENCE DAY, USA.
+Rained.
+ 
+Sunday  July 5th  THIRD AFTER TRINITY.
+Bored stiff all day. Other families go out to safari parks but we never do.
+When I am a parent I will fill my children with stimulation at weekends and
+holidays.
+ 
+Monday  July 6th.
+I, Adrian Mole, score 21 percent, which makes me an unrespectable creep.
+ 
+Postcard from my mother, she wants me to go on holiday with her and creep
+Lucas. They are going to Scotland. I hope they enjoy themselves.
+ 
+Tuesday  July 7th.
+ 
+Wednesday  July 8th.
+Pandora has allowed me to touch her bust. I promised not to tell anyone, but
+there was nothing to tell really. I couldn't tell where her bust began through
+all the layers of underclothes, dress, cardigan and anorak. 
+ 
+I am reading Sex, the Facts, by Dr A.P.G.Haig.
+ 
+Thursday  July 9th.
+The street is full of brown-skinned people trooping in and out of Mr Lucas's
+old house. 
+ 
+Pandora and I are going round to welcome them to our district.
+ 
+Friday  July 10th.
+Cooked some bacon myself for breakfast. What a revelation, the rashers were
+about half water! I wonder if the EEC has a bacon lake?
+ 
+Saturday  July 11th.
+My father and me had a good talk last night. He asked me who I would prefer to
+live with, him or my mother?
+Choose one of the following for me:
+1) say her.
+2) say him.
+3) say both.
+3
+I say both. He told me he had made friends with a woman at work. She is called
+Doreen Slater. He said he would like me to meet her. Here we go again; so much
+for the suicidal, heartbroken, deserted husband.
+Which of the following shall I do?
+1) ring my grandma.
+2) ring my mother.
+3) ring Pandora.
+3
+I ring Pandora. She took the news very calmly. She said it made no difference
+to our love that I was descended from two shameless and immoral parents.
+ 
+Sunday  July 12th  FOURTH AFTER TRINITY.
+ 
+Monday  July 13th.
+I, Adrian Mole, score 21 percent, which makes me an unrespectable creep.
+ 
+Nigel is dead lucky. His house is absolutely fantastic! Everything is modern.
+I spent the whole day there and it really opened my eyes. Without knowing it I
+have been living in poverty for the past fourteen years. I have had to put up
+with inferior accommodation, lousy food and paltry pocket money. My father
+will just have to look for a decent well-paid job. Perhaps as a judge or a
+senior civil servant.
+ 
+Tuesday  July 14th.
+My father said he had Doreen Slater for tea. By the look of the house he'd had
+her for breakfast, dinner and tea! I have never seen the woman, but from the
+evidence she left behind she has got bright red hair, wears orange lipstick
+and sleeps on the left side of the bed!
+ 
+Wednesday  July 15th.
+Read 'Lord of the Rings' today. It is better than the film.
+ 
+Thursday  July 16th.
+Got another postcard from my mother. 
+ 
+Dear Aidy, 
+You've no idea how much I long to see you. The mothering bond is as strong as
+ever. I know you feel threatened by my involvement with Bimbo, but really Aidy
+there is no need. Bimbo fulfils my sexual needs. No more, no less. So, Aidy,
+grow up and come to Scotland. 
+Lots of Love, Pauline (mother) 
+ 
+P.S. We leave next Saturday. Catch 8.22 train to Sheffield.
+ 
+Friday  July 17th  FULL MOON.
+ 
+Saturday  July 18th.
+My father has decided to go to Somerset. He has booked a four-berth caravan.
+He is taking Doreen and Maxwell with him! He expects ME to go!
+What shall I do?
+1) decide to go to Scotland.
+2) decide to go to Somerset.
+3) decide to stay at home.
+3
+I decide to stay at home. It must be better than Scotland or Somerset.
+ 
+Sunday  July 19th  FIFTH AFTER TRINITY.
+Written to Mars, volunteering my services as a Mars bar tester in place of
+their monkeys.
+ 
+Monday  July 20th.
+I, Adrian Mole, score 20 percent, which makes me a second-rate creep.
+ 
+Pandora thinks a trial separation will do us good. She says our light to
+medium petting will turn quite heavy soon.
+Choose one of the following for me:
+1) decide to go to Scotland.
+2) decide to go to Somerset.
+3) toss a pound.
+3
+I toss a pound coin.
+ 
+Tuesday  July 21st.
+My father had a letter that made his face go white: he has been made redundant
+from his job. I am now a single-parent child whose parent is on the dole! How
+can we live on the pittance the government will give us? I made my father lots
+of hot, sweet drinks for shock; he kept going on about electric storage
+heaters and saying he would spill the beans to the media. 
+ 
+He rang Doreen Slater and she came round straightaway, she had a horrible
+little kid called Maxwell with her. It was quite a shock to see Doreen Slater
+for the first time. Why my father wanted to have carnal knowledge of her I
+can't imagine. She is as thin as a stick insect.
+ 
+Wednesday  July 22nd.
+Doreen and Maxwell stayed the night.
+ 
+Last night in Leicester.
+Which of the following shall I do?
+1) say goodbye to Pandora.
+2) make sure to pack everything.
+3) have an early night.
+3
+I have an early night. It could be my last day in civilisation for quite a
+while.
+ 
+Thursday  July 23rd.
+ 
+Friday  July 24th  MOON'S LAST QUARTER.
+Doreen is living with us. She is straight all the way up and down, including
+her nose and mouth and hair.
+What shall I do?
+1) make friends with the stick insect.
+2) tell my father to choose between me and the stick insect.
+3) shop Doreen to the DHSS.
+3
+I shop Doreen to the DHSS. She is cohabiting with my father while getting
+benefit. If she leaves, my mother is more likely to come back.
+ 
+Saturday  July 25th.
+My father, Stick Insect and Maxwell House saw me off at the station. My father
+didn't mind a bit that I chose to go to Scotland. In fact he looked dead
+cheerful. 
+ 
+My mother and creep Lucas met me at Sheffield. My mother has started dressing
+in clothes that are too young for her. Lucas creep was wearing jeans! His
+belly hangs over his belt.
+ 
+Sunday  July 26th  SIXTH AFTER TRINITY.
+We are in a log cabin beside a lake called Loch Lubnaig. My mother and Lucas
+have gone to the village to try to buy cigarettes. At least that is their
+story.
+Choose one of the following for me:
+1) send thistle postcards.
+2) phone Pandora, reversed charges.
+3) walk into Callander to buy a Mars bar.
+3
+I walk into Callander to buy a Mars bar. Two and a half miles. Play on Space
+Invaders. Come back.
+ 
+Monday  July 27th.
+I, Adrian Mole, score 17 percent, which makes me a spotty bully boy.
+ 
+Rained all day.
+ 
+Tuesday  July 28th.
+Did some washing in a log cabin launderette.
+ 
+Wednesday  July 29th.
+Rained.
+ 
+Thursday  July 30th.
+Rain stopped.
+Which of the following shall I do?
+1) go to see a waterfall in the car.
+2) play patience.
+3) go for a long walk around the Loch.
+3
+I go for a long walk around the Loch.
+ 
+Friday  July 31st  NEW MOON.
+I am in torment! My skin itches from hundreds of bites. 
+ 
+A million blood-sucking midges ambushed me in the long grass yesterday. I
+tried to beat them off with a branch but it was hopeless. The only thing was
+to run back to the cabin and lock the door.
+ 
+Saturday  August 1st.
+Went to see Rob Roy's grave. Saw it, came back.
+What shall I do?
+1) send a haggis postcard to Pandora.
+2) phone Pandora, reversed charges.
+3) phone Pandora normally.
+3
+I phone Pandora normally. Her father answers the phone. By the time he has
+fetched her my last 10p is in use. Exchange words of love as the pips sound.
+ 
+Sunday  August 2nd  SEVENTH AFTER TRINITY.
+My mother has made friends with a couple called Mr and Mrs Ball and it is Mrs
+Ball's birthday so they all came back to our log cabin to celebrate. I
+complained about the noise at 1am, 2am, 3am, and 4am. At 5am they decide to
+climb the mountain!
+Choose one of the following for me:
+1) walk into Callander to buy a Guardian for intellectual stimulus.
+2) try to persuade them of the dangers.
+3) go along to advise.
+3
+I go along to advise. They are all blind drunk, unqualified, unfit and lacking
+in knowledge of the hills, but I have read Jack London and know about survival
+in adversity.
+ 
+3p.m. The crumblies skipped up the mountain like goats while I sweltered in
+long woollen socks, two pullovers, kagoul and fifteen pound rucksack of
+essential supplies.
+ 
+Monday  August 3rd  BANK HOLIDAY IN SCOTLAND AND REP. OF IRELAND.
+I, Adrian Mole, score 16 percent, which makes me a mediocre bully boy.
+ 
+ 
+Tuesday  August 4th.
+Edinburgh. Saw castle, museum, art gallery. Bought haggis.
+ 
+Wednesday  August 5th.
+Glasgow. 11am. Counted twenty-seven drunks in one mile! My mother nagged creep
+Lucas into taking us to the Glasgow art gallery.
+Which of the following shall I do?
+1) phone Pandora instead.
+2) follow them inside.
+3) return to the car and read 'Glencoe'.
+3
+I return to the car and read 'Glencoe'by John Prebble.
+ 
+Thursday  August 6th.
+Oban.
+ 
+Friday  August 7th  MOON'S FIRST QUARTER.
+Fort William. Ben Nevis was another disappointment. The other mountains and
+hills clutter it up. Lucas fell in the burn (Scottish for 'little river') but
+unfortunately it was too shallow to drown in.
+ 
+Saturday  August 8th.
+ 
+Sunday  August 9th  EIGHTH AFTER TRINITY.
+Going home.
+What shall I do?
+1) buy a tiny bottle of whisky for my father.
+2) buy a tartan scribbling pad and pencil and write 'My thoughts on Scotland'.
+3) buy lots of souvenirs.
+3
+I buy lots of souvenirs. All tartan, even grandma's fudge.
+ 
+Home. Too tired to write more.
+ 
+Monday  August 10th.
+I, Adrian Mole, score 14 percent, which makes me a namby-pamby bully boy.
+ 
+The stick insect and my father are having anxiety attacks. A sex snooper is
+poking his nose about, asking the neighbours who is living where. Doreen will
+have to leave or lose her social security benefit. It is tragic but all for
+the best.
+ 
+Tuesday  August 11th.
+ 
+Wednesday  August 12th.
+Nice sunny day. I was forced to draw my curtains to keep out the dazzling
+light.
+ 
+Thursday  August 13th.
+ 
+Friday  August 14th.
+I am going on a camping trip with the Youth Club tomorrow. My father promised
+to help, but he can't tear himself away from the video, so I will have to
+spend all night washing and ironing. 
+ 
+My nylon sleeping bag is a bit yukky. It wasn't cleaned last year.
+Choose one of the following for me:
+1) pack it anyway.
+2) wash it in the bath.
+3) put it in the washing machine.
+3
+I put it in the washing machine. I would normally ask my mother for
+instructions on how to work the machine, but she is off slumming it with
+rat-fink Lucas. Because of her neglect, I wash the sleeping bag on 'white
+heavy soil'.
+The sleeping bag drips water over everything.
+Which of the following shall I do?
+1) hang it on the clothes line outside.
+2) drape it over a table in front of the fanheater.
+3) pack it anyway.
+3
+I pack it anyway. It is so swollen with water that it fills my rucksack. The
+rest of my luggage must go in carrier bags.
+ 
+Saturday  August 15th  FULL MOON.
+Up at 5am to do final packing. I woke my father at 5.30 to ask if there was a
+jar of crab paste for my sandwiches. His response was very unhelpful. Why
+can't my parents be more like the parents in adverts? THEY never lose their
+tempers and are always smiling and being helpful to their children. 
+ 
+My father eventually got up at 6am and helped me to repack my rucksack. He
+took out my copy of War & Peace and substituted a little book called Campfire
+Cookery for Beginners. 
+ 
+At 7am the Youth Club minibus arrived, blaring its horn. The Youth Leader,
+Rick Lemon, tried to stop the kids from shouting things out of the window but
+he didn't succeed.
+ 
+Sunday  August 16th  NINTH AFTER TRINITY.
+Everyone is being most unkind. Water from my wet sleeping bag soaked all their
+luggage.
+ 
+I am writing this at dawn in a muddy desolate field in Derbyshire. When we set
+up camp the ground looked smooth and flat. In the darkness it changed into the
+side of a lumpy hill.
+ 
+Got up to admire the majestic scenery as soon as it was light, but all I can
+see is thick grey mist. I will prepare breakfast instead. 
+ 
+Disaster! I can't cook breakfast! No one brought a tin-opener!
+What shall I do?
+1) use a table knife.
+2) ask Rick to go and buy one.
+3) use a rock.
+3
+I use a rock. A medium-sized pointy lump of Millstone Grit. Wash it, boil to
+sterilise, then bash the tin with it. I make a big hole without too much
+difficulty. A few stone fragments fall into the food, but minerals are good
+for you. Ha! Ha!
+ 
+Monday  August 17th.
+I, Adrian Mole, score 11 percent, which makes me a second-rate bully boy.
+ 
+Rick Lemon, the Youth Leader, is organising a ten-mile hike across the hills
+for the group.
+Choose one of the following for me:
+1) climb a nearby hill instead.
+2) go with them.
+3) volunteer to stay behind and cook a campfire meal.
+3
+I volunteer to stay behind and cook a campfire meal and look after the dog.
+Must stop. I've got to prepare a stew for eleven hungry people.
+ 
+Tuesday  August 18th.
+Only Pandora is speaking to me. It's not my fault that the dog knocked over
+the saucepan of stew. Everyone is going mountain climbing.
+Which of the following shall I do?
+1) volunteer to stay behind and keep the camp fire burning.
+2) join in.
+3) go along and watch.
+3
+I go along and watch. I will be able to help by pointing out footholds and any
+dangers.
+ 
+Wednesday  August 19th.
+Mountain climbing is very risky and it was my duty to keep pointing this out.
+What if someone had fallen? It is not my fault that Barbara Boyer became
+terrified and had to be rescued!
+ 
+Thursday  August 20th.
+One more day of this ordeal to go. I long for clean sheets and my electric
+toothbrush.
+ 
+Friday  August 21st.
+8p.m. It is wonderful to be back in civilisation! 
+ 
+I have lived like an ignoble savage! Sleeping on rough ground with only a tent
+and sleeping bag between me and the elements! Trying to cook chips over a tiny
+primus stove! Not being able to have a bath or clean my teeth! Having to
+perform my natural functions out in the open! Wiping my bum on leaves! No
+television or radio or anything!
+ 
+Saturday  August 22nd  MOON'S LAST QUARTER.
+I am determined to learn to wiggle my ears; it is a useful talent at parties.
+ 
+Sunday  August 23rd  TENTH AFTER TRINITY.
+ 
+Monday  August 24th.
+I, Adrian Mole, score 11 percent, which makes me a second-rate bully boy.
+ 
+ 
+Tuesday  August 25th.
+TV program about insurance. It seems that you need insurance against the risk
+of your insurance not paying up.
+ 
+Wednesday  August 26th.
+ 
+Thursday  August 27th.
+The slugs have eaten my father's vegetable patch again.
+ 
+Friday  August 28th.
+Someone is knocking at the front door.
+What shall I do?
+1) go to the door.
+2) wait for a while, hoping they will go away.
+3) shout to my father to answer.
+3
+I shout to my father to answer it, but he pretends not to hear. My father is
+hiding upstairs because of not paying tax on his spice-rack earnings.
+Choose one of the following for me:
+1) tiptoe quietly away.
+2) go to the door.
+3) look out of the front room window.
+3
+I look out of the front room window. Two official-looking men in smart suits
+are standing on the doorstep.
+Which of the following shall I do?
+1) tiptoe quietly away.
+2) open the door.
+3) ask who they are through the letterbox.
+3
+I ask who they are through the letterbox. It would not do to talk to
+left-wingers, not if I want the BBC to broadcast my poems, but my fears are
+soon allayed. The two just want to talk about Life. I invite them inside and
+we talk for a while. They are called Brothers Mark and Luke and are Witnesses
+of Jesus. Luke gives me a big-type magazine called the Watchword which is full
+of exclamation marks, and asks me to attend a service with the Witnesses on
+Sunday. I do not want to do this!
+What shall I do?
+1) say that I am an agnostic atheist.
+2) drag my father from hiding.
+3) order them to leave.
+3
+I order them to leave. This is most embarrassing because the Witnesses of
+Jesus seem like nice people, but I am forced to assert my rights because I do
+not have all day.
+ 
+Saturday  August 29th  FULL MOON.
+Stayed in bed until 6p.m. There was no point in getting up. Pandora has gone
+to a gymkhana.
+ 
+Sunday  August 30th  ELEVENTH AFTER TRINITY.
+Brainbox Henderson got a new computer printer for his birthday, to go with his
+word processor. It is a state-of-the-art laser printer from Micro Periphery.
+He showed me some printing and it looked dead good. I expect the laser singes
+letters onto the paper.
+ 
+12p.m. I know why the BBC have rejected all my poems! I was blind not to see
+it earlier.
+ 
+Monday  August 31st  BANK HOLIDAY IN UK (EXCEPT SCOTLAND).
+I, Adrian Mole, score 10 percent, which makes me a useless bully boy.
+ 
+I explained to my father that the BBC rejected my poems because the typing
+wasn't good enough. My mother's typewriter is to blame; it is knackered and
+prints each letter half red and half black.
+ 
+If they lent me the money for a word processor and laser printer like
+Henderson's, my poems would look really nice when printed, the BBC would buy
+them, and I would get more than enough money to repay the loan.
+ 
+My stupid father would not understand. My father said he had no money and it
+was bad enough Reagan putting lasers in space without me bringing them home.
+It is traumas like this that turn people into axe-wielding maniacs!
+ 
+Tuesday  September 1st.
+The dog costs a fortune to keep. I know because my father has added up its
+bills for a year. He says it has got to go. I don't agree but I will put an
+advert in the local rag.
+Choose one of the following for me:
+1) amuse myself by writing a truthful advert.
+2) write a simple, dishonest advert.
+3) write a short classified advert.
+3
+I write a short classified advert for the dog: "GREAT VALUE. #49.99 inc usual
+accessories. 1971. Immac, Good runner, Reliable, One owner, Full service
+history. Must sell. Leicester 944550".
+Which of the following shall I do?
+1) book 1 insertion in the Leicester Star.
+2) show it to Pandora.
+3) book 3 insertions in the Leicester Free Advertiser.
+3
+I book 3 insertions in the Leicester Free Advertiser.
+ 
+Wednesday  September 2nd.
+I saw Henderson's printer today. It looked like a small photocopier. All it
+did was hum. No zapping or smoke or anything. What a disappointment!
+ 
+Thursday  September 3rd.
+7.10a.m. Answer the door while my father is in the bathroom. An Arthur Daley
+character in a pin-striped suit points at my advert in the paper and asks "Is
+this the right place, squire?" He is taken aback a bit when I say I am the
+vendor, but recovers quickly. He thinks fifty quid is a fair price, in fact he
+has the money on him! 
+ 
+I am unable to say if the dog is licensed and insured, but say that it
+probably is. The man does not need to inspect it, because it was standing
+outside when he arrived and it looked OK. He holds out a wad of money and says
+"Do we have a deal?"
+What shall I do?
+1) say "maybe".
+2) say "No".
+3) say "yes".
+3
+I say "yes". The sale is made!
+ 
+Friday  September 4th.
+Yesterday was the most terrible day of my life. The pinstriped man was a used
+car salesman! He thought he had bought my father's new second-hand car for
+fifty pounds! 
+ 
+He gave me the money and, before I could react, took the keys from the
+windowsill and started the car. 
+ 
+Just then my father came downstairs from the bathroom and World War Three
+broke out. I hid until things quietened down, but they didn't because the
+phone never stopped ringing and thousands of people came to the door. They
+were all furious when I admitted it was the dog on sale. 
+ 
+At least we got the car back.
+ 
+Brainbox Henderson can't use his laser printer properly.
+ 
+Its instructions list what the printer can do, and you must refer to the
+Subsystem Manual for details. But this is missing.
+Choose one of the following for me:
+1) agree to help.
+2) advise him to complain.
+3) say it's his problem.
+3
+I say it's his problem. I don't know anything about computers.
+ 
+Saturday  September 5th.
+ 
+Sunday  September 6th  TWELFTH AFTER TRINITY. MOON'S FIRST QUARTER.
+ 
+Monday  September 7th  LABOR DAY, USA AND CANADA.
+I, Adrian Mole, score 6 percent, which makes me an unimportant dreg of
+society.
+ 
+Maxwell bust a mirror while playing; he was using it to admire his own
+reflection. The poor kid will have bad luck all through primary school.
+ 
+Tuesday  September 8th.
+ 
+Wednesday  September 9th.
+ 
+Thursday  September 10th.
+ 
+Friday  September 11th.
+Pandora has offered to help Brainbox Henderson get his printer manual. I offer
+to help as well, but Henderson rudely says I don't know anything about
+computers. How does he know!
+ 
+Saturday  September 12th.
+Have taken up bird watching. Counted five black birds, twenty nine brown birds
+and one white bird in just half an hour.
+ 
+Sunday  September 13th  THIRTEENTH AFTER TRINITY.
+Pandora visited Henderson again. I hope they aren't lovers.
+ 
+Monday  September 14th  FULL MOON.
+I, Adrian Mole, score 6 percent, which makes me an unimportant dreg of
+society.
+ 
+ 
+Tuesday  September 15th.
+I've got to write an essay on the causes of the Second World war. What a waste
+of time! Everybody knows the causes. You can't go anywhere without seeing
+Hitler's photo.
+ 
+Finished essay. Copied it out of Pear's Encyclopedia.
+ 
+Wednesday  September 16th.
+ 
+Thursday  September 17th.
+ 
+Friday  September 18th.
+ 
+Saturday  September 19th.
+I have just seen the Greenham Women on the telly and my mother was with them!
+They were tying babies' bootees onto the wire surrounding the missile base.
+Then they held hands with each other. The newscaster said that 30,000 women
+were there. I explained to the dog that my mother was safeguarding its future,
+but it didn't understand.
+ 
+Sunday  September 20th  FOURTEENTH AFTER TRINITY. MOON'S LAST QUARTER.
+ 
+Monday  September 21st.
+I, Adrian Mole, score 6 percent, which makes me an unimportant dreg of
+society.
+ 
+Finally solved my Rubik Cube (I cheated). Living in permanent dread that
+someone will shuffle the colours again.
+ 
+Tuesday  September 22nd.
+Newspaper story about Freddie Laker. I don't think business men should take
+knighthoods. They are worse kisses of death than even government grants.
+ 
+Wednesday  September 23rd.
+Went to see Blossom. Pandora doesn't ride her now because her feet drag on the
+ground.
+ 
+Thursday  September 24th.
+ 
+Friday  September 25th.
+Pandora and I are enjoying the last of the autumn together by walking through
+leaves and sniffing bonfires. This is the first year I have been able to pass
+a horse-chestnut tree without throwing a stick at it. Pandora says I am
+maturing very quickly.
+ 
+Saturday  September 26th.
+Went out conkering with Nigel tonight. I found five big beauties and smashed
+Nigel's into pulp. Ha! Ha! Ha!
+ 
+Sunday  September 27th  FIFTEENTH AFTER TRINITY.
+ 
+Monday  September 28th  NEW MOON.
+I, Adrian Mole, score 6 percent, which makes me an unimportant dreg of
+society.
+ 
+Took Blossom to see Bert. He can't walk far these days. Blossom is being sold
+to a rich family, a girl called Camilla is going to learn to ride on her.
+Pandora says Camilla is so posh as to be unintelligible. Bert was dead sad, he
+said, "You and me will both end up in the knackers yard, gel."
+ 
+Tuesday  September 29th.
+Blossom went off at 10.30am. I gave her a sixteen-pence apple to take her mind
+off the heartbreak. Pandora ran after the little horse-box, shouting, "I've
+changed my mind", but it carried on.
+ 
+Wednesday  September 30th.
+I am glad September is nearly over, it has been nothing but trouble. Blossom
+gone. Pandora sad. Bert on his last legs. My father still out of work. My
+mother still besotted with creep Lucas.
+ 
+I, Adrian Mole, score 6 percent, which makes me an unimportant dreg of
+society.
+ 
+ 
+That's the end of this part of the game. Would you like to continue with the
+next part? 
+YES
+Check the program tape/disk is in the drive and press ENTER or RETURN. If
+using tape, check the recorder is set to PLAY (if the tape isn't moving, press
+ENTER or RETURN again).
+Welcome to the final part of the Secret Diary of Adrian Mole from Level 9 and
+Mosaic. If you are loading from tape, and it has not stopped, then STOP THE
+TAPE IMMEDIATELY.
+ 
+ 
+Thursday  October 1st.
+A telegram! Addressed to me! The BBC? No, from my mother: "ADRIAN STOP COMING
+HOME STOP". What does she mean "Stop coming home"? How can I "stop coming
+home"? I live here.
+ 
+Friday  October 2nd.
+My mother has just turned up with no warning! She had all her suitcases with
+her. She has just thrown herself on the mercy of my father. My father has just
+thrown himself on the body of my mother. I tactfully withdraw to my bedroom
+where I am now trying to work out how I feel over my mother's return. On the
+whole I am over the moon, but I am dreading her looking around our squalid
+house. She will go mad when she finds out that I have lent Pandora her fox-fur
+coat.
+ 
+Saturday  October 3rd.
+My mother and father were still in bed when I left this morning.
+ 
+Sunday  October 4th  SIXTEENTH AFTER TRINITY.
+My mother has had a letter from creep Lucas! Inside he had written, "Paulie,
+have you got the dry-cleaning ticket for my best suit? Sketchley's are being
+very difficult". My father rang Sheffield and ordered Lucas to cease
+communications or risk getting a bit of Sheffield steel between his porky
+shoulder blades.
+ 
+Monday  October 5th.
+I, Adrian Mole, score 6 percent which makes me an unimportant dreg of society.
+ 
+I am loved by two women! Barbara Boyer gave Victoria Louise Thompson a note in
+Science. It says "Ask Adrian Mole if he wants to go out with me". Victoria
+Louise Thompson (hereinafter known as V.L.T.) Passed on the message.
+Which of the following shall I do?
+1) reply to V.L.T. in the affirmative.
+2) reply to V.L.T. in the negative.
+3) say nothing and wink at Barbara.
+3
+I say nothing and wink at Barbara Boyer (hereinafter known as B.B.).
+ 
+Pandora has suggested I start a literary magazine using the school duplicator.
+I wrote the first edition during dinner-time. It is called The Voice of Youth.
+ 
+Tuesday  October 6th  MOON'S FIRST QUARTER.
+I ate my dinner sitting next to B.B. She is a truly wonderful girl. She
+pointed out that Pandora has got a lot of faults. I am forced to agree with
+her.
+ 
+Pandora looked at The Voice of Youth. She suggested that instead of writing
+the whole thing myself, I invite contributions from other talented scribblers.
+What shall I do?
+1) agree reluctantly.
+2) persuade Pandora that she is wrong.
+3) reject this argument.
+3
+I reject this argument. Only an intellectual has the qualities needed to write
+articulately. Imagine accepting material from someone who has not read
+Chekhov!
+ 
+Wednesday  October 7th.
+I am committing non-sexual adultery with Barbara. I am at the centre of an
+eternal triangle. I shall burst if I don't tell someone.
+Choose one of the following for me:
+1) tell Bert Baxter.
+2) tell Pandora about Barbara.
+3) tell my best friend Nigel but swear him to secrecy.
+3
+I tell my best friend Nigel but swear him to secrecy.
+ 
+The Voice of Youth goes to press in a week. I am typing the stencils. Here is
+my editorial: 
+ 
+Hi Kids, 
+Well, here's your very own magazine. Yes! Written and produced entirely using
+child labour. I have tried to break new ground in our first edition. Many of
+you will be unaware of the achievements of the Norwegian leather industry and
+the joys of Great Literature. If so, hang on to your hats, you're in for a
+magic surprise. 
+ADRIAN MOLE, EDITOR 
+ 
+I am going to charge twenty-five pence a copy.
+ 
+Thursday  October 8th.
+I am thinking of writing an expose about Barry Kent for the Voice of Youth.
+Which of the following shall I do?
+1) decide against it.
+2) go ahead.
+3) advertise it on the cover but leave all the details for a later issue.
+3
+I advertise it on the cover but leave all the details for a later issue. Real
+magazines do this; I think it's to boost sales.
+ 
+Nigel blabbed about me and B.B. all over the school. Pandora spent the
+afternoon in matron's office.
+ 
+Friday  October 9th.
+Pandora and I put the paper to bed. How I wish I were putting Pandora to bed.
+ 
+Saturday  October 10th.
+I have had a spiritual awakening. Two nice men with staring eyes called at the
+house while my parents were out. They are from a religious group called the
+Sunshine People. There are thousands of Sunshine People in every country,
+working for peace. They knew instantly that I was an intellectual, and said
+that my talents are being wasted by society. This is true. No one appreciates
+my true worth. 
+ 
+The Sunshine People left me some religious leaflets and a personality profile
+to show where my true skills lie. They will be back in a week to give advice
+on personal development. The advice is free because by helping me they help to
+make the world a little bit better.
+What shall I do?
+1) throw the religious leaflets away.
+2) read the Sunshine People leaflets.
+3) tell my parents.
+3
+I tell my parents and my father goes raving mad! He says that most wars are
+caused by religion and that famines are the Pope's fault because he won't let
+people use birth control. He doesn't want me getting involved with a bunch of
+loony cranks.
+ 
+Barbara has ended our brief affaire. I rang her up at the pet shop where she
+works part time cleaning the cages out. She said she couldn't bear to see the
+pain in Pandora's eyes. I have learnt an important lesson. Because of lust I
+am without love. Had a shave to cheer myself up.
+ 
+Sunday  October 11th  SEVENTEENTH AFTER TRINITY.
+ 
+Monday  October 12th  COLUMBUS DAY, USA. THANKSGIVING DAY, CANADA.
+I, Adrian Mole, score 5 percent which makes me a namby-pamby dreg of society.
+ 
+The Voice of Youth hits the classrooms tomorrow.
+ 
+Tuesday  October 13th  FULL MOON.
+We have been hit by a wildcat strike! Mrs Claricoates, the school secretary,
+has refused to handle The Voice of Youth. She says there is nothing in her job
+description to say that she has to mess about with school magazines.
+Choose one of the following for me:
+1) offer, on behalf of the editorial team, to duplicate copies ourselves.
+2) say "Please".
+3) complain to the Headmaster.
+3
+I complain to the Headmaster. What is a school secretary for if not to help
+the pupils? She certainly doesn't do any teaching!
+ 
+Scruton is incapable of understanding, he says that Mrs Claricoates works very
+hard and does a difficult job very well. What does he know about work anyway?
+He always leaves early to play golf.
+ 
+Wednesday  October 14th.
+ 
+Thursday  October 15th.
+Grandma's Christmas card arrived.
+ 
+Friday  October 16th.
+The house looks like a jungle. My mother has replaced the pot plants. I should
+report her to the RSPCP.
+ 
+Saturday  October 17th.
+I will have to get the five hundred copies of The Voice of Youth printed
+myself.
+Which of the following shall I do?
+1) visit Leicester Megaprint Ltd.
+2) visit Printopress, my friendly neighbourhood highstreet copyshop.
+3) visit A&M Litho, a small local printer.
+3
+I visit A&M Litho, a small local printer. It is dead scruffy and everyone
+looks like punks, but they are quite keen to print my magazine. It will cost
+ninety-six pounds if they do everything, or a bit less if we do the folding
+and stapling etc.
+What shall I do?
+1) give up. Printing is too expensive.
+2) get A&M Litho to print the magazine.
+3) ask Pandora's father to use his firm's photocopier.
+3
+I ask Pandora's father to use his firm's photocopier.
+ 
+The Sunshine People came at six o'clock. My father made them stand on the
+doorstep in the rain. Their robes got wet through. My father said they were
+trying to brainwash a simple child. When they left my mother watched them walk
+up the cul-de-sac. She said, "They don't look very sunny now, they just look
+bloody wet."
+ 
+Sunday  October 18th  EIGHTEENTH AFTER TRINITY.
+Nothing happened today. This is what comes of living in a cul-de-sac.
+ 
+Monday  October 19th.
+I, Adrian Mole, score 6 percent which makes me an unimportant dreg of society.
+ 
+Pandora's father is photocopying The Voice of Youth on his office machine. He
+didn't want to, but Pandora sulked in her room and refused to eat until he
+agreed.
+ 
+Tuesday  October 20th.
+Five hundred copies of The Voice of Youth were on sale in the dinner hall
+today. 
+ 
+Five hundred copies were locked in the games cupboard by the end of the
+afternoon. Not one copy was sold! Not one! My fellow pupils are nothing but
+Philistines and Morons. 
+ 
+We are dropping the price to twenty pence.
+ 
+Wednesday  October 21st.
+School was dead good today. My English essay 'Despair' got twenty out of
+twenty and was read out to the class. Everyone looked dead miserable by the
+end. Pandora's eyes were full of tears. I think I would like to be a full-time
+writer, it must be a dead cushy job just sitting around writing essays. I have
+sent 'Despair' to the BBC. It is a story about a hamster with an incurable
+illness. It's just the sort of thing Radio Four likes.
+ 
+Thursday  October 22nd.
+Had a letter from Grandma to ask why I hadn't sent her a Christmas card yet.
+ 
+Friday  October 23rd.
+I think it is very brave of our school to attempt a modern classic of the
+theatre. It is not every comprehensive that would have the nerve to do a free
+adaptation of The Cherry Orchard by Anton Chekhov. Pandora is auditioning
+today.
+Choose one of the following for me:
+1) audition too.
+2) offer to work backstage.
+3) have nothing to do with it.
+3
+I have nothing to do with it. Chekhov is Russian. Don't they know that
+cherries are RED?
+ 
+Saturday  October 24th  UNITED NATIONS' DAY.
+The doorbell rings. It must be the Sunshine People again.
+Which of the following shall I do?
+1) talk to them through the letterbox.
+2) let them in.
+3) hide behind the curtains.
+3
+I hide behind the curtains until they go away. I regret, dear diary, that I
+suspect their motives.
+ 
+Sunday  October 25th  NINETEENTH AFTER TRINITY. BRITISH SUMMER TIME ENDS.
+ 
+Monday  October 26th  BANK HOLIDAY IN THE REP. OF IRELAND.
+I, Adrian Mole, score 6 percent which makes me an unimportant dreg of society.
+ 
+Sold one copy of The Voice of Youth, to Barry Kent. He wanted to discover if
+we had said anything about him. He is a slow reader, so it will probably take
+him a week to find out. 
+ 
+We are going to try dropping the price to fifteen pence to stimulate demand.
+There are now four hundred and ninety-nine copies to be sold.
+ 
+Tuesday  October 27th  NEW MOON.
+ 
+Wednesday  October 28th.
+ 
+Thursday  October 29th.
+ 
+Friday  October 30th.
+ 
+Saturday  October 31st  HALLOWE'EN.
+Saw the Sunshine People in the main Shopping Centre. They are handing out
+flowers and peace leaflets.
+What shall I do?
+1) telephone the police to complain.
+2) pass by on the other side.
+3) go over and talk to them.
+3
+I go over and talk to them about a better world. They invite me to a service
+at the Church of Sunshine in Leicester.
+ 
+Sunday  November 1st  TWENTIETH AFTER TRINITY.
+I find the Church of Sunshine. It is not like a real church, just a bright
+doorway in a side street. Two Sunshine Women stand outside with bundles of
+leaflets.
+Choose one of the following for me:
+1) stand and watch.
+2) go in.
+3) walk past.
+3
+I walk past. Religion is not for me. I am an agnostic atheist; during
+daylight, anyway.
+ 
+Monday  November 2nd.
+I, Adrian Mole, score 5 percent which makes me a namby-pamby dreg of society.
+ 
+Trudged half-way to school. Dog followed me. Trudged back home. Shut dog in
+coal shed. Trudged all the way to school. Fifteen minutes late. Mr Scruton
+said it was not setting a good example for the late prefect to be late. It is
+all right for him to talk! He can ride to school in a Ford Cortina and then
+all he has to do is be in charge of a school. I have got a lot of problems and
+no car.
+ 
+Tuesday  November 3rd  ELECTION DAY, USA.
+The trees are stark naked. 
+Their autumnal clothes 
+Litter the pavements. 
+Council sweepers apply fire 
+Thus creating municipal pyres. 
+I, Adrian Mole, 
+Kick them 
+And burn my Hush Puppies. 
+ 
+I have copied it out carefully and sent it to John Tydeman at the BBC. He
+strikes me as a man who might like poems about autumn leaves.
+ 
+Wednesday  November 4th.
+ 
+Thursday  November 5th  MOON'S FIRST QUARTER.
+ 
+Friday  November 6th.
+ 
+Saturday  November 7th.
+I asked Pandora to marry me this morning. We were leaning over the frozen food
+cabinet at the Co-op at the time. Pandora said, "Adrian, don't distract me,
+I'm looking for bargain buys." I was astonished at her lack of romance.
+ 
+When we got to the checkout I repeated my proposal but Pandora snapped, "Don't
+be ridiculous, I'm only 14." The cashier said, "I wouldn't marry at any age,
+my love. Men are nothing but beasts." I gave the woman an insolent look but
+she was counting change so she missed it. 
+ 
+Pandora told me off for showing her up and made me carry the heavy shopping
+bag. My arm was nearly out of its socket by the time we got back to her house.
+ 
+Sunday  November 8th  TWENTY-FIRST AFTER TRINITY. REMEMBRANCE SUNDAY.
+Pandora is fed up with going out with me. She thinks I am getting too serious.
+I was heartbroken to hear this revelation. Does it mean she is no longer
+insanely in love with me? I need advice.
+Which of the following shall I do?
+1) tell Bert my problem.
+2) ask my father how to manage women.
+3) ask my mother for advice.
+3
+I ask my mother for advice. She says, "Adrian, why can't you just be fond of
+Pandora? Why do y you have to dramatise everything in your life?" She can talk
+- when she burns the toast she acts as if it was a scene from The Towering
+Inferno.
+What shall I do?
+1) take my mother's advice.
+2) ask my father how to manage women.
+3) tell Bert my problem.
+3
+I tell Bert my problem over tea at his and Queenie's bungalow. Bert says, "The
+way to manage women is to let them know who's master." To prove it he shouted
+at Queenie and ordered her to open a bottle of beer. She replied, "Do it
+yourself you lazy lump." Bert blushed and hid his face in Sabre's fur. Queenie
+said, "Play hard to get, Adrian. Pandora will soon come running."
+Choose one of the following for me:
+1) take Queenie's advice.
+2) let Pandora know who's master.
+3) take my mother's advice.
+3
+I take my mother's advice
+ 
+Monday  November 9th.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  November 10th.
+ 
+Wednesday  November 11th  VETERAN'S DAY, USA. REMEMBRANCE DAY, CANADA. FULL
+MOON.
+ 
+Thursday  November 12th.
+ 
+Friday  November 13th.
+ 
+Saturday  November 14th.
+ 
+Sunday  November 15th  TWENTY-SECOND AFTER TRINITY.
+ 
+Monday  November 16th.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  November 17th.
+ 
+Wednesday  November 18th  MOON'S LAST QUARTER.
+ 
+Thursday  November 19th.
+ 
+Friday  November 20th.
+ 
+Saturday  November 21st.
+ 
+Sunday  November 22nd.
+ 
+Monday  November 23rd.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  November 24th.
+ 
+Wednesday  November 25th.
+ 
+Thursday  November 26th  THANKSGIVING DAY, USA. NEW MOON.
+ 
+Friday  November 27th.
+ 
+Saturday  November 28th.
+ 
+Sunday  November 29th  ADVENT SUNDAY.
+ 
+Monday  November 30th  ST ANDREW'S DAY.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  December 1st.
+ 
+Wednesday  December 2nd.
+ 
+Thursday  December 3rd.
+ 
+Friday  December 4th  MOON'S FIRST QUARTER.
+ 
+Saturday  December 5th.
+ 
+Sunday  December 6th  SECOND IN ADVENT.
+ 
+Monday  December 7th.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  December 8th.
+ 
+Wednesday  December 9th.
+ 
+Thursday  December 10th.
+ 
+Friday  December 11th  FULL MOON.
+ 
+Saturday  December 12th.
+ 
+Sunday  December 13th  THIRD IN ADVENT.
+ 
+Monday  December 14th.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  December 15th.
+ 
+Wednesday  December 16th.
+ 
+Thursday  December 17th.
+ 
+Friday  December 18th  MOON'S LAST QUARTER.
+ 
+Saturday  December 19th.
+ 
+Sunday  December 20th  FOURTH IN ADVENT.
+ 
+Monday  December 21st.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  December 22nd.
+ 
+Wednesday  December 23rd.
+ 
+Thursday  December 24th.
+ 
+Friday  December 25th  CHRISTMAS DAY.
+ 
+Saturday  December 26th  BANK HOLIDAY IN UK AND REP. OF IRELAND (a day may be
+given in lieu). NEW MOON.
+ 
+Sunday  December 27th  1ST AFTER CHRISTMAS.
+ 
+Monday  December 28th.
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+Tuesday  December 29th.
+ 
+Wednesday  December 30th.
+ 
+Thursday  December 31st.
+ 
+I, Adrian Mole, score 4 percent which makes me a lowly dreg of society.
+ 
+ 
+The game is over, unless you'd like to play the final part again. Would you? 
+#quit
+

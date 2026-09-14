@@ -241,3 +241,7 @@ extern void MCAttConst(int, int);
 extern void MCAft(int, int);
 extern void MCrfr(struct _symbol *, struct _forwardentry *);
 //---
+// defined in int.c
+void intinit1();
+void intinitloadpics(void *, void *, bool);
+void intstart2();

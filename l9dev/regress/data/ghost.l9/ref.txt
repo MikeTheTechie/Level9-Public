@@ -1,0 +1,1841 @@
+
+Looking for gameplay log on disk - 'log.bat'
+
+Executing instructions in file 'log.bat'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Welcome to "Scapeghost", copyright (C) 1989 from Level 9 Computing. 
+My head cleared, I looked around, and found myself standing among a crowd of
+dark suits at a funeral. How had I got there? What was going on? 
+ 
+The last thing I remembered was driving in the motor with Sarah, on our way to
+meet with the drugs gang. Our long patient months of undercover work were
+about to pay off. But what had happened then? 
+ 
+I stared around at the others, as a priest mouthed platitudes over a nearby
+grave, and wondered who had copped it this time. Then I read the name on a
+nearby wreath...
+ 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and UNDO to take back bad moves).
+ 
+I was standing beside my own grave. I could see some mourners, a detective, a
+pebble, a new wreath and a mound of earth. 
+ 
+As the mourners prepared to file away, ignoring me, I was still rooted to the
+spot. This was going to take a bit of getting used to. 
+What now? #title: Scapeghost test script
+#comment: MSX version 
+#SEED 42
+Seed set to 42
+N 
+ 
+I drifted north and was by Joe Danby's grave. It was a well-tended spot, for
+this was a man who had been loved by many in the village. I could see some
+thistledown. The inscription on the stone read, "The great Landlord has called
+'Time' on our Joe". 
+What now? GET THISTLEDOWN
+I took the thistledown. I felt slightly stronger. 
+What now? W
+ 
+I floated west and was in a circular clearing between the graves. I could see
+a sundial. The moon had risen, casting a faint shadow across the top of the
+sundial. 
+What now? W
+ 
+I hovered west and was in a patch of swishy grass, heavy with dew. The webs of
+a thousand spiders glistened like frost. 
+What now? W
+ 
+I drifted west and was among an untidy group of old tombstones, leaning
+sleepily together. Others were obscured behind a veil of uncut grass. This
+peaceful part of the cemetery seemed so old that even its ghosts had faded and
+only Nature remained. 
+What now? NW
+ 
+I hovered northwest and was by a grave covered in marigolds, their gold
+evoking the memory of summers past. I could see a petal. The marigolds must
+have been beautiful in the Summer, and even now there were still some in
+flower. 
+What now? GET PETAL
+I took the petal. My strength seemed to be increasing. I dropped the
+thistledown. 
+What now? E
+ 
+I drifted east and was by a granite cenotaph. A small flowerbed of poppies had
+been grown around the base of the monument. 
+What now? E
+ 
+I floated east and was by the tomb of David Ridge, with its imposing
+headstone. I could see a sarcophagus. Here lay someone who didn't want to be
+forgotten. 
+A haunting breeze carried away the "What now" prompts. 
+> E
+ 
+I drifted east and was beneath a copper beech. Golden leaves rustled gently in
+the breeze. I could see a dry leaf and some jumbled stonework. 
+ 
+The tree cast a long shadow across the leaves that carpeted the ground. 
+> GET LEAF
+I took the dry leaf. I felt a little more solid. I dropped the petal. 
+> S
+ 
+I hovered south and was in a circular clearing between the graves. I could see
+a sundial. 
+> S
+ 
+I floated south and was at a corner in the gravel path which wound west to a
+shed and south beside the church. I could see a matchbook. I felt a strange
+pull towards the east. 
+> GET MATCHBOOK
+I took the matchbook. My control over material objects was improving. I
+dropped the dry leaf. 
+> W
+ 
+I drifted west and was at the end of the path outside an old weather-beaten
+shed. I could see a shed door. In it was a lock. On the shed door was a rope
+handle. 
+> W
+ 
+I hovered west and was west of the shed where a pile of twigs and branches lay
+rotting. I could see a heap of branches and a cart. In it was the cemetery
+supervisor. He was carrying a faded wreath. A hedgehog snuffled its way over -
+or through - my feet. "That makes a change", I thought, "being run over by a
+hedgehog". 
+The cemetery supervisor put the faded wreath on the heap of branches. 
+My strength seemed drained by the presence of the cemetery supervisor. My
+hands became weak and I dropped the matchbook. 
+> EXAMINE HEAP
+It was an untidy heap of prunings and wind-broken wood. In it was a twig. On
+the heap of branches was a faded wreath. 
+The cemetery supervisor coughed noisily. He drove the cart to the east. 
+> EXAMINE WREATH
+It was faded and tatty; its flowers wilted and leaves shrivelled. On it was a
+yellow card. 
+> GET CARD
+I took the yellow card. I began to feel a much more experienced ghost. 
+> GET TWIG
+I took the twig. I congratulated myself with my power over heavier objects. I
+dropped the yellow card. 
+> E
+ 
+I drifted east and was at the end of the path outside an old weather-beaten
+shed. I could see the cemetery supervisor, the workman, a shed door and a
+cart. In the shed door was a lock. On the shed door was a rope handle. The
+workman was carrying a shovel. 
+The cemetery supervisor stomped inside through the door. The workman walked
+inside through the door. 
+> E
+ 
+I drifted east and was at a corner in the gravel path which wound west to a
+shed and south beside the church. I could see a dry leaf. 
+> E
+ 
+I hovered east and was standing beside my own grave. I could see a pebble and
+a new wreath. 
+> WAIT 
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+ 
+Twilight gave way to darkness and the street lights came on to the south of
+the cemetery. I felt myself begin to disperse into the night air, and when I
+came to I was back beside my own grave. 
+ 
+A ghostly figure entered from the north and made its way towards me...
+ 
+> EXAMINE FIGURE 
+Joe Danby was the ghost of the landlord of one of the local pubs. He was a
+good sort, always ready to help out. 
+ 
+The figure greeted me with a warm smile and introduced himself. "I'm Joe
+Danby, that used to run the Pig and Whistle", he said. "Turned my toes up
+nearly five years ago, I did, and couldn't return to haunt my pub because they
+don't serve spirits. I've got to know this place quite well in that time". 
+ 
+Joe spread his arm in a wide arc, prompting me to take a look at the cemetery.
+"Come on", he added, "follow me and I'll show you around the place and
+introduce you to some of my kindred spirits". Joe Danby hovered north. 
+> N
+ 
+I floated north and was by Joe Danby's grave. It was a well-tended spot, for
+this was a man who had been loved by many in the village. I could see Joe
+Danby. 
+ 
+On Sundays, there would always be a fresh wreath or bunch of flowers on Joe's
+grave, and someone came regularly to cut the grass around it. 
+ 
+Joe Danby gave me a broad grin and announced, "Here's my grave. Right next to
+yours. I can see us being good neighbours". 
+ 
+I returned a smile and admired the well-mown grass. "It gets cut every Sunday,
+through the Summer", he explained. "I had some good friends". 
+> WAIT
+Time passed. 
+Joe Danby drifted north. 
+> N
+ 
+I hovered north and was among the new graves, a neatly aligned set of black
+and white headstones and crosses. I could see Joe Danby. The neat rows
+stretched off into the distance. 
+Joe Danby hummed quietly. He drifted north. 
+> N
+ 
+I hovered north and was by the Willmot graves where a tombstone bore a double
+inscription under the word "reunited". I could see Joe Danby, Bert Willmot,
+Edna Willmot and a green wreath. A pair of squirrels chattered and squabbled
+over an acorn at the foot of the grave, before chasing one another west. 
+Joe Danby hummed quietly. 
+ 
+He beckoned me to come closer. "These are the Willmot graves", he said in a
+low whisper. "And if you thought the dead rest in peace, you should listen to
+this couple". 
+> EDNA, HELLO
+Edna Willmot returned my greeting with a smile. 
+ 
+"What was that, Mr Danby?", shouted Bert. 
+"Oh", replied Joe. "I was just telling the new fellow what a lovely couple you
+and Edna make". He grinned to me, "I think it's time to pass on". Joe Danby
+floated southwest. 
+> SW
+ 
+I drifted southwest and was beneath a copper beech. Golden leaves rustled
+gently in the breeze. I could see Joe Danby, a petal and some jumbled
+stonework. Something moved within the stonework. 
+Joe Danby hovered west. 
+> W
+ 
+I floated west and was by the tomb of David Ridge, with its imposing
+headstone. I could see Joe Danby, David Ridge and a sarcophagus. There was
+something challenging about this grave. Something which seemed to say, "Prove
+that you're worthy to be here". 
+Joe Danby stared blankly into the night. 
+ 
+He whispered, "Always has to prove something, does our David. He may have gone
+to meet his maker, like, but still he claims to be a self-made man". 
+> EXAMINE SARCOPHAGUS
+It was a marble coffin, decorated like a miniature Greek temple. On it was an
+urn. 
+ 
+Joe Danby greeted David with a tight smile. "Still practising with your
+psychic powers, I see", he said, as David lifted up a moth and spun it high
+into the air. 
+> ROCK URN 
+I pushed the urn and it rocked slightly. 
+ 
+"Hmm, not bad for a beginner", began David, who was obviously impressed,
+though trying not to show it. "I might consider helping you now", he added. 
+Joe Danby grinned and said in a whisper, "Well done, lad. You kicked that
+Greek style bucket good and proper". 
+Joe Danby hovered northwest. 
+ 
+David Ridge conjuring up a breeze. 
+> DAVID, FOLLOW ME
+He nodded slowly. 
+> NW
+ 
+I hovered northwest and was by Colonel Rycroft's tombstone, in the shadow of
+the war memorial to the south. I could see Joe Danby and Colonel Rycroft. The
+tall tombstone still stood stiffly to attention, unbowed by the passing years.
+ 
+Joe Danby continued with his guided tour. "And this is Colonel Rycroft's
+grave", he said. "An extinct ex-soldier is the Colonel. Bit stiff. Served his
+country well in the old days, but he's rather stuck in his ways. Can't stand
+the young louts we sometimes get here of a night". David Ridge entered from
+the southeast. 
+> COLONEL, HI THERE!
+Colonel Rycroft returned my greeting with a smile. 
+ 
+"Evening, Joe", barked the Colonel. "I see you've brought along the new chap".
+ 
+He held out his hand, but it went straight through me when I tried to shake
+it. The Colonel laughed and said, "Not too solid yet, eh? You'll have firmed
+up some before the night is out". Joe Danby floated southwest. 
+> SW
+ 
+I drifted southwest and was by a grave covered in marigolds, their gold
+evoking the memory of summers past. I could see Joe Danby and some
+thistledown. 
+Joe Danby hovered south. David Ridge entered from the northeast. 
+> S
+ 
+I drifted south and was by the headstone of Violet Conway, beside the hedge. I
+could see Joe Danby, Violet Conway and a dogwood bush. A spider span a broad
+web between its branches and the neighbouring headstone. 
+ 
+Joe Danby said, "Violet Conway's our oldest resident. Cracked as well as
+croaked. She went blind in life and now won't leave her grave in case she
+can't find her way back. It's nonsense of course; we ghosts don't need eyes to
+see". David Ridge entered from the north. 
+> VIOLET, HI
+Violet Conway grinned warmly. 
+ 
+"I'm certainly all ears", replied Violet. "And you must be Alan, the new
+arrival". She gave me a warm, friendly smile. 
+"You must forgive me if I don't follow you", she continued, "but if I wandered
+too far from my grave, I might never find my way back again". Joe Danby
+hovered south. 
+> S
+ 
+I floated south and was by a toppled sepulchre, overgrown with weeds and
+grass. I could see Joe Danby. It must have been an impressive construction
+once, but nothing stands forever. 
+Joe Danby drifted south. David Ridge entered from the north. 
+> S
+ 
+I floated south and was by Edith Dean's headstone in a remote and lonely
+corner of the cemetery. I could see Joe Danby, Edith Dean, some gravel and a
+vase. Edith seemed to be sniffling quietly. 
+ 
+Joe Danby sighed and said, "And by no means least, this is the last resting
+place of Edith Dean". David Ridge entered from the north. 
+> EDITH, NICE WEATHER TODAY
+Edith Dean wept softly and said, "I'd like to help you, but I'm cursed to
+remain here until the end of time". 
+ 
+Joe Danby lowered his voice. "If 'resting' is the word. Edith used to be a
+real hypochondriac; scared to death of catching germs off things; the rumour
+is that she OD'd on carrots. So nowadays she reckons she's cursed or
+something". 
+> N
+ 
+I drifted north and was by a toppled sepulchre, overgrown with weeds and
+grass. 
+Joe Danby entered from the south. David Ridge entered from the south. 
+> WAIT
+Time passed. 
+ 
+Joe Danby concluded his guided tour, saying, "Well, that's most of your new
+neighbours introduced. I hope you haven't been bored to death". 
+ 
+He laughed warmly and I had to smile. "I guess that's more of your graveyard
+humour", I replied. Joe laughed again and continued, "I can see we're going to
+get along all right. Do you mind If I walk with you? We don't want you getting
+lost on your first night, do we?". 
+> NE
+ 
+I hovered northeast and was among an untidy group of old tombstones, leaning
+sleepily together. Others were obscured behind a veil of uncut grass. 
+Joe Danby entered from the southwest. David Ridge entered from the southwest. 
+> E
+ 
+I hovered east and was in a patch of swishy grass, heavy with dew. The dew was
+painful to my feet and I thought wryly that I should have died with my boots
+on - preferably wellies. 
+Joe Danby entered from the west. David Ridge entered from the west. 
+> E
+ 
+I hovered east and was in a circular clearing between the graves. I could see
+a sundial. 
+Joe Danby entered from the west. David Ridge entered from the west. 
+> EXAMINE SUNDIAL 
+It was a top-heavy stone ornament, with a fluted pillar and a round top on
+which its gnomon cast a faint shadow. 
+> JOE, WAIT THEN PUSH SUNDIAL
+Joe Danby nodded in acknowledgement. 
+> PUSH SUNDIAL 
+I pushed the sundial and it began to rock heavily. 
+Joe Danby pushed the sundial and it teetered and keeled over. The heavy
+sundial crashed down the steps, breaking into pieces as it fell to the ground.
+Joe Danby tutted and sighed, "You're worse than the vandals around here". 
+> GET GNOMON
+I took the gnomon. My strength had reached its peak for my first night as a
+ghost. 
+Joe Danby grinned, "I guess you're one spirit that's not weak". I dropped the
+twig. 
+> SW
+Did you know that you can go quickly to a far off place? Eg "RUN TO VAULT" or
+"GOTO VIOLET"
+ 
+I floated southwest and was at the end of the path outside an old
+weather-beaten shed. I could see a shed door. In it was a lock. On the shed
+door was a rope handle. I knew that there must be things in that shed that
+would help me, if only I could get to them. 
+Joe Danby entered from the northeast. David Ridge entered from the northeast. 
+> W
+ 
+I floated west and was west of the shed where a pile of twigs and branches lay
+rotting. I could see a matchbook, a yellow card and a heap of branches. 
+Joe Danby entered from the east. David Ridge entered from the east. 
+> W
+ 
+I floated west and was by a toppled sepulchre, overgrown with weeds and grass.
+Joe Danby entered from the east. David Ridge entered from the east. 
+> S 
+ 
+I floated south and was by Edith Dean's headstone in a remote and lonely
+corner of the cemetery. I could see Edith Dean, some gravel and a vase. 
+ 
+Edith saw the gnomon and smiled with relief. "Oh, I'm so happy!", she
+announced. "I'm free from my curse now that you've brought about the end of
+time...". 
+Joe Danby entered from the north. David Ridge entered from the north. 
+ 
+Edith Dean smiled delightfully and said, "I think I'll take a nice walk around
+the cemetery, now that I'm free of my curse". 
+> EDITH, FOLLOW ME
+Edith Dean nodded in acknowledgement. 
+> N
+ 
+I hovered north and was by a toppled sepulchre, overgrown with weeds and
+grass. 
+Joe Danby entered from the south. David Ridge entered from the south. Edith
+Dean entered from the south. 
+> E
+ 
+I floated east and was west of the shed where a pile of twigs and branches lay
+rotting. I could see a matchbook, a yellow card and a heap of branches. 
+Joe Danby entered from the west. David Ridge entered from the west. Edith Dean
+entered from the west. 
+> E
+ 
+I drifted east and was at the end of the path outside an old weather-beaten
+shed. I could see a shed door. In it was a lock. On the shed door was a rope
+handle. 
+Joe Danby entered from the west. David Ridge entered from the west. Edith Dean
+entered from the west. 
+> EXAMINE LOCK
+It was a galvanised iron lock for the shed door. In it were a barrel, a short
+lever, a medium sized lever and a long lever. 
+> JOE, WAIT 3 THEN PUSH LONG LEVER
+Joe Danby nodded in acknowledgement. 
+He stared blankly into the night. 
+> DAVID, WAIT 2 THEN PUSH MEDIUM LEVER
+David Ridge nodded obediently. 
+Edith Dean hummed quietly. 
+> EDITH, WAIT THEN PUSH SHORT LEVER
+Edith Dean nodded obediently. 
+Joe Danby hummed quietly. 
+> PUSH BARREL 
+Joe Danby pushed the long lever briefly into place. David Ridge pushed the
+medium sized lever briefly into position. Edith Dean pushed the short lever
+briefly into place so that it wasn't obstructing the barrel. 
+I turned the barrel and unlocked the door. 
+Joe Danby rubbed his hands, saying, "Only you would have been good enough to
+unlock the door and let us in". 
+> E
+ 
+I hovered east and was at a corner in the gravel path which wound west to a
+shed and south beside the church. I could see a dry leaf. 
+Joe Danby entered from the west. David Ridge entered from the west. Edith Dean
+entered from the west. 
+> S
+ 
+I floated south and was on a wide gravel path leading south from the graves. I
+could see a dog, a thermometer and a crumbling abbey wall. 
+ 
+The spotlight illuminated the whole of the southern part of the cemetery. 
+Joe Danby entered from the north. 
+ 
+"It's beyond me why they bother collecting money", commented Joe whilst
+pointing at the thermometer. "This place is past repair; the first storm of
+winter will have the whole wall down. Look at those cracks deep in the stone".
+David Ridge entered from the north. Edith Dean entered from the north. 
+ 
+The dog seemed to notice me and began to shiver a little. It opened its mouth
+to bark, but only managed a dry choking noise. 
+I began to feel weak because of the spotlight. My hands became weak and I
+dropped the gnomon. 
+> PAT DOG
+I stroked the dog. The dog wagged its tail a little, but still seemed to be
+frightened of me. 
+Joe Danby didn't seem to be able to do anything, except point weakly at the
+spotlight. Edith Dean refused to do anything until somebody turned off the
+spotlight. The dog darted north. 
+> N
+ 
+I floated north and was at a corner in the gravel path which wound west to a
+shed and south beside the church. I could see a dog and a dry leaf. 
+Joe Danby entered from the south. David Ridge entered from the south. Edith
+Dean entered from the south. 
+ 
+The dog ran in circles, choking harshly. 
+> PAT DOG
+I stroked the dog. The dog lost some of its fears and sniffed me nervously. 
+Joe Danby hummed quietly. 
+ 
+"Come here, doggy", said Joe in a soft voice. But the dog just growled. 
+> PAT DOG 
+I stroked the dog. The dog must have realised that I wasn't going to hurt it,
+and it became quite friendly. 
+Joe Danby said, "Well, well. We've made a new friend". 
+Joe Danby stared blankly into the night. Edith Dean gazed up at the starry
+sky. 
+ 
+The dog coughed hoarsely, trying to clear its throat. 
+> EXAMINE DOG 
+It was a flea-ridden stray, with no home but the cemetery. Lodged in the
+throat of it was a fishbone. 
+> REMOVE FISHBONE 
+I reached through the dog's throat and removed the fishbone. 
+ 
+The dog yelped in panic and ran away from me, its tail tucked between its
+legs. 
+Joe Danby said, "Don't worry, it'll come back". 
+> W
+ 
+I floated west and was at the end of the path outside an old weather-beaten
+shed. I could see a shed door. In it was a lock. On the shed door was a rope
+handle. 
+Joe Danby entered from the east. David Ridge entered from the east. Edith Dean
+entered from the east. 
+> W
+ 
+I hovered west and was west of the shed where a pile of twigs and branches lay
+rotting. I could see a matchbook, a yellow card and a heap of branches. 
+Joe Danby entered from the east. David Ridge entered from the east. Edith Dean
+entered from the east. 
+> GET CARD
+I took the yellow card. I dropped the fishbone. 
+Edith Dean stared blankly into the night. 
+> E
+ 
+I floated east and was at the end of the path outside an old weather-beaten
+shed. I could see a dog and a shed door. In it was a lock. On the shed door
+was a rope handle. 
+Joe Danby entered from the west. David Ridge entered from the west. Edith Dean
+entered from the west. 
+> E
+ 
+I drifted east and was at a corner in the gravel path which wound west to a
+shed and south beside the church. I could see a dry leaf. 
+Joe Danby entered from the west. David Ridge entered from the west. Edith Dean
+entered from the west. 
+> E
+ 
+I floated east and was standing beside my own grave. I could see a pebble and
+a new wreath. 
+ 
+My eyes wandered absently and I found myself looking to the north, where a
+neat row of new headstones stood. 
+Joe Danby entered from the west. David Ridge entered from the west. Edith Dean
+entered from the west. 
+> DAVID, GET WHITE CARD 
+David Ridge nodded slowly. 
+He took the white card. 
+> PUT YELLOW CARD ON WREATH
+I put the yellow card on the new wreath. 
+> WAIT FOR DOG
+Time passed. 
+Edith Dean stared blankly into the night. A dog entered from the west. 
+> GET WREATH 
+I would never be strong enough to carry that. 
+David Ridge laughed pretentiously. The dog took the new wreath. 
+> NW
+ 
+I hovered northwest and was in a circular clearing between the graves. I could
+see a twig and a broken sundial. 
+Joe Danby entered from the southeast. David Ridge entered from the southeast.
+Edith Dean entered from the southeast. 
+> WAIT FOR DOG
+Time passed. 
+Edith Dean hummed quietly. 
+A dog entered from the southeast. 
+> N
+ 
+I hovered north and was beneath a copper beech. Golden leaves rustled gently
+in the breeze. I could see a petal and some jumbled stonework. 
+Joe Danby entered from the south. David Ridge entered from the south. Edith
+Dean entered from the south. 
+> EXAMINE STONEWORK
+The jumbled stonework was, at first glance, a mass of jumbled stones. Looking
+closer, I could see a plinth and some carvings. 
+> EXAMINE PLINTH
+It was a decorated square stone base, that may once have been topped by a
+cross. On it was a statue. 
+> HIT STATUE 
+I hit the statue. Slowly, it began to take the shape of a ghostly figure. 
+Joe Danby grinned. "A familiar spirit, I see. Hello again, Alex". 
+I watched as the figure stood up, yawned, and then brushed a few pigeon
+droppings off its arms. 
+ 
+"Greetings, my friend", it announced in an elderly voice. "I am Alex Pym.
+Pleased to meet you". 
+ 
+Alex Pym yawned widely. A dog entered from the south. 
+> ALEX, FOLLOW ME
+Alex Pym nodded obediently. 
+ 
+The dog sniffed my leg curiously and made a puzzled noise. 
+> NE
+ 
+I floated northeast and was by the Willmot graves where a tombstone bore a
+double inscription under the word "reunited". I could see Bert Willmot, Edna
+Willmot and a green wreath. 
+The company arrived from the southwest. 
+ 
+Edna tried to snatch Bert's wreath but he wouldn't let go of it. They glared
+at one another in silence. 
+> WAIT FOR DOG 
+Time passed. 
+ 
+Bert Willmot stood guarding his wreath, while Edna paced around him, trying to
+it. "Let me have my wreath back", she insisted. 
+ 
+"It's mine!", he replied, "And you're not having it". A dog entered from the
+southwest. 
+ 
+"Ah, you've found Bert's wreath, though it seems that someone has mixed up the
+cards and put mine on it", said Edna in a satisfied tone. 
+"Well, thank goodness that squabble's over with", said Bert with a sigh. "Now
+we might get a bit of peace and quiet around here". 
+Joe Danby sniggered and muttered, "Hah! Some chance of that, Bert". 
+> EDNA, FOLLOW ME
+Edna Willmot nodded slowly. 
+ 
+The dog greeted me with a wag of its tail. 
+> BERT, FOLLOW ME
+Bert Willmot nodded slowly. 
+Edna Willmot stared pointedly into the distance. The dog wagged its tail
+timidly. 
+> SW
+ 
+I drifted southwest and was beneath a copper beech. Golden leaves rustled
+gently in the breeze. I could see a petal, some carvings and a plinth. 
+The company arrived from the northeast. 
+> SW
+ 
+I hovered southwest and was in a patch of swishy grass, heavy with dew. 
+The company arrived from the northeast. 
+> S
+ 
+I drifted south and was at the end of the path outside an old weather-beaten
+shed. I could see a shed door. In it was a lock. On the shed door was a rope
+handle. 
+The company arrived from the north. 
+> WAIT FOR DOG
+Time passed. 
+Joe Danby floated east. A dog entered from the north. 
+> PULL HANDLE 
+I wasn't strong enough to pull the rope. 
+Joe Danby entered from the east. The dog pulled the rope handle. A small bell
+jingled inside the shed, the shed door swung open and the dog darted inside.
+It soon reappeared with the workman's lunch box, clinking with bottles and
+bulging with biscuits. It struggled out of the cemetery to eat its reward. 
+Joe Danby laughed, "Sly little mutt!". 
+> S
+ 
+I floated south through the door and was inside the shed where the workmen
+kept their tools. I could see a watch, a bell, a shovel, a button, a switch
+and a lightbulb. 
+The company arrived from outside through the door. 
+> DAVID, WAIT THEN PRESS BUTTON
+David Ridge nodded slowly. 
+> PRESS BUTTON 
+I pushed the button. More pressure seemed to be needed to push it properly. 
+Joe Danby tried to slink out of the door. 
+David Ridge pushed the button. 
+ 
+The button clicked to its "off" position. Looking through the shed window, I
+noticed that the southern part of the cemetery had become much darker. 
+ 
+Just then, I heard a young lout bellow, "Now even the bulb's dead!" 
+> GET BELL
+I took the bell. 
+> PRESS SWITCH 
+I pushed the switch. The shed light came on. 
+ 
+The sudden shock of the light stabbed through me. I felt myself fade and
+everything returned to darkness. I opened my eyes and found myself back upon
+my own grave. 
+ 
+Suddenly, I heard a young vandal shout, "Quick! Somebody's in the shed!" 
+Then another replied, "Come on, let's leg it over this wall!" 
+ 
+Soon after, I heard footsteps running alongside the burnt church and the sound
+of them scrambling jumping over the wall. "Stone me!", yelled one of them, "I
+nearly knocked the wall over". 
+"Be quiet!", bellowed another at the top of his voice. 
+ 
+Soon, their footsteps faded into the distance as they ran from the cemetery. 
+The company arrived from the north. 
+> FIND COLONEL
+The company arrived from the northwest. 
+ 
+I hovered northwest and was in a circular clearing between the graves. I could
+see Colonel Rycroft, a twig and a broken sundial. 
+The company arrived from the southeast. 
+> COLONEL, FOLLOW ME
+Colonel Rycroft nodded in acknowledgement. 
+Joe Danby stared blankly into the night. Edna Willmot stared pointedly into
+the distance. Edith Dean entered from the west. 
+> FIND VIOLET
+ 
+I hovered west and was in a patch of swishy grass. 
+The company arrived from the east. 
+ 
+I drifted west and was among an untidy group of old tombstones. 
+The company arrived from the east. 
+ 
+I floated west and was by the headstone of Violet Conway, beside the hedge. I
+could see Violet Conway and a dogwood bush. 
+The company arrived from the east. 
+ 
+Violet Conway leaned against her headstone, sorrowfully. "Oh, I wish I'd been
+healthier before my death", she sighed, "It's terrible having to spend my
+afterlife without eyes". 
+> PUT BELL ON BUSH 
+I put the bell on the dogwood bush. "Oh, what a clever idea, young man", said
+Violet with a little smile. "I can hear the bell nicely when the wind blows". 
+ 
+She got up from her grave and walked steadily towards me, "Now I can get about
+the place without becoming lost", she said with delight, "How ever can I thank
+you?". 
+> VIOLET, FOLLOW ME 
+Violet Conway nodded obediently. 
+> SE
+ 
+I floated southeast and was west of the shed where a pile of twigs and
+branches lay rotting. I could see a matchbook, a fishbone and a heap of
+branches. 
+The company arrived from the northwest. 
+> E
+ 
+I floated east and was at the end of the path outside an old weather-beaten
+shed. I could see a shed door. In it was a lock. On the shed door was a rope
+handle. 
+ 
+The shed light was on. 
+The company arrived from the west. 
+> E
+ 
+I floated east and was at a corner in the gravel path which wound west to a
+shed and south beside the church. I could see a dry leaf. 
+The company arrived from the west. 
+> S
+ 
+I floated south and was on a wide gravel path leading south from the graves. I
+could see a gnomon, a thermometer and a crumbling abbey wall. 
+The company arrived from the north. 
+> JOE, WAIT 8 THEN PUSH WALL
+Joe Danby nodded slowly. 
+> EDITH, WAIT 7 THEN PUSH WALL
+Edith Dean nodded obediently. 
+Joe Danby hummed quietly. Edith Dean stared blankly into the night. 
+> ALEX, WAIT 6 THEN PUSH WALL
+Alex Pym nodded obediently. 
+David Ridge laughed pretentiously. 
+> DAVID, WAIT 5 THEN PUSH WALL
+He nodded slowly. 
+Edith Dean gazed up at the starry sky. 
+> EDNA, WAIT 4 THEN PUSH WALL
+Edna Willmot nodded in acknowledgement. 
+Joe Danby stared blankly into the night. 
+> BERT, WAIT 3 THEN PUSH WALL
+Bert Willmot nodded obediently. 
+Violet Conway hummed quietly. 
+> VIOLET WAIT 2 THEN PUSH WALL
+She nodded slowly. 
+> COLONEL, WAIT THEN PUSH WALL
+Colonel Rycroft nodded obediently. 
+He muttered about the youth of today. 
+> PUSH WALL 
+I pushed the crumbling abbey wall. A light breeze seemed to blow against the
+thermometer. 
+Joe Danby pushed the crumbling abbey wall. The thermometer groaned quietly in
+the breeze. 
+Bert Willmot pushed the crumbling abbey wall. I could feel a strong breeze
+blowing against the thermometer. 
+Edna Willmot pushed the crumbling abbey wall. The breeze turned to a wind and
+spread itself over the wall. 
+David Ridge stood pompously with his hands on his hips. He pushed the
+crumbling abbey wall. Dust and loose chippings blew into the air along the
+wall. 
+Alex Pym pushed the crumbling abbey wall. The thermometer leaned heavily and
+the wall began to crumble. 
+Edith Dean pushed the crumbling abbey wall. A strong gale blew the wall until
+it leaned heavily. 
+Colonel Rycroft pushed the crumbling abbey wall. The increasing blast set the
+wall a-quiver, almost bringing it to collapse. 
+Violet Conway pushed the crumbling abbey wall. 
+ 
+Finally, the wall could resist the wind's torment no longer, and it began to
+topple over. Like a tidal wave crashing along a shore, the collapse spread
+further and further south along the course of the wall, until at last the
+southernmost section smashed heavily onto the vault. 
+ 
+We all cheered as the vault was buried beneath an avalanche of rubble,
+trapping the drugs hoard within it. Now the gangsters would be delayed for a
+day or two, until enough of the debris was cleared for them to be able to
+sneak back and recover their loot. It would give me time to track down their
+hideout, and perhaps tomorrow I would be be strong enough in spirit to leave
+the churchyard and do it. 
+ 
+I could do nothing more today, for the night was now coming to an end, and it
+was time for us ghosts to make our way back to our graves. 
+ 
+I had scored 300 out of 300 and was a poltergeist. 
+ 
+I am about to start another part of the game. Do you want to save my position
+first, just in case? NO 
+ 
+I am about to start another part of the game. Do you want to go ahead? YES 
+Play the game tape to load part 2. 
+ 
+I woke once again beside my own grave. Darkness had fallen on my second night
+as a ghost and my powers had grown. I smiled as I remembered how my deeds of
+yesternight had delayed the gangsters, buying time tonight to locate their new
+hideout. Now, with my heightened senses, I could detect an old house north of
+the cemetery...
+ 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and UNDO to take back bad moves).
+ 
+I was standing beside my own grave. Through the darkness, I could make out Joe
+Danby's grave to the north, and to the west I saw the ruins of the church
+tower. 
+ 
+The earth around my grave was slushy and wet after yesterday's storm. Fallen
+leaves lay soaking in the murky puddles nearby, and uprooted plants littered
+the ground. 
+What now? N 
+I drifted north and was by Joe Danby's grave. It was strewn with splintered
+lengths of wood, rusting bolts and angle irons, cast here when the spotlit
+tower collapsed. I could see Joe Danby. 
+ 
+I had little doubt that Joe's old friends would be busy this weekend, tidying
+up his resting place. 
+ 
+Joe Danby greeted me with a warm smile. "Good evening", he began, "I trust you
+slept well. You're looking fit, all things considered. It seems that you
+temporary ghosts soon get stronger than us residents, so I expect you'll find
+you've got new powers this night. Could be that you're now able to heat and
+cool things. You might even be able to reach through solid objects - I've seen
+that done in the past. How about a wander outside the cemetery. Perhaps we'll
+find those crooks you were telling me about last night? You lead the way and
+I'll just follow on". 
+What now? N 
+I hovered north and was among the new graves. A small path, its overgrown
+surface almost indistinguishable from the surrounding land, lead east through
+a gap in the wall. 
+ 
+The path seemed to turn beyond the wall and head north. The village green lay
+there, and beyond it the chimneys of an old house stood out against the
+skyline. It looked strangely familiar. 
+Joe Danby entered from the south. 
+What now? E
+I drifted east and was on a path which twisted into the foggy distance to the
+north. 
+ 
+Twin beams of light briefly pierced the gloom far to the north. 
+Joe Danby entered from the west. 
+What now? N
+I floated north and was on a winding track leading north from the cemetery
+towards the old village. 
+ 
+Dank clouds of mist hovered low over the green to the north, lit occasionally
+by long sweeping beams from the headlights of passing cars. 
+No one much lived hereabouts nowadays. Most of the old houses had long since
+been abandoned, as people moved down to the burgeoning town to the south. 
+Joe Danby entered from the south. 
+What now? N 
+I hovered north and was on the south part of the village green. The grass was
+wet beneath my feet, sodden with yesternight's rain. 
+Joe Danby entered from the south. 
+ 
+The sound of an approaching car drifted across the village green. Joe urged me
+on, anxious to be clear of the open space. 
+What now? S
+I drifted south and was on a winding track leading north from the cemetery
+towards the old village. 
+ 
+Dank clouds of mist hovered low over the green to the north, lit occasionally
+by long sweeping beams from the headlights of passing cars. 
+Joe Danby entered from the north. 
+What now? WAIT
+Time passed. 
+What now? N
+I drifted north and was on the south part of the village green. The grass was
+wet beneath my feet, sodden with yesternight's rain. 
+Joe Danby entered from the south. 
+ 
+The dim red tail lights of a passing car faded away into the distance. 
+Joe said, "The green looks safe enough to cross now. I think we should pass
+over". 
+What now? N
+I floated north and was in the middle of the village green. The area around me
+had been churned into a sea of mud and deeply marked by studded footprints.
+Just beyond, the centre line of the football pitch reappeared on a small patch
+of clear grass. 
+Joe Danby entered from the south. 
+> N
+I floated north and was on the north green. 
+ 
+As the mist thinned out, I could clearly see an old house at the end of a
+tangled garden to the north. No lamps were lit there, no smoke drifted from
+its chimneys and no sounds escaped its dark walls. Yet there was a strong
+sense that it was occupied, and I felt uneasy. 
+Joe Danby entered from the south. 
+ 
+The sound of an approaching car drifted across the village green. Joe urged me
+on, anxious to be clear of the open space. 
+> N
+I hovered north and was in the front garden which must once have been well
+tended but was now overrun with weeds and long grass. I realised with shock
+that I had been here before. Though this place was now deserted, it had been
+the gang's old hideout. 
+ 
+As I approached the house, I seemed to see the images of many figures,
+spinning in a frenzy, blurring into darkening mist. 
+Joe Danby entered from the south. 
+ 
+Joe looked around. "If I'm right", he said thoughtfully, "a tragic event has
+left its mark on this place. Some people can call up the past in visions; I
+get hints but no more. Perhaps you could concentrate and summon the past a
+shade better than I can. As like as not, it concerned you". 
+> W
+I drifted west and was in the herb garden, ruined by long neglect - its plants
+all strangled by dead nettles. I could see a ditch. In it was some running
+water. I recoiled involuntarily from the sound of the ripples. 
+Joe Danby entered from the east. 
+> CONCENTRATE 
+ 
+I began meditating, and saw a vision of myself approaching from the garden to
+the east. 
+> WAIT
+Time passed. 
+ 
+I watched the vision and saw myself burying my identity card in the garden
+amongst the herbs. Then, the vision cleared as my figure returned inside the
+house again. 
+> DIG 
+I found a small plastic card. 
+ 
+"Aha!", exclaimed Joe, "Some evidence! Let's see what else there is to find,
+before you summon the police". 
+ 
+I seemed to lose my concentration. 
+> GET CARD
+I took the plastic card. 
+> N
+I drifted north through the door and was in the kitchen. Curling flakes of old
+paint and dusty chunks of crumbling plaster had collected around the skirting
+boards, leaving the yellowing walls mottled and peeling like dead skin. I
+could see a bottle of whisky, some curtains, a dispenser, a lampholder and a
+small switch. In the lampholder was a pearl bulb. A lone cockroach scuttled
+off as I entered and disappeared through a hole in the cracked lino. 
+> E
+I floated east through the door and was in the hall which was cold and bare
+and unwelcoming. I could see a directory, a telephone, a lampholder and a
+large switch. In the lampholder was a clear bulb. 
+ 
+A distressing presence hit me as I entered the hall; a sudden sense of past
+violence. And there was a painful familiarity to it, as if that violence had
+concerned me. 
+Joe Danby entered from outside through the door. 
+> GET BULB 
+I took the clear bulb. I dropped the plastic card. 
+> PRESS SWITCH 
+I pushed the large switch. The landing light came on. 
+ 
+Luke's ghost screamed painfully as the sudden shock of the landing light cast
+him into limbo for the rest of the night. 
+Joe smacked his hands together. "You got that spirit's measure", he said with
+grim pleasure. "That unholy ghost won't be back in a hurry". 
+Joe Danby cringed weakly away from the landing light. 
+I felt uneasy about the landing light. I dropped the clear bulb. It smashed to
+smithereens. 
+> W
+I drifted west through the door and was in the kitchen. Curling flakes of old
+paint and dusty chunks of crumbling plaster had collected around the skirting
+boards, leaving the yellowing walls mottled and peeling like dead skin. I
+could see a bottle of whisky, some curtains, a dispenser, a lampholder and a
+small switch. In the lampholder was a pearl bulb. 
+Joe Danby entered from the east through the door. 
+> EXAMINE DISPENSER
+It was fastened to the kitchen wall. Looking at the serrated metal blade along
+the front edge, I remembered that I never did quite get the hang of using
+dispensers while I was alive. I always ended up with a torn triangle of
+aluminum that was never big enough to do the job. In it was some foil. 
+> GET FOIL
+I took the foil. 
+Joe Danby drifted south through the door. 
+> WAIT FOR JOE
+Time passed. 
+Joe Danby entered from the east through the door. 
+> JOE, GET PEARL BULB
+He nodded in acknowledgement. 
+He took the pearl bulb. 
+> PUT FOIL IN LAMPHOLDER
+I put the foil in the lampholder. 
+> PRESS SWITCH 
+I pushed the small switch. There was a loud crack as the main fuse in the
+house was blown. 
+Joe smiled and said, "That's better. I couldn't stand those blasted lights". 
+> S
+I drifted south through the door and was in the herb garden, ruined by long
+neglect - its plants all strangled by dead nettles. I could see a ditch. In it
+was some running water. 
+> EXAMINE DITCH
+The running water was cold, dirty and wet. Even in mortal form I would have
+kept clear of there. Now, I felt a strange revulsion as I contemplated the
+moving liquid. On the running water was a branch. 
+> EXAMINE BRANCH
+It was a large and irregular twig, still bearing a few tired leaves. On it was
+a map. 
+Joe Danby entered from the east. 
+> FREEZE WATER 
+I froze the running water. 
+Joe Danby floated north through the door. 
+> GET MAP
+I took the map. 
+> WAIT FOR JOE
+Time passed. 
+Joe Danby entered from the east. 
+> JOE, GO TO LOUNGE AND PRESS WALL
+He nodded slowly. 
+He hovered east. 
+> E
+I floated east and was in the front garden which must once have been well
+tended but was now overrun with weeds and long grass. I could see Joe Danby. 
+He drifted inside through the door. 
+> E
+I hovered east and was on a thick grassy lawn. A tangled growth of ivy covered
+the cracking wall of the house before me, reaching high to tug at the gutters
+and pry beneath the roof tiles. I could see some ivy. 
+An owl came upon me in a white rush, sweeping down through me, talons
+outstretched, to pluck a cowering field mouse from the lawn behind me. I heard
+a thin small cry of pain before the sound was overwhelmed by the urgent beat
+of powerful wings. And the silence that followed was even deeper than it had
+been before. 
+> WAIT 
+Time passed. 
+A ghostly hand emerged from behind the ivy, waved briefly and disappeared
+again. This gave me a fix on the room, so that I knew the position of the
+chimney within the wall. 
+> PRESS WALL
+I put a hand through the wall behind the chimney and dislodged the piece of
+paper from its resting place inside. 
+> W
+I hovered west and was in the front garden which must once have been well
+tended but was now overrun with weeds and long grass. 
+Joe Danby entered from inside through the door. 
+> N
+I found that I was now capable of passing through some solid objects! With
+some difficulty, I drifted north through the door and was in the hall which
+was cold and bare and unwelcoming. I could see an plastic card, a directory, a
+telephone, a lampholder and a large switch. 
+Joe Danby entered from outside through the door. 
+> DROP MAP
+I dropped the map. 
+> E
+I floated east through the door and was in the lounge. Dark-stained bookcases
+covered one wall, but carried nothing but dust and the pale stains from
+careless cups. Apart from that, the place was bare of furniture. I could see a
+chimney piece, a fireplace and a bricked-up door. In the fireplace was a piece
+of paper. The room's sparseness was offset by a fine old fireplace with a
+carved mantle and tiled surround. I wondered idly how long it would be before
+some enterprising cowboy ripped it out to sell in London. 
+Joe Danby entered from the west through the door. 
+> GET PAPER
+I took the piece of paper. 
+> W
+I hovered west through the door and was in the hall which was cold and bare
+and unwelcoming. I could see an plastic card, a map, a directory, a telephone,
+a lampholder and a large switch. 
+Joe Danby entered from the east through the door. 
+> DROP PAPER
+I dropped the piece of paper. 
+> EXAMINE DIRECTORY
+It was just of the local area. It was the latest edition and only three years
+out-of-date. In it was a bookmark. 
+> JOE, WAIT THEN PULL BOOKMARK
+Joe Danby nodded slowly. 
+> PULL BOOKMARK
+I pulled the bookmark. A little more force seemed to be needed. 
+Joe said, "It will take more than one ghost to do that". 
+Joe Danby pulled the bookmark. 
+ 
+"It seems to me", began Joe, "that we've almost found enough evidence to
+locate where the drugs gang are hiding. When we've finished, I hope you can
+work out how to give it all to the police". 
+> U
+I hovered upwards and was on the landing, overlooking a narrow staircase. A
+door lead into the bathroom, and a small hatch above led into the attic. I
+could see a grandfather clock and a fluorescent tube. On the grandfather clock
+was a panel. 
+ 
+Ghostly footsteps trod clumsily behind me, as if two figures were carrying
+something heavy up the stairs. But this was only another echo of the past. 
+Joe Danby entered from below. 
+> U
+I hovered upwards and was in the attic. Dusty cobwebs dangled down and passed
+through me. I could see a plug, a socket and a water tank. 
+ 
+The still air seemed to shimmer. 
+Joe Danby entered from below. 
+> GET PLUG
+I took the plug. 
+> D
+I drifted downwards and was on the landing, overlooking a narrow staircase. A
+door lead into the bathroom, and a small hatch above led into the attic. I
+could see a grandfather clock and a fluorescent tube. On the grandfather clock
+was a panel. 
+Joe Danby entered from above. 
+> N
+I floated north through the door and was in the bathroom. I could see a
+mirror. 
+ 
+The socket was dragged along the floor on the landing. 
+Joe Danby entered from outside through the door. 
+> SMASH MIRROR
+The plug hit the mirror and smashed it to pieces, revealing a secret alcove.
+Someone had stashed a briefcase in there. 
+ 
+"Well", said Joe contentedly, "I think we've collected enough evidence for the
+police to locate the gang. Now we'd better try and find some way to get it to
+them". 
+> JOE, GET BRIEFCASE, S, D, DROP BRIEFCASE
+Joe Danby nodded in acknowledgement. 
+He took the briefcase. 
+> S
+I drifted south through the door and was on the landing, overlooking a narrow
+staircase. A door lead into the bathroom, and a small hatch above led into the
+attic. I could see a socket, a grandfather clock and a fluorescent tube. On
+the grandfather clock was a panel. 
+Joe Danby entered from the north through the door. 
+> U
+I floated upwards and was in the attic. Dusty cobwebs dangled down and passed
+through me. I could see a water tank. 
+> GET IN TANK 
+I eased myself into the tank and then realised to my horror that I was not
+alone there. Swaying eerily in the discoloured water was the dead body of
+Luke, the crook I had shot in the struggle before my death. 
+ 
+Startled by the gruesome sight, I scrambled to get out of the tank, pushing
+aside the lid in my panic. 
+> GET IN TANK 
+I got in the water tank. 
+> FREEZE PLUG TO BODY
+I froze the plug to the dead body. 
+Joe Danby entered from below. 
+> D
+I drifted downwards and was on the landing, overlooking a narrow staircase. A
+door lead into the bathroom, and a small hatch above led into the attic. I
+could see a socket, a grandfather clock and a fluorescent tube. On the
+grandfather clock was a panel. 
+Joe Danby entered from above. 
+> OPEN PANEL
+I opened the panel. 
+Joe Danby floated inside through the door. 
+> GET SOCKET
+I took the socket. 
+Joe Danby entered from inside through the door. 
+> PUT SOCKET IN PANEL
+I put the socket behind the panel. 
+> CLOSE PANEL
+I closed the panel. 
+> PUSH CLOCK 
+I pushed the grandfather clock. The clock toppled over and slid heavily down
+the stairs to the hall. 
+"Timber!" shouted Joe, enjoying his night's work. The dead body was dragged
+along behind it. 
+> D
+I hovered downwards and was in the hall which was cold and bare and
+unwelcoming. I could see an plastic card, a piece of paper, a map, a bookmark,
+a briefcase, a directory, a dead body, a grandfather clock, a telephone, a
+lampholder and a large switch. On the grandfather clock was a panel. 
+Joe Danby entered from above. 
+> W
+Did you know that you can go quickly to a far off place? E.g "RUN TO HALL" or
+"GOTO JOE". 
+I drifted west through the door and was in the kitchen. Curling flakes of old
+paint and dusty chunks of crumbling plaster had collected around the skirting
+boards, leaving the yellowing walls mottled and peeling like dead skin. I
+could see a bottle of whisky, some curtains, a dispenser, a lampholder and a
+small switch. In the lampholder was some foil. 
+Joe Danby entered from the east through the door. 
+> PUSH BOTTLE
+I pushed over the bottle, which smashed open on the floor. The whisky spread
+in a widening pool and began to evaporate. It wasn't long before the room was
+filled with its strong vapour. 
+"Hey!", Joe, "What a terrible waste". 
+Joe Danby made a quiet murmuring sound. 
+> LIGHT PUDDLE
+I ignited the cloud of whisky vapour. 
+ 
+The whisky vapour flashed into a flickering blue-white fire. 
+> PULL CURTAINS
+I blew the curtains into the flames where the crisp fabric instantly caught
+fire. 
+Joe gaped at me, "I see you are determined to experience death warmed up". 
+ 
+Thick smoke began to fill the house. 
+"You'll have the fire brigade around", tutted Joe. 
+> WAIT 
+Time passed. 
+ 
+The house was filled with dense acrid smoke and the roar of flames. Then the
+wailing sound of an approaching siren came through above the noise of the
+fire. There was a screech of brakes and a rush of heavy footsteps as a fire
+engine pulled up outside and a group of firemen ran up to the house. They
+smashed their way in through the front door and dashed into the kitchen,
+shouting orders to the others outside. 
+ 
+"Someone radio for the police!", shouted a fireman in the hall. "There's a
+dead man here and he wasn't killed by the fire. Don't touch anything". I was
+sure that Luke's body would stir the police into action, and that when they
+looked at the evidence I had collected, they would have sufficient clues to
+locate the drugs gang. I had done my job. 
+ 
+I had scored 600 out of 600 and was a poltergeist. 
+ 
+I am about to start another part of the game. Do you want to save my position
+first, just in case? NO 
+ 
+I am about to start another part of the game. Do you want to go ahead? YES 
+Play the game tape to load part 3. 
+ 
+Welcome to part 3 of Scapeghost, copyright (C) 1989 from Level 9 Computing. 
+ 
+I awoke abruptly at the start of my third night, feeling stronger than ever
+and wondering if I would be able to achieve such feats as bending metal and
+manifesting myself to mortals. 
+ 
+With a shock, I noticed a priest kneeling before my grave, mumbling passages
+from a leather-bound book. Two men stood over him. I thought at first they
+were some kind of assistants, until I saw through their disguises and
+recognised them as members of the drugs gang. They weren't helping him. They
+were making sure he did what he was told.. 
+ 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and UNDO to take back bad moves).
+ 
+I was overlooking my own grave. It was difficult to see anything to the north,
+as that part of the cemetery seemed somehow drained of colour and form. To the
+west, a path led towards the pile of rubble that had once been the abbey wall.
+I could see the priest, Big John and Weasel. 
+ 
+The priest made the sign of a cross, his eyes raised blankly towards heaven.
+Beside him, the villain that they called Weasel rubbed his hands together in
+evil satisfaction. 
+"Get a move on", John urged the priest. "We all dreamed of Luke last night,
+and he warned us that the ghost of this one was still walking. Let's get the
+holy water business over with". 
+What now? W 
+I drifted west and was on a path of stone chippings, running east-west between
+my grave and the rubble of the wall. A second path led off to the south
+through a scattering of fallen stones. 
+ 
+I sensed that if I returned to my exorcised grave I would be banished forever.
+It would be the same if I returned as a free spirit or if I were cast there by
+sudden light. I would have to be very careful on this last night as a ghost...
+What now? S
+I floated south and was on a path leading south out of the cemetery. The
+church wall had collapsed into a great pile of rubble that was strewn across
+the graveyard, though much of the debris had by now been cleared. I could see
+some rubble. 
+ 
+I felt a twinge of guilt about the damage that I had created, even though it
+had been in a good cause. 
+ 
+The priest ran past me in a panic as I heard the cruel laughter of John and
+Weasel coming from my grave. 
+What now? S
+I drifted south and was at a junction in the path. The ruins of the church lay
+to the northwest and a narrow path led east towards the gate to the car park.
+I could see a collapsed vault. Though there was no sign of Joe that night, I
+thought I heard him saying, "Good luck and happy haunting". 
+ 
+I would need all the luck going, if I were going to slow down the gangsters. 
+What now? E
+I drifted east and was outside the cemetery gate where there was a small car
+park. I could see a van. 
+What now? GET IN VAN
+I got in the van. 
+What now? WAIT FOR WEASEL
+Time passed. 
+Big John entered from the west. Weasel entered from the west. 
+What now? WAIT 3 
+Time passed. 
+Big John got in the van. Weasel got in the van. 
+ 
+Weasel started the engine and said, "Right, let's be off then". 
+Weasel narrowed his eyes. He drove for miles through the damp and dismal
+countryside, while I hid in the shadows at the back of the van. At last, we
+began to slow down... 
+ 
+The van was at a junction. A narrow track split off from the main north-south
+road and disappeared into the darkness to the west. 
+ 
+Drizzle began to patter lightly on the roof of the van. 
+ 
+"Bit of a rough night, Weasel", moaned John. "Better not get one of those
+blasted power cuts at the farm tonight". 
+What now? GET OUT OF VAN
+I got out. 
+Weasel drove the van west. 
+What now? W
+I hovered west and was on a narrow dirt track. I could see a farmhouse ahead
+of me to the west. The junction with the road, to the east, was lost in the
+dark. I could see a van. 
+ 
+I knew where we were now; this was the track I had seen on the criminals' map.
+Obviously they were still using their new hideout, which meant that the police
+had not yet closed in, and that I still had work to do... 
+Weasel drove the van west. 
+A haunting breeze carried away the "What now" prompts. 
+> W
+I drifted west and was in the farmyard outside a small stone farmhouse. A
+ramshackle old barn stood to the west, from which scatterings of straw were
+strewn all the way to the track on the east. A small passage ran northeast to
+the side of the house. I could see a van. 
+ 
+The farm stood on a small hill, with views of the countryside all around. The
+rain would help restrict visibility, but if the police were to have a chance
+of closing in without being seen, I would have to help. Otherwise, the
+evidence would all be destroyed before they got here. 
+ 
+"Park the van in the barn", said John. "And make sure it's facing out in case
+we need to do a runner". 
+> W
+I hovered west and was in the front of the barn at the western edge of the
+farmyard. The ground inside was thick with dung and sodden straw. I could see
+some hay. 
+ 
+A dull glimmer caught my eye for a moment, but I couldn't see anything when I
+looked again. I guessed I must have frightened a rat, but there bigger rats
+around the place that needed my attention more. 
+Weasel drove the van from the east. 
+> EXAMINE HAY
+The hay was damp and full of fungus tendrils. In the hay was an insecticide
+sprayer. 
+Big John got out. Weasel got out. 
+> GET SPRAYER
+I took the insecticide sprayer. 
+Big John walked east. Weasel trudged east. 
+> E
+I hovered east and was in the farmyard outside a small stone farmhouse. A
+ramshackle old barn stood to the west, from which scatterings of straw were
+strewn all the way to the track on the east. A small passage ran northeast to
+the side of the house. I could see Big John and Weasel. 
+Big John walked inside through the door. Weasel trudged inside through the
+door. 
+> NE
+I floated northeast and was by the side of the farmhouse, where stood a small
+stone-built outhouse. A concrete path carried on northwards around the back of
+the house. The long shadow of the farmhouse made it difficult to see much
+along that side. 
+> N
+I floated north and was at the back of the house. Thick clumps of nettles and
+weeds thrust upwards between the paving stones and the wall. Behind them, two
+thick electricity supply cables emerged from the house. I could see some
+connectors and some wires. 
+ 
+The insulation on the connectors had crumbled away, leaving them dangerously
+exposed. 
+> TOUCH SPRAYER ON CONNECTORS 
+I touched the sprayer on the connectors and there was a swift shower of crisp
+blue sparks and a sharp crack as I shorted out the electricity supply to the
+house. 
+> S
+I hovered south and was by the side of the farmhouse, where stood a small
+stone-built outhouse. A concrete path carried on northwards around the back of
+the house. I could see John. 
+ 
+John cursed the electricity board vigorously, and went into the outhouse to
+start the backup generator. 
+"Ruddy thing's knackered", he complained as he reappeared. "It's only giving
+out sixty flamin' volts". John walked southwest. 
+> SW
+I drifted southwest and was in the farmyard outside a small stone farmhouse. A
+ramshackle old barn stood to the west, from which scatterings of straw were
+strewn all the way to the track on the east. A small passage ran northeast to
+the side of the house. I could see John. 
+He stomped inside through the door. 
+> N
+I floated north through the door and was in the hallway. It was a cold room
+with a hard quarry tiled floor. Stairways led up and down from here, and there
+were two doors. The one to the east had "Kitchen" carved on the ornamented
+woodwork above it. The one to the north was marked in discriminatory fashion,
+"Living Room". I could see John and a cupboard. 
+ 
+The electricity supply to the house now came from the ancient generator
+outside, so the lights only glowed dimly. 
+ 
+I realised that my powers had grown since the previous night, and that now I
+had the power to charge things with static, and to manifest myself if I
+wished. 
+John coughed loudly. He stomped east through the door. 
+> EXAMINE CUPBOARD
+It was a walk-in wardrobe, that may have been used for storing brooms and
+coats but was now bare. In it was a circuit breaker. 
+> PUSH BREAKER 
+I switched off the circuit breaker. 
+> U
+I floated upwards and was at the top of the stairs next to the bathroom door.
+A narrow corridor hung with cheap prints led off northwards to the bedrooms,
+and a small hatch above gave access to the attic. I could see a creaky stair.
+I glanced at the prints. They were of thatched cottages, horse-drawn ploughs,
+bright clean farmyards - and always the sun shone gaily and the people were
+tanned and smiling. Country-living as it never was. 
+> U
+I drifted upwards and was in the attic which had been converted into a small
+bed-sitting room. At its western end there was a low bed beneath a small
+window. Tiny motes of dust danced lazily in the moonbeams that shone through
+the window. 
+> W
+I hovered west and was in the attic bedroom. A small single bed had been
+pushed hard up against the wall. I could see a whisky flask, a window, some
+curtains and a lampholder. 
+ 
+I looked through the window with concern. I felt sure that my colleagues would
+soon have puzzled out the clues that I had left for them. But the window
+overlooked several points on the main road to the farm, and anyone sitting
+here would be sure to see the police coming. Unless he was distracted, of
+course, and I somehow knew that I would have to do this five times... 
+> EXAMINE LAMPHOLDER 
+It was hanging from the ceiling on a twisted flex. In it was a bulb. 
+> WAIT FOR BIG JOHN
+Time passed. 
+Big John entered from the east. Big John looked straight through me and
+squinted slightly. 
+ 
+He sat down on the bed next to the window and opened his flask of whisky.
+"Well, at least I won't be losing all my money to John when he plays poker",
+he sighed. "I can get sloshed in peace up here". 
+> GET BULB
+I took the bulb. I dropped the insecticide sprayer. The attic was then much
+darker, lit only by the light that came through the window. "Not another power
+cut", groaned John. 
+> WAIT
+I waited patiently for a while, and then noticed something going on outside
+the window... 
+ 
+Big John took his copy of "The Beano" out his pocket and began to read it.
+"Gosh!", he exclaimed, "Isn't Dennis being naughty this week". 
+ 
+Looking through the window, I noticed a series of flashing lights in the
+nearby village. 
+> THROW BULB
+I dropped the bulb. It smashed to smithereens. "Whassat!", snapped John as he
+heard the bulb smash. Nervously, he looked away from the window and so didn't
+see the signs of the police approaching. 
+Big John narrowed his eyes. 
+ 
+John scratched his head in frustration. "Dunno what it is about this place",
+he said, shaking his head. "But it sure gives me the willies". 
+> GET GLASS
+I took the broken glass. 
+ 
+John shone his torch around the room, thinking that the other members of the
+gang were playing tricks on him. "Come on, I can see you", he shouted,
+although he couldn't see anyone at all. "It's not funny, y'know". 
+> WAIT
+Time passed. 
+ 
+John put his torch down and sat back on the bed, slightly more at ease. "Must
+be the gang takin' the Mick", he said. "Well, they won't scare me easily". 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+ 
+Big John began to pour whisky down his throat like there was no tomorrow.
+"Sheesh!", he wheezed as he took the flask from his mouth, "Fiery stuff,
+that". 
+> WAIT
+I waited patiently for a while, and then noticed something going on outside
+the window... 
+ 
+From the window, I saw the lights of a fleet of cars leaving the centre of the
+village. It looked like the police were now on their way. 
+> BLOW CURTAIN
+I blew the curtains. The curtains wafted into the room and John stared at them
+uneasily. Nervously, he looked away from the window and so didn't see the
+signs of the police approaching. 
+Big John coughed loudly. 
+ 
+John leapt into bed and pulled up the covers until only his eyes were visible.
+"This attic is haunted", he said in a muffled voice. 
+> WAIT
+Time passed. 
+ 
+John climbed hesitantly out of the bed and paced across the attic towards the
+hatch. "No, I can't do that", he said as he got half way across the room. "If
+I tell the others they'll just laugh in my face". 
+He paced reluctantly back to the bed and sat down, shivering. 
+> WAIT
+Time passed. 
+ 
+"It must be the booze", decided John. "I've been drinking steady ever since I
+came up here. No wonder I'm seeing things". 
+He took another swig of whisky from his flask, to calm himself down. 
+> WAIT
+Time passed. 
+Big John narrowed his eyes. 
+> WAIT
+Time passed. 
+ 
+Big John flicked through his Beano with excitement, as if trying to find
+something. "Yeah!", he shouted, "The Bash Street kids! I wonder what teach' is
+going to get up to this week...". 
+> WAIT
+I waited patiently for a while, and then noticed something going on outside
+the window... 
+ 
+I caught a glimpse of some cars passing over a nearby hill. A number of them
+disappeared back into the valley, but one of them parked by the side of the
+road. 
+> E
+I hovered east and was in the attic which had been converted into a small
+bed-sitting room. At its western end there was a low bed beneath a small
+window. 
+> D
+I drifted downwards and was at the top of the stairs next to the bathroom
+door. A narrow corridor hung with cheap prints led off northwards to the
+bedrooms, and a small hatch above gave access to the attic. I could see a
+creaky stair. 
+> PULL STAIR 
+I pulled the creaky stair. The stair creaked eerily and I heard Big John let
+out a nervous whine. "T-there's s-something creepy going on here", he
+stammered. 
+> D
+I hovered downwards and was in the hallway. It was a cold room with a hard
+quarry tiled floor. Stairways led up and down from here, and there were two
+doors. The one to the east had "Kitchen" carved on the ornamented woodwork
+above it. The one to the north was marked in discriminatory fashion, "Living
+Room". I could see a cupboard. 
+> D
+I drifted downwards and was on a flight of steps cut into the stone
+foundations of the house and leading down into a dank basement. I could see a
+heavy oak door. In it was a window. 
+ 
+Droplets of icy water dripped from the ceiling and splashed onto the steps,
+making patterns in the dust. 
+> WAIT FOR WEASEL
+Time passed. 
+Weasel entered from above. 
+> WAIT
+Time passed. 
+Weasel opened the heavy oak door. 
+> IN
+I floated inside through the door and was in a large cellar which stretched to
+the north beneath a low ceiling. I could see a shelf and a heavy oak door. In
+it was a window. 
+Weasel entered from outside through the door. 
+> N
+I hovered north and was in the back of the cellar. I could see a chair and a
+hammer. On the chair was Sarah. 
+Weasel entered from the south. 
+> WAIT
+Time passed. 
+ 
+"Just checking you're still here", said Weasel to Sarah. "If you want anything
+to eat, just give me a shout and I'll ignore you", he sniggered. 
+Sarah glared at him and cursed vigorously behind her gag. Weasel trudged
+south. 
+> MANIFEST
+I concentrated my ghostly powers and manifested myself. Sarah's eyes widened
+and she let out a muffled shriek. As the initial shock wore off, she realised
+who I was and her expression slowly changed from fear to amazement. Soon, when
+she had calmed down, she sat still, hoping that I would cut the ropes. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> CUT ROPES
+I cut the ropes and the gag with the glass, freeing Sarah. 
+ 
+"I don't know how you managed to return from the dead", she whispered with a
+shudder, "but I never thought I'd be glad to see a ghost. Thank you for
+freeing me". 
+She ran over to the cellar door and balanced a hammer on the shelf above it,
+before returning to her previous position on the chair. 
+"You know what to do when Weasel returns", she said with a tight smile,
+tossing the bonds back over her as if she were still tied up. 
+> S
+I drifted south and was in a large cellar which stretched to the north beneath
+a low ceiling. I could see a shelf and a heavy oak door. In it was a window.
+On the shelf was a hammer. 
+> WAIT FOR WEASEL
+Time passed. 
+The door opened from the other side. 
+Weasel entered from outside through the door. 
+ 
+In the presence of hostile humans, I became invisible once again. 
+> PUSH HAMMER
+I pushed the heavy hammer off the shelf. 
+ 
+It hit Weasel smack on the back of the head, knocking him flat out on the
+floor. 
+> MANIFEST
+I concentrated my ghostly powers and manifested myself. 
+Sarah entered from the north. 
+> SARAH, TIE WEASEL
+She nodded obediently. 
+She looked around. Sarah bound and gagged Weasel, finishing just as he began
+to wake up. 
+> OUT
+I floated outside through the door and was on a flight of steps cut into the
+stone foundations of the house and leading down into a dank basement. I could
+see a heavy oak door. In it was a window. 
+Sarah entered from inside through the door. She bolted the cellar door
+securely on her way out. 
+> U
+I hovered upwards and was in the hallway. It was a cold room with a hard
+quarry tiled floor. Stairways led up and down from here, and there were two
+doors. The one to the east had "Kitchen" carved on the ornamented woodwork
+above it. The one to the north was marked in discriminatory fashion, "Living
+Room". I could see a cupboard. 
+Sarah entered from below. 
+ 
+"Maybe I'd better find somewhere to hide", said Sarah, her eyes exploring the
+hallway. 
+> GO TO BARN
+I floated outside through the door and was in the farmyard outside a small
+stone farmhouse. A ramshackle old barn stood to the west, from which
+scatterings of straw were strewn all the way to the track on the east. A small
+passage ran northeast to the side of the house. 
+Sarah entered from inside through the door. 
+> SARAH, GO TO TAXI, DEFLATE TYRES
+Sarah nodded obediently. 
+She looked around. She trudged west. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+Sarah entered from the west. 
+> SARAH, GO TO CUPBOARD, HIDE IN IT, WAIT 20
+Sarah nodded in acknowledgement. 
+She trudged inside through the door. 
+> GO TO ATTIC
+I hovered inside through the door and was in the hallway. I could see Sarah
+and a cupboard. 
+Sarah hid in the cupboard. 
+I floated upwards and was at the top of the stairs. I could see a creaky
+stair. 
+I hovered upwards and was in the attic. 
+I floated west and was in the attic bedroom. A small single bed had been
+pushed hard up against the wall. I could see Big John, a whisky flask, an
+insecticide sprayer, a window, some curtains and a lampholder. 
+ 
+In the presence of hostile humans, I became invisible once again. 
+ 
+Big John began to pour whisky down his throat like there was no tomorrow.
+"Sheesh!", he wheezed as he took the flask from his mouth, "Fiery stuff,
+that". 
+ 
+John took a brief look out of the window, but he didn't appear to have seen
+the police yet. 
+> FREEZE JOHN
+I cooled Big John. John clasped his arms around himself, shivering in the
+sudden cold. He sat on the edge of his bed, eyes darting nervously around the
+attic. Nervously, he looked away from the window and so didn't see the signs
+of the police approaching. 
+ 
+John shrieked and darted into the bed, pulling the covers up to his twitching
+eyes. 
+> FREEZE JOHN
+I cooled Big John. "It gets colder by the minute", said John, rubbing his
+hands together. "Well I know one way to keep out the chill of the night", he
+added and took a warming swig of whisky. 
+ 
+John lay trembling in the bed, cautiously edging back the covers with his
+quivering hands. 
+> FREEZE JOHN
+I cooled Big John. "It gets colder by the minute", said John, rubbing his
+hands together. "Well I know one way to keep out the chill of the night", he
+added and took a warming swig of whisky. 
+ 
+John climbed hesitantly out of the bed and wiped the sweat from his brow with
+the back of his hand. 
+"Pull yourself together", he said to himself, "It's probably just the wind
+outside". 
+Having reassured himself a little, he lay back on the bed and tried to calm
+down again. 
+> MANIFEST
+I concentrated my ghostly powers and manifested myself. 
+ 
+John fixed his eyes on me and screamed, firing off the full magazine of his
+gun through me. The gang must have thought that they were under attack and I
+heard them running from the kitchen, to see what was going on. 
+> E
+I floated east and was in the attic which had been converted into a small
+bed-sitting room. At its western end there was a low bed beneath a small
+window. 
+> D
+I hovered downwards and was at the top of the stairs next to the bathroom
+door. A narrow corridor hung with cheap prints led off northwards to the
+bedrooms, and a small hatch above gave access to the attic. I could see a
+creaky stair. 
+John entered from below. 
+ 
+In the presence of hostile humans, I became invisible once again. Jude entered
+from below. Severian entered from below. 
+> D
+I hovered downwards and was in the hallway. It was a cold room with a hard
+quarry tiled floor. Stairways led up and down from here, and there were two
+doors. The one to the east had "Kitchen" carved on the ornamented woodwork
+above it. The one to the north was marked in discriminatory fashion, "Living
+Room". I could see a cupboard. 
+> MANIFEST
+I concentrated my ghostly powers and manifested myself. Sarah watched me
+closely, waiting for me to say something. 
+> SARAH, E, GET BRIEFCASE, W
+Sarah nodded obediently. 
+She ran east through the door. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+Sarah entered from the east through the door. 
+> SARAH, HIDE IN CUPBOARD, WAIT 20
+Sarah nodded in acknowledgement. 
+She sighed. She hid in the cupboard. 
+> GO TO VAN
+I floated outside through the door and was in the farmyard. 
+I hovered west and was in the front of the barn at the western edge of the
+farmyard. The ground inside was thick with dung and sodden straw. I could see
+some hay and a van. 
+ 
+With a boost of confidence, I had the feeling that the police were now on
+their way. 
+> LET DOWN TYRES
+I deflated the tyres them. 
+> WAIT
+Time passed. 
+Big John entered from the east. 
+ 
+In the presence of hostile humans, I became invisible once again. 
+> WAIT
+Time passed. 
+Big John narrowed his eyes. He kicked the tyres impatiently and said, "We
+don't have time to inflate those. Let's go! Just drive the damn thing
+carefully". He got in the van. 
+> WAIT
+Time passed. 
+ 
+"Blast!", cursed Big John. "John's got the van key with him. Where the hell's
+he got to?". Severian entered from the east. 
+> WAIT
+Time passed. 
+Severian hurried west. 
+> WAIT
+Time passed. 
+ 
+A feeling of satisfaction coursed through me as I realised that the police
+should be hot on the trail of the crooks by now. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+Weasel entered from the east. 
+> WAIT
+Time passed. 
+John entered from the east. Weasel got in the van. Jude entered from the east.
+> BEND KEY
+I bent the key. John felt the movement in his pocket and guessed that Jude was
+feeling friendly. He casually put his hand on her knee and was taken aback
+when she pulled it away and hissed, "Not now". 
+John got in the van. Jude got in the van. 
+> WAIT
+Time passed. 
+ 
+"Okay, let's hit the road", said John as he fumbled in his pocket for his
+ignition key. 
+ 
+"Hell and Damnation!", stormed John as he took the bent key from his pocket.
+"Come on! I haven't got time to straighten the damn thing. Leg it across the
+fields before the Bill catch us. 
+ 
+Unfortunately for the drug traffickers, the police had the farm surrounded,
+making the gang easy prey. 
+> GO TO BARN
+ 
+The wail of a distant siren drifted faintly through the air and then faded
+again. It seemed like it wouldn't be long before the police would be here. 
+I hovered east and was in the farmyard outside a small stone farmhouse. A
+ramshackle old barn stood to the west, from which scatterings of straw were
+strewn all the way to the track on the east. A small passage ran northeast to
+the side of the house. 
+> WAIT
+Time passed. 
+Severian drove the taxi from the west. 
+> GET INTO TAXI
+I got in the taxi. 
+Severian sighed impatiently. He drove the taxi south. 
+The taxi was on a muddy track, running from the farmyard, south-east across a
+grassy field. Other fields lay to the east and west beyond low hedges of
+thorn. 
+> MANIFEST
+I concentrated my ghostly powers and manifested myself. Severian appeared to
+have seen me, but just seemed to avoid me. 
+ 
+In a last attempt to stop the buyers from getting away, I made myself visible
+and tried to overcome Severian, who was driving. He fought back, waving his
+arms about in a frenzy. The taxi began to career madly all over the track. The
+flat tyres had made it difficult to drive anyway, now it went completely out
+of control. 
+ 
+The taxi skidded off the side of the track and crashed into a tree. Severian
+and the Professor struggled free of the wreck, moments before it burst into
+flames. Bruised and shaken, they made a run for it across the fields. 
+ 
+Unfortunately for them, the police were close by, and soon had them caught and
+cuffed. 
+ 
+Epilogue... 
+ 
+I had succeeded in bringing John Q and the other drug smugglers to justice.
+And as for the buyers, Severian and the Professor, they were caught, with the
+drugs being available as evidence - irrefutable proof of their guilt. 
+Sarah was still alive and gave evidence to the police to clear my name. 
+ 
+Knowing that my work was done, I returned at peace to the spirit world. My
+three days on earth were at an end, and I ascended triumphally to Heaven. 
+ 
+I had scored 1000 out of 1000 and was a poltergeist. 
+The adventure had come to an end. 
+Please type RESTART, UNDO, RESTORE or RAM RESTORE: #quit
+

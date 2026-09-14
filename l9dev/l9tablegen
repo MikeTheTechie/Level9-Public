@@ -1,13 +1,12 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: $0 [options]"
+  echo "Usage: $0 [options] [<table>]"
   echo
   echo "Options:"
   echo "--help: this usage message"
   echo "--bin: use a binary table.bin as input iso table.txt"
   echo "--old: for strict binary compatibility with older games"
-  echo "--i8086: for strict binary compatibility with older games"
   echo
   exit 1
 }
@@ -23,41 +22,44 @@ fi
 
 bin=""
 old=""
+table="table"
 while [[ $# -gt 0 ]]
 do
   case $1 in
     --help) usage ;;
     --bin) bin=$1 ;;
     --old) old=$1 ;;
+    *) table=$1 ;;
   esac
   shift
 done
 
-if [[ ! -f table.txt ]]; then echo "The file table.txt was not found."; exit 2; fi
+if [[ ! -f $table.txt ]]; then echo "The file $table.txt was not found."; exit 2; fi
 
 path=`dirname $0`
 if [[ -z $bin ]]
 then
   # assembler does not support case insensitive names
-  cat table.txt | tr "[[:upper:]]" "[[:lower:]]" >table.s
+  # assembler renders strings in lowercase
+  awk -F"'" 'BEGIN { for(i=0; i<256; i++) ord[sprintf("%c",i)]=i } { if ($0 ~ /[dD][cC]\.[bB]/ && NF >= 3) { printf "%s", $1; for(i=1; i<=length($2); i++) printf "%s$%02X", (i==1?"":","), ord[substr($2,i,1)]; for(i=3; i<=NF; i++) printf "%s%s", $i, (i==NF?"":FS); print "" } else { print } }' $table.txt | tr "[[:upper:]]" "[[:lower:]]" >$table.s
   # assembler does not support ORG directive
-  sed -i -e "s/^ org/;org/g" -e "/^ dc/s/,  */,/g" table.s
+  sed -i -e "s/^ org/;org/g" -e "/^ dc/s/,  */,/g" $table.s
   # assembler wants to word-align every repeated instruction
   exp="`echo -e ' rept\n dc.b 0\n endr'`"
-  act="`sed -ne '/rept/,/endr/{s/rept .*/rept/g;p}' table.s`"
+  act="`sed -ne '/rept/,/endr/{s/rept .*/rept/g;p}' $table.s`"
   if [[ -n "$act" && "$act" != "$exp" ]]
   then
     echo "Warning: unsupported rept statement."
   else
     # adjust observed case: start aligned and repeat "dc.b 0"
-    sed -i -e "s/^ rept \(.*\)/ rept (\1)\/2/g" table.s
-    sed -i -e "/^ endr/a\ even" table.s
+    sed -i -e "s/^ rept \(.*\)/ rept (\1)\/2/g" $table.s
+    sed -i -e "/^ endr/a\ even" $table.s
   fi
-  $path/l9asm2bin table 2>/dev/null
-  rm table.s
+  $path/l9asm2bin $table 2>/dev/null
+  rm $table.s
 fi
-$path/l9bin2tos table $old
-if [[ -z $bin ]]; then rm table.bin; fi
-mv table.prg table.dat
-echo "Level 9 table.dat generation done."
+$path/l9bin2tos $table $old
+if [[ -z $bin ]]; then rm $table.bin; fi
+mv $table.prg $table.dat
+echo "Level 9 $table.dat generation done."
 echo

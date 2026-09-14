@@ -95,7 +95,7 @@ uint8_t m68kDataLetVC[] = { // i.e. Let V1=CCCC
 };
 
 uint8_t m68kDataLetVV[] = { // i.e. Let V1=V2
-  // move.w xxxx(A5),yyyy(A5)
+  // move.w xxxx(A4),yyyy(A4)
   // format is: 0x3 , 0xrr,r1  6 1sss  XXXX  YYYY (rrr=source address reg)
   6,
   0x00, 0x39,
@@ -115,8 +115,8 @@ uint8_t m68kDataAddVV[] = { // i.e. ADD V1,V2: V1:=V1+V2
 };
 
 uint8_t m68kDataSubVV[] = { // i.e. SUB V1,V2: V1:=V1-V2
-  // move.w V2(A5),d0:   0x30, 0x2C, VVVV
-  // sub.w d0,V1(A5):    0x91, 0x6C, VVVV
+  // move.w V2(A4),d0:   0x30, 0x2C, VVVV
+  // sub.w d0,V1(A4):    0x91, 0x6C, VVVV
   8,
   0x00, 0x30, 0x00, 0x2C,
   0xA0, 0x00, 0x20, 0x00, // V2 offset
@@ -125,7 +125,7 @@ uint8_t m68kDataSubVV[] = { // i.e. SUB V1,V2: V1:=V1-V2
 };
 
 uint8_t m68kDataIfNEVCShort[] = { // i.e. IF V<>C THEN label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x66, 0xXX, where XX is offset from next instruction
   7,
   0x00, 0x0C, 0x00, 0x6C,
@@ -135,7 +135,7 @@ uint8_t m68kDataIfNEVCShort[] = { // i.e. IF V<>C THEN label
 };
 
 uint8_t m68kDataIfNEVCLong[] = { // i.e. IF V<>C THEN @label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x66, 0x00, XXXX
   //                   where XXXX is offset from XXXX
   8,
@@ -146,7 +146,7 @@ uint8_t m68kDataIfNEVCLong[] = { // i.e. IF V<>C THEN @label
 };
 
 uint8_t m68kDataIfEQVCShort[] = { // i.e. IF V=C THEN label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x67, 0xXX, where XX is offset from next instruction
   7,
   0x00, 0x0C, 0x00, 0x6C,
@@ -156,7 +156,7 @@ uint8_t m68kDataIfEQVCShort[] = { // i.e. IF V=C THEN label
 };
 
 uint8_t m68kDataIfEQVCLong[] = { // i.e. IF V=C THEN @label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x67, 0x00, XXXX
   //                  where XXXX is offset from XXXX
   8,
@@ -167,7 +167,7 @@ uint8_t m68kDataIfEQVCLong[] = { // i.e. IF V=C THEN @label
 };
 
 uint8_t m68kDataIfLTVCShort[] = { // i.e. IF V<C THEN label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x65, 0xXX, where XX is offset from next instruction
   7,
   0x00, 0x0C, 0x00, 0x6C,
@@ -177,7 +177,7 @@ uint8_t m68kDataIfLTVCShort[] = { // i.e. IF V<C THEN label
 };
 
 uint8_t m68kDataIfLTVCLong[] = { // i.e. IF V<C THEN @label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x65, 0x00, XXXX
   //                  where XXXX is offset from XXXX
   8,
@@ -188,7 +188,7 @@ uint8_t m68kDataIfLTVCLong[] = { // i.e. IF V<C THEN @label
 };
 
 uint8_t m68kDataIfGTVCShort[] = { // i.e. IF V>C THEN label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x62, 0xXX, where XX is offset from next instruction
   7,
   0x00, 0x0C, 0x00, 0x6C,
@@ -198,7 +198,7 @@ uint8_t m68kDataIfGTVCShort[] = { // i.e. IF V>C THEN label
 };
 
 uint8_t m68kDataIfGTVCLong[] = { // i.e. IF V>C THEN @label
-  // cmp.w C,V(A5):   0x0C, 0x6C, CCCC VVVV
+  // cmp.w C,V(A4):   0x0C, 0x6C, CCCC VVVV
   // beq label:       0x62, 0x00, XXXX
   //                  where XXXX is offset from XXXX
   8,
@@ -209,8 +209,8 @@ uint8_t m68kDataIfGTVCLong[] = { // i.e. IF V>C THEN @label
 };
 
 uint8_t m68kDataIfNEVVShort[] = { // i.e. IF V<>V1 THEN label
-  // move.w V(A5),d0:   0x30, 0x2C, VVVV
-  // cmp.w V1(A5),D0:   0xB0, 0x6C, V1V1
+  // move.w V(A4),d0:   0x30, 0x2C, VVVV
+  // cmp.w V1(A4),D0:   0xB0, 0x6C, V1V1
   // beq label:         0x66, 0xXX, where XX is offset from next instruction
   9,
   0x00, 0x30, 0x00, 0x2C,
@@ -221,8 +221,8 @@ uint8_t m68kDataIfNEVVShort[] = { // i.e. IF V<>V1 THEN label
 };
 
 uint8_t m68kDataIfNEVVLong[] = { // i.e. IF V<>V1 THEN @label
-  // move.w V(A5),d0:   0x30, 0x2C, VVVV
-  // cmp.w V1(A5),D0:   0xB0, 0x6C, V1V1
+  // move.w V(A4),d0:   0x30, 0x2C, VVVV
+  // cmp.w V1(A4),D0:   0xB0, 0x6C, V1V1
   // beq label:         0x66, 0x00, XXXX
   //                    where XXXX is offset from XXXX
   10,
@@ -234,8 +234,8 @@ uint8_t m68kDataIfNEVVLong[] = { // i.e. IF V<>V1 THEN @label
 };
 
 uint8_t m68kDataIfEQVVShort[] = { // i.e. IF V=V1 THEN label
-  // move.w V(A5),d0:   0x30, 0x2C, VVVV
-  // cmp.w V1(A5),D0:   0xB0, 0x6C, V1V1
+  // move.w V(A4),d0:   0x30, 0x2C, VVVV
+  // cmp.w V1(A4),D0:   0xB0, 0x6C, V1V1
   // beq label:         0x67, 0xXX, where XX is offset from next instruction
   9,
   0x00, 0x30, 0x00, 0x2C,
@@ -246,8 +246,8 @@ uint8_t m68kDataIfEQVVShort[] = { // i.e. IF V=V1 THEN label
 };
 
 uint8_t m68kDataIfEQVVLong[] = { // i.e. IF V=C THEN @label
-  // move.w V(A5),d0:   0x30, 0x2C, VVVV
-  // cmp.w V1(A5),D0:   0xB0, 0x6C, V1V1
+  // move.w V(A4),d0:   0x30, 0x2C, VVVV
+  // cmp.w V1(A4),D0:   0xB0, 0x6C, V1V1
   // beq label:         0x67, 0x00, XXXX
   //                    where XXXX is offset from XXXX
   10,
@@ -358,7 +358,7 @@ uint8_t m68kDataAttCV[] = { // i.e. TableN(C)=V
   0xA0, 0x00, 0x20, 0x00,
 };
 
-uint8_t m68kDataAftVV[] = { // i.e. V1=TableN(V2)
+uint8_t m68kDataAftVV[] = { // i.e. V2=TableN(V1)
   // move.l N*4(a3),A0:         0x20, 0x6B, NNNN
   // move.w V1(a4),D0:          0x30, 0x2C, V1V1
   // CLR.W V2(A4):              0x42, 0x6C, V2V2
@@ -413,7 +413,7 @@ uint8_t m68kDataAttCV16[] = { // i.e. &TableN(C)=V
   0xA0, 0x00, 0x20, 0x00,
 };
 
-uint8_t m68kDataAftVV16[] = { // i.e. &V1=TableN(V2)
+uint8_t m68kDataAftVV16[] = { // i.e. &V2=TableN(V1)
   // move.l N*4(a3),A0:       0x20, 0x6B, NNNN
   // move.w V1(a4),D0:        0x30, 0x2C, V1V1
   // MOVE.W 0(a0,d0),V2(A4)   0x39, 0x70, 0000+IndexByte<<16 V2V2

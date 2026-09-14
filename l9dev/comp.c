@@ -172,6 +172,7 @@ void comphexbyted0(uint8_t n) { hexbyted0(n); }
 void compreturntogem() { returntogem(); }
 //---
 // workspace values
+uint8_t *startfile = NULL;
 void *endcompiler = NULL;
 void *opcodeaddress = NULL;
 int currentvarnumber = 0;
@@ -213,7 +214,6 @@ char SixteenFlag = 0; // set to indicate 16 bit list operations
 char compdriverbuffer[100];
 //---
 void compflush() {
-  // flush(); // is an interpreter routine, not needed for now
   fflush(stdout);
 }
 //-------------
@@ -221,7 +221,8 @@ void clearsymbols() {
   // acode area is immediately after comp
 
   // once-only init
-  endcompiler = malloc(512 * 1024);
+  endcompiler = malloc(compramsize);
+  endmemory = endcompiler + compramsize;
 
   // acode area is first section
   startacode = endcompiler + 2; // reserve space for acode length
@@ -266,6 +267,7 @@ void clearsymbols() {
   // complete.dat will eventually be formed at the end of everything
   // to allow further compilation or symbol table actions after finishing
   startcomplete = (char *)endforward;
+  startfile = (uint8_t *)startcomplete; // needed for interpreter
 }
 //---
 void compsoftinit() {
@@ -280,10 +282,7 @@ void compsoftinit() {
 }
 //---
 void compstart() {
-  init1();
-  init2();
   clearsymbols();
-  // wrapreset();
 
   // set acode generation to start with
   CodeState = '-';
@@ -328,20 +327,23 @@ bool batchcompile() {
   // copy file name into driverbuffer
   struct _fcb *fcb = (struct _fcb *)&compdriverbuffer;
   fcb->start = startsource;
-  char *f = fcb->filename;
+  char *filename = cbatchptr;
   char c;
-  while (c = *(char *)cbatchptr++, c != cr && c != lf) {
-    *f++ = c;
+  while (c = *(char *)cbatchptr++, c != cr && c != lf)
     compprs("%c", c);
-  }
-  // end of filename, add 0 terminator
-  *f++ = 0;
+  // end of filename, temporarily add 0 terminator
+  char *term = cbatchptr - 1;
+  *term = 0;
   compprs("'. ");
   compflush();
 
+  *fcb->filename = 0x80; // pointer to filename
+  *(char **)(fcb->filename + 1) = filename;
   compdriver(loaddcode, fcb);
+
   if (*(char *)fcb) return false; // not found
   abscompilefile();
+  *term = c; // reset line terminator
   return true;
 }
 
@@ -370,7 +372,7 @@ void compmenu() {
     compprs("\n");
     compprs("Your choice: ");
     char c;
-    while (compdriver(osrdchdcode, &compdriverbuffer), (c = *compdriverbuffer) != lf) {
+    while ((c = waitkey()) != lf) {
       compprs("%c  ", c); // echo character typed
       dojumptable(c);
     }
@@ -473,35 +475,15 @@ void savegamedata() {
   if (!splitdata) climb(); // leave us back where we started
 }
 //---
-void rungame() { // XXX
-  compprs("Running game... is not implemented...\n");
-  compreturntogem();
-  return;
-
-  descend();
-  // call_ebios _getrez
-  // addq.l 2,sp
-  // d0.b = 2 for hires
-  // cmp.b 2,d0
-  int res = 0;
-  if (res != 2) {
-    // move.w 1,-(sp) // medium resolution
-    // move.l -1,-(sp) // retain physical base
-    // move.l -1,-(sp) // retain logical base
-    // call_ebios _setscreen
-    // add.l 12,sp
-  }
-  // dc.w 0xA00A // Line A function to hide mouse
-  // and set up palette - we want yellow text on black background
-  // setuppalette();
-
-  // lea initialstackpointer,a0
-  // move.l sp,(a0)
-  // intinit1(); // first part of initialise
-  // move.l a6,-(sp)
+void rungame() {
+  compprs("Running game...\n");
+  for (int i = 0; i < 25; i++) prs("\n"); // clear screen
+  if (!splitdata) descend();
+  intinit1(); // first part of initialise
+  if (forcedlongjumps) autoruninit(NULL);
   // get end of gamedata file
-  // intinitloadpics(savecompletedriverblock->end);
-  // intstart2();
+  intinitloadpics(savecompletedriverblock.end, startacode, debugginginfoon);
+  intstart2();
 }
 //---
 void toggledebugginginfo() {
@@ -511,7 +493,7 @@ void toggledebugginginfo() {
 }
 //---
 void compdebuggingon() {
-// as part of a program
+  // as part of a program
   debugginginfoon ^= 0xff;
 }
 //---
@@ -751,7 +733,7 @@ int vardefinitions() {
     // In split data (1.5) vars can go higher than 256
     // for MC purposes but are flagged when
     // used in non-MC sections
-    if (currentvarnumber >= (splitdata ? 65536 : 256)) {
+    if (currentvarnumber >= (splitdata ? 1025 : 256)) {
       TooManyVars();
       continue;
     }
@@ -1858,7 +1840,7 @@ void comperror1() {
 //---
 void compprintfilename() {
   struct _fcb *fcb = (struct _fcb *)&compdriverbuffer;
-  compprs("%s", fcb->filename);
+  compprs("%s", getfilename(fcb));
 }
 //---
 void chartoprinter(char c) {
