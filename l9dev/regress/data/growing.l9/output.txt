@@ -1,0 +1,1733 @@
+
+Looking for gameplay log on disk - 'log.bat'
+
+Executing instructions in file 'log.bat'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Welcome to the Growing Pains of Adrian Mole, from Level 9 and Virgin Games. If
+you are loading from tape, and it is still running, STOP THE TAPE IMMEDIATELY.
+ 
+Friday January 1st BANK HOLIDAY IN UK, REP. OF IRELAND, USA AND CANADA.
+These are my New Year resolutions: 
+1. I will be true to Pandora. 
+2. I will bring my bike in at night. 
+3. I will not read unworthy books. 
+4. I will study hard for my O levels and get grade A's. 
+5. I will try to be more kind to the dog. 
+6. I will try to find it in my heart to forgive Barry Kent his multiple sins. 
+7. I will clean the bath after use. 
+8. I will stop worrying about the size of my thing. 
+9. I will do my back-stretching exercises every night without fail. 
+10. I will learn a new word and use it every day. 
+ 
+Saturday January 2nd BANK HOLIDAY IN SCOTLAND (a day may be given in lieu).
+How interesting it is that Aabec should be an Australian bark used for making
+sweat. 
+ 
+Sunday January 3rd SECOND AFTER CHRISTMAS. MOON'S FIRST QUARTER.
+I wouldn't mind going to Africa and hunting an Aardvark. 
+ 
+Monday January 4th.
+Whilst in Africa I would go south and look for an Aardwolf. 
+ 
+Thursday January 7th.
+My father has had his last credit card taken off him! Marks & Spencer caught
+on to his trick of buying suits on credit and demanding a cash refund next
+day. He has only got a few quid's redundancy money left in his sock drawer. 
+Choose one of the following for me:
+1) ask him for a month's pocket money in advance;
+2) say he should have put it in the building society;
+3) tell him to invest it in his own business.
+#title: Growing Pains of Adrian Mole test script
+#comment: MSX version 
+9
+ 
+Type a command, HELP for a list of commands, or leave the line blank to return
+to the game. Then press ENTER or RETURN.
+#seed 42
+Seed set to 42
+ 
+Thursday January 7th.
+Which of the following shall I do?
+1) ask him for a month's pocket money in advance;
+2) say he should have put it in the building society;
+3) tell him to invest it in his own business.
+9
+ 
+Type a command, HELP for a list of commands, or leave the line blank to return
+to the game. Then press ENTER or RETURN.
+RESTART
+ 
+ 
+Friday January 1st BANK HOLIDAY IN UK, REP. OF IRELAND, USA AND CANADA.
+These are my New Year resolutions: 
+1. I will be true to Pandora. 
+2. I will bring my bike in at night. 
+3. I will not read unworthy books. 
+4. I will study hard for my O levels and get grade A's. 
+5. I will try to be more kind to the dog. 
+6. I will try to find it in my heart to forgive Barry Kent his multiple sins. 
+7. I will clean the bath after use. 
+8. I will stop worrying about the size of my thing. 
+9. I will do my back-stretching exercises every night without fail. 
+10. I will learn a new word and use it every day. 
+ 
+Saturday January 2nd BANK HOLIDAY IN SCOTLAND (a day may be given in lieu).
+How interesting it is that Aabec should be an Australian bark used for making
+sweat. 
+ 
+Sunday January 3rd SECOND AFTER CHRISTMAS. MOON'S FIRST QUARTER.
+I wouldn't mind going to Africa and hunting an Aardvark. 
+ 
+Monday January 4th.
+I, Adrian Mole, score 40 percent, which makes me a lowly schoolboy.
+ 
+Whilst in Africa I would go south and look for an Aardwolf. 
+ 
+Friday January 8th.
+Got a wedding invitation from Bert and Queenie, they are getting married at
+the Pocklington Street Register Office. 
+What shall I do?
+1) say to my mother that I think it's disgusting;
+2) think it is a waste of time;
+3) rush out to buy them a present.
+3
+I rush out to buy them a present, at least, I will do when the snow melts and
+I can walk down the streets in safety, secure in the knowledge that no one is
+going to ram a snowball down the back of my anorak. 
+ 
+Thursday January 14th.
+Why do socks have their ingredients listed but not all foods? It is most odd.
+ 
+Friday January 15th.
+I have arranged to go shopping with Pandora for Bert and Queenie's present. 
+Choose one of the following for me:
+1) buy twenty Woodbines for Bert and some rouge for Queenie;
+2) buy a small, slim vase;
+3) choose some vitamin pills for Bert.
+3
+I choose some vitamin pills for Bert, but Pandora won't let me buy them. She
+says it's not in good taste. 
+ 
+Saturday January 16th MOON'S LAST QUARTER.
+Bert got married today. He looked dead good. He had cashed in his life
+insurance and spent the money on a new suit. Queenie was wearing a hat made of
+flowers and fruit. She had lots of orange make-up on her face to try and cover
+the wrinkles. A newspaper reporter and photographer made everyone pose for
+photographs. The reporter asks for my name. 
+Which of the following shall I do?
+1) explain how I have been helping Bert;
+2) tell him my name but say that I don't want publicity;
+3) tell him my name.
+3
+I tell him my name and it is written in his notebook. 
+ 
+Monday January 18th.
+I, Adrian Mole, score 40 percent, which makes me a lowly schoolboy.
+ 
+Monday February 1st MOON'S FIRST QUARTER.
+I, Adrian Mole, score 40 percent, which makes me a lowly schoolboy.
+ 
+Thursday February 4th.
+Went round to see Bert and Queenie in their new bungalow. It is so full of
+knick-knacks that there is hardly room for a person to move. They both seem
+happy enough, but their sex life can't be up to much. 
+ 
+Wednesday February 10th.
+Pandora has got a crush on Tony Benn, just like the one she had on Bob Geldof.
+She says that older men are exciting. I am trying to grow my moustache.
+Valentine's Day soon. 
+ 
+Thursday February 11th.
+A big card came for my mother today. It has a Sheffield postcard. 
+What shall I do?
+1) hide it from my father;
+2) throw it away;
+3) ignore it as it is not addressed to me.
+3
+I ignore it as it is not addressed to me. 
+ 
+Saturday February 13th.
+Valentine's day tomorrow. 
+Choose one of the following for me:
+1) re-route the Sheffield card to Pandora;
+2) wait for someone to send me a card;
+3) send Pandora a poem.
+3
+I send Pandora a poem. I have bought a false Victorian card for Pandora and
+composed this verse to go in it: 
+My young love, 
+Treacle hair and knee socks 
+Give my system deep shocks. 
+You've got a magic figure: 
+I'm Roy Rogers, you are Trigger. 
+Which of the following shall I do?
+1) write "Ever Yours" instead;
+2) add "Copyright (C) Adrian Mole";
+3) send it to her.
+3
+I send it to her. If she doesn't get the literary reference to Roy Rogers, I
+will lend her my father's old Roy Rogers annuals. 
+ 
+Sunday February 14th SEXAGESIMA. ST VALENTINE'S DAY.
+At last I have a valentine from somebody who is not a blood relation!
+Pandora's card was charming, she had written a simple message of love:
+"Adrian, it is you alone".
+ 
+My father threw the Sheffield card in the waste-bin. My mother took it out
+when my father had gone to the pub. Inside it said, "Pauline, I am in
+anguish." My mother smiled and ripped it up. 
+What shall I do?
+1) say, "Well done, Mum.";
+2) smile and relax;
+3) decide to tell my father later.
+3
+I decide to tell my father later. He will be pleased to know what she did. 
+ 
+Monday February 15th WASHINGTON'S BIRTHDAY, USA. MOON'S LAST QUARTER.
+I, Adrian Mole, score 39 percent, which makes me an average thicko.
+ 
+Tuesday February 23rd SHROVE TUESDAY. NEW MOON.
+The South Wigston Brass Band gave a concert at school today. At the end, Mr
+Scruton said that they were looking for new members and anyone who was
+interested should stay behind. 
+Choose one of the following for me:
+1) go home;
+2) decide to join;
+3) stay to find out more.
+3
+I stay to find out more. Mr Swan, the bandmaster, said that he wanted people
+to play the Cornet, French Horn, and Euphonium. Rehearsals are every Saturday
+night at the Methodist Hall. 
+Which of the following shall I do?
+1) choose the Euphonium;
+2) choose the Cornet;
+3) choose the French Horn.
+3
+I choose the French Horn as it sounds a bit cultured and Pandora says we can
+play horn-viola duets. But someone else asked first. 
+What shall I do?
+1) give up and go home;
+2) choose the Euphonium;
+3) choose the Cornet.
+3
+I choose the Cornet. It is small and easy to carry. 
+ 
+Thursday February 25th.
+Miss Elf said that school-leavers are despairing all over the country. She
+said that headmaster Scruton should be ashamed of having a portrait of Mrs.
+Thatcher over his desk. 
+Choose one of the following for me:
+1) disagree;
+2) say he should have a portrait of the Queen instead;
+3) agree and help Pandora to organize a petition.
+3
+I agree and help Pandora to organize a petition to get it removed. We collect
+over twenty signatures. 
+Which of the following shall I do?
+1) ask Miss Elf to deliver it;
+2) take it to Mr Scruton;
+3) say that twenty isn't enough.
+3
+I say that twenty isn't enough and we forget the petition. 
+ 
+Friday February 26th.
+This morning Scruton ordered the whole school to go to the assembly hall.
+Somebody has drawn a moustache on his Thatcher portrait and written "Three
+million jobless" across it.
+ 
+He said that when the culprit was found he would be immediately expelled. The
+whole school is to have handwriting tests. 
+What shall I do?
+1) write with my left hand;
+2) stage a protest;
+3) do the test.
+3
+I do the test, wondering who is the culprit. 
+ 
+Saturday February 27th.
+Managed to get four different notes out of the cornet, but not in the right
+order. 
+ 
+Sunday February 28th QUADRAGESIMA (FIRST IN LENT).
+The dog went barmy when I started practicing the cornet. 
+Choose one of the following for me:
+1) practise out in the coal shed;
+2) shut the dog in the coal shed;
+3) stop and watch telly instead.
+3
+I stop and watch telly instead. I shall resign from the brass band. 
+ 
+Monday March 1st ST DAVID'S DAY (WALES).
+I, Adrian Mole, score 43 percent, which makes me a mediocre schoolboy.
+ 
+Miss Elf has resigned. 
+Which of the following shall I do?
+1) miss her;
+2) write a letter to the Evening Reporter;
+3) do nothing.
+3
+I do nothing. I must not take risks with exams coming soon. 
+ 
+Thursday March 4th.
+Pandora came round. I copied her homework.
+ 
+Monday March 15th.
+I, Adrian Mole, score 42 percent, which makes me an unimportant schoolboy.
+ 
+My father has a job!! He is going to be a Canal Bank Renovation Supervisor, in
+charge of a gang of school leavers. To celebrate, my father bought cigarettes
+for my mother and himself. I got a family pack of Mars Bars. 
+ 
+Tuesday March 16th.
+Pandora and I went to see the bit of canal bank that my father is now in
+charge of. If he worked for a thousand years he will never get it cleaned of
+old bikes and pram and Coca-Cola bottles. 
+What shall I do?
+1) make encouraging noises;
+2) tell him that he is in a no-win situation;
+3) suggest he finds another job.
+3
+I suggest he finds another job, but he points out that there are very few
+openings for redundant Electric Storage Radiator salesmen. 
+ 
+Wednesday March 17th ST PATRICK'S DAY. BANK HOLIDAY (IRELAND). MOON'S LAST
+QUARTER.
+My father went to see his canal bank this morning. Then he came home and shut
+himself in his bedroom. It is uncertain whether or not he will turn up for
+work. 
+ 
+Thursday March 18th.
+My father went to work. After school I walked home along the canal bank. I
+found him bossing a gang of skinheads and punks about. They were surly and
+unco-operative. None of them wanted to get their clothes dirty. 
+Choose one of the following for me:
+1) point out to my father that the lads are alienated;
+2) feel sorry for my father;
+3) attempt to exchange a few civilities with the lads.
+3
+I attempt to exchange a few civilities with the lads, but they spurn my
+overtures. 
+ 
+Saturday March 20th VERNAL EQUINOX.
+Mother's Day tomorrow. I don't know whether to get my mother anything for
+Mother's Day or not. She was going on about it last night saying it was a
+commercial racket for gullible fools. 
+Which of the following shall I do?
+1) ask Dad what to do;
+2) think I will get her something anyway;
+3) decide she's right, and save my money.
+3
+I decide she's right, and save my money. I hope she means it. 
+ 
+Sunday March 21st FOURTH IN LENT. MOTHERING SUNDAY.
+11.30 am. My mother has been in a bad mood all morning. 
+What shall I do?
+1) get out of the house;
+2) ask her what's the matter;
+3) sit tight.
+3
+I sit tight.
+ 
+By 1pm, the clattering and banging from the kitchen was getting on my nerves.
+My father said, "If I were you, lad, I'd nip round to Cherry's and get your
+mother a card and a present." He gave me two pounds so I got a card saying
+"Mummy I love you", and four boxes of liquorice allsorts. She cheered up a bit
+after that. 
+ 
+Monday March 22nd.
+I want to see how my father is getting on at the canal bank and decide to go
+there after school. 
+Choose one of the following for me:
+1) go down on my bike;
+2) ask Nigel to come along with me;
+3) ask Pandora to come along with me.
+3
+I ask Pandora to come along with me. Afterwards my father asked me not to
+bring her there again. He says he can't do anything with the lads after she
+has gone. 
+ 
+Wednesday March 24th.
+My father had a good day at the canal bank. He's almost through to the grass
+now. 
+ 
+Monday March 29th.
+I, Adrian Mole, score 39 percent, which makes me an average thicko.
+ 
+Saturday April 3rd.
+8 am. Britain is at war with Argentina!!! Radio Four has just announced it.
+Half of me thinks it is tragic and the other half of me thinks it is dead
+exciting. 
+Which of the following shall I do?
+1) wake my father to tell him;
+2) read a newspaper for more information;
+3) call an emergency meeting of the Pink Brigade.
+3
+I call an emergency meeting of the Pink Brigade. We argue about the war. Is it
+"the last knee-jerk of British colonialism" (Pandora) or "the struggle against
+the jack-boot of Fascism" (Nigel)? 
+What shall I do?
+1) say whatever it is, it is dead interesting;
+2) say "the struggle against the jack-boot";
+3) say "the last knee-jerk".
+3
+I say "the last knee-jerk" and swing the vote against Nigel. He leaves in
+disgust. 
+ 
+Monday April 5th.
+My father has sent a telegram to the War Office. He wants to take part in the
+war with Argentina and has offered his services as a heating engineer. 
+Choose one of the following for me:
+1) try to point out the error of his ways;
+2) offer my services as Official War Poet;
+3) say that I am proud of his selfless patriotism.
+3
+I say that I am proud of his selfless patriotism. My mother laughs and says
+that he will do anything to escape from the canal bank. 
+ 
+Tuesday April 6th.
+At tea-time I was looking at our world map, but I couldn't see the Falklands
+anywhere. My mother found them, hidden under a cake crumb. 
+ 
+Thursday April 8th MAUNDY THURSDAY. FULL MOON.
+Grandma came round to check our pantry for Argentinian corned beef. We passed
+the test because our corned beef was made by Brazilian cows. Grandma has a
+funny look in her eyes. My mother says it is called Jingoism. 
+Which of the following shall I do?
+1) look up Jingoism in the dictionary;
+2) say it is cataracts forming;
+3) ask my mother if there is a cure for it.
+3
+I ask my mother if there is a cure for it. She said that a cold dose of
+reality sometimes helps. I wish I knew what she means. 
+ 
+Sunday April 11th EASTER DAY.
+Now Windscale has been renamed Sellafield, I think they should rename the Lake
+District the Leak District.
+ 
+Monday April 12th EASTER MONDAY.
+I, Adrian Mole, score 43 percent, which makes me a mediocre schoolboy.
+ 
+Monday April 19th.
+Barry Kent came to school in a Union Jack tee-shirt today. Ms Fossington-Gore
+sent him home to change. Barry Kent shouted, "I'm bein' patriotic, inn I?" 
+What shall I do?
+1) support Barry Kent's right to wear what he likes;
+2) agree with Ms Fossington-Gore;
+3) watch developments with interest.
+3
+I watch developments with interest. This argument could keep everyone occupied
+for days, while I have a quiet life. 
+ 
+We had a dead good debate in Social Studies this morning. It is about the
+Falklands. Pandora put the proposition "That this class is against the use of
+force to regain the Falkland Islands." 
+Choose one of the following for me:
+1) say nothing;
+2) make an ironic speech against the motion;
+3) make a brilliant speech in favour.
+3
+I make a brilliant speech in favour of the motion. I quoted from Animal Farm
+and The Grapes of Wrath. I got quite a good round of applause when I sat down.
+ 
+Barry Kent spoke against the proposition. He said, "Er, I er, fink we should
+er, you know, like, bomb Argentina." He sat down to a standing ovation. 
+ 
+Tuesday April 20th.
+Barry Kent's father is refusing to let him attend school until Ms
+Fossington-Gore apologizes about the tee-shirt. 
+Which of the following shall I do?
+1) complain to the papers about lefty school teachers;
+2) organize a petition in support of him;
+3) organize a petition in support of her.
+3
+I organize a petition in support of her but, apart from Pandora, no-one is
+willing to sign it and I was forced to forget the idea when Kent was seen
+lurking outside the school exit. 
+ 
+Wednesday April 21st.
+My father has had his last credit card taken off him! Marks & Spencer caught
+on to his trick of buying suits on credit and demanding a cash refund next
+day. He has only got a few quid's redundancy money left in his sock drawer. 
+What shall I do?
+1) ask him for a month's pocket money in advance;
+2) say he should have put it in the building society;
+3) tell him to invest it in his own business.
+3
+I tell him to invest it in his own business. He looks thoughtful, and asks if
+I've got any ideas. 
+Choose one of the following for me:
+1) suggest starting a milk round;
+2) say, "Why not ask Mum?";
+3) suggest an Electric Storage Heater Repair service.
+3
+I suggest an Electric Storage Heater Repair service, but he says that they
+don't break down often enough. 
+ 
+Saturday April 24th.
+I don't understand local radio. All the stations are the same. There should be
+one for intellectual programmes.
+ 
+Monday April 26th.
+I, Adrian Mole, score 44 percent, which makes me a spotty schoolboy.
+ 
+School is dead brilliant now that Barry Kent's shaved head and ferocious boots
+are but a bad memory. 
+ 
+Wednesday April 28th.
+My father is going to start his own business making telephone tables. He has
+spent the last of his redundancy money on buying pine and glue. Our spare
+bedroom has turned into a workshop. Sawdust is all over the house. I have a
+feeling of deja vu. 
+Which of the following shall I do?
+1) feel very proud of my father;
+2) offer to help;
+3) ask if he has done his Market Research.
+3
+I ask if he has done his Market Research before deciding on telephone tables.
+My father says "Market what?" I fear this enterprise is doomed. 
+ 
+Thursday April 29th.
+Delivered Mrs Braithwaite's massive telephone table after school. It took two
+of us to carry it round and install it in her hall. My father wasted two
+pounds on a bottle of champagne to celebrate his first sale. 
+What shall I do?
+1) say he should wait a few days before celebrating;
+2) propose a toast to Mole Enterprises;
+3) tell him he has no respect for capital investment.
+3
+I tell him he has no respect for capital investment. He tells me I have no
+respect for champagne and refuses to give me a glass. 
+ 
+Friday April 30th MOON'S FIRST QUARTER.
+I will be fifteen in two days. So I have only got to wait one year and two
+days to get married, should Pandora want to. Love is the only thing that keeps
+me sane... 
+ 
+I, Adrian Mole, score 44 percent, which makes me a spotty schoolboy.
+ 
+That's the end of this part of the game. Would you like to continue with the
+next part? 
+YES
+Check the program tape/disk is in the drive and press ENTER or RETURN. If
+using tape, check the recorder is set to PLAY (and, if the tape isn't moving,
+press ENTER or RETURN again).
+Welcome to part 2 of the Growing Pains of Adrian Mole, from Level 9 and Virgin
+Games. If you are loading from tape, and it is still running, STOP THE TAPE
+IMMEDIATELY.
+ 
+Saturday May 1st.
+Grandma rang with her usual gibberish about "Cast ne'er a clout". I know it's
+got something to do with keeping your vest on. But so what? I keep my vest on
+all year round anyway.
+ 
+Britain has bombed Port Stanley airport and put it out of action. 
+ 
+Wednesday May 5th.
+It is time I was done with childish things so I have taken all my Enid Blyton
+books off my bookshelves and packed them in an Anchor butter box on the
+landing. I hope my parents take the hint.
+ 
+Friday May 7th.
+I wish my mother wouldn't wear such tight tee-shirts. It is not dignified in
+someone her age (37).
+ 
+Monday May 10th.
+I, Adrian Mole, score 44 percent, which makes me a spotty schoolboy.
+ 
+Friday May 14th.
+Got an airmail letter from Hamish Mancini, the American we met on holiday last
+year. After reading and rereading it I think it means that Hamish is coming to
+stay with us in two days! I haven't told my parents yet. My mother said that
+he ruined her adulterous holiday avec Lucas with his constant yapping. 
+Choose one of the following for me:
+1) wait to catch my mother in a good mood;
+2) leave the letter where my mother will find it;
+3) phone him to put him off.
+3
+I phone him to put him off, but the operator cannot find his number. As his
+mother has probably married yet again, I do not know what name the phone would
+be under. 
+ 
+Saturday May 15th SCOTTISH QUARTER DAY.
+When I got in, I made a fuss over my poor pregnant mother. When she was in a
+good mood I told her about Hamish. She pulled her lips tight, but she didn't
+go mad. 
+ 
+Monday May 17th.
+Hamish Mancini is here. He arrived at 5.30 am. having taken a taxi from
+Heathrow Airport (130 miles!) He made a terrible faux pas at breakfast. He
+asked my mother, "Hey, Pauline, where's that guy, Lucas?" There was an awful
+silence. 
+Which of the following shall I do?
+1) kick Hamish under the table;
+2) keep my head down;
+3) change the subject quickly.
+3
+I change the subject quickly and ask what Hamish would like to do today. He
+says, "Why don't we promenade around this little old town and take in the
+ancient ruins?" I tell him that there aren't many in Leicester, but we could
+go and see Bert and Queenie. They are both ancient ruins. 
+ 
+In the afternoon we went to see Bert and Queenie. Hamish was beside himself
+with joy. He kept saying "Jee-sus! A genuine Derby and Joan!" 
+ 
+Saturday May 22nd.
+We took Hamish to the fun fair on our recreation ground. Hamish was
+disappointed that it wasn't like Disneyland. 
+What shall I do?
+1) stand sadly by the Tunnel of Love;
+2) go on the Flying Whiplash;
+3) go on the dodgems.
+3
+I go on the dodgems with my mother. It is dead good. I think I'll be a stock
+car racer when I'm older. 
+ 
+Sunday May 23rd SUNDAY AFTER ASCENSION. NEW MOON.
+Hamish wants to meet Pandora. I told him how things stand between Pandora and
+me, but Hamish wouldn't listen. He just said, "But that doesn't stop me from
+meeting her, for Christ's sake." 
+Choose one of the following for me:
+1) arrange a date for him with Sharon Botts;
+2) ask him not to see her;
+3) give him Pandora's number.
+3
+I give him Pandora's number. I must be a good host. 
+ 
+Monday May 24th VICTORIA DAY (CANADA).
+I, Adrian Mole, score 47 percent, which makes me a middling schoolboy.
+ 
+Hamish has invited himself round to Pandora's for supper. At least the house
+is peaceful. I am reading The Quiet American by Graham Greene, Hughie Greene's
+brother. 
+ 
+Monday June 7th HOLIDAY (REPUBLIC OF IRELAND).
+I, Adrian Mole, score 47 percent, which makes me a middling schoolboy.
+ 
+Wednesday June 9th.
+I have got thirty-eight spots: twenty-eight on my face and the rest on my
+shoulders.
+ 
+Monday June 21st LONGEST DAY. NEW MOON.
+I, Adrian Mole, score 47 percent, which makes me a middling schoolboy.
+ 
+Mr Scruton summoned the whole school into the assembly hall this morning. Even
+the teachers who are atheists were forced to attend. He said, "Today at three
+minutes to nine a future King of England was born." Claire Neilson shouted,
+"How much did he weigh?" Mr Scruton smiled and ignored her. Pandora shouted,
+"How much will he cost?" And Mr Scruton suddenly developed good hearing and
+ordered her out of the hall. 
+Which of the following shall I do?
+1) give her a supportive smile;
+2) walk out in sympathy with her;
+3) do nothing.
+3
+I do nothing. How can I when Scruton's ferocious eyes are scanning the whole
+hall for the slightest twitch? 
+ 
+Tuesday June 22nd.
+Pandora has been put in isolation at school. She is working at a desk outside
+Scruton's office. 
+What shall I do?
+1) organize a petition in her support;
+2) ring her at home in the evening;
+3) write her a note of support.
+3
+I write her a note of support and sign it, "your ex-lover". She writes back to
+say that we were never lovers, but thanks me for my support. 
+ 
+Monday July 5th INDEPENDENCE DAY HOLIDAY (USA).
+I, Adrian Mole, score 47 percent, which makes me a middling schoolboy.
+ 
+Saturday July 10th.
+11 am. A dirty white cat turned up on our doorstep this morning. It had a tag
+round its neck which said, "My name is Roy" but there was no address. It
+ignored me when I got the milk in. 
+Choose one of the following for me:
+1) bring a saucer of milk to the doorstep;
+2) pick it up and take it inside;
+3) ignore it back.
+3
+I ignore it back. Later I find that it has gone to stay at the Singh's. I hope
+Roy likes curry and chapatis. 
+ 
+Hamish has gone skiing on a dry slope with Pandora. I hope they both break
+something, preferably their necks. 
+ 
+Monday July 12th HOLIDAY (NORTHERN IRELAND).
+Hamish is spending every waking moment at Pandora's house. A telegram has
+arrived from America. It was addressed to MANCINI but I opened it in case his
+mother had dropped dead or something. It was from Mom begging him to come
+home. 
+Which of the following shall I do?
+1) deliver it to Pandora's house;
+2) do nothing;
+3) phone him at Pandora's.
+3
+I phone him at Pandora's and read it out, telling him to hurry home. He says,
+"Hey, man, don't get spaced out. I'll be there real soon. I just gotta say my
+goodbyes to Pan for the really great times we've had." It takes him three
+hours to say his goodbyes! 
+ 
+Tuesday July 13th.
+Hamish has gone home to Mom. The next time he runs away I hope he goes to Cape
+Horn or the Artic Circle or anywhere I'm not likely to be. 
+ 
+Friday July 16th.
+Queenie is ill. Bert rang at dinner-time to ask us to go round. Queenie was
+lying on the big saggy bed looking gruesome (she hadn't put her artificial
+cheeks or lips on). She said, "I've been having pains like red hot needles in
+my chest." My mother phoned for an ambulance. It was a good job that she did
+because while it was coming Queenie went a bit strange and started talking
+about ration books and stuff. My mother went in the ambulance and me and my
+father stayed behind to comfort Bert. Two hours later my mother rang to say
+that Queenie had had a stroke and would be in hospital for ages. Bert said,
+"What am I going to do without my girl to help me?" 
+What shall I do?
+1) say, "How about going back to the Alderman Cooper Sunshine Home for a
+while";
+2) suggest that Bert comes home with us;
+3) promise that we will help to look after him.
+3
+I promise that we will help to look after him. My father nods his agreement
+and Bert murmurs, "Thanks, Adrian." 
+ 
+Saturday July 17th.
+My mother has been round at Bert's all day cleaning and cooking. My father is
+going to call in every day on his way home from the canal. I have promised to
+take horrible Sabre for his morning and evening walks. I must let Pandora know
+about Queenie and Bert. It would be nice for Bert if she could visit him. 
+Choose one of the following for me:
+1) take Sabre for an early walk;
+2) make Bert a cup a tea;
+3) iron Bert's giant underpants.
+3
+I iron Bert's giant underpants. While I am doing it, Pandora walked in
+carrying a jar of home-pickled beetroot. I was transfixed. Bert sent me off to
+make some tea. I looked yearningly at Pandora as I handed her her tea. And she
+looked yearningly back at me!!!!! Later, when he was asleep in bed, we fell
+into each other's arms with little sighs and moans. Sex didn't cross my mind
+once. On the way home, Pandora said that she realized she still loved me when
+she saw me ironing those horrible underpants. She said, "Only a superior type
+of youth could have done it." 
+ 
+Monday July 19th.
+I, Adrian Mole, score 49 percent, which makes me a worthy schoolboy.
+ 
+My father took Bert to see Queenie in hospital, so I went to Sainsbury's on
+the bus. My mother gave me thirty pounds and told me to buy enough food for
+five days. 
+Which of the following shall I do?
+1) ask for a shopping list;
+2) stock up on Vesta curries and Instant Whip;
+3) buy cheap wholesome food.
+3
+I buy cheap wholesome food like vegetables, brown rice and yogurt. In our last
+Domestic Science lesson, Mrs Appleyard had shown us how to make cheap meals
+with maximum nourishment. My mother didn't thank me when I handed her fifteen
+pounds change! She whined on and on about forgetting the frozen gateaux and
+tinned peas, and she went mad when she saw that I hadn't bought a white
+thick-sliced loaf. 
+What shall I do?
+1) hurry back to Sainsbury's before it closes;
+2) say she could make her own bread;
+3) say she can do her own shopping next time.
+3
+I say she can do her own shopping next time. She says, "Right, I'll do MY
+shopping. You can do your own." That sounds like trouble to me. 
+ 
+Monday August 2nd BANK HOLIDAY (SCOTLAND). HOLIDAY (REPUBLIC OF IRELAND).
+I, Adrian Mole, score 49 percent, which makes me a worthy schoolboy.
+ 
+Tuesday August 3rd.
+Went to Grandma's to eat proper food for a change.
+ 
+Friday August 6th.
+Went to see Queenie in hospital. She is on a ward full of old ladies with
+sunken-in faces. It's a good job Queenie was wearing her rouge, I wouldn't
+have recognized her without it. She can't speak properly so it was dead
+embarrassing trying to work out what she was saying. 
+Choose one of the following for me:
+1) stay for a while and smile a lot;
+2) make a note to bring a book next time;
+3) leave as quickly as I can.
+3
+I leave as quickly as I can as I've got nothing to say and I hate hospitals. 
+ 
+Saturday August 14th.
+My mother is fed up. She is just sitting round the house smoking and sighing.
+She's been like it ever since she came back from the "Well Woman" clinic.
+Perhaps she's not well. 
+ 
+Monday August 16th.
+I, Adrian Mole, score 48 percent, which makes me an average schoolboy.
+ 
+Brainbox Henderson has started a youth club magazine and is offering a prize
+for the best poem. I have submitted some of my Juvenilia plus a more mature
+poem called Ode to Engels, or Hymn to the Modern Poor. 
+Which of the following shall I do?
+1) show it to my parents;
+2) send a copy to John Tydeman at the BBC;
+3) read it to Pandora.
+3
+I read it to Pandora who says it is a work of genius. 
+ 
+Tuesday August 17th.
+Brainbox Henderson showed me Barry Kent's entry for the poetry competition.
+Kent is convinced his "Tulips" will win the first prize of five pounds: 
+Nice, red, tall, stiff, 
+In a vase, 
+On a table, 
+In a room, 
+In our house. 
+What shall I do?
+1) say nothing;
+2) admire its economy;
+3) say it is pathetic.
+3
+I say it is pathetic but Henderson says it shows Japanese cultural influences.
+How stupid can you get! The nearest Kent has been to Japanese culture is the
+pillion of a stolen Honda. 
+ 
+Saturday August 28th.
+Found a strange device in the bathroom this morning. It looked like an
+egg-timer. It said "Predictor" on the side of the box. I hope my mother is not
+dabbling in the occult. 
+Choose one of the following for me:
+1) ask her what it is;
+2) warn my mother about the dangers of the occult;
+3) turn it upside down to see what happens.
+3
+I turn it upside down to see what happens. Later, I heard her complaining to
+my father that "the bloody thing didn't work". I kept quiet as I guessed she
+meant the Predictor. 
+ 
+Sunday August 29th TWELFTH AFTER TRINITY.
+The paper reports GEC as saying the Nimrod project is within budget and going
+well. I expect this means it will be finished by 1983.
+ 
+Monday August 30th LATE SUMMER HOLIDAY (UK EXCEPT SCOTLAND).
+I, Adrian Mole, score 47 percent, which makes me a middling schoolboy.
+ 
+Tuesday August 31st.
+The Royal Hospital phoned with a message for my father to say that a close
+friend had been taken into ward ten and would he please ring immediately. It
+was a mystery to all of us. My father hasn't got any close friends. He was
+speaking for about fifteen minutes. When he came back he said, "I've got
+something to tell you both".
+ 
+He informed me and my mother that he is the father of Stick Insect's
+one-day-old baby boy. 
+ 
+I, Adrian Mole, score 47 percent, which makes me a middling schoolboy.
+ 
+That's the end of this part of the game. Would you like to continue with the
+next part? 
+YES
+Check the program tape/disk is in the drive and press ENTER or RETURN. If
+using tape, check the recorder is set to PLAY (and, if the tape isn't moving,
+press ENTER or RETURN again).
+Welcome to part 3 of the Growing Pains of Adrian Mole, from Level 9 and Virgin
+Games. If you are loading from tape, and it is still running, STOP THE TAPE
+IMMEDIATELY.
+ 
+Wednesday September 1st.
+My father has gone to see Brett and Stick Insect. My mother made him go. So
+once again I am living in a broken home. 
+ 
+Friday September 3rd FULL MOON.
+Queenie Baxter died at 3 o'clock this morning. She had a stroke in her sleep.
+Bert said it was a good way to go, and I am inclined to agree with him. Bert
+doesn't know what to do about death certificates and funeral arrangements,
+etc. So Pandora's father came round to help. 
+ 
+Pandora is taking canoing lessons in preparation for her River Wye holiday.
+She has her first lesson today and invited me to watch. 
+Which of the following shall I do?
+1) decline;
+2) ask to join in;
+3) accept.
+3
+I accept. I will be on hand to save her with the kiss of life if she falls out
+and nearly drowns. 
+ 
+Saturday September 4th.
+Pandora looked dead erotic in her black wetsuit and crash helmet. And for the
+first time in yonks I felt my thing moving on its own. I can't remember any
+more about the canoe lesson, so I was unable to join in Pandora's enthusiastic
+conversation on the way home in her dad's car. Pandora and her parents are
+leaving for the River Wye on Saturday. 
+What shall I do?
+1) plead to go along too;
+2) try not to look rejected;
+3) offer to look after their house.
+3
+I offer to look after their house. 
+ 
+Sunday September 5th.
+Pandora's parents have accepted my kind offer and entrusted me with their
+keys. It is a massive responsibility. 
+ 
+Monday September 6th LABOUR DAY (USA AND CANADA).
+Mr Braithwaite is very worried about Queenie's funeral. The cheapest he can
+arrange will cost 350 pounds, but her funeral insurance is only thirty. 
+Choose one of the following for me:
+1) suggest a loan;
+2) raise money;
+3) say, "Ask the Social Security to do it".
+3
+I say, "Ask the Social Security to do it". Bert is dead upset by this as he
+wants a proper funeral. 
+ 
+Thursday September 9th.
+Queenie's funeral today. It was dead sad. Now Bert is on his own again, and
+will need more looking after than ever! 
+ 
+Saturday September 11th.
+Waved goodbye to my love today. She blew kisses from the rear windows of the
+Volvo Estate then vanished round the corner.
+ 
+I let myself into their house to watch the big colour telly and couldn't help
+noticing a letter on Mr Braithwaite's desk:
+ 
+Dear Chairperson, 
+Arthur, it is with the deepest regret that I offer my resignation as
+vice-chairperson of the Elm Ward Labour Party. The Committee has moved so far
+to the right recently that I find my own moderate views and opposition to
+witch-hunts labelled as extremist...
+ 
+The letter was signed Ivan Braithwaite. There was a stamped addressed envelope
+lying next to it. Obviously he had been too busy to post it. 
+Which of the following shall I do?
+1) post it;
+2) tear it up;
+3) leave it alone.
+3
+I leave it alone. The Labour Party is hardly likely to return to Socialism in
+the next week, so he can post it himself when he gets back. 
+ 
+Monday September 13th.
+I, Adrian Mole, score 49 percent, which makes me a worthy schoolboy.
+ 
+Monday September 27th.
+I, Adrian Mole, score 49 percent, which makes me a worthy schoolboy.
+ 
+Saturday October 2nd.
+Our lawn looks like a jungle now my father isn't cutting it.
+ 
+Thursday October 7th.
+Courtney Elliot, the postman, didn't bring my mother's Social Security giro
+this morning. It should have been here yesterday. 
+What shall I do?
+1) go to school worrying;
+2) do nothing;
+3) tell my mother to ring up.
+3
+I tell my mother to ring up the DHSS, but their line is permanently engaged. 
+ 
+Friday October 8th.
+No giro. My mother is going to go to the Social Security Office. 
+Choose one of the following for me:
+1) hope she gets it;
+2) say, "Good luck!";
+3) skive off school and go with her.
+3
+I skive off school and go with her because it is no place for a pregnant woman
+alone. 
+ 
+The man at the Social Security Office told my mother that the giro would be in
+the post tonight. He wouldn't even lend her anything, though my mother did ask
+nicely. 
+Which of the following shall I do?
+1) sob, "Mummy, Mummy, when will we eat again";
+2) take my mother home;
+3) refuse to leave until they do something.
+3
+I refuse to leave until they do something to help. They did do something. They
+sent a big man round to our side of the counter and he helped me to leave. 
+ 
+Monday October 11th COLUMBUS DAY (USA). THANKSGIVING DAY (CANADA).
+I, Adrian Mole, score 52 percent, which makes me a mediocre youth.
+ 
+No giro. Courtney Elliot lent my mother five pounds. 
+ 
+Tuesday October 12th.
+No giro. But a cheque arrived from my father. My mother is thinking about
+ripping it up, like she did the last one. 
+What shall I do?
+1) say, "Take the money!";
+2) take it to Mr Cherry's to cash it;
+3) say, "Throw it away".
+3
+I say, "Throw it away", even if it does mean going hungry. 
+ 
+Friday October 15th.
+A Tydeman letter! Alas, yet another rejection. The gods are not yet smiling on
+me.
+ 
+Monday October 18th.
+No giro! 
+Choose one of the following for me:
+1) face another Mars-less day with courage;
+2) say, "Why not ask Grandma Sugden for a loan?";
+3) suggest we try our MP.
+3
+I suggest we try our MP. My mother got his number from the Citizens' Advice
+Bureau and rang him up. He wasn't there. His wife said bitterly that he had
+gone on a fact-finding mission to the Canary Isles. 
+ 
+Thursday October 21st.
+No giro! My mother cracked today. She phoned the local radio station and told
+them she was going to abandon her child at the Social Security Office unless
+she was given her giro. They have got until noon today to contact her. 
+Which of the following shall I do?
+1) look forward to this;
+2) beg her to keep me out of it;
+3) sit and wait for noon.
+3
+I sit and wait for noon. 
+ 
+It worked! The presence of reporters caused a mini-riot at the Social Security
+office when my mother turned up to abandon me. Police were called and Mr
+Gudgeon gave my mother an Emergency Needs Payment of 25 pounds. We'll get the
+rest next week. 
+ 
+Monday October 25th HOLIDAY (REPUBLIC OF IRELAND). MOON'S FIRST QUARTER.
+I, Adrian Mole, score 51 percent, which makes me an unimportant youth.
+ 
+When I got home from school my mother's little suitcase was missing from the
+hall. She is nowhere in the house. 
+What shall I do?
+1) rush around the house;
+2) visit Mrs O'Leary;
+3) phone the police.
+3
+I phone the police. A bored sergeant asked if I'd looked for a message from
+her. I said no. My mother left a note on the biscuit tin. It said: 
+I am in the labour ward of the Royal Infirmary. Call a taxi. 5 pound note at
+the bottom of the spaghetti jar. Don't worry. 
+Love, Mum. 
+Choose one of the following for me:
+1) call my father at Grandma's;
+2) tip out the note;
+3) call a taxi and grab the money.
+3
+I call a taxi and grab the money. The taxi ride was a nightmare. I was
+struggling to get my hand free of the spaghetti jar all the way. The taxi
+driver kept saying, "You should have tipped the jar upside down, you stupid
+bleeder." 
+ 
+At the hospital I ran in and found the lift and pressed the button marked
+"Labour Ward". I emerged into another world. It was like the space control
+centre at Houston. A technician asked me whether I had permission to visit the
+labour ward. 
+Which of the following shall I do?
+1) ask whose permission I need;
+2) say, "Yes";
+3) say, "No".
+3
+I say, "No", and he directs me to the waiting room. The room was full of
+worried-looking men, smoking and talking about cars. I looked for something to
+read, but all I could see were tatty copies of Autocar and Motoring. 
+What shall I do?
+1) pace around the room;
+2) try to wait patiently;
+3) dig among the magazines.
+3
+I dig among the magazines and find an old Reader's Digest. Now I can increase
+my word-power while my mother increases our family. After about 2 hours, a
+nurse comes to find me. She tells me that my mother and sister are both well. 
+ 
+The baby started crying in a crabby way and she was put on my mother's flatter
+belly. My mother looked at her as if she was a precious piece of jewellery. 
+Choose one of the following for me:
+1) congratulate my mother;
+2) look at them both and smile, then slip away;
+3) say nothing.
+3
+I say nothing. I am speechless with emotion. The doctor says to me, "You've
+got a beautiful daughter, Mr Mole." When I tell him that I'm her brother, not
+her father, he looks startled and orders me out immediately. 
+ 
+7.30 pm. Home. For some reason I was dead tired. I put all my smashable
+possessions on the top shelf and went to bed.
+ 
+8.15 pm. The phone wakes me up. It is my father gibbering about having a
+daughter. He wants to know all about her. 
+Which of the following shall I do?
+1) tell him everything I can remember;
+2) say she takes after him;
+3) ask him to ring again in the morning.
+3
+I ask him to ring again in the morning. I am too tired to talk now. 
+ 
+Friday October 29th.
+My father brought my mother and sister home this morning. My mother went up to
+bed and my father hung about for a bit then went home to Grandma's. The
+midwife came in the afternoon. She said that my mother was suffering from
+after-baby blues and asked me who was looking after my mother. I said I was.
+She said that my mother needs more support. 
+What shall I do?
+1) give my mother the pillows off my bed;
+2) arrange for Mrs Singh and Mrs O'Leary to help;
+3) phone Grandma.
+3
+I phone Grandma. She says she has already got too much on her plate with my
+father, Stick Insect and Brett, but she will come round if she can. 
+ 
+Saturday October 30th.
+My mother and I have been trying to decide what to call the baby. My mother
+has made out this list of names: Charity, Christobel, Zoe, Jade, Frankie,
+India, Rosie, Caitlin and Ruth. 
+Choose one of the following for me:
+1) suggest "Pandora" instead;
+2) say we should ask my father;
+3) say I like "Rosie" and "Ruth".
+3
+I say I like "Rosie" and "Ruth". 
+ 
+Monday November 1st FULL MOON.
+My sister's name is Rosie Germaine Mole. Everybody likes "Rosie" but only my
+mother likes "Germaine". 
+ 
+Wednesday November 3rd.
+Everybody has gone bonfire mad! They are all discussing firework parties and
+displays. Even Barry Kent seems interested. 
+Which of the following shall I do?
+1) offer to help with the Marriage Guidance Council Bonfire;
+2) arrange my own fireworks party;
+3) help Barry Kent collect "pennies for the guy".
+3
+I help Barry Kent collect "pennies for the guy" with menaces. After all, we
+are in Thatcher's Britain. 
+ 
+Thursday November 4th.
+Barry Kent has persuaded me to provide the guy. 
+What shall I do?
+1) make a real guy;
+2) dress up;
+3) wrap the dog in a blanket and balaclava.
+3
+I wrap the dog in a blanket and balaclava and push it about in Pandora's old
+dolls' pram. 
+ 
+Friday November 5th BONFIRE NIGHT.
+The dog was a disaster as a guy. It kept jumping up, barking and licking
+people. So Barry Kent forced me to squeeze into the pram instead. 
+ 
+Saturday November 6th.
+At four o'clock, I was asked by my so-called best friend Nigel to go to his
+Hallowe'en party. He said, "Forgot to send you an invite, zit face, but come
+anyway. Dress as a warlock or you won't get in." 
+Choose one of the following for me:
+1) ask if Pandora can come too;
+2) accept;
+3) turn down the invite.
+3
+I turn down the invite, saying I wouldn't be seen dead at his place. 
+ 
+Locked the dog in the coal shed, as advised by the media. Then went to the
+Marriage Guidance Council Bonfire party. It was crowded with couples bickering
+over the fireworks. 
+Which of the following shall I do?
+1) go to where the rockets are being lit;
+2) try to pacify them;
+3) slip away with Pandora.
+3
+I slip away with Pandora and a packet of sparklers. I wrote "PANDORA" in the
+air with my sparkler. Pandora wrote "ADRAIN". She ought to know how to spell
+my name by now. Went back to the community bonfire and found our dog watching
+the firework display and chewing a hot-dog. I lost count of the times nosy
+adults said, "That dog should be locked up out of harm's way". 
+What shall I do?
+1) tell them to mind their own business;
+2) take the stupid dog home;
+3) explain that our dog is an individualist.
+3
+I explain that our dog is an individualist and can't be treated like other
+dogs, but with the crowd going, "Oooh!" And, "Aaaah!" Every time a pathetic
+rocket is launched, it is a bit difficult. 
+ 
+Monday November 8th.
+I, Adrian Mole, score 46 percent, which makes me an ordinary schoolboy.
+ 
+Sunday November 14th REMEMBRANCE SUNDAY.
+I long for the day when I buy my first studio flat in Hampstead.
+ 
+Monday November 15th.
+Nigel managed to get some photos of me, dressed up as Guy Fawkes. He is
+showing them round school. I may have to emigrate. 
+ 
+Wednesday November 17th.
+Nigel has proved we live in a police state. Britain has three times as many
+police per head as South Africa. And I bet we have fewer black policemen.
+ 
+Friday November 19th.
+I wish vandals would carve their names on flowering cherries and leave decent
+trees alone.
+ 
+Monday November 22nd.
+I, Adrian Mole, score 46 percent, which makes me an ordinary schoolboy.
+ 
+Friday November 26th.
+The school play this Christmas is The Importance of Being Earnest by Oscar
+Wilde. Mr Golightly, the Drama teacher is asking for volunteers. 
+Choose one of the following for me:
+1) offer to adapt it;
+2) ask to be Assistant Director;
+3) audition for a part.
+3
+I audition for a part. I hope to get to play Ernest. 
+ 
+Monday November 29th.
+Mr Golightly gave me a speech about Victoria Station to read, listened, then
+said: "Yes, you'll do." I have decided to be an actor when I grow up. I will
+write my novels during breaks in rehearsal. 
+ 
+Thursday December 2nd.
+When I said, "Hello" to Pandora in Geography my voice wobbled out of control.
+I kept quiet for the rest of the lesson. 
+ 
+Friday December 3rd.
+My mother asked why I was so quiet. She said, "Is anything wrong." 
+Which of the following shall I do?
+1) tell her my voice had gone wobbly;
+2) whisper, "Sore throat";
+3) say, "No".
+3
+I say, "No" in a shrill voice and leave the room. 
+ 
+Monday December 6th.
+I, Adrian Mole, score 46 percent, which makes me an ordinary schoolboy.
+ 
+My voice can't be trusted. One minute it's booming like Ian Paisley, and the
+next it's shrill and shrieking like Margaret Thatcher's used to be before she
+had voice lessons from an advertising agency. 
+What shall I do?
+1) suffer patiently;
+2) go to see Dr Gray;
+3) take a vow of silence.
+3
+I take a vow of silence until it has sorted itself out.
+ 
+7 p.m. It is very difficult to get people to pass the ketchup if you have
+taken a vow of silence. 
+ 
+Wednesday December 8th.
+Am to be Ernest in the school play. Mr Golightly gave me a copy to bring home
+today.
+ 
+6 pm. I have been right through the play and can't find any speeches marked
+Ernest!
+ 
+8 pm. My mother has told me that Ernest is actually called John, and we have
+found lots of speeches, all marked Jack. It is most confusing. Rehearsals
+start in earnest tomorrow. 
+Choose one of the following for me:
+1) begin to learn my lines;
+2) ask for a smaller part;
+3) resign because of my voice.
+3
+I resign because of my voice. It is too unreliable. 
+ 
+Monday December 20th.
+I, Adrian Mole, score 45 percent, which makes me a suburban schoolboy.
+ 
+Went to Cherry's and bought a tasteful card for Pandora and a pack of cheap
+cards for other people. We can send each other cards through the school's Elf
+postal service, run by the first years. 
+Which of the following shall I do?
+1) wait to see who sends me one;
+2) sort out which cards to send to which people;
+3) write greetings to all my friends.
+3
+I write greetings to all my friends and put them in the Elf post. 
+ 
+Tuesday December 21st.
+The school's post service is as bad as the GPO's. I posted Pandora a card
+before assembly but she still hadn't had it by the end of the last lesson. 
+What shall I do?
+1) describe it to her;
+2) find out which first-years are on Elf duty;
+3) do nothing for a day.
+3
+I do nothing for a day but if it hasn't arrived by tomorrow I shall complain. 
+ 
+Wednesday December 22nd.
+Spent all day watering the Braithwaite's plants. It can't be healthy living
+amongst so much vegetation. 
+ 
+Friday December 31st.
+Had cards back from six of the people that I sent cards to, (which means that
+four have been wasted) plus three from other kids (which means I shall have to
+buy some more). 
+ 
+I, Adrian Mole, score 46 percent, which makes me an ordinary schoolboy.
+ 
+That's the end of this part of the game. Would you like to continue with the
+next part? 
+YES
+Check the program tape/disk is in the drive and press ENTER or RETURN. If
+using tape, check the recorder is set to PLAY (and, if the tape isn't moving,
+press ENTER or RETURN again).
+Welcome to Part 4 of the Growing Pains of Adrian Mole, from Level 9 and Virgin
+Games. If you are loading from tape, and it is still running, STOP THE TAPE
+IMMEDIATELY.
+ 
+Saturday January 1st NEW YEAR'S DAY.
+These are my New Year resolutions: 
+1. I will revise for my O levels at least two hours a night. 
+2. I will stop using my mother's Buff-Puff to clean the bath. 
+3. I will buy a suede brush for my coat. 
+4. I will stop thinking erotic thoughts during school hours. 
+5. I will oil my bike once a week. 
+6. I will try to like Bert Baxter again. 
+7. I will pay my library fines (88 pence) and rejoin the library. 
+8. I will get my mother and father together again. 
+9. I will cancel the Beano. 
+ 
+Sunday January 2nd.
+Negotiations are going on between my parents for a return to the married
+state. My mother said, "But how can it work? There is so much to forget." 
+Choose one of the following for me:
+1) suggest hypnosis;
+2) sigh and agree;
+3) say, "Why not go to the Marriage Guidance?".
+3
+I say, "Why not go to the Marriage Guidance?". My mother replies, "What, and
+have Tanya Braithwaite know all our problems!" 
+ 
+Monday January 3rd.
+I, Adrian Mole, score 47 percent, which makes me a middling schoolboy.
+ 
+More negotiations behind closed doors. I saw my father leaving. 
+Which of the following shall I do?
+1) ask my father how it went;
+2) go to make my mother some tea;
+3) do nothing.
+3
+I do nothing but hope. 
+ 
+Tuesday January 4th.
+Negotiations have broken down. 
+ 
+Wednesday January 5th.
+A message was passed to an intermediary (me) that fresh negotiations would be
+welcomed. 
+What shall I do?
+1) tell my father to ask for himself;
+2) do nothing;
+3) pass on the message.
+3
+I pass on the message. The response was favourable and a meeting has been
+arranged. 
+ 
+Saturday January 8th.
+My parents have agreed to a trial reunion for a month. 
+ 
+Sunday January 9th.
+I had to look after Rosie while my parents swanned down to the pub. I was also
+in charge of the pork and roast potatoes and switching on the greens. I fed
+Rosie OK, but now she needs changing. 
+Choose one of the following for me:
+1) change her yukky nappy;
+2) wait for Rosie to complain about it;
+3) ignore it.
+3
+I ignore it and act surprised when my mother points out there was a yukky
+smell in the room. 
+ 
+10 pm. My father is back. How do I feel about it? They've had reconciliations
+before, so I think I'll reserve judgement until the slopping has stopped and
+they're back to normal. 
+ 
+Friday January 14th.
+After school, I went to Smiths to read the magazines.
+ 
+Sunday January 16th.
+Breakfast TV starts tomorrow. 
+Which of the following shall I do?
+1) ask Pandora to record it on their video;
+2) set my alarm for 5.45;
+3) ignore it.
+3
+I ignore it. I am a Channel 4 and Radio 4 person. 
+ 
+Monday January 17th.
+I, Adrian Mole, score 45 percent, which makes me a suburban schoolboy.
+ 
+Saturday January 22nd.
+The dog had an unfortunate accident on the kitchen floor this morning.
+Unfortunate for me, that is, because I had to clear it up. 
+What shall I do?
+1) reach for the dustpan and brush;
+2) go to get a handful of bog paper;
+3) grab last week's copy of the Sunday Times.
+3
+I grab last week's copy of the Sunday Times. 
+ 
+When I opened the paper I saw that The Sunday Times claimed to have the story
+of the discovery of Hitler's Diaries. 
+Choose one of the following for me:
+1) save the article for later;
+2) read on avidly;
+3) clean the floor with it.
+3
+I clean the floor with it. 
+ 
+Monday January 24th.
+The water workers have gone on strike, so my father made us all have a bath
+tonight. The dog included. 
+ 
+Tuesday January 25th.
+Fabulous! Amazing! Brilliant! Magic! Showers have been banned at school! The
+twice weekly torture of displaying my inferior muscle development is over. 
+Which of the following shall I do?
+1) try weight-lifting;
+2) write to their union;
+3) hope the water workers prolong the strike.
+3
+I hope the water workers prolong the strike until I've left full-time
+education. 
+ 
+Wednesday January 26th.
+A water main has burst at the end of Laurel Close. Workmen came to stop the
+leak, but because of the strike they selfishly refused to restart the water -
+even though my father explained we were all Labour voters. Stupid unions,
+don't they realize when they are helping the Tory government? 
+What shall I do?
+1) 'phone the council for a water tanker;
+2) collect rainwater;
+3) get my father to borrow some water containers.
+3
+I get my father to borrow some water containers from the Braithwaites - they
+use the five gallon kind in their caravan. My father fills them at Pandora's
+and brings the water home by car. 
+Choose one of the following for me:
+1) take everything into the kitchen;
+2) turn off the immersion heater;
+3) refill the attic tank.
+3
+I refill the attic tank so we can use a bit of hot water for washing up and
+showers. I put the full containers beside the sink as drinking water. 
+ 
+Friday January 28th.
+My slave-driving parents are making ME fetch water from Elm Tree Avenue each
+day. It's not fair, they can drive but I am forced to use my racing bike. 
+ 
+Monday January 31st.
+I, Adrian Mole, score 48 percent, which makes me an average schoolboy.
+ 
+Tuesday February 1st.
+The water strike is over. That means water for Laurel Close, but they have
+started school showers again. 
+Which of the following shall I do?
+1) organize a petition against showers;
+2) resign myself to twice-weekly humiliation;
+3) sabotage the school showers.
+3
+I sabotage the school showers. 
+What shall I do?
+1) remove the shower heads;
+2) block the drains with my football socks;
+3) remove the tap.
+3
+I remove the tap so that the water cannot be turned on. 
+ 
+Wednesday February 2nd.
+Ratfink Lucas rang up today. I told him that my mother was at the pub with my
+father. He asked me which pub. 
+Choose one of the following for me:
+1) tell him;
+2) say that I don't know;
+3) ask why he wants to know.
+3
+I ask why he wants to know. He says he just wants to talk to her, and asks
+again. 
+Which of the following shall I do?
+1) say that I don't know;
+2) tell him;
+3) ask him to leave a message.
+3
+I ask him to leave a message. He said, "Please get her to ring me." I promise
+to tell my mother. 
+What shall I do?
+1) leave my mother a message;
+2) tell my mother of the phone call;
+3) go to bed and try to forget about Lucas.
+3
+I go to bed and try to forget about Lucas. 
+ 
+Thursday February 3rd.
+We are having to have cold showers until they can get a new hot water tap. I
+wish I had realized that there were two taps! 
+ 
+Thursday February 10th.
+I wrote a poem on the toilet wall at school today. I thought it was a good way
+of getting a bit of political consciousness over to my moronic fellow pupils. 
+Choose one of the following for me:
+1) add, "A.Mole";
+2) add, "The Poet of the Midlands";
+3) stand back to admire it.
+3
+I stand back to admire it. 
+ 
+Friday February 11th.
+I was sent to see the headmaster today. He has found out about my toilet poem.
+I asked him how he knew I'd written it. He said, "We've still got the
+handwriting samples". 
+ 
+I have been suspended for a week. 
+ 
+Lucas turned up on our doorstep halfway through Coronation Street demanding to
+see Rosie. He claimed that she was his child. This started the most awful row.
+Which of the following shall I do?
+1) do nothing;
+2) turn up the volume on the telly;
+3) run from the room.
+3
+I run from the room saying, "I can't stand this eternal insecurity." 
+ 
+Saturday February 12th.
+Barry Kent and his gang called for me today. Kent said, "We're going down
+town, you can come with us if you like." 
+What shall I do?
+1) go with them;
+2) decline;
+3) ask, "What for?".
+3
+I ask, "What for?". Kent says they are just going to hang around. 
+Choose one of the following for me:
+1) decline;
+2) go with them;
+3) suggest a visit to Bert instead.
+3
+I suggest a visit to Bert instead. 
+ 
+Sabre came charging to meet us at the door of Bert's bungalow. I caught hold
+of his collar to calm him down, but Barry Kent and his gang fled up the path
+shouting, "See you, Moley." They're a useless lot. Old Bert's got more guts
+than them. 
+ 
+Monday February 14th ST VALENTINE'S DAY.
+I, Adrian Mole, score 49 percent, which makes me a worthy schoolboy.
+ 
+I have spent the day in matron's office due to feeling weak in the first
+lesson. She asked me if there was anything wrong at home. 
+Which of the following shall I do?
+1) say that parents ought to be moral and consistent;
+2) start to cry and say that everything is;
+3) say "No".
+3
+I say "No", and keep my troubles to myself. 
+ 
+Thursday February 17th.
+Lucas continues to persecute my mother. A solicitor's letter arrived today. He
+is taking her to court unless he is allowed access to Rosie. 
+What shall I do?
+1) suggest we let him see her;
+2) tell my father to rip up the letter;
+3) ask Courtney Elliot for his advice.
+3
+I ask Courtney Elliot for his advice. Courtney thinks we should get a
+solicitor to write back and warn Lucas off. 
+ 
+Saturday February 19th.
+The solicitor's letter to Lucas cost 20 pounds! 
+ 
+Monday February 21st WASHINGTON'S BIRTHDAY OBSERVANCE.
+I am dead worried. Donkey Dawkins of 5P says his thing comes off the end of
+the ruler, yet he is only a week older than me.
+ 
+Wednesday February 23rd.
+My father went to the bank today to try to get a loan. He didn't want to buy
+anything, just to feel some money in his hand. After hearing that both my
+parents were out of work, Mr Niggard, the Bank Manager, refused the loan. 
+ 
+Friday February 25th.
+I overheard my father say, "Well it looks like the North Sea for me, Pauline."
+Choose one of the following for me:
+1) ask if I can come with him;
+2) ask him what he means;
+3) say, "Don't do it, Dad.
+3
+I say, "Don't do it, Dad. The economy is bound to pick up." My father looked
+puzzled. Perhaps he was surprised to hear such an emotional outburst from me.
+I was surprised myself. 
+ 
+Monday February 28th.
+I, Adrian Mole, score 50 percent, which makes me a namby-pamby youth.
+ 
+Tuesday March 1st.
+My father has had an interview for a job as a roustabout on an oil rig in the
+North Sea. He wants to buy himself some roustabout clothes and is going to
+borrow some money off Grandma. 
+Which of the following shall I do?
+1) draw the remaining 40 pounds from my Building Society;
+2) remind him to get thermal underwear as well;
+3) tell him it's premature.
+3
+I tell him it's premature to buy the clothes before he has got the job for
+sure. 
+ 
+Thursday March 3rd.
+Our house is intolerable because my father is beside himself with grief at
+being turned down by the oil firm. And he's got to repay the money he owes for
+the clothes. 
+ 
+Monday March 14th COMMONWEALTH DAY.
+I, Adrian Mole, score 51 percent, which makes me an unimportant youth.
+ 
+Wednesday March 16th.
+Barry Kent hit me today. He has decided to be an anti-racist this week and I
+accidentally said the toilets were like the Black Hole of Calcutta. Nobody
+dares use words like "blackboard".
+ 
+Tuesday March 22nd.
+Mrs Braithwaite was most offended when I criticized her trees. She hates
+flowering cherries too, but says her trees are called Prunus and are much
+better.
+ 
+Friday March 25th.
+My racing bike has been stolen from out of the back garden. 
+What shall I do?
+1) suspect the dustmen;
+2) ask Barry Kent if he knows anything about it;
+3) ring up the police.
+3
+I ring up the police. They asked if it was postcoded. I replied that it was a
+bike not a letter, and that it had been stolen. The policeman sighed and said
+they would let me know if it turned up. 
+ 
+Monday March 28th.
+I, Adrian Mole, score 52 percent, which makes me a mediocre youth.
+ 
+Tuesday March 29th.
+My father wore on his new straight-legged jeans today. He looks dead stupid in
+them. Talk about mutton dressed as lamb. He looks like stewing steak.
+ 
+Thursday March 31st.
+Another letter with a Sheffield postmark. My father read it, then ripped it up
+and threw it away. 
+ 
+Saturday April 2nd.
+Nigel brought my bike back today. He intended to run away on it to avoid his O
+levels, but decided not to after his father bought him a set of video cassette
+study aids. 
+ 
+Thursday April 7th.
+Threw away my last nylon shirt. It is not very fashionable, in fact nylon is
+very entre-nous.
+ 
+Monday April 11th.
+I, Adrian Mole, score 52 percent, which makes me a mediocre youth.
+ 
+Sunday April 17th.
+Rosie started crawling at 5 pm. My parents gave her a standing ovation.
+ 
+Monday April 25th.
+I, Adrian Mole, score 52 percent, which makes me a mediocre youth.
+ 
+Tuesday May 3rd.
+We spent the first day back at school being taught how to revise for the
+dreaded O levels. 
+Choose one of the following for me:
+1) organize a revision timetable;
+2) start revising English, Biology and Geography;
+3) decide to start revising tomorrow.
+3
+I decide to start revising tomorrow. There's so much to do, I don't know where
+to start. 
+ 
+Monday May 9th.
+I, Adrian Mole, score 51 percent, which makes me an unimportant youth.
+ 
+Mrs Thatcher has called a General Election for June 9th! How can teenagers
+study when loudspeakers are blaring out lying promises day and night, and
+canvassers are continually knocking on our door. 
+Which of the following shall I do?
+1) write to our local parties;
+2) try to ignore the Election;
+3) adjust my revision schedule.
+3
+I adjust my revision schedule to allow time for Election interruptions. 
+ 
+Friday May 13th.
+At breakfast time my mother announced that after the exams we are going to
+sell our house and move to a desolate area of Wales. She said, "I want to give
+us a chance of surviving a nuclear attack." 
+What shall I do?
+1) write to the council;
+2) argue that Wales is no safer than Leicester;
+3) say that New South Wales would be safer.
+3
+I say that New South Wales would be safer. My mother said, "Perhaps, but we
+would never see our relatives again." My father has written to the Australian
+High Commission asking about opportunities for Storage Heater Engineers and
+Salesmen in Australia. 
+ 
+Saturday May 14th.
+The Conservative candidate has just knocked at our door. He thrust out his
+hand and said, "I trust I have your vote!" 
+Choose one of the following for me:
+1) say, "You are planning to exterminate the working class!";
+2) tell him we are all Revolutionary Socialists;
+3) invite him in to wait for my parents.
+3
+I invite him in to wait for my parents. I managed to keep him there for over
+an hour, AND made him help me with my History revision, before he finally
+escaped. That ruined his day's canvassing! 
+ 
+Sunday May 22nd.
+What with politicians, my parents and Rosie, I am getting no peace to study. 
+Which of the following shall I do?
+1) go to Grandma's to revise;
+2) ban people from my room;
+3) appeal to my mother.
+3
+I appeal to my mother. She is going to do what she can to keep people away. 
+ 
+Monday May 23rd.
+I, Adrian Mole, score 55 percent, which makes me an ordinary youth.
+ 
+Wednesday June 1st.
+This will be my last entry until the exams are over. Courtney Elliot is coming
+round to give me last-minute coaching; must stop, his taxi has just drawn up
+outside. 
+ 
+Thursday June 2nd.
+My parents went to see a family therapist last night. During their absense
+Pandora and I indulged in extremely heavy petting; so heavy that I felt a
+weight fall from me.
+ 
+If I don't pass my exams it won't matter. I have known what it is to have the
+love of a good woman. 
+ 
+I, Adrian Mole, score 55 percent, which makes me an ordinary youth.
+ 
+The game is over, unless you'd like to play the final part again. Would you? 
+#quit
+

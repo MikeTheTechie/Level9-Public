@@ -1,5 +1,5 @@
 // 68000 Acode compiler, finish and squasher program (for Linux)
-// common declarations needed for comp.c, finish.c and squash.c
+// common declarations
 // Copyright (C) 1986-1988 Level 9 Computing
 
 // finish version string
@@ -16,6 +16,9 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <glob.h>
+
+// RAM size
+#define compramsize 0x100000 // 1M
 
 // useful characters
 #define cr 13
@@ -49,6 +52,10 @@
 #define ramloaddcode 23
 
 #define lenslokdisplaydcode 25
+
+#define displayhirescode 32
+#define preloadhirescode 33
+#define testhirescode 34
 
 // used by both comp.c and finish.c
 #define sizeofpointers 44 // overall gamedata pointers
@@ -90,6 +97,11 @@ struct _forwardentry {
 };
 #define forwardentrysize sizeof(struct _forwardentry)
 
+// For PC code generation (1.5 feature)
+// See gamedata segment layout in pccode.c
+#define PCListVector 4
+#define PCvarsoffset 144
+
 // definition of file control block
 struct _fcb {
   void *start;
@@ -98,6 +110,7 @@ struct _fcb {
 };
 
 // driver functions
+extern void *endmemory;
 extern bool isd0alphanumeric(char);
 extern void printdecimald0(int);
 extern void hexlonga0(uint32_t);
@@ -106,9 +119,16 @@ extern void openlogfile(char *);
 extern void closelogfile();
 extern int OutputDevice;
 extern void prs(char const *, ...);
+extern char osrdch();
 extern char waitkey();
 extern int readdecimal(char **);
 extern void hexbyted0(uint8_t);
 extern void returntogem();
 extern void init1();
 extern bool init2();
+extern void autoruninit(char *);
+extern char *getfilename(struct _fcb *);
+extern bool output_terminal();
+extern bool input_terminal();
+extern void set_input_mode(bool);
+extern void reset_input_mode();

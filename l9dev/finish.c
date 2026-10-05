@@ -17,7 +17,6 @@
 char *ptr = NULL; // pointer to current pos in file
 char *finishedptr = NULL;
 void *endfinish = NULL;
-char filenamelist[1000];
 char directorypathname[100]; // will contain the complete path name for use by climb
 char subdirname[100];
 char directoryname[] = "*.l9";
@@ -64,7 +63,7 @@ void finishstart() {
   // file from the data on the disk
 
   // once-only init
-  endfinish = malloc(512 * 1024);
+  endfinish = malloc(compramsize);
   finishedptr = endfinish;
   startsources = finishedptr;
   finishedptr += 0x30008; // allow space for files to be loaded
@@ -428,8 +427,7 @@ void selectdirectory() {
     char c;
     do {
       // now get a letter
-      driver(osrdchdcode, &finishdriverbuffer);
-      c = toupper(*finishdriverbuffer);
+      c = toupper(waitkey());
       prs("%c\n", c);
       selection = c - 'A';
     } while (selection < 0 || selection >= found);

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd ${0%/*}/data
+
+for i in */
+do
+  cd $i
+  pwd
+  if [[ -f acod1.dat ]]
+  then
+    split="--splitdata"
+  else
+    split=""
+  fi
+  ../../../l9int $split --autorun >output.txt
+  cmp ref.txt output.txt
+  cd ..
+done

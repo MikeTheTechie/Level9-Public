@@ -1920,7 +1920,6 @@ int calccompression() {
 
 // main, chain, selectdr and RAM variables
 void *ram = NULL;
-void *endmemory = NULL;
 char squasherdriverbuffer[40];
 char subdirname[100];
 char directoryname[] = "*.l9";
@@ -1954,8 +1953,7 @@ void selectdirectory() {
     char c;
     do {
       // now get a letter
-      driver(osrdchdcode, &squasherdriverbuffer);
-      c = toupper(*squasherdriverbuffer);
+      c = toupper(waitkey());
       squasherprs("%c\n", c);
       selection = c - 'A';
     } while (selection < 0 || selection >= found);

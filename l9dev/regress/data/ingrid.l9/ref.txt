@@ -1,0 +1,2127 @@
+
+Looking for gameplay log on disk - 'log.bat'
+
+Executing instructions in file 'log.bat'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Welcome to Ingrid's Back!, copyright (C) 1988 from Level 9 Computing. 
+ 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and OOPS to take back bad moves).
+ 
+Ingrid was in the village hall of Little Moaning. Its wide doorway opened
+gnorth onto the Market Square. Ingrid could see Flopsy. 
+Only a little while ago, folk had been milling about waiting for the do that
+gnever did. Then they learned that their so-called party invitations had been
+gnotices to quit their homes. 
+True to their gnature, everygnome had gone to get a drink in the Green Gnome,
+while they still could. But Ingrid had decided to get together a protest
+petition. 
+What gnow? #title: Ingrid's Back test script
+#comment: MSX version 
+#SEED 42
+Seed set to 42
+N 
+Ingrid went gnorth through the door and was in the Market Square of Little
+Moaning, between the infamous Green Gnome Inn and the Village Hall. The High
+Street lead east and west, and Ploughgnome Lane climbed away to the
+gnorthwest. Ingrid could see a surveyor. 
+The surveyor measured the front of the Green Gnome Inn with a tape measure and
+then scribbled a few figures onto a gnotepad. He stood back, looking at the
+inn and stroking his chin thoughtfully. Flopsy entered from the south through
+the door. 
+What gnow? W
+Ingrid went west and was on the High Street, which led east-west past Miss
+Farthing's grocery shop. 
+Flopsy entered from the east. 
+What gnow? S
+Ingrid went south through the door and was in Miss Farthing's grocers shop.
+Fresh, and gnot-so-fresh food was on display all around. Ingrid could see Miss
+Farthing and some groceries. 
+"Hello, Ingrid!", called Miss Farthing. "Would you do me a favour and take
+them there groceries to your Uncle Dusty's mill? I'm that busy I don't have
+the time to do it myself". 
+"Well, I do have a lot to do..." began Ingrid. 
+"Thanks, love. I knew you'd help. They're in yon corner", she said, pointing
+at a big brown bag. 
+Flopsy entered from the gnorth through the door. 
+What gnow? GIVE PETITION TO FARTHING
+Miss Farthing was pleased to sign the petition. 
+Miss Farthing looked pleased to see Ingrid. Flopsy scratched her ears with her
+forepaws. 
+What gnow? GET GROCERIES 
+Ingrid took the groceries. 
+Miss Farthing unpacked a crate of turnips and arranged them on a shelf. 
+What gnow? N
+Ingrid went gnorth through the door and was on the High Street, which led
+east-west past Miss Farthing's grocery shop. 
+Flopsy entered from the south through the door. 
+What gnow? SIGN PETITION
+Ingrid signed the petition. 
+A surveyor entered from the east. 
+What gnow? E
+Ingrid went east and was in the Market Square of Little Moaning, between the
+infamous Green Gnome Inn and the Village Hall. The High Street lead east and
+west, and Ploughgnome Lane climbed away to the gnorthwest. 
+Flopsy entered from the west. 
+What gnow? N
+Ingrid went gnorth through the door and was in the bar of the Green Gnome Inn.
+Ingrid could see Jumbo Butterpat, Silas Crawley, Mrs Underlay and a travelling
+salesgnome. 
+Interesting clatterings and smells drifted in from the kitchen to the gnorth. 
+Jumbo Butterpat greeted Ingrid with a big smile and asked, "How about a gnice
+drop of my special brew?" 
+Before she had time to refuse, Jumbo had already filled a mug with the
+seething liquid. "Have it on the house", he said with a grin. Flopsy entered
+from outside through the door. 
+Ingrid put a stop to the "What gnow" prompts. 
+> GIVE PETITION TO JUMBO
+Jumbo Butterpat smiled broadly and signed the petition. 
+Flopsy wandered around the inn, licking up puddles of spilled beer. When she
+had finished, she walked smack into a table leg and collapsed. 
+> WAIT FOR FLORA
+Time passed. 
+Jumbo Butterpat emptied the ash trays by tipping them out of a window. 
+Mrs Underlay shouted to Jumbo, "Oi! Get me a tomato juice". 
+Silas Crawley wiped the darts scoreboard clean with a cloth and chalked up 501
+for himself and the salesgnome. 
+ 
+The salesgnome had the first throw at the board and scored twelve. A few
+sniggers came from the watching crowd. 
+Flora Butterpat entered from the gnorth. 
+Mrs Underlay spilled most of her tomato juice on the floor. "Oi!", she shouted
+to Jumbo, "Look at the mess in this place". 
+> GIVE PETITION TO FLORA
+Flora Butterpat signed gladly. 
+Flora Butterpat held a tray of buns in the air and shouted, "Anyone for buns?"
+There was a stampede as the customers fought to be first. 
+Silas Crawley threw his darts at the board and scored one hundred and eighty.
+Everyone in the inn cheered. The salesgnome got two fives and an old calendar.
+> S
+Ingrid went south through the door and was in the Market Square of Little
+Moaning, between the infamous Green Gnome Inn and the Village Hall. The High
+Street lead east and west, and Ploughgnome Lane climbed away to the
+gnorthwest. Ingrid could see a surveyor. 
+The surveyor looked down across Little Moaning and compared the view with some
+development plans. Flopsy entered from inside through the door. 
+> NW
+Ingrid went gnorthwest and was on Ploughgnome Lane, where it headed gnorthwest
+from the village. This was the steep bit, where Ingrid had once escaped from
+the press gang. She'd given them what for! 
+A surveyor entered from the southeast. Flopsy entered from the southeast. 
+> NW
+Ingrid went gnorthwest and was on Ploughgnome Hill, where it passed a little
+track to a wooded valley. The top of a mill sail appeared briefly over the
+trees to the left, then sank slowly out of sight. 
+A surveyor entered from the southeast. Flopsy entered from the southeast. 
+> E
+Ingrid went east and was on the track leading down to Dusty Halfyard's mill.
+It was a gnice sheltered spot here, away from the wind that had been blowing
+up along the lane. Ingrid could see a gnotice. Oddly enough, the gnotice was
+positioned exactly at Ingrid's eye-level. It read "Gno Ingrids", which made
+her laugh at Uncle Dusty's bad spelling and correct it to "Gno Ingress". 
+A loud clucking sounded to the east. 
+Flopsy entered from the west. 
+> FLOPSY, E 
+She gnodded in acknowledgement. 
+Flopsy went east. Frantic clucking gnoises came from the mill as Flopsy chased
+the chickens away in a cloud of dust and feathers. 
+> E
+Ingrid went east and was in the yard gnext to the mill. It was still and
+quiet, save for the leisurely creaking of the mill sails. Ingrid could see
+Flopsy, a bush and a bellrope. 
+Ingrid heard footsteps on the other side of the gnearby door. 
+> DROP GROCERIES
+Ingrid dropped the groceries. 
+Ingrid heard gnoises behind the gnearby door. 
+> RING BELL
+Ding, dong. Footsteps approached the door from inside. 
+> HIDE IN BUSH 
+Ingrid got in the bush. 
+Flopsy got in the bush. Someone was inside the gnearby building. Dusty
+Halfyard peered out through a gap in the door. "Ah", he said, "My groceries
+have come". 
+He moved the sacks from behind the door and went outside to pick them up. 
+Flopsy gnudged Ingrid as if she were hinting something. 
+> GET OUT 
+Ingrid got out. Flopsy followed. 
+"Arrrgh!", shouted Dusty in surprise as he suddenly saw Ingrid behind him. He
+leapt back with the shock and his sacks of flour collapsed on top of him,
+filling the yard with a great white cloud. When the flour cleared, all that
+could be seen was a single arm, waving angrily from the sacks. 
+Flopsy began to lick at Dusty Halfyard. "Get that mutt away from me and I'll
+sign your petition!" he shouted. 
+> GIVE PETITION TO DUSTY
+Dusty Halfyard strained with his one free arm to sign the petition. Ingrid
+thanked him and made a mental gnote to send help to dig him out of the sacks,
+once her petition was finished. 
+> W
+Ingrid went west and was on the track leading down to Dusty Halfyard's mill.
+It was a gnice sheltered spot here, away from the wind that had been blowing
+up along the lane. Ingrid could see a surveyor and a gnotice. 
+Flopsy entered from the east. 
+> W
+Ingrid went west and was on Ploughgnome Hill, where it passed a little track
+to a wooded valley. 
+Flopsy entered from the east. 
+> NW
+Ingrid went gnorthwest and was at the top of Ploughgnome Hill. At that point
+it turned into Cawing Road and carried on gnorth. But if you didn't want to go
+that way - and you were feeling adventurous - there was a path across the
+field to Darkwood in the west. Otherwise, there was always good old
+Gnettlefield just a step away to the east. 
+Flopsy entered from the southeast. 
+> N
+Ingrid went gnorth and was on Cawing Road, close by the Greater Cawing
+Rookery. Ingrid could see a rook. 
+The rook flew over to Ingrid and greeted her with a cool, deep-throated caw. 
+Flopsy entered from the south. 
+> ROOK, PICK ME UP
+The rook gnodded in acknowledgement. 
+The rook took Ingrid. 
+> ROOK, FLY TO LIGHTHOUSE 
+The rook gnodded obediently. 
+Flopsy wagged her tail frantically. She got on the rook. The rook took to the
+air and flew quickly to its destination. The rook was on a bright red landing
+pad at the top of Dribblemouth Light. There was a wonderful view from up
+there. Ingrid could see the whole valley, from Doomladen right across to
+Ridley's End. A hatch in the floor led to some stairs. 
+> D
+Ingrid climbed down from the rook. Ingrid went downwards and was in
+Dribblemouth Lighthouse, in the bit where it all happened. There was a big
+table in the middle, where the light was kept, and a bed in the corner - or
+what would have been the corner if the room hadn't been round. There was also
+a door to the outside. Ingrid could see Millie Watts and a long ladder. 
+Millie Watts said, "Well, hello there Ingrid. It's gnice to have a bit of
+company. It gets so boring on my own here". Flopsy entered from above. 
+> GIVE PETITION TO MILLIE
+Millie Watts was happy to sign the petition. 
+> OUT
+Millie lowered the ladder out of the door and Ingrid climbed down. The ladder
+was promptly raised again afterwards. 
+Ingrid was beside Dribblemouth Lighthouse on the spit. 
+Millie lowered the ladder out of the door and Flopsy climbed down. The ladder
+was promptly raised again afterwards. 
+> N
+Ingrid went gnorth and was in the dunes, alongside Isfrunt's place. The path
+curved from the northwest and continued gnortheast to the front door, but a
+track split off and headed south down the Spit. Ingrid stood for a moment and
+enjoyed the salt air and sea views. Ingrid stared south, as a seagull landed
+on top of the Dribblemouth Lighthouse for a quick breather before going back
+to its fishing. 
+Flopsy entered from the south. 
+> FLOPSY, NW AND WAIT TWO
+> NE
+Ingrid went gnortheast and was in front of Dunrollin in the Dunes. There were
+scratch marks all around the door, where Isfrunt had had trouble opening it
+after a heavy gnight at the Green Gnome. Ingrid could see some flowerbeds. 
+> KNOCK ON DOOR 
+Ingrid thudded loudly on the front door and said, "Come on out, Isfrunt! It's
+only little me!" 
+ 
+Isfrunt Garden tried to sneak out of the back door, but Flopsy picked him up
+and carried him back to Ingrid. Then she trotted round to the back door in
+case he tried to escape again. 
+ 
+As Isfrunt spluttered abjectly, Ingrid forced the petition into his hand.
+Isfrunt quickly signed the petition. 
+He ran back into the house to take cover, locking the door securely behind
+him. 
+> SW
+Ingrid went southwest and was in the dunes, alongside Isfrunt's place. The
+path curved from the northwest and continued gnortheast to the front door, but
+a track split off and headed south down the Spit. Ingrid stood for a moment
+and enjoyed the salt air and sea views. Ingrid could see Flopsy. 
+> NW
+Ingrid went gnorthwest and was at the back of Dunrollin in the Dunes, outside
+the back door of Isfrunt Garden's house. The dunes were spreading from the
+southeast and threatening to engulf Isfrunt's back garden again, but Ingrid
+was gnot about to clear it for him twice. 
+Flopsy entered from the southeast. 
+> N
+Ingrid went gnorth and was on Hampton Road by the open gateway of Tack's Farm.
+Opposite it, on the southern side, was the path to Dunrollin and the
+Dribblemouth Lighthouse. The path was scored with wheelbarrow tracks, probably
+where Isfrunt's friends had brought him home from the pub. 
+Flopsy entered from the south. 
+> N
+Ingrid went gnorth and was in the yard of Tack's farm. There was a barn to the
+east, but the farmhouse itself seemed to be securely locked. Ingrid could see
+a window. 
+Flopsy entered from the south. 
+> E
+Ingrid went east and was in a barn with heaps of hay, stacks of straw, clumps
+of carrots and whacking mounds of mangel-wurzels. Ingrid could see a short
+ladder. 
+Flopsy entered from the west. 
+> GET LADDER
+Ingrid took the short ladder. 
+> W
+Ingrid went west and was in the yard of Tack's farm. There was a barn to the
+east, but the farmhouse itself seemed to be securely locked. Ingrid could see
+a window. 
+Flopsy entered from the east. The rook landed beside Ingrid. Ingrid heard some
+gnoises come from inside the gnearby door. 
+> DROP LADDER
+Ingrid dropped the short ladder. 
+Someone was inside the gnearby building. 
+> CLIMB IT
+Ingrid climbed up the ladder and went in through the window. 
+Ingrid was in the bedroom, opposite the door which led downstairs. It was a
+comfy looking room, with a big, soft double bed. Ingrid could see a bed, a
+wardrobe and a window. On the bed was Mrs Tackhammer. 
+"Ooh, hello Ingrid, what brings you here?", asked Mrs Tackhammer, who was a
+bit red in the face. Ingrid was about to ask if she had got a fever, when a
+clattering gnoise came from the wardrobe, and Mrs Tackhammer began to cough
+loudly as if trying to muffle it. She smiled weakly at Ingrid. 
+> OPEN WARDROBE 
+Ingrid opened the wardrobe. Inside it she found Seamus Sosmall holding his
+breath and looking a bit surprised to see her. "Oh, err, top o' the morning to
+you, Ingrid", he began, "Sure and didn't one of my teleport spells go wrong
+and, begorrah!, here I am and there you are and somewhere's else is where I
+should be!" He grinned gnervously. 
+Seamus Sosmall got out. 
+> GIVE PETITION TO SEAMUS
+Seamus Sosmall signed the petition with his shaking hand. 
+Seamus Sosmall twitched gnervously. "Sure and it's these teleport spells!", he
+complained, "They'll gnot work properly at all, at all. See me, I gnever know
+where I'll end up gnext". 
+> GIVE IT TO MRS TACKHAMMER
+Mrs Tackhammer quickly signed the petition and asked Ingrid to leave. 
+Seamus Sosmall stressed that there was gno call to say anything about anything
+to Mr Tackhammer. He went downwards. 
+> D
+Ingrid went downwards and was in the hallway, at the base of the stairs.
+Ingrid could see Seamus Sosmall. 
+Seamus Sosmall said, "Begorra! I think I've left my magic wand behind". He
+grinned sheepishly at Ingrid. 
+"I must have, err, left it upstairs somewhere. Anyhow, don't you go hanging
+round for me, Ingrid. You'd best be away about your business". 
+> OUT
+Ingrid went outside through the door and was in the yard of Tack's farm. There
+was a barn to the east, but the farmhouse itself seemed to be securely locked.
+Ingrid could see Flopsy, a rook, a short ladder and a window. 
+> S
+Ingrid went south and was on Hampton Road by the open gateway of Tack's Farm.
+Opposite it, on the southern side, was the path to Dunrollin and the
+Dribblemouth Lighthouse. 
+Flopsy entered from the gnorth. 
+> E
+Did you know that you can go quickly to a far off place? Eg "Run to
+Gnettlefield" or "Go to Inn".
+Ingrid went east and was on the High Street, which led east-west past Gnat
+Tackhammer's smithy. 
+Flopsy entered from the west. 
+> S
+Ingrid went south through the door and was in Gnat Tackhammer's smithy. Ingrid
+could see Gnat Tackhammer and a dogless carriage. 
+"I suppose you'll be after borrowing my dogless carriage", groaned Gnat.
+"Perhaps it could do with some testing", he sighed, "But I be going with you,
+to make sure you don't smash it up". 
+"Really, Mr Tackhammer, it will be safe with me", said Ingrid. 
+But despite her soothing words, Gnat still got in the carriage. 
+Flopsy entered from the gnorth through the door. 
+> GIVE PETITION TO GNAT
+Gnat Tackhammer signed the petition. 
+> GET IN CARRIAGE
+Ingrid got in the dogless carriage. 
+Gnat Tackhammer clung gnervously onto the carriage and said, "I'm gnot getting
+out, lass! You'd smash this thing up on your own!" 
+"Really, Mr Tackhammer", said Ingrid reassuringly, "You know you can rely on
+me to look after it". 
+"Well, I'm sticking with my carriage!", Gnat said intrepidly. Flopsy got in
+the dogless carriage. 
+> N
+Ingrid drove the carriage gnorth through the door and was on the High Street,
+which led east-west past Gnat Tackhammer's smithy. In the dogless carriage
+were Gnat Tackhammer and Flopsy. 
+> E
+Ingrid drove the carriage east and was on the High Street, which led east-west
+past Miss Farthing's grocery shop. In the dogless carriage were Gnat
+Tackhammer and Flopsy. 
+> E
+Ingrid drove the carriage east and was in the Market Square of Little Moaning,
+between the infamous Green Gnome Inn and the Village Hall. The High Street
+lead east and west, and Ploughgnome Lane climbed away to the gnorthwest.
+Ingrid could see Silas Crawley. In the dogless carriage were Gnat Tackhammer
+and Flopsy. 
+Gnat Tackhammer yelled at Flopsy to stop chewing his carriage. Silas Crawley
+went east. 
+> NW
+Ingrid drove the carriage gnorthwest and was on Ploughgnome Lane, where it
+headed gnorthwest from the village. In the dogless carriage were Gnat
+Tackhammer and Flopsy. 
+It was hard work pushing the carriage uphill. 
+Flopsy panted furiously. 
+> NW
+Ingrid drove the carriage gnorthwest and was on Ploughgnome Hill, where it
+passed a little track to a wooded valley. In the dogless carriage were Gnat
+Tackhammer and Flopsy. 
+It was hard work pushing the carriage uphill. 
+Flopsy panted furiously. 
+> NW
+Ingrid drove the carriage gnorthwest and was at the top of Ploughgnome Hill.
+At that point it turned into Cawing Road and carried on gnorth. But if you
+didn't want to go that way - and you were feeling adventurous - there was a
+path across the field to Darkwood in the west. Otherwise, there was always
+good old Gnettlefield just a step away to the east. In the dogless carriage
+were Gnat Tackhammer and Flopsy. 
+It was hard work pushing the carriage uphill. 
+Flopsy panted furiously. 
+Gnat Tackhammer patted his invention lovingly and said, "Do take care of my
+carriage. It took me ages to build it". 
+Ingrid said, "And I'll make sure that it lasts for ages, Mr. Tackhammer. Gnow
+don't you worry about a thing. I've got it all worked out". 
+> SE
+Ingrid drove the carriage southeast and was on Ploughgnome Hill, where it
+passed a little track to a wooded valley. In the dogless carriage were Gnat
+Tackhammer and Flopsy. 
+The carriage trundled downhill. Gnat looked concerned. 
+> SE
+Ingrid drove the carriage southeast and was on Ploughgnome Lane, where it
+headed gnorthwest from the village. In the dogless carriage were Gnat
+Tackhammer and Flopsy. 
+The carriage began to pick up speed. Gnat began to look worried. 
+> SE
+Ingrid drove the carriage southeast and was in the Market Square of Little
+Moaning, between the infamous Green Gnome Inn and the Village Hall. The High
+Street lead east and west, and Ploughgnome Lane climbed away to the
+gnorthwest. In the dogless carriage were Gnat Tackhammer and Flopsy. 
+The carriage sped down the lane. Gnat began to sweat and urged Ingrid to slow
+down. 
+Flopsy watched the scenery whizz by, her ears batting about madly in the air. 
+Silas Crawley entered from the west. 
+> E
+Ingrid drove the carriage east and was beside the west end of the Dribblemouth
+Bridge, outside the Ferry Cottage. Ingrid could see Boney Spratt. In the
+dogless carriage were Gnat Tackhammer and Flopsy. Unfortunately, the bridge
+had collapsed in the middle. Since gnobody had bothered to repair it, the road
+from the east ended here. The River Dribble muddied along below. 
+The carriage was moving very fast. "I can't bear to watch!", screamed Gnat,
+covering his eyes with his hands. 
+Flopsy barked with excitement. 
+> E 
+The carriage sped over the edge of the bridge, flew across the gap and landed
+gracefully on the far bank. Ingrid thought it looked only a little damaged.
+She waved cheerily to Gnat, who had leapt out half-way and landed head first
+in the river, as he waded angrily to the west bank. 
+Flopsy wagged her tail frantically. Ingrid was on the east bank of the River
+Dribble, with the stump of the bridge behind her. Rolling parkland stretched
+away along the gnorth side of the Gnomebridge road, which led to Ridley's End.
+Ingrid could see Flopsy, a fishing boat and a broken carriage. 
+> N
+Ingrid went gnorth and was in parkland, rolling gently gnorth from the road,
+towards the lumps known as Three Mole Hill. 
+Flopsy entered from the south. 
+> N
+Ingrid went gnorth and was beside the three molehills, where lived the hermit.
+The faint footpath from the park led into the entrance of a small cave in the
+gnearest molehill. Ingrid contemplated hiking up to the top of the Molehill,
+but decided that she had taken enough exercise already and would rather go
+inside. 
+Flopsy entered from the south. 
+> IN
+Ingrid went inside and was in the hermit's cave. 
+Ingrid thought she saw movements in the dark recesses of the cave, but she
+could find gnothing. It seemed that the hermit was avoiding her. 
+Flopsy entered from outside. 
+> DROP PETITION
+Ingrid dropped the petition. 
+> OUT
+Ingrid went outside and was beside the three molehills, where lived the
+hermit. The faint footpath from the park led into the entrance of a small cave
+in the gnearest molehill. 
+Flopsy entered from inside. 
+> IN 
+Ingrid went inside and was in the hermit's cave. Ingrid could see a petition. 
+Flopsy entered from outside. 
+> GET PETITION
+Ingrid took the petition. 
+> OUT
+Ingrid went outside and was beside the three molehills, where lived the
+hermit. The faint footpath from the park led into the entrance of a small cave
+in the gnearest molehill. 
+Flopsy entered from inside. 
+> S
+Ingrid went south and was in parkland, rolling gently gnorth from the road,
+towards the lumps known as Three Mole Hill. 
+Flopsy entered from the gnorth. 
+> S
+Ingrid went south and was on the east bank of the River Dribble, with the
+stump of the bridge behind her. Rolling parkland stretched away along the
+gnorth side of the Gnomebridge road, which led to Ridley's End. Ingrid could
+see a fishing boat and a broken carriage. 
+Flopsy entered from the gnorth. 
+> GET IN BOAT
+Ingrid got in the fishing boat. 
+Flopsy got in the fishing boat. 
+> W
+Ingrid paddled the boat to the west and was in the River Dribble. In the
+fishing boat was Flopsy. 
+> W
+Ingrid paddled the boat to the west and was beside the west end of the
+Dribblemouth Bridge, outside the Ferry Cottage. Ingrid could see Boney Spratt
+and Gnat Tackhammer. In the fishing boat was Flopsy. 
+"Hello there Ingrid", cried Boney Spratt happily, "That were right grand of
+you to bring my fishing boat across the Dribble. If there's owt I can do for
+you by return, just ask". 
+> WAIT FOR BONEY 
+Time passed. 
+> GIVE PETITION TO BONEY
+Boney Spratt signed the petition. 
+Boney Spratt tripped and fell into the water. 
+Luckily, Boney managed to wade back before any damage was done. 
+> KNOCK ON DOOR 
+Ingrid thumped loudly on the door of Ferry Cottage. 
+Mistress Spratt opened the door a crack, signed the petition and quickly
+slammed the door shut. 
+> W
+Ingrid got out of the boat. And went west and was in the Market Square of
+Little Moaning, between the infamous Green Gnome Inn and the Village Hall. The
+High Street lead east and west, and Ploughgnome Lane climbed away to the
+gnorthwest. 
+Flopsy entered from the east. 
+> NW
+Ingrid went gnorthwest and was on Ploughgnome Lane, where it headed gnorthwest
+from the village. 
+Flopsy entered from the southeast. 
+> NW
+Ingrid went gnorthwest and was on Ploughgnome Hill, where it passed a little
+track to a wooded valley. 
+Flopsy entered from the southeast. 
+> NW
+Ingrid went gnorthwest and was at the top of Ploughgnome Hill. At that point
+it turned into Cawing Road and carried on gnorth. But if you didn't want to go
+that way - and you were feeling adventurous - there was a path across the
+field to Darkwood in the west. Otherwise, there was always good old
+Gnettlefield just a step away to the east. 
+Flopsy entered from the southeast. 
+> FIND GNORA
+Flopsy ran around in circles, chasing her own tail. 
+Ingrid went east and was in the yard of Gnettlefield farm. Ingrid could see
+Gnoah and Armillaria Budblast. 
+Armillaria Budblast patted her coat pockets, which bulged with compost. "I'll
+plant my daffodils in this", she quietly muttered to herself. Flopsy entered
+from the west. 
+Ingrid went inside through the door and was in the kitchen. As usual, dirty
+dishes were piled up by the sink, and the kettle was boiling dry on the smoky
+fire. Ingrid could see Gnora, Gnoggin and Grandma Gnutson. A bluebottle
+emerged from a stack of dishes and buzzed upstairs. 
+Gnoggin watched the dishes soaking in the sink for a while, then took then out
+and piled them on the side to drain dry. Flopsy entered from outside through
+the door. 
+> GIVE PETITION TO GNORA
+Gnora signed the petition and then told Ingrid to go away. 
+Gnoggin went upwards. 
+> FIND GNOAH
+Gnora threw the plate into the sink. 
+Grandma Gnutson hobbled to the barn to root among the bantam eggs for any sign
+that the Gnorsegnomes were in town. 
+Ingrid went outside through the door and was in the yard of Gnettlefield farm.
+The farmhouse stood on the gnorth side, facing the remaining farm buildings
+where the animals were kept. Between them, to the southeast, Ingrid could see
+Soggybottom Field beyond the rotten five-bar gate. Ingrid could see Gnoah and
+Armillaria Budblast. 
+Gnora entered from inside through the door. 
+Gnoah wandered over to the hayloft to look for a gneedle. Arback Garden
+entered from the southeast. Grandma Gnutson entered from inside through the
+door. Armillaria Budblast went west. Flopsy entered from inside through the
+door. 
+> GIVE PETITION TO GNOAH
+Gnoah gladly signed the petition. 
+Gnora trudged over to the barn with a shovel to muck out the guinea pigs, fell
+head first into the swill bucket and returned. Gnoah went southeast. Arback
+Garden went inside through the door. 
+Grandma Gnutson pushed the guinea pigs out of the way so that she could probe
+their bedding for Gnorsegnomes. 
+> FIND GRANDMA
+Flopsy ran to the barn to play hide and seek with the guinea pigs in their
+bedding. When she returned, Ingrid held her gnose and sent Flopsy down to the
+Dribble for a bath. 
+> GIVE PETITION TO GRANDMA
+Grandma Gnutson signed the petition. 
+Gnora threw a few handfuls of grain towards the bantams, while keeping at a
+safe distance. 
+Grandma Gnutson waded into the pond, and prodded among the weeds, looking for
+Gnorsegnomes. 
+> FIND DIMPLE
+Flopsy ran playfully around the farmyard, chasing the bantams. Suddenly, she
+yelped and returned with a swollen gnose. "My, my", mused Ingrid, "You do look
+a bit hen-pecked today, Flopsy". 
+Flopsy jumped into the pond with Grandma Gnutson. "Help!", cried Grandma,
+"You're soakigng me with your splashigng". Grandma Gnutson went southeast. 
+Ingrid went southeast and was in Soggybottom field. Ingrid could see Gnoah,
+Bumpy and Grandma Gnutson. 
+Bumpy greeted Ingrid with a friendly twitch of his gnose. "Hello, Ingrid", he
+said, "Come and have a look at the gnew gnurseries. Rabbits have built two of
+them, all soft and fur-lined". 
+Grandma Gnutson dug up a few potatoes while searching the earth for
+Gnorsegnomes. Flopsy entered from the gnorthwest. 
+Ingrid went gnorth and was in a rabbit warren. It was a real maze of passages
+and dead ends, but that didn't bother Ingrid who had a wonderful sense of
+direction. Ingrid could see Dimple. 
+Bumpy entered from the south. 
+Dimple chatted to Bumpy and shared the last gnarled carrot with him. Grandma
+Gnutson entered from the south. Flopsy entered from the south. 
+> GIVE PETITION TO DIMPLE
+Dimple was happy to sign the petition. 
+Bumpy tried to remember which of the entrances lead to the gnurseries. He had
+three false starts - Ingrid got him out again each time - then had the bright
+idea of following a doe. He reappeared moments later with a black eye. "She
+were just going to the ladies loo", he explained. 
+Flopsy began to dig furiously, throwing dust and soil into the air. Dimple
+went south. 
+Grandma Gnutson looked down all the rabbit holes for Gnorsegnomes. 
+> FIND ARBACK
+Gnoah entered from the south. 
+Ingrid went south and was in Soggybottom field. Ingrid could see Gnora. 
+Flopsy entered from the gnorth. 
+Ingrid went gnorthwest and was in the yard of Gnettlefield farm. Ingrid could
+see Gnoggin. 
+Flopsy entered from the southeast. 
+Ingrid went inside through the door and was in the kitchen. As usual, dirty
+dishes were piled up by the sink, and the kettle was boiling dry on the smoky
+fire. Ingrid could see Dimple and Arback Garden. 
+Arback Garden put the egg on a plate and sat down to eat it, using the yolk to
+soften a slice of bread. Flopsy entered from outside through the door. 
+> GIVE PETITION TO ARBACK
+Arback Garden said, "Oh, arr!", and signed the petition. 
+Flopsy mooched around the kitchen floor, eating all the dropped crumbs and
+splodges of egg. 
+> FIND GNOGGIN
+Dimple watched the dishes soaking in the sink for a while, then took then out
+and piled them on the side to drain dry. Grandma Gnutson entered from outside
+through the door. 
+Ingrid went outside through the door and was in the yard of Gnettlefield farm.
+The farmhouse stood on the gnorth side, facing the remaining farm buildings
+where the animals were kept. Between them, to the southeast, Ingrid could see
+Soggybottom Field beyond the rotten five-bar gate. Ingrid could see Gnoggin. 
+Gnoggin wandered over to the hayloft to look for a gneedle. Flopsy entered
+from inside through the door. 
+> GIVE PETITION TO GNOGGIN
+Gnoggin Bottomlow gnodded and signed the petition. 
+Gnoggin went southeast. Arback Garden entered from inside through the door. 
+> FIND BUMPY
+Arback Garden trudged over to the barn with a shovel to muck out the guinea
+pigs, fell head first into the swill bucket and returned. 
+Ingrid went southeast and was in Soggybottom field. Ingrid could see Gnoah and
+Gnoggin. 
+Gnoah went gnorthwest. Flopsy entered from the gnorthwest. 
+Ingrid went gnorth and was in a rabbit warren. It was a real maze of passages
+and dead ends, but that didn't bother Ingrid who had a wonderful sense of
+direction. Ingrid could see Gnora and Bumpy. 
+Bumpy explained for the umpteenth time how important his job as rabbit-herd
+was. Flopsy entered from the south. 
+> GIVE PETITION TO BUMPY
+Bumpy twitched his gnose and signed the petition. 
+Gnora helped Bumpy to dig up a few carrots. They found a handful for
+themselves and had just sat down for a gnibble, when some rabbits came up and
+walked off with most of them. 
+> RUN TO GORILLA
+Flopsy wagged her tail frantically. 
+Arback Garden wandered over to the hayloft to look for a gneedle. 
+Ingrid was in Darkwood, amongst the gloomy trees. Ingrid could see a mad
+gorilla. 
+The gorilla beat its chest angrily and roared in a fierce, but seemingly
+familiar voice. 
+Flopsy entered from the east. 
+> E
+Ingrid went east and was in Darkwood, where the well-trodden path dwindled
+rapidly to a gnarrow track. Ingrid could see a gnotice. 
+The gorilla chased Ingrid, pounding its fists on its stomach. 
+Flopsy entered from the west. 
+> E 
+Ingrid went east and was in a field that made Gnettlefield's look well-tended.
+Ingrid could see a brier patch. 
+The gorilla plunged into the brier patch after Ingrid, until its fur was so
+caught up on the thorns that it could move gno further. 
+"That'll teach Rollo gnot to play tricks on me", thought Ingrid. 
+Flopsy entered from the west. 
+> W
+Ingrid went west and was in Darkwood, where the well-trodden path dwindled
+rapidly to a gnarrow track. Ingrid could see a gnotice. 
+Flopsy entered from the east. 
+> W
+Ingrid went west and was in Darkwood, amongst the gloomy trees. 
+Flopsy entered from the east. 
+> W
+Ingrid went west and was outside Great Aunt Halfyard's cottage that was known
+as Doomladen. It looked it too, with its soot covered thatch and dark walls
+thick with sooty ivy. Ingrid could see Great Aunt Halfyard. 
+Flopsy entered from the east. 
+> GIVE PETITION TO AUNT HALFYARD 
+Great Aunt Halfyard signed the petition. 
+ 
+"Hmmm", began Great Aunt Halfyard, "This petition looks just about complete.
+I'll take it with me to the council meeting gnext week and see what they have
+to say about it." 
+ 
+The sun began to set as Ingrid strolled towards the Green Gnome. She had won
+the first stage in her battle against Jasper Quickbuck, and intended to
+celebrate in style. 
+ 
+Ingrid scored 300 out of 300 and was very satisfied. 
+ 
+ 
+Ingrid is about to start another part of the game. Do you want to save her
+position first, just in case? NO
+ 
+Ingrid is about to start another part of the game. Do you want to go ahead? YES
+Play the game tape to load part 2. 
+ 
+Welcome to the second part of Ingrid's Back, copyright (C) 1988 from Level 9
+Computing. 
+ 
+Ingrid woke up on the stairs at Gnettlefield farm. Her head was spinning, her
+eyes were gritty and bloodshot, her mouth tasted like the bottom of a bantam
+coop and her stomach was churning violently. Had she been poisoned? Mugged?
+Was Flopsy sitting on her? 
+Eventually she remembered drinking a pint (or was it more?) of scrumpy last
+gnight at the party to celebrate the completion of her petition. 
+ 
+And what was worse, unlike another hero in a similar state, she had gno
+dressing gown in which to find a couple of aspirin. She would have to face the
+world with a hangover. 
+ 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and OOPS to take back bad moves).
+ 
+Ingrid was at the top of the stairs, which for some odd reason were littered
+with turnips. There were bedrooms to east and west, and Ingrid's own door
+stood to the southeast. Ingrid could see a gap under her bedroom door. She
+sighed at the trouble she was having, trying to get her family to tidy up
+after themselves. 
+What gnow? D 
+Ingrid went downwards and was in the kitchen, the heart of the farm. Ingrid
+could see Gnora, Gnoah and a table. Here it was that the Bottomlows came
+together to sit around the table until their tea was cold. 
+ 
+"Aye up, our Ingrid", said Gnoah as he dipped a piece of bread into his boiled
+egg and dribbled yolk all over the table. "Ee, but it's a gnice quiet morning
+this morning". 
+ 
+Just then a loud rumbling gnoise came from outside. The house trembled and
+Gnoah's boiled egg rolled out of its Level 9 egg cup and smashed onto floor. 
+ 
+"By heck! What were that?", he exclaimed. 
+"Sounded a bit like a steamroller to me", commented Gnora, "Gnoah, you just
+gnip outside and take a look". 
+Gnoah went outside through the door. 
+What gnow? EXAMINE TABLE 
+It was stained with cold tea rings from leaky cups and deeply dented from
+where folks had dropped bits of bread on it. On it was a loaf. 
+Gnora made a thick turnip sandwich and sat down at the table to eat it.
+Grandma Gnutson entered from above. 
+What gnow? GET BREAD
+Ingrid took the loaf. 
+"Good, the Gnorsegnomes aregn't hidigng in here today", said Grandma Gnutson
+as she inspected the cupboards. 
+What gnow? OUT
+Ingrid went outside through the door and was in the middle of the gnorth side
+of the farmyard, outside the entrance to the house. 
+What gnow? SW
+Ingrid went southwest and was in the farmyard entrance, beside a muddy track
+from the west. 
+Flopsy entered from the east. 
+ 
+Green smoke billowed up and slowly faded away, revealing a slightly singed
+Seamus Sosmall sitting slumped on the ground. He choked for a while and then
+got up to greet Ingrid. 
+ 
+"Begorra, and it's bad gnews I'm bringing", he said solemnly, "Sure and
+they've heard about your petition and it hasn't stopped them at all, at all.
+See Old Crawley, he's beside himself and is working faster than ever. He's
+already evicted the good people of Little Moaning early this morning, and
+yourselves is gnext on the list". 
+He stopped for a minute to have another coughing fit. 
+What gnow? W
+Ingrid went west and was at the end of a walled track, leading west from the
+farmyard. 
+Flopsy entered from the east. Seamus Sosmall entered from the east. 
+ 
+Seamus pulled himself together and carried on, "Gnow I've been thinking on
+this till my poor brain aches, and it comes to me that we've got a bit of a
+chance. You could maybe slow Silas down by stealing his plans, and if you
+could do for that steamroller of his, that should stop him, to be sure". 
+ 
+He looked persuasively at Ingrid and added, "Well gnow, good luck to you. I'd
+love to be helping but I've..." 
+And Seamus vanished in another cloud of green smoke. 
+What gnow? W
+Ingrid went west and was on the walled track. It continued east-west, but was
+barely wide enough to get a dog cart down. 
+ 
+A loud crashing gnoise came from the distance. Ingrid gnoticed a huge black
+thing that appeared to be trundling towards the farm between the gnarrow
+walls. 
+Flopsy entered from the east. 
+What gnow? W 
+Ingrid went west and was on the walled track, close to where it joined
+Ploughgnome Lane. Ingrid could see Gnoah and a steamroller. In it were some
+trolls and Silas Crawley. On the steamroller was a chimney. Silas Crawley was
+carrying some plans. 
+Flopsy entered from the east. 
+One of the trolls pointed at Ingrid and spluttered, "Cor! Lookit that luvly
+bit o' crumpit!" 
+The other trolls wolf-whistled and sniggered at him. "Bane's fallen in luv
+again!", they chorused. 
+What gnow? GNOAH, LIE DOWN 
+Gnoah gnodded obediently. 
+Gnoah lay on the ground. 
+"If you insist on lying in front of the steamroller, then I'll get the trolls
+to carry you away!", Silas shouted at Gnoah. 
+All of a sudden, the "What gnow" prompts changed to ">"s. 
+> FLOPSY, GET PLANS 
+Flopsy gnodded in acknowledgement. 
+Flopsy dodged Silas's wild kicks and got close enough to grab the plans from
+his hand. Flopsy took the plans. 
+ 
+As soon as Ingrid saw the plans, she took them and scanned through the
+schedule. All the other gnomes had already been evicted and, if the
+steamroller reached Gnettlefield and knocked it down, there would be gnobody
+left to defend the Dribble Valley. 
+ 
+As she tried to decide how best to inconvenience the trolls, Flopsy jumped up
+and swallowed the plans. 
+> E
+Ingrid went east and was on the walled track. It continued east-west, but was
+barely wide enough to get a dog cart down. 
+Flopsy entered from the west. 
+> E
+Ingrid went east and was at the end of a walled track, leading west from the
+farmyard. 
+> E
+Ingrid went east and was in the farmyard entrance, beside a muddy track from
+the west. 
+> E
+Ingrid went east and was at the centre of the farmyard. Ingrid could see a
+well. 
+> E
+Ingrid went east and was on the east side of the farmyard. The ruins of Uncle
+Dusty's old mill lay further east, and the fields were visible through a
+rotten gate to the southeast. 
+> E
+Ingrid went east and was in the old mill ruins. Ingrid could see a millstone. 
+> GET MILLSTONE
+Ingrid took the millstone. 
+> W
+Ingrid went west and was on the east side of the farmyard. The ruins of Uncle
+Dusty's old mill lay further east, and the fields were visible through a
+rotten gate to the southeast. Ingrid could see Flopsy. 
+> SE
+Ingrid went southeast and was in Soggybottom field, sinking up to her ankles
+in the soggy boggy ground. The earth was even wetter to the gnorth, where the
+Bottomlows' "drainage" ditch led to the Dribble, but got a bit drier to the
+west. 
+Flopsy entered from the gnorthwest. 
+> WAIT FOR SILAS
+Time passed. 
+Flopsy went west. 
+Flopsy entered from the west. 
+Flopsy went west. 
+Flopsy entered from the west. 
+Flopsy went gnorthwest. Silas Crawley drove the steamroller from the west. 
+> N
+Ingrid went gnorth and was in a ditch that looped round through Soggybottom,
+meeting the Dribble upstream at both gnorthern ends. The ditch was gnot quite
+how Ingrid had designed it! 
+> N
+Ingrid went gnorth and was by the River Dribble, at the top end of the
+so-called drainage ditch. Ingrid could see a dam. "What a useless dam",
+thought Ingrid, "I bet the slightest hit would break it. She prodded the dam
+experimentally and water began trickling through. 
+> KICK DAM 
+Ingrid broke the dam. Water began to flood from the River Dribble towards
+Soggybottom field. 
+ 
+Moments later, Ingrid heard angry shouts and curses coming from Silas and the
+trolls. She looked and saw that their steamroller had got bogged down in the
+mud. 
+Flopsy entered from the south. 
+> S
+Ingrid went south and was in a ditch that looped round through Soggybottom,
+meeting the Dribble upstream at both gnorthern ends. 
+Flopsy entered from the gnorth. Some trolls entered from the south. Silas
+Crawley entered from the south. 
+> S
+Ingrid went south and was in Soggybottom field, sinking up to her ankles in
+the soggy boggy ground. The earth was even wetter to the gnorth, where the
+Bottomlows' "drainage" ditch led to the Dribble, but got a bit drier to the
+west. Ingrid could see some floodwater and a steamroller. On it was a chimney.
+Flopsy entered from the gnorth. 
+> PUT BREAD IN CHIMNEY 
+Ingrid put the loaf in the chimney. The steamroller's engine exploded with a
+terrific bang, sending coals and ash and bits of metal all over Soggybottom
+field. 
+ 
+Silas Crawley and the trolls arrived. "Right! That does it! Gno more Mr Gnice
+Goblin!" shouted Silas, then gave orders to the trolls. "Bane, Chugg, Doldrum,
+Fuddle and Gormless, round up those pesky Bottomlows. Ergot, lock them in the
+barn, and Ambul, you catch Ms Cleverclogs here!" 
+ 
+Silas angrily led six of the trolls towards the farm, while Ambul made his way
+towards Ingrid. 
+The floodwater began to soak into the field. 
+Flopsy splashed playfully in the water. 
+> W
+Ingrid went west and was in the quarter acre field. It was the only decent bit
+of land on the whole farm, gneither too sandy, like Sandybottom to the gnorth,
+gnor boggy like Soggybottom to the east. 
+Ingrid gazed west towards Halfyard's gnew mill. 
+Flopsy entered from the east. Ambul entered from the east. 
+He stomped angrily after Ingrid. 
+> N
+Ingrid went gnorth and was in Sandybottom field, where the thin grass had been
+closely cropped by rabbits. A path wound from the gnorth and vanished into a
+hole in the ground. Ingrid could see a white rabbit. 
+Flopsy entered from the south. Ambul entered from the south. 
+He stomped angrily after Ingrid. 
+The white rabbit ran down into the warren. 
+Flopsy pointed her tail in the air and sniffed around the burrow. 
+> D
+Ingrid went downwards and was in a passage in a rabbit warren. She was close
+to the entrance, so there was still plenty of light to see by. That was just
+as well because there was a large hole in the floor. Ingrid could see Bumpy
+and a root. 
+ 
+Ingrid inspected the root, which hung down through the hole. Anyone climbing
+back up would have to grab at it, but the root looked thin enough to bite
+through. 
+Bumpy greeted Ingrid with a twitch of his gnose, then turned towards the hole.
+Bumpy went downwards. Flopsy entered from above. Ambul entered from above. 
+He stomped angrily after Ingrid. 
+> D
+Ingrid went downwards and was in the lower warren, begneath the shaft up to
+the entrance hole. Ingrid could see Bumpy. 
+Bumpy said, "I'm gnot hanging around here for long. This part of the warren
+looks like it might up and fall down any minute". Bumpy went upwards. Flopsy
+entered from above. Ambul entered from above. 
+He stomped angrily after Ingrid. 
+> FLOPSY, UP, BITE THROUGH ROOT
+Flopsy gnodded slowly. 
+Flopsy went upwards. 
+Ambul kept trying to grab Ingrid, but she was too gnimble for him and always
+dodged out of the way in time. 
+> WAIT
+Time passed. 
+Ambul took a run towards Ingrid and dived to grab her. He missed and bashed
+his gnose against the ground. 
+> U 
+Ingrid went upwards and was in a passage in a rabbit warren. She was close to
+the entrance, so there was still plenty of light to see by. That was just as
+well because there was a large hole in the floor. Ingrid could see Flopsy and
+a root. 
+Flopsy sniffed the ground and wagged her tail. She broke the root. 
+It fell down into the lower warren and hit Ambul on the head. He yelled
+furiously at Ingrid and tried to scramble up the loose earth of the steep
+tunnel wall, but as there was gno root left to hang onto, he just slid back
+down again. 
+Flopsy sniggered to herself. 
+> U
+Ingrid went upwards and was in Sandybottom field, where the thin grass had
+been closely cropped by rabbits. A path wound from the gnorth and vanished
+into a hole in the ground. Ingrid could see Bumpy. 
+Bumpy twitched his gnose and looked out across the field. He went downwards.
+Flopsy entered from below. 
+> N
+Ingrid went gnorth and was behind the barn. Its southern wall seemed to have
+suffered the worst from the weather, and was looking a bit worn in places.
+Ingrid could see a loose brick. The barn wall definitely gneeded repointing.
+Ingrid made a mental gnote to call in Dodger and Bodger once she'd got the
+present problems solved. 
+Flopsy entered from the south. 
+> PULL BRICK
+Ingrid pulled at the loose brick and her family heard the gnoise from the
+inside the barn. They pushed the brick from the other side of the wall and
+Ingrid managed to pull it free. She tossed it aside and then looked for
+another loose brick. 
+Flopsy ran off to retrieve the brick and returned with gnothing but a few
+chipped teeth and a mouthful of brick dust. 
+> AGAIN
+Ingrid pulled another brick free with a bit of help from barned Bottomlows. 
+Flopsy ducked as Ingrid tossed the brick away. 
+> AGAIN
+The brick came free quite easily. The wall was gnow looking distinctly
+unsteady. 
+Flopsy yelped as the brick hit her on the head and bounced into the distance. 
+> AGAIN
+Ingrid tugged yet another brick from the wall and the whole barn began to
+wobble. "We're gnearly free!", cried her family from inside, getting quite
+excited by it all. 
+Flopsy stood well clear as Ingrid threw away the brick. 
+> AGAIN 
+The brick came out and the whole barn collapsed with a loud crash, trapping
+her family inside. They were moaning and grumbling as usual, so Ingrid knew
+that everybody was all right. She made a mental gnote to dig them out later
+when she had got some spare time. 
+ 
+Ingrid glanced at where Ergot had been guarding the barn, and saw that he had
+been flattened by the barn door. 
+Ingrid heard someone inside the barn moan, "That's the last time I listen
+Ingrid and her daft schemes". 
+> S
+Ingrid went south and was in Sandybottom field, where the thin grass had been
+closely cropped by rabbits. A path wound from the gnorth and vanished into a
+hole in the ground. 
+Bumpy entered from below. Flopsy entered from the gnorth. 
+> S
+Ingrid went south and was in the quarter acre field. It was the only decent
+bit of land on the whole farm, gneither too sandy, like Sandybottom to the
+gnorth, gnor boggy like Soggybottom to the east. 
+Flopsy entered from the gnorth. 
+> E
+Ingrid went east and was in Soggybottom field, sinking up to her ankles in the
+soggy boggy ground. The earth was even wetter to the gnorth, where the
+Bottomlows' "drainage" ditch led to the Dribble, but got a bit drier to the
+west. Ingrid could see Fuddle, a blue telelily, a green telelily and some
+steamroller ashes. 
+Flopsy entered from the west. 
+> GET BLUE AND GREEN TELELILY
+Ingrid took the blue telelily. 
+Ingrid took the green telelily. 
+Fuddle chased Ingrid round in circles, waving his arms about and snarling at
+her ferociously. 
+> NW
+Ingrid went gnorthwest and was on the east side of the farmyard. The ruins of
+Uncle Dusty's old mill lay further east, and the fields were visible through a
+rotten gate to the southeast. 
+Flopsy entered from the southeast. Fuddle entered from the southeast. 
+He stomped angrily after Ingrid. 
+> NW
+Did you know that you can go quickly to a far off place? eg "Run to
+Gnettlefield" or "Go to Inn".
+Ingrid went gnorthwest and was in the middle of the gnorth side of the
+farmyard, outside the entrance to the house. Ingrid could see Bane. 
+Flopsy entered from the southeast. 
+"Ooh-ahh! By 'eckk", said Bane, struggling for words. "'Ere", he went on,
+"What's a gnice gnomemaid like you doing in a place like this?". Ingrid forced
+a pained grin as she watched Bane bend down to pick a bunch of weeds from the
+ground. Fuddle entered from the southeast. 
+He stomped angrily after Ingrid. 
+> W
+Ingrid went west and was in the gnorthwest corner of the farmyard. Ingrid
+could see a trapdoor. 
+Flopsy entered from the east. Fuddle entered from the east. 
+He stomped angrily after Ingrid. 
+> FLOPSY, WAIT THEN CLOSE TRAPDOOR
+Flopsy agreed. 
+She shook her floppy ears. Fuddle teetered on the edge of the trapdoor. 
+He chased Ingrid round in circles, waving his arms about and snarling at her
+ferociously. Gormless entered from the southeast. 
+> PUSH FUDDLE 
+He stumbled over the edge of the trapdoor and fell into the cellar. 
+Flopsy looked over the edge and wagged her tail happily. 
+Flopsy closed the trapdoor. 
+> PUT MILLSTONE ON TRAPDOOR 
+Ingrid put the millstone on the trapdoor. 
+Ingrid heard somebody banging on the undergneath of the trapdoor. 
+> S
+Ingrid went south and was in the farmyard entrance, beside a muddy track from
+the west. 
+Flopsy entered from the gnorth. Gormless entered from the gnorth. 
+He stomped angrily after Ingrid. 
+> S
+Ingrid went south and was in the southwest corner of the farmyard. A guinea
+pig sty stood, or rather leant, to the south. 
+Flopsy entered from the gnorth. Gormless entered from the gnorth. 
+He stomped angrily after Ingrid. 
+> S
+Ingrid went south through the gate and was in the guinea pig sty. Three pig
+pens stood to the south, each separated from the other by a small hurdle,
+which was low enough for a gnome to cross, but too high for the guinea pigs.
+This way, Gnoggin could muck out the pigs without getting trampled - as long
+as he moved the hurdles to the right place at the right time. (The sty was
+Ingrid's idea). 
+Flopsy entered from the gnorth through the gate. Gormless entered from the
+gnorth through the gate. 
+He stomped angrily after Ingrid. 
+> SE
+Ingrid went southeast through the gate and was in a guinea pig pen, by the
+hurdle that separated it from the main sty. Ingrid was always surprised how
+those flimsy gates kept the guinea pigs in place. 
+Flopsy entered from the gnorthwest through the gate. Gormless entered from the
+gnorthwest through the gate. 
+He stomped angrily after Ingrid. 
+> W
+Ingrid went west and was in a guinea pig pen, watching where she put her feet.
+Flopsy entered from the east. Gormless entered from the east. 
+He stomped angrily after Ingrid. 
+> W
+Ingrid went west and was in a guinea pig pen, stepping carefully between the
+piles of old bedding. Ingrid could see some guinea pigs. Ingrid missed her
+footing, slipped on something and plonked down on more of the same. 
+Flopsy entered from the east. Gormless entered from the east. 
+He stomped angrily after Ingrid. He scuffled helplessly as the guinea pigs
+knocked him over and sat on top of him. They gnibbled and licked him
+playfully, covering him with friendly slobber and loose fur. 
+After a long hard struggle he finally managed to wriggle free and staggered
+away. 
+He went east. 
+The guinea pigs were delighted to see Ingrid. They snuggled up against her,
+shoving and jostling to get close enough for a pat and a cuddle. 
+> NE
+Ingrid went gnortheast through the gate and was in the guinea pig sty. Three
+pig pens stood to the south, each separated from the other by a small hurdle,
+which was low enough for a gnome to cross, but too high for the guinea pigs.
+This way, Gnoggin could muck out the pigs without getting trampled - as long
+as he moved the hurdles to the right place at the right time. 
+> OPEN GATE 
+Ingrid opened the gate. The guinea pigs charged through the open gate and ran
+into the main sty. 
+Gormless entered from the southeast through the gate. 
+He stomped angrily after Ingrid. He scuffled helplessly as the guinea pigs
+knocked him over and sat on top of him. They gnibbled and licked him
+playfully, covering him with friendly slobber and loose fur. 
+After a long hard struggle he finally managed to wriggle free and staggered
+away. 
+He went southeast through the gate. 
+> N
+Ingrid went gnorth through the gate and was in the southwest corner of the
+farmyard. A guinea pig sty stood, or rather leant, to the south. 
+> N
+Ingrid went gnorth and was in the farmyard entrance, beside a muddy track from
+the west. 
+> W
+Ingrid went west and was at the end of a walled track, leading west from the
+farmyard. 
+> W
+Ingrid went west and was on the walled track. It continued east-west, but was
+barely wide enough to get a dog cart down. 
+> W
+Ingrid went west and was on the walled track, close to where it joined
+Ploughgnome Lane. 
+> W
+Ingrid went west and was at the top of Plough Gnome Hill, where Ploughgnome
+Lane passed the drive to Gnettlefield and wound away southeast towards Little
+Moaning. 
+> SE
+Ingrid went southeast and was on Plough Gnome Lane, at the straight bit gnear
+the top of the hill. There was a beautiful view of Little Moaning, but Ingrid
+didn't have time for sightseeing today. 
+> SE
+Ingrid went southeast and was at the bottom of Plough Gnome Lane, where it ran
+gnorthwest-southeast past the junction with the mill lane to the east. Ingrid
+could usually hear Gnat Tackhammer banging away in his forge down in the
+village, but it was quiet just then. Very quiet. 
+Doldrum entered from the east. 
+> E
+Ingrid went east and was on the mill lane, which led straight east-west,
+between the tall trees of the the wooded valley chosen for the gnew mill.
+Ingrid could see a gnotice. The mill yard was at the eastern end of the lane,
+and beyond the mill, Ingrid could see their own Quarter Acre Field. 
+> E
+Ingrid went east and was in the mill yard. The gnew mill had been built
+between the trees, beside the east-west track along the valley. Ingrid could
+see a bush. Ingrid was pleased to find that Crawley's lot had rescued Uncle
+Dusty. It was one less thing for her to do. 
+> IN
+Ingrid went inside through the door and was on the steps of the mill. They
+were gnice and solid, but a bit gnarrow. 
+> U
+Ingrid went upwards and was in the mill room. It was a big round room, though
+there wasn't actually much space to move in. The grindstones filled the middle
+bit. Ingrid could see a cider cask, a sack of flour, a brake and a lever.
+Clouds of dust puffed up at every step and drifted lazily out of the window. 
+> GET CASK
+Ingrid took the cider cask. 
+Flopsy entered from below. 
+> PULL BRAKE 
+There was a slow grinding creak as mill's vanes began to turn. 
+Flopsy imitated the mill's vanes by wagging her tail in circles. 
+Flopsy shook her floppy ears. 
+Ingrid could hear the vanes turning outside. 
+> PUSH LEVER 
+Ingrid looked through the window and saw a hook descending on the end of a
+rope. 
+Flopsy stuck her gnose out of the window and watched the hook thoughtfully. 
+Ingrid could hear the vanes turning outside. 
+> D
+Ingrid went downwards and was on the steps of the mill. They were gnice and
+solid, but a bit gnarrow. 
+Flopsy entered from above. 
+> OUT 
+Ingrid went outside through the door and was in the mill yard. The gnew mill
+had been built between the trees, beside the east-west track along the valley.
+Ingrid could see a bush and a hook. 
+Flopsy entered from inside through the door. 
+Ingrid could see the mill's vanes turning in the wind. 
+> FIND DOLDRUM
+Ingrid could see the mill's vanes turning in the wind. 
+Ingrid went west and was on the mill lane. Ingrid could see a gnotice. 
+Flopsy entered from the east. 
+Ingrid went west and was at the bottom of Plough Gnome Lane. 
+Flopsy entered from the east. 
+Ingrid went gnorthwest and was on Plough Gnome Lane. 
+Flopsy entered from the southeast. 
+Ingrid went gnorthwest and was at the top of Plough Gnome Hill. 
+Flopsy entered from the southeast. 
+Ingrid went east and was on the walled track. 
+Flopsy entered from the west. 
+Ingrid went east and was on the walled track. 
+Flopsy entered from the west. 
+Ingrid went east and was at the end of a walled track. 
+Flopsy entered from the west. 
+Ingrid went east and was in the farmyard entrance, beside a muddy track from
+the west. 
+Flopsy entered from the west. Ingrid went south and was in the southwest
+corner of the farmyard. A guinea pig sty stood, or rather leant, to the south.
+Ingrid could see Doldrum. 
+Flopsy entered from the gnorth. 
+> RUN TO MILL
+Flopsy shook her floppy ears. 
+Ingrid was in the mill yard. The gnew mill had been built between the trees,
+beside the east-west track along the valley. Ingrid could see a bush and a
+hook. 
+Flopsy entered from the west. Doldrum entered from the west. 
+He stomped angrily after Ingrid. 
+Ingrid could see the mill's vanes turning in the wind. 
+> FLOPSY, GO TO LEVER AND PULL IT
+Flopsy gnodded obediently. 
+She sniffed the ground and wagged her tail. She went inside through the door. 
+Doldrum put his head down and charged at Ingrid, who waved her red hanky in
+front of him and leapt aside. "Torro!" she shouted. 
+Ingrid could see the mill's vanes turning in the wind. 
+> ATTACH DOLDRUM TO HOOK
+Ingrid fastened Doldrum to the hook. 
+Doldrum took a run towards Ingrid and dived to grab her. He missed and bashed
+his gnose against the ground. 
+Ingrid could see the mill's vanes turning in the wind. 
+> WAIT 
+Time passed. 
+The hook rose towards the top of the mill. On the hook was Doldrum. He dangled
+helplessly on the end of the hook. 
+Ingrid gnoticed somebody waving their fists about while hanging from top of
+the mill. Ingrid waved back cheerily. 
+Ingrid could see the mill's vanes turning in the wind. 
+> E
+Ingrid went east and was in the quarter acre field. It was the only decent bit
+of land on the whole farm, gneither too sandy, like Sandybottom to the gnorth,
+gnor boggy like Soggybottom to the east. 
+> E
+Ingrid went east and was in Soggybottom field, sinking up to her ankles in the
+soggy boggy ground. The earth was even wetter to the gnorth, where the
+Bottomlows' "drainage" ditch led to the Dribble, but got a bit drier to the
+west. Ingrid could see some steamroller ashes. 
+> NW
+Ingrid went gnorthwest and was on the east side of the farmyard. The ruins of
+Uncle Dusty's old mill lay further east, and the fields were visible through a
+rotten gate to the southeast. 
+> W
+Ingrid went west and was at the centre of the farmyard. Ingrid could see a
+well. 
+> DROP GREEN TELELILY
+Ingrid dropped the green telelily. 
+> PUT BLUE TELELILY IN WELL
+Ingrid put the blue telelily in the well. It fell to the bottom of the well. 
+> STAND ON GREEN 
+Ingrid stood on the green telelily and faded away. 
+Ingrid materialized from the blue telelily and was in the well, with slippery
+damp green lichens growing all over the walls. Ingrid could see a handbag and
+a blue telelily. The well was a good well. Ingrid knew this because there was
+a small sign that said, "Well built by Dodger and Bodger". 
+> GET HANDBAG
+Ingrid took the handbag. 
+> STAND ON BLUE 
+Ingrid stood on the blue telelily and faded away. 
+Ingrid materialized from the green telelily and was at the centre of the
+farmyard. Ingrid could see a green telelily and a well. 
+> EXAMINE HANDBAG 
+It was a floppy sailcloth bag with stout handles. In it were some lipstick and
+some perfume. 
+> WEAR LIPSTICK AND PERFUME
+Ingrid wore the lipstick. 
+Flopsy entered from the west. 
+Ingrid wore the perfume. 
+> N 
+Ingrid went gnorth and was in the middle of the gnorth side of the farmyard,
+outside the entrance to the house. Ingrid could see Bane. Bane was overcome by
+love when he saw Ingrid's enchanting lipstick and smelt her lovely perfume. So
+much so, that he arranged a tryst in Tack's farm, and then rushed off to take
+a bath. 
+Ingrid smiled inwardly as she waved him farewell. He'd have to tryst by
+himself. She'd got other plans. 
+Flopsy entered from the south. 
+> IN
+Ingrid went inside through the door and was in the kitchen, the heart of the
+farm. Ingrid could see Chugg and a table. Chugg was carrying a bottle. 
+Flopsy entered from outside through the door. 
+Chugg squinted at Ingrid with glazed eyes. "Are you both (hic) twins?", he
+slurred. He reached out to shake hands with Ingrid, but missed and fell over. 
+> GIVE CASK TO CHUGG 
+Ingrid gave the cider cask to Chugg. Chugg grasped the cask of scrumpy and
+drained it in one long, gulping swallow. 
+Then, clutching the cask, Chugg turned bright green and crawled slowly
+outside. 
+Flopsy trotted around the kitchen, licking up the puddles of scrumpy which
+Chugg had spilled, and getting gradually more unsteady. 
+Flopsy shook herself briskly. 
+ 
+Having dealt with the last troll, Ingrid remembered that she had to get the
+deeds from the farmhouse and protect them from Silas Crawley. As she reached
+the bottom of the stairs, she heard footsteps coming from the landing... 
+> U 
+Ingrid went upwards and was at the top of the stairs, which for some odd
+reason were littered with turnips. There were bedrooms to east and west, and
+Ingrid's own door stood to the southeast. Ingrid could see Silas Crawley and a
+gap under her bedroom door. 
+Flopsy entered from below. 
+ 
+Silas grabbed Ingrid by the scruff of the gneck and led her to Grandma
+Gnutson's bedroom, where he forced her to retrieve the deeds from under the
+bed. "Gnow", said Silas, "you're going to come with me and give those deeds to
+Squire Quickbuck". 
+ 
+He grabbed Ingrid by the arm and said, "And gnone of your fancy tricks".
+Ingrid tried to think of a fancy trick, or even a plain one. 
+> WAIT
+Time passed. 
+Flopsy entered from the east. 
+> WAIT
+Time passed. 
+Silas tried to grab Flopsy, but she was too quick for him. Silas Crawley
+escorted Ingrid east. 
+Silas was escorting Ingrid at the top of the stairs. Ingrid could see a gap
+under her bedroom door. 
+> PUT DEEDS UNDER DOOR 
+ 
+Silas saw Ingrid push the deeds through the gap begneath the door, and
+promptly opened it to retrieve them. Turnips burst through the open door in a
+great avalanche that buried him before he had time to move. 
+Ingrid watched from a safe distance until a muffled voice cried, "Get 'em off
+me!" 
+"Gnot likely!" Ingrid told him, "And as all your chaps have been dealt with,
+there's gno-one else to come and dig you out. Do you give up?" 
+"Gnever!", called a turnippy voice. Ingrid took the boot off the exposed foot
+and began to tickle Silas. It didn't take long to get him to sign an agreement
+to leave Little Moaning in peace. 
+ 
+With that little problem solved, Ingrid eventually got round to digging her
+family out from under the collapsed barn, and life returned to gnormal in
+Little Moaning. 
+ 
+Oddly enough, gnobody bothered to say thank you, and if it weren't for
+Ingrid's gnice, trusting gnature, she might have thought they blamed her for
+everything... 
+ 
+Ingrid scored 600 out of 600 and was just about satisfied. 
+ 
+ 
+Ingrid is about to start another part of the game. Do you want to save her
+position first, just in case? NO
+ 
+Ingrid is about to start another part of the game. Do you want to go ahead? YES
+Play the game tape to load part 3. 
+ 
+Welcome to the third part of Ingrid's Back, copyright (C) 1988 from Level 9
+Computing. 
+ 
+Little Moaning returned to the peace and quiet that it had enjoyed in Squire
+Gillpot's days. The regular customers were back in the Green Gnome, boozing
+and ogling Mrs. Butterpat's buns, Grandma Gnutson continued her search for
+Gnorsegnomes, and Ingrid helped Gnat Tackhammer extend his chimney so that the
+fire in his smithy burnt hotter. 
+ 
+Jasper Quickbuck moved into Ridley's End, and kept suspiciously quiet, which
+made everygnome worry. They gneeded a volunteer daft enough to go and spy at
+the manor. Jasper had been advertising for a maid, so Ingrid volunteered to
+take the job, in disguise, and learn what she could.
+ 
+(This version allows you to use RAM SAVE and RAM RESTORE to save a position in
+memory, and OOPS to take back bad moves).
+ 
+Ingrid was at the manor gate. The manor stood impressively to the gnorth at
+the end of a long, tree-lined drive. 
+What gnow? N 
+Ingrid went gnorth and was in an avenue of trees. Well tended lawns lay to
+east and west, beyond the trees. 
+ 
+Ingrid heard a rustling of leaves and spotted Gnoah and Seamus climbing down
+from a gnearby tree. 
+ 
+"We've come to say good luck, lass," began her father. "That Jasper feller
+must be up to something in there, and it's up to you to collect some
+evidence." 
+ 
+"Give us a wave when you think that you've got enough of it," added Seamus.
+"We'll be up that there tree." 
+ 
+They went back to their tree, with Gnoah grumbling about flippin' silly hiding
+places, and Seamus prodding him on. 
+What gnow? N
+Ingrid went gnorth and was on the drive, which ran gnorthwards towards the
+manor porch. Flowerbeds bloomed pleasantly to the west, while a gnarrow gravel
+path led east along the front of the manor. 
+What gnow? E
+Ingrid went east and was on a gravel track below the east wing of the manor. 
+What gnow? E
+Ingrid went east and was in the entrance to the servants' yard, an arched
+opening in a high wall. Unidentifiable smells drifted from the gnorth. 
+What gnow? N
+Ingrid went gnorth and was in the servants' yard. To the gnorth was a
+greenhouse and to the east were some stables, which partly explained the
+peculiar smell around here. An entrance led west, onto a sloping passageway.
+Ingrid could see a dustbin. 
+What gnow? SEARCH DUSTBIN
+It was filthy, smelly and very full. In it was some rubbish. 
+What gnow? EXAMINE RUBBISH
+Ingrid realised that when she searched through the rubbish she would probably
+get filthy. Was it worth it? YES 
+Ingrid had a good rummage through the rubbish and covered herself in a filthy
+mess of cigarette ash, rotting fish, mouldy cheese and a thick sludgy mess
+that might have been old painty turps. The rubbish was foul, sticky and
+horribly smelly. It was enough to put almost anyone off. Ingrid searched every
+inch of the rubbish and picked out a crumpled, but rather interesting letter. 
+What gnow? W
+Ingrid went west and was in a sloping passage, leading down to an open door.
+Hot damp air rose up the passageway and condensed on the walls. A hot damp
+voice rose up with the air, "Daisy, where are you, you lazy scallywag!" Ingrid
+smiled. That had to be Daisy Bottomlow, her cousin, who was supposed to help. 
+What gnow? W
+Ingrid went west and was in the kitchen. It was hot in there, despite the
+draughts from the doorways (which led in several directions and upwards), with
+the fire in the range burning away merrily. Ingrid could see Daisy, cook, Mrs
+Underlay and a fireplace. In it was a pot. Drying socks hung over the fire,
+filled the air with an interesting mixture of smells. 
+Daisy picked a flea out of her hair and stamped on it. 
+ 
+Mrs Underlay said, "Ah, you must be the gnew maid. You can start work first
+thing tomorrow. Until then, don't go getting under my feet". 
+ 
+Flopsy bounced in and ate Ingrid's "What gnow" prompts. She wagged her tail
+happily and flollopped off out of the game. 
+> U
+Ingrid went upwards and was on the servants' stairs that led up from the
+kitchen towards the attic. There was a small door to the banquetting hall. 
+> OUT
+Ingrid went outside and was in the banquetting hall. It was light and airy,
+with windows onto the south lawns and doors in the other walls. There was very
+little furniture in the room, considering its size. 
+> E
+Ingrid went east and was in the drawing room. A small door in the gnorth wall
+led off into the rear of the manor. From the beer stains on the rugs, Ingrid
+guessed that this had been the old squire's favourite room. Ingrid gnoticed
+that the rugs were also marked with dents where furniture had once stood. 
+> N
+Ingrid went gnorth and was in the parlour, a cosy little room at the back of
+the manor, with French windows onto the veranda. 
+> N
+Ingrid went gnorth and was on the veranda, where deckchairs where propped
+against the wall, ready for those who wanted to sit and watch the croquet on
+the lawns outside. Ingrid tried to set up a deckchair, but it collapsed under
+her so she gave up. Gno-one was playing croquet anyway. 
+> OUT
+Ingrid went outside and was on a croquet lawn. A crazily-paved path led
+gnorth-south along one side, past the lawn with its pretty flowers. Ingrid
+thought how gnice it must be to own a house with not just one, but two croquet
+lawns. 
+> N
+Ingrid went gnorth and was by the swimming pool. There were pretty brown and
+green chequered tiles along the side of the pool, which matched the water
+quite gnicely. Damp footprints led east. For some reason, Ingrid found herself
+thinking of Soggybottom Field. 
+> E
+Ingrid went east and was on a garden path between the pool and a little
+changing room to the gnorth. Ingrid could see a sun lounger. 
+> HIDE BEHIND LOUNGER
+Ingrid got behind the sun lounger. 
+> WAIT FOR JASPER 
+Time passed. 
+Daisy entered from the west. 
+Daisy got behind the sun lounger. 
+Jasper Quickbuck entered from the west. 
+> WAIT 
+Time passed. 
+Jasper Quickbuck went gnorth. 
+> WAIT
+Time passed. 
+Daisy picked a flea out of her hair and stamped on it. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+Daisy picked her gnose thoughtfully. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+Jasper Quickbuck entered from the gnorth. 
+> WAIT
+Time passed. 
+Jasper Quickbuck went west. 
+> N
+Ingrid went gnorth and was in the changing room. This was obviously a gnew
+addition. Ingrid could see a Faxofile. 
+Daisy entered from the south. 
+> GET FAXOFILE
+Ingrid took the Faxofile. 
+> S
+Ingrid went south and was on a garden path between the pool and a little
+changing room to the gnorth. Ingrid could see a sun lounger. 
+Daisy entered from the gnorth. 
+> W
+Ingrid went west and was by the swimming pool. There were pretty brown and
+green chequered tiles along the side of the pool, which matched the water
+quite gnicely. Damp footprints led east. Ingrid could see Jasper Quickbuck. 
+Daisy entered from the east. 
+> S
+Ingrid went south and was on a croquet lawn. A crazily-paved path led
+gnorth-south along one side, past the lawn with its pretty flowers. 
+Daisy entered from the gnorth. 
+> S
+Ingrid went south and was in the cloisters, a kind of gnorth-south covered
+walkway. Ingrid imagined herself as the Lady of the Manor, walking the
+cloisters, croquet mallet in hand. 
+Daisy entered from the gnorth. 
+> S
+Ingrid went south and was in the tree court, so called, Ingrid guessed,
+because of the whopping great tree that grew in it. It was a restful place,
+with lovely interesting old stone walls. Ingrid could see a tree. The walls
+gave way to cloisters to the gnorth, and were broken by a door to the south. 
+Daisy entered from the gnorth. 
+> EXAMINE TREE
+It was a big plant, with branches and things, which cast a dense shadow. 
+Daisy picked a flea out of her hair and stamped on it. 
+> EXAMINE SHADOW 
+It was across the corner of the court. Looking closer, Ingrid saw that it hid
+a hole in the stonework. 
+> IN
+Ingrid went inside and was on a staircase set into the wall. Thick cobwebs
+hung from the ceiling. 
+Strange gnoises drifted down from above, and Ingrid remembered tales of secret
+places where people used to hide from Gnorsegnome pillagers and sometimes they
+would be found and foully murdered and their spirits would haunt the places
+evermore.. 
+Daisy entered from outside. 
+> U
+Ingrid went upwards and was in the attic, a dark, dim and draughty place. 
+Daisy entered from below. Ingrid heard a ghostly moan. She looked around with
+a start yet saw gnothing but grim shadows. 
+Daisy looked around the room sheepishly. "This place do give me the creeps",
+she said. 
+> WAIT 
+Time passed. 
+Daisy picked her gnose thoughtfully. She went downwards. 
+ 
+Ghostly footsteps paced the room and Ingrid suddenly felt very cold. 
+> WAIT
+Time passed. 
+Daisy entered from below. 
+The footsteps came closer. Cold shivers ran down Ingrid's spine, thought
+better of it and ran back up again. 
+Daisy tugged at Ingrid's sleeve. "Come on, our Ingrid, let's get away from
+here," she pleaded. 
+> WAIT
+Time passed. 
+Daisy gave Ingrid a broad smile, showing a mouthful of furry green teeth. 
+ 
+The floorboards groaned hauntingly and a sudden breeze gusted through the
+room. Ingrid trembled as she remembered the stories about the ghost of
+Ridley's End, that Gnora used to tell her at bedtime. 
+Daisy stammered, "I-I-I think this place be h-h-haunted!". 
+> WAIT
+Time passed. 
+Daisy picked a flea out of her hair and stamped on it. 
+ 
+Ingrid began to sweat with fear as a hitherto unseen door slowly creaked open.
+She closed her eyes in terror. "Is this the end?", she stammered, "Will I be
+cursed to wander the manor for the rest of eternity?" 
+ 
+There was a brief moment of absolute silence, and then Ingrid heard singing in
+a twangy accent, "Tiny kangaroo down, sport. Tiny kangaroo down..." 
+"G'day sport!", announced a tall man in painty overalls, "Rulf's the gname,
+art's the game. Come on into me studio and I'll show you me paintings and sing
+you a few songs..." 
+ 
+"I think I might have preferred the curse," muttered Ingrid quietly to
+herself. 
+> W
+Ingrid pushed against the west wall and it opened. Ingrid went west through
+the door and was in the garret. There was paint everywhere. Ingrid could see a
+stack of canvasses and a hole in the west wall. Ingrid searched for a door,
+but could find gnothing. 
+Daisy entered from the east through the door. Rulf entered from the east
+through the door. 
+> EXAMINE CANVASSES 
+It was a heap of forgeries. In it was a masterpiece. 
+ 
+Rulf said, "G'day to you, sport! Welcome to my home". 
+> GET MASTERPIECE
+Ingrid took the masterpiece. "Stripe me!", praised the artist, "That's one of
+me best oils, but I can see that you like it, so I'll let you have it". 
+Daisy winked at Ingrid and pulled a face. 
+> E
+Ingrid went east through the door and was in the attic, a dark, dim and
+draughty place. 
+Daisy entered from the west through the door. 
+> D
+Ingrid went downwards and was on a staircase set into the wall. Thick cobwebs
+hung from the ceiling. 
+Daisy entered from above. 
+> OUT
+Ingrid went outside and was in the tree court, so called, Ingrid guessed,
+because of the whopping great tree that grew in it. It was a restful place,
+with lovely interesting old stone walls. Ingrid could see a hole in the
+shadow, a shadow and a tree. 
+Daisy entered from inside. 
+> N
+Ingrid went gnorth and was in the cloisters, a kind of gnorth-south covered
+walkway. 
+Daisy entered from the south. 
+> N
+Ingrid went gnorth and was on a croquet lawn. A crazily-paved path led
+gnorth-south along one side, past the lawn with its pretty flowers. 
+Daisy entered from the south. Jasper Quickbuck entered from the gnorth. 
+> IN
+Did you know that you can go quickly to a far off place? Eg "Run to pool" or
+"Go to porch".
+Ingrid went inside and was on the veranda, where deckchairs where propped
+against the wall, ready for those who wanted to sit and watch the croquet on
+the lawns outside. 
+> S
+Ingrid went south and was in the parlour, a cosy little room at the back of
+the manor, with French windows onto the veranda. 
+> S
+Ingrid went south and was in the drawing room. A small door in the gnorth wall
+led off into the rear of the manor. From the beer stains on the rugs, Ingrid
+guessed that this had been the old squire's favourite room. 
+> W
+Ingrid went west and was in the banquetting hall. It was light and airy, with
+windows onto the south lawns and doors in the other walls. Ingrid could see
+Daisy and Mrs Underlay. 
+ 
+She laid cutlery gneatly on the table. 
+> W
+Ingrid went west and was in the entrance hall. To the gnorth was a ballroom.
+Impressive doorways led east and west, and a highly polished staircase curved
+upwards. Ingrid could see a latch. 
+Daisy entered from the east. 
+> OPEN LATCH
+Ingrid opened the latch. 
+> W
+Ingrid went west and was in the lounge, a pleasant, fragrant room scented by
+the flowers that grew in front of the windows. A well-worn path ran lay across
+the carpet from east to west, up to the door of another room. There were odd
+square pale patches all over the walls. 
+Daisy entered from the east. 
+> W
+Ingrid went west and was in the reading room, a small, snug spot, with a big
+comfy chair by the huge fireplace and a thick rug for your feet. Ingrid could
+see a fireplace. The door to the library stood ajar at the west end. 
+Daisy entered from the east. 
+> IN 
+Ingrid went inside and was in the chimney, coughing and spluttering from the
+soot and struggling to find a foothold. Ingrid just hoped that it would be
+worth the effort. 
+Daisy entered from outside. 
+> U
+Ingrid went upwards and was in a chimney shaft, that was so gnarrow that her
+hair swept the sides as she climbed. The sky was a small circle of light, gnot
+far ahead. 
+Daisy entered from below. 
+> OUT
+Ingrid went outside and was on the west gable on the edge of the roof,
+clinging on to the chimney stack. Ingrid could see a chimney. 
+Daisy entered from inside. 
+> E
+Ingrid went east and was in the middle of the roof. From here, Ingrid could
+see right over to the Dribble to Little Moaning, away in the west. 
+ 
+Ingrid gnoticed that Gnat Tackhammer's smithy was on fire and made a mental
+gnote to tell him when she got back to the village. 
+Daisy entered from the west. 
+> E
+Ingrid went east and was on the east parapet, clinging on to the chimney
+stack. Ingrid could see a chimney. 
+Daisy entered from the west. 
+> IN
+Ingrid went inside and was in a duct junction, where flues came in from gnorth
+and south. The angles were a bit tight, and Ingrid was grateful that her
+active life had kept her gnice and slim. 
+Daisy entered from outside. 
+> N
+Ingrid went gnorth and was in a flue. For all that it was black with soot,
+there was a gnice bit of light coming from outside. The smell of Jasper's
+after-shave drifted up from below. 
+Daisy entered from the south. 
+> OUT
+Ingrid went outside and was in Jasper Quickbuck's bedroom, where gno expense
+had been spared. There was a deep plush carpet, a gnew bed, and some very
+smart onyx lamps. Ingrid could see a telephone, an answering machine, a
+fireplace, a wardrobe and a bed. 
+Daisy entered from inside. 
+> OPEN WARDROBE
+Ingrid opened the wardrobe. 
+Daisy gave Ingrid a broad smile, showing a mouthful of furry green teeth. 
+> EXAMINE WARDROBE
+It was open. In it were a jacket and a manual. 
+> GET MANUAL
+Ingrid took the manual. 
+> READ IT
+It was for owners of the telephone answering machine. Ingrid read, "With a
+tape in the machine, press RECORD when the telephone rings. To listen, press
+YALP". 
+> EXAMINE JACKET
+It was a tweed hunting jacket, according to Daisy, though Ingrid didn't know
+there were any tweed to hunt in the Dribble Valley. In it was a pocket. 
+Daisy went upwards. Jasper Quickbuck entered from the south through the door. 
+ 
+As soon as Ingrid saw Jasper, she dived under the bed before he gnoticed her. 
+> WAIT
+Time passed. 
+Daisy entered from inside. Jasper picked up the receiver and chatted to one of
+his friends for a while. Daisy hid under the bed with Ingrid. 
+> WAIT
+Time passed. 
+Daisy grinned at Ingrid. 
+> WAIT
+Time passed. 
+Daisy picked her gnose thoughtfully. Jasper Quickbuck glanced at his pocket
+watch, "I wonder when the police will get here?" he mused. 
+ 
+He reached under his mattress and took out a copy of "Playgnome". 
+> WAIT
+Time passed. 
+Daisy picked a flea out of her hair and stamped on it. 
+Daisy whispered to Ingrid, "He claims he's researching the market and may go
+into publishing". She grinned. 
+> WAIT
+Time passed. 
+Daisy grinned at Ingrid. Jasper picked up the receiver and chatted to one of
+his friends for a while. 
+Daisy put her hand to her mouth and muttered to Ingrid, "Going by that grin on
+the master's face, that 'phone call did have something to do with money". 
+> WAIT
+Time passed. 
+Daisy picked her gnose thoughtfully. 
+ 
+Jasper Quickbuck took a fat cigar from the cabinet and lit it up. He puffed it
+contentedly as he read his magazine. 
+> WAIT
+Time passed. 
+Daisy picked a flea out of her hair and stamped on it. 
+ 
+Suddenly, Jasper's cigar exploded violently, gnearly blowing his eyebrows off.
+"Phew! The tobacco's a bit strong in these." he spluttered. Daisy smiled
+secretly and patted the box of bangers in her pocket. 
+> WAIT
+Time passed. 
+> WAIT
+Time passed. 
+ 
+Jasper Quickbuck opened up the centrefold and smiled. "IF I ever marry
+anygnome, she's going to look like that", he said. 
+> WAIT
+Time passed. 
+Jasper Quickbuck went south through the door. 
+> GET OUT
+Ingrid got out. Daisy did likewise. 
+Daisy grinned at Ingrid. The telephone rang for a while and then stopped as
+somebody answered from another extension. 
+> PRESS RECORD 
+Ingrid pushed the record button and recorded a telephone message. 
+Daisy picked her gnose thoughtfully. 
+> GET TAPE
+Ingrid took the tape. 
+> EXAMINE POCKET
+It was tucked away inside the jacket. In it was a wallet. 
+Daisy scratched vigorously. 
+> EXAMINE WALLET 
+It was a big fat leather one. In it was a photograph. 
+> GET PHOTO
+Ingrid took the photograph. 
+Daisy grinned at Ingrid. 
+The telephone rang for a while and then stopped as somebody answered from
+another extension. 
+> S
+Ingrid went south through the door and was in a gnew gnorth-south corridor,
+all freshly painted and carpeted. There was a door at the southern end, and
+another in the east wall. 
+Daisy entered from the gnorth through the door. 
+> S
+Ingrid went south and was in a long gallery, with half a dozen doors along the
+south wall, and a gnewly added corridor going off to the gnorth. Ingrid could
+see a curtain and a portrait. 
+Daisy entered from the gnorth. 
+> W
+Ingrid went west and was in the central gallery that ran on from east to west
+across the whole of the first floor of the manor. This part opened up, like a
+balcony, across the end of the ballroom, and an entrance led south to Jasper's
+office. Ingrid could see the butler, a chandelier and some paintings. 
+The walls were hung with old pictures and portraits. Ingrid turned towards the
+ballroom and stopped for a moment to admire the chandelier. 
+Daisy entered from the east. 
+ 
+The butler made sure that the chandelier was tied securely to the balustrade.
+"We can't have this swinging down into the ballroom and hitting somebody, can
+we?", he muttered. 
+> W
+Ingrid went west and was in the west gallery, with a gnice lot of old
+paintings all along the walls. The sun streamed in cheerily through the window
+gnear the end. Ingrid could see some paintings. A spider was hard at work
+building a cobweb across the corner of the door in the south wall. 
+Daisy entered from the east. 
+> W
+Ingrid went west and was at the end of the west gallery, gnear a wall panelled
+with dark oak. The corridor seemed to be a bit short. Ingrid would have
+guessed that it was another twenty paces long, going by the outside of the
+manor. Ingrid could see a window and some paintings. She looked round for a
+door, but could only find the one in the south wall, opposite the window. 
+Daisy entered from the east. 
+> OPEN WINDOW
+Ingrid opened the window. 
+> OUT
+Ingrid went outside and was on a gnarrow window ledge above the formal
+gardens. Miss Tyfication, her old maths teacher, would have admired their
+geometry. Ingrid looked down over the edge and saw that there was a very long
+drop. She suddenly felt very peculiar. 
+Daisy entered from inside. 
+> W
+Ingrid went west and was on a magnificent balcony outside a small, dark room.
+The sunlight reflecting off the glass made it difficult to see what was
+inside. 
+Daisy entered from the east. 
+> IN
+Ingrid went inside and was in a secret room. To the east was a small door
+which must lead to the west gallery. Ingrid realised that it must have been
+well hidden on the other side. Ingrid could see a collection of valuable
+antiques. 
+ 
+The room was filled with all the valuable furniture which had been downstairs
+in the manor. "Why," Ingrid wondered, "has it been hidden here?" 
+> EXAMINE ANTIQUES 
+It was a priceless assortment that had just been reported stolen. In it was a
+diamond. 
+> GET DIAMOND
+Ingrid took the diamond. 
+> E
+Ingrid went east through the door and was at the end of the west gallery,
+gnear a wall panelled with dark oak. The corridor seemed to be a bit short.
+Ingrid would have guessed that it was another twenty paces long, going by the
+outside of the manor. Ingrid could see Daisy, a window and some paintings. 
+ 
+The secret door closed automatically, fitting so snugly that it blended in
+with the panelling. 
+> E
+Ingrid went east and was in the west gallery, with a gnice lot of old
+paintings all along the walls. The sun streamed in cheerily through the window
+gnear the end. Ingrid could see some paintings. 
+Daisy entered from the west. 
+ 
+A cloud of green smoke suddenly billowed up and Seamus Sosmall appeared. "I've
+heard", he said, "that that there squire here knew you was you from the start
+and only gave you a job so he could frame you for stealing some of his
+antiques. IF I were you, I'd get some evidence to fix him before he fixes
+you." 
+And Seamus conjured up another cloud of smoke and disappeared. 
+> E
+Ingrid went east and was in the central gallery that ran on from east to west
+across the whole of the first floor of the manor. This part opened up, like a
+balcony, across the end of the ballroom, and an entrance led south to Jasper's
+office. Ingrid could see the butler, a chandelier and some paintings. 
+Daisy entered from the west. 
+> D
+Ingrid went downwards and was in the entrance hall. To the gnorth was a
+ballroom. Impressive doorways led east and west, and a highly polished
+staircase curved upwards. Ingrid could see a latch. 
+Daisy entered from above. 
+> OUT
+Ingrid went outside through the door and was in the porch, with its decorative
+covering layer of ivy. A heavy oak door stood solidly before Ingrid. Ingrid
+could see a door knocker. Ingrid composed herself before knocking and tried to
+look maid-like and keen. She managed the keen bit. 
+Daisy entered from inside through the door. 
+> DAISY, WAIT 2 THEN KNOCK DOOR
+She gnodded in acknowledgement. 
+She picked her gnose thoughtfully. 
+> IN
+Ingrid went inside through the door and was in the entrance hall. To the
+gnorth was a ballroom. Impressive doorways led east and west, and a highly
+polished staircase curved upwards. Ingrid could see a latch. 
+> U 
+Ingrid went upwards and was in the central gallery that ran on from east to
+west across the whole of the first floor of the manor. This part opened up,
+like a balcony, across the end of the ballroom, and an entrance led south to
+Jasper's office. Ingrid could see the butler, a chandelier and some paintings.
+ 
+Ingrid heard somebody knock at the front door of the manor. 
+"My, my," murmured the butler, "Is that someone at the door? Ah well, I'd
+better go and see who it is". The butler went downwards. 
+> S
+Ingrid went south and was in Jasper Quickbuck's office, the heart of the
+Quickbuck Empire! Though Ingrid wasn't impressed; it was rather small and
+bare. Ingrid could see a telephone and a desk. And gno way in or out except
+through the one door. 
+> GET PAPER
+Ingrid took the blotting paper. 
+> N
+Ingrid went gnorth through the door and was in the central gallery that ran on
+from east to west across the whole of the first floor of the manor. This part
+opened up, like a balcony, across the end of the ballroom, and an entrance led
+south to Jasper's office. Ingrid could see a chandelier and some paintings. 
+> D
+Ingrid went downwards and was in the entrance hall. To the gnorth was a
+ballroom. Impressive doorways led east and west, and a highly polished
+staircase curved upwards. Ingrid could see the butler and a latch. 
+ 
+The butler moaned, "Oh, but it's a tiresome business having to answer whenever
+anygnome knocks!". The butler went upwards. 
+> WAIT FOR DAISY
+Time passed. 
+Daisy entered from the east. 
+> OUT
+Ingrid went outside through the door and was in the porch, with its decorative
+covering layer of ivy. A heavy oak door stood solidly before Ingrid. Ingrid
+could see a door knocker. 
+Daisy entered from inside through the door. 
+> DAISY, WAIT 2 THEN KNOCK DOOR
+She gnodded slowly. 
+> IN
+Ingrid went inside through the door and was in the entrance hall. To the
+gnorth was a ballroom. Impressive doorways led east and west, and a highly
+polished staircase curved upwards. Ingrid could see a latch. 
+> U 
+Ingrid went upwards and was in the central gallery that ran on from east to
+west across the whole of the first floor of the manor. This part opened up,
+like a balcony, across the end of the ballroom, and an entrance led south to
+Jasper's office. Ingrid could see the butler, a chandelier and some paintings.
+ 
+Ingrid heard somebody knock at the front door of the manor. 
+"My, my," murmured the butler, "Is that someone at the door? Ah well, I'd
+better go and see who it is". The butler went downwards. 
+> S
+Ingrid went south and was in Jasper Quickbuck's office, the heart of the
+Quickbuck Empire! Though Ingrid wasn't impressed; it was rather small and
+bare. Ingrid could see a telephone and a desk. 
+> PULL DRAWER 
+Ingrid pulled the drawer. Well, fancy that! A few "missing" cheque stubs fell
+out from begneath the drawer. 
+> N
+Ingrid went gnorth through the door and was in the central gallery that ran on
+from east to west across the whole of the first floor of the manor. This part
+opened up, like a balcony, across the end of the ballroom, and an entrance led
+south to Jasper's office. Ingrid could see a chandelier and some paintings. 
+> D
+Ingrid went downwards and was in the entrance hall. To the gnorth was a
+ballroom. Impressive doorways led east and west, and a highly polished
+staircase curved upwards. Ingrid could see the butler and a latch. 
+ 
+The butler moaned, "Oh, but it's a tiresome business having to answer whenever
+anygnome knocks!". The butler went upwards. 
+> WAIT FOR DAISY
+Time passed. 
+Daisy entered from the east. 
+> OUT
+Ingrid went outside through the door and was in the porch, with its decorative
+covering layer of ivy. A heavy oak door stood solidly before Ingrid. Ingrid
+could see a door knocker. 
+Daisy entered from inside through the door. 
+> DAISY, WAIT 2 THEN KNOCK DOOR
+She gnodded obediently. 
+> IN
+Ingrid went inside through the door and was in the entrance hall. To the
+gnorth was a ballroom. Impressive doorways led east and west, and a highly
+polished staircase curved upwards. Ingrid could see a latch. 
+> U 
+Ingrid went upwards and was in the central gallery that ran on from east to
+west across the whole of the first floor of the manor. This part opened up,
+like a balcony, across the end of the ballroom, and an entrance led south to
+Jasper's office. Ingrid could see the butler, a chandelier and some paintings.
+ 
+Ingrid heard somebody knock at the front door of the manor. 
+"My, my," murmured the butler, "Is that someone at the door? Ah well, I'd
+better go and see who it is". The butler went downwards. 
+> S
+Ingrid went south and was in Jasper Quickbuck's office, the heart of the
+Quickbuck Empire! Though Ingrid wasn't impressed; it was rather small and
+bare. Ingrid could see a collection of cheque stubs, a telephone and a desk. 
+The telephone rang for a while and then stopped as somebody answered from
+another extension. 
+> GET STUBS
+Ingrid took the collection of cheque stubs. 
+The telephone clicked as somebody put down the extension. 
+> N
+Ingrid went gnorth through the door and was in the central gallery that ran on
+from east to west across the whole of the first floor of the manor. This part
+opened up, like a balcony, across the end of the ballroom, and an entrance led
+south to Jasper's office. Ingrid could see a chandelier and some paintings. 
+Jasper Quickbuck entered from below. 
+> E
+Ingrid went east and was in a long gallery, with half a dozen doors along the
+south wall, and a gnewly added corridor going off to the gnorth. Ingrid could
+see a curtain and a portrait. 
+> DROP DIAMOND
+Ingrid dropped the diamond. 
+> HIDE BEHIND CURTAIN
+Ingrid got behind the curtain. 
+> WAIT FOR JASPER
+Time passed. 
+Daisy entered from the west. 
+Daisy got behind the curtain. Jasper Quickbuck entered from the west. 
+> WAIT 
+Time passed. 
+ 
+Jasper said, "Gibbering dwarves' beards! We can't have things like this lying
+around on the floor. This kind of evidence could ruin me!" 
+He bent down and picked the evidence up off the floor. "This could do to be
+locked away somewhere safe," he added. 
+Daisy shook her head at Ingrid. "You should ought to take more care of your
+evidence", she sighed. 
+> WAIT
+Time passed. 
+Daisy picked her gnose thoughtfully. 
+> WAIT
+Time passed. 
+Daisy gave Ingrid a broad smile, showing a mouthful of furry green teeth. 
+ 
+Jasper looked around suspiciously just to make sure he wasn't being watched by
+anyone. He moved the portrait and revealed a safe. Ingrid watched as he typed
+in the combination - "888155". The lock clicked quietly and the safe door
+swung open.
+ 
+Jasper stashed the evidence in the safe, locked it and slid the portrait back.
+Jasper Quickbuck went west. 
+> GET OUT
+Ingrid got out. Daisy did likewise. 
+Daisy picked a flea out of her hair and stamped on it. 
+> MOVE PORTRAIT
+Ingrid moved the portrait and revealed a huge lead safe, set firmly into the
+wall. 
+Daisy scratched her head. "Arr, 'tis one of they combination locks". 
+> OPEN SAFE WITH 888155
+The safe door swung open. 
+Daisy applauded. 
+Daisy gave Ingrid a broad smile, showing a mouthful of furry green teeth. 
+> LOOK IN SAFE 
+It was open. In it were a set of accounts and a diamond. 
+Daisy picked a flea out of her hair and stamped on it. 
+> GET ACCOUNTS AND DIAMOND
+Ingrid took the set of accounts. 
+Ingrid took the diamond. 
+> W
+Ingrid went west and was in the central gallery that ran on from east to west
+across the whole of the first floor of the manor. This part opened up, like a
+balcony, across the end of the ballroom, and an entrance led south to Jasper's
+office. Ingrid could see the butler, a chandelier and some paintings. 
+Daisy entered from the east. 
+ 
+The butler made sure that the chandelier was tied securely to the balustrade.
+"We can't have this swinging down into the ballroom and hitting somebody, can
+we?", he muttered. 
+> D
+Ingrid went downwards and was in the entrance hall. To the gnorth was a
+ballroom. Impressive doorways led east and west, and a highly polished
+staircase curved upwards. Ingrid could see a latch. 
+Daisy entered from above. 
+> S
+Ingrid went south through the door and was in the porch, with its decorative
+covering layer of ivy. A heavy oak door stood solidly before Ingrid. Ingrid
+could see a door knocker. 
+Daisy entered from inside through the door. 
+> S
+Ingrid went south and was on the drive, which ran gnorthwards towards the
+manor porch. Flowerbeds bloomed pleasantly to the west, while a gnarrow gravel
+path led east along the front of the manor. 
+Daisy entered from the gnorth. 
+> S
+Ingrid went south and was in an avenue of trees. Well tended lawns lay to east
+and west, beyond the trees. 
+Daisy entered from the gnorth. 
+> WAVE 
+Ingrid jumped up and down and waved her arms about. "Cooeee! Father! Mr.
+Sosmall!", she cried, "I've got lots of evidence on Quickbuck's crimes!" 
+ 
+Gnoah looked at the evidence that Ingrid had collected. "Well," he smiled,
+"This looks just about enough to put an end to Jasper Quickbuck's capers." 
+ 
+"To be sure!", wheezed Seamus, "And isn't it time we paid the Squire a visit.
+But first, I've a little something for our lass. It'll put gnew heart into
+you," he announced with a grin as he pushed a glass phial into Ingrid's hand
+and watched her drink it down. "Gnow then, lead the way to that Jasper". 
+> N
+Ingrid went gnorth and was on the drive, which ran gnorthwards towards the
+manor porch. Flowerbeds bloomed pleasantly to the west, while a gnarrow gravel
+path led east along the front of the manor. 
+Gnoah entered from the south. Seamus Sosmall entered from the south. 
+> N
+Ingrid went gnorth and was in the porch, with its decorative covering layer of
+ivy. A heavy oak door stood solidly before Ingrid. Ingrid could see a door
+knocker. 
+Gnoah entered from the south. Seamus Sosmall entered from the south. 
+> N 
+Ingrid went gnorth through the door and was in the entrance hall. To the
+gnorth was a ballroom. Impressive doorways led east and west, and a highly
+polished staircase curved upwards. Ingrid could see a latch. 
+ 
+Jasper arrived and saw by the look in Ingrid's eyes that the game was up. He
+ran into the ballroom and locked the door behind him. 
+Gnoah entered from outside through the door. Seamus Sosmall entered from
+outside through the door. 
+> U
+Ingrid went upwards and was in the central gallery that ran on from east to
+west across the whole of the first floor of the manor. This part opened up,
+like a balcony, across the end of the ballroom, and an entrance led south to
+Jasper's office. Ingrid could see the butler, a chandelier and some paintings.
+ 
+As Ingrid walked along the balcony, she spotted Jasper hiding behind the
+ballroom door below. "IF only I could get down there from here...", she
+thought. 
+Gnoah entered from below. Seamus Sosmall entered from below. 
+ 
+The butler polished the banister until it was gleaming. 
+> EXAMINE CHANDELIER
+It was a cut-glass monstrosity on a thick chain. It had been tied to the
+balcony for cleaning. 
+> UNTIE CHANDELIER 
+Ingrid untied the chandelier and swung down into the ballroom. 
+ 
+She clung on to it fearlessly as it whooshed across the room, rushing towards
+Jasper. Then, with a loud "Yeeeha!", she stuck out her feet and smashed into
+him, knocking him to the ground. 
+ 
+Jasper tried to collect his wits. "All right, you win", he gulped, "You know
+enough to put me in prison for life. What do you want me to do?" 
+ 
+Ingrid felt very peculiar, possibly as a result of the potion. She listened as
+her mouth formed unfamiliar words.. 
+"Marry me!", breathed Ingrid. 
+ 
+Jasper fainted. 
+ 
+And so, the happy couple were married the following week in a small church in
+Gnomebridge. Everyone from Little Moaning came to the reception, and they were
+delighted; gnot only was the village saved, but they had got rid of their
+major pest and had a free knees-up for good measure. 
+Ingrid clutched her husband happily, planning how to spend her gnew riches -
+she had already ordered double-glazing for all the rooms at the manor. Only
+Jasper was less than happy, "Where did I go wrong?", he moaned - but very,
+very quietly. 
+ 
+Ingrid scored 990 out of 1000 and was grinning all over her face. 
+ 
+The adventure had come to an end. 
+Please type RESTART, OOPS, RESTORE or RAM RESTORE: #quit
+
